@@ -14,7 +14,7 @@
     </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="20">
-            <ActivityIndicator IsRunning="True" Color="{StaticResource Secondary}" WidthRequest="64" HeightRequest="64" IsVisible="{Binding BlockTime, Converter={StaticResource IsNullConverter}}" />
+            <ActivityIndicator IsRunning="True" Color="{toolkit:AppThemeResource Secondary}" WidthRequest="64" HeightRequest="64" IsVisible="{Binding BlockTime, Converter={StaticResource IsNullConverter}}" />
             <Border StrokeShape="Ellipse" BackgroundColor="#5bc782" WidthRequest="64" HeightRequest="64" IsVisible="{Binding BlockTime, Converter={StaticResource IsNotNullConverter}}">
                 <Image Source="{FontImageSource &#xe9b0;, FontFamily=Icons, Color=#f1f3f6}" WidthRequest="32" HeightRequest="32" />
             </Border>

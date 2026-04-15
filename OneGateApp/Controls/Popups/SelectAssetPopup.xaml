@@ -25,7 +25,7 @@
                     <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="10" Padding="10" BackgroundColor="{toolkit:AppThemeResource Panel}">
                         <Image Source="{Binding Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
                         <VerticalStackLayout Grid.Column="1">
-                            <Label Text="{Binding Token.Symbol}" TextColor="{StaticResource Primary}" FontAttributes="Bold" FontSize="16" />
+                            <Label Text="{Binding Token.Symbol}" TextColor="{toolkit:AppThemeResource Primary}" FontAttributes="Bold" FontSize="16" />
                             <Label StyleClass="Secondary" Text="{Binding Token.Name}" FontSize="12" />
                         </VerticalStackLayout>
                         <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe9b0;" FontSize="22" Margin="10,0" VerticalOptions="Center">
