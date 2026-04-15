@@ -33,8 +33,9 @@ public class AppDelegate : MauiUIApplicationDelegate
         return HandleAppLink(activity.WebPageUrl);
     }
 
-    static bool HandleAppLink(NSUrl url)
+    static bool HandleAppLink(NSUrl? url)
     {
+        if (url?.AbsoluteString is null) return false;
         if (Microsoft.Maui.Controls.Application.Current is not App app) return false;
         if (!Uri.TryCreate(url.AbsoluteString, UriKind.Absolute, out var uri)) return false;
         return app.ProcessAppLinkUri(uri);

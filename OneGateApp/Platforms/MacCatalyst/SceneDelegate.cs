@@ -8,7 +8,9 @@ public class SceneDelegate : MauiUISceneDelegate
 {
     public override void WillConnect(UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
     {
-        var activity = connectionOptions.UserActivities.ToArray().FirstOrDefault(p => p.ActivityType == NSUserActivityType.BrowsingWeb);
+        var activity = connectionOptions.UserActivities?
+            .ToArray()
+            .FirstOrDefault(p => p?.ActivityType == NSUserActivityType.BrowsingWeb);
         if (activity is not null)
             HandleAppLink(activity);
         else
@@ -34,14 +36,15 @@ public class SceneDelegate : MauiUISceneDelegate
         return HandleAppLink(activity.WebPageUrl);
     }
 
-    static bool HandleAppLink(NSSet<UIOpenUrlContext> urlContexts)
+    static bool HandleAppLink(NSSet<UIOpenUrlContext>? urlContexts)
     {
-        if (urlContexts.Count == 0) return false;
-        return HandleAppLink(urlContexts.AnyObject!.Url);
+        if (urlContexts is null || urlContexts.Count == 0) return false;
+        return urlContexts.AnyObject?.Url is NSUrl url && HandleAppLink(url);
     }
 
-    static bool HandleAppLink(NSUrl url)
+    static bool HandleAppLink(NSUrl? url)
     {
+        if (url?.AbsoluteString is null) return false;
         if (Application.Current is not App app) return false;
         if (!Uri.TryCreate(url.AbsoluteString, UriKind.Absolute, out var uri)) return false;
         return app.ProcessAppLinkUri(uri);
