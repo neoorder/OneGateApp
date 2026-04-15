@@ -26,12 +26,12 @@ public partial class GenerateMnemonicPage : ContentPage
 
     protected override void OnAppearing()
     {
-        screenSecurity.ActivateScreenSecurityProtection();
+        ScreenSecurityCoordinator.Enter(screenSecurity);
     }
 
     protected override void OnDisappearing()
     {
-        screenSecurity.DeactivateScreenSecurityProtection();
+        ScreenSecurityCoordinator.Exit(screenSecurity);
     }
 
     async void OnSubmitted(object sender, EventArgs e)

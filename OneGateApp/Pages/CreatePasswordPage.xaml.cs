@@ -25,12 +25,12 @@ public partial class CreatePasswordPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        screenSecurity.ActivateScreenSecurityProtection();
+        ScreenSecurityCoordinator.Enter(screenSecurity);
     }
 
     protected override void OnDisappearing()
     {
-        screenSecurity.DeactivateScreenSecurityProtection();
+        ScreenSecurityCoordinator.Exit(screenSecurity);
         base.OnDisappearing();
     }
 

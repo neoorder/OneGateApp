@@ -32,12 +32,12 @@ public partial class SelectImportTypePage : ContentPage
 
     protected override void OnAppearing()
     {
-        screenSecurity.ActivateScreenSecurityProtection();
+        ScreenSecurityCoordinator.Enter(screenSecurity);
     }
 
     protected override void OnDisappearing()
     {
-        screenSecurity.DeactivateScreenSecurityProtection();
+        ScreenSecurityCoordinator.Exit(screenSecurity);
     }
 
     void Mnemonic_Validate(object sender, CustomValidationEventArgs e)
