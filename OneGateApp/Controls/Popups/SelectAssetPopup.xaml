@@ -3,6 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:og="http://schemas.neoorder.org/onegate/controls"
             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
             x:Class="NeoOrder.OneGate.Controls.Popups.SelectAssetPopup"
             x:TypeArguments="og:AssetInfo"
             CanBeDismissedByTappingOutsideOfPopup="True"
@@ -15,7 +16,7 @@
             <Label Text="{x:Static og:Strings.SelectAsset}" FontAttributes="Bold" />
             <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" Margin="-10" Padding="10" Clicked="OnCancel" />
         </Grid>
-        <SearchBar Placeholder="{x:Static og:Strings.Search}" TextChanged="OnSearch" />
+        <SearchBar Placeholder="{x:Static og:Strings.Search}" ios:SearchBar.SearchBarStyle="Minimal" TextChanged="OnSearch" />
         <CollectionView ItemsSource="{Binding Assets}" HeightRequest="300">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
