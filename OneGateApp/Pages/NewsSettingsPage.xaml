@@ -32,9 +32,9 @@
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:CategroySetting">
-                    <Grid>
+                    <Grid ColumnDefinitions="*,auto" MinimumHeightRequest="44">
                         <Label Text="{Binding Categroy}" VerticalOptions="Center" />
-                        <Switch IsToggled="{Binding IsEnabled}" Toggled="OnSwitchToggled" />
+                        <Switch Grid.Column="1" IsToggled="{Binding IsEnabled}" VerticalOptions="Center" Toggled="OnSwitchToggled" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

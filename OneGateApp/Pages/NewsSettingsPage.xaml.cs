@@ -36,7 +36,8 @@ public partial class NewsSettingsPage : ContentPage
     async void OnSwitchToggled(object sender, ToggledEventArgs e)
     {
         Switch @switch = (Switch)sender;
-        CategroySetting setting = (CategroySetting)@switch.BindingContext;
+        CategroySetting? setting = (CategroySetting?)@switch.BindingContext;
+        if (setting is null) return;
         var excluded = await dbContext.Settings.GetAsync<HashSet<string>>("news/categories/excluded") ?? [];
         bool changed = e.Value switch
         {
