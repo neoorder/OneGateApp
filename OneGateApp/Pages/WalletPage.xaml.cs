@@ -56,7 +56,9 @@ public partial class WalletPage : ContentPage
     async Task LoadAssetsAsync()
     {
         Assets = await tokenManager.LoadAssetsAsync();
-        decimal totalValuation = Assets.Sum(p => p.Valuation!.Value);
+        decimal totalValuation = Assets
+            .Where(p => p.Valuation.HasValue)
+            .Sum(p => p.Valuation!.Value);
         TotalValuation = $"$ {totalValuation:N2}";
     }
 
