@@ -19,7 +19,7 @@
             <CollectionView.Header>
                 <VerticalStackLayout Spacing="20" Padding="{OnPlatform iOS='0,0,0,20', Default='0'}">
                     <!-- There are some issues with CarouselView on WinUI, so we disable looping on that platform to prevent potential crashes. -->
-                    <CarouselView x:Name="carouselView" Loop="{OnPlatform WinUI=False, Default=True}" ItemsSource="{Binding Banners}" IndicatorView="indicatorView" HeightRequest="{Binding Width, Source={RelativeSource Self}, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x / 2'}" MaximumHeightRequest="300">
+                    <CarouselView x:Name="carouselView" Loop="{OnPlatform WinUI=False, Default=True}" ItemsSource="{Binding Banners}" IndicatorView="indicatorView" HeightRequest="{Binding Width, Source={RelativeSource AncestorType={x:Type RefreshView}}, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x / 2'}" MaximumHeightRequest="300">
                         <CarouselView.ItemTemplate>
                             <DataTemplate x:DataType="og:Banner">
                                 <Image Aspect="AspectFit" SemanticProperties.Description="{Binding AltText}">
