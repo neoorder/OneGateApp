@@ -63,7 +63,9 @@ public static class MauiProgram
             {
                 Margin = new(0),
                 HorizontalOptions = LayoutOptions.Fill,
+#if !IOS
                 VerticalOptions = LayoutOptions.End
+#endif
             });
             options.SetPopupOptionsDefaults(new DefaultPopupOptionsSettings
             {
