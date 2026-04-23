@@ -198,6 +198,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
                 await Toast.Show(ex.Message);
                 return;
             }
+            GlobalStates.Invalidate<WalletPage>();
             await Shell.Current.GoToAsync("//wallet/sending", new Dictionary<string, object>
             {
                 ["tx"] = tx,
