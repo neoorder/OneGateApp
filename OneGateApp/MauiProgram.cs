@@ -89,8 +89,11 @@ public static class MauiProgram
             options.UseSqlite($"Filename={SharedOptions.DbPath}");
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         });
-        using (var stream = EmbeddedResource.Open("protocol.json"))
-            builder.Services.AddSingleton(ProtocolSettings.Load(stream));
+        builder.Services.AddSingleton(sp =>
+        {
+            using var stream = EmbeddedResource.Open("protocol.json");
+            return ProtocolSettings.Load(stream);
+        });
         builder.Services.AddSingleton<IWalletProvider, WalletProvider>();
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddSingleton<TokenManager>();

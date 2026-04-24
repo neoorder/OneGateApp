@@ -20,7 +20,7 @@
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>2.0.1</ApplicationDisplayVersion>
-		<ApplicationVersion>51</ApplicationVersion>
+		<ApplicationVersion>52</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>MSIX</WindowsPackageType>
@@ -32,9 +32,17 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (K222UWB5LF)</CodesignKey>
-	  <CodesignProvision>VS: org.neoorder.onegate Development</CodesignProvision>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
+		<CodesignKey>Apple Development: Created via API (K222UWB5LF)</CodesignKey>
+		<CodesignProvision>VS: org.neoorder.onegate Development</CodesignProvision>
+		<ProvisioningType>manual</ProvisioningType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
+		<CodesignKey>Apple Distribution: NEO GLOBAL DEVELOPMENT PTE. LTD. (3F3295APF5)</CodesignKey>
+		<CodesignProvision>App Store</CodesignProvision>
+		<ProvisioningType>manual</ProvisioningType>
+		<MtouchInterpreter>Neo</MtouchInterpreter>
 	</PropertyGroup>
 
 	<ItemGroup>

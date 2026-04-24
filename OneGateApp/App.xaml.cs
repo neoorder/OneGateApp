@@ -12,19 +12,23 @@ public partial class App : Application
 {
     readonly IServiceProvider serviceProvider;
     readonly ApplicationDbContext dbContext;
-    readonly ProtocolSettings protocolSettings;
     readonly IWalletProvider walletProvider;
     readonly HttpClient httpClient;
 
     AppLinkAction? appLinkAction;
 
-    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, ProtocolSettings protocolSettings, IWalletProvider walletProvider, HttpClient httpClient)
+    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient)
     {
         this.serviceProvider = serviceProvider;
         this.dbContext = dbContext;
-        this.protocolSettings = protocolSettings;
         this.walletProvider = walletProvider;
         this.httpClient = httpClient;
+        InitializeComponent();
+    }
+
+    protected override void OnStart()
+    {
+        base.OnStart();
         dbContext.Database.EnsureCreated();
         Version? version = dbContext.Settings.Get<Version>("system/version");
         if (version is null || version < AppInfo.Version)
@@ -32,7 +36,17 @@ public partial class App : Application
             dbContext.Settings.Put("system/version", AppInfo.Version);
             dbContext.Settings.Delete("system/updates");
         }
-        InitializeComponent();
+        string? lang = dbContext.Settings.Get("preference/language");
+        if (!string.IsNullOrEmpty(lang))
+        {
+            CultureInfo culture = new(lang);
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+        }
+        httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
+        httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.CurrentUICulture.Name);
     }
 
     internal bool ProcessAppLinkUri(Uri uri)
@@ -57,6 +71,7 @@ public partial class App : Application
 
     AppLinkAction? ProcessNeoScheme(Uri uri)
     {
+        ProtocolSettings protocolSettings = serviceProvider.GetRequiredService<ProtocolSettings>();
         try
         {
             return new PaymentAction(uri, protocolSettings);
@@ -98,17 +113,6 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        string? lang = dbContext.Settings.Get("preference/language");
-        if (!string.IsNullOrEmpty(lang))
-        {
-            CultureInfo culture = new(lang);
-            CultureInfo.CurrentCulture = culture;
-            CultureInfo.CurrentUICulture = culture;
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            CultureInfo.DefaultThreadCurrentUICulture = culture;
-        }
-        httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
-        httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.CurrentUICulture.Name);
         Page page;
         if (walletProvider.GetWallet() is null)
         {
