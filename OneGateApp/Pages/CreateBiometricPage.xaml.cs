@@ -25,6 +25,7 @@ public partial class CreateBiometricPage : ContentPage
         InitializeComponent();
     }
 
+#if !(IOS || MACCATALYST)
     protected override void OnAppearing()
     {
         screenSecurity.ActivateScreenSecurityProtection();
@@ -34,6 +35,7 @@ public partial class CreateBiometricPage : ContentPage
     {
         screenSecurity.DeactivateScreenSecurityProtection();
     }
+#endif
 
     async void OnSubmitted(object sender, EventArgs e)
     {
