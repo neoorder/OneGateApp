@@ -26,7 +26,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
@@ -37,6 +37,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
         InitializeComponent();
+        if (!homeShortcutService.IsSupported)
+            ToolbarItems.Remove(addToHomeScreenButton);
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)

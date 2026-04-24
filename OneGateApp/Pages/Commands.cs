@@ -58,6 +58,12 @@ static class Commands
         GlobalStates.Invalidate<DAppsPage>();
     });
 
+    public static AsyncCommand<DApp> AddToHomeScreen { get; } = new(static async dapp =>
+    {
+        IHomeShortcutService service = Application.Current!.Handler.GetRequiredService<IHomeShortcutService>();
+        await service.AddShortcutAsync(dapp);
+    });
+
     public static AsyncCommand LaunchDApp { get; } = new(static async parameter =>
     {
         int appId = parameter switch

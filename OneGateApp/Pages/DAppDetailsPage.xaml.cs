@@ -1,4 +1,5 @@
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Services;
 
 namespace NeoOrder.OneGate.Pages;
 
@@ -8,10 +9,12 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
 
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
 
-    public DAppDetailsPage(ApplicationDbContext dbContext)
+    public DAppDetailsPage(ApplicationDbContext dbContext, IHomeShortcutService homeShortcutService)
     {
         this.dbContext = dbContext;
         InitializeComponent();
+        if (!homeShortcutService.IsSupported)
+            ToolbarItems.Remove(addToHomeScreenButton);
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)

@@ -19,6 +19,7 @@
                 <FontImageSource Glyph="{Binding IsFavorite, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe83a;&#xe839;, Source={RelativeSource AncestorType={x:Type og:DAppDetailsPage}}}" FontFamily="Icons" Color="Gold" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
+        <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding .}" />
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding .}" />
     </ContentPage.ToolbarItems>
     <ScrollView>
