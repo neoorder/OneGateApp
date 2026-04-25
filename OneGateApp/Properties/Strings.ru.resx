@@ -437,7 +437,7 @@
     <value>Отправить</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>История транзакций</value>
+    <value>История</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Активы</value>

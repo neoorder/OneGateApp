@@ -437,7 +437,7 @@ Nach der Deaktivierung müssen Sie Ihr Wallet-Passwort manuell eingeben, um den 
     <value>Senden</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Transaktionsverlauf</value>
+    <value>Verlauf</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Vermögenswerte</value>

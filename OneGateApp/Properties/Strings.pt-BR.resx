@@ -437,7 +437,7 @@ Depois de desativá-la, será necessário digitar manualmente a senha da carteir
     <value>Enviar</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Histórico de transações</value>
+    <value>Hist.</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Ativo</value>

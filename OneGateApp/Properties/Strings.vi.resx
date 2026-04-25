@@ -437,7 +437,7 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
     <value>Gửi</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Lịch sử giao dịch</value>
+    <value>Lịch sử</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Tài sản</value>

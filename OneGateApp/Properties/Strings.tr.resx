@@ -437,7 +437,7 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
     <value>Gönder</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>İşlem geçmişi</value>
+    <value>Geçmiş</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Varlık</value>

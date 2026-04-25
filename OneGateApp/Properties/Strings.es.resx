@@ -437,7 +437,7 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
     <value>Enviar</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Historial de transacciones</value>
+    <value>Movs.</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Activos</value>

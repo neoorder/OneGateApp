@@ -437,7 +437,7 @@ Après désactivation, vous devrez saisir manuellement le mot de passe du portef
     <value>Envoyer</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Historique des transactions</value>
+    <value>Histor.</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Actifs</value>

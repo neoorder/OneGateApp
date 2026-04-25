@@ -437,7 +437,7 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
     <value>Verzenden</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Transactiegeschiedenis</value>
+    <value>Historie</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Asset</value>

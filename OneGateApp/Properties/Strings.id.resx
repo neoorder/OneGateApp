@@ -437,7 +437,7 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
     <value>Kirim</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Riwayat transaksi</value>
+    <value>Riwayat</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Aset</value>

@@ -437,7 +437,7 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
     <value>Invia</value>
   </data>
   <data name="Records" xml:space="preserve">
-    <value>Cronologia transazioni</value>
+    <value>Storico</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Asset</value>
