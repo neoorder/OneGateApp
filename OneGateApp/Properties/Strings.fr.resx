@@ -821,4 +821,7 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Copié dans le presse-papiers</value>
   </data>
+  <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
+    <value>Solde insuffisant pour couvrir le montant et les frais. Le montant maximal que vous pouvez envoyer est de {0} GAS.</value>
+  </data>
 </root>

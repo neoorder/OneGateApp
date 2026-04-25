@@ -821,4 +821,7 @@
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>已複製到剪貼簿</value>
   </data>
+  <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
+    <value>餘額不足，無法支付金額和手續費。您最多可發送 {0} GAS。</value>
+  </data>
 </root>

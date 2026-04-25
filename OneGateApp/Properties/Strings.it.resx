@@ -821,4 +821,7 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Copiato negli appunti</value>
   </data>
+  <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
+    <value>Saldo insufficiente per coprire l’importo e le commissioni. L’importo massimo che puoi inviare è {0} GAS.</value>
+  </data>
 </root>

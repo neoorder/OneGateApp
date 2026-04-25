@@ -179,6 +179,12 @@ public partial class SendPage : ContentPage, IQueryAttributable
                 await Toast.Show(ex.Message);
                 return;
             }
+            if (SelectedAsset.Token.Hash == NativeContract.GAS.Hash && tx.NetworkFee + tx.SystemFee + amount > SelectedAsset.Balance)
+            {
+                BigDecimal max = new(SelectedAsset.Balance - tx.NetworkFee - tx.SystemFee, SelectedAsset.Token.Decimals);
+                validationAmount.SetError(string.Format(Strings.InsufficientBalanceForAmountAndFees, max));
+                return;
+            }
             var popup = serviceProvider.GetServiceOrCreateInstance<SendTransactionPopup>();
             popup.Message = Strings.SendTransactionByUserText;
             popup.Transaction = tx;

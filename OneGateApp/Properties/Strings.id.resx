@@ -821,4 +821,7 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Disalin ke clipboard</value>
   </data>
+  <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
+    <value>Saldo tidak cukup untuk menutupi jumlah dan biaya. Jumlah maksimum yang dapat Anda kirim adalah {0} GAS.</value>
+  </data>
 </root>

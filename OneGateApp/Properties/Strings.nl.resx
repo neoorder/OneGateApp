@@ -821,4 +821,7 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Gekopieerd naar klembord</value>
   </data>
+  <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
+    <value>Onvoldoende saldo om het bedrag en de kosten te dekken. Het maximale bedrag dat u kunt verzenden is {0} GAS.</value>
+  </data>
 </root>

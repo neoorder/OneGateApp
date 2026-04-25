@@ -821,4 +821,7 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>In Zwischenablage kopiert</value>
   </data>
+  <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
+    <value>Nicht genügend Guthaben, um den Betrag und die Gebühren zu decken. Der maximale sendbare Betrag beträgt {0} GAS.</value>
+  </data>
 </root>

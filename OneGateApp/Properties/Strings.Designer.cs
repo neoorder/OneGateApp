@@ -905,6 +905,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Insufficient balance to cover the amount and fees. The maximum you can send is {0} GAS. 的本地化字符串。
+        /// </summary>
+        internal static string InsufficientBalanceForAmountAndFees {
+            get {
+                return ResourceManager.GetString("InsufficientBalanceForAmountAndFees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Description 的本地化字符串。
         /// </summary>
         internal static string Introduction {

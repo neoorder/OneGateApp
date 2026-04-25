@@ -47,7 +47,7 @@
                     <Button Grid.Column="1" StyleClass="Link" Text="{x:Static og:Strings.All}" Margin="0,-10" Padding="10" VerticalOptions="Center" Clicked="OnSelectAllBalance" />
                 </Grid>
             </Border>
-            <og:ValidationMessage Title="{x:Static og:Strings.Amount}" Margin="0,-16,0,0" Target="{x:Reference entryAmount}">
+            <og:ValidationMessage x:Name="validationAmount" Title="{x:Static og:Strings.Amount}" Margin="0,-16,0,0" Target="{x:Reference entryAmount}">
                 <og:Required />
                 <og:Custom Validate="OnValidateAmount" />
                 <og:Range x:TypeArguments="x:Decimal" Minimum="0" IsMinimumIncluded="False" Maximum="{Binding SelectedAsset.DecimalBalance, StringFormat='{}{0}'}" />

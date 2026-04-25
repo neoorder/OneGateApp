@@ -821,4 +821,7 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>클립보드에 복사됨</value>
   </data>
+  <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
+    <value>금액과 수수료를 충당하기에 잔액이 부족합니다. 보낼 수 있는 최대 금액은 {0} GAS입니다.</value>
+  </data>
 </root>
