@@ -16,6 +16,7 @@ public partial class ShowWifPage : ContentPage
         InitializeComponent();
     }
 
+#if !MACCATALYST
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -27,4 +28,5 @@ public partial class ShowWifPage : ContentPage
         screenSecurity.DeactivateScreenSecurityProtection();
         base.OnDisappearing();
     }
+#endif
 }

@@ -24,6 +24,7 @@ public partial class GenerateMnemonicPage : ContentPage
             context.Mnemonic = Mnemonic.Create(256);
     }
 
+#if !MACCATALYST
     protected override void OnAppearing()
     {
         ScreenSecurityCoordinator.Enter(screenSecurity);
@@ -33,6 +34,7 @@ public partial class GenerateMnemonicPage : ContentPage
     {
         ScreenSecurityCoordinator.Exit(screenSecurity);
     }
+#endif
 
     async void OnSubmitted(object sender, EventArgs e)
     {

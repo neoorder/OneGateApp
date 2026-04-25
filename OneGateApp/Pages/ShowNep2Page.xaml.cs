@@ -19,6 +19,7 @@ public partial class ShowNep2Page : ContentPage
         InitializeComponent();
     }
 
+#if !MACCATALYST
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -30,6 +31,7 @@ public partial class ShowNep2Page : ContentPage
         screenSecurity.DeactivateScreenSecurityProtection();
         base.OnDisappearing();
     }
+#endif
 
     async void OnSubmit(object sender, EventArgs e)
     {

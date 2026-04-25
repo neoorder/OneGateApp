@@ -17,6 +17,7 @@ public partial class VerifyMnemonicPage : ContentPage
         InitializeComponent();
     }
 
+#if !MACCATALYST
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -28,6 +29,7 @@ public partial class VerifyMnemonicPage : ContentPage
         ScreenSecurityCoordinator.Exit(screenSecurity);
         base.OnDisappearing();
     }
+#endif
 
     void Word_Clicked(object sender, EventArgs e)
     {

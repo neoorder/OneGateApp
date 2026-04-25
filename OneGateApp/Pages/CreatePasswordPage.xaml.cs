@@ -22,6 +22,7 @@ public partial class CreatePasswordPage : ContentPage
         InitializeComponent();
     }
 
+#if !MACCATALYST
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -33,6 +34,7 @@ public partial class CreatePasswordPage : ContentPage
         ScreenSecurityCoordinator.Exit(screenSecurity);
         base.OnDisappearing();
     }
+#endif
 
     async void OnSubmitted(object sender, EventArgs e)
     {

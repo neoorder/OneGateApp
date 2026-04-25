@@ -30,6 +30,7 @@ public partial class SelectImportTypePage : ContentPage
         InitializeComponent();
     }
 
+#if !MACCATALYST
     protected override void OnAppearing()
     {
         ScreenSecurityCoordinator.Enter(screenSecurity);
@@ -39,6 +40,7 @@ public partial class SelectImportTypePage : ContentPage
     {
         ScreenSecurityCoordinator.Exit(screenSecurity);
     }
+#endif
 
     void Mnemonic_Validate(object sender, CustomValidationEventArgs e)
     {
