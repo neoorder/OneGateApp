@@ -75,22 +75,31 @@ static class Commands
             Uri uri => int.Parse(uri.Segments[2]),
             _ => throw new ArgumentException("Invalid parameter type.")
         };
-        if (!await Launcher.TryOpenAsync($"https://{SharedOptions.OneGateDomain}/app/{appId}"))
+#if IOS
+        bool supportOpenWithDeepLink = false;
+#else
+        bool supportOpenWithDeepLink = true;
+#endif
+        if (!supportOpenWithDeepLink || !await Launcher.TryOpenAsync($"https://{SharedOptions.OneGateDomain}/app/{appId}"))
         {
             Dictionary<string, object> parameters = new();
             if (parameter is DApp) parameters["dapp"] = parameter;
             else if (parameter is Uri uri) parameters["uri"] = WebUtility.UrlEncode(uri.ToString());
 #if IOS
             bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
-            if (!supportMultiWindow)
+#else
+            bool supportMultiWindow = true;
+#endif
+            if (supportMultiWindow)
+            {
+                LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
+                page.ApplyQueryAttributes(parameters);
+                Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
+            }
+            else
             {
                 await Shell.Current.GoToAsync("//dapps/launch", parameters);
-                return;
             }
-#endif
-            LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
-            page.ApplyQueryAttributes(parameters);
-            Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
         }
     });
 

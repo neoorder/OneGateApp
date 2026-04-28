@@ -2,6 +2,7 @@
 
 using CoreGraphics;
 using Foundation;
+using Microsoft.Maui.Platform;
 using WebKit;
 
 namespace NeoOrder.OneGate.Controls.Handlers;
@@ -31,7 +32,7 @@ partial class BridgeWebViewHandler
         controller.AddUserScript(script);
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
         config.UserContentController = controller;
-        return new WKWebView(CGRect.Empty, config);
+        return new MauiWKWebView(CGRect.Empty, this, config);
     }
 }
 #endif
