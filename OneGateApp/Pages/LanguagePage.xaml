@@ -5,37 +5,36 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.LanguagePage"
              Title="{x:Static og:Strings.ChangeLanguage}"
+             SafeAreaEdges="Container"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
         <og:LanguageConverter x:Key="LanguageConverter" />
         <og:IsEqualMultiValueConverter x:Key="IsEqualMultiValueConverter" />
     </ContentPage.Resources>
-    <ScrollView>
-        <Border StrokeShape="RoundRectangle 10" Margin="20">
-            <CollectionView ItemsSource="{x:Static og:LanguagePage.SupportedLanguages}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="x:String">
-                        <Grid ColumnDefinitions="*,auto" ColumnSpacing="20" Padding="20" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                            <Label Text="{Binding Converter={StaticResource LanguageConverter}}" />
-                            <Label Grid.Column="1" StyleClass="Icon, Secondary" Text="&#xe9b0;" FontSize="22">
-                                <Label.IsVisible>
-                                    <MultiBinding Converter="{StaticResource IsEqualMultiValueConverter}">
-                                        <Binding Path="." />
-                                        <Binding Path="CurrentLanguage" Source="{RelativeSource AncestorType={x:Type og:LanguagePage}}" />
-                                    </MultiBinding>
-                                </Label.IsVisible>
-                            </Label>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnLanguageTapped" CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Border>
-    </ScrollView>
+    <Border StrokeShape="RoundRectangle 10" Margin="20">
+        <CollectionView ItemsSource="{x:Static og:LanguagePage.SupportedLanguages}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Grid ColumnDefinitions="*,auto" ColumnSpacing="20" Padding="20" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                        <Label Text="{Binding Converter={StaticResource LanguageConverter}}" />
+                        <Label Grid.Column="1" StyleClass="Icon, Secondary" Text="&#xe9b0;" FontSize="22">
+                            <Label.IsVisible>
+                                <MultiBinding Converter="{StaticResource IsEqualMultiValueConverter}">
+                                    <Binding Path="." />
+                                    <Binding Path="CurrentLanguage" Source="{RelativeSource AncestorType={x:Type og:LanguagePage}}" />
+                                </MultiBinding>
+                            </Label.IsVisible>
+                        </Label>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLanguageTapped" CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Border>
 </ContentPage>

@@ -14,17 +14,17 @@
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe69a;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.ScanQRCode}" />
     </ContentPage.ToolbarItems>
     <Shell.SearchHandler>
-        <og:DAppSearchHandler SearchBoxVisibility="Collapsible" DApps="{Binding DApps}">
+        <og:DAppSearchHandler SearchBoxVisibility="Collapsible" ShowsResults="True" DApps="{Binding DApps}">
             <og:DAppSearchHandler.ItemTemplate>
                 <DataTemplate x:DataType="og:DApp">
-                    <HorizontalStackLayout Margin="5" Spacing="5">
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="5" Margin="{OnPlatform iOS='20,0', Default='5'}">
                         <Image WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
                             <Image.Source>
                                 <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
                             </Image.Source>
                         </Image>
-                        <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+                        <Label Grid.Column="1" Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" VerticalOptions="Center" />
+                    </Grid>
                 </DataTemplate>
             </og:DAppSearchHandler.ItemTemplate>
         </og:DAppSearchHandler>
@@ -39,10 +39,10 @@
                     </x:Array>
                 </og:TabBar.Tabs>
             </og:TabBar>
-            <CollectionView ItemsSource="{Binding DAppsFavoriteOrRecent}" MinimumHeightRequest="20">
+            <CollectionView ItemsSource="{Binding DAppsFavoriteOrRecent}" HeightRequest="88">
                 <CollectionView.EmptyView>
-                    <Grid>
-                        <Label IsVisible="{Binding LoadingService.IsLoading}">
+                    <Grid RowDefinitions="60">
+                        <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="{x:Static og:Strings.Loading}" />
@@ -50,7 +50,7 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label Text="{x:Static og:Strings.DefaultEmptyViewMessage}" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}" />
+                        <Label Text="{x:Static og:Strings.DefaultEmptyViewMessage}" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Grid>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
@@ -66,7 +66,7 @@
                                     </Image.Source>
                                 </Image>
                             </Border>
-                            <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" LineBreakMode="TailTruncation" HorizontalOptions="Center" />
+                            <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" LineBreakMode="TailTruncation" HorizontalOptions="Fill" HorizontalTextAlignment="Center" />
                             <VerticalStackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
                             </VerticalStackLayout.GestureRecognizers>

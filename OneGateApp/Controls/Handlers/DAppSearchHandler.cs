@@ -16,7 +16,7 @@ partial class DAppSearchHandler : SearchHandler
 
     protected override void OnQueryChanged(string oldValue, string newValue)
     {
-        ItemsSource = Search(newValue, DApps);
+        ItemsSource = Search(newValue, DApps)?.ToArray();
     }
 
     static IEnumerable<DApp>? Search(string? keyword, IEnumerable<DApp>? dapps)
@@ -44,8 +44,8 @@ partial class DAppSearchHandler : SearchHandler
 
     protected override void OnQueryConfirmed()
     {
-        DApp[] results = ItemsSource.Cast<DApp>().ToArray();
-        if (results.Length == 1)
+        DApp[]? results = ItemsSource?.Cast<DApp>().ToArray();
+        if (results?.Length == 1)
             Commands.LaunchDApp.Execute(results[0]);
     }
 }
