@@ -34,9 +34,10 @@ public partial class VerifyMnemonicPage : ContentPage
     void Word_Clicked(object sender, EventArgs e)
     {
         Button button = (Button)sender;
-        if (editorMnemonic.Text?.Contains(button.Text) == true)
+        if (button.Opacity < 0.5)
         {
-            editorMnemonic.Text = editorMnemonic.Text.Replace(button.Text, "").Replace("  ", " ").Trim();
+            int index = editorMnemonic.Text.LastIndexOf(button.Text);
+            editorMnemonic.Text = editorMnemonic.Text.Remove(index, 1).Replace("  ", " ").Trim();
             button.Opacity = 1.0;
         }
         else
