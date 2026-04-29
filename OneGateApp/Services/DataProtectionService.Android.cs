@@ -103,20 +103,36 @@ partial class DataProtectionService
         keyStore.Load(null);
         if (!keyStore.ContainsAlias(KeyAlias))
         {
-            var keyGenerator = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, "AndroidKeyStore")!;
-            var spec = new KeyGenParameterSpec.Builder(KeyAlias, KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt)
-                .SetBlockModes(KeyProperties.BlockModeGcm)
-                .SetEncryptionPaddings(KeyProperties.EncryptionPaddingNone)
-                .SetKeySize(256)
-                .SetUserAuthenticationRequired(true)
-                .SetUserAuthenticationParameters(0, (int)KeyPropertiesAuthType.BiometricStrong)
-                .SetIsStrongBoxBacked(true)
-                .Build();
-            keyGenerator.Init(spec);
-            return keyGenerator.GenerateKey()!;
+            try
+            {
+                return GenerateSecretKey(strongBoxBacked: true);
+            }
+            catch (ProviderException)
+            {
+                return GenerateSecretKey(strongBoxBacked: false);
+            }
+            catch (InvalidAlgorithmParameterException)
+            {
+                return GenerateSecretKey(strongBoxBacked: false);
+            }
         }
         var key = keyStore.GetKey(KeyAlias, null)!;
         return key.JavaCast<ISecretKey>();
+    }
+
+    static ISecretKey GenerateSecretKey(bool strongBoxBacked)
+    {
+        var keyGenerator = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, "AndroidKeyStore")!;
+        var builder = new KeyGenParameterSpec.Builder(KeyAlias, KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt)
+            .SetBlockModes(KeyProperties.BlockModeGcm)
+            .SetEncryptionPaddings(KeyProperties.EncryptionPaddingNone)
+            .SetKeySize(256)
+            .SetUserAuthenticationRequired(true)
+            .SetUserAuthenticationParameters(0, (int)KeyPropertiesAuthType.BiometricStrong);
+        if (strongBoxBacked)
+            builder.SetIsStrongBoxBacked(true);
+        keyGenerator.Init(builder.Build());
+        return keyGenerator.GenerateKey()!;
     }
 
     static Task<bool> AuthenticateWithCipherAsync(Cipher? cipher = null, string? title = null, string? message = null)
