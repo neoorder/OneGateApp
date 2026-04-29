@@ -9,6 +9,7 @@ using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -217,12 +218,15 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)
     {
         var response = await rpcServer.HandleRequestAsync(request);
-        await webView.EvaluateJavaScriptAsync($"window.__OneGateDapiCallback({response.ToJsonString()})");
+        string responseJson = JsonSerializer.Serialize(response.ToJsonString());
+        await webView.EvaluateJavaScriptAsync($"window.__OneGateDapiCallback({responseJson})");
     }
 
     async Task EmitEventAsync(string eventName, JsonObject? detial)
     {
         detial ??= new();
-        await webView.EvaluateJavaScriptAsync($"window.OneGateDapiProvider.__emit('{eventName}', {detial.ToJsonString()})");
+        string eventNameJson = JsonSerializer.Serialize(eventName);
+        string detailJson = JsonSerializer.Serialize(detial.ToJsonString());
+        await webView.EvaluateJavaScriptAsync($"window.OneGateDapiProvider.__emit({eventNameJson}, JSON.parse({detailJson}))");
     }
 }
