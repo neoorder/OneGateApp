@@ -112,9 +112,23 @@ public partial class App : Application
         }
         else
         {
-            page = appLinkAction?.GetPage(serviceProvider)
+            page = TryCreateAppLinkPage()
                 ?? serviceProvider.GetServiceOrCreateInstance<AppShell>();
         }
         return new Window(page) { Title = "OneGate" };
+    }
+
+    Page? TryCreateAppLinkPage()
+    {
+        if (appLinkAction is null) return null;
+        try
+        {
+            return appLinkAction.GetPage(serviceProvider);
+        }
+        catch
+        {
+            appLinkAction = null;
+            return null;
+        }
     }
 }
