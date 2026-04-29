@@ -33,8 +33,8 @@ public partial class SelectAssetPopup : MyPopup<AssetInfo?>
 
     async void OnSelectAsset(object sender, TappedEventArgs e)
     {
-        AssetInfo asset = (AssetInfo)e.Parameter!;
-        await CloseAsync(asset);
+        if (e.Parameter is AssetInfo asset)
+            await CloseAsync(asset);
     }
 
     async void OnCancel(object sender, EventArgs e)

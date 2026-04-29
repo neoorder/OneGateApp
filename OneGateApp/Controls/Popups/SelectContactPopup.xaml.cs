@@ -36,8 +36,8 @@ public partial class SelectContactPopup : MyPopup<Contact?>
 
     async void OnSelectContact(object sender, TappedEventArgs e)
     {
-        Contact contact = (Contact)e.Parameter!;
-        await CloseAsync(contact);
+        if (e.Parameter is Contact contact)
+            await CloseAsync(contact);
     }
 
     async void OnCancel(object sender, EventArgs e)
