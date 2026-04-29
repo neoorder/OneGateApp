@@ -7,6 +7,7 @@ using NeoOrder.OneGate.Resources;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net.Http.Json;
 using System.Numerics;
+using System.Text.Json;
 
 namespace NeoOrder.OneGate.Services;
 
@@ -30,7 +31,7 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
         var tokens = await LoadTokensAsync(true);
         TokenInfo token = tokens.FirstOrDefault(p => p.Hash == assetId) ?? await rpcClient.GetTokenInfo(assetId);
         BigInteger balance = await rpcClient.BalanceOf(assetId, account.ScriptHash);
-        Ticker[] tickers = (await httpClient.GetFromJsonAsync<Ticker[]>($"/api/ticker/price?symbol={token.Symbol}USDT"))!;
+        Ticker[] tickers = await TryLoadTickersAsync(httpClient, $"/api/ticker/price?symbol={token.Symbol}USDT");
         token.Price = tickers.FirstOrDefault()?.Price;
         return new AssetInfo
         {
@@ -49,13 +50,17 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
             .Zip(balance, (x, y) => new AssetInfo { Token = x, Balance = y })
             .Where(p => p.Balance > 0 || p.Token.Hash == NativeContract.NEO.Hash || p.Token.Hash == NativeContract.GAS.Hash)
             .ToArray();
+        if (assets.Length == 0) return assets;
         string query = string.Join('&', assets.Select(p => $"symbol={p.Token.Symbol}USDT"));
         string url = $"/api/ticker/price?{query}";
-        Ticker[] tickers = (await httpClient.GetFromJsonAsync<Ticker[]>(url))!;
+        Ticker[] tickers = await TryLoadTickersAsync(httpClient, url);
         foreach (Ticker ticker in tickers)
         {
-            var asset = assets.First(p => p.Token.Symbol == ticker.Symbol[0..^4]);
-            asset.Token.Price = ticker.Price;
+            string? symbol = GetTickerAssetSymbol(ticker.Symbol);
+            if (symbol is null) continue;
+            AssetInfo? asset = assets.FirstOrDefault(p => p.Token.Symbol == symbol);
+            if (asset is not null)
+                asset.Token.Price = ticker.Price;
         }
         return assets;
     }
@@ -114,5 +119,25 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
         if (hiddens is null) return;
         if (hiddens.Remove(hash))
             await dbContext.Settings.PutAsync("tokens/hidden", hiddens);
+    }
+
+    static async Task<Ticker[]> TryLoadTickersAsync(HttpClient httpClient, string url)
+    {
+        try
+        {
+            return await httpClient.GetFromJsonAsync<Ticker[]>(url) ?? [];
+        }
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or NotSupportedException or TaskCanceledException)
+        {
+            return [];
+        }
+    }
+
+    static string? GetTickerAssetSymbol(string symbol)
+    {
+        const string quoteSymbol = "USDT";
+        if (symbol.Length <= quoteSymbol.Length || !symbol.EndsWith(quoteSymbol, StringComparison.Ordinal))
+            return null;
+        return symbol[..^quoteSymbol.Length];
     }
 }
