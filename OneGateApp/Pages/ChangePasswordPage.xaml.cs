@@ -44,7 +44,16 @@ public partial class ChangePasswordPage : ContentPage
         Submit submit = (Submit)sender;
         using (submit.EnterBusyState())
         {
-            bool success = await Task.Run(() => wallet.ChangePassword(CurrentPassword, Password));
+            bool success;
+            try
+            {
+                success = await Task.Run(() => wallet.ChangePassword(CurrentPassword, Password));
+            }
+            catch
+            {
+                errMsg.SetError(Strings.UnknownError);
+                return;
+            }
             if (success)
             {
                 await Shell.Current.GoToAsync("..");
