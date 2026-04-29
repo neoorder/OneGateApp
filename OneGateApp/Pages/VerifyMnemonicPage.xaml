@@ -20,13 +20,9 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
-            <VerticalStackLayout.Behaviors>
-                <og:KonamiCodeBehavior KonamiCodeEntered="OnKonamiCodeEntered" />
-            </VerticalStackLayout.Behaviors>
         </VerticalStackLayout>
         <VerticalStackLayout Grid.Row="1" Spacing="20">
             <og:Submit Text="{x:Static og:Strings.Next}" Submitted="OnSubmitted" />
-            <Button StyleClass="Secondary" Text="{x:Static og:Strings.Skip}" BorderWidth="0" IsVisible="{Binding ShowSkip, Source={RelativeSource AncestorType={x:Type og:VerifyMnemonicPage}}}" Clicked="OnSubmitted" />
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
