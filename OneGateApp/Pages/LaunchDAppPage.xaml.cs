@@ -9,6 +9,7 @@ using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net;
 using System.Net.Http.Json;
+using System.Security.Cryptography;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -23,6 +24,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
+
+    string? pendingBridgeToken;
 
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
 
@@ -88,19 +91,36 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         {
             e.Cancel = true;
             await Toast.Show(Strings.RedirectionBlockedText);
+            return;
         }
+
+        BridgeWebView webView = (BridgeWebView)sender;
+        webView.BridgeToken = null;
+        pendingBridgeToken = CreateBridgeToken();
     }
 
     async void OnNavigated(object sender, WebNavigatedEventArgs e)
     {
-        if (e.Result != WebNavigationResult.Success) return;
+        if (e.Result != WebNavigationResult.Success)
+        {
+            pendingBridgeToken = null;
+            return;
+        }
         BridgeWebView webView = (BridgeWebView)sender;
+        if (pendingBridgeToken is not { Length: > 0 } bridgeToken)
+        {
+            webView.BridgeToken = null;
+            return;
+        }
+        webView.BridgeToken = bridgeToken;
+        pendingBridgeToken = null;
         string script = $$"""
             (function () {
                 if (window.__OneGateDapiInjected) return;
                 window.__OneGateDapiInjected = true;
 
                 const pending = new Map();
+                const bridgeToken = '{{bridgeToken}}';
 
                 function createId() {
                     return 'onegate_' + Date.now() + '_' + Math.random().toString(16).slice(2);
@@ -115,7 +135,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                             jsonrpc: "2.0",
                             id: id,
                             method: method,
-                            params: params
+                            params: params,
+                            onegateBridgeToken: bridgeToken
                         };
 
                         window.__OneGateBridge.invoke(JSON.stringify(request));
@@ -204,6 +225,11 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             })();
             """.ReplaceLineEndings("");
         await webView.EvaluateJavaScriptAsync(script);
+    }
+
+    static string CreateBridgeToken()
+    {
+        return Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
     }
 
     static bool IsCrossDomain(Uri uriOld, Uri uriNew)
