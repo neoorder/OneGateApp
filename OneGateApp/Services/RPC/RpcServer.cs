@@ -15,20 +15,20 @@ class RpcServer(object host)
 
     public async Task<JsonObject> HandleRequestAsync(JsonObject request)
     {
-        string id = request["id"]!.GetValue<string>();
-        string method = request["method"]!.GetValue<string>();
-        JsonArray? args = request["params"]?.AsArray();
         var response = new JsonObject
         {
-            ["jsonrpc"] = "2.0",
-            ["id"] = id
+            ["jsonrpc"] = "2.0"
         };
         try
         {
+            response["id"] = GetRequestId(request["id"]);
+            string method = GetRequiredString(request, "method");
+            JsonArray? args = GetParams(request["params"]);
             response["result"] = await HandleRequestAsync(method, args);
         }
         catch (OperationCanceledException)
         {
+            response.TryAdd("id", null);
             response["error"] = new JsonObject
             {
                 ["code"] = 10006,
@@ -37,6 +37,7 @@ class RpcServer(object host)
         }
         catch (DapiException ex)
         {
+            response.TryAdd("id", null);
             response["error"] = new JsonObject
             {
                 ["code"] = ex.Code,
@@ -46,6 +47,7 @@ class RpcServer(object host)
         }
         catch (Exception ex)
         {
+            response.TryAdd("id", null);
             response["error"] = new JsonObject
             {
                 ["code"] = 10000,
@@ -53,6 +55,45 @@ class RpcServer(object host)
             };
         }
         return response;
+    }
+
+    static JsonNode? GetRequestId(JsonNode? id)
+    {
+        if (id is null) return null;
+        if (id is not JsonValue value)
+            throw new DapiException(10002, "Invalid request id");
+        if (value.TryGetValue<string>(out _) ||
+            value.TryGetValue<int>(out _) ||
+            value.TryGetValue<long>(out _) ||
+            value.TryGetValue<ulong>(out _) ||
+            value.TryGetValue<decimal>(out _))
+        {
+            return id.DeepClone();
+        }
+        throw new DapiException(10002, "Invalid request id");
+    }
+
+    static string GetRequiredString(JsonObject request, string name)
+    {
+        try
+        {
+            return request[name]?.GetValue<string>()
+                ?? throw new DapiException(10002, $"Missing {name}");
+        }
+        catch (InvalidOperationException)
+        {
+            throw new DapiException(10002, $"Invalid {name}");
+        }
+    }
+
+    static JsonArray? GetParams(JsonNode? node)
+    {
+        return node switch
+        {
+            null => null,
+            JsonArray array => array,
+            _ => throw new DapiException(10002, "Invalid params")
+        };
     }
 
     private async Task<JsonNode?> HandleRequestAsync(string method, JsonArray? args)
