@@ -4,6 +4,7 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using ZXing.Net.Maui;
 
@@ -21,13 +22,23 @@ static class Commands
 
     public static AsyncCommand<string> OpenUrl { get; } = new(static async url =>
     {
-        await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
+        if (!TryCreateWebUri(url, out Uri? uri))
+        {
+            await Toast.Show(Strings.UnknownError);
+            return;
+        }
+        await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
     });
 
     public static AsyncCommand<string> LaunchUrl { get; } = new(static async url =>
     {
-        if (!await Launcher.TryOpenAsync(url))
-            await Browser.OpenAsync(url, BrowserLaunchMode.External);
+        if (!TryCreateWebUri(url, out Uri? uri))
+        {
+            await Toast.Show(Strings.UnknownError);
+            return;
+        }
+        if (!await Launcher.TryOpenAsync(uri))
+            await Browser.OpenAsync(uri, BrowserLaunchMode.External);
     });
 
     public static AsyncCommand<IShareable> Share { get; } = new(static async shareable =>
@@ -140,6 +151,14 @@ static class Commands
         UpdateService service = Application.Current!.Handler.GetRequiredService<UpdateService>();
         await service.UpdateAsync();
     });
+
+    static bool TryCreateWebUri(string? value, [NotNullWhen(true)] out Uri? uri)
+    {
+        if (Uri.TryCreate(value, UriKind.Absolute, out uri) && uri.Scheme == Uri.UriSchemeHttps)
+            return true;
+        uri = null;
+        return false;
+    }
 }
 
 partial class AsyncCommand(Func<object?, Task> execute) : Command(async p => await execute(p))
