@@ -7,6 +7,8 @@ public partial class BridgeWebView : WebView
 {
     public event EventHandler<BridgeWebView, JsonObject>? InvokedFromJavaScript;
 
+    public string? BridgeToken { get; set; }
+
     internal void OnMessage(string payload)
     {
         JsonObject? request;
@@ -20,6 +22,9 @@ public partial class BridgeWebView : WebView
             if (request["params"] is not null && request["params"] is not JsonArray) return;
             if (request["id"] is not JsonValue id) return;
             if (id.GetValueKind() != JsonValueKind.String && id.GetValueKind() != JsonValueKind.Number) return;
+            if (BridgeToken is not { Length: > 0 } token) return;
+            if (request["onegateBridgeToken"] is not JsonValue bridgeToken || bridgeToken.GetValueKind() != JsonValueKind.String || bridgeToken.GetValue<string>() != token) return;
+            request.Remove("onegateBridgeToken");
         }
         catch
         {
