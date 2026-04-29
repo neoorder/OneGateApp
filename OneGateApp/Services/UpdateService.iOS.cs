@@ -13,9 +13,8 @@ partial class UpdateService
     {
         if (IsAppStore())
         {
-            JsonObject result = (await httpClient.GetFromJsonAsync<JsonObject>("https://itunes.apple.com/lookup?id=1584915425"))!;
-            Version latest = new(result["results"]!["version"]!.GetValue<string>());
-            return latest > AppInfo.Version;
+            JsonObject? result = await httpClient.GetFromJsonAsync<JsonObject>("https://itunes.apple.com/lookup?id=1584915425");
+            return TryGetAppStoreVersion(result, out Version? latest) && latest > AppInfo.Version;
         }
         return await CheckForUpdatesFallbackAsync();
     }
@@ -36,6 +35,21 @@ partial class UpdateService
     static bool IsAppStore()
     {
         return NSBundle.MainBundle.AppStoreReceiptUrl.LastPathComponent == "receipt";
+    }
+
+    static bool TryGetAppStoreVersion(JsonObject? result, out Version? version)
+    {
+        version = null;
+        if (result?["results"] is not JsonArray { Count: > 0 } results) return false;
+        if (results[0] is not JsonObject app) return false;
+        try
+        {
+            return Version.TryParse(app["version"]?.GetValue<string>(), out version);
+        }
+        catch (InvalidOperationException)
+        {
+            return false;
+        }
     }
 }
 #endif

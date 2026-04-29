@@ -17,8 +17,8 @@ public partial class UpdateService(HttpClient httpClient)
 
     async Task<bool> CheckForUpdatesFallbackAsync()
     {
-        Version latest = new(await httpClient.GetStringAsync("/api/app/version"));
-        return latest > AppInfo.Version;
+        string latestVersion = await httpClient.GetStringAsync("/api/app/version");
+        return Version.TryParse(latestVersion, out Version? latest) && latest > AppInfo.Version;
     }
 
     public async Task UpdateAsync()
