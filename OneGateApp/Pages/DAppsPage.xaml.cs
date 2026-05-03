@@ -54,7 +54,7 @@ public partial class DAppsPage : ContentPage
         if (tabBar.SelectedTab == tabBar.Tabs![0])
             DAppsFiltered = DApps.ToArray();
         else
-            DAppsFiltered = DApps.Where(p => p.Tags.Contains(tabBar.SelectedTab)).ToArray();
+            DAppsFiltered = DApps.Where(p => p.Tags?.Select(t => Strings.ResourceManager.GetString(t) ?? t).Contains(tabBar.SelectedTab) == true).ToArray();
     }
 
     async void OnDetailsClicked(object sender, EventArgs e)
