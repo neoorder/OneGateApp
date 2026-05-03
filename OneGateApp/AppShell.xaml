@@ -28,6 +28,11 @@
             </og:AdaptiveStateBehavior.NarrowDeviceSetters>
         </og:AdaptiveStateBehavior>
     </Shell.Behaviors>
+    <Shell.FlyoutHeader>
+        <Grid Padding="10,0">
+            <Image Source="splash_branding.png" HeightRequest="60" HorizontalOptions="Start" VerticalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <Tab Title="{x:Static og:Strings.Home}">
             <Tab.Icon>
