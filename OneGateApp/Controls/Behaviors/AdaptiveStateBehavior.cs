@@ -56,17 +56,24 @@ sealed partial class AdaptiveStateBehavior : Behavior<VisualElement>
         DetachWindow();
         _window = _associatedObject.Window;
         _window.SizeChanged += OnWindowSizeChanged;
+        _window.Destroying += OnWindowDestroying;
     }
 
     void DetachWindow()
     {
         _window?.SizeChanged -= OnWindowSizeChanged;
+        _window?.Destroying -= OnWindowDestroying;
         _window = null;
     }
 
     void OnWindowSizeChanged(object? sender, EventArgs e)
     {
         ApplyCurrentState(force: false);
+    }
+
+    void OnWindowDestroying(object? sender, EventArgs e)
+    {
+        DetachWindow();
     }
 
     void ApplyCurrentState(bool force)
