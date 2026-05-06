@@ -61,10 +61,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 return;
             }
             DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
-            if (string.IsNullOrEmpty(uri.Query))
-                Url = DApp.Url;
-            else
-                Url = DApp.Url + uri.Query;
+            Url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, uri);
         }
         List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
         IsFavorite = favorites?.Contains(DApp.Id) ?? false;

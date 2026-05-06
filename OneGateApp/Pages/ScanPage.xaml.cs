@@ -178,10 +178,7 @@ public partial class ScanPage : ContentPage, IQueryAttributable
 
     async Task<bool> ProcessDappUriAsync(Uri uri)
     {
-        if (uri.Segments.Length != 3) return false;
-        if (uri.Segments[1] != "app/") return false;
-        if (!int.TryParse(uri.Segments[2], out int appId)) return false;
-        if (appId <= 0) return false;
+        if (!DAppLaunchUri.TryGetAppId(uri, out _)) return false;
         if (action is null)
         {
             await Shell.Current.GoToAsync("..");

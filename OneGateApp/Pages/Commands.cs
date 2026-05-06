@@ -80,7 +80,7 @@ static class Commands
         intent.SetAction(Android.Content.Intent.ActionView);
         intent.SetData(Android.Net.Uri.Parse(canonicalUri));
         intent.AddFlags(Android.Content.ActivityFlags.NewDocument);
-        if (!string.IsNullOrEmpty(uri.Query))
+        if (DAppLaunchUri.HasLaunchParameters(uri))
             intent.PutExtra("org.neoorder.onegate.ORIGINAL_URI", uri.AbsoluteUri);
         activity.StartActivity(intent);
 #else

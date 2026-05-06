@@ -89,6 +89,8 @@ public partial class App : Application
     {
         try
         {
+            if (!string.Equals(uri.Host, SharedOptions.OneGateDomain, StringComparison.OrdinalIgnoreCase))
+                return null;
             return uri.Segments[1] switch
             {
                 "app/" => new LaunchDAppAction(uri),
