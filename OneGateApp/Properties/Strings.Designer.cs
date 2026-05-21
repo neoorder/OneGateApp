@@ -460,6 +460,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 DApp Testing 的本地化字符串。
+        /// </summary>
+        internal static string DAppTesting {
+            get {
+                return ResourceManager.GetString("DAppTesting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} do not match 的本地化字符串。
         /// </summary>
         internal static string DefaultCompareErrorMessage {
@@ -593,6 +602,24 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Developer mode enabled 的本地化字符串。
+        /// </summary>
+        internal static string DeveloperModeEnabled {
+            get {
+                return ResourceManager.GetString("DeveloperModeEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Developer Tools 的本地化字符串。
+        /// </summary>
+        internal static string DeveloperTools {
+            get {
+                return ResourceManager.GetString("DeveloperTools", resourceCulture);
             }
         }
         

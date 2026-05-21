@@ -25,7 +25,6 @@ partial class LaunchDAppPage
     [RpcMethod]
     async Task<AuthenticationResponsePayload> Authenticate(AuthenticationChallengePayload payload)
     {
-        DApp dapp = (DApp)BindingContext;
         try
         {
             payload.Validate(protocolSettings);
@@ -38,7 +37,7 @@ partial class LaunchDAppPage
         {
             throw new DapiException(10002, ex.Message);
         }
-        if (payload.Domain != new Uri(dapp.Url).Host)
+        if (payload.Domain != new Uri(DApp.Url).Host)
             throw new DapiException(10002, "Domain mismatch");
         if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText))
             throw new DapiException(10006, "Operation cancelled");

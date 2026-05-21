@@ -824,4 +824,13 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Tutarı ve ücretleri karşılamak için bakiye yetersiz. Gönderebileceğiniz en yüksek tutar {0} GAS’tır.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Geliştirici modu etkinleştirildi</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Geliştirici araçları</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp Testi</value>
+  </data>
 </root>

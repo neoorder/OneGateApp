@@ -115,7 +115,17 @@ public partial class App : Application
             page = TryCreateAppLinkPage()
                 ?? serviceProvider.GetServiceOrCreateInstance<AppShell>();
         }
-        return new Window(page) { Title = "OneGate" };
+        return new Window(page)
+        {
+            Title = "OneGate",
+#if WINDOWS
+            TitleBar = new TitleBar
+            {
+                Title = "OneGate",
+                BackgroundColor = Color.FromArgb("#e8e8e8")
+            }
+#endif
+        };
     }
 
     Page? TryCreateAppLinkPage()

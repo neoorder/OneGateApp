@@ -4,7 +4,6 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
-using System.Net;
 using ZXing.Net.Maui;
 
 namespace NeoOrder.OneGate.Pages;
@@ -69,22 +68,32 @@ static class Commands
 
     public static AsyncCommand LaunchDApp { get; } = new(static async parameter =>
     {
-        int appId = parameter switch
-        {
-            DApp dapp => dapp.Id,
-            Uri uri => int.Parse(uri.Segments[2]),
-            _ => throw new ArgumentException("Invalid parameter type.")
-        };
-#if IOS
+        DApp? dapp = parameter as DApp;
+        Uri? uri = parameter as Uri;
+        if (dapp is null && uri is null) throw new ArgumentException("Invalid parameter type.");
+        uri ??= new($"https://{SharedOptions.OneGateDomain}/app/{dapp!.Id}");
+        int appId = dapp?.Id ?? int.Parse(uri.Segments[2]);
+#if ANDROID
+        var activity = Platform.CurrentActivity!;
+        string canonicalUri = $"https://{SharedOptions.OneGateDomain}/app/{appId}";
+        var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.MainActivity));
+        intent.SetAction(Android.Content.Intent.ActionView);
+        intent.SetData(Android.Net.Uri.Parse(canonicalUri));
+        intent.AddFlags(Android.Content.ActivityFlags.NewDocument);
+        if (!string.IsNullOrEmpty(uri.Query))
+            intent.PutExtra("org.neoorder.onegate.ORIGINAL_URI", uri.AbsoluteUri);
+        activity.StartActivity(intent);
+#else
+#if IOS || MACCATALYST
         bool supportOpenWithDeepLink = false;
 #else
         bool supportOpenWithDeepLink = true;
 #endif
-        if (!supportOpenWithDeepLink || !await Launcher.TryOpenAsync($"https://{SharedOptions.OneGateDomain}/app/{appId}"))
+        if (!supportOpenWithDeepLink || !await Launcher.TryOpenAsync(uri))
         {
             Dictionary<string, object> parameters = new();
-            if (parameter is DApp) parameters["dapp"] = parameter;
-            else if (parameter is Uri uri) parameters["uri"] = WebUtility.UrlEncode(uri.ToString());
+            if (dapp != null) parameters["dapp"] = dapp;
+            parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
 #if IOS
             bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
 #else
@@ -101,6 +110,7 @@ static class Commands
                 await Shell.Current.GoToAsync("//dapps/launch", parameters);
             }
         }
+#endif
     });
 
     public static AsyncCommand CheckForUpdates { get; } = new(static async parameter =>

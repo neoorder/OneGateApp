@@ -17,6 +17,9 @@ partial class DAppSearchHandler : SearchHandler
     protected override void OnQueryChanged(string oldValue, string newValue)
     {
         ItemsSource = Search(newValue, DApps)?.ToArray();
+#if IOS
+        if (string.IsNullOrEmpty(newValue)) HideSoftInputAsync();
+#endif
     }
 
     static IEnumerable<DApp>? Search(string? keyword, IEnumerable<DApp>? dapps)

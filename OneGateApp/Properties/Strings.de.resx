@@ -824,4 +824,13 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Nicht genügend Guthaben, um den Betrag und die Gebühren zu decken. Der maximale sendbare Betrag beträgt {0} GAS.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Entwicklermodus aktiviert</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Entwicklertools</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp-Test</value>
+  </data>
 </root>

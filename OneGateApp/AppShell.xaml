@@ -4,20 +4,41 @@
        xmlns:og="http://schemas.neoorder.org/onegate/controls"
        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
        x:Class="NeoOrder.OneGate.AppShell"
-       Title="OneGate">
-    <TabBar>
+       Title="OneGate"
+       Shell.TabBarIsVisible="{OnIdiom Desktop=False, Tablet=False, Default=True}">
+    <Shell.Resources>
+        <FontImageSource x:Key="HomeIconChecked" FontFamily="Icons" Glyph="&#xe64d;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="HomeIconUnchecked" FontFamily="Icons" Glyph="&#xe609;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="DAppsIconChecked" FontFamily="Icons" Glyph="&#xe853;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="DAppsIconUnchecked" FontFamily="Icons" Glyph="&#xe792;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="WalletIconChecked" FontFamily="Icons" Glyph="&#xe852;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="WalletIconUnchecked" FontFamily="Icons" Glyph="&#xe798;" Color="{toolkit:AppThemeResource Primary}" />
+    </Shell.Resources>
+    <Shell.Behaviors>
+        <og:AdaptiveStateBehavior>
+            <og:AdaptiveStateBehavior.CompactSetters>
+                <Setter Property="Shell.FlyoutBehavior" Value="Flyout" />
+                <Setter Property="Shell.FlyoutIsPresented" Value="False" />
+            </og:AdaptiveStateBehavior.CompactSetters>
+            <og:AdaptiveStateBehavior.ExpandedSetters>
+                <Setter Property="Shell.FlyoutBehavior" Value="Locked" />
+            </og:AdaptiveStateBehavior.ExpandedSetters>
+            <og:AdaptiveStateBehavior.NarrowDeviceSetters>
+                <Setter Property="Shell.FlyoutBehavior" Value="Disabled" />
+            </og:AdaptiveStateBehavior.NarrowDeviceSetters>
+        </og:AdaptiveStateBehavior>
+    </Shell.Behaviors>
+    <Shell.FlyoutHeader>
+        <Grid Padding="10,0">
+            <Image Source="splash_branding.png" HeightRequest="60" HorizontalOptions="Start" VerticalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <Tab Title="{x:Static og:Strings.Home}">
             <Tab.Icon>
                 <Binding Path="IsChecked" Source="{RelativeSource Self}">
                     <Binding.Converter>
-                        <toolkit:BoolToObjectConverter>
-                            <toolkit:BoolToObjectConverter.TrueObject>
-                                <FontImageSource FontFamily="Icons" Glyph="&#xe64d;" />
-                            </toolkit:BoolToObjectConverter.TrueObject>
-                            <toolkit:BoolToObjectConverter.FalseObject>
-                                <FontImageSource FontFamily="Icons" Glyph="&#xe609;" />
-                            </toolkit:BoolToObjectConverter.FalseObject>
-                        </toolkit:BoolToObjectConverter>
+                        <toolkit:BoolToObjectConverter TrueObject="{StaticResource HomeIconChecked}" FalseObject="{StaticResource HomeIconUnchecked}" />
                     </Binding.Converter>
                 </Binding>
             </Tab.Icon>
@@ -27,14 +48,7 @@
             <Tab.Icon>
                 <Binding Path="IsChecked" Source="{RelativeSource Self}">
                     <Binding.Converter>
-                        <toolkit:BoolToObjectConverter>
-                            <toolkit:BoolToObjectConverter.TrueObject>
-                                <FontImageSource FontFamily="Icons" Glyph="&#xe853;" />
-                            </toolkit:BoolToObjectConverter.TrueObject>
-                            <toolkit:BoolToObjectConverter.FalseObject>
-                                <FontImageSource FontFamily="Icons" Glyph="&#xe792;" />
-                            </toolkit:BoolToObjectConverter.FalseObject>
-                        </toolkit:BoolToObjectConverter>
+                        <toolkit:BoolToObjectConverter TrueObject="{StaticResource DAppsIconChecked}" FalseObject="{StaticResource DAppsIconUnchecked}" />
                     </Binding.Converter>
                 </Binding>
             </Tab.Icon>
@@ -44,18 +58,11 @@
             <Tab.Icon>
                 <Binding Path="IsChecked" Source="{RelativeSource Self}">
                     <Binding.Converter>
-                        <toolkit:BoolToObjectConverter>
-                            <toolkit:BoolToObjectConverter.TrueObject>
-                                <FontImageSource FontFamily="Icons" Glyph="&#xe852;" />
-                            </toolkit:BoolToObjectConverter.TrueObject>
-                            <toolkit:BoolToObjectConverter.FalseObject>
-                                <FontImageSource FontFamily="Icons" Glyph="&#xe798;" />
-                            </toolkit:BoolToObjectConverter.FalseObject>
-                        </toolkit:BoolToObjectConverter>
+                        <toolkit:BoolToObjectConverter TrueObject="{StaticResource WalletIconChecked}" FalseObject="{StaticResource WalletIconUnchecked}" />
                     </Binding.Converter>
                 </Binding>
             </Tab.Icon>
             <ShellContent Route="wallet" ContentTemplate="{DataTemplate og:WalletPage}" />
         </Tab>
-    </TabBar>
+    </FlyoutItem>
 </Shell>

@@ -28,6 +28,11 @@ public partial class DAppsPage : ContentPage
         this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
         this.DApps.CollectionLoaded += OnDAppsLoaded;
         InitializeComponent();
+#if WINDOWS
+        // Disable the search handler on Windows
+        // The search handler is not well supported on Windows and can cause issues with the layout
+        Shell.SetSearchHandler(this, null);
+#endif
         LoadingService.Loaded += OnDataLoaded;
         LoadingService.BeginLoad();
     }
@@ -54,7 +59,7 @@ public partial class DAppsPage : ContentPage
         if (tabBar.SelectedTab == tabBar.Tabs![0])
             DAppsFiltered = DApps.ToArray();
         else
-            DAppsFiltered = DApps.Where(p => p.Tags.Contains(tabBar.SelectedTab)).ToArray();
+            DAppsFiltered = DApps.Where(p => p.Tags?.Select(t => Strings.ResourceManager.GetString(t) ?? t).Contains(tabBar.SelectedTab) == true).ToArray();
     }
 
     async void OnDetailsClicked(object sender, EventArgs e)

@@ -17,7 +17,7 @@
         <og:DAppSearchHandler SearchBoxVisibility="Collapsible" ShowsResults="True" DApps="{Binding DApps}">
             <og:DAppSearchHandler.ItemTemplate>
                 <DataTemplate x:DataType="og:DApp">
-                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="5" Margin="{OnPlatform iOS='20,0', Default='5'}">
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="5" Margin="{OnPlatform iOS='20,0', MacCatalyst='20,0', Default='5'}">
                         <Image WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
                             <Image.Source>
                                 <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />

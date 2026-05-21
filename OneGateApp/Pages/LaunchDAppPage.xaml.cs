@@ -24,6 +24,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
 
+    public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
+    public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
@@ -45,33 +47,52 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     {
         if (query.TryGetValue("dapp", out var value))
         {
-            BindingContext = value;
+            DApp = (DApp)value;
+            Url = DApp.Url;
         }
         else
         {
             Uri uri = query["uri"] as Uri ?? new(WebUtility.UrlDecode((string)query["uri"]));
-            int id = int.Parse(uri.Segments[2]);
-            var response = await httpClient.GetAsync($"/api/dapp/{id}");
-            if (response.IsSuccessStatusCode)
-                BindingContext = (await response.Content.ReadFromJsonAsync<DApp>())!;
+            if (uri.Authority == SharedOptions.OneGateDomain && uri.Segments[1] == "app/")
+            {
+                int id = int.Parse(uri.Segments[2]);
+                var response = await httpClient.GetAsync($"/api/dapp/{id}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    await this.GoBackOrCloseAsync();
+                    return;
+                }
+                DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
+                if (string.IsNullOrEmpty(uri.Query))
+                    Url = DApp.Url;
+                else
+                    Url = DApp.Url + uri.Query;
+            }
             else
-                await this.GoBackOrCloseAsync();
+            {
+                DApp = new DApp
+                {
+                    Id = 0,
+                    IsActive = false,
+                    Name = $"{{\"en\":\"{uri.Host}\"}}",
+                    Url = uri.AbsoluteUri,
+                    Languages = ["en"]
+                };
+                Url = uri.AbsoluteUri;
+            }
         }
-    }
-
-    protected override async void OnBindingContextChanged()
-    {
-        base.OnBindingContextChanged();
-        DApp dapp = (DApp)BindingContext;
-        List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
-        IsFavorite = favorites?.Contains(dapp.Id) ?? false;
-        List<int> recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
-        recents.Remove(dapp.Id);
-        recents.Insert(0, dapp.Id);
-        while (recents.Count > 10)
-            recents.RemoveAt(recents.Count - 1);
-        await dbContext.Settings.PutAsync("dapps/recent", recents);
-        GlobalStates.Invalidate<DAppsPage>();
+        if (DApp.Id > 0)
+        {
+            List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
+            IsFavorite = favorites?.Contains(DApp.Id) ?? false;
+            List<int> recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+            recents.Remove(DApp.Id);
+            recents.Insert(0, DApp.Id);
+            while (recents.Count > 10)
+                recents.RemoveAt(recents.Count - 1);
+            await dbContext.Settings.PutAsync("dapps/recent", recents);
+            GlobalStates.Invalidate<DAppsPage>();
+        }
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
@@ -81,8 +102,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     async void OnNavigating(object sender, WebNavigatingEventArgs e)
     {
-        DApp dapp = (DApp)BindingContext;
-        Uri uriOld = new(dapp.Url);
+        Uri uriOld = new(DApp.Url);
         Uri uriNew = new(uriOld, e.Url);
         if (IsCrossDomain(uriOld, uriNew))
         {

@@ -41,7 +41,7 @@ public class MainActivity : MauiAppCompatActivity
             }
             else
             {
-                if (!HandleUri(Intent.Data!)) Finish();
+                if (!HandleUri(Intent)) Finish();
             }
         }
         base.OnCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class MainActivity : MauiAppCompatActivity
     protected override void OnNewIntent(Intent? intent)
     {
         if (intent?.Action == Intent.ActionView)
-            HandleUri(intent.Data!);
+            HandleUri(intent);
         base.OnNewIntent(intent);
     }
 
@@ -66,10 +66,12 @@ public class MainActivity : MauiAppCompatActivity
         ApplySystemBarStyle();
     }
 
-    static bool HandleUri(global::Android.Net.Uri data)
+    static bool HandleUri(Intent intent)
     {
         if (Microsoft.Maui.Controls.Application.Current is not App app) return false;
-        if (!Uri.TryCreate(data.ToString(), UriKind.Absolute, out var uri)) return false;
+        string url = intent.GetStringExtra("org.neoorder.onegate.ORIGINAL_URI")
+            ?? intent.Data!.ToString()!;
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri)) return false;
         return app.ProcessAppLinkUri(uri);
     }
 

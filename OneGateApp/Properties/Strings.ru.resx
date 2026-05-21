@@ -824,4 +824,13 @@
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Недостаточно средств для покрытия суммы и комиссии. Максимальная сумма, которую вы можете отправить, составляет {0} GAS.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Режим разработчика включён</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Инструменты разработчика</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>Тест DApp</value>
+  </data>
 </root>
