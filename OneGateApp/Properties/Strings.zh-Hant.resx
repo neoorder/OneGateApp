@@ -824,4 +824,13 @@
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>餘額不足，無法支付金額和手續費。您最多可發送 {0} GAS。</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>開發者模式已啟用</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>開發者工具</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp測試</value>
+  </data>
 </root>

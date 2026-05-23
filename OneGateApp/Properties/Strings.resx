@@ -824,4 +824,13 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Insufficient balance to cover the amount and fees. The maximum you can send is {0} GAS.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Developer mode enabled</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Developer Tools</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp Testing</value>
+  </data>
 </root>

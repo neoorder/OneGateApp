@@ -6,9 +6,12 @@
              Title="{x:Static og:Strings.AboutOneGate}"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
-    <VerticalStackLayout Margin="20" Spacing="20">
+    <Grid RowDefinitions="auto,auto,*" RowSpacing="20" Margin="20">
         <Image Source="logo_vertical.png" WidthRequest="128" />
-        <Label StyleClass="Secondary" Text="{Binding AppInfo.VersionString}" HorizontalOptions="Center" />
-        <og:SettingsView Settings="{Binding SettingEntries}" />
-    </VerticalStackLayout>
+        <Label Grid.Row="1" StyleClass="Secondary" Text="{Binding AppInfo.VersionString}" HorizontalOptions="Center" />
+        <og:SettingsView Grid.Row="2" Settings="{Binding SettingEntries}" />
+        <Grid.Behaviors>
+            <og:KonamiCodeBehavior KonamiCodeEntered="OnKonamiCodeEntered" />
+        </Grid.Behaviors>
+    </Grid>
 </ContentPage>

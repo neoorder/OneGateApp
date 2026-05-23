@@ -824,4 +824,13 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Onvoldoende saldo om het bedrag en de kosten te dekken. Het maximale bedrag dat u kunt verzenden is {0} GAS.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Ontwikkelaarsmodus ingeschakeld</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Ontwikkelaarstools</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp-test</value>
+  </data>
 </root>

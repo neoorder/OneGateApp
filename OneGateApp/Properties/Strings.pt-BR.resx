@@ -824,4 +824,13 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Saldo insuficiente para cobrir o valor e as taxas. O valor máximo que você pode enviar é {0} GAS.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Modo de desenvolvedor ativado</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Ferramentas do desenvolvedor</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>Teste de DApp</value>
+  </data>
 </root>

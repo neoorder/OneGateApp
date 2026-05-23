@@ -824,4 +824,13 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>금액과 수수료를 충당하기에 잔액이 부족합니다. 보낼 수 있는 최대 금액은 {0} GAS입니다.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>개발자 모드가 활성화되었습니다</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>개발자 도구</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp 테스트</value>
+  </data>
 </root>

@@ -449,6 +449,7 @@
         <Setter Property="Shell.TabBarForegroundColor" Value="{toolkit:AppThemeResource Primary}" />
         <Setter Property="Shell.TabBarTitleColor" Value="{toolkit:AppThemeResource Primary}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{toolkit:AppThemeResource Primary}" />
+        <Setter Property="Shell.FlyoutBackground" Value="#f4f6f8" />
     </Style>
 
     <Style TargetType="NavigationPage">

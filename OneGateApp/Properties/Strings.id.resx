@@ -824,4 +824,13 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Saldo tidak cukup untuk menutupi jumlah dan biaya. Jumlah maksimum yang dapat Anda kirim adalah {0} GAS.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Mode pengembang diaktifkan</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Alat pengembang</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>Pengujian DApp</value>
+  </data>
 </root>

@@ -4,7 +4,7 @@
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.LaunchDAppPage"
-             x:DataType="og:DApp"
+             BindingContext="{Binding Source={RelativeSource Self}}"
              SafeAreaEdges="All"
              Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
@@ -12,16 +12,16 @@
         <og:StringSelectConverter x:Key="StringSelectConverter" />
     </ContentPage.Resources>
     <ContentPage.Title>
-        <Binding Path="Name" Converter="{StaticResource LocalizerConverter}" />
+        <Binding Path="DApp.Name" Converter="{StaticResource LocalizerConverter}" />
     </ContentPage.Title>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" Clicked="OnFavoriteClicked" Command="{x:Static og:Commands.AddToFavorites}" CommandParameter="{Binding .}">
+        <ToolbarItem Order="Primary" IsEnabled="{Binding DApp.IsActive}" Clicked="OnFavoriteClicked" Command="{x:Static og:Commands.AddToFavorites}" CommandParameter="{Binding DApp}">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="{Binding IsFavorite, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe83a;&#xe839;, Source={RelativeSource AncestorType={x:Type og:LaunchDAppPage}}}" FontFamily="Icons" Color="Gold" />
+                <FontImageSource Glyph="{Binding IsFavorite, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe83a;&#xe839;}" FontFamily="Icons" Color="Gold" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding .}" />
-        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding .}" />
+        <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding DApp}" />
+        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
     </ContentPage.ToolbarItems>
     <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" Navigated="OnNavigated" InvokedFromJavaScript="OnInvokedFromJavaScript" />
 </ContentPage>

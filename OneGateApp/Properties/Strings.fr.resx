@@ -824,4 +824,13 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Solde insuffisant pour couvrir le montant et les frais. Le montant maximal que vous pouvez envoyer est de {0} GAS.</value>
   </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Mode développeur activé</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Outils de développement</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>Test DApp</value>
+  </data>
 </root>
