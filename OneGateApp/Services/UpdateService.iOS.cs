@@ -35,7 +35,7 @@ partial class UpdateService
 
     static bool IsAppStore()
     {
-        return NSBundle.MainBundle.AppStoreReceiptUrl.LastPathComponent == "receipt";
+        return NSBundle.MainBundle.AppStoreReceiptUrl?.LastPathComponent == "receipt";
     }
 }
 #endif

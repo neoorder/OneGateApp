@@ -1,4 +1,5 @@
 ﻿using Neo;
+using Neo.Cryptography;
 using Neo.Extensions;
 using Neo.Wallets;
 using System.Text.Json.Serialization;
@@ -58,7 +59,7 @@ public class AuthenticationChallengePayload
             Address = account.Address,
             Nonce = Nonce,
             Timestamp = timestamp,
-            Signature = Workarounds.Sign(message, key)
+            Signature = Crypto.Sign(message, key)
         };
     }
 }

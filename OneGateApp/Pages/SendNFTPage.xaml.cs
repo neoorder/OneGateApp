@@ -100,7 +100,7 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
             var result = await this.ShowPopupAsync<bool>(popup);
             if (!result.Result) return;
             var context = new ContractParametersContext(null!, tx, protocolSettings.Network);
-            if (!wallet.SignWithWorkaround(context) || !context.Completed)
+            if (!wallet.Sign(context) || !context.Completed)
                 await Toast.Show(Strings.SignTransactionFailed);
             tx.Witnesses = context.GetWitnesses();
             try
