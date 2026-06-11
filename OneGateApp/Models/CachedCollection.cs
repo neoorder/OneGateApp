@@ -66,13 +66,30 @@ public class CachedCollection<T>(ApplicationDbContext dbContext, HttpClient http
         foreach (T item in items_new)
         {
             int index = BinarySearch(item);
-            if (index >= 0) continue;
-            base.InsertItem(~index, item);
-            dbContext.Entry(item).State = EntityState.Added;
+            if (index >= 0)
+            {
+                if (ShouldReplace(base[index], item))
+                {
+                    base.SetItem(index, item);
+                    dbContext.Entry(item).State = EntityState.Modified;
+                }
+            }
+            else
+            {
+                base.InsertItem(~index, item);
+                dbContext.Entry(item).State = EntityState.Added;
+            }
         }
         CollectionLoaded?.Invoke(this, EventArgs.Empty);
         await dbContext.SaveChangesAsync();
         dbContext.ChangeTracker.Clear();
         await dbContext.Settings.PutAsync(settings_key, DateTimeOffset.UtcNow);
+    }
+
+    static bool ShouldReplace(T current, T incoming)
+    {
+        return current is IVersioned currentVersioned
+            && incoming is IVersioned incomingVersioned
+            && currentVersioned.Version != incomingVersioned.Version;
     }
 }
