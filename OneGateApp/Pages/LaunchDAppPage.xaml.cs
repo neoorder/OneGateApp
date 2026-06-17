@@ -102,6 +102,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     async void OnNavigating(object sender, WebNavigatingEventArgs e)
     {
+        if (DApp is null) return;
         Uri uriOld = new(DApp.Url);
         Uri uriNew = new(uriOld, e.Url);
         if (IsCrossDomain(uriOld, uriNew))
