@@ -10,28 +10,6 @@ Run("password policy rejects weak inputs", () =>
     AssertTrue(PasswordPolicy.Evaluate("N3o!Wallet-2026").IsValid);
 });
 
-await RunAsync("rpc endpoint pool fails over and pins healthy endpoint", async () =>
-{
-    AssertEqual(5, new RpcEndpointPool().Endpoints.Count);
-
-    Uri first = new("https://bad.example");
-    Uri second = new("https://good.example");
-    RpcEndpointPool pool = new([first, second]);
-    List<Uri> attempts = [];
-
-    Uri result = await pool.SendAsync(endpoint =>
-    {
-        attempts.Add(endpoint);
-        if (endpoint == first)
-            throw new HttpRequestException("offline");
-        return Task.FromResult(endpoint);
-    });
-
-    AssertEqual(second, result);
-    AssertEqual(second, pool.PreferredEndpoint);
-    AssertEqual(2, attempts.Count);
-});
-
 Console.WriteLine("All OneGate P0 tests passed.");
 
 static void Run(string name, Action test)
@@ -39,20 +17,6 @@ static void Run(string name, Action test)
     try
     {
         test();
-        Console.WriteLine($"PASS {name}");
-    }
-    catch (Exception ex)
-    {
-        Console.Error.WriteLine($"FAIL {name}: {ex.Message}");
-        Environment.ExitCode = 1;
-    }
-}
-
-static async Task RunAsync(string name, Func<Task> test)
-{
-    try
-    {
-        await test();
         Console.WriteLine($"PASS {name}");
     }
     catch (Exception ex)

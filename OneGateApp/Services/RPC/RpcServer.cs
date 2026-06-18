@@ -69,39 +69,6 @@ class RpcServer(object host)
         return response;
     }
 
-    public static JsonObject CreateErrorResponse(JsonObject request, int code, string message, JsonNode? data = null)
-    {
-        var error = new JsonObject
-        {
-            ["code"] = code,
-            ["message"] = message
-        };
-        if (data is not null)
-            error["data"] = data;
-
-        var response = new JsonObject
-        {
-            ["jsonrpc"] = "2.0",
-            ["error"] = error
-        };
-        response["id"] = CloneRequestId(request);
-        return response;
-    }
-
-    static JsonNode? CloneRequestId(JsonObject request)
-    {
-        try
-        {
-            return request.TryGetPropertyValue("id", out JsonNode? id) && id is JsonValue
-                ? id.DeepClone()
-                : null;
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
     private async Task<JsonNode?> HandleRequestAsync(string method, JsonArray? args)
     {
         if (!handlers.TryGetValue(method, out var handler))
