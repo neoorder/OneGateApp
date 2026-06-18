@@ -25,6 +25,16 @@ Run("dapp permissions normalize and expire grants", () =>
     AssertFalse(ReferenceEquals(DAppPermissions.DefaultScopes, grant.Scopes));
 });
 
+Run("dapp permissions require exact same origin", () =>
+{
+    Uri trusted = new("https://example.com/app/index.html");
+
+    AssertTrue(DAppPermissions.IsSameOrigin(trusted, new Uri(trusted, "/next?ok=1")));
+    AssertFalse(DAppPermissions.IsSameOrigin(trusted, new("https://wallet.example.com/app/index.html")));
+    AssertFalse(DAppPermissions.IsSameOrigin(trusted, new("http://example.com/app/index.html")));
+    AssertFalse(DAppPermissions.IsSameOrigin(trusted, new("https://example.com:8443/app/index.html")));
+});
+
 await RunAsync("rpc endpoint pool fails over and pins healthy endpoint", async () =>
 {
     AssertEqual(5, new RpcEndpointPool().Endpoints.Count);

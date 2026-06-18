@@ -54,6 +54,13 @@ public static class DAppPermissions
         return $"dapps/permissions/{NormalizeHost(host)}";
     }
 
+    public static bool IsSameOrigin(Uri trustedUri, Uri candidateUri)
+    {
+        return string.Equals(trustedUri.Scheme, candidateUri.Scheme, StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(NormalizeHost(trustedUri.Host), NormalizeHost(candidateUri.Host), StringComparison.Ordinal) &&
+            trustedUri.Port == candidateUri.Port;
+    }
+
     public static bool IsFresh(DAppPermissionGrant? grant, DateTimeOffset now)
     {
         return grant is not null && grant.GrantedAt <= now && now - grant.GrantedAt <= Lifetime;

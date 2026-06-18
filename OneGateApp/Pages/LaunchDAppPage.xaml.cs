@@ -232,10 +232,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     static bool IsCrossDomain(Uri uriOld, Uri uriNew)
     {
-        if (uriOld.Scheme != uriNew.Scheme) return true;
-        if (uriOld.Authority == uriNew.Authority) return false;
-        if (uriNew.Authority.EndsWith("." + uriOld.Authority)) return false;
-        return true;
+        return !DAppPermissions.IsSameOrigin(uriOld, uriNew);
     }
 
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)
