@@ -9,11 +9,11 @@
     <Grid RowDefinitions="*,auto" Margin="20">
         <VerticalStackLayout Spacing="20">
             <Label Text="{x:Static og:Strings.VerifyMnemonicPrompt}" HorizontalOptions="Center" />
-            <Editor x:Name="editorMnemonic" IsReadOnly="True" />
+            <Editor x:Name="editorMnemonic" IsReadOnly="True" AutomationProperties.ExcludedWithChildren="True" />
             <og:ValidationMessage Margin="0,-20,0,0" Target="{x:Reference editorMnemonic}">
                 <og:Compare To="{Binding MnemonicPhrase}" ErrorMessage="{x:Static og:Strings.ErrorMessageMnemonicMismatch}" />
             </og:ValidationMessage>
-            <FlexLayout Wrap="Wrap" Margin="-1" BindableLayout.ItemsSource="{Binding ShuffledWords}">
+            <FlexLayout x:Name="wordChoices" Wrap="Wrap" Margin="-1" BindableLayout.ItemsSource="{Binding ShuffledWords}" AutomationProperties.ExcludedWithChildren="True">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
                         <Button Text="{Binding .}" TextColor="{toolkit:AppThemeResource Primary}" FontAttributes="None" BackgroundColor="Transparent" BorderWidth="1" CornerRadius="0" Margin="1" Padding="10,5" MinimumHeightRequest="0" MinimumWidthRequest="0" Clicked="Word_Clicked" />

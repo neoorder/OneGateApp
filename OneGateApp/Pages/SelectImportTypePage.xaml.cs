@@ -34,6 +34,7 @@ public partial class SelectImportTypePage : ContentPage
     protected override void OnAppearing()
     {
         ScreenSecurityCoordinator.Enter(screenSecurity);
+        SensitiveContentProtection.HideFromPlatformAutomation(editorMnemonic, entryPrivateKey, entryNep2Key, entryPassword);
     }
 
     protected override void OnDisappearing()

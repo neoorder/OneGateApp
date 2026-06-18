@@ -22,6 +22,7 @@ public partial class VerifyMnemonicPage : ContentPage
     {
         base.OnAppearing();
         ScreenSecurityCoordinator.Enter(screenSecurity);
+        SensitiveContentProtection.HideFromPlatformAutomation(editorMnemonic, wordChoices);
     }
 
     protected override void OnDisappearing()

@@ -12,8 +12,8 @@
         <Label Text="{x:Static og:Strings.PrivateKeySecurity}" FontAttributes="Bold" HorizontalOptions="Center" />
         <Label Text="{x:Static og:Strings.WifPrivateKeyWarning}" />
         <Label StyleClass="Secondary" Text="{x:Static og:Strings.PlaintextPrivateKeyWif}" />
-        <Border Padding="10" StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-            <Editor Text="{Binding PrivateKey}" IsReadOnly="True" HeightRequest="60" og:Border.IsVisible="False" />
+        <Border Padding="10" StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource TextBox}" AutomationProperties.ExcludedWithChildren="True">
+            <Editor x:Name="editorPrivateKey" Text="{Binding PrivateKey}" IsReadOnly="True" HeightRequest="60" og:Border.IsVisible="False" />
         </Border>
     </VerticalStackLayout>
 </ContentPage>

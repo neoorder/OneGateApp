@@ -1,5 +1,6 @@
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls.Views;
+using NeoOrder.OneGate.Services;
 using Plugin.Maui.ScreenSecurity;
 
 namespace NeoOrder.OneGate.Pages;
@@ -24,6 +25,7 @@ public partial class ShowNep2Page : ContentPage
     {
         base.OnAppearing();
         screenSecurity.ActivateScreenSecurityProtection();
+        SensitiveContentProtection.HideFromPlatformAutomation(entryPassword, editorPrivateKey);
     }
 
     protected override void OnDisappearing()

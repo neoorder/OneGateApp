@@ -28,6 +28,7 @@ public partial class GenerateMnemonicPage : ContentPage
     protected override void OnAppearing()
     {
         ScreenSecurityCoordinator.Enter(screenSecurity);
+        SensitiveContentProtection.HideFromPlatformAutomation(mnemonicGrid);
     }
 
     protected override void OnDisappearing()

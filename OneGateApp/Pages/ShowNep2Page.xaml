@@ -14,7 +14,7 @@
             <Label Text="{x:Static og:Strings.PrivateKeySecurity}" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="{x:Static og:Strings.Nep2PrivateKeyWarning}" />
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.SetPassword}" />
-            <Entry Text="{Binding Password}" IsPassword="True" ReturnType="Next" Margin="0,-20,0,0" />
+            <Entry x:Name="entryPassword" Text="{Binding Password}" IsPassword="True" ReturnType="Next" Margin="0,-20,0,0" />
             <og:ValidationMessage Title="{x:Static og:Strings.Password}" Margin="0,-20,0,0" Target="{Binding Password}">
                 <og:Required />
                 <og:StringLength Min="6" Max="20" />
@@ -25,8 +25,8 @@
                 <og:Compare To="{Binding Password}" ErrorMessage="{x:Static og:Strings.ErrorMessagePasswordsMismatch}" />
             </og:ValidationMessage>
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.PasswordProtectedPrivateKeyNep2}" />
-            <Border Padding="10" StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                <Editor Text="{Binding PrivateKey}" Placeholder="{x:Static og:Strings.ShownAfterSettingPassword}" IsReadOnly="True" HeightRequest="60" og:Border.IsVisible="False" />
+            <Border Padding="10" StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource TextBox}" AutomationProperties.ExcludedWithChildren="True">
+                <Editor x:Name="editorPrivateKey" Text="{Binding PrivateKey}" Placeholder="{x:Static og:Strings.ShownAfterSettingPassword}" IsReadOnly="True" HeightRequest="60" og:Border.IsVisible="False" />
             </Border>
             <og:Submit Text="{x:Static og:Strings.ExportPrivateKey}" Submitted="OnSubmit" />
         </VerticalStackLayout>

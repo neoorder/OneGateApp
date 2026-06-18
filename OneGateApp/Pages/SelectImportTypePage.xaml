@@ -30,21 +30,21 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout IsVisible="{Binding SelectedIndex, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 0}}">
                     <Label StyleClass="Secondary" Text="{x:Static og:Strings.EnterMnemonicPrompt}" />
-                    <Editor x:Name="editorMnemonic" />
+                    <Editor x:Name="editorMnemonic" AutomationProperties.ExcludedWithChildren="True" />
                     <og:ValidationMessage Title="{x:Static og:Strings.Mnemonic}" Target="{x:Reference editorMnemonic}" IsEnabled="{Binding SelectedIndex, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 0}}">
                         <og:Custom Validate="Mnemonic_Validate" />
                     </og:ValidationMessage>
                 </VerticalStackLayout>
                 <VerticalStackLayout IsVisible="{Binding SelectedIndex, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
                     <Label StyleClass="Secondary" Text="{x:Static og:Strings.PrivateKey}" />
-                    <Entry x:Name="entryPrivateKey" />
+                    <Entry x:Name="entryPrivateKey" AutomationProperties.ExcludedWithChildren="True" />
                     <og:ValidationMessage Title="{x:Static og:Strings.PrivateKey}" Target="{x:Reference entryPrivateKey}" IsEnabled="{Binding SelectedIndex, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
                         <og:Custom Validate="PrivateKey_Validate" />
                     </og:ValidationMessage>
                 </VerticalStackLayout>
                 <VerticalStackLayout IsVisible="{Binding SelectedIndex, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 2}}">
                     <Label StyleClass="Secondary" Text="{x:Static og:Strings.Nep2Key}" />
-                    <Entry x:Name="entryNep2Key" />
+                    <Entry x:Name="entryNep2Key" AutomationProperties.ExcludedWithChildren="True" />
                     <og:ValidationMessage Title="{x:Static og:Strings.Nep2Key}" Target="{x:Reference entryNep2Key}" IsEnabled="{Binding SelectedIndex, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 2}}">
                         <og:Custom Validate="Nep2_Validate" />
                     </og:ValidationMessage>

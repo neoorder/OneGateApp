@@ -1,4 +1,5 @@
 using Neo.Wallets;
+using NeoOrder.OneGate.Services;
 using Plugin.Maui.ScreenSecurity;
 
 namespace NeoOrder.OneGate.Pages;
@@ -21,6 +22,7 @@ public partial class ShowWifPage : ContentPage
     {
         base.OnAppearing();
         screenSecurity.ActivateScreenSecurityProtection();
+        SensitiveContentProtection.HideFromPlatformAutomation(editorPrivateKey);
     }
 
     protected override void OnDisappearing()

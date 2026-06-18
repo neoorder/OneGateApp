@@ -13,7 +13,7 @@
                 <Label StyleClass="Icon" Text="&#xe744;" FontSize="50" HorizontalOptions="Center" />
                 <Label Text="{x:Static og:Strings.MnemonicImportanceTitle}" FontAttributes="Bold" HorizontalOptions="Center" />
                 <Label Text="{x:Static og:Strings.MnemonicImportanceContent}" />
-                <Grid ColumnDefinitions="*,*,*" RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto" ColumnSpacing="1" RowSpacing="1" BackgroundColor="{toolkit:AppThemeResource Primary}" HorizontalOptions="Fill">
+                <Grid x:Name="mnemonicGrid" ColumnDefinitions="*,*,*" RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto" ColumnSpacing="1" RowSpacing="1" BackgroundColor="{toolkit:AppThemeResource Primary}" HorizontalOptions="Fill" AutomationProperties.ExcludedWithChildren="True">
                     <Grid.Resources>
                         <Style TargetType="Label" Class="Cell">
                             <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource Panel}" />
