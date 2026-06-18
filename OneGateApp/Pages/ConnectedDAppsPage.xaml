@@ -2,16 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.ConnectedDAppsPage"
              Title="{x:Static og:Strings.ConnectedDApps}"
              Shell.TabBarIsVisible="False">
-    <CollectionView Margin="20" ItemsSource="{Binding Grants}">
-        <CollectionView.EmptyView>
-            <Label Text="{x:Static og:Strings.NoConnectedDApps}" HorizontalOptions="Center" />
-        </CollectionView.EmptyView>
+    <Grid Margin="20">
+        <Label Text="{x:Static og:Strings.NoConnectedDApps}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               IsVisible="{Binding HasNoGrants}" />
+        <CollectionView ItemsSource="{Binding Grants}" IsVisible="{Binding HasGrants}">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="og:ConnectedDAppPermissionItem">
-                <Border StrokeShape="RoundRectangle 10" Padding="10" Margin="0,0,0,15">
+                <Border StrokeShape="RoundRectangle 10"
+                        BackgroundColor="{toolkit:AppThemeResource Panel}"
+                        StrokeThickness="0"
+                        Padding="10"
+                        Margin="0,0,0,15">
                     <Grid ColumnDefinitions="*,auto" ColumnSpacing="15">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{Binding Host}" FontAttributes="Bold" />
@@ -27,5 +34,6 @@
                 </Border>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+        </CollectionView>
+    </Grid>
 </ContentPage>

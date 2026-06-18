@@ -875,6 +875,9 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="PasswordTooSimpleError" xml:space="preserve">
     <value>Use a stronger mix of uppercase letters, lowercase letters, numbers, or symbols.</value>
   </data>
+  <data name="PasswordWhitespaceError" xml:space="preserve">
+    <value>Do not start or end your wallet password with spaces.</value>
+  </data>
   <data name="Signers" xml:space="preserve">
     <value>Signers</value>
   </data>

@@ -833,4 +833,58 @@
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp测试</value>
   </data>
+  <data name="ConnectDApp" xml:space="preserve">
+    <value>连接 dApp</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>已连接的 dApps</value>
+  </data>
+  <data name="DAppConnectionRequestText" xml:space="preserve">
+    <value>允许此 dApp 连接你的钱包？它可以读取账户和链上数据，并请求交易或消息签名。每笔交易或签名仍需你单独确认。</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp 已断开连接</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>断开连接</value>
+  </data>
+  <data name="LastUsedFormat" xml:space="preserve">
+    <value>上次使用：{0:g}</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>网络</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>暂无已连接的 dApps</value>
+  </data>
+  <data name="Origin" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="PasswordRepeatedPatternError" xml:space="preserve">
+    <value>避免重复字符、重复模式或明显序列。</value>
+  </data>
+  <data name="PasswordTooCommonError" xml:space="preserve">
+    <value>这个密码太常见。请设置更独特的钱包密码。</value>
+  </data>
+  <data name="PasswordTooLongError" xml:space="preserve">
+    <value>请不要超过 {0} 个字符。</value>
+  </data>
+  <data name="PasswordTooShortError" xml:space="preserve">
+    <value>请至少使用 {0} 个字符。</value>
+  </data>
+  <data name="PasswordTooSimpleError" xml:space="preserve">
+    <value>请混合使用大写字母、小写字母、数字或符号来提高强度。</value>
+  </data>
+  <data name="PasswordWhitespaceError" xml:space="preserve">
+    <value>钱包密码不要以空格开头或结尾。</value>
+  </data>
+  <data name="Signers" xml:space="preserve">
+    <value>签名人</value>
+  </data>
+  <data name="TransactionHash" xml:space="preserve">
+    <value>交易哈希</value>
+  </data>
+  <data name="ValidUntilBlock" xml:space="preserve">
+    <value>有效至区块</value>
+  </data>
 </root>

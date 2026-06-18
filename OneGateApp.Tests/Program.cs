@@ -4,6 +4,7 @@ Run("password policy rejects weak inputs", () =>
 {
     AssertEqual(PasswordPolicyFailure.Required, PasswordPolicy.Evaluate(" ").Failure);
     AssertEqual(PasswordPolicyFailure.TooShort, PasswordPolicy.Evaluate("password").Failure);
+    AssertEqual(PasswordPolicyFailure.LeadingOrTrailingWhitespace, PasswordPolicy.Evaluate(" N3o!Wallet-2026 ").Failure);
     AssertEqual(PasswordPolicyFailure.RepeatedPattern, PasswordPolicy.Evaluate("aaaaaaaaaa").Failure);
     AssertEqual(PasswordPolicyFailure.RepeatedPattern, PasswordPolicy.Evaluate("abcdef1234").Failure);
     AssertTrue(PasswordPolicy.Evaluate("N3o!Wallet-2026").IsValid);
@@ -18,12 +19,16 @@ Run("dapp permissions normalize and expire grants", () =>
     AssertEqual("dapps/permissions/example.com", DAppPermissions.SettingsKeyForHost("Example.COM."));
     AssertTrue(DAppPermissions.IsFresh(grant, now.AddDays(29)));
     AssertFalse(DAppPermissions.IsFresh(grant, now.AddDays(31)));
+    AssertFalse(DAppPermissions.IsFresh(grant, now.AddDays(-1)));
     AssertTrue(DAppPermissions.RequiresConnection("getAccounts"));
     AssertFalse(DAppPermissions.RequiresConnection("getBlock"));
+    AssertFalse(ReferenceEquals(DAppPermissions.DefaultScopes, grant.Scopes));
 });
 
 await RunAsync("rpc endpoint pool fails over and pins healthy endpoint", async () =>
 {
+    AssertEqual(5, new RpcEndpointPool().Endpoints.Count);
+
     Uri first = new("https://bad.example");
     Uri second = new("https://good.example");
     RpcEndpointPool pool = new([first, second]);

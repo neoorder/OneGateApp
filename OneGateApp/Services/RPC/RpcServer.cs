@@ -84,8 +84,22 @@ class RpcServer(object host)
             ["jsonrpc"] = "2.0",
             ["error"] = error
         };
-        response["id"] = request["id"]?.AsValue().DeepClone();
+        response["id"] = CloneRequestId(request);
         return response;
+    }
+
+    static JsonNode? CloneRequestId(JsonObject request)
+    {
+        try
+        {
+            return request.TryGetPropertyValue("id", out JsonNode? id) && id is JsonValue
+                ? id.DeepClone()
+                : null;
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     private async Task<JsonNode?> HandleRequestAsync(string method, JsonArray? args)

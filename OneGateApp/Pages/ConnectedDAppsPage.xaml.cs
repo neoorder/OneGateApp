@@ -12,6 +12,8 @@ public partial class ConnectedDAppsPage : ContentPage
     readonly ApplicationDbContext dbContext;
 
     public ObservableCollection<ConnectedDAppPermissionItem> Grants { get; } = [];
+    public bool HasGrants => Grants.Count > 0;
+    public bool HasNoGrants => !HasGrants;
 
     public ConnectedDAppsPage(ApplicationDbContext dbContext)
     {
@@ -41,6 +43,8 @@ public partial class ConnectedDAppsPage : ContentPage
                     grant!.Host,
                     string.Format(Strings.LastUsedFormat, grant.LastUsedAt.LocalDateTime)));
         }
+        OnPropertyChanged(nameof(HasGrants));
+        OnPropertyChanged(nameof(HasNoGrants));
     }
 
     async void OnDisconnectClicked(object sender, EventArgs e)
@@ -50,6 +54,8 @@ public partial class ConnectedDAppsPage : ContentPage
         ConnectedDAppPermissionItem? grant = Grants.FirstOrDefault(p => p.Host == host);
         if (grant is not null)
             Grants.Remove(grant);
+        OnPropertyChanged(nameof(HasGrants));
+        OnPropertyChanged(nameof(HasNoGrants));
         await Toast.Make(Strings.DAppDisconnected).Show();
     }
 }

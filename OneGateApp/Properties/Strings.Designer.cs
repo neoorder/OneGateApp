@@ -2285,6 +2285,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Do not start or end your wallet password with spaces.
+        /// </summary>
+        internal static string PasswordWhitespaceError {
+            get {
+                return ResourceManager.GetString("PasswordWhitespaceError", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Signers.
         /// </summary>
         internal static string Signers {

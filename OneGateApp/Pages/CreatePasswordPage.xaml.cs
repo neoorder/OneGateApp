@@ -80,6 +80,7 @@ public partial class CreatePasswordPage : ContentPage
             PasswordPolicyFailure.TooLong => string.Format(Strings.PasswordTooLongError, PasswordPolicy.MaxLength),
             PasswordPolicyFailure.TooCommon => Strings.PasswordTooCommonError,
             PasswordPolicyFailure.RepeatedPattern => Strings.PasswordRepeatedPatternError,
+            PasswordPolicyFailure.LeadingOrTrailingWhitespace => Strings.PasswordWhitespaceError,
             PasswordPolicyFailure.TooSimple => Strings.PasswordTooSimpleError,
             _ => null
         };

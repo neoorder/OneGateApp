@@ -19,9 +19,13 @@ public sealed class RpcEndpointPool
     public IReadOnlyList<Uri> Endpoints => endpoints;
     public Uri PreferredEndpoint => endpoints[Math.Clamp(Volatile.Read(ref preferredIndex), 0, endpoints.Length - 1)];
 
-    public RpcEndpointPool(IEnumerable<Uri>? endpoints = null)
+    public RpcEndpointPool() : this(DefaultEndpoints)
     {
-        this.endpoints = (endpoints ?? DefaultEndpoints).Distinct().ToArray();
+    }
+
+    internal RpcEndpointPool(IEnumerable<Uri> endpoints)
+    {
+        this.endpoints = endpoints.Distinct().ToArray();
         if (this.endpoints.Length == 0)
             throw new ArgumentException("At least one RPC endpoint is required.", nameof(endpoints));
     }

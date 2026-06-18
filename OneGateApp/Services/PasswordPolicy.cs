@@ -8,7 +8,8 @@ public enum PasswordPolicyFailure
     TooLong,
     TooSimple,
     TooCommon,
-    RepeatedPattern
+    RepeatedPattern,
+    LeadingOrTrailingWhitespace
 }
 
 public sealed record PasswordPolicyResult(bool IsValid, PasswordPolicyFailure Failure, int Score);
@@ -40,12 +41,14 @@ public static class PasswordPolicy
     {
         if (string.IsNullOrWhiteSpace(password))
             return Invalid(PasswordPolicyFailure.Required);
+        if (password.Length != password.Trim().Length)
+            return Invalid(PasswordPolicyFailure.LeadingOrTrailingWhitespace);
         if (password.Length < MinLength)
             return Invalid(PasswordPolicyFailure.TooShort);
         if (password.Length > MaxLength)
             return Invalid(PasswordPolicyFailure.TooLong);
 
-        string normalized = password.Trim();
+        string normalized = password;
         string lower = normalized.ToLowerInvariant();
         if (CommonPasswords.Contains(lower))
             return Invalid(PasswordPolicyFailure.TooCommon);

@@ -56,7 +56,7 @@ public static class DAppPermissions
 
     public static bool IsFresh(DAppPermissionGrant? grant, DateTimeOffset now)
     {
-        return grant is not null && now - grant.GrantedAt <= Lifetime;
+        return grant is not null && grant.GrantedAt <= now && now - grant.GrantedAt <= Lifetime;
     }
 
     public static DAppPermissionGrant CreateGrant(string host, int? dAppId, DateTimeOffset now)
@@ -65,7 +65,7 @@ public static class DAppPermissions
         {
             Host = NormalizeHost(host),
             DAppId = dAppId,
-            Scopes = DefaultScopes,
+            Scopes = [.. DefaultScopes],
             GrantedAt = now,
             LastUsedAt = now
         };
@@ -77,7 +77,7 @@ public static class DAppPermissions
         {
             Host = NormalizeHost(grant.Host),
             DAppId = grant.DAppId,
-            Scopes = grant.Scopes,
+            Scopes = [.. grant.Scopes],
             GrantedAt = grant.GrantedAt,
             LastUsedAt = now
         };
