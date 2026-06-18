@@ -4,11 +4,13 @@ using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Views;
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -27,6 +29,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
+    string DAppHost => DAppPermissions.NormalizeHost(new Uri(DApp.Url).Host);
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
@@ -237,8 +240,55 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)
     {
-        var response = await rpcServer.HandleRequestAsync(request);
+        JsonObject response;
+        try
+        {
+            await EnsureDAppPermissionAsync(request);
+            response = await rpcServer.HandleRequestAsync(request);
+        }
+        catch (OperationCanceledException)
+        {
+            response = RpcServer.CreateErrorResponse(request, 10006, "Operation cancelled");
+        }
+        catch (DapiException ex)
+        {
+            response = RpcServer.CreateErrorResponse(
+                request,
+                ex.Code,
+                ex.Message,
+                JsonSerializer.SerializeToNode(ex.Data, SharedOptions.JsonSerializerOptions));
+        }
+        catch (Exception ex)
+        {
+            response = RpcServer.CreateErrorResponse(request, 10000, ex.Message);
+        }
         await webView.EvaluateJavaScriptAsync($"window.__OneGateDapiCallback({response.ToJsonString()})");
+    }
+
+    async Task EnsureDAppPermissionAsync(JsonObject request)
+    {
+        string? method = request["method"]?.GetValue<string>();
+        if (!DAppPermissions.RequiresConnection(method) ||
+            string.Equals(method, "authenticate", StringComparison.OrdinalIgnoreCase))
+            return;
+
+        string host = DAppHost;
+        string key = DAppPermissions.SettingsKeyForHost(host);
+        DateTimeOffset now = DateTimeOffset.UtcNow;
+        DAppPermissionGrant? grant = await dbContext.Settings.GetAsync<DAppPermissionGrant>(key);
+        if (DAppPermissions.IsFresh(grant, now))
+        {
+            await dbContext.Settings.PutAsync(key, DAppPermissions.Touch(grant!, now));
+            return;
+        }
+
+        if (!await walletAuthorizationService.RequestAuthorizationAsync(
+            this,
+            Strings.ConnectDApp,
+            Strings.DAppConnectionRequestText,
+            host))
+            throw new OperationCanceledException();
+        await dbContext.Settings.PutAsync(key, DAppPermissions.CreateGrant(host, DApp.Id > 0 ? DApp.Id : null, now));
     }
 
     async Task EmitEventAsync(string eventName, JsonObject? detial)

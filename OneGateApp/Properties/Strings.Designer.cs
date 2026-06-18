@@ -2157,5 +2157,158 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Connect dApp.
+        /// </summary>
+        internal static string ConnectDApp {
+            get {
+                return ResourceManager.GetString("ConnectDApp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Connected dApps.
+        /// </summary>
+        internal static string ConnectedDApps {
+            get {
+                return ResourceManager.GetString("ConnectedDApps", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Allow this dApp to connect to your wallet?.
+        /// </summary>
+        internal static string DAppConnectionRequestText {
+            get {
+                return ResourceManager.GetString("DAppConnectionRequestText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to dApp disconnected.
+        /// </summary>
+        internal static string DAppDisconnected {
+            get {
+                return ResourceManager.GetString("DAppDisconnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect.
+        /// </summary>
+        internal static string Disconnect {
+            get {
+                return ResourceManager.GetString("Disconnect", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Last used: {0:g}.
+        /// </summary>
+        internal static string LastUsedFormat {
+            get {
+                return ResourceManager.GetString("LastUsedFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Network.
+        /// </summary>
+        internal static string Network {
+            get {
+                return ResourceManager.GetString("Network", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to No connected dApps.
+        /// </summary>
+        internal static string NoConnectedDApps {
+            get {
+                return ResourceManager.GetString("NoConnectedDApps", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Origin.
+        /// </summary>
+        internal static string Origin {
+            get {
+                return ResourceManager.GetString("Origin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid repeated characters, repeated patterns, or obvious sequences.
+        /// </summary>
+        internal static string PasswordRepeatedPatternError {
+            get {
+                return ResourceManager.GetString("PasswordRepeatedPatternError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to This password is too common.
+        /// </summary>
+        internal static string PasswordTooCommonError {
+            get {
+                return ResourceManager.GetString("PasswordTooCommonError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use no more than {0} characters.
+        /// </summary>
+        internal static string PasswordTooLongError {
+            get {
+                return ResourceManager.GetString("PasswordTooLongError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use at least {0} characters.
+        /// </summary>
+        internal static string PasswordTooShortError {
+            get {
+                return ResourceManager.GetString("PasswordTooShortError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use a stronger mix of uppercase letters, lowercase letters, numbers, or symbols.
+        /// </summary>
+        internal static string PasswordTooSimpleError {
+            get {
+                return ResourceManager.GetString("PasswordTooSimpleError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Signers.
+        /// </summary>
+        internal static string Signers {
+            get {
+                return ResourceManager.GetString("Signers", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction hash.
+        /// </summary>
+        internal static string TransactionHash {
+            get {
+                return ResourceManager.GetString("TransactionHash", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Valid until block.
+        /// </summary>
+        internal static string ValidUntilBlock {
+            get {
+                return ResourceManager.GetString("ValidUntilBlock", resourceCulture);
+            }
+        }
     }
 }

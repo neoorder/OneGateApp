@@ -16,6 +16,15 @@
             <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" Margin="-10" Padding="10" Clicked="OnCancel" />
         </Grid>
         <Label Text="{x:Static og:Strings.SignMessageText}" />
+        <Label IsVisible="{Binding Origin, Converter={StaticResource IsNotNullConverter}}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static og:Strings.Origin}" />
+                    <Span Text=": " />
+                    <Span Text="{Binding Origin}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
         <Label>
             <Label.FormattedText>
                 <FormattedString>

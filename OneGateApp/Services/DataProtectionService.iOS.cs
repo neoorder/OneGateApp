@@ -42,7 +42,7 @@ partial class DataProtectionService
             Account = Account,
             Label = "OneGate Wallet Password",
             ValueData = NSData.FromString(plainText),
-            AccessControl = new SecAccessControl(SecAccessible.WhenUnlockedThisDeviceOnly, SecAccessControlCreateFlags.BiometryAny)
+            AccessControl = new SecAccessControl(SecAccessible.WhenUnlockedThisDeviceOnly, SecAccessControlCreateFlags.BiometryCurrentSet)
         };
         var status = SecKeyChain.Add(record);
         return status switch

@@ -9,7 +9,8 @@ static class SharedOptions
     public const string OneGateDomain = "onegate.space";
     public static readonly string DbPath = Path.Combine(FileSystem.AppDataDirectory, "settings.db3");
     public static readonly string WalletPath = Path.Combine(FileSystem.AppDataDirectory, "wallet.json");
-    public static readonly Uri RpcServerUri = new("https://n3seed1.ngd.network:10332");
+    public static readonly Uri[] RpcServerUris = RpcEndpointPool.DefaultEndpoints;
+    public static readonly Uri RpcServerUri = RpcServerUris[0];
     public static readonly JsonSerializerOptions JsonSerializerOptions = new(JsonSerializerOptions.Web)
     {
         Converters =

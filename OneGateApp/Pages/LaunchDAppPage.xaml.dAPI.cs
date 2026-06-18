@@ -38,10 +38,14 @@ partial class LaunchDAppPage
         {
             throw new DapiException(10002, ex.Message);
         }
-        if (payload.Domain != new Uri(DApp.Url).Host)
+        string host = DAppPermissions.NormalizeHost(new Uri(DApp.Url).Host);
+        if (DAppPermissions.NormalizeHost(payload.Domain) != host)
             throw new DapiException(10002, "Domain mismatch");
-        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText))
+        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText, host))
             throw new DapiException(10006, "Operation cancelled");
+        await dbContext.Settings.PutAsync(
+            DAppPermissions.SettingsKeyForHost(host),
+            DAppPermissions.CreateGrant(host, DApp.Id > 0 ? DApp.Id : null, DateTimeOffset.UtcNow));
         WalletAccount account = walletProvider.GetWallet()!.GetDefaultAccount()!;
         return payload.CreateResponse(account, protocolSettings);
     }
@@ -160,6 +164,7 @@ partial class LaunchDAppPage
         popup.Transaction = tx;
         popup.Intents = intents.ToArray();
         popup.InvocationResult = result;
+        popup.Origin = DAppHost;
         var popup_result = await this.ShowPopupAsync<bool>(popup);
         if (!popup_result.Result) throw new OperationCanceledException();
         if (!walletProvider.GetWallet()!.Sign(context))
@@ -177,6 +182,7 @@ partial class LaunchDAppPage
         var popup = serviceProvider.GetServiceOrCreateInstance<SignMessagePopup>();
         popup.Account = account?.ToAddress(protocolSettings.AddressVersion);
         popup.Message = message;
+        popup.Origin = DAppHost;
         var result = await this.ShowPopupAsync<string?>(popup);
         if (result.Result is null) throw new OperationCanceledException();
         byte[] payload = options?.IsBase64Encoded == true
@@ -244,6 +250,7 @@ partial class LaunchDAppPage
     {
         var popup = serviceProvider.GetServiceOrCreateInstance<SendTransactionPopup>();
         popup.Transaction = tx;
+        popup.Origin = DAppHost;
         if (intents != null)
         {
             for (int i = 0; i < intents.Length; i++)

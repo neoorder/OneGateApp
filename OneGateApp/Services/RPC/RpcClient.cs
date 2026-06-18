@@ -17,9 +17,12 @@ using Map = Neo.VM.Types.Map;
 
 namespace NeoOrder.OneGate.Services.RPC;
 
-public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocolSettings)
+public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocolSettings, RpcEndpointPool rpcEndpointPool)
 {
-    readonly HttpClient http = new();
+    readonly HttpClient http = new()
+    {
+        Timeout = TimeSpan.FromSeconds(20)
+    };
 
     public async Task<T> RpcSendAsync<T>(string method, params object?[] args) where T : notnull
     {
@@ -30,7 +33,12 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
             ["method"] = method,
             ["params"] = new JsonArray(args.Select(p => JsonSerializer.SerializeToNode(p, SharedOptions.JsonSerializerOptions)).ToArray())
         };
-        var requestMsg = new HttpRequestMessage(HttpMethod.Post, SharedOptions.RpcServerUri)
+        return await rpcEndpointPool.SendAsync(endpoint => SendToEndpointAsync<T>(endpoint, request));
+    }
+
+    async Task<T> SendToEndpointAsync<T>(Uri endpoint, JsonObject request) where T : notnull
+    {
+        var requestMsg = new HttpRequestMessage(HttpMethod.Post, endpoint)
         {
             Content = new StringContent(request.ToJsonString(), Utility.StrictUTF8, "application/json")
         };

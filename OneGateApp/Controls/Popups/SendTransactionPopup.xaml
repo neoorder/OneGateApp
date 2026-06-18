@@ -19,6 +19,16 @@
                 <og:IntentsView Intents="{Binding Intents}" />
                 <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
                     <VerticalStackLayout Padding="10,0">
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Origin}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding DisplayOrigin}" HorizontalOptions="End" LineBreakMode="TailTruncation" />
+                        </Grid>
+                        <BoxView HeightRequest="1" />
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Network}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding DisplayNetwork}" HorizontalOptions="End" LineBreakMode="MiddleTruncation" />
+                        </Grid>
+                        <BoxView HeightRequest="1" />
                         <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10" IsVisible="{Binding InvocationResult, Converter={StaticResource IsNotNullConverter}}">
                             <Label StyleClass="Secondary" Text="{x:Static og:Strings.ExecutionResult}" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
@@ -33,6 +43,21 @@
                                 <Label Text="{Binding DisplayFee}" HorizontalOptions="End" />
                                 <Label StyleClass="Secondary" Text="{Binding FeeDetails}" HorizontalOptions="End" />
                             </VerticalStackLayout>
+                        </Grid>
+                        <BoxView HeightRequest="1" />
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Signers}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding DisplaySigners}" HorizontalOptions="End" HorizontalTextAlignment="End" LineBreakMode="TailTruncation" />
+                        </Grid>
+                        <BoxView HeightRequest="1" />
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.ValidUntilBlock}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding DisplayValidUntilBlock}" HorizontalOptions="End" />
+                        </Grid>
+                        <BoxView HeightRequest="1" />
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.TransactionHash}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding DisplayTransactionHash}" HorizontalOptions="End" LineBreakMode="MiddleTruncation" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
