@@ -32,6 +32,12 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+		<AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
+		<AndroidStoreUncompressedFileExtensions>.so;.blob;$(AndroidStoreUncompressedFileExtensions)</AndroidStoreUncompressedFileExtensions>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
 		<CodesignKey>Apple Development: Created via API (K222UWB5LF)</CodesignKey>
 		<CodesignProvision>VS: org.neoorder.onegate Development</CodesignProvision>
