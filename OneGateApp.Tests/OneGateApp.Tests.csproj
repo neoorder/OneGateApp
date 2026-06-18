@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="../OneGateApp/Services/DAppPermissions.cs" Link="Services/DAppPermissions.cs" />
     <Compile Include="../OneGateApp/Services/PasswordPolicy.cs" Link="Services/PasswordPolicy.cs" />
     <Compile Include="../OneGateApp/Services/RpcEndpointPool.cs" Link="Services/RpcEndpointPool.cs" />
   </ItemGroup>

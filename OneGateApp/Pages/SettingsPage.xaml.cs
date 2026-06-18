@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
@@ -73,12 +72,6 @@ public partial class SettingsPage : ContentPage
                 CommandParameter = enabled ? "//home/settings/biometric/disable" : "//home/settings/biometric/create"
             });
         }
-        yield return (Strings.Security, new SettingEntry(Strings.ConnectedDApps)
-        {
-            CurrentValue = await GetConnectedDAppCountAsync(),
-            Command = Commands.GotoPage,
-            CommandParameter = "//home/settings/dapps"
-        });
         yield return (Strings.Others, new SettingEntry(Strings.ContactUs)
         {
             CurrentValue = "contact@neoorder.org",
@@ -106,21 +99,5 @@ public partial class SettingsPage : ContentPage
         if (string.IsNullOrEmpty(lang)) return Strings.SystemLanguage;
         CultureInfo culture = new(lang);
         return culture.NativeName;
-    }
-
-    async Task<string> GetConnectedDAppCountAsync()
-    {
-        Setting[] settings = await dbContext.Settings
-            .Where(p => p.Key.StartsWith("dapps/permissions/"))
-            .ToArrayAsync();
-        DateTimeOffset now = DateTimeOffset.UtcNow;
-        int count = 0;
-        foreach (Setting setting in settings)
-        {
-            DAppPermissionGrant? grant = await dbContext.Settings.GetAsync<DAppPermissionGrant>(setting.Key);
-            if (DAppPermissions.IsFresh(grant, now))
-                count++;
-        }
-        return count.ToString();
     }
 }

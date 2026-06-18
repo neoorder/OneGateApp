@@ -833,29 +833,8 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp Testing</value>
   </data>
-  <data name="ConnectDApp" xml:space="preserve">
-    <value>Connect dApp</value>
-  </data>
-  <data name="ConnectedDApps" xml:space="preserve">
-    <value>Connected dApps</value>
-  </data>
-  <data name="DAppConnectionRequestText" xml:space="preserve">
-    <value>Allow this dApp to connect to your wallet? It can read your account and blockchain data, and it can request transactions or message signatures. You will still approve every transaction or signature separately.</value>
-  </data>
-  <data name="DAppDisconnected" xml:space="preserve">
-    <value>dApp disconnected</value>
-  </data>
-  <data name="Disconnect" xml:space="preserve">
-    <value>Disconnect</value>
-  </data>
-  <data name="LastUsedFormat" xml:space="preserve">
-    <value>Last used: {0:g}</value>
-  </data>
   <data name="Network" xml:space="preserve">
     <value>Network</value>
-  </data>
-  <data name="NoConnectedDApps" xml:space="preserve">
-    <value>No connected dApps</value>
   </data>
   <data name="Origin" xml:space="preserve">
     <value>Origin</value>

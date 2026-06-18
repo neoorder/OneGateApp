@@ -2159,74 +2159,11 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Connect dApp.
-        /// </summary>
-        internal static string ConnectDApp {
-            get {
-                return ResourceManager.GetString("ConnectDApp", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Connected dApps.
-        /// </summary>
-        internal static string ConnectedDApps {
-            get {
-                return ResourceManager.GetString("ConnectedDApps", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Allow this dApp to connect to your wallet?.
-        /// </summary>
-        internal static string DAppConnectionRequestText {
-            get {
-                return ResourceManager.GetString("DAppConnectionRequestText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to dApp disconnected.
-        /// </summary>
-        internal static string DAppDisconnected {
-            get {
-                return ResourceManager.GetString("DAppDisconnected", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Disconnect.
-        /// </summary>
-        internal static string Disconnect {
-            get {
-                return ResourceManager.GetString("Disconnect", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Last used: {0:g}.
-        /// </summary>
-        internal static string LastUsedFormat {
-            get {
-                return ResourceManager.GetString("LastUsedFormat", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   Looks up a localized string similar to Network.
         /// </summary>
         internal static string Network {
             get {
                 return ResourceManager.GetString("Network", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to No connected dApps.
-        /// </summary>
-        internal static string NoConnectedDApps {
-            get {
-                return ResourceManager.GetString("NoConnectedDApps", resourceCulture);
             }
         }
 

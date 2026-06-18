@@ -38,14 +38,10 @@ partial class LaunchDAppPage
         {
             throw new DapiException(10002, ex.Message);
         }
-        string host = DAppPermissions.NormalizeHost(new Uri(DApp.Url).Host);
-        if (DAppPermissions.NormalizeHost(payload.Domain) != host)
+        if (NormalizeHost(payload.Domain) != DAppHost)
             throw new DapiException(10002, "Domain mismatch");
-        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText, host))
+        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText, DAppHost))
             throw new DapiException(10006, "Operation cancelled");
-        await dbContext.Settings.PutAsync(
-            DAppPermissions.SettingsKeyForHost(host),
-            DAppPermissions.CreateGrant(host, DApp.Id > 0 ? DApp.Id : null, DateTimeOffset.UtcNow));
         WalletAccount account = walletProvider.GetWallet()!.GetDefaultAccount()!;
         return payload.CreateResponse(account, protocolSettings);
     }
