@@ -16,7 +16,9 @@ using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
+using System.Globalization;
 using System.Numerics;
+using System.Web;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Pages;
@@ -207,9 +209,25 @@ public partial class SendPage : ContentPage, IQueryAttributable
 
     bool TryReadAddress(string? value, out string address)
     {
+        return TryReadPaymentRequest(value, out address, out _);
+    }
+
+    bool TryReadPaymentRequest(string? value, out string address, out decimal? amount)
+    {
         address = value?.Trim() ?? string.Empty;
+        amount = null;
         if (address.StartsWith("neo:", StringComparison.OrdinalIgnoreCase) && Uri.TryCreate(address, UriKind.Absolute, out Uri? uri))
+        {
             address = uri.LocalPath;
+            var query = HttpUtility.ParseQueryString(uri.Query);
+            string? rawAmount = query["amount"];
+            if (!string.IsNullOrWhiteSpace(rawAmount)
+                && decimal.TryParse(rawAmount, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal parsedAmount)
+                && parsedAmount > 0)
+            {
+                amount = parsedAmount;
+            }
+        }
         if (string.IsNullOrWhiteSpace(address)) return false;
         try
         {
@@ -243,13 +261,15 @@ public partial class SendPage : ContentPage, IQueryAttributable
     {
         try
         {
-            if (!TryReadAddress(await Clipboard.GetTextAsync(), out string address))
+            if (!TryReadPaymentRequest(await Clipboard.GetTextAsync(), out string address, out decimal? amount))
             {
                 RefreshClipboardAvailability();
                 await Toast.Show(Strings.ClipboardAddressInvalid);
                 return;
             }
             ToAddress = address;
+            if (amount is decimal paymentAmount && Amount == 0)
+                Amount = paymentAmount;
             HasClipboardText = false;
             await Toast.Show(Strings.AddressPasted);
         }
