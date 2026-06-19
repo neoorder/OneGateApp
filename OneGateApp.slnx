@@ -3,4 +3,5 @@
     <File Path=".editorconfig" />
   </Folder>
   <Project Path="OneGateApp/OneGateApp.csproj" />
+  <Project Path="OneGate.Tools/OneGate.Tools.csproj" />
 </Solution>

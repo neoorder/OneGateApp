@@ -91,7 +91,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             while (recents.Count > 10)
                 recents.RemoveAt(recents.Count - 1);
             await dbContext.Settings.PutAsync("dapps/recent", recents);
-            GlobalStates.Invalidate<DAppsPage>();
+            if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
         }
     }
 

@@ -17,6 +17,20 @@ partial class BridgeWebViewHandler
         }
     }
 
+    class BridgeWebViewUIDelegate : WKUIDelegate
+    {
+        public override void RequestDeviceOrientationAndMotionPermission(
+            WKWebView webView,
+            WKSecurityOrigin origin,
+            WKFrameInfo frame,
+            Action<WKPermissionDecision> decisionHandler)
+        {
+            decisionHandler(frame.MainFrame ? WKPermissionDecision.Grant : WKPermissionDecision.Deny);
+        }
+    }
+
+    static readonly BridgeWebViewUIDelegate uiDelegate = new();
+
     protected override WKWebView CreatePlatformView()
     {
         var config = new WKWebViewConfiguration();
@@ -32,7 +46,10 @@ partial class BridgeWebViewHandler
         controller.AddUserScript(script);
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
         config.UserContentController = controller;
-        return new MauiWKWebView(CGRect.Empty, this, config);
+        return new MauiWKWebView(CGRect.Empty, this, config)
+        {
+            UIDelegate = uiDelegate
+        };
     }
 }
 #endif

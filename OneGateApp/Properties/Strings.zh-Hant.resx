@@ -647,6 +647,24 @@
   <data name="SignInWithNeo" xml:space="preserve">
     <value>使用 Neo 登入</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>請先確認請求來源，再授權錢包登入。</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>錢包地址</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>網路</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>回呼地址</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>授權登入</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>正在授權登入請求…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>正在登入</value>
   </data>
@@ -746,6 +764,21 @@
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>遊戲</value>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>遊戲類型</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>動作</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>桌遊</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>模擬器</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>競速</value>
   </data>
   <data name="Marketplace" xml:space="preserve">
     <value>市場</value>
