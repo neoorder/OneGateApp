@@ -11,11 +11,11 @@
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
     </ContentPage.ToolbarItems>
     <ScrollView>
-        <CollectionView ItemsSource="{Binding Contacts}" Margin="20">
+        <CollectionView ItemsSource="{Binding Contacts}" Margin="20,8">
             <CollectionView.EmptyView>
                 <Grid RowDefinitions="*,auto,*">
                     <VerticalStackLayout Spacing="20" VerticalOptions="Center">
-                        <Border StrokeShape="Ellipse" BackgroundColor="#e9eaee" WidthRequest="100" HeightRequest="100">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource TextBox}" WidthRequest="100" HeightRequest="100">
                             <Image Source="empty.png" WidthRequest="32" HeightRequest="32" />
                         </Border>
                         <Label Text="{x:Static og:Strings.NoAddress}" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
@@ -29,16 +29,21 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
-                    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                        <Label Text="{Binding Label}" FontAttributes="Bold" />
-                        <Grid ColumnDefinitions="*,auto">
-                            <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" />
-                            <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Margin="-20" Padding="20" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                    <Border StyleClass="Card" Padding="14">
+                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                            <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="42" HeightRequest="42" VerticalOptions="Center">
+                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                                <Label Text="{Binding Label}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
+                                <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Padding="8" WidthRequest="44" HeightRequest="44" VerticalOptions="Center" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnContactTapped" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
                         </Grid>
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnContactTapped" CommandParameter="{Binding .}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

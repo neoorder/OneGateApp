@@ -20,6 +20,7 @@ public partial class DAppsPage : ContentPage
     public List<int> DAppsIdRecent { get; private set; } = [];
     public ObservableCollection<DApp> DAppsRecent { get; private set; } = [];
     public ObservableCollection<DApp>? DAppsFavoriteOrRecent { get; set { field = value; OnPropertyChanged(); } }
+    public bool HasFavoriteOrRecent { get; private set { field = value; OnPropertyChanged(); } }
 
     public DAppsPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
     {
@@ -96,6 +97,7 @@ public partial class DAppsPage : ContentPage
     {
         DAppsFavorite = new(DAppsIdFavorite.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
         DAppsRecent = new(DAppsIdRecent.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
+        HasFavoriteOrRecent = DAppsFavorite.Count > 0 || DAppsRecent.Count > 0;
         if (tabbarFavoriteOrRecent.SelectedTab == tabbarFavoriteOrRecent.Tabs![0])
             DAppsFavoriteOrRecent = DAppsRecent;
         else

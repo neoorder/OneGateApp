@@ -95,7 +95,7 @@ public partial class TabBar : ContentView
 
     void Tab_Tapped(object sender, TappedEventArgs e)
     {
-        Label label = (Label)sender;
-        SelectedTab = label.Text;
+        if (sender is Border { Content: Label label })
+            SelectedTab = label.Text;
     }
 }

@@ -7,37 +7,38 @@
     <ContentView.Resources>
         <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
         <og:TabBarLabelColorConverter x:Key="TabBarLabelColorConverter" />
+        <og:TabBarBackgroundColorConverter x:Key="TabBarBackgroundColorConverter" />
         <og:IsEqualMultiValueConverter x:Key="IsEqualMultiValueConverter" />
     </ContentView.Resources>
-    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" BindingContext="{Binding Source={RelativeSource AncestorType={x:Type og:TabBar}}}">
-        <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Tabs}" Spacing="{Binding Spacing}">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout>
-                        <Label Text="{Binding .}" FontSize="{Binding FontSize, Source={RelativeSource AncestorType={x:Type og:TabBar}}}" FontAttributes="Bold" HeightRequest="{Binding FontSize, Source={RelativeSource AncestorType={x:Type og:TabBar}}, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x * 6 / 5'}" VerticalTextAlignment="End">
-                            <Label.TextColor>
-                                <MultiBinding Converter="{StaticResource TabBarLabelColorConverter}">
+    <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="4" HorizontalOptions="Start">
+        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" BindingContext="{Binding Source={RelativeSource AncestorType={x:Type og:TabBar}}}">
+            <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Tabs}" Spacing="{Binding Spacing}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeShape="RoundRectangle 8" Padding="14,8">
+                            <Border.BackgroundColor>
+                                <MultiBinding Converter="{StaticResource TabBarBackgroundColorConverter}">
                                     <Binding Path="." />
                                     <Binding Path="SelectedTab" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
-                                    <Binding Path="TabColor" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
-                                    <Binding Path="SelectedTabColor" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
                                 </MultiBinding>
-                            </Label.TextColor>
-                            <Label.GestureRecognizers>
+                            </Border.BackgroundColor>
+                            <Label Text="{Binding .}" FontSize="{Binding FontSize, Source={RelativeSource AncestorType={x:Type og:TabBar}}}" FontAttributes="Bold" VerticalTextAlignment="Center">
+                                <Label.TextColor>
+                                    <MultiBinding Converter="{StaticResource TabBarLabelColorConverter}">
+                                        <Binding Path="." />
+                                        <Binding Path="SelectedTab" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
+                                        <Binding Path="TabColor" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
+                                        <Binding Path="SelectedTabColor" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
+                                    </MultiBinding>
+                                </Label.TextColor>
+                            </Label>
+                            <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Tab_Tapped" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <BoxView HeightRequest="2" Color="{Binding SelectedTabColor, Source={RelativeSource AncestorType={x:Type og:TabBar}}}">
-                            <BoxView.IsVisible>
-                                <MultiBinding Converter="{StaticResource IsEqualMultiValueConverter}">
-                                    <Binding Path="." />
-                                    <Binding Path="SelectedTab" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
-                                </MultiBinding>
-                            </BoxView.IsVisible>
-                        </BoxView>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </HorizontalStackLayout>
-    </ScrollView>
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+        </ScrollView>
+    </Border>
 </ContentView>

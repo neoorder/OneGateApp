@@ -9,20 +9,16 @@
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <Grid RowDefinitions="*,auto" Margin="20">
-        <VerticalStackLayout Spacing="20">
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Address}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <ContentView Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Entry Text="{Binding Contact.Address}" IsReadOnly="True" og:Border.IsVisible="False" />
-                </ContentView>
+        <VerticalStackLayout Spacing="18">
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Address}" FontAttributes="Bold" />
+            <Border StyleClass="Field">
+                <Entry Text="{Binding Contact.Address}" IsReadOnly="True" og:Border.IsVisible="False" />
             </Border>
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Label}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <ContentView Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Entry x:Name="entryLabel" Text="{Binding Contact.Label}" og:Border.IsVisible="False" />
-                </ContentView>
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Label}" FontAttributes="Bold" />
+            <Border StyleClass="Field">
+                <Entry x:Name="entryLabel" Text="{Binding Contact.Label}" og:Border.IsVisible="False" />
             </Border>
-            <og:ValidationMessage Title="{x:Static og:Strings.Label}" Margin="0,-16,0,0" Target="{x:Reference entryLabel}">
+            <og:ValidationMessage Title="{x:Static og:Strings.Label}" Target="{x:Reference entryLabel}">
                 <og:Required />
             </og:ValidationMessage>
         </VerticalStackLayout>

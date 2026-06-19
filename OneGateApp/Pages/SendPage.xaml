@@ -12,66 +12,76 @@
         <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
         <toolkit:MultiMathExpressionConverter x:Key="MultiMathExpressionConverter" />
     </ContentPage.Resources>
-    <Grid Margin="20" RowDefinitions="*,auto">
-        <VerticalStackLayout Spacing="20">
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Asset}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="10" Padding="10" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Image Source="{Binding SelectedAsset.Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
-                    <VerticalStackLayout Grid.Column="1">
-                        <Label Text="{Binding SelectedAsset.Token.Symbol}" FontAttributes="Bold" FontSize="16" />
-                        <Label StyleClass="Secondary" Text="{Binding SelectedAsset.Token.Name}" FontSize="12" />
-                    </VerticalStackLayout>
-                    <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe608;" Margin="10,0" VerticalOptions="Center" IsVisible="{Binding Assets, Converter={StaticResource IsNotNullConverter}}" />
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSelectAsset" />
-                    </Grid.GestureRecognizers>
-                </Grid>
-            </Border>
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.ReceivingAddress}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <Grid ColumnDefinitions="*,auto,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Entry x:Name="entryAddress" Text="{Binding ToAddress}" ClearButtonVisibility="Never" og:Border.IsVisible="False" />
-                    <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe60d;" FontSize="22" Margin="10,0" VerticalOptions="Center" Clicked="OnSelectContact" />
-                    <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe69a;" FontSize="28" Margin="10,0" VerticalOptions="Center" Command="{x:Static og:Commands.ScanQRCode}" CommandParameter="?action=RecognizeAddress" />
-                </Grid>
-            </Border>
-            <og:ValidationMessage Title="{x:Static og:Strings.ReceivingAddress}" Margin="0,-16,0,0" Target="{x:Reference entryAddress}">
-                <og:Required />
-                <og:Custom Validate="OnValidateAddress" />
-            </og:ValidationMessage>
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Amount}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <Grid ColumnDefinitions="*,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Entry x:Name="entryAmount" Text="{Binding Amount}" Keyboard="Numeric" ClearButtonVisibility="Never" og:Border.IsVisible="False" />
-                    <Button Grid.Column="1" StyleClass="Link" Text="{x:Static og:Strings.All}" Margin="0,-10" Padding="10" VerticalOptions="Center" Clicked="OnSelectAllBalance" />
-                </Grid>
-            </Border>
-            <og:ValidationMessage x:Name="validationAmount" Title="{x:Static og:Strings.Amount}" Margin="0,-16,0,0" Target="{x:Reference entryAmount}">
-                <og:Required />
-                <og:Custom Validate="OnValidateAmount" />
-                <og:Range x:TypeArguments="x:Decimal" Minimum="0" IsMinimumIncluded="False" Maximum="{Binding SelectedAsset.DecimalBalance, StringFormat='{}{0}'}" />
-            </og:ValidationMessage>
-            <Grid ColumnDefinitions="*,auto" Margin="0,-16,0,0">
-                <Label>
-                    <Label.Text>
-                        <MultiBinding StringFormat="≈ ${0:N2}" TargetNullValue="N/A" Converter="{StaticResource MultiMathExpressionConverter}" ConverterParameter="x0 * x1">
-                            <Binding Path="Amount" />
-                            <Binding Path="SelectedAsset.Token.Price" />
-                        </MultiBinding>
-                    </Label.Text>
-                </Label>
-                <Label Grid.Column="1" StyleClass="Secondary">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{x:Static og:Strings.Balance}" />
-                            <Span Text=": " />
-                            <Span Text="{Binding SelectedAsset.DisplayBalance}" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </Grid>
-        </VerticalStackLayout>
+    <Grid Margin="20" RowDefinitions="*,auto" RowSpacing="20">
+        <ScrollView>
+            <VerticalStackLayout Spacing="18">
+                <VerticalStackLayout Spacing="8">
+                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.Asset}" FontAttributes="Bold" />
+                    <Border StyleClass="Card" Padding="14">
+                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8" WidthRequest="48" HeightRequest="48">
+                                <Image Source="{Binding SelectedAsset.Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding SelectedAsset.Token.Symbol}" FontAttributes="Bold" FontSize="17" />
+                                <Label StyleClass="Secondary" Text="{Binding SelectedAsset.Token.Name}" FontSize="12" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe608;" FontSize="18" VerticalOptions="Center" IsVisible="{Binding Assets, Converter={StaticResource IsNotNullConverter}}" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSelectAsset" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8">
+                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.ReceivingAddress}" FontAttributes="Bold" />
+                    <Border StyleClass="Field">
+                        <Grid ColumnDefinitions="*,auto,auto" ColumnSpacing="8">
+                            <Entry x:Name="entryAddress" Text="{Binding ToAddress}" ClearButtonVisibility="Never" og:Border.IsVisible="False" />
+                            <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe60d;" FontSize="22" Padding="8" WidthRequest="44" HeightRequest="44" VerticalOptions="Center" Clicked="OnSelectContact" />
+                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe69a;" FontSize="26" Padding="8" WidthRequest="44" HeightRequest="44" VerticalOptions="Center" Command="{x:Static og:Commands.ScanQRCode}" CommandParameter="?action=RecognizeAddress" />
+                        </Grid>
+                    </Border>
+                    <og:ValidationMessage Title="{x:Static og:Strings.ReceivingAddress}" Target="{x:Reference entryAddress}">
+                        <og:Required />
+                        <og:Custom Validate="OnValidateAddress" />
+                    </og:ValidationMessage>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8">
+                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.Amount}" FontAttributes="Bold" />
+                    <Border StyleClass="Field">
+                        <Grid ColumnDefinitions="*,auto">
+                            <Entry x:Name="entryAmount" Text="{Binding Amount}" Keyboard="Numeric" ClearButtonVisibility="Never" og:Border.IsVisible="False" />
+                            <Button Grid.Column="1" StyleClass="Link" Text="{x:Static og:Strings.All}" Padding="10" VerticalOptions="Center" Clicked="OnSelectAllBalance" />
+                        </Grid>
+                    </Border>
+                    <og:ValidationMessage x:Name="validationAmount" Title="{x:Static og:Strings.Amount}" Target="{x:Reference entryAmount}">
+                        <og:Required />
+                        <og:Custom Validate="OnValidateAmount" />
+                        <og:Range x:TypeArguments="x:Decimal" Minimum="0" IsMinimumIncluded="False" Maximum="{Binding SelectedAsset.DecimalBalance, StringFormat='{}{0}'}" />
+                    </og:ValidationMessage>
+                    <Grid ColumnDefinitions="*,auto">
+                        <Label>
+                            <Label.Text>
+                                <MultiBinding StringFormat="≈ ${0:N2}" TargetNullValue="N/A" Converter="{StaticResource MultiMathExpressionConverter}" ConverterParameter="x0 * x1">
+                                    <Binding Path="Amount" />
+                                    <Binding Path="SelectedAsset.Token.Price" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Grid.Column="1" StyleClass="Secondary">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static og:Strings.Balance}" />
+                                    <Span Text=": " />
+                                    <Span Text="{Binding SelectedAsset.DisplayBalance}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
         <og:Submit Grid.Row="1" Text="{x:Static og:Strings.Continue}" Submitted="OnSubmitted" />
     </Grid>
 </ContentPage>

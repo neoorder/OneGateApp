@@ -17,30 +17,34 @@
             <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" Margin="-10" Padding="10" Clicked="OnCancel" />
         </Grid>
         <SearchBar Placeholder="{x:Static og:Strings.Search}" ios:SearchBar.SearchBarStyle="Minimal" TextChanged="OnSearch" />
-        <CollectionView ItemsSource="{Binding Assets}" HeightRequest="300">
+        <CollectionView ItemsSource="{Binding Assets}" HeightRequest="320">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:AssetInfo">
-                    <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="10" Padding="10" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                        <Image Source="{Binding Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
-                        <VerticalStackLayout Grid.Column="1">
-                            <Label Text="{Binding Token.Symbol}" TextColor="{toolkit:AppThemeResource Primary}" FontAttributes="Bold" FontSize="16" />
-                            <Label StyleClass="Secondary" Text="{Binding Token.Name}" FontSize="12" />
-                        </VerticalStackLayout>
-                        <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe9b0;" FontSize="22" Margin="10,0" VerticalOptions="Center">
-                            <Label.IsVisible>
-                                <MultiBinding Converter="{StaticResource IsEqualMultiValueConverter}">
-                                    <Binding Path="Token.Hash" />
-                                    <Binding Path="SelectedHash" Source="{RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type og:SelectAssetPopup}}" />
-                                </MultiBinding>
-                            </Label.IsVisible>
-                        </Label>
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnSelectAsset" CommandParameter="{Binding .}" />
-                        </Grid.GestureRecognizers>
-                    </Grid>
+                    <Border StyleClass="Card" Padding="14">
+                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8" WidthRequest="48" HeightRequest="48">
+                                <Image Source="{Binding Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding Token.Symbol}" TextColor="{toolkit:AppThemeResource Primary}" FontAttributes="Bold" FontSize="16" />
+                                <Label StyleClass="Secondary" Text="{Binding Token.Name}" FontSize="12" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe9b0;" FontSize="22" VerticalOptions="Center">
+                                <Label.IsVisible>
+                                    <MultiBinding Converter="{StaticResource IsEqualMultiValueConverter}">
+                                        <Binding Path="Token.Hash" />
+                                        <Binding Path="SelectedHash" Source="{RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type og:SelectAssetPopup}}" />
+                                    </MultiBinding>
+                                </Label.IsVisible>
+                            </Label>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSelectAsset" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
