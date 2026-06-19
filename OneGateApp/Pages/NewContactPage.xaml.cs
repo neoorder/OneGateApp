@@ -66,10 +66,24 @@ public partial class NewContactPage : ContentPage, IQueryAttributable
             && !wallet.Contains(address.ToScriptHash(protocolSettings.AddressVersion));
     }
 
+    void OnValidateLabelDuplicity(object sender, CustomValidationEventArgs e)
+    {
+        string? currentAddress = addressBookService.TryNormalizeAddress(Address, out string address) ? address : null;
+        e.IsValid = addressBookService.IsLabelAvailable(e.Value as string, currentAddress);
+        if (!e.IsValid)
+            e.ErrorMessage = Strings.LabelAlreadyExists;
+    }
+
     async void OnSubmitted(object sender, EventArgs e)
     {
         if (!addressBookService.TryNormalizeAddress(Address, out string address))
         {
+            return;
+        }
+        string label = Label!.Trim();
+        if (!addressBookService.IsLabelAvailable(label, address))
+        {
+            await Toast.Show(Strings.LabelAlreadyExists);
             return;
         }
         Contact? contact = await dbContext.Contacts.FindAsync(address);
@@ -78,14 +92,14 @@ public partial class NewContactPage : ContentPage, IQueryAttributable
             dbContext.Contacts.Add(new Contact
             {
                 Address = address,
-                Label = Label!.Trim(),
+                Label = label,
                 Note = Note?.Trim(),
                 IsAddressBookEntry = true
             });
         }
         else
         {
-            contact.Label = Label!.Trim();
+            contact.Label = label;
             contact.Note = Note?.Trim();
             contact.IsAddressBookEntry = true;
         }

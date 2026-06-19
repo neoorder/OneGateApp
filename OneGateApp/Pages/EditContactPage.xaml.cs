@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Extensions;
 using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Popups;
+using NeoOrder.OneGate.Controls.Views.Validation;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
@@ -43,18 +44,30 @@ public partial class EditContactPage : ContentPage, IQueryAttributable
 
     async void OnSubmitted(object sender, EventArgs e)
     {
-        string label = Contact.Label;
+        string label = Contact.Label.Trim();
         string? note = Contact.Note?.Trim();
+        if (!addressBookService.IsLabelAvailable(label, Contact.Address))
+        {
+            await Toast.Show(Strings.LabelAlreadyExists);
+            return;
+        }
         await dbContext.Contacts
             .Where(p => p.Address == Contact.Address)
             .ExecuteUpdateAsync(builder => builder
-                .SetProperty(p => p.Label, _ => label.Trim())
+                .SetProperty(p => p.Label, _ => label)
                 .SetProperty(p => p.Note, _ => note)
                 .SetProperty(p => p.IsAddressBookEntry, _ => true));
         await Toast.Show(Strings.ContactUpdatedSuccessfully);
         GlobalStates.Invalidate<ContactsPage>();
         GlobalStates.Invalidate<SettingsPage>();
         await Shell.Current.GoToAsync("..");
+    }
+
+    void OnValidateLabelDuplicity(object sender, CustomValidationEventArgs e)
+    {
+        e.IsValid = addressBookService.IsLabelAvailable(e.Value as string, Contact.Address);
+        if (!e.IsValid)
+            e.ErrorMessage = Strings.LabelAlreadyExists;
     }
 
     async void OnDelete(object sender, EventArgs e)

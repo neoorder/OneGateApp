@@ -24,6 +24,8 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
     readonly Wallet wallet;
     readonly RpcClient rpcClient;
     readonly AddressBookService addressBookService;
+    Contact? selectedRecipient;
+    bool suppressAddressChange;
 
     public required NFT NFT { get; set { field = value; OnPropertyChanged(); } }
     public string? ToAddress { get; set { field = value; OnPropertyChanged(); } }
@@ -54,11 +56,27 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
         var result = await this.ShowPopupAsync<Contact?>(popup);
         if (result.Result is not null)
         {
-            ResolvedToAddress = result.Result.Address;
-            ToAddress = result.Result.IsAddressBookEntry && !string.IsNullOrWhiteSpace(result.Result.Label)
-                ? result.Result.Label
-                : result.Result.Address;
+            SelectRecipient(result.Result);
         }
+    }
+
+    void OnAddressTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (suppressAddressChange) return;
+        if (selectedRecipient is not null && IsTextForRecipient(e.NewTextValue, selectedRecipient)) return;
+        selectedRecipient = null;
+        ResolvedToAddress = null;
+    }
+
+    void SelectRecipient(Contact contact)
+    {
+        suppressAddressChange = true;
+        selectedRecipient = contact;
+        ResolvedToAddress = contact.Address;
+        ToAddress = contact.IsAddressBookEntry && !string.IsNullOrWhiteSpace(contact.Label)
+            ? contact.Label
+            : contact.Address;
+        suppressAddressChange = false;
     }
 
     void OnValidateAddress(object sender, CustomValidationEventArgs e)
@@ -68,8 +86,7 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
             e.IsValid = false;
             return;
         }
-        ResolvedToAddress = addressBookService.ResolveAddress(address);
-        e.IsValid = ResolvedToAddress is not null;
+        e.IsValid = ResolveRecipientForText(address) is not null;
     }
 
     async void OnSubmitted(object sender, EventArgs e)
@@ -79,7 +96,12 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
         {
             WalletAccount account = wallet.GetDefaultAccount()!;
             UInt160 from = account.ScriptHash;
-            string toAddress = ResolvedToAddress ?? addressBookService.ResolveAddress(ToAddress) ?? ToAddress!;
+            string? toAddress = ResolveCurrentRecipient();
+            if (toAddress is null)
+            {
+                await Toast.Show(string.Format(Strings.DefaultValidatorErrorMessage, Strings.ReceivingAddress));
+                return;
+            }
             UInt160 to = toAddress.ToScriptHash(protocolSettings.AddressVersion);
             TransactionIntent[] intents = [new Nep11TransferIntent
             {
@@ -110,6 +132,14 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
             try
             {
                 await rpcClient.SendRawTransaction(tx);
+            }
+            catch (Exception ex)
+            {
+                await Toast.Show(ex.Message);
+                return;
+            }
+            try
+            {
                 await addressBookService.RecordTransferAsync(
                     toAddress,
                     tx.Hash.ToString(),
@@ -117,10 +147,9 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
                     NFT.Name,
                     "NFT");
             }
-            catch (Exception ex)
+            catch
             {
-                await Toast.Show(ex.Message);
-                return;
+                // The transaction was already relayed; local history must not turn success into a send failure.
             }
             GlobalStates.Invalidate<WalletPage>();
             await Shell.Current.GoToAsync("//wallet/sending", new Dictionary<string, object>
@@ -129,5 +158,28 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
                 ["intents"] = intents
             });
         }
+    }
+
+    string? ResolveCurrentRecipient()
+    {
+        string? address = ResolveRecipientForText(ToAddress);
+        ResolvedToAddress = address;
+        return address;
+    }
+
+    string? ResolveRecipientForText(string? text)
+    {
+        if (selectedRecipient is not null && IsTextForRecipient(text, selectedRecipient))
+            return selectedRecipient.Address;
+        return addressBookService.ResolveAddress(text);
+    }
+
+    static bool IsTextForRecipient(string? text, Contact contact)
+    {
+        string value = text?.Trim() ?? "";
+        return string.Equals(value, contact.Address, StringComparison.OrdinalIgnoreCase) ||
+            contact.IsAddressBookEntry &&
+            !string.IsNullOrWhiteSpace(contact.Label) &&
+            string.Equals(value, contact.Label.Trim(), StringComparison.OrdinalIgnoreCase);
     }
 }

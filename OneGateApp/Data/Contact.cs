@@ -2,6 +2,7 @@
 using NeoOrder.OneGate.Properties;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace NeoOrder.OneGate.Data;
 
@@ -31,7 +32,7 @@ public class Contact
         get
         {
             string name = DisplayName.Trim();
-            return name.Length == 0 ? "?" : name[..1].ToUpperInvariant();
+            return name.Length == 0 ? "?" : StringInfo.GetNextTextElement(name).ToUpperInvariant();
         }
     }
 

@@ -508,6 +508,9 @@
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>地址已存在</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>名称已存在</value>
+  </data>
   <data name="EditContact" xml:space="preserve">
     <value>编辑地址</value>
   </data>

@@ -33,13 +33,29 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
 
         string query = value?.Trim() ?? "";
         if (query.Length == 0) return null;
-        return dbContext.Contacts
+        string[] matches = dbContext.Contacts
             .AsNoTracking()
             .Where(p => p.IsAddressBookEntry)
             .AsEnumerable()
             .Where(p => string.Equals(p.Label, query, StringComparison.OrdinalIgnoreCase))
             .Select(p => p.Address)
-            .FirstOrDefault();
+            .Take(2)
+            .ToArray();
+        return matches.Length == 1 ? matches[0] : null;
+    }
+
+    public bool IsLabelAvailable(string? label, string? currentAddress = null)
+    {
+        string normalizedLabel = label?.Trim() ?? "";
+        if (normalizedLabel.Length == 0) return true;
+        string? normalizedAddress = TryNormalizeAddress(currentAddress, out string address) ? address : null;
+        return !dbContext.Contacts
+            .AsNoTracking()
+            .Where(p => p.IsAddressBookEntry)
+            .AsEnumerable()
+            .Any(p =>
+                !string.Equals(p.Address, normalizedAddress, StringComparison.Ordinal) &&
+                string.Equals(p.Label, normalizedLabel, StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task<Contact?> FindByAddressAsync(string address)

@@ -146,6 +146,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
     async void OnAddressTextChanged(object sender, TextChangedEventArgs e)
     {
         if (suppressAddressSearch) return;
+        if (SelectedRecipient is not null && IsTextForRecipient(e.NewTextValue, SelectedRecipient)) return;
         ResolvedToAddress = null;
         SelectedRecipient = null;
         await LoadAddressSuggestionsAsync(e.NewTextValue);
@@ -188,8 +189,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
             e.IsValid = false;
             return;
         }
-        ResolvedToAddress = addressBookService.ResolveAddress(address);
-        e.IsValid = ResolvedToAddress is not null;
+        e.IsValid = ResolveRecipientForText(address) is not null;
     }
 
     void OnSelectAllBalance(object sender, EventArgs e)
@@ -210,7 +210,12 @@ public partial class SendPage : ContentPage, IQueryAttributable
         {
             WalletAccount account = wallet.GetDefaultAccount()!;
             UInt160 from = account.ScriptHash;
-            string toAddress = ResolvedToAddress ?? addressBookService.ResolveAddress(ToAddress) ?? ToAddress!;
+            string? toAddress = await ResolveCurrentRecipientAsync();
+            if (toAddress is null)
+            {
+                await Toast.Show(string.Format(Strings.DefaultValidatorErrorMessage, Strings.ReceivingAddress));
+                return;
+            }
             UInt160 to = toAddress.ToScriptHash(protocolSettings.AddressVersion);
             BigInteger amount = BigDecimal.Parse(entryAmount.Text, SelectedAsset.Token.Decimals).Value;
             TransactionIntent[] intents = [new TransferIntent
@@ -249,16 +254,23 @@ public partial class SendPage : ContentPage, IQueryAttributable
             try
             {
                 await rpcClient.SendRawTransaction(tx);
+            }
+            catch (Exception ex)
+            {
+                await Toast.Show(ex.Message);
+                return;
+            }
+            try
+            {
                 await addressBookService.RecordTransferAsync(
                     toAddress,
                     tx.Hash.ToString(),
                     SelectedAsset.Token.Symbol,
                     new BigDecimal(amount, SelectedAsset.Token.Decimals).ToString());
             }
-            catch (Exception ex)
+            catch
             {
-                await Toast.Show(ex.Message);
-                return;
+                // The transaction was already relayed; local history must not turn success into a send failure.
             }
             GlobalStates.Invalidate<WalletPage>();
             await Shell.Current.GoToAsync("//wallet/sending", new Dictionary<string, object>
@@ -267,5 +279,29 @@ public partial class SendPage : ContentPage, IQueryAttributable
                 ["intents"] = intents
             });
         }
+    }
+
+    async Task<string?> ResolveCurrentRecipientAsync()
+    {
+        string? address = ResolveRecipientForText(ToAddress);
+        ResolvedToAddress = address;
+        SelectedRecipient = address is null ? null : await addressBookService.FindByAddressAsync(address);
+        return address;
+    }
+
+    string? ResolveRecipientForText(string? text)
+    {
+        if (SelectedRecipient is not null && IsTextForRecipient(text, SelectedRecipient))
+            return SelectedRecipient.Address;
+        return addressBookService.ResolveAddress(text);
+    }
+
+    static bool IsTextForRecipient(string? text, Contact contact)
+    {
+        string value = text?.Trim() ?? "";
+        return string.Equals(value, contact.Address, StringComparison.OrdinalIgnoreCase) ||
+            contact.IsAddressBookEntry &&
+            !string.IsNullOrWhiteSpace(contact.Label) &&
+            string.Equals(value, contact.Label.Trim(), StringComparison.OrdinalIgnoreCase);
     }
 }

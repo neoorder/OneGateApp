@@ -104,6 +104,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AddressAlreadyExists", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Name already exists.
+        /// </summary>
+        internal static string LabelAlreadyExists {
+            get {
+                return ResourceManager.GetString("LabelAlreadyExists", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Address Book 的本地化字符串。
