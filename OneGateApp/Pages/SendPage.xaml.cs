@@ -14,6 +14,7 @@ using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
+using System.Globalization;
 using System.Numerics;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
@@ -31,6 +32,11 @@ public partial class SendPage : ContentPage, IQueryAttributable
     public required AssetInfo SelectedAsset { get; set { field = value; OnPropertyChanged(); } }
     public string? ToAddress { get; set { field = value; OnPropertyChanged(); } }
     public decimal Amount { get; set { field = value; OnPropertyChanged(); } }
+    public string? RequestMemo { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasRequestMemo)); OnPropertyChanged(nameof(HasPaymentRequestDetails)); } }
+    public string? RequestData { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasRequestData)); OnPropertyChanged(nameof(HasPaymentRequestDetails)); } }
+    public bool HasRequestMemo => !string.IsNullOrWhiteSpace(RequestMemo);
+    public bool HasRequestData => !string.IsNullOrWhiteSpace(RequestData);
+    public bool HasPaymentRequestDetails => HasRequestMemo || HasRequestData;
 
     public SendPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, RpcClient rpcClient, TokenManager tokenManager)
     {
@@ -52,11 +58,15 @@ public partial class SendPage : ContentPage, IQueryAttributable
         {
             if (Amount == 0) Amount = obj_amount switch
             {
-                string s => decimal.Parse(s),
+                string s => ParsePaymentRequestAmount(s),
                 decimal d => d,
                 _ => 0
             };
         }
+        if (query.TryGetValue("memo", out var obj_memo))
+            RequestMemo = DecodeRequestMetadata(obj_memo);
+        if (query.TryGetValue("data", out var obj_data))
+            RequestData = DecodeRequestMetadata(obj_data);
         if (Assets is null && query.TryGetValue("assets", out var obj_assets))
         {
             Assets = (AssetInfo[])obj_assets;
@@ -106,6 +116,19 @@ public partial class SendPage : ContentPage, IQueryAttributable
             }
             SelectedAsset = Assets.FirstOrDefault(p => p.Token.Hash == NativeContract.NEO.Hash) ?? Assets[0];
         }
+    }
+
+    static decimal ParsePaymentRequestAmount(string value)
+    {
+        if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal amount))
+            return amount;
+        return decimal.Parse(value, NumberStyles.Number, CultureInfo.CurrentCulture);
+    }
+
+    static string? DecodeRequestMetadata(object value)
+    {
+        string? text = value.ToString();
+        return string.IsNullOrWhiteSpace(text) ? null : Uri.UnescapeDataString(text);
     }
 
     async void OnSelectAsset(object sender, TappedEventArgs e)

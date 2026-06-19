@@ -140,6 +140,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Amount", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Copy request 的本地化字符串。
+        /// </summary>
+        internal static string CopyRequestLink {
+            get {
+                return ResourceManager.GetString("CopyRequestLink", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 App Details 的本地化字符串。
@@ -939,6 +948,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("InsufficientBalanceForAmountAndFees", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Enter a positive amount. 的本地化字符串。
+        /// </summary>
+        internal static string InvalidRequestedAmount {
+            get {
+                return ResourceManager.GetString("InvalidRequestedAmount", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Description 的本地化字符串。
@@ -1330,6 +1348,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("PermissionDenied", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 0.00 (optional) 的本地化字符串。
+        /// </summary>
+        internal static string OptionalAmountPlaceholder {
+            get {
+                return ResourceManager.GetString("OptionalAmountPlaceholder", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Select address 的本地化字符串。
@@ -1433,6 +1460,24 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Receive", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Check before sharing 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveAddressSafetyTitle {
+            get {
+                return ResourceManager.GetString("ReceiveAddressSafetyTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Only share this Neo address with people you trust. Amount, memo, and data are request details; funds move only after the sender reviews and confirms. 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveAddressSafetyText {
+            get {
+                return ResourceManager.GetString("ReceiveAddressSafetyText", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 This address can receive all assets on the Neo platform. 的本地化字符串。
@@ -1449,6 +1494,42 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ReceiveQRCodeTitle {
             get {
                 return ResourceManager.GetString("ReceiveQRCodeTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Payment request copied 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveRequestCopied {
+            get {
+                return ResourceManager.GetString("ReceiveRequestCopied", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Request details 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveRequestDetails {
+            get {
+                return ResourceManager.GetString("ReceiveRequestDetails", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Add optional payment details before sharing your QR code. 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveRequestSubtitle {
+            get {
+                return ResourceManager.GetString("ReceiveRequestSubtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Create receive request 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveRequestTitle {
+            get {
+                return ResourceManager.GetString("ReceiveRequestTitle", resourceCulture);
             }
         }
         
@@ -1476,6 +1557,51 @@ namespace NeoOrder.OneGate.Properties {
         internal static string RecognizeQRCode {
             get {
                 return ResourceManager.GetString("RecognizeQRCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Reference data 的本地化字符串。
+        /// </summary>
+        internal static string RequestData {
+            get {
+                return ResourceManager.GetString("RequestData", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Optional payment reference 的本地化字符串。
+        /// </summary>
+        internal static string RequestDataPlaceholder {
+            get {
+                return ResourceManager.GetString("RequestDataPlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Memo 的本地化字符串。
+        /// </summary>
+        internal static string RequestMemo {
+            get {
+                return ResourceManager.GetString("RequestMemo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Invoice, order, or note 的本地化字符串。
+        /// </summary>
+        internal static string RequestMemoPlaceholder {
+            get {
+                return ResourceManager.GetString("RequestMemoPlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Requested amount 的本地化字符串。
+        /// </summary>
+        internal static string RequestedAmount {
+            get {
+                return ResourceManager.GetString("RequestedAmount", resourceCulture);
             }
         }
         
@@ -1701,6 +1827,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Share {
             get {
                 return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Share QR 的本地化字符串。
+        /// </summary>
+        internal static string ShareQRCode {
+            get {
+                return ResourceManager.GetString("ShareQRCode", resourceCulture);
             }
         }
         

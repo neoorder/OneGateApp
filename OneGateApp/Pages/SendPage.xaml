@@ -40,6 +40,19 @@
                 <og:Required />
                 <og:Custom Validate="OnValidateAddress" />
             </og:ValidationMessage>
+            <Border Padding="14" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 5" IsVisible="{Binding HasPaymentRequestDetails}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{x:Static og:Strings.ReceiveRequestDetails}" FontAttributes="Bold" />
+                    <VerticalStackLayout Spacing="2" IsVisible="{Binding HasRequestMemo}">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.RequestMemo}" FontSize="12" />
+                        <Label Text="{Binding RequestMemo}" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="2" IsVisible="{Binding HasRequestData}">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.RequestData}" FontSize="12" />
+                        <Label Text="{Binding RequestData}" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.Amount}" />
             <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
                 <Grid ColumnDefinitions="*,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">

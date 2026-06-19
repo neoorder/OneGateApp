@@ -6,6 +6,7 @@ using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using SkiaSharp;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Web;
@@ -145,7 +146,11 @@ public partial class ScanPage : ContentPage, IQueryAttributable
         if (nv["asset"] is string s_asset)
             query += $"&asset={UInt160.Parse(s_asset)}";
         if (nv["amount"] is string s_amount)
-            query += $"&amount={decimal.Parse(s_amount)}";
+            query += $"&amount={decimal.Parse(s_amount, NumberStyles.Number, CultureInfo.InvariantCulture)}";
+        if (nv["memo"] is string s_memo)
+            query += $"&memo={Uri.EscapeDataString(s_memo)}";
+        if (nv["data"] is string s_data)
+            query += $"&data={Uri.EscapeDataString(s_data)}";
         switch (action)
         {
             case "RecognizeAddress":
