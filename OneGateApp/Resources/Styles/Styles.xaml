@@ -28,7 +28,7 @@
     </Style>
 
     <Style TargetType="Border" Class="Field">
-        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource TextBox}" />
+        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource PanelAlt}" />
         <Setter Property="StrokeShape" Value="RoundRectangle 12" />
         <Setter Property="StrokeThickness" Value="0" />
         <Setter Property="Padding" Value="14,8" />
