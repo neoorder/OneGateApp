@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Extensions;
+using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Popups;
 using NeoOrder.OneGate.Data;
@@ -15,16 +16,18 @@ public partial class LanguagePage : ContentPage
 
     readonly IServiceProvider serviceProvider;
     readonly ApplicationDbContext dbContext;
+    readonly IDbContextFactory<CacheDbContext> cacheDbContextFactory;
     readonly HttpClient httpClient;
 
     public LoadingService LoadingService { get; set { field = value; OnPropertyChanged(); } }
     public string? CurrentLanguage { get; set { field = value; OnPropertyChanged(); } }
 
-    public LanguagePage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, HttpClient httpClient)
+    public LanguagePage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IDbContextFactory<CacheDbContext> cacheDbContextFactory, HttpClient httpClient)
     {
         this.LoadingService = new(LoadSettingsAsync);
         this.serviceProvider = serviceProvider;
         this.dbContext = dbContext;
+        this.cacheDbContextFactory = cacheDbContextFactory;
         this.httpClient = httpClient;
         InitializeComponent();
         LoadingService.BeginLoad();
@@ -50,7 +53,7 @@ public partial class LanguagePage : ContentPage
         var result = await this.ShowPopupAsync<bool>(popup);
         if (!result.Result) return;
         await dbContext.Settings.PutAsync("preference/language", lang);
-        await dbContext.Settings.DeleteAsync("caching/last_update/news");
+        await cacheDbContextFactory.DeleteSettingIfExistsAsync("caching/last_update/news");
         CultureInfo culture = string.IsNullOrEmpty(lang)
             ? CultureInfo.InstalledUICulture
             : new CultureInfo(lang);

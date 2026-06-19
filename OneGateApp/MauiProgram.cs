@@ -93,6 +93,11 @@ public static class MauiProgram
             options.UseSqlite($"Filename={SharedOptions.DbPath}");
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         });
+        builder.Services.AddDbContextFactory<CacheDbContext>(options =>
+        {
+            options.UseSqlite($"Filename={SharedOptions.CacheDbPath};Pooling=False");
+            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        });
         builder.Services.AddSingleton(sp =>
         {
             using var stream = EmbeddedResource.Open("protocol.json");

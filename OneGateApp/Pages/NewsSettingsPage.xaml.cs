@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Services;
@@ -8,15 +9,17 @@ namespace NeoOrder.OneGate.Pages;
 public partial class NewsSettingsPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
+    readonly IDbContextFactory<CacheDbContext> cacheDbContextFactory;
     readonly HttpClient httpClient;
 
     public LoadingService LoadingService { get; set { field = value; OnPropertyChanged(); } }
     public CategroySetting[]? Categroies { get; set { field = value; OnPropertyChanged(); } }
 
-    public NewsSettingsPage(ApplicationDbContext dbContext, HttpClient httpClient)
+    public NewsSettingsPage(ApplicationDbContext dbContext, IDbContextFactory<CacheDbContext> cacheDbContextFactory, HttpClient httpClient)
     {
         this.LoadingService = new(LoadCategroiesAsync);
         this.dbContext = dbContext;
+        this.cacheDbContextFactory = cacheDbContextFactory;
         this.httpClient = httpClient;
         InitializeComponent();
         LoadingService.BeginLoad();
@@ -47,7 +50,7 @@ public partial class NewsSettingsPage : ContentPage
         if (changed)
         {
             await dbContext.Settings.PutAsync("news/categories/excluded", excluded);
-            await dbContext.Settings.DeleteAsync("caching/last_update/news");
+            await cacheDbContextFactory.DeleteSettingIfExistsAsync("caching/last_update/news");
             GlobalStates.Invalidate<HomePage>();
         }
     }

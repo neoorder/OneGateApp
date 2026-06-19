@@ -54,6 +54,8 @@
 	<string>Need your Touch ID to unlock!</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Need your face to unlock!</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app allows web games to use motion sensors for controls.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

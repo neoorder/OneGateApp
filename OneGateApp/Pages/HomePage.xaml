@@ -29,7 +29,7 @@
                                             <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="30:00:00:00" />
                                         </Image.Source>
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="{Binding TargetUrl}" />
+                                            <TapGestureRecognizer Tapped="OnBannerTapped" CommandParameter="{Binding TargetUrl}" />
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </DataTemplate>
