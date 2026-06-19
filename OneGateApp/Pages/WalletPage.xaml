@@ -55,34 +55,34 @@
                         <Path Fill="#46F2C2" Opacity="0.16" Data="M 300 0 L 520 0 L 520 220 Z" HorizontalOptions="End" InputTransparent="True" />
                     </Grid>
                 </Border>
-                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
-                    <Border Grid.Column="0" StyleClass="Card" Padding="10,9">
-                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label StyleClass="Icon" Text="&#xe7dd;" FontSize="18" VerticalOptions="Center" />
-                            <Label Text="{x:Static og:Strings.Receive}" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                        <Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="4,0">
+                    <VerticalStackLayout Grid.Column="0" Spacing="7" HorizontalOptions="Center">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                            <Label StyleClass="Icon" Text="&#xe7dd;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label Text="{x:Static og:Strings.Receive}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="//wallet/receive" />
-                        </Border.GestureRecognizers>
-                    </Border>
-                    <Border Grid.Column="1" StyleClass="Card" Padding="10,9">
-                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label StyleClass="Icon" Text="&#xe705;" FontSize="18" VerticalOptions="Center" />
-                            <Label Text="{x:Static og:Strings.Send}" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                        <Border.GestureRecognizers>
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="7" HorizontalOptions="Center">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                            <Label StyleClass="Icon" Text="&#xe705;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label Text="{x:Static og:Strings.Send}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSendClicked" />
-                        </Border.GestureRecognizers>
-                    </Border>
-                    <Border Grid.Column="2" StyleClass="Card" Padding="10,9">
-                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label StyleClass="Icon" Text="&#xe901;" FontSize="18" VerticalOptions="Center" />
-                            <Label Text="{x:Static og:Strings.Records}" FontAttributes="Bold" FontSize="14" VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                        <Border.GestureRecognizers>
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="2" Spacing="7" HorizontalOptions="Center">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                            <Label StyleClass="Icon" Text="&#xe901;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label Text="{x:Static og:Strings.Records}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="{Binding ScriptHash, StringFormat='https://explorer.onegate.space/accountprofile/{0}'}" />
-                        </Border.GestureRecognizers>
-                    </Border>
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
                 </Grid>
                 <og:TabBar x:Name="tabBarAssetType" FontSize="14" Spacing="4">
                     <og:TabBar.Tabs>
@@ -92,7 +92,8 @@
                         </x:Array>
                     </og:TabBar.Tabs>
                 </og:TabBar>
-                <CollectionView ItemsSource="{Binding Assets}" MinimumHeightRequest="150" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 0}}">
+                <Border StyleClass="Card" Padding="0" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 0}}">
+                    <CollectionView ItemsSource="{Binding Assets}" MinimumHeightRequest="150">
                     <CollectionView.EmptyView>
                         <Grid>
                             <Label IsVisible="{Binding LoadingService.IsLoading}">
@@ -112,11 +113,11 @@
                         </Grid>
                     </CollectionView.EmptyView>
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="og:AssetInfo">
-                            <Border StyleClass="Card" Padding="12">
+                            <Grid Padding="12,10">
                                 <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12" RowDefinitions="auto,auto" RowSpacing="2">
                                     <Border Grid.RowSpan="2" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
                                         <Image Source="{Binding Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="30" HeightRequest="30" Aspect="AspectFit" />
@@ -143,11 +144,13 @@
                                         <TapGestureRecognizer Tapped="OnAssetTapped" CommandParameter="{Binding .}" />
                                     </Grid.GestureRecognizers>
                                 </Grid>
-                            </Border>
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <CollectionView ItemsSource="{Binding NFTs}" MinimumHeightRequest="150" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
+                </Border>
+                <Border StyleClass="Card" Padding="0" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
+                    <CollectionView ItemsSource="{Binding NFTs}" MinimumHeightRequest="150">
                     <CollectionView.EmptyView>
                         <Grid>
                             <Label IsVisible="{Binding LoadingService.IsLoading}">
@@ -167,11 +170,11 @@
                         </Grid>
                     </CollectionView.EmptyView>
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="og:NFT">
-                            <Border StyleClass="Card" Padding="12">
+                            <Grid Padding="12,10">
                                 <Grid ColumnDefinitions="auto,*" ColumnSpacing="12" RowDefinitions="auto,auto" RowSpacing="2">
                                     <Border Grid.RowSpan="2" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
                                         <Image Source="{Binding TokenInfo.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="30" HeightRequest="30" Aspect="AspectFit" />
@@ -182,10 +185,11 @@
                                         <TapGestureRecognizer Tapped="OnNFTTapped" CommandParameter="{Binding .}" />
                                     </Grid.GestureRecognizers>
                                 </Grid>
-                            </Border>
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+                </Border>
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>
