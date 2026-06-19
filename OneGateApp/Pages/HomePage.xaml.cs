@@ -59,6 +59,16 @@ public partial class HomePage : ContentPage
 #endif
     }
 
+    async void OnBannerTapped(object sender, TappedEventArgs e)
+    {
+        string url = (string)e.Parameter!;
+        Uri uri = new(url);
+        if (uri.Scheme == "https" && uri.Authority == SharedOptions.OneGateDomain && uri.Segments is ["/", "app/", _])
+            await Commands.LaunchDApp.ExecuteAsync(uri);
+        else
+            await Commands.OpenUrl.ExecuteAsync(url);
+    }
+
     async void OnNewsTapped(object sender, TappedEventArgs e)
     {
         await Shell.Current.GoToAsync("//home/news/details", new Dictionary<string, object>
