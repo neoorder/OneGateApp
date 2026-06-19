@@ -31,7 +31,7 @@
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.ReceivingAddress}" />
             <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
                 <Grid ColumnDefinitions="*,auto,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Entry x:Name="entryAddress" Text="{Binding ToAddress}" ClearButtonVisibility="Never" og:Border.IsVisible="False" />
+                    <Entry x:Name="entryAddress" Text="{Binding ToAddress}" ClearButtonVisibility="Never" og:Border.IsVisible="False" Focused="OnAddressFocused" TextChanged="OnAddressTextChanged" />
                     <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe60d;" FontSize="22" Margin="10,0" VerticalOptions="Center" Clicked="OnSelectContact" />
                     <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe69a;" FontSize="28" Margin="10,0" VerticalOptions="Center" Command="{x:Static og:Commands.ScanQRCode}" CommandParameter="?action=RecognizeAddress" />
                 </Grid>
@@ -40,6 +40,31 @@
                 <og:Required />
                 <og:Custom Validate="OnValidateAddress" />
             </og:ValidationMessage>
+            <VerticalStackLayout IsVisible="{Binding HasRecipientPreview}" Padding="12" Spacing="4" BackgroundColor="{toolkit:AppThemeResource Panel}" Margin="0,-16,0,0">
+                <Label Text="{Binding RecipientPreviewTitle}" FontAttributes="Bold" />
+                <Label StyleClass="Secondary" Text="{Binding RecipientPreviewAddress}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                <Label StyleClass="Secondary" Text="{Binding RecipientPreviewNote}" FontSize="12" IsVisible="{Binding HasRecipientPreviewNote}" />
+            </VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding AddressSuggestions}" IsVisible="{Binding HasAddressSuggestions}" HeightRequest="170" Margin="0,-16,0,0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="og:Contact">
+                        <Grid ColumnDefinitions="*,auto" Padding="12" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding DisplayName}" FontAttributes="Bold" />
+                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" />
+                                <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1" StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" VerticalOptions="Start" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAddressSuggestionTapped" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.Amount}" />
             <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
                 <Grid ColumnDefinitions="*,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">

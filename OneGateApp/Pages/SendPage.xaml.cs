@@ -26,19 +26,31 @@ public partial class SendPage : ContentPage, IQueryAttributable
     readonly Wallet wallet;
     readonly RpcClient rpcClient;
     readonly TokenManager tokenManager;
+    readonly AddressBookService addressBookService;
+    bool suppressAddressSearch;
 
     public IReadOnlyList<AssetInfo>? Assets { get; set { field = value; OnPropertyChanged(); } }
     public required AssetInfo SelectedAsset { get; set { field = value; OnPropertyChanged(); } }
     public string? ToAddress { get; set { field = value; OnPropertyChanged(); } }
+    public string? ResolvedToAddress { get; set { field = value; OnPropertyChanged(); } }
+    public Contact[]? AddressSuggestions { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressSuggestions)); } }
+    public Contact? SelectedRecipient { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasRecipientPreview)); OnPropertyChanged(nameof(RecipientPreviewTitle)); OnPropertyChanged(nameof(RecipientPreviewAddress)); OnPropertyChanged(nameof(RecipientPreviewNote)); OnPropertyChanged(nameof(HasRecipientPreviewNote)); } }
     public decimal Amount { get; set { field = value; OnPropertyChanged(); } }
+    public bool HasAddressSuggestions => AddressSuggestions?.Length > 0;
+    public bool HasRecipientPreview => SelectedRecipient is not null;
+    public string RecipientPreviewTitle => SelectedRecipient?.DisplayName ?? "";
+    public string RecipientPreviewAddress => SelectedRecipient?.Address ?? "";
+    public string RecipientPreviewNote => SelectedRecipient?.DetailText ?? "";
+    public bool HasRecipientPreviewNote => !string.IsNullOrWhiteSpace(RecipientPreviewNote) && RecipientPreviewNote != RecipientPreviewAddress;
 
-    public SendPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, RpcClient rpcClient, TokenManager tokenManager)
+    public SendPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, RpcClient rpcClient, TokenManager tokenManager, AddressBookService addressBookService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.wallet = walletProvider.GetWallet()!;
         this.rpcClient = rpcClient;
         this.tokenManager = tokenManager;
+        this.addressBookService = addressBookService;
         InitializeComponent();
     }
 
@@ -47,6 +59,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
         if (query.TryGetValue("address", out var obj_address))
         {
             ToAddress = (string)obj_address;
+            await RefreshRecipientPreviewAsync();
         }
         if (query.TryGetValue("amount", out var obj_amount))
         {
@@ -122,7 +135,50 @@ public partial class SendPage : ContentPage, IQueryAttributable
     {
         var popup = serviceProvider.GetServiceOrCreateInstance<SelectContactPopup>();
         var result = await this.ShowPopupAsync<Contact?>(popup);
-        if (result.Result is not null) ToAddress = result.Result.Address;
+        if (result.Result is not null) SelectRecipient(result.Result);
+    }
+
+    async void OnAddressFocused(object sender, FocusEventArgs e)
+    {
+        await LoadAddressSuggestionsAsync(ToAddress);
+    }
+
+    async void OnAddressTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (suppressAddressSearch) return;
+        ResolvedToAddress = null;
+        SelectedRecipient = null;
+        await LoadAddressSuggestionsAsync(e.NewTextValue);
+    }
+
+    async void OnAddressSuggestionTapped(object sender, TappedEventArgs e)
+    {
+        SelectRecipient((Contact)e.Parameter!);
+        await entryAddress.HideSoftInputAsync(default);
+    }
+
+    void SelectRecipient(Contact contact)
+    {
+        suppressAddressSearch = true;
+        SelectedRecipient = contact;
+        ResolvedToAddress = contact.Address;
+        ToAddress = contact.IsAddressBookEntry && !string.IsNullOrWhiteSpace(contact.Label)
+            ? contact.Label
+            : contact.Address;
+        AddressSuggestions = [];
+        suppressAddressSearch = false;
+    }
+
+    async Task LoadAddressSuggestionsAsync(string? query)
+    {
+        AddressSuggestions = await addressBookService.GetSuggestionsAsync(query);
+    }
+
+    async Task RefreshRecipientPreviewAsync()
+    {
+        string? address = addressBookService.ResolveAddress(ToAddress);
+        ResolvedToAddress = address;
+        SelectedRecipient = address is null ? null : await addressBookService.FindByAddressAsync(address);
     }
 
     void OnValidateAddress(object sender, CustomValidationEventArgs e)
@@ -132,14 +188,8 @@ public partial class SendPage : ContentPage, IQueryAttributable
             e.IsValid = false;
             return;
         }
-        try
-        {
-            address.ToScriptHash(protocolSettings.AddressVersion);
-        }
-        catch
-        {
-            e.IsValid = false;
-        }
+        ResolvedToAddress = addressBookService.ResolveAddress(address);
+        e.IsValid = ResolvedToAddress is not null;
     }
 
     void OnSelectAllBalance(object sender, EventArgs e)
@@ -160,7 +210,8 @@ public partial class SendPage : ContentPage, IQueryAttributable
         {
             WalletAccount account = wallet.GetDefaultAccount()!;
             UInt160 from = account.ScriptHash;
-            UInt160 to = ToAddress!.ToScriptHash(protocolSettings.AddressVersion);
+            string toAddress = ResolvedToAddress ?? addressBookService.ResolveAddress(ToAddress) ?? ToAddress!;
+            UInt160 to = toAddress.ToScriptHash(protocolSettings.AddressVersion);
             BigInteger amount = BigDecimal.Parse(entryAmount.Text, SelectedAsset.Token.Decimals).Value;
             TransactionIntent[] intents = [new TransferIntent
             {
@@ -198,6 +249,11 @@ public partial class SendPage : ContentPage, IQueryAttributable
             try
             {
                 await rpcClient.SendRawTransaction(tx);
+                await addressBookService.RecordTransferAsync(
+                    toAddress,
+                    tx.Hash.ToString(),
+                    SelectedAsset.Token.Symbol,
+                    new BigDecimal(amount, SelectedAsset.Token.Decimals).ToString());
             }
             catch (Exception ex)
             {

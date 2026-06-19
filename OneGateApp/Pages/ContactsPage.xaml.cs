@@ -7,15 +7,16 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class ContactsPage : ContentPage
 {
-    readonly ApplicationDbContext dbContext;
+    readonly AddressBookService addressBookService;
+    Contact[] allContacts = [];
 
     public LoadingService LoadingService { get; set { field = value; OnPropertyChanged(); } }
     public Contact[]? Contacts { get; set { field = value; OnPropertyChanged(); } }
 
-    public ContactsPage(ApplicationDbContext dbContext)
+    public ContactsPage(AddressBookService addressBookService)
     {
         this.LoadingService = new(LoadContactsAsync);
-        this.dbContext = dbContext;
+        this.addressBookService = addressBookService;
         InitializeComponent();
         LoadingService.BeginLoad();
     }
@@ -27,14 +28,26 @@ public partial class ContactsPage : ContentPage
             LoadingService.BeginLoad();
     }
 
-    async void OnContactTapped(object sender, TappedEventArgs e)
-    {
-        Contact contact = (Contact)e.Parameter!;
-        await Shell.Current.GoToAsync("edit", new Dictionary<string, object> { ["contact"] = contact });
-    }
-
     async Task LoadContactsAsync()
     {
-        Contacts = await dbContext.Contacts.ToArrayAsync();
+        allContacts = await addressBookService.GetEntriesAsync();
+        Contacts = allContacts;
+    }
+
+    void OnSearch(object sender, TextChangedEventArgs e)
+    {
+        string filter = e.NewTextValue?.Trim() ?? "";
+        if (filter.Length == 0)
+        {
+            Contacts = allContacts;
+            return;
+        }
+
+        Contacts = allContacts
+            .Where(p =>
+                p.DisplayName.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                p.Address.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                (p.Note?.Contains(filter, StringComparison.OrdinalIgnoreCase) ?? false))
+            .ToArray();
     }
 }

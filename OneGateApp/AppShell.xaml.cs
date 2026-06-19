@@ -7,6 +7,26 @@ public partial class AppShell : Shell
     public AppShell()
     {
         InitializeComponent();
+        Navigated += OnNavigated;
+        UpdateTabBarVisibility(CurrentState?.Location);
+    }
+
+    void OnNavigated(object? sender, ShellNavigatedEventArgs e)
+    {
+        UpdateTabBarVisibility(e.Current.Location);
+    }
+
+    void UpdateTabBarVisibility(Uri? location)
+    {
+        string route = location?.OriginalString.Split('?')[0].TrimEnd('/') ?? "";
+        bool isRootRoute = Navigation.NavigationStack.Count <= 1
+            && (route.Length == 0 || route is "//home" or "//dapps" or "//wallet" or "home" or "dapps" or "wallet");
+        DeviceIdiom idiom = DeviceInfo.Idiom;
+        bool isMobile = idiom != DeviceIdiom.Desktop && idiom != DeviceIdiom.Tablet;
+        if (CurrentPage is not null)
+        {
+            Shell.SetTabBarIsVisible(CurrentPage, isMobile && isRootRoute);
+        }
     }
 
     static AppShell()
@@ -16,6 +36,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("scan", typeof(ScanPage));
         Routing.RegisterRoute("home/contacts", typeof(ContactsPage));
         Routing.RegisterRoute("home/contacts/edit", typeof(EditContactPage));
+        Routing.RegisterRoute("home/contacts/edit/transaction", typeof(ContactTransactionPage));
         Routing.RegisterRoute("home/contacts/new", typeof(NewContactPage));
         Routing.RegisterRoute("home/news/details", typeof(NewsDetailsPage));
         Routing.RegisterRoute("home/settings", typeof(SettingsPage));

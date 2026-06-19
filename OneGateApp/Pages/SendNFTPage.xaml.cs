@@ -23,16 +23,19 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
     readonly ProtocolSettings protocolSettings;
     readonly Wallet wallet;
     readonly RpcClient rpcClient;
+    readonly AddressBookService addressBookService;
 
     public required NFT NFT { get; set { field = value; OnPropertyChanged(); } }
     public string? ToAddress { get; set { field = value; OnPropertyChanged(); } }
+    public string? ResolvedToAddress { get; set; }
 
-    public SendNFTPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, RpcClient rpcClient)
+    public SendNFTPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, RpcClient rpcClient, AddressBookService addressBookService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.wallet = walletProvider.GetWallet()!;
         this.rpcClient = rpcClient;
+        this.addressBookService = addressBookService;
         InitializeComponent();
     }
 
@@ -49,7 +52,13 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
     {
         var popup = serviceProvider.GetServiceOrCreateInstance<SelectContactPopup>();
         var result = await this.ShowPopupAsync<Contact?>(popup);
-        if (result.Result is not null) ToAddress = result.Result.Address;
+        if (result.Result is not null)
+        {
+            ResolvedToAddress = result.Result.Address;
+            ToAddress = result.Result.IsAddressBookEntry && !string.IsNullOrWhiteSpace(result.Result.Label)
+                ? result.Result.Label
+                : result.Result.Address;
+        }
     }
 
     void OnValidateAddress(object sender, CustomValidationEventArgs e)
@@ -59,14 +68,8 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
             e.IsValid = false;
             return;
         }
-        try
-        {
-            address.ToScriptHash(protocolSettings.AddressVersion);
-        }
-        catch
-        {
-            e.IsValid = false;
-        }
+        ResolvedToAddress = addressBookService.ResolveAddress(address);
+        e.IsValid = ResolvedToAddress is not null;
     }
 
     async void OnSubmitted(object sender, EventArgs e)
@@ -76,7 +79,8 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
         {
             WalletAccount account = wallet.GetDefaultAccount()!;
             UInt160 from = account.ScriptHash;
-            UInt160 to = ToAddress!.ToScriptHash(protocolSettings.AddressVersion);
+            string toAddress = ResolvedToAddress ?? addressBookService.ResolveAddress(ToAddress) ?? ToAddress!;
+            UInt160 to = toAddress.ToScriptHash(protocolSettings.AddressVersion);
             TransactionIntent[] intents = [new Nep11TransferIntent
             {
                 Asset = NFT,
@@ -106,6 +110,12 @@ public partial class SendNFTPage : ContentPage, IQueryAttributable
             try
             {
                 await rpcClient.SendRawTransaction(tx);
+                await addressBookService.RecordTransferAsync(
+                    toAddress,
+                    tx.Hash.ToString(),
+                    NFT.TokenInfo?.Symbol ?? "NFT",
+                    NFT.Name,
+                    "NFT");
             }
             catch (Exception ex)
             {

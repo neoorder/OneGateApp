@@ -14,27 +14,43 @@ public partial class EditContactPage : ContentPage, IQueryAttributable
 {
     readonly IServiceProvider serviceProvider;
     readonly ApplicationDbContext dbContext;
+    readonly AddressBookService addressBookService;
 
     public required Contact Contact { get; set { field = value; OnPropertyChanged(); } }
+    public ContactTransfer[]? Transactions { get; set { field = value; OnPropertyChanged(); } }
 
-    public EditContactPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
+    public EditContactPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, AddressBookService addressBookService)
     {
         this.serviceProvider = serviceProvider;
         this.dbContext = dbContext;
+        this.addressBookService = addressBookService;
         InitializeComponent();
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        Contact = (Contact)query["contact"];
+        if (query.TryGetValue("contact", out var contact))
+        {
+            Contact = (Contact)contact;
+        }
+        else
+        {
+            string address = query["address"].ToString()!;
+            Contact = dbContext.Contacts.Single(p => p.Address == address);
+        }
+        _ = LoadTransactionsAsync();
     }
 
     async void OnSubmitted(object sender, EventArgs e)
     {
         string label = Contact.Label;
+        string? note = Contact.Note?.Trim();
         await dbContext.Contacts
             .Where(p => p.Address == Contact.Address)
-            .ExecuteUpdateAsync(builder => builder.SetProperty(p => p.Label, _ => label));
+            .ExecuteUpdateAsync(builder => builder
+                .SetProperty(p => p.Label, _ => label.Trim())
+                .SetProperty(p => p.Note, _ => note)
+                .SetProperty(p => p.IsAddressBookEntry, _ => true));
         await Toast.Show(Strings.ContactUpdatedSuccessfully);
         GlobalStates.Invalidate<ContactsPage>();
         GlobalStates.Invalidate<SettingsPage>();
@@ -50,10 +66,39 @@ public partial class EditContactPage : ContentPage, IQueryAttributable
         popup.IsDanger = true;
         var result = await this.ShowPopupAsync<bool>(popup);
         if (!result.Result) return;
-        await dbContext.Contacts.Where(p => p.Address == Contact.Address).ExecuteDeleteAsync();
+        Contact? contact = await dbContext.Contacts.SingleOrDefaultAsync(p => p.Address == Contact.Address);
+        if (contact is not null)
+        {
+            if (contact.TransferCount > 0)
+            {
+                contact.Label = "";
+                contact.Note = null;
+                contact.IsAddressBookEntry = false;
+            }
+            else
+            {
+                dbContext.Contacts.Remove(contact);
+            }
+            await dbContext.SaveChangesAsync();
+        }
         await Toast.Show(Strings.ContactDeletedSuccessfully);
         GlobalStates.Invalidate<ContactsPage>();
         GlobalStates.Invalidate<SettingsPage>();
         await Shell.Current.GoToAsync("..");
+    }
+
+    async void OnTransactionTapped(object sender, TappedEventArgs e)
+    {
+        ContactTransfer transfer = (ContactTransfer)e.Parameter!;
+        await Shell.Current.GoToAsync("transaction", new Dictionary<string, object>
+        {
+            ["transfer"] = transfer,
+            ["contact"] = Contact
+        });
+    }
+
+    async Task LoadTransactionsAsync()
+    {
+        Transactions = await addressBookService.GetTransfersAsync(Contact.Address);
     }
 }

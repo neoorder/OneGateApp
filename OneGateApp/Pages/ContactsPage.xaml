@@ -4,14 +4,16 @@
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.ContactsPage"
+             x:Name="Root"
              Title="{x:Static og:Strings.AddressBook}"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <CollectionView ItemsSource="{Binding Contacts}" Margin="20">
+    <Grid RowDefinitions="auto,*" Margin="20" RowSpacing="16">
+        <SearchBar Placeholder="{x:Static og:Strings.SearchAddressBook}" TextChanged="OnSearch" />
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Contacts}">
             <CollectionView.EmptyView>
                 <Grid RowDefinitions="*,auto,*">
                     <VerticalStackLayout Spacing="20" VerticalOptions="Center">
@@ -30,17 +32,24 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
                     <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                        <Label Text="{Binding Label}" FontAttributes="Bold" />
+                        <Grid ColumnDefinitions="*,auto,auto" ColumnSpacing="10">
+                            <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" />
+                            <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3">
+                                <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
+                            </Border>
+                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe602;" FontSize="18" Margin="-20" Padding="20" Command="{x:Static og:Commands.GotoPage}" CommandParameter="{Binding Address, StringFormat='edit?address={0}'}" />
+                        </Grid>
+                        <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="13" LineBreakMode="TailTruncation" />
                         <Grid ColumnDefinitions="*,auto">
-                            <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" />
+                            <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
                             <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Margin="-20" Padding="20" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
                         </Grid>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnContactTapped" CommandParameter="{Binding .}" />
+                            <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="{Binding Address, StringFormat='edit?address={0}'}" />
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </ScrollView>
+    </Grid>
 </ContentPage>
