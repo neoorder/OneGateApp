@@ -744,6 +744,21 @@ Mit dem Fortfahren bestätigen Sie, dass Sie alle damit verbundenen Risiken voll
   <data name="Gaming" xml:space="preserve">
     <value>Gaming</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Spieltyp</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Brettspiel</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Emulator</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Rennspiel</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Marktplatz</value>
   </data>

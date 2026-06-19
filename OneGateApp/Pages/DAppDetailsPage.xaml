@@ -10,6 +10,7 @@
     <ContentPage.Resources>
         <og:StringSelectConverter x:Key="StringSelectConverter" />
         <toolkit:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
+        <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
         <og:LocalizerConverter x:Key="LocalizerConverter" />
         <og:LanguageConverter x:Key="LanguageConverter" />
     </ContentPage.Resources>
@@ -42,6 +43,8 @@
                 </VerticalStackLayout>
             </Grid>
             <Button Text="{x:Static og:Strings.Open}" Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+            <Label Text="{x:Static og:Strings.GameType}" FontAttributes="Bold" IsVisible="{Binding GameType, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
+            <Label Text="{Binding GameTypeDisplayName}" Margin="0,-10,0,0" IsVisible="{Binding GameType, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
             <Label Text="{x:Static og:Strings.Preview}" FontAttributes="Bold" IsVisible="{Binding Previews, Converter={StaticResource IsListNotNullOrEmptyConverter}}" />
             <CollectionView ItemsSource="{Binding Previews}" IsVisible="{Binding Previews, Converter={StaticResource IsListNotNullOrEmptyConverter}}">
                 <CollectionView.ItemsLayout>

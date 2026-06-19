@@ -744,6 +744,21 @@
   <data name="Gaming" xml:space="preserve">
     <value>게임</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>게임 유형</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>액션</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>보드게임</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>에뮬레이터</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>레이싱</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>마켓플레이스</value>
   </data>

@@ -744,6 +744,21 @@
   <data name="Gaming" xml:space="preserve">
     <value>遊戲</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>遊戲類型</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>動作</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>桌遊</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>模擬器</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>競速</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>市場</value>
   </data>

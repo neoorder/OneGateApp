@@ -744,6 +744,21 @@ Khi tiếp tục, bạn xác nhận rằng bạn đã hiểu đầy đủ và ch
   <data name="Gaming" xml:space="preserve">
     <value>Trò chơi</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Thể loại trò chơi</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Hành động</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Trò chơi bàn cờ</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Trình giả lập</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Đua xe</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Chợ</value>
   </data>

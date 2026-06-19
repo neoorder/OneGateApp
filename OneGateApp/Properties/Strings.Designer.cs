@@ -815,6 +815,51 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Game type 的本地化字符串。
+        /// </summary>
+        internal static string GameType {
+            get {
+                return ResourceManager.GetString("GameType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Action 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeAction {
+            get {
+                return ResourceManager.GetString("GameTypeAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Board 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeBoard {
+            get {
+                return ResourceManager.GetString("GameTypeBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Emulator 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeEmulator {
+            get {
+                return ResourceManager.GetString("GameTypeEmulator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Racing 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeRacing {
+            get {
+                return ResourceManager.GetString("GameTypeRacing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Gaming 的本地化字符串。
         /// </summary>
         internal static string Gaming {

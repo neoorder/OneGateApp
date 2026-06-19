@@ -744,6 +744,21 @@ Devam ederek, ilgili tüm riskleri tamamen anladığınızı ve kabul ettiğiniz
   <data name="Gaming" xml:space="preserve">
     <value>Oyun</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Oyun türü</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Aksiyon</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Masa oyunu</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Emülatör</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Yarış</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Pazaryeri</value>
   </data>

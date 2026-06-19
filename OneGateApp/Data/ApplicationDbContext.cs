@@ -13,6 +13,7 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
     public void EnsureMigrations()
     {
         Migration_AddProperty_DApps_Version_20260611();
+        Migration_AddProperty_DApps_GameType_20260619();
     }
 
     void Migration_AddProperty_DApps_Version_20260611()
@@ -23,5 +24,15 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
             .Single();
         if (dappVersionColumns == 0)
             Database.ExecuteSqlRaw("ALTER TABLE [DApps] ADD COLUMN [Version] INTEGER NOT NULL DEFAULT 0");
+    }
+
+    void Migration_AddProperty_DApps_GameType_20260619()
+    {
+        int dappGameTypeColumns = Database
+            .SqlQueryRaw<int>("SELECT COUNT(*) AS \"Value\" FROM pragma_table_info('DApps') WHERE name = 'GameType'")
+            .AsEnumerable()
+            .Single();
+        if (dappGameTypeColumns == 0)
+            Database.ExecuteSqlRaw("ALTER TABLE [DApps] ADD COLUMN [GameType] TEXT NULL");
     }
 }

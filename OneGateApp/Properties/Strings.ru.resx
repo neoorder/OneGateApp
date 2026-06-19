@@ -744,6 +744,21 @@
   <data name="Gaming" xml:space="preserve">
     <value>Игры</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Тип игры</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Экшен</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Настольная игра</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Эмулятор</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Гонки</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Маркетплейс</value>
   </data>
