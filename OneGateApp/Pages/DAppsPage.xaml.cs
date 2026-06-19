@@ -13,6 +13,7 @@ public partial class DAppsPage : ContentPage
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
+    public DApp[] DAppsRegular { get; private set { field = value; OnPropertyChanged(); } } = [];
     public string[] DAppCategories { get; private set { field = value; OnPropertyChanged(); } } = [Strings.All];
     public DApp[] DAppsFiltered { get; private set { field = value; OnPropertyChanged(); } } = [];
     public List<int> DAppsIdFavorite { get; private set; } = [];
@@ -57,9 +58,9 @@ public partial class DAppsPage : ContentPage
     {
         TabBar tabBar = (TabBar)sender;
         if (tabBar.SelectedTab == tabBar.Tabs![0])
-            DAppsFiltered = DApps.ToArray();
+            DAppsFiltered = DAppsRegular;
         else
-            DAppsFiltered = DApps.Where(p => p.Tags?.Select(t => Strings.ResourceManager.GetString(t) ?? t).Contains(tabBar.SelectedTab) == true).ToArray();
+            DAppsFiltered = DAppsRegular.Where(p => p.Tags?.Select(DApp.LocalizeTag).Contains(tabBar.SelectedTab) == true).ToArray();
     }
 
     async void OnDetailsClicked(object sender, EventArgs e)
@@ -83,19 +84,20 @@ public partial class DAppsPage : ContentPage
 
     void OnDAppsLoaded(object? sender, EventArgs e)
     {
-        DAppsFiltered = DApps.ToArray();
-        DAppCategories = DApps
+        DAppsRegular = DApps.Where(p => p.IsRegularApp).ToArray();
+        DAppsFiltered = DAppsRegular;
+        DAppCategories = DAppsRegular
             .SelectMany(p => p.Tags ?? [])
             .Distinct()
-            .Select(p => Strings.ResourceManager.GetString(p) ?? p)
+            .Select(DApp.LocalizeTag)
             .Prepend(Strings.All)
             .ToArray();
     }
 
     void OnDataLoaded(object? sender, EventArgs e)
     {
-        DAppsFavorite = new(DAppsIdFavorite.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
-        DAppsRecent = new(DAppsIdRecent.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
+        DAppsFavorite = new(DAppsIdFavorite.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>().Where(p => p.IsRegularApp));
+        DAppsRecent = new(DAppsIdRecent.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>().Where(p => p.IsRegularApp));
         if (tabbarFavoriteOrRecent.SelectedTab == tabbarFavoriteOrRecent.Tabs![0])
             DAppsFavoriteOrRecent = DAppsRecent;
         else

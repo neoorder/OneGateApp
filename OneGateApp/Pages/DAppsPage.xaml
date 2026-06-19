@@ -14,7 +14,7 @@
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe69a;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.ScanQRCode}" />
     </ContentPage.ToolbarItems>
     <Shell.SearchHandler>
-        <og:DAppSearchHandler SearchBoxVisibility="Collapsible" ShowsResults="True" DApps="{Binding DApps}">
+        <og:DAppSearchHandler SearchBoxVisibility="Collapsible" ShowsResults="True" DApps="{Binding DAppsRegular}">
             <og:DAppSearchHandler.ItemTemplate>
                 <DataTemplate x:DataType="og:DApp">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="5" Margin="{OnPlatform iOS='20,0', MacCatalyst='20,0', Default='5'}">

@@ -644,6 +644,24 @@ Bạn có muốn tiếp tục không?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Đăng nhập bằng Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Xem lại yêu cầu này trước khi cấp quyền truy cập ví.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Địa chỉ ví</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Mạng</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL gọi lại</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Cho phép đăng nhập</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Đang cho phép yêu cầu đăng nhập…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Đang đăng nhập</value>
   </data>
@@ -743,6 +761,21 @@ Khi tiếp tục, bạn xác nhận rằng bạn đã hiểu đầy đủ và ch
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>Trò chơi</value>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Thể loại trò chơi</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Hành động</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Trò chơi bàn cờ</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Trình giả lập</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Đua xe</value>
   </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Chợ</value>

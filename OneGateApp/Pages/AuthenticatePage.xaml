@@ -2,21 +2,64 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.AuthenticatePage"
+             BindingContext="{Binding Source={RelativeSource Self}}"
              Title="{x:Static og:Strings.SignInWithNeo}"
              SafeAreaEdges="All"
              Shell.TabBarIsVisible="False">
-    <Grid RowDefinitions="2*,*">
-        <VerticalStackLayout Spacing="20" VerticalOptions="Center">
-            <Label HorizontalOptions="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{x:Static og:Strings.SigningIn}" />
-                        <Span Text="…" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <ActivityIndicator IsRunning="True" />
-        </VerticalStackLayout>
+    <ContentPage.Resources>
+        <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*,auto">
+        <ScrollView>
+            <VerticalStackLayout Margin="20" Spacing="20">
+                <Image Source="sign_in_with_neo_icon.svg" WidthRequest="96" HeightRequest="96" Aspect="AspectFit" HorizontalOptions="Center" />
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{x:Static og:Strings.SignInWithNeo}" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.LoginRequestReviewText}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                    <VerticalStackLayout Padding="14,0">
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,12">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Domain}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding Payload.Domain}" LineBreakMode="MiddleTruncation" HorizontalTextAlignment="End" HorizontalOptions="End" />
+                        </Grid>
+                        <BoxView HeightRequest="1" />
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,12">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.WalletAddress}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding WalletAddress}" LineBreakMode="MiddleTruncation" HorizontalTextAlignment="End" HorizontalOptions="End" />
+                        </Grid>
+                        <BoxView HeightRequest="1" />
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,12">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Network}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding NetworkText}" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" HorizontalOptions="End" />
+                        </Grid>
+                        <BoxView HeightRequest="1" />
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,12">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.CallbackURL}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding CallbackText}" MaxLines="2" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" HorizontalOptions="End" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource TextBox}" IsVisible="{Binding IsProcessing}">
+                    <Grid ColumnDefinitions="auto,*" Padding="14" ColumnSpacing="12">
+                        <ActivityIndicator IsRunning="{Binding IsProcessing}" WidthRequest="24" HeightRequest="24" />
+                        <Label Grid.Column="1" Text="{x:Static og:Strings.AuthenticationInProgress}" VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource TextBox}" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}">
+                    <Label StyleClass="Danger" Text="{Binding ErrorMessage}" Padding="14" />
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="1" Padding="20,10,20,20" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <Button StyleClass="Secondary" Text="{x:Static og:Strings.Cancel}" IsEnabled="{Binding IsIdle}" Clicked="OnCancelClicked" />
+            <Button Grid.Column="1" Text="{x:Static og:Strings.AuthorizeSignIn}" IsEnabled="{Binding CanAuthorize}" Clicked="OnAuthorizeClicked" />
+        </Grid>
     </Grid>
 </ContentPage>

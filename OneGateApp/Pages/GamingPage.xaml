@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.GamingPage"
+             Title="{x:Static og:Strings.Gaming}"
+             BindingContext="{Binding Source={RelativeSource Self}}">
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        <og:LocalizerConverter x:Key="LocalizerConverter" />
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe69a;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.ScanQRCode}" />
+    </ContentPage.ToolbarItems>
+    <Shell.SearchHandler>
+        <og:DAppSearchHandler SearchBoxVisibility="Collapsible" ShowsResults="True" DApps="{Binding Games}">
+            <og:DAppSearchHandler.ItemTemplate>
+                <DataTemplate x:DataType="og:DApp">
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="5" Margin="{OnPlatform iOS='20,0', MacCatalyst='20,0', Default='5'}">
+                        <Image WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
+                            <Image.Source>
+                                <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                            </Image.Source>
+                        </Image>
+                        <Label Grid.Column="1" Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </og:DAppSearchHandler.ItemTemplate>
+        </og:DAppSearchHandler>
+    </Shell.SearchHandler>
+    <RefreshView Margin="20,0" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
+        <CollectionView ItemsSource="{Binding GamesFiltered}" MinimumHeightRequest="20">
+            <CollectionView.Header>
+                <VerticalStackLayout Spacing="20">
+                    <Border StrokeShape="RoundRectangle 10" StrokeThickness="0" HeightRequest="132">
+                        <Image Source="gaming_banner.webp" Aspect="AspectFill" />
+                    </Border>
+                    <og:TabBar x:Name="gameTypeTabBar" Tabs="{Binding GameTypes}" IsVisible="{Binding HasGameTypeFilters}" Spacing="18" Margin="0,10" SelectedTabChanged="OnGameTypeChanged" />
+                </VerticalStackLayout>
+            </CollectionView.Header>
+            <CollectionView.EmptyView>
+                <Grid RowDefinitions="120">
+                    <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static og:Strings.Loading}" />
+                                <Span Text="…" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="{x:Static og:Strings.DefaultEmptyViewMessage}" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout x:Name="GamesItemsLayout" Orientation="Vertical" Span="1" HorizontalItemSpacing="28" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="og:DApp">
+                    <Grid RowDefinitions="*,1" HeightRequest="96">
+                        <Grid ColumnDefinitions="60,*,40" ColumnSpacing="12" Padding="0,8" MinimumHeightRequest="88">
+                            <Image WidthRequest="56" HeightRequest="56" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                </Image.Source>
+                            </Image>
+                            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                                <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation" MaxLines="1" />
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label StyleClass="Link" Text="{Binding Developer}" FontSize="11" LineBreakMode="TailTruncation" MaxLines="1" />
+                                    <Label StyleClass="Secondary" Text="·" FontSize="11" />
+                                    <Label StyleClass="Secondary" Text="{Binding GameTypeDisplayName}" FontSize="11" LineBreakMode="TailTruncation" MaxLines="1" />
+                                </HorizontalStackLayout>
+                                <Label StyleClass="Secondary" Text="{Binding Description, Converter={StaticResource LocalizerConverter}}" FontSize="11" MaxLines="2" LineBreakMode="TailTruncation" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe605;" FontSize="18" Margin="-12" Padding="12" VerticalOptions="Center" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />
+                        </Grid>
+                        <BoxView Grid.Row="1" Margin="72,0,0,0" HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
