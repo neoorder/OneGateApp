@@ -644,6 +644,24 @@
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Neo로 로그인</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>지갑 접근을 승인하기 전에 이 요청을 검토하세요.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>지갑 주소</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>네트워크</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>콜백 URL</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>로그인 승인</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>로그인 요청 승인 중…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>로그인 중</value>
   </data>
@@ -743,6 +761,21 @@
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>게임</value>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>게임 유형</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>액션</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>보드게임</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>에뮬레이터</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>레이싱</value>
   </data>
   <data name="Marketplace" xml:space="preserve">
     <value>마켓플레이스</value>

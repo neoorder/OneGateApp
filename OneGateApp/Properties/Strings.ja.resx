@@ -644,6 +644,24 @@
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Neoでログイン</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>ウォレットへのアクセスを承認する前に、このリクエストを確認してください。</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>ウォレットアドレス</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>ネットワーク</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>コールバック URL</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>ログインを承認</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>ログインリクエストを承認中…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>ログイン中</value>
   </data>
@@ -743,6 +761,21 @@
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>ゲーム</value>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>ゲームタイプ</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>アクション</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>ボードゲーム</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>エミュレーター</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>レース</value>
   </data>
   <data name="Marketplace" xml:space="preserve">
     <value>マーケットプレイス</value>

@@ -21,7 +21,6 @@ public partial class App : Application
         this.walletProvider = walletProvider;
         InitializeComponent();
         dbContext.Database.EnsureCreated();
-        dbContext.EnsureMigrations();
         Version? version = dbContext.Settings.Get<Version>("system/version");
         if (version is null || version < AppInfo.Version)
         {

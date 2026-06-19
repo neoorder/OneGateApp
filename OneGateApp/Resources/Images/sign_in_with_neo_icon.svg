@@ -1,0 +1,41 @@
+<svg width="96" height="96" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="top" x1="302" y1="130" x2="690" y2="376" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7CFFAC"/>
+      <stop offset="0.45" stop-color="#22F06B"/>
+      <stop offset="1" stop-color="#00B84F"/>
+    </linearGradient>
+    <linearGradient id="left" x1="200" y1="266" x2="496" y2="706" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#45FF8C"/>
+      <stop offset="1" stop-color="#009E49"/>
+    </linearGradient>
+    <linearGradient id="right" x1="598" y1="322" x2="842" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16D963"/>
+      <stop offset="1" stop-color="#006D36"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="422" y1="318" x2="604" y2="690" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061911"/>
+      <stop offset="1" stop-color="#052D1A"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="210" y1="114" x2="814" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9FFE6"/>
+      <stop offset="0.45" stop-color="#66FF9D"/>
+      <stop offset="1" stop-color="#00D45A"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <path d="M512 122L802 289L596 408L512 359L428 408L222 289L512 122Z" fill="url(#top)" stroke="url(#stroke)" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M222 289L428 408V665L512 714V815L222 648V289Z" fill="url(#left)" stroke="url(#stroke)" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M596 408L802 289V648L512 815V714L596 665V408Z" fill="url(#right)" stroke="url(#stroke)" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M428 408L512 359L596 408V665L512 714L428 665V408Z" fill="url(#inner)" stroke="#39F27E" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+  <g>
+    <path d="M533 537H420" stroke="#A8FFC3" stroke-width="42" stroke-linecap="round"/>
+    <path d="M446 466L374 537L446 608" stroke="#A8FFC3" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g>
+    <path d="M692 449L770 483V568C770 642 729 696 692 718C655 696 614 642 614 568V483L692 449Z" fill="#06331F" stroke="#8DFFAE" stroke-width="12" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M692 521C673.8 521 659 535.8 659 554C659 566.2 665.7 576.8 675.5 582.5V637H708.5V582.5C718.3 576.8 725 566.2 725 554C725 535.8 710.2 521 692 521Z" fill="#7CFFAC"/>
+    <path d="M692 521C673.8 521 659 535.8 659 554C659 566.2 665.7 576.8 675.5 582.5V637H708.5V582.5C718.3 576.8 725 566.2 725 554C725 535.8 710.2 521 692 521Z" stroke="#022312" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+</svg>
