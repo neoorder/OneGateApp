@@ -20,6 +20,7 @@
                                 <MultiBinding Converter="{StaticResource TabBarBackgroundColorConverter}">
                                     <Binding Path="." />
                                     <Binding Path="SelectedTab" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
+                                    <Binding Path="SelectedTabBackgroundColor" Source="{RelativeSource AncestorType={x:Type og:TabBar}}" />
                                 </MultiBinding>
                             </Border.BackgroundColor>
                             <Label Text="{Binding .}" FontSize="{Binding FontSize, Source={RelativeSource AncestorType={x:Type og:TabBar}}}" FontAttributes="Bold" VerticalTextAlignment="Center">

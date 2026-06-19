@@ -26,13 +26,12 @@ class TabBarBackgroundColorConverter : IMultiValueConverter
 
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values.Length < 2) return Transparent;
+        if (values.Length < 3) return Transparent;
         if (values[0] is not string value) return Transparent;
         if (values[1] is not string selectedTab) return Transparent;
+        if (values[2] is not Color selectedTabBackgroundColor) return Transparent;
         if (value != selectedTab) return Transparent;
-        return Application.Current?.RequestedTheme == AppTheme.Dark
-            ? Color.FromArgb("#263241")
-            : Colors.White;
+        return selectedTabBackgroundColor;
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

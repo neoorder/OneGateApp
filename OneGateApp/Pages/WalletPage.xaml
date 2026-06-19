@@ -22,9 +22,9 @@
                     <Grid>
                         <Grid.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#1C222C" Offset="0.0" />
-                                <GradientStop Color="#263241" Offset="0.55" />
-                                <GradientStop Color="#0BA878" Offset="1.0" />
+                                <GradientStop Color="{StaticResource WalletCardStart}" Offset="0.0" />
+                                <GradientStop Color="{StaticResource WalletCardMid}" Offset="0.55" />
+                                <GradientStop Color="{StaticResource WalletCardEnd}" Offset="1.0" />
                             </LinearGradientBrush>
                         </Grid.Background>
                         <Grid>
@@ -44,15 +44,15 @@
                                         </MultiBinding>
                                     </Label.Text>
                                 </Label>
-                                <BoxView HeightRequest="1" Color="#FFFFFF" Opacity="0.16" Margin="0,4" />
+                                <BoxView HeightRequest="1" Color="{StaticResource White}" Opacity="0.16" Margin="0,4" />
                                 <Grid ColumnDefinitions="*,auto">
                                     <Label Text="{Binding DefaultAccount.Address}" TextColor="{StaticResource White}" Opacity="0.82" FontSize="13" LineBreakMode="MiddleTruncation" VerticalOptions="Center" />
                                     <Button Grid.Column="1" StyleClass="Icon" Text="&#xe664;" TextColor="{StaticResource White}" FontSize="20" Padding="8,4" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding DefaultAccount.Address}" />
                                 </Grid>
                             </VerticalStackLayout>
                         </Grid>
-                        <Path Fill="#FFFFFF" Opacity="0.10" Data="M 0 260 L 260 0 L 0 0 Z" InputTransparent="True" />
-                        <Path Fill="#46F2C2" Opacity="0.16" Data="M 300 0 L 520 0 L 520 220 Z" HorizontalOptions="End" InputTransparent="True" />
+                        <Path Fill="{StaticResource White}" Opacity="0.10" Data="M 0 260 L 260 0 L 0 0 Z" InputTransparent="True" />
+                        <Path Fill="{StaticResource NeoGreenBright}" Opacity="0.16" Data="M 300 0 L 520 0 L 520 220 Z" HorizontalOptions="End" InputTransparent="True" />
                     </Grid>
                 </Border>
                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="4,0">

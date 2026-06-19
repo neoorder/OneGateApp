@@ -17,6 +17,9 @@
     <Color x:Key="NeoGreen">#00B884</Color>
     <Color x:Key="NeoGreenBright">#46F2C2</Color>
     <Color x:Key="NeoBlue">#2563EB</Color>
+    <Color x:Key="WalletCardStart">#1C222C</Color>
+    <Color x:Key="WalletCardMid">#263241</Color>
+    <Color x:Key="WalletCardEnd">#0BA878</Color>
 
     <toolkit:AppThemeColor x:Key="Primary" Light="{StaticResource Black}" Dark="#F4F7FB" />
     <toolkit:AppThemeColor x:Key="Secondary" Light="{StaticResource Gray500}" Dark="#A2AAB8" />
@@ -32,5 +35,6 @@
     <toolkit:AppThemeColor x:Key="PanelAlt" Light="#F9FBFD" Dark="#18212B" />
     <toolkit:AppThemeColor x:Key="TextBox" Light="#EEF2F6" Dark="#1D2631" />
     <toolkit:AppThemeColor x:Key="Stroke" Light="{StaticResource Gray200}" Dark="#263241" />
+    <toolkit:AppThemeColor x:Key="SelectedTabBackground" Light="{StaticResource White}" Dark="{StaticResource WalletCardMid}" />
 
 </ResourceDictionary>

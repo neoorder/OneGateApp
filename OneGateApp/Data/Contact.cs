@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace NeoOrder.OneGate.Data;
 
@@ -19,7 +20,7 @@ public class Contact
         get
         {
             string label = Label.Trim();
-            return label.Length == 0 ? "?" : label[..1].ToUpperInvariant();
+            return label.Length == 0 ? "?" : StringInfo.GetNextTextElement(label).ToUpperInvariant();
         }
     }
 }
