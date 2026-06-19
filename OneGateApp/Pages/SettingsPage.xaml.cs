@@ -57,6 +57,12 @@ public partial class SettingsPage : ContentPage
             Command = Commands.GotoPage,
             CommandParameter = "//home/settings/assets/hidden"
         });
+        yield return (Strings.Security, new SettingEntry(Strings.SecurityCenter)
+        {
+            CurrentValue = Strings.Review,
+            Command = Commands.GotoPage,
+            CommandParameter = "//home/settings/security"
+        });
         yield return (Strings.Security, new SettingEntry(Strings.WalletSettings)
         {
             Command = Commands.GotoPage,

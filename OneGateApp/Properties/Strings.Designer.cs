@@ -2082,6 +2082,246 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
         
+        internal static string Available {
+            get {
+                return ResourceManager.GetString("Available", resourceCulture);
+            }
+        }
+
+        internal static string BackupConfirmed {
+            get {
+                return ResourceManager.GetString("BackupConfirmed", resourceCulture);
+            }
+        }
+
+        internal static string BackupConfirmedText {
+            get {
+                return ResourceManager.GetString("BackupConfirmedText", resourceCulture);
+            }
+        }
+
+        internal static string BackupNotConfirmed {
+            get {
+                return ResourceManager.GetString("BackupNotConfirmed", resourceCulture);
+            }
+        }
+
+        internal static string BackupNotConfirmedText {
+            get {
+                return ResourceManager.GetString("BackupNotConfirmedText", resourceCulture);
+            }
+        }
+
+        internal static string BackupStatus {
+            get {
+                return ResourceManager.GetString("BackupStatus", resourceCulture);
+            }
+        }
+
+        internal static string BiometricAvailableText {
+            get {
+                return ResourceManager.GetString("BiometricAvailableText", resourceCulture);
+            }
+        }
+
+        internal static string BiometricEnabledText {
+            get {
+                return ResourceManager.GetString("BiometricEnabledText", resourceCulture);
+            }
+        }
+
+        internal static string BiometricStatus {
+            get {
+                return ResourceManager.GetString("BiometricStatus", resourceCulture);
+            }
+        }
+
+        internal static string BiometricUnavailableSecurityText {
+            get {
+                return ResourceManager.GetString("BiometricUnavailableSecurityText", resourceCulture);
+            }
+        }
+
+        internal static string Checking {
+            get {
+                return ResourceManager.GetString("Checking", resourceCulture);
+            }
+        }
+
+        internal static string Connected {
+            get {
+                return ResourceManager.GetString("Connected", resourceCulture);
+            }
+        }
+
+        internal static string ConnectionIssue {
+            get {
+                return ResourceManager.GetString("ConnectionIssue", resourceCulture);
+            }
+        }
+
+        internal static string DAppAuthorization {
+            get {
+                return ResourceManager.GetString("DAppAuthorization", resourceCulture);
+            }
+        }
+
+        internal static string DAppAuthorizationStatus {
+            get {
+                return ResourceManager.GetString("DAppAuthorizationStatus", resourceCulture);
+            }
+        }
+
+        internal static string DAppAuthorizationText {
+            get {
+                return ResourceManager.GetString("DAppAuthorizationText", resourceCulture);
+            }
+        }
+
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
+            }
+        }
+
+        internal static string LastCheckedAt {
+            get {
+                return ResourceManager.GetString("LastCheckedAt", resourceCulture);
+            }
+        }
+
+        internal static string ManageBiometrics {
+            get {
+                return ResourceManager.GetString("ManageBiometrics", resourceCulture);
+            }
+        }
+
+        internal static string ManageWalletPassword {
+            get {
+                return ResourceManager.GetString("ManageWalletPassword", resourceCulture);
+            }
+        }
+
+        internal static string ManageWalletPasswordText {
+            get {
+                return ResourceManager.GetString("ManageWalletPasswordText", resourceCulture);
+            }
+        }
+
+        internal static string NetworkStatus {
+            get {
+                return ResourceManager.GetString("NetworkStatus", resourceCulture);
+            }
+        }
+
+        internal static string PasswordProtected {
+            get {
+                return ResourceManager.GetString("PasswordProtected", resourceCulture);
+            }
+        }
+
+        internal static string PasswordProtectedText {
+            get {
+                return ResourceManager.GetString("PasswordProtectedText", resourceCulture);
+            }
+        }
+
+        internal static string PasswordStatus {
+            get {
+                return ResourceManager.GetString("PasswordStatus", resourceCulture);
+            }
+        }
+
+        internal static string PrivacyMode {
+            get {
+                return ResourceManager.GetString("PrivacyMode", resourceCulture);
+            }
+        }
+
+        internal static string PrivacyModeText {
+            get {
+                return ResourceManager.GetString("PrivacyModeText", resourceCulture);
+            }
+        }
+
+        internal static string Review {
+            get {
+                return ResourceManager.GetString("Review", resourceCulture);
+            }
+        }
+
+        internal static string ReviewBackup {
+            get {
+                return ResourceManager.GetString("ReviewBackup", resourceCulture);
+            }
+        }
+
+        internal static string ReviewBackupText {
+            get {
+                return ResourceManager.GetString("ReviewBackupText", resourceCulture);
+            }
+        }
+
+        internal static string ReviewDApps {
+            get {
+                return ResourceManager.GetString("ReviewDApps", resourceCulture);
+            }
+        }
+
+        internal static string ReviewDAppsText {
+            get {
+                return ResourceManager.GetString("ReviewDAppsText", resourceCulture);
+            }
+        }
+
+        internal static string RpcStatusConnectedText {
+            get {
+                return ResourceManager.GetString("RpcStatusConnectedText", resourceCulture);
+            }
+        }
+
+        internal static string RpcStatusUnavailableText {
+            get {
+                return ResourceManager.GetString("RpcStatusUnavailableText", resourceCulture);
+            }
+        }
+
+        internal static string SecurityActions {
+            get {
+                return ResourceManager.GetString("SecurityActions", resourceCulture);
+            }
+        }
+
+        internal static string SecurityCenter {
+            get {
+                return ResourceManager.GetString("SecurityCenter", resourceCulture);
+            }
+        }
+
+        internal static string SecurityCenterSummaryText {
+            get {
+                return ResourceManager.GetString("SecurityCenterSummaryText", resourceCulture);
+            }
+        }
+
+        internal static string SecurityCenterSummaryTitle {
+            get {
+                return ResourceManager.GetString("SecurityCenterSummaryTitle", resourceCulture);
+            }
+        }
+
+        internal static string SecurityStatus {
+            get {
+                return ResourceManager.GetString("SecurityStatus", resourceCulture);
+            }
+        }
+
+        internal static string Unavailable {
+            get {
+                return ResourceManager.GetString("Unavailable", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Wallet 的本地化字符串。
         /// </summary>

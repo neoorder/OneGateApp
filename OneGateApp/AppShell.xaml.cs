@@ -26,6 +26,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("home/settings/developer", typeof(DeveloperToolsPage));
         Routing.RegisterRoute("home/settings/language", typeof(LanguagePage));
         Routing.RegisterRoute("home/settings/news", typeof(NewsSettingsPage));
+        Routing.RegisterRoute("home/settings/security", typeof(SecurityCenterPage));
         Routing.RegisterRoute("home/settings/wallet/details", typeof(WalletDetailsPage));
         Routing.RegisterRoute("dapps/details", typeof(DAppDetailsPage));
         Routing.RegisterRoute("dapps/launch", typeof(LaunchDAppPage));

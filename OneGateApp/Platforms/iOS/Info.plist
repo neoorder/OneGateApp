@@ -49,11 +49,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBiometricUsageDescription</key>
-	<string>Need your Touch ID to unlock!</string>
+	<string>Use Touch ID to unlock OneGate and approve wallet actions.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app scans QR codes to access dApps or payment addresses.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Need your face to unlock!</string>
+	<string>Use Face ID to unlock OneGate and approve wallet actions.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to photos gallery for picking photos and videos.</string>
 	<key>UIApplicationSceneManifest</key>
