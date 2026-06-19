@@ -644,6 +644,24 @@ Apakah Anda ingin melanjutkan?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Masuk dengan Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Tinjau permintaan ini sebelum mengizinkan akses dompet.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Alamat dompet</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Jaringan</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL callback</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Izinkan masuk</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Mengizinkan permintaan masuk…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Sedang masuk</value>
   </data>
@@ -744,6 +762,21 @@ Dengan melanjutkan, Anda menyatakan bahwa Anda sepenuhnya memahami dan menerima 
   <data name="Gaming" xml:space="preserve">
     <value>Game</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Jenis game</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Aksi</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Permainan papan</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Emulator</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Balapan</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Marketplace</value>
   </data>
@@ -823,5 +856,14 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Saldo tidak cukup untuk menutupi jumlah dan biaya. Jumlah maksimum yang dapat Anda kirim adalah {0} GAS.</value>
+  </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Mode pengembang diaktifkan</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Alat pengembang</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>Pengujian DApp</value>
   </data>
 </root>

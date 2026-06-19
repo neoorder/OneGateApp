@@ -15,13 +15,13 @@
         <Binding Path="DApp.Name" Converter="{StaticResource LocalizerConverter}" />
     </ContentPage.Title>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" Clicked="OnFavoriteClicked" Command="{x:Static og:Commands.AddToFavorites}" CommandParameter="{Binding DApp}">
+        <ToolbarItem Order="Primary" IsEnabled="{Binding DApp.IsActive}" Clicked="OnFavoriteClicked" Command="{x:Static og:Commands.AddToFavorites}" CommandParameter="{Binding DApp}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="{Binding IsFavorite, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe83a;&#xe839;}" FontFamily="Icons" Color="Gold" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding DApp}" />
-        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
+        <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding DApp}" />
+        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
     </ContentPage.ToolbarItems>
     <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" Navigated="OnNavigated" InvokedFromJavaScript="OnInvokedFromJavaScript" />
 </ContentPage>

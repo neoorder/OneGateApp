@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Extensions;
 using Neo;
+using Neo.Cryptography;
 using Neo.Extensions;
 using Neo.Network.P2P.Payloads;
 using Neo.SmartContract;
@@ -161,7 +162,7 @@ partial class LaunchDAppPage
         popup.InvocationResult = result;
         var popup_result = await this.ShowPopupAsync<bool>(popup);
         if (!popup_result.Result) throw new OperationCanceledException();
-        if (!walletProvider.GetWallet()!.SignWithWorkaround(context))
+        if (!walletProvider.GetWallet()!.Sign(context))
             throw new DapiException(10000, "Failed to sign transaction");
         return context;
     }
@@ -186,7 +187,7 @@ partial class LaunchDAppPage
         return new SignedMessage
         {
             Payload = payload,
-            Signature = Workarounds.Sign(payload, key),
+            Signature = Crypto.Sign(payload, key),
             Account = account,
             PublicKey = key.PublicKey
         };
@@ -255,7 +256,7 @@ partial class LaunchDAppPage
         var result = await this.ShowPopupAsync<bool>(popup);
         if (!result.Result) throw new OperationCanceledException();
         var context = new ContractParametersContext(null!, tx, protocolSettings.Network);
-        if (!walletProvider.GetWallet()!.SignWithWorkaround(context))
+        if (!walletProvider.GetWallet()!.Sign(context))
             throw new DapiException(10000, "Failed to sign transaction");
         if (!context.Completed)
             throw new DapiException(10001, "Multisignature transaction requires more signatures");

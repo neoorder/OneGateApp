@@ -5,11 +5,12 @@ using System.Net.Http.Json;
 
 namespace NeoOrder.OneGate.Models;
 
-public class CachedCollection<T>(ApplicationDbContext dbContext, HttpClient httpClient) : ObservableCollection<T> where T : class, IComparable<T>
+public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFactory, HttpClient httpClient) : ObservableCollection<T> where T : class, IComparable<T>
 {
     public event EventHandler? CollectionLoaded;
 
     static readonly string settings_key = $"caching/last_update/{typeof(T).Name.ToLowerInvariant()}";
+    static readonly SemaphoreSlim sync_lock = new(1, 1);
     bool loaded = false;
 
     public new void Add(T item)
@@ -47,32 +48,66 @@ public class CachedCollection<T>(ApplicationDbContext dbContext, HttpClient http
 
     public async Task LoadAsync(string url, TimeSpan duration)
     {
-        if (!loaded)
+        await sync_lock.WaitAsync();
+        try
         {
-            AddRange(await dbContext.Set<T>().ToArrayAsync());
-            loaded = true;
-            CollectionLoaded?.Invoke(this, EventArgs.Empty);
+            var dbContext = await dbContextFactory.CreateInitializedDbContextAsync();
+            using (dbContext)
+            {
+                bool wasLoaded = loaded;
+                if (!loaded)
+                {
+                    AddRange(await dbContext.Set<T>().ToArrayAsync());
+                    loaded = true;
+                    CollectionLoaded?.Invoke(this, EventArgs.Empty);
+                }
+                bool cacheNeedsSeeding = wasLoaded
+                    && Count > 0
+                    && !await dbContext.Set<T>().AnyAsync();
+                var last_update = await dbContext.Settings.GetAsync<DateTimeOffset>(settings_key);
+                if (last_update > DateTimeOffset.UtcNow - duration) return;
+                var items_new = (await httpClient.GetFromJsonAsync<T[]>(url))!;
+                for (int i = Count - 1; i >= 0; i--)
+                {
+                    T item = base[i];
+                    if (items_new.Any(p => p.CompareTo(item) == 0)) continue;
+                    base.RemoveItem(i);
+                    if (!cacheNeedsSeeding)
+                        dbContext.Entry(item).State = EntityState.Deleted;
+                }
+                foreach (T item in items_new)
+                {
+                    int index = BinarySearch(item);
+                    if (index >= 0)
+                    {
+                        if (cacheNeedsSeeding || ShouldReplace(base[index], item))
+                        {
+                            base.SetItem(index, item);
+                            dbContext.Entry(item).State = cacheNeedsSeeding ? EntityState.Added : EntityState.Modified;
+                        }
+                    }
+                    else
+                    {
+                        base.InsertItem(~index, item);
+                        dbContext.Entry(item).State = EntityState.Added;
+                    }
+                }
+                CollectionLoaded?.Invoke(this, EventArgs.Empty);
+                await dbContext.SaveChangesAsync();
+                dbContext.ChangeTracker.Clear();
+                await dbContext.Settings.PutAsync(settings_key, DateTimeOffset.UtcNow);
+            }
         }
-        var last_update = await dbContext.Settings.GetAsync<DateTimeOffset>(settings_key);
-        if (last_update > DateTimeOffset.UtcNow - duration) return;
-        var items_new = (await httpClient.GetFromJsonAsync<T[]>(url))!;
-        for (int i = Count - 1; i >= 0; i--)
+        finally
         {
-            T item = base[i];
-            if (items_new.Any(p => p.CompareTo(item) == 0)) continue;
-            base.RemoveItem(i);
-            dbContext.Entry(item).State = EntityState.Deleted;
+            sync_lock.Release();
         }
-        foreach (T item in items_new)
-        {
-            int index = BinarySearch(item);
-            if (index >= 0) continue;
-            base.InsertItem(~index, item);
-            dbContext.Entry(item).State = EntityState.Added;
-        }
-        CollectionLoaded?.Invoke(this, EventArgs.Empty);
-        await dbContext.SaveChangesAsync();
-        dbContext.ChangeTracker.Clear();
-        await dbContext.Settings.PutAsync(settings_key, DateTimeOffset.UtcNow);
+    }
+
+    static bool ShouldReplace(T current, T incoming)
+    {
+        return current is IVersioned currentVersioned
+            && incoming is IVersioned incomingVersioned
+            && currentVersioned.Version != incomingVersioned.Version;
     }
 }

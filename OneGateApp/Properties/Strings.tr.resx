@@ -644,6 +644,24 @@ Devam etmek istiyor musunuz?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Neo ile oturum aç</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Cüzdan erişimini yetkilendirmeden önce bu isteği gözden geçirin.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Cüzdan adresi</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Ağ</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>Geri çağırma URL'si</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Oturum açmayı yetkilendir</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Oturum açma isteği yetkilendiriliyor…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Oturum açılıyor</value>
   </data>
@@ -744,6 +762,21 @@ Devam ederek, ilgili tüm riskleri tamamen anladığınızı ve kabul ettiğiniz
   <data name="Gaming" xml:space="preserve">
     <value>Oyun</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Oyun türü</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Aksiyon</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Masa oyunu</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Emülatör</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Yarış</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Pazaryeri</value>
   </data>
@@ -823,5 +856,14 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Tutarı ve ücretleri karşılamak için bakiye yetersiz. Gönderebileceğiniz en yüksek tutar {0} GAS’tır.</value>
+  </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Geliştirici modu etkinleştirildi</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Geliştirici araçları</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp Testi</value>
   </data>
 </root>

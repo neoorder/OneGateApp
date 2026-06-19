@@ -57,7 +57,7 @@ static class Commands
         List<int> favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite") ?? [];
         if (!favorites.Remove(dapp.Id)) favorites.Insert(0, dapp.Id);
         await dbContext.Settings.PutAsync("dapps/favorite", favorites);
-        GlobalStates.Invalidate<DAppsPage>();
+        if (dapp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
     });
 
     public static AsyncCommand<DApp> AddToHomeScreen { get; } = new(static async dapp =>
@@ -107,7 +107,7 @@ static class Commands
             }
             else
             {
-                await Shell.Current.GoToAsync("//dapps/launch", parameters);
+                await Shell.Current.GoToAsync("launch", parameters);
             }
         }
 #endif

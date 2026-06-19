@@ -23,11 +23,13 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("home/settings/assets/hidden", typeof(HiddenAssetsPage));
         Routing.RegisterRoute("home/settings/biometric/create", typeof(CreateBiometricPage));
         Routing.RegisterRoute("home/settings/biometric/disable", typeof(DisableBiometricPage));
+        Routing.RegisterRoute("home/settings/developer", typeof(DeveloperToolsPage));
         Routing.RegisterRoute("home/settings/language", typeof(LanguagePage));
         Routing.RegisterRoute("home/settings/news", typeof(NewsSettingsPage));
         Routing.RegisterRoute("home/settings/wallet/details", typeof(WalletDetailsPage));
         Routing.RegisterRoute("dapps/details", typeof(DAppDetailsPage));
-        Routing.RegisterRoute("dapps/launch", typeof(LaunchDAppPage));
+        Routing.RegisterRoute("gaming/details", typeof(DAppDetailsPage));
+        Routing.RegisterRoute("launch", typeof(LaunchDAppPage));
         Routing.RegisterRoute("wallet/asset/details", typeof(AssetDetailsPage));
         Routing.RegisterRoute("wallet/asset/details/receive", typeof(ReceivePage));
         Routing.RegisterRoute("wallet/asset/details/send", typeof(SendPage));

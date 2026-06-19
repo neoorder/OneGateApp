@@ -1,4 +1,5 @@
 ﻿using Neo;
+using Neo.Cryptography;
 using Neo.Extensions;
 using Neo.Wallets;
 using System.Text.Json.Serialization;
@@ -28,6 +29,8 @@ public class AuthenticationChallengePayload
             throw new NotSupportedException("Unsupported grant type");
         if (!AllowedAlgorithms.Contains("ECDSA-P256"))
             throw new NotSupportedException("No supported algorithm");
+        if (string.IsNullOrWhiteSpace(Domain))
+            throw new InvalidOperationException("Domain cannot be empty");
         if (!Networks.Contains(protocolSettings.Network))
             throw new NotSupportedException("No supported network");
         if (DateTimeOffset.UtcNow - DateTimeOffset.FromUnixTimeSeconds(Timestamp) > AuthenticationTimeout)
@@ -58,7 +61,7 @@ public class AuthenticationChallengePayload
             Address = account.Address,
             Nonce = Nonce,
             Timestamp = timestamp,
-            Signature = Workarounds.Sign(message, key)
+            Signature = Crypto.Sign(message, key)
         };
     }
 }

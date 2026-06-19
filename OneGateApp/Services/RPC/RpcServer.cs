@@ -15,14 +15,28 @@ class RpcServer(object host)
 
     public async Task<JsonObject> HandleRequestAsync(JsonObject request)
     {
-        string id = request["id"]!.GetValue<string>();
-        string method = request["method"]!.GetValue<string>();
-        JsonArray? args = request["params"]?.AsArray();
         var response = new JsonObject
         {
-            ["jsonrpc"] = "2.0",
-            ["id"] = id
+            ["jsonrpc"] = "2.0"
         };
+        string method;
+        JsonArray? args;
+        try
+        {
+            response["id"] = request["id"]?.AsValue().DeepClone();
+            method = request["method"]!.GetValue<string>();
+            args = request["params"]?.AsArray();
+        }
+        catch
+        {
+            response.TryAdd("id", null);
+            response["error"] = new JsonObject
+            {
+                ["code"] = 10002,
+                ["message"] = "Invalid request"
+            };
+            return response;
+        }
         try
         {
             response["result"] = await HandleRequestAsync(method, args);

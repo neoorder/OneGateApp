@@ -644,6 +644,24 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Iniciar sesión con Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Revise esta solicitud antes de autorizar el acceso a la cartera.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Dirección de la cartera</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL de callback</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Autorizar inicio de sesión</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Autorizando solicitud de inicio de sesión…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Iniciando sesión</value>
   </data>
@@ -744,6 +762,21 @@ Al continuar, usted reconoce que comprende plenamente y acepta todos los riesgos
   <data name="Gaming" xml:space="preserve">
     <value>Juegos</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Tipo de juego</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Acción</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Juego de mesa</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Emulador</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Carreras</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Mercado</value>
   </data>
@@ -823,5 +856,14 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>No hay saldo suficiente para cubrir el importe y las comisiones. La cantidad máxima que puedes enviar es {0} GAS.</value>
+  </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Modo de desarrollador activado</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Herramientas de desarrollador</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>Prueba de DApp</value>
   </data>
 </root>

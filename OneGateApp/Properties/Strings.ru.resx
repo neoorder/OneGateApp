@@ -644,6 +644,24 @@
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Войти с помощью Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Проверьте этот запрос перед авторизацией доступа к кошельку.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Адрес кошелька</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL обратного вызова</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Авторизовать вход</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Авторизация запроса на вход…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Вход в систему</value>
   </data>
@@ -744,6 +762,21 @@
   <data name="Gaming" xml:space="preserve">
     <value>Игры</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Тип игры</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Экшен</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Настольная игра</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Эмулятор</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Гонки</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Маркетплейс</value>
   </data>
@@ -823,5 +856,14 @@
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Недостаточно средств для покрытия суммы и комиссии. Максимальная сумма, которую вы можете отправить, составляет {0} GAS.</value>
+  </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Режим разработчика включён</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Инструменты разработчика</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>Тест DApp</value>
   </data>
 </root>

@@ -644,11 +644,29 @@
   <data name="SignInWithNeo" xml:space="preserve">
     <value>使用 Neo 登录</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>请先确认请求来源，再授权钱包登录。</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>正在登录</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>域名</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>钱包地址</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>网络</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>回调地址</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>授权登录</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>正在授权登录请求…</value>
   </data>
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>无法返回 DApp</value>
@@ -744,6 +762,21 @@
   <data name="Gaming" xml:space="preserve">
     <value>游戏</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>游戏类型</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>动作</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>桌游</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>模拟器</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>竞速</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>市场</value>
   </data>
@@ -823,5 +856,14 @@
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>余额不足，无法支付金额和手续费。您最多可发送 {0} GAS。</value>
+  </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>开发者模式已启用</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>开发者工具</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp测试</value>
   </data>
 </root>

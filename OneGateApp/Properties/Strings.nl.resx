@@ -644,6 +644,24 @@ Wilt u doorgaan?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Inloggen met Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Controleer dit verzoek voordat u wallettoegang autoriseert.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Walletadres</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Netwerk</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>Callback-URL</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Inloggen autoriseren</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Aanmeldverzoek autoriseren…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Bezig met inloggen</value>
   </data>
@@ -744,6 +762,21 @@ Door door te gaan bevestigt u dat u alle bijbehorende risico's volledig begrijpt
   <data name="Gaming" xml:space="preserve">
     <value>Games</value>
   </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Speltype</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Actie</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Bordspel</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Emulator</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Racen</value>
+  </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Marketplace</value>
   </data>
@@ -823,5 +856,14 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Onvoldoende saldo om het bedrag en de kosten te dekken. Het maximale bedrag dat u kunt verzenden is {0} GAS.</value>
+  </data>
+  <data name="DeveloperModeEnabled" xml:space="preserve">
+    <value>Ontwikkelaarsmodus ingeschakeld</value>
+  </data>
+  <data name="DeveloperTools" xml:space="preserve">
+    <value>Ontwikkelaarstools</value>
+  </data>
+  <data name="DAppTesting" xml:space="preserve">
+    <value>DApp-test</value>
   </data>
 </root>

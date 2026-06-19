@@ -15,7 +15,7 @@ class LaunchDAppAction : AppLinkAction
         AppId = appId;
     }
 
-    protected override string Route => "//dapps/launch";
+    protected override string Route => "launch";
     public int AppId { get; }
 
     protected override Page CreatePage(IServiceProvider serviceProvider)

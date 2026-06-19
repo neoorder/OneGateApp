@@ -53,25 +53,42 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         else
         {
             Uri uri = query["uri"] as Uri ?? new(WebUtility.UrlDecode((string)query["uri"]));
-            int id = int.Parse(uri.Segments[2]);
-            var response = await httpClient.GetAsync($"/api/dapp/{id}");
-            if (!response.IsSuccessStatusCode)
+            if (DAppLaunchUri.TryGetAppId(uri, out int id))
             {
-                await this.GoBackOrCloseAsync();
-                return;
+                var response = await httpClient.GetAsync($"/api/dapp/{id}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    await this.GoBackOrCloseAsync();
+                    return;
+                }
+                DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
+                Url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, uri);
             }
-            DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
-            Url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, uri);
+            else
+            {
+                DApp = new DApp
+                {
+                    Id = 0,
+                    IsActive = false,
+                    Name = $"{{\"en\":\"{uri.Host}\"}}",
+                    Url = uri.AbsoluteUri,
+                    Languages = ["en"]
+                };
+                Url = uri.AbsoluteUri;
+            }
         }
-        List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
-        IsFavorite = favorites?.Contains(DApp.Id) ?? false;
-        List<int> recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
-        recents.Remove(DApp.Id);
-        recents.Insert(0, DApp.Id);
-        while (recents.Count > 10)
-            recents.RemoveAt(recents.Count - 1);
-        await dbContext.Settings.PutAsync("dapps/recent", recents);
-        GlobalStates.Invalidate<DAppsPage>();
+        if (DApp.Id > 0)
+        {
+            List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
+            IsFavorite = favorites?.Contains(DApp.Id) ?? false;
+            List<int> recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+            recents.Remove(DApp.Id);
+            recents.Insert(0, DApp.Id);
+            while (recents.Count > 10)
+                recents.RemoveAt(recents.Count - 1);
+            await dbContext.Settings.PutAsync("dapps/recent", recents);
+            if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
+        }
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
@@ -81,6 +98,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     async void OnNavigating(object sender, WebNavigatingEventArgs e)
     {
+        if (DApp is null) return;
         Uri uriOld = new(DApp.Url);
         Uri uriNew = new(uriOld, e.Url);
         if (IsCrossDomain(uriOld, uriNew))

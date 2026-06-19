@@ -11,7 +11,6 @@ using System.Text.Json.Nodes;
 using System.Web;
 using ZXing.Common;
 using ZXing.Net.Maui;
-using ZXing.SkiaSharp;
 
 namespace NeoOrder.OneGate.Pages;
 
@@ -71,7 +70,7 @@ public partial class ScanPage : ContentPage, IQueryAttributable
             await Toast.Show(Strings.ErrorMessageUnableReadQRCode);
             return;
         }
-        var reader = new BarcodeReader
+        var reader = new ZXing.SkiaSharp.BarcodeReader
         {
             Options = new DecodingOptions
             {

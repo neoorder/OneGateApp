@@ -178,11 +178,29 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Authorizing sign-in request… 的本地化字符串。
+        /// </summary>
+        internal static string AuthenticationInProgress {
+            get {
+                return ResourceManager.GetString("AuthenticationInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Authorize 的本地化字符串。
         /// </summary>
         internal static string Authorize {
             get {
                 return ResourceManager.GetString("Authorize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Authorize sign in 的本地化字符串。
+        /// </summary>
+        internal static string AuthorizeSignIn {
+            get {
+                return ResourceManager.GetString("AuthorizeSignIn", resourceCulture);
             }
         }
         
@@ -257,6 +275,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string BiometricUnavailableText {
             get {
                 return ResourceManager.GetString("BiometricUnavailableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Callback URL 的本地化字符串。
+        /// </summary>
+        internal static string CallbackURL {
+            get {
+                return ResourceManager.GetString("CallbackURL", resourceCulture);
             }
         }
         
@@ -460,6 +487,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 DApp Testing 的本地化字符串。
+        /// </summary>
+        internal static string DAppTesting {
+            get {
+                return ResourceManager.GetString("DAppTesting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} do not match 的本地化字符串。
         /// </summary>
         internal static string DefaultCompareErrorMessage {
@@ -593,6 +629,24 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Developer mode enabled 的本地化字符串。
+        /// </summary>
+        internal static string DeveloperModeEnabled {
+            get {
+                return ResourceManager.GetString("DeveloperModeEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Developer Tools 的本地化字符串。
+        /// </summary>
+        internal static string DeveloperTools {
+            get {
+                return ResourceManager.GetString("DeveloperTools", resourceCulture);
             }
         }
         
@@ -784,6 +838,51 @@ namespace NeoOrder.OneGate.Properties {
         internal static string From {
             get {
                 return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Game type 的本地化字符串。
+        /// </summary>
+        internal static string GameType {
+            get {
+                return ResourceManager.GetString("GameType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Action 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeAction {
+            get {
+                return ResourceManager.GetString("GameTypeAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Board 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeBoard {
+            get {
+                return ResourceManager.GetString("GameTypeBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Emulator 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeEmulator {
+            get {
+                return ResourceManager.GetString("GameTypeEmulator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Racing 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeRacing {
+            get {
+                return ResourceManager.GetString("GameTypeRacing", resourceCulture);
             }
         }
         
@@ -995,6 +1094,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Review this request before authorizing wallet access. 的本地化字符串。
+        /// </summary>
+        internal static string LoginRequestReviewText {
+            get {
+                return ResourceManager.GetString("LoginRequestReviewText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The app is requesting to sign in with your wallet address. Allow? 的本地化字符串。
         /// </summary>
         internal static string LoginRequestText {
@@ -1076,6 +1184,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Nep2PrivateKeyWarning {
             get {
                 return ResourceManager.GetString("Nep2PrivateKeyWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Network 的本地化字符串。
+        /// </summary>
+        internal static string Network {
+            get {
+                return ResourceManager.GetString("Network", resourceCulture);
             }
         }
         
@@ -2061,6 +2178,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Wallet {
             get {
                 return ResourceManager.GetString("Wallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Wallet address 的本地化字符串。
+        /// </summary>
+        internal static string WalletAddress {
+            get {
+                return ResourceManager.GetString("WalletAddress", resourceCulture);
             }
         }
         

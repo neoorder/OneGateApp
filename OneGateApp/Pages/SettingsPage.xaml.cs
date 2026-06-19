@@ -78,6 +78,14 @@ public partial class SettingsPage : ContentPage
             Command = Commands.LaunchUrl,
             CommandParameter = $"mailto:contact@neoorder.org"
         });
+        if (await dbContext.Settings.GetAsync<bool>("preference/developer_mode_enabled"))
+        {
+            yield return (Strings.Others, new SettingEntry(Strings.DeveloperTools)
+            {
+                Command = Commands.GotoPage,
+                CommandParameter = "//home/settings/developer"
+            });
+        }
         yield return (Strings.Others, new SettingEntry(Strings.About)
         {
             Command = Commands.GotoPage,

@@ -8,6 +8,20 @@
     </ContentView.Resources>
     <Grid BindingContext="{Binding Source={RelativeSource AncestorType={x:Type og:SpinnerButton}}}">
         <Button x:Name="Button" TextColor="{Binding TextColor}" FontSize="{Binding FontSize}" FontAttributes="{Binding FontAttributes}" BackgroundColor="{Binding ButtonColor}" BorderWidth="{Binding BorderWidth}" BorderColor="{Binding BorderColor}" Clicked="Button_Clicked">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{Binding TextColor}" />
+                                <Setter Property="BackgroundColor" Value="{Binding ButtonColor}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="PointerOver" />
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
             <Button.Text>
                 <MultiBinding Converter="{StaticResource SpinnerButtonTextConverter}">
                     <Binding Path="Text" />
