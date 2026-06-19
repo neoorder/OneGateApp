@@ -42,13 +42,13 @@ public partial class SendPage : ContentPage, IQueryAttributable
             if (field == value) return;
             field = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(HasClipboardSuggestion));
             _ = RefreshAddressInsightsAsync();
         }
     }
     public decimal Amount { get; set { field = value; OnPropertyChanged(); } }
-    public string? ClipboardAddress { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasClipboardAddress)); } }
-    public bool HasClipboardAddress => !string.IsNullOrWhiteSpace(ClipboardAddress)
-        && !string.Equals(ClipboardAddress, ToAddress?.Trim(), StringComparison.Ordinal);
+    public bool HasClipboardText { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasClipboardSuggestion)); } }
+    public bool HasClipboardSuggestion => HasClipboardText && string.IsNullOrWhiteSpace(ToAddress);
     public Contact? MatchedContact { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
     public bool IsOwnWalletAddress { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
     public bool IsUnknownValidAddress { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
@@ -154,7 +154,8 @@ public partial class SendPage : ContentPage, IQueryAttributable
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await RefreshClipboardAddressAsync();
+        contacts = null;
+        RefreshClipboardAvailability();
         await RefreshAddressInsightsAsync();
     }
 
@@ -163,15 +164,15 @@ public partial class SendPage : ContentPage, IQueryAttributable
         contacts ??= await dbContext.Contacts.AsNoTracking().ToArrayAsync();
     }
 
-    async Task RefreshClipboardAddressAsync()
+    void RefreshClipboardAvailability()
     {
         try
         {
-            ClipboardAddress = TryReadAddress(await Clipboard.GetTextAsync(), out string address) ? address : null;
+            HasClipboardText = Clipboard.HasText;
         }
         catch
         {
-            ClipboardAddress = null;
+            HasClipboardText = false;
         }
     }
 
@@ -201,7 +202,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
         MatchedContact = matchedContact;
         IsOwnWalletAddress = isOwnWalletAddress;
         IsUnknownValidAddress = isUnknownValidAddress;
-        OnPropertyChanged(nameof(HasClipboardAddress));
+        OnPropertyChanged(nameof(HasClipboardSuggestion));
     }
 
     bool TryReadAddress(string? value, out string address)
@@ -240,9 +241,22 @@ public partial class SendPage : ContentPage, IQueryAttributable
 
     async void OnPasteClipboardAddress(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(ClipboardAddress)) return;
-        ToAddress = ClipboardAddress;
-        await Toast.Show(Strings.AddressPasted);
+        try
+        {
+            if (!TryReadAddress(await Clipboard.GetTextAsync(), out string address))
+            {
+                RefreshClipboardAvailability();
+                await Toast.Show(Strings.ClipboardAddressInvalid);
+                return;
+            }
+            ToAddress = address;
+            HasClipboardText = false;
+            await Toast.Show(Strings.AddressPasted);
+        }
+        catch (Exception ex)
+        {
+            await Toast.Show(ex.Message);
+        }
     }
 
     void OnValidateAddress(object sender, CustomValidationEventArgs e)

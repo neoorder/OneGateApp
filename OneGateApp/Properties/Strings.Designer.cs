@@ -325,11 +325,29 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Address found on clipboard 的本地化字符串。
+        ///   查找类似 Clipboard available 的本地化字符串。
         /// </summary>
         internal static string ClipboardAddressFoundTitle {
             get {
                 return ResourceManager.GetString("ClipboardAddressFoundTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Clipboard does not contain a valid Neo address. 的本地化字符串。
+        /// </summary>
+        internal static string ClipboardAddressInvalid {
+            get {
+                return ResourceManager.GetString("ClipboardAddressInvalid", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Tap Paste to let OneGate read the clipboard and use it only if it contains a valid Neo address. 的本地化字符串。
+        /// </summary>
+        internal static string ClipboardAddressPromptText {
+            get {
+                return ResourceManager.GetString("ClipboardAddressPromptText", resourceCulture);
             }
         }
         
