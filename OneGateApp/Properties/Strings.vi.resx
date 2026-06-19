@@ -644,6 +644,24 @@ Bạn có muốn tiếp tục không?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Đăng nhập bằng Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Xem lại yêu cầu này trước khi cấp quyền truy cập ví.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Địa chỉ ví</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Mạng</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL gọi lại</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Cho phép đăng nhập</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Đang cho phép yêu cầu đăng nhập…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Đang đăng nhập</value>
   </data>

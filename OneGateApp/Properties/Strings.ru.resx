@@ -644,6 +644,24 @@
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Войти с помощью Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Проверьте этот запрос перед авторизацией доступа к кошельку.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Адрес кошелька</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL обратного вызова</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Авторизовать вход</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Авторизация запроса на вход…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Вход в систему</value>
   </data>

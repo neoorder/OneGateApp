@@ -178,11 +178,29 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Authorizing sign-in request… 的本地化字符串。
+        /// </summary>
+        internal static string AuthenticationInProgress {
+            get {
+                return ResourceManager.GetString("AuthenticationInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Authorize 的本地化字符串。
         /// </summary>
         internal static string Authorize {
             get {
                 return ResourceManager.GetString("Authorize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Authorize sign in 的本地化字符串。
+        /// </summary>
+        internal static string AuthorizeSignIn {
+            get {
+                return ResourceManager.GetString("AuthorizeSignIn", resourceCulture);
             }
         }
         
@@ -257,6 +275,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string BiometricUnavailableText {
             get {
                 return ResourceManager.GetString("BiometricUnavailableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Callback URL 的本地化字符串。
+        /// </summary>
+        internal static string CallbackURL {
+            get {
+                return ResourceManager.GetString("CallbackURL", resourceCulture);
             }
         }
         
@@ -1067,6 +1094,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Review this request before authorizing wallet access. 的本地化字符串。
+        /// </summary>
+        internal static string LoginRequestReviewText {
+            get {
+                return ResourceManager.GetString("LoginRequestReviewText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The app is requesting to sign in with your wallet address. Allow? 的本地化字符串。
         /// </summary>
         internal static string LoginRequestText {
@@ -1148,6 +1184,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Nep2PrivateKeyWarning {
             get {
                 return ResourceManager.GetString("Nep2PrivateKeyWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Network 的本地化字符串。
+        /// </summary>
+        internal static string Network {
+            get {
+                return ResourceManager.GetString("Network", resourceCulture);
             }
         }
         
@@ -2133,6 +2178,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Wallet {
             get {
                 return ResourceManager.GetString("Wallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Wallet address 的本地化字符串。
+        /// </summary>
+        internal static string WalletAddress {
+            get {
+                return ResourceManager.GetString("WalletAddress", resourceCulture);
             }
         }
         

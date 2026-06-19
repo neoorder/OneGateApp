@@ -644,11 +644,29 @@ Do you want to continue?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Sign in with Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Review this request before authorizing wallet access.</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Signing in</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>Domain name</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Wallet address</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>Callback URL</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Authorize sign in</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Authorizing sign-in request…</value>
   </data>
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>Unable to return to the DApp</value>

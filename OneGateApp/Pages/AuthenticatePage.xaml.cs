@@ -19,8 +19,15 @@ public partial class AuthenticatePage : ContentPage, IQueryAttributable
     readonly Wallet wallet;
     readonly HttpClient httpClient;
 
-    public string? DAppIdentifier { get; set { field = value; OnPropertyChanged(); } }
-    public required AuthenticationChallengePayload Payload { get; set { field = value; OnPropertyChanged(); } }
+    public string? DAppIdentifier { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(CallbackText)); } }
+    public AuthenticationChallengePayload? Payload { get; private set { field = value; OnPropertyChanged(); RefreshRequestState(); } }
+    public bool IsProcessing { get; private set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(IsIdle)); OnPropertyChanged(nameof(CanAuthorize)); } }
+    public bool IsIdle => !IsProcessing;
+    public bool CanAuthorize => !IsProcessing && ErrorMessage is null && Payload is not null;
+    public string? ErrorMessage { get; private set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(CanAuthorize)); } }
+    public string? WalletAddress => wallet.GetDefaultAccount()?.Address;
+    public string NetworkText => FormatNetwork(protocolSettings.Network);
+    public string CallbackText => DAppIdentifier is null ? Payload?.Callback?.ToString() ?? "--" : $"dapp://{DAppIdentifier}/auth";
 
     public AuthenticatePage(ProtocolSettings protocolSettings, WalletAuthorizationService walletAuthorizationService, IWalletProvider walletProvider, HttpClient httpClient)
     {
@@ -29,7 +36,6 @@ public partial class AuthenticatePage : ContentPage, IQueryAttributable
         this.wallet = walletProvider.GetWallet()!;
         this.httpClient = httpClient;
         InitializeComponent();
-        Loaded += OnLoaded;
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -39,51 +45,54 @@ public partial class AuthenticatePage : ContentPage, IQueryAttributable
         Payload = (AuthenticationChallengePayload)query["payload"];
     }
 
-    void OnLoaded(object? sender, EventArgs e)
+    async void OnAuthorizeClicked(object sender, EventArgs e)
     {
-        Authenticate();
-    }
-
-    async void Authenticate()
-    {
+        if (Payload is null || IsProcessing || ErrorMessage is not null) return;
+        IsProcessing = true;
         try
         {
-            AuthenticationResponsePayload response = await AuthenticateAsync(Payload);
-            if (DAppIdentifier is null)
-            {
-                if (Payload.Callback is null || !Payload.Callback.IsAbsoluteUri || Payload.Callback.Scheme != "https" || Payload.Callback.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase))
-                    throw new InvalidOperationException(Strings.InvalidCallbackURLFormat);
-                var message = await httpClient.PostAsJsonAsync(Payload.Callback, response, SharedOptions.JsonSerializerOptions);
-                message.EnsureSuccessStatusCode();
-            }
-            else
-            {
-                string result = WebUtility.UrlEncode(JsonSerializer.Serialize(response, SharedOptions.JsonSerializerOptions));
-                string uri = $"dapp://{DAppIdentifier}/auth?result={result}";
-                if (!await Launcher.TryOpenAsync(uri))
-                    await Toast.Show(Strings.OpenDAppFailedText);
-            }
+            await Authenticate(Payload);
+            await this.GoBackOrCloseAsync();
+        }
+        catch (OperationCanceledException ex)
+        {
+            await NotifyAuthenticationErrorAsync(ex, showToast: false);
+            await this.GoBackOrCloseAsync();
         }
         catch (Exception ex)
         {
-            if (DAppIdentifier is null)
-            {
-                await Toast.Show(ex.Message);
-            }
-            else
-            {
-                var error = new JsonObject
-                {
-                    ["code"] = ex.HResult,
-                    ["message"] = ex.Message
-                };
-                string text = WebUtility.UrlEncode(JsonSerializer.Serialize(error, SharedOptions.JsonSerializerOptions));
-                string uri = $"dapp://{DAppIdentifier}/auth?error={text}";
-                if (!await Launcher.TryOpenAsync(uri))
-                    await Toast.Show(ex.Message);
-            }
+            await NotifyAuthenticationErrorAsync(ex, showToast: true);
+            await this.GoBackOrCloseAsync();
         }
+        finally
+        {
+            IsProcessing = false;
+        }
+    }
+
+    async void OnCancelClicked(object sender, EventArgs e)
+    {
+        if (IsProcessing) return;
+        await NotifyAuthenticationErrorAsync(new OperationCanceledException(Strings.OperationCancelled), showToast: false);
         await this.GoBackOrCloseAsync();
+    }
+
+    async Task Authenticate(AuthenticationChallengePayload payload)
+    {
+        AuthenticationResponsePayload response = await AuthenticateAsync(payload);
+        if (DAppIdentifier is null)
+        {
+            ValidateCallback(payload);
+            var message = await httpClient.PostAsJsonAsync(payload.Callback, response, SharedOptions.JsonSerializerOptions);
+            message.EnsureSuccessStatusCode();
+        }
+        else
+        {
+            string result = WebUtility.UrlEncode(JsonSerializer.Serialize(response, SharedOptions.JsonSerializerOptions));
+            string uri = $"dapp://{DAppIdentifier}/auth?result={result}";
+            if (!await Launcher.TryOpenAsync(uri))
+                await Toast.Show(Strings.OpenDAppFailedText);
+        }
     }
 
     async Task<AuthenticationResponsePayload> AuthenticateAsync(AuthenticationChallengePayload payload)
@@ -93,5 +102,58 @@ public partial class AuthenticatePage : ContentPage, IQueryAttributable
             throw new OperationCanceledException();
         WalletAccount account = wallet.GetDefaultAccount()!;
         return payload.CreateResponse(account, protocolSettings);
+    }
+
+    async Task NotifyAuthenticationErrorAsync(Exception ex, bool showToast)
+    {
+        string message = ex is OperationCanceledException ? Strings.OperationCancelled : ex.Message;
+        if (DAppIdentifier is null)
+        {
+            if (showToast)
+                await Toast.Show(message);
+            return;
+        }
+
+        var error = new JsonObject
+        {
+            ["code"] = ex.HResult,
+            ["message"] = message
+        };
+        string text = WebUtility.UrlEncode(JsonSerializer.Serialize(error, SharedOptions.JsonSerializerOptions));
+        string uri = $"dapp://{DAppIdentifier}/auth?error={text}";
+        if (!await Launcher.TryOpenAsync(uri) && showToast)
+            await Toast.Show(message);
+    }
+
+    void RefreshRequestState()
+    {
+        try
+        {
+            if (Payload is not null)
+            {
+                Payload.Validate(protocolSettings);
+                if (DAppIdentifier is null)
+                    ValidateCallback(Payload);
+            }
+            ErrorMessage = null;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        OnPropertyChanged(nameof(CallbackText));
+    }
+
+    static void ValidateCallback(AuthenticationChallengePayload payload)
+    {
+        if (payload.Callback is null || !payload.Callback.IsAbsoluteUri || payload.Callback.Scheme != "https" || payload.Callback.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException(Strings.InvalidCallbackURLFormat);
+    }
+
+    string FormatNetwork(uint network)
+    {
+        return network == protocolSettings.Network
+            ? $"Neo N3 ({network})"
+            : network.ToString();
     }
 }

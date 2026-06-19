@@ -644,6 +644,24 @@ Deseja continuar?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Entrar com Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Revise esta solicitação antes de autorizar o acesso à carteira.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Endereço da carteira</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Rede</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL de callback</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Autorizar login</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Autorizando solicitação de login…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Entrando</value>
   </data>
