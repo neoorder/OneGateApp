@@ -31,23 +31,27 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
-                    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                        <Grid ColumnDefinitions="*,auto,auto" ColumnSpacing="10">
-                            <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" />
-                            <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3">
-                                <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
+                    <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16">
+                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                            <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="42" HeightRequest="42" VerticalOptions="Start">
+                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
-                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe602;" FontSize="18" Margin="-20" Padding="20" Command="{x:Static og:Commands.GotoPage}" CommandParameter="{Binding Address, StringFormat='edit?address={0}'}" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
+                                    <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
+                                    <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3" VerticalOptions="Start">
+                                        <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
+                                    </Border>
+                                </Grid>
+                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="13" LineBreakMode="TailTruncation" />
+                                <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Padding="8" WidthRequest="44" HeightRequest="44" VerticalOptions="Center" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="{Binding Address, StringFormat='edit?address={0}'}" />
+                            </Grid.GestureRecognizers>
                         </Grid>
-                        <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="13" LineBreakMode="TailTruncation" />
-                        <Grid ColumnDefinitions="*,auto">
-                            <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
-                            <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Margin="-20" Padding="20" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
-                        </Grid>
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="{Binding Address, StringFormat='edit?address={0}'}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

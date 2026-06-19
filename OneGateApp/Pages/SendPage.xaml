@@ -40,28 +40,42 @@
                 <og:Required />
                 <og:Custom Validate="OnValidateAddress" />
             </og:ValidationMessage>
-            <VerticalStackLayout IsVisible="{Binding HasRecipientPreview}" Padding="12" Spacing="4" BackgroundColor="{toolkit:AppThemeResource Panel}" Margin="0,-16,0,0">
-                <Label Text="{Binding RecipientPreviewTitle}" FontAttributes="Bold" />
-                <Label StyleClass="Secondary" Text="{Binding RecipientPreviewAddress}" FontSize="12" LineBreakMode="MiddleTruncation" />
-                <Label StyleClass="Secondary" Text="{Binding RecipientPreviewNote}" FontSize="12" IsVisible="{Binding HasRecipientPreviewNote}" />
-            </VerticalStackLayout>
-            <CollectionView ItemsSource="{Binding AddressSuggestions}" IsVisible="{Binding HasAddressSuggestions}" HeightRequest="170" Margin="0,-16,0,0">
+            <Border IsVisible="{Binding HasRecipientPreview}" StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="12" Margin="0,-16,0,0">
+                <Grid ColumnDefinitions="auto,*" ColumnSpacing="12">
+                    <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="38" HeightRequest="38" VerticalOptions="Start">
+                        <Label Text="{Binding SelectedRecipient.AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label Text="{Binding RecipientPreviewTitle}" FontAttributes="Bold" />
+                        <Label StyleClass="Secondary" Text="{Binding RecipientPreviewAddress}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                        <Label StyleClass="Secondary" Text="{Binding RecipientPreviewNote}" FontSize="12" IsVisible="{Binding HasRecipientPreviewNote}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+            <CollectionView ItemsSource="{Binding AddressSuggestions}" IsVisible="{Binding HasAddressSuggestions}" HeightRequest="190" Margin="0,-16,0,0">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="og:Contact">
-                        <Grid ColumnDefinitions="*,auto" Padding="12" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                            <VerticalStackLayout Spacing="4">
-                                <Label Text="{Binding DisplayName}" FontAttributes="Bold" />
-                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" />
-                                <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
-                            </VerticalStackLayout>
-                            <Label Grid.Column="1" StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" VerticalOptions="Start" />
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnAddressSuggestionTapped" CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
+                        <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="12">
+                            <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                                <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="36" HeightRequest="36" VerticalOptions="Start">
+                                    <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="15" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                    <Label Text="{Binding DisplayName}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                    <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" LineBreakMode="TailTruncation" />
+                                    <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                                </VerticalStackLayout>
+                                <Border Grid.Column="2" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3" VerticalOptions="Start">
+                                    <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
+                                </Border>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAddressSuggestionTapped" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

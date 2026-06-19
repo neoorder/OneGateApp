@@ -26,6 +26,16 @@ public class Contact
     public string DisplayName => !string.IsNullOrWhiteSpace(Label) ? Label : ShortAddress;
 
     [NotMapped]
+    public string AvatarText
+    {
+        get
+        {
+            string name = DisplayName.Trim();
+            return name.Length == 0 ? "?" : name[..1].ToUpperInvariant();
+        }
+    }
+
+    [NotMapped]
     public string ShortAddress => Address.Length <= 14 ? Address : $"{Address[..6]}...{Address[^6..]}";
 
     [NotMapped]

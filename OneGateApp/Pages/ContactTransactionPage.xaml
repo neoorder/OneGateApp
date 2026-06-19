@@ -9,28 +9,37 @@
              Shell.TabBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="16">
-            <VerticalStackLayout Padding="20" Spacing="8" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                <Label Text="{Binding Contact.DisplayName}" FontAttributes="Bold" FontSize="20" />
-                <Label StyleClass="Secondary" Text="{Binding Contact.Address}" LineBreakMode="MiddleTruncation" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Padding="20" Spacing="12" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
-                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.TxID}" />
-                    <Label Grid.Column="1" Text="{Binding Transfer.TransactionHash}" LineBreakMode="MiddleTruncation" HorizontalOptions="End" />
+            <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="18">
+                <Grid ColumnDefinitions="auto,*" ColumnSpacing="12">
+                    <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="44" HeightRequest="44" VerticalOptions="Start">
+                        <Label Text="{Binding Contact.AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="6">
+                        <Label Text="{Binding Contact.DisplayName}" FontAttributes="Bold" FontSize="20" LineBreakMode="TailTruncation" />
+                        <Label StyleClass="Secondary" Text="{Binding Contact.Address}" LineBreakMode="MiddleTruncation" />
+                    </VerticalStackLayout>
                 </Grid>
-                <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
-                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.Asset}" />
-                    <Label Grid.Column="1" Text="{Binding Transfer.AssetSymbol}" HorizontalOptions="End" />
-                </Grid>
-                <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
-                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.Amount}" />
-                    <Label Grid.Column="1" Text="{Binding Transfer.Amount}" HorizontalOptions="End" />
-                </Grid>
-                <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
-                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.Time}" />
-                    <Label Grid.Column="1" Text="{Binding Transfer.CreatedAt, StringFormat='{0:g}'}" HorizontalOptions="End" />
-                </Grid>
-            </VerticalStackLayout>
+            </Border>
+            <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="18">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.TxID}" />
+                        <Label Grid.Column="1" Text="{Binding Transfer.TransactionHash}" LineBreakMode="MiddleTruncation" HorizontalOptions="End" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.Asset}" />
+                        <Label Grid.Column="1" Text="{Binding Transfer.AssetSymbol}" HorizontalOptions="End" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.Amount}" />
+                        <Label Grid.Column="1" Text="{Binding Transfer.Amount}" HorizontalOptions="End" />
+                    </Grid>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="16">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.Time}" />
+                        <Label Grid.Column="1" Text="{Binding Transfer.CreatedAt, StringFormat='{0:g}'}" HorizontalOptions="End" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
             <Button Text="{x:Static og:Strings.CopyTransactionHash}" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Transfer.TransactionHash}" />
         </VerticalStackLayout>
     </ScrollView>
