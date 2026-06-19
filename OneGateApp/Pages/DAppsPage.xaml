@@ -32,7 +32,7 @@
         </og:DAppSearchHandler>
     </Shell.SearchHandler>
     <ScrollView Margin="20,8">
-        <VerticalStackLayout Spacing="18">
+        <VerticalStackLayout Spacing="14">
             <og:TabBar x:Name="tabbarFavoriteOrRecent" Spacing="4" IsVisible="{Binding HasFavoriteOrRecent}" SelectedTabChanged="FavoriteOrRecent_SelectedTabChanged">
                 <og:TabBar.Tabs>
                     <x:Array Type="{x:Type x:String}">
@@ -41,7 +41,7 @@
                     </x:Array>
                 </og:TabBar.Tabs>
             </og:TabBar>
-            <CollectionView ItemsSource="{Binding DAppsFavoriteOrRecent}" HeightRequest="114" IsVisible="{Binding HasFavoriteOrRecent}">
+            <CollectionView ItemsSource="{Binding DAppsFavoriteOrRecent}" HeightRequest="104" IsVisible="{Binding HasFavoriteOrRecent}">
                 <CollectionView.EmptyView>
                     <Border StyleClass="Card" HeightRequest="88">
                         <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
@@ -56,14 +56,14 @@
                     </Border>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12" />
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="og:DApp">
-                        <Border StyleClass="Card" WidthRequest="92" Padding="10">
-                            <VerticalStackLayout Spacing="8">
-                                <Border StrokeShape="RoundRectangle 14" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8" HorizontalOptions="Center">
-                                    <Image WidthRequest="46" HeightRequest="46" Aspect="AspectFit">
+                        <Border StyleClass="Card" WidthRequest="88" Padding="8">
+                            <VerticalStackLayout Spacing="6">
+                                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" HorizontalOptions="Center">
+                                    <Image WidthRequest="42" HeightRequest="42" Aspect="AspectFit">
                                         <Image.Source>
                                             <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
                                         </Image.Source>
@@ -94,14 +94,14 @@
                     </Border>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="og:DApp">
-                        <Border StyleClass="Card" Padding="14">
-                            <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="14">
-                                <Border StrokeShape="RoundRectangle 14" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8" WidthRequest="58" HeightRequest="58" VerticalOptions="Center">
-                                    <Image WidthRequest="42" HeightRequest="42" Aspect="AspectFit">
+                        <Border StyleClass="Card" Padding="12">
+                            <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" WidthRequest="52" HeightRequest="52" VerticalOptions="Center">
+                                    <Image WidthRequest="38" HeightRequest="38" Aspect="AspectFit">
                                         <Image.Source>
                                             <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
                                         </Image.Source>
@@ -111,7 +111,7 @@
                                     <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
                                     <Label StyleClass="Secondary" Text="{Binding Description, Converter={StaticResource LocalizerConverter}}" FontSize="12" MaxLines="2" LineBreakMode="TailTruncation" />
                                 </VerticalStackLayout>
-                                <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe605;" FontSize="20" Padding="8" WidthRequest="44" HeightRequest="44" VerticalOptions="Center" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />
+                                <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe605;" FontSize="20" Padding="8" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>

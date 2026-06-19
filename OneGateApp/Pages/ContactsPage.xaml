@@ -25,14 +25,14 @@
                 </Grid>
             </CollectionView.EmptyView>
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
-                    <Border StyleClass="Card" Padding="14">
+                    <Border StyleClass="Card" Padding="12">
                         <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
-                            <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="42" HeightRequest="42" VerticalOptions="Center">
-                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="38" HeightRequest="38" VerticalOptions="Center">
+                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
                                 <Label Text="{Binding Label}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
