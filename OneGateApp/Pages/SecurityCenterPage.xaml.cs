@@ -1,5 +1,4 @@
 using CommunityToolkit.Maui.Alerts;
-using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
@@ -19,7 +18,6 @@ public partial class SecurityCenterPage : ContentPage
     bool suppressToggleUpdates;
 
     public Command RefreshCommand { get; }
-    public Wallet Wallet { get; }
     public bool IsRefreshing { get; set { field = value; OnPropertyChanged(); } }
     public bool IsBackupConfirmed { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(BackupStatus)); OnPropertyChanged(nameof(BackupStatusText)); } }
     public bool IsPrivacyModeEnabled { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(PrivacyModeStatus)); } }
@@ -40,11 +38,10 @@ public partial class SecurityCenterPage : ContentPage
             : Strings.BiometricUnavailableSecurityText;
     public string BiometricActionText => IsBiometricEnabled ? Strings.DisableBiometric : Strings.CreateBiometricCredential;
 
-    public SecurityCenterPage(ApplicationDbContext dbContext, IWalletProvider walletProvider, RpcClient rpcClient)
+    public SecurityCenterPage(ApplicationDbContext dbContext, RpcClient rpcClient)
     {
         this.dbContext = dbContext;
         this.rpcClient = rpcClient;
-        Wallet = walletProvider.GetWallet()!;
         RefreshCommand = new Command(async () => await RefreshAsync());
         InitializeComponent();
     }
@@ -95,16 +92,45 @@ public partial class SecurityCenterPage : ContentPage
     {
         if (suppressToggleUpdates) return;
         IsBackupConfirmed = e.Value;
-        await dbContext.Settings.PutAsync(BackupConfirmedKey, e.Value);
+        try
+        {
+            await dbContext.Settings.PutAsync(BackupConfirmedKey, e.Value);
+        }
+        catch (Exception ex)
+        {
+            RevertToggleState(() => IsBackupConfirmed = !e.Value);
+            await Toast.Show(ex.Message);
+        }
     }
 
     async void OnPrivacyModeToggled(object sender, ToggledEventArgs e)
     {
         if (suppressToggleUpdates) return;
         IsPrivacyModeEnabled = e.Value;
-        await dbContext.Settings.PutAsync(ShowBalanceKey, !e.Value);
-        GlobalStates.Invalidate<WalletPage>();
-        GlobalStates.Invalidate<AssetDetailsPage>();
+        try
+        {
+            await dbContext.Settings.PutAsync(ShowBalanceKey, !e.Value);
+            GlobalStates.Invalidate<WalletPage>();
+            GlobalStates.Invalidate<AssetDetailsPage>();
+        }
+        catch (Exception ex)
+        {
+            RevertToggleState(() => IsPrivacyModeEnabled = !e.Value);
+            await Toast.Show(ex.Message);
+        }
+    }
+
+    void RevertToggleState(Action revert)
+    {
+        suppressToggleUpdates = true;
+        try
+        {
+            revert();
+        }
+        finally
+        {
+            suppressToggleUpdates = false;
+        }
     }
 
     async void OnReviewBackupTapped(object sender, TappedEventArgs e)
