@@ -644,6 +644,24 @@ Vuoi continuare?</value>
   <data name="SignInWithNeo" xml:space="preserve">
     <value>Accedi con Neo</value>
   </data>
+  <data name="LoginRequestReviewText" xml:space="preserve">
+    <value>Controlla questa richiesta prima di autorizzare l'accesso al wallet.</value>
+  </data>
+  <data name="WalletAddress" xml:space="preserve">
+    <value>Indirizzo wallet</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Rete</value>
+  </data>
+  <data name="CallbackURL" xml:space="preserve">
+    <value>URL di callback</value>
+  </data>
+  <data name="AuthorizeSignIn" xml:space="preserve">
+    <value>Autorizza accesso</value>
+  </data>
+  <data name="AuthenticationInProgress" xml:space="preserve">
+    <value>Autorizzazione della richiesta di accesso…</value>
+  </data>
   <data name="SigningIn" xml:space="preserve">
     <value>Accesso in corso</value>
   </data>
@@ -743,6 +761,21 @@ Continuando, confermi di aver compreso pienamente e accettato tutti i rischi ass
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>Giochi</value>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Tipo di gioco</value>
+  </data>
+  <data name="GameTypeAction" xml:space="preserve">
+    <value>Azione</value>
+  </data>
+  <data name="GameTypeBoard" xml:space="preserve">
+    <value>Gioco da tavolo</value>
+  </data>
+  <data name="GameTypeEmulator" xml:space="preserve">
+    <value>Emulatore</value>
+  </data>
+  <data name="GameTypeRacing" xml:space="preserve">
+    <value>Corsa</value>
   </data>
   <data name="Marketplace" xml:space="preserve">
     <value>Marketplace</value>

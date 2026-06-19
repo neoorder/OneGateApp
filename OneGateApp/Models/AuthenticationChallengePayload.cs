@@ -29,6 +29,8 @@ public class AuthenticationChallengePayload
             throw new NotSupportedException("Unsupported grant type");
         if (!AllowedAlgorithms.Contains("ECDSA-P256"))
             throw new NotSupportedException("No supported algorithm");
+        if (string.IsNullOrWhiteSpace(Domain))
+            throw new InvalidOperationException("Domain cannot be empty");
         if (!Networks.Contains(protocolSettings.Network))
             throw new NotSupportedException("No supported network");
         if (DateTimeOffset.UtcNow - DateTimeOffset.FromUnixTimeSeconds(Timestamp) > AuthenticationTimeout)
