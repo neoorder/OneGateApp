@@ -2,10 +2,8 @@ using CommunityToolkit.Maui.Alerts;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Views;
-using NeoOrder.OneGate.Controls.Views.Validation;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
-using NeoOrder.OneGate.Services;
 using Plugin.Maui.ScreenSecurity;
 
 namespace NeoOrder.OneGate.Pages;
@@ -65,22 +63,5 @@ public partial class ChangePasswordPage : ContentPage
                 errMsg.SetError(Strings.ErrorMessageIncorrectPassword);
             }
         }
-    }
-
-    void Password_Validate(object sender, CustomValidationEventArgs e)
-    {
-        PasswordPolicyResult result = PasswordPolicy.Evaluate(e.Value as string);
-        e.IsValid = result.IsValid;
-        e.ErrorMessage = result.Failure switch
-        {
-            PasswordPolicyFailure.Required => string.Format(Strings.DefaultRequiredErrorMessage, Strings.Password),
-            PasswordPolicyFailure.TooShort => string.Format(Strings.PasswordTooShortError, PasswordPolicy.MinLength),
-            PasswordPolicyFailure.TooLong => string.Format(Strings.PasswordTooLongError, PasswordPolicy.MaxLength),
-            PasswordPolicyFailure.TooCommon => Strings.PasswordTooCommonError,
-            PasswordPolicyFailure.RepeatedPattern => Strings.PasswordRepeatedPatternError,
-            PasswordPolicyFailure.LeadingOrTrailingWhitespace => Strings.PasswordWhitespaceError,
-            PasswordPolicyFailure.TooSimple => Strings.PasswordTooSimpleError,
-            _ => null
-        };
     }
 }

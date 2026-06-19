@@ -38,9 +38,9 @@ partial class LaunchDAppPage
         {
             throw new DapiException(10002, ex.Message);
         }
-        if (NormalizeHost(payload.Domain) != DAppHost)
+        if (payload.Domain != new Uri(DApp.Url).Host)
             throw new DapiException(10002, "Domain mismatch");
-        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText, DAppHost))
+        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText))
             throw new DapiException(10006, "Operation cancelled");
         WalletAccount account = walletProvider.GetWallet()!.GetDefaultAccount()!;
         return payload.CreateResponse(account, protocolSettings);
@@ -160,7 +160,6 @@ partial class LaunchDAppPage
         popup.Transaction = tx;
         popup.Intents = intents.ToArray();
         popup.InvocationResult = result;
-        popup.Origin = DAppHost;
         var popup_result = await this.ShowPopupAsync<bool>(popup);
         if (!popup_result.Result) throw new OperationCanceledException();
         if (!walletProvider.GetWallet()!.Sign(context))
@@ -178,7 +177,6 @@ partial class LaunchDAppPage
         var popup = serviceProvider.GetServiceOrCreateInstance<SignMessagePopup>();
         popup.Account = account?.ToAddress(protocolSettings.AddressVersion);
         popup.Message = message;
-        popup.Origin = DAppHost;
         var result = await this.ShowPopupAsync<string?>(popup);
         if (result.Result is null) throw new OperationCanceledException();
         byte[] payload = options?.IsBase64Encoded == true
@@ -246,7 +244,6 @@ partial class LaunchDAppPage
     {
         var popup = serviceProvider.GetServiceOrCreateInstance<SendTransactionPopup>();
         popup.Transaction = tx;
-        popup.Origin = DAppHost;
         if (intents != null)
         {
             for (int i = 0; i < intents.Length; i++)

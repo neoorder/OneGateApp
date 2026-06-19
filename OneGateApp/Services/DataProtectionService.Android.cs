@@ -103,32 +103,20 @@ partial class DataProtectionService
         keyStore.Load(null);
         if (!keyStore.ContainsAlias(KeyAlias))
         {
-            try
-            {
-                return GenerateSecretKey(useStrongBox: true);
-            }
-            catch (StrongBoxUnavailableException)
-            {
-                return GenerateSecretKey(useStrongBox: false);
-            }
+            var keyGenerator = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, "AndroidKeyStore")!;
+            var spec = new KeyGenParameterSpec.Builder(KeyAlias, KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt)
+                .SetBlockModes(KeyProperties.BlockModeGcm)
+                .SetEncryptionPaddings(KeyProperties.EncryptionPaddingNone)
+                .SetKeySize(256)
+                .SetUserAuthenticationRequired(true)
+                .SetUserAuthenticationParameters(0, (int)KeyPropertiesAuthType.BiometricStrong)
+                .SetIsStrongBoxBacked(true)
+                .Build();
+            keyGenerator.Init(spec);
+            return keyGenerator.GenerateKey()!;
         }
         var key = keyStore.GetKey(KeyAlias, null)!;
         return key.JavaCast<ISecretKey>();
-    }
-
-    static ISecretKey GenerateSecretKey(bool useStrongBox)
-    {
-        var keyGenerator = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, "AndroidKeyStore")!;
-        var builder = new KeyGenParameterSpec.Builder(KeyAlias, KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt)
-            .SetBlockModes(KeyProperties.BlockModeGcm)
-            .SetEncryptionPaddings(KeyProperties.EncryptionPaddingNone)
-            .SetKeySize(256)
-            .SetUserAuthenticationRequired(true)
-            .SetUserAuthenticationParameters(0, (int)KeyPropertiesAuthType.BiometricStrong);
-        if (useStrongBox)
-            builder.SetIsStrongBoxBacked(true);
-        keyGenerator.Init(builder.Build());
-        return keyGenerator.GenerateKey()!;
     }
 
     static Task<bool> AuthenticateWithCipherAsync(Cipher? cipher = null, string? title = null, string? message = null)

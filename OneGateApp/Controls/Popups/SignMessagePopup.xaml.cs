@@ -11,7 +11,6 @@ public partial class SignMessagePopup : MyPopup<string?>
     public string? Account { get; set { field = value; OnPropertyChanged(); } }
     public string[] Addresses { get; set { field = value; OnPropertyChanged(); } }
     public required string Message { get; set { field = value; OnPropertyChanged(); } }
-    public string? Origin { get; set { field = value; OnPropertyChanged(); } }
 
     public SignMessagePopup(IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService)
     {

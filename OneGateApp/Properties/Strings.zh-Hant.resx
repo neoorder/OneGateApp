@@ -833,37 +833,4 @@
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp測試</value>
   </data>
-  <data name="Network" xml:space="preserve">
-    <value>網路</value>
-  </data>
-  <data name="Origin" xml:space="preserve">
-    <value>來源</value>
-  </data>
-  <data name="PasswordRepeatedPatternError" xml:space="preserve">
-    <value>避免重複字元、重複模式或明顯序列。</value>
-  </data>
-  <data name="PasswordTooCommonError" xml:space="preserve">
-    <value>這個密碼太常見。請設定更獨特的錢包密碼。</value>
-  </data>
-  <data name="PasswordTooLongError" xml:space="preserve">
-    <value>請不要超過 {0} 個字元。</value>
-  </data>
-  <data name="PasswordTooShortError" xml:space="preserve">
-    <value>請至少使用 {0} 個字元。</value>
-  </data>
-  <data name="PasswordTooSimpleError" xml:space="preserve">
-    <value>請混合使用大寫字母、小寫字母、數字或符號來提高強度。</value>
-  </data>
-  <data name="PasswordWhitespaceError" xml:space="preserve">
-    <value>錢包密碼不要以空格開頭或結尾。</value>
-  </data>
-  <data name="Signers" xml:space="preserve">
-    <value>簽名人</value>
-  </data>
-  <data name="TransactionHash" xml:space="preserve">
-    <value>交易雜湊</value>
-  </data>
-  <data name="ValidUntilBlock" xml:space="preserve">
-    <value>有效至區塊</value>
-  </data>
 </root>

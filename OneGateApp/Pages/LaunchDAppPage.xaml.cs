@@ -27,7 +27,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
-    string DAppHost => NormalizeHost(new Uri(DApp.Url).Host);
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
@@ -235,15 +234,15 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             uriOld.Port != uriNew.Port;
     }
 
+    static string NormalizeHost(string host)
+    {
+        return host.TrimEnd('.').ToLowerInvariant();
+    }
+
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)
     {
         var response = await rpcServer.HandleRequestAsync(request);
         await webView.EvaluateJavaScriptAsync($"window.__OneGateDapiCallback({response.ToJsonString()})");
-    }
-
-    static string NormalizeHost(string host)
-    {
-        return host.TrimEnd('.').ToLowerInvariant();
     }
 
     async Task EmitEventAsync(string eventName, JsonObject? detial)

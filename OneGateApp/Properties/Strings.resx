@@ -833,37 +833,4 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp Testing</value>
   </data>
-  <data name="Network" xml:space="preserve">
-    <value>Network</value>
-  </data>
-  <data name="Origin" xml:space="preserve">
-    <value>Origin</value>
-  </data>
-  <data name="PasswordRepeatedPatternError" xml:space="preserve">
-    <value>Avoid repeated characters, repeated patterns, or obvious sequences.</value>
-  </data>
-  <data name="PasswordTooCommonError" xml:space="preserve">
-    <value>This password is too common. Choose a more unique wallet password.</value>
-  </data>
-  <data name="PasswordTooLongError" xml:space="preserve">
-    <value>Use no more than {0} characters.</value>
-  </data>
-  <data name="PasswordTooShortError" xml:space="preserve">
-    <value>Use at least {0} characters.</value>
-  </data>
-  <data name="PasswordTooSimpleError" xml:space="preserve">
-    <value>Use a stronger mix of uppercase letters, lowercase letters, numbers, or symbols.</value>
-  </data>
-  <data name="PasswordWhitespaceError" xml:space="preserve">
-    <value>Do not start or end your wallet password with spaces.</value>
-  </data>
-  <data name="Signers" xml:space="preserve">
-    <value>Signers</value>
-  </data>
-  <data name="TransactionHash" xml:space="preserve">
-    <value>Transaction hash</value>
-  </data>
-  <data name="ValidUntilBlock" xml:space="preserve">
-    <value>Valid until block</value>
-  </data>
 </root>
