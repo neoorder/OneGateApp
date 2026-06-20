@@ -23,5 +23,5 @@
         <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding DApp}" />
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
     </ContentPage.ToolbarItems>
-    <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" Navigated="OnNavigated" InvokedFromJavaScript="OnInvokedFromJavaScript" />
+    <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />
 </ContentPage>

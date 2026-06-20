@@ -57,12 +57,18 @@ partial class BridgeWebViewHandler
                 }
             };
             """;
-        var script = new WKUserScript(new NSString(shim), WKUserScriptInjectionTime.AtDocumentStart, true);
-        controller.AddUserScript(script);
+        controller.AddUserScript(CreateDocumentStartScript(shim));
+        if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
+            controller.AddUserScript(CreateDocumentStartScript(BridgeWebView.DocumentStartScript));
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
         config.Preferences.ElementFullscreenEnabled = true;
         config.UserContentController = controller;
         return new MauiWKWebView(CGRect.Empty, this, config);
+    }
+
+    static WKUserScript CreateDocumentStartScript(string script)
+    {
+        return new WKUserScript(new NSString(script), WKUserScriptInjectionTime.AtDocumentStart, true);
     }
 }
 #endif
