@@ -34,9 +34,9 @@ class HomeShortcutService(HttpClient httpClient) : IHomeShortcutService
         string deepLink = $"https://{SharedOptions.OneGateDomain}/app/{dapp.Id}";
         var deepLinkUri = Android.Net.Uri.Parse(deepLink);
         var intent = new Intent(Intent.ActionView, deepLinkUri);
-        intent.SetClass(activity, typeof(MainActivity));
+        intent.SetClass(activity, typeof(DocumentLinkActivity));
         intent.SetPackage(activity.PackageName);
-        intent.AddFlags(ActivityFlags.ClearTop | ActivityFlags.SingleTop);
+        intent.AddFlags(ActivityFlags.NewDocument);
         AndroidIcon icon = await CreateShortcutIconAsync(activity, dapp.IconUrl);
         var shortcut = new ShortcutInfo.Builder(activity, $"dapp-{dapp.Id}")
             .SetShortLabel(title)
