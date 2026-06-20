@@ -214,56 +214,11 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Confirmed 的本地化字符串。
-        /// </summary>
-        internal static string BackupConfirmed {
-            get {
-                return ResourceManager.GetString("BackupConfirmed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 You marked your recovery material as backed up. Keep it offline and separate from this device. 的本地化字符串。
-        /// </summary>
-        internal static string BackupConfirmedText {
-            get {
-                return ResourceManager.GetString("BackupConfirmedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 I have written down and securely backed up the above mnemonic phrase 的本地化字符串。
         /// </summary>
         internal static string BackupMnemonicCheckBoxText {
             get {
                 return ResourceManager.GetString("BackupMnemonicCheckBoxText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Needs review 的本地化字符串。
-        /// </summary>
-        internal static string BackupNotConfirmed {
-            get {
-                return ResourceManager.GetString("BackupNotConfirmed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 OneGate cannot verify your backup. Confirm only after you have stored your recovery material safely. 的本地化字符串。
-        /// </summary>
-        internal static string BackupNotConfirmedText {
-            get {
-                return ResourceManager.GetString("BackupNotConfirmedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Backup status 的本地化字符串。
-        /// </summary>
-        internal static string BackupStatus {
-            get {
-                return ResourceManager.GetString("BackupStatus", resourceCulture);
             }
         }
         

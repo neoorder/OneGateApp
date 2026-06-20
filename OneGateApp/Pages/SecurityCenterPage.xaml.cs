@@ -10,7 +10,6 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class SecurityCenterPage : ContentPage
 {
-    const string BackupConfirmedKey = "wallet/backup_confirmed";
     const string ShowBalanceKey = "wallet/showBalance";
 
     readonly ApplicationDbContext dbContext;
@@ -19,16 +18,12 @@ public partial class SecurityCenterPage : ContentPage
 
     public Command RefreshCommand { get; }
     public bool IsRefreshing { get; set { field = value; OnPropertyChanged(); } }
-    public bool IsBackupConfirmed { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(BackupStatus)); OnPropertyChanged(nameof(BackupStatusText)); } }
     public bool IsPrivacyModeEnabled { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(PrivacyModeStatus)); } }
     public bool IsBiometricAvailable { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(BiometricStatus)); OnPropertyChanged(nameof(BiometricStatusText)); OnPropertyChanged(nameof(BiometricActionText)); } }
     public bool IsBiometricEnabled { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(BiometricStatus)); OnPropertyChanged(nameof(BiometricStatusText)); OnPropertyChanged(nameof(BiometricActionText)); } }
     public string RpcStatus { get; set { field = value; OnPropertyChanged(); } } = Strings.Checking;
     public string RpcStatusText { get; set { field = value; OnPropertyChanged(); } } = "";
     public string LastCheckedText { get; set { field = value; OnPropertyChanged(); } } = "";
-
-    public string BackupStatus => IsBackupConfirmed ? Strings.BackupConfirmed : Strings.BackupNotConfirmed;
-    public string BackupStatusText => IsBackupConfirmed ? Strings.BackupConfirmedText : Strings.BackupNotConfirmedText;
     public string PrivacyModeStatus => IsPrivacyModeEnabled ? Strings.Enabled : Strings.Disabled;
     public string BiometricStatus => IsBiometricEnabled ? Strings.Enabled : IsBiometricAvailable ? Strings.Available : Strings.Unavailable;
     public string BiometricStatusText => IsBiometricEnabled
@@ -59,7 +54,6 @@ public partial class SecurityCenterPage : ContentPage
         suppressToggleUpdates = true;
         try
         {
-            IsBackupConfirmed = await dbContext.Settings.GetAsync<bool>(BackupConfirmedKey);
             IsPrivacyModeEnabled = !await dbContext.Settings.GetAsync<bool>(ShowBalanceKey);
             IsBiometricAvailable = await DataProtectionService.CheckAvailabilityAsync();
             IsBiometricEnabled = await dbContext.Settings.ExistsAsync("biometric/credential");
@@ -85,21 +79,6 @@ public partial class SecurityCenterPage : ContentPage
         {
             RpcStatus = Strings.ConnectionIssue;
             RpcStatusText = string.Format(Strings.RpcStatusUnavailableText, SharedOptions.RpcServerUri.Host);
-        }
-    }
-
-    async void OnBackupConfirmedToggled(object sender, ToggledEventArgs e)
-    {
-        if (suppressToggleUpdates) return;
-        IsBackupConfirmed = e.Value;
-        try
-        {
-            await dbContext.Settings.PutAsync(BackupConfirmedKey, e.Value);
-        }
-        catch (Exception ex)
-        {
-            RevertToggleState(() => IsBackupConfirmed = !e.Value);
-            await Toast.Show(ex.Message);
         }
     }
 

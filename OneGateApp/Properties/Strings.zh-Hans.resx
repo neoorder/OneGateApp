@@ -869,21 +869,6 @@
   <data name="Available" xml:space="preserve">
     <value>可用</value>
   </data>
-  <data name="BackupConfirmed" xml:space="preserve">
-    <value>已确认</value>
-  </data>
-  <data name="BackupConfirmedText" xml:space="preserve">
-    <value>您已标记恢复材料完成备份。请继续离线保存，并避免与本设备放在一起。</value>
-  </data>
-  <data name="BackupNotConfirmed" xml:space="preserve">
-    <value>需要确认</value>
-  </data>
-  <data name="BackupNotConfirmedText" xml:space="preserve">
-    <value>OneGate 无法验证您的备份。请仅在安全保存恢复材料后再确认。</value>
-  </data>
-  <data name="BackupStatus" xml:space="preserve">
-    <value>备份状态</value>
-  </data>
   <data name="BiometricAvailableText" xml:space="preserve">
     <value>设备支持生物识别，但尚未启用于钱包授权。</value>
   </data>

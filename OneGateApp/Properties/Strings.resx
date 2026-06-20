@@ -869,21 +869,6 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Available" xml:space="preserve">
     <value>Available</value>
   </data>
-  <data name="BackupConfirmed" xml:space="preserve">
-    <value>Confirmed</value>
-  </data>
-  <data name="BackupConfirmedText" xml:space="preserve">
-    <value>You marked your recovery material as backed up. Keep it offline and separate from this device.</value>
-  </data>
-  <data name="BackupNotConfirmed" xml:space="preserve">
-    <value>Needs review</value>
-  </data>
-  <data name="BackupNotConfirmedText" xml:space="preserve">
-    <value>OneGate cannot verify your backup. Confirm only after you have stored your recovery material safely.</value>
-  </data>
-  <data name="BackupStatus" xml:space="preserve">
-    <value>Backup status</value>
-  </data>
   <data name="BiometricAvailableText" xml:space="preserve">
     <value>Device biometrics are available but not enabled for wallet approval.</value>
   </data>
