@@ -49,6 +49,7 @@ public partial class App : Application
         if (!supportMultiWindow && Windows.Count > 0 && Windows[0].Page is AppShell shell)
         {
             _ = appLinkAction.GotoRoute(shell);
+            appLinkAction = null;
         }
 #endif
         return true;
@@ -66,6 +67,7 @@ public partial class App : Application
         {
             page = appLinkAction?.GetPage(serviceProvider)
                 ?? serviceProvider.GetServiceOrCreateInstance<AppShell>();
+            appLinkAction = null;
         }
         return new Window(page)
         {
