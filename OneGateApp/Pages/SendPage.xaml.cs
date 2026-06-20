@@ -273,9 +273,9 @@ public partial class SendPage : ContentPage, IQueryAttributable
             HasClipboardText = false;
             await Toast.Show(Strings.AddressPasted);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            await Toast.Show(ex.Message);
+            await Toast.Show(Strings.ClipboardAddressInvalid);
         }
     }
 
