@@ -1,37 +1,24 @@
-using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Services;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Controls.Popups;
 
 public partial class SelectContactPopup : MyPopup<Contact?>
 {
-    readonly ApplicationDbContext dbContext;
-    Contact[]? contacts_all;
+    readonly AddressBookService addressBookService;
 
     public required Contact[] Contacts { get; set { field = value; OnPropertyChanged(); } }
 
-    public SelectContactPopup(ApplicationDbContext dbContext)
+    public SelectContactPopup(AddressBookService addressBookService)
     {
-        this.dbContext = dbContext;
+        this.addressBookService = addressBookService;
         InitializeComponent();
         LoadData();
     }
 
-    void OnSearch(object sender, TextChangedEventArgs e)
+    async void OnSearch(object sender, TextChangedEventArgs e)
     {
-        contacts_all ??= Contacts;
-        if (string.IsNullOrWhiteSpace(e.NewTextValue))
-        {
-            Contacts = contacts_all;
-        }
-        else
-        {
-            string filter = e.NewTextValue.Trim();
-            Contacts = contacts_all
-                .Where(p => p.Label.Contains(filter, StringComparison.OrdinalIgnoreCase))
-                .ToArray();
-        }
+        Contacts = await addressBookService.GetSuggestionsAsync(e.NewTextValue, 30);
     }
 
     async void OnSelectContact(object sender, TappedEventArgs e)
@@ -52,6 +39,6 @@ public partial class SelectContactPopup : MyPopup<Contact?>
 
     async Task LoadContactsAsync()
     {
-        Contacts = await dbContext.Contacts.ToArrayAsync();
+        Contacts = await addressBookService.GetEntriesAsync();
     }
 }
