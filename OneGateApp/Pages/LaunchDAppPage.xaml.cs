@@ -4,6 +4,7 @@ using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Views;
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
@@ -53,10 +54,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         else
         {
             Uri uri = query["uri"] as Uri ?? new(WebUtility.UrlDecode((string)query["uri"]));
-            if (uri.Authority == SharedOptions.OneGateDomain && uri.Segments[1] == "app/")
+            if (LaunchDAppAction.TryCreate(uri) is LaunchDAppAction action)
             {
-                int id = int.Parse(uri.Segments[2]);
-                var response = await httpClient.GetAsync($"/api/dapp/{id}");
+                var response = await httpClient.GetAsync($"/api/dapp/{action.AppId}");
                 if (!response.IsSuccessStatusCode)
                 {
                     await this.GoBackOrCloseAsync();
