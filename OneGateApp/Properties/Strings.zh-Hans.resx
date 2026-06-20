@@ -301,7 +301,7 @@
     <value>应用正在请求使用您的钱包地址登录，是否允许？</value>
   </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
-    <value>设置生物识别授权</value>
+    <value>创建生物识别凭证</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
     <value>检测到您的设备支持生物识别。设置后，您可以用生物识别解锁 OneGate 并授权钱包操作，无需每次输入密码。</value>
@@ -310,21 +310,21 @@
     <value>已阻止外部链接跳转</value>
   </data>
   <data name="BiometricAuthentication" xml:space="preserve">
-    <value>生物识别授权</value>
+    <value>生物识别</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>已启用</value>
   </data>
   <data name="BiometricIntroductionText" xml:space="preserve">
-    <value>设置后，您可以使用设备生物识别来解锁 OneGate、登录并授权钱包操作。
+    <value>创建生物识别凭据后，您可以通过生物识别解锁钱包、登录应用或进行支付。
 
-您可以随时关闭生物识别授权。</value>
+您可以随时关闭生物识别功能。</value>
   </data>
   <data name="VerifyPassword" xml:space="preserve">
     <value>验证密码</value>
   </data>
   <data name="VerifyBiometricText" xml:space="preserve">
-    <value>请完成验证以继续。</value>
+    <value>请验证您的生物信息以继续操作</value>
   </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>操作已取消</value>
@@ -354,9 +354,9 @@
     <value>关闭生物识别验证</value>
   </data>
   <data name="DisableBiometricText" xml:space="preserve">
-    <value>您当前已启用生物识别授权，用于钱包访问和敏感操作。是否关闭生物识别授权？
+    <value>您当前已启用生物识别验证用于授权应用访问钱包。是否关闭生物识别验证？
 
-关闭后，您需要输入钱包密码来授权受保护操作。</value>
+关闭后，您需要手动输入钱包密码进行授权。</value>
   </data>
   <data name="BiometricDisabledText" xml:space="preserve">
     <value>生物识别已禁用</value>
@@ -374,7 +374,7 @@
     <value>发送交易</value>
   </data>
   <data name="SendTransactionText" xml:space="preserve">
-    <value>请在授权前仔细核对这笔交易请求：</value>
+    <value>应用正在请求发送交易：</value>
   </data>
   <data name="SelectAddressFromWallet" xml:space="preserve">
     <value>从钱包中选择一个地址</value>
@@ -533,7 +533,7 @@
     <value>交易签名失败</value>
   </data>
   <data name="SendTransactionByUserText" xml:space="preserve">
-    <value>请在授权前核对收款地址、金额、资产和网络手续费。</value>
+    <value>您正在发起一笔转账交易：</value>
   </data>
   <data name="UnknownAddress" xml:space="preserve">
     <value>陌生地址</value>

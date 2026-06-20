@@ -301,7 +301,7 @@
     <value>The app is requesting to sign in with your wallet address. Allow?</value>
   </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
-    <value>Set up biometric approval</value>
+    <value>Create Biometric Credential</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
     <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
@@ -310,21 +310,21 @@
     <value>External link navigation blocked</value>
   </data>
   <data name="BiometricAuthentication" xml:space="preserve">
-    <value>Biometric approval</value>
+    <value>Biometric Authentication</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
   <data name="BiometricIntroductionText" xml:space="preserve">
-    <value>After setup, you can use device biometrics to unlock OneGate, sign in, and approve wallet actions.
+    <value>After creating a biometric credential, you can use biometrics to unlock your wallet, sign in to the app, or make payments.
 
-You can disable biometric approval at any time.</value>
+You can disable biometric authentication at any time.</value>
   </data>
   <data name="VerifyPassword" xml:space="preserve">
     <value>Verify password</value>
   </data>
   <data name="VerifyBiometricText" xml:space="preserve">
-    <value>Authenticate to continue.</value>
+    <value>Please verify your biometrics to continue</value>
   </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operation cancelled</value>
@@ -354,9 +354,9 @@ You can disable biometric approval at any time.</value>
     <value>Disable biometric authentication</value>
   </data>
   <data name="DisableBiometricText" xml:space="preserve">
-    <value>Biometric approval is currently enabled for wallet access and sensitive actions. Disable biometric approval?
+    <value>Biometric authentication is currently enabled to authorize app access to your wallet. Disable biometric authentication?
 
-After disabling it, you will need to enter your wallet password to approve protected actions.</value>
+After disabling, you will need to manually enter your wallet password to authorize access.</value>
   </data>
   <data name="BiometricDisabledText" xml:space="preserve">
     <value>Biometric authentication is disabled</value>
@@ -374,7 +374,7 @@ After disabling it, you will need to enter your wallet password to approve prote
     <value>Send transaction</value>
   </data>
   <data name="SendTransactionText" xml:space="preserve">
-    <value>Review this transaction request before approving it:</value>
+    <value>The app is requesting to send a transaction:</value>
   </data>
   <data name="SelectAddressFromWallet" xml:space="preserve">
     <value>Select an address from your wallet</value>
@@ -533,7 +533,7 @@ After disabling it, you will need to enter your wallet password to approve prote
     <value>Transaction signing failed</value>
   </data>
   <data name="SendTransactionByUserText" xml:space="preserve">
-    <value>Review the recipient, amount, asset, and network fee before approving this transfer.</value>
+    <value>You are initiating a transfer transaction:</value>
   </data>
   <data name="UnknownAddress" xml:space="preserve">
     <value>Unknown address</value>
