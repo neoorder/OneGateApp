@@ -454,6 +454,51 @@
   <data name="ReceiveQRCodeText" xml:space="preserve">
     <value>该地址可接收 Neo 平台上的所有资产。</value>
   </data>
+  <data name="ReceiveRequestTitle" xml:space="preserve">
+    <value>创建收款请求</value>
+  </data>
+  <data name="ReceiveRequestSubtitle" xml:space="preserve">
+    <value>分享二维码前，可添加可选的付款信息。</value>
+  </data>
+  <data name="ReceiveRequestDetails" xml:space="preserve">
+    <value>请求信息</value>
+  </data>
+  <data name="RequestedAmount" xml:space="preserve">
+    <value>请求金额</value>
+  </data>
+  <data name="OptionalAmountPlaceholder" xml:space="preserve">
+    <value>0.00（可选）</value>
+  </data>
+  <data name="InvalidRequestedAmount" xml:space="preserve">
+    <value>请输入大于 0 的金额。</value>
+  </data>
+  <data name="RequestMemo" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="RequestMemoPlaceholder" xml:space="preserve">
+    <value>发票、订单或说明</value>
+  </data>
+  <data name="RequestData" xml:space="preserve">
+    <value>参考数据</value>
+  </data>
+  <data name="RequestDataPlaceholder" xml:space="preserve">
+    <value>可选付款参考</value>
+  </data>
+  <data name="ReceiveAddressSafetyTitle" xml:space="preserve">
+    <value>分享前检查</value>
+  </data>
+  <data name="ReceiveAddressSafetyText" xml:space="preserve">
+    <value>只将此 Neo 地址分享给可信的人。金额、备注和数据只是请求信息；资金只有在付款方检查并确认后才会转出。</value>
+  </data>
+  <data name="CopyRequestLink" xml:space="preserve">
+    <value>复制请求</value>
+  </data>
+  <data name="ReceiveRequestCopied" xml:space="preserve">
+    <value>付款请求已复制</value>
+  </data>
+  <data name="ShareQRCode" xml:space="preserve">
+    <value>分享二维码</value>
+  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>保存到相册</value>
   </data>

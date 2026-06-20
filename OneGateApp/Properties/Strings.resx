@@ -454,6 +454,51 @@ After disabling, you will need to manually enter your wallet password to authori
   <data name="ReceiveQRCodeText" xml:space="preserve">
     <value>This address can receive all assets on the Neo platform.</value>
   </data>
+  <data name="ReceiveRequestTitle" xml:space="preserve">
+    <value>Create receive request</value>
+  </data>
+  <data name="ReceiveRequestSubtitle" xml:space="preserve">
+    <value>Add optional payment details before sharing your QR code.</value>
+  </data>
+  <data name="ReceiveRequestDetails" xml:space="preserve">
+    <value>Request details</value>
+  </data>
+  <data name="RequestedAmount" xml:space="preserve">
+    <value>Requested amount</value>
+  </data>
+  <data name="OptionalAmountPlaceholder" xml:space="preserve">
+    <value>0.00 (optional)</value>
+  </data>
+  <data name="InvalidRequestedAmount" xml:space="preserve">
+    <value>Enter a positive amount.</value>
+  </data>
+  <data name="RequestMemo" xml:space="preserve">
+    <value>Memo</value>
+  </data>
+  <data name="RequestMemoPlaceholder" xml:space="preserve">
+    <value>Invoice, order, or note</value>
+  </data>
+  <data name="RequestData" xml:space="preserve">
+    <value>Reference data</value>
+  </data>
+  <data name="RequestDataPlaceholder" xml:space="preserve">
+    <value>Optional payment reference</value>
+  </data>
+  <data name="ReceiveAddressSafetyTitle" xml:space="preserve">
+    <value>Check before sharing</value>
+  </data>
+  <data name="ReceiveAddressSafetyText" xml:space="preserve">
+    <value>Only share this Neo address with people you trust. Amount, memo, and data are request details; funds move only after the sender reviews and confirms.</value>
+  </data>
+  <data name="CopyRequestLink" xml:space="preserve">
+    <value>Copy request</value>
+  </data>
+  <data name="ReceiveRequestCopied" xml:space="preserve">
+    <value>Payment request copied</value>
+  </data>
+  <data name="ShareQRCode" xml:space="preserve">
+    <value>Share QR</value>
+  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Save to gallery</value>
   </data>
