@@ -150,13 +150,6 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
         parts.Add($"{label}: {value}");
     }
 
-    async void OnCopyRequestUri(object sender, EventArgs e)
-    {
-        if (!IsRequestValid) return;
-        await Clipboard.SetTextAsync(AddressUri);
-        await Toast.Show(Strings.ReceiveRequestCopied);
-    }
-
     async void OnShareQRCode(object sender, EventArgs e)
     {
         if (!IsRequestValid) return;

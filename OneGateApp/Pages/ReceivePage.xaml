@@ -57,10 +57,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                <Button Text="{x:Static og:Strings.CopyRequestLink}" IsEnabled="{Binding IsRequestValid}" Clicked="OnCopyRequestUri" />
-                <Button Grid.Column="1" Text="{x:Static og:Strings.ShareQRCode}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" IsEnabled="{Binding IsRequestValid}" Clicked="OnShareQRCode" />
-            </Grid>
+            <Button Text="{x:Static og:Strings.ShareQRCode}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" IsEnabled="{Binding IsRequestValid}" Clicked="OnShareQRCode" />
             <Button StyleClass="Secondary" Text="{x:Static og:Strings.SaveToPhotoLibrary}" Clicked="OnSaveToPhotoLibrary" />
         </VerticalStackLayout>
     </ScrollView>

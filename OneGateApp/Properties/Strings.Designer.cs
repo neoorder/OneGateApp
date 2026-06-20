@@ -514,15 +514,6 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Copy request 的本地化字符串。
-        /// </summary>
-        internal static string CopyRequestLink {
-            get {
-                return ResourceManager.GetString("CopyRequestLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Create Biometric Credential 的本地化字符串。
         /// </summary>
         internal static string CreateBiometricCredential {
@@ -1764,15 +1755,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ReceiveQRCodeTitle {
             get {
                 return ResourceManager.GetString("ReceiveQRCodeTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Payment request copied 的本地化字符串。
-        /// </summary>
-        internal static string ReceiveRequestCopied {
-            get {
-                return ResourceManager.GetString("ReceiveRequestCopied", resourceCulture);
             }
         }
         

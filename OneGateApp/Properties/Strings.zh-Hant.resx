@@ -890,12 +890,6 @@
   <data name="RequestDataPlaceholder" xml:space="preserve">
     <value>選填付款參考</value>
   </data>
-  <data name="CopyRequestLink" xml:space="preserve">
-    <value>複製請求</value>
-  </data>
-  <data name="ReceiveRequestCopied" xml:space="preserve">
-    <value>付款請求已複製</value>
-  </data>
   <data name="ShareQRCode" xml:space="preserve">
     <value>分享 QR Code</value>
   </data>

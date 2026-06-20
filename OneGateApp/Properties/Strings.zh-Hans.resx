@@ -478,12 +478,6 @@
   <data name="RequestDataPlaceholder" xml:space="preserve">
     <value>可选付款参考</value>
   </data>
-  <data name="CopyRequestLink" xml:space="preserve">
-    <value>复制请求</value>
-  </data>
-  <data name="ReceiveRequestCopied" xml:space="preserve">
-    <value>付款请求已复制</value>
-  </data>
   <data name="ShareQRCode" xml:space="preserve">
     <value>分享二维码</value>
   </data>
