@@ -46,55 +46,70 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        string url;
-        Uri? launchUri = GetLaunchUri(query);
-        if (query.TryGetValue("dapp", out var value))
+        // Reached from external app-links / scanned QR codes (LaunchDAppAction, Commands), so the inputs
+        // are untrusted and may be malformed. Any failure here must close the page gracefully rather than
+        // surface an unhandled exception on the SynchronizationContext, which crashes the app.
+        try
         {
-            DApp = (DApp)value;
-            url = launchUri is null
-                ? DApp.Url
-                : DAppLaunchUri.ApplyLaunchParameters(DApp.Url, launchUri);
-        }
-        else
-        {
-            Uri uri = launchUri ?? throw new ArgumentException("Missing launch URI.");
-            if (LaunchDAppAction.TryCreate(uri) is LaunchDAppAction action)
+            string url;
+            Uri? launchUri = GetLaunchUri(query);
+            if (query.TryGetValue("dapp", out var value) && value is DApp dapp)
             {
-                var response = await httpClient.GetAsync($"/api/dapp/{action.AppId}");
-                if (!response.IsSuccessStatusCode)
+                DApp = dapp;
+                url = launchUri is null
+                    ? DApp.Url
+                    : DAppLaunchUri.ApplyLaunchParameters(DApp.Url, launchUri);
+            }
+            else if (launchUri is { } uri)
+            {
+                if (LaunchDAppAction.TryCreate(uri) is LaunchDAppAction action)
                 {
-                    await this.GoBackOrCloseAsync();
-                    return;
+                    var response = await httpClient.GetAsync($"/api/dapp/{action.AppId}");
+                    if (!response.IsSuccessStatusCode
+                        || await response.Content.ReadFromJsonAsync<DApp>() is not DApp fetched)
+                    {
+                        await this.GoBackOrCloseAsync();
+                        return;
+                    }
+                    DApp = fetched;
+                    url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, action.Uri);
                 }
-                DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
-                url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, action.Uri);
+                else
+                {
+                    DApp = new DApp
+                    {
+                        Id = 0,
+                        IsActive = false,
+                        Name = $"{{\"en\":\"{uri.Host}\"}}",
+                        Url = uri.AbsoluteUri,
+                        Languages = ["en"]
+                    };
+                    url = uri.AbsoluteUri;
+                }
             }
             else
             {
-                DApp = new DApp
-                {
-                    Id = 0,
-                    IsActive = false,
-                    Name = $"{{\"en\":\"{uri.Host}\"}}",
-                    Url = uri.AbsoluteUri,
-                    Languages = ["en"]
-                };
-                url = uri.AbsoluteUri;
+                await this.GoBackOrCloseAsync();
+                return;
+            }
+            webView.DocumentStartScript = CreateDapiProviderScript();
+            Url = url;
+            if (DApp.Id > 0)
+            {
+                List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
+                IsFavorite = favorites?.Contains(DApp.Id) ?? false;
+                List<int> recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+                recents.Remove(DApp.Id);
+                recents.Insert(0, DApp.Id);
+                while (recents.Count > 10)
+                    recents.RemoveAt(recents.Count - 1);
+                await dbContext.Settings.PutAsync("dapps/recent", recents);
+                if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
             }
         }
-        webView.DocumentStartScript = CreateDapiProviderScript();
-        Url = url;
-        if (DApp.Id > 0)
+        catch (Exception)
         {
-            List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
-            IsFavorite = favorites?.Contains(DApp.Id) ?? false;
-            List<int> recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
-            recents.Remove(DApp.Id);
-            recents.Insert(0, DApp.Id);
-            while (recents.Count > 10)
-                recents.RemoveAt(recents.Count - 1);
-            await dbContext.Settings.PutAsync("dapps/recent", recents);
-            if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
+            await this.GoBackOrCloseAsync();
         }
     }
 
@@ -102,7 +117,12 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     {
         if (!query.TryGetValue("uri", out var value))
             return null;
-        return value as Uri ?? new(WebUtility.UrlDecode((string)value));
+        if (value is Uri uri)
+            return uri;
+        return value is string text
+            && Uri.TryCreate(WebUtility.UrlDecode(text), UriKind.Absolute, out Uri? parsed)
+            ? parsed
+            : null;
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
