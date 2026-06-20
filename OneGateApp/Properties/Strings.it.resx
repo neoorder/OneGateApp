@@ -866,4 +866,103 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="DAppTesting" xml:space="preserve">
     <value>Test DApp</value>
   </data>
+  <data name="Available" xml:space="preserve">
+    <value>Disponibile</value>
+  </data>
+  <data name="BiometricAvailableText" xml:space="preserve">
+    <value>La biometria del dispositivo è disponibile, ma non è abilitata per l’approvazione del portafoglio.</value>
+  </data>
+  <data name="BiometricEnabledText" xml:space="preserve">
+    <value>Le azioni protette possono usare la biometria del dispositivo su questo dispositivo.</value>
+  </data>
+  <data name="BiometricStatus" xml:space="preserve">
+    <value>Biometria</value>
+  </data>
+  <data name="BiometricUnavailableSecurityText" xml:space="preserve">
+    <value>La biometria del dispositivo non è disponibile. L’approvazione con password del portafoglio rimane attiva.</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Controllo in corso</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connesso</value>
+  </data>
+  <data name="ConnectionIssue" xml:space="preserve">
+    <value>Problema di connessione</value>
+  </data>
+  <data name="DAppAuthorization" xml:space="preserve">
+    <value>Autorizzazione dApp</value>
+  </data>
+  <data name="DAppAuthorizationStatus" xml:space="preserve">
+    <value>Solo sessione</value>
+  </data>
+  <data name="DAppAuthorizationText" xml:space="preserve">
+    <value>Le dApp devono richiedere ogni volta le azioni del portafoglio tramite OneGate. Le approvazioni persistenti non vengono salvate.</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disattivato</value>
+  </data>
+  <data name="LastCheckedAt" xml:space="preserve">
+    <value>Ultimo controllo: {0}</value>
+  </data>
+  <data name="ManageBiometrics" xml:space="preserve">
+    <value>Gestisci biometria</value>
+  </data>
+  <data name="ManageWalletPassword" xml:space="preserve">
+    <value>Gestisci password del portafoglio</value>
+  </data>
+  <data name="ManageWalletPasswordText" xml:space="preserve">
+    <value>Modifica la password usata per sbloccare e firmare con questo portafoglio.</value>
+  </data>
+  <data name="NetworkStatus" xml:space="preserve">
+    <value>Stato della rete</value>
+  </data>
+  <data name="PasswordProtected" xml:space="preserve">
+    <value>Protetto</value>
+  </data>
+  <data name="PasswordProtectedText" xml:space="preserve">
+    <value>Il portafoglio locale richiede la password prima di firmare azioni sensibili.</value>
+  </data>
+  <data name="PasswordStatus" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PrivacyMode" xml:space="preserve">
+    <value>Modalità privacy</value>
+  </data>
+  <data name="PrivacyModeText" xml:space="preserve">
+    <value>Nasconde i saldi nelle schermate del portafoglio quando sei in pubblico o condividi lo schermo.</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Rivedi</value>
+  </data>
+  <data name="ReviewBackup" xml:space="preserve">
+    <value>Rivedi backup di recupero</value>
+  </data>
+  <data name="ReviewBackupText" xml:space="preserve">
+    <value>Apri il flusso di esportazione del portafoglio e rivedi le opzioni di archiviazione sicura.</value>
+  </data>
+  <data name="RpcStatusConnectedText" xml:space="preserve">
+    <value>{0} risponde. Blocco corrente: {1:N0}.</value>
+  </data>
+  <data name="RpcStatusUnavailableText" xml:space="preserve">
+    <value>{0} non ha risposto. I trasferimenti potrebbero non riuscire finché la connessione non viene ripristinata.</value>
+  </data>
+  <data name="SecurityActions" xml:space="preserve">
+    <value>Azioni di sicurezza</value>
+  </data>
+  <data name="SecurityCenter" xml:space="preserve">
+    <value>Centro sicurezza</value>
+  </data>
+  <data name="SecurityCenterSummaryText" xml:space="preserve">
+    <value>Rivedi protezione del portafoglio, approvazione del dispositivo, stato della rete, modalità privacy e gestione delle richieste dApp.</value>
+  </data>
+  <data name="SecurityCenterSummaryTitle" xml:space="preserve">
+    <value>Protezione del portafoglio a colpo d’occhio</value>
+  </data>
+  <data name="SecurityStatus" xml:space="preserve">
+    <value>Stato sicurezza</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Non disponibile</value>
+  </data>
 </root>
