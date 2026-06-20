@@ -866,4 +866,103 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="DAppTesting" xml:space="preserve">
     <value>Test DApp</value>
   </data>
+  <data name="Available" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
+  <data name="BiometricAvailableText" xml:space="preserve">
+    <value>La biométrie de l’appareil est disponible, mais non activée pour approuver le portefeuille.</value>
+  </data>
+  <data name="BiometricEnabledText" xml:space="preserve">
+    <value>Les actions protégées peuvent utiliser la biométrie de cet appareil.</value>
+  </data>
+  <data name="BiometricStatus" xml:space="preserve">
+    <value>Biométrie</value>
+  </data>
+  <data name="BiometricUnavailableSecurityText" xml:space="preserve">
+    <value>La biométrie de l’appareil n’est pas disponible. L’approbation par mot de passe du portefeuille reste active.</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Vérification en cours</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connecté</value>
+  </data>
+  <data name="ConnectionIssue" xml:space="preserve">
+    <value>Problème de connexion</value>
+  </data>
+  <data name="DAppAuthorization" xml:space="preserve">
+    <value>Autorisation dApp</value>
+  </data>
+  <data name="DAppAuthorizationStatus" xml:space="preserve">
+    <value>Session uniquement</value>
+  </data>
+  <data name="DAppAuthorizationText" xml:space="preserve">
+    <value>Les dApps doivent demander chaque action de portefeuille via OneGate. Les approbations persistantes ne sont pas enregistrées.</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="LastCheckedAt" xml:space="preserve">
+    <value>Dernière vérification : {0}</value>
+  </data>
+  <data name="ManageBiometrics" xml:space="preserve">
+    <value>Gérer la biométrie</value>
+  </data>
+  <data name="ManageWalletPassword" xml:space="preserve">
+    <value>Gérer le mot de passe du portefeuille</value>
+  </data>
+  <data name="ManageWalletPasswordText" xml:space="preserve">
+    <value>Modifiez le mot de passe utilisé pour déverrouiller et signer avec ce portefeuille.</value>
+  </data>
+  <data name="NetworkStatus" xml:space="preserve">
+    <value>État du réseau</value>
+  </data>
+  <data name="PasswordProtected" xml:space="preserve">
+    <value>Protégé</value>
+  </data>
+  <data name="PasswordProtectedText" xml:space="preserve">
+    <value>Votre portefeuille local exige son mot de passe avant de signer des actions sensibles.</value>
+  </data>
+  <data name="PasswordStatus" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="PrivacyMode" xml:space="preserve">
+    <value>Mode confidentialité</value>
+  </data>
+  <data name="PrivacyModeText" xml:space="preserve">
+    <value>Masquez les soldes dans les écrans du portefeuille lorsque vous êtes en public ou partagez votre écran.</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Examiner</value>
+  </data>
+  <data name="ReviewBackup" xml:space="preserve">
+    <value>Examiner la sauvegarde de récupération</value>
+  </data>
+  <data name="ReviewBackupText" xml:space="preserve">
+    <value>Ouvrez le flux d’exportation du portefeuille et examinez les options de stockage sécurisé.</value>
+  </data>
+  <data name="RpcStatusConnectedText" xml:space="preserve">
+    <value>{0} répond. Bloc actuel : {1:N0}.</value>
+  </data>
+  <data name="RpcStatusUnavailableText" xml:space="preserve">
+    <value>{0} n’a pas répondu. Les transferts peuvent échouer jusqu’au rétablissement de la connexion.</value>
+  </data>
+  <data name="SecurityActions" xml:space="preserve">
+    <value>Actions de sécurité</value>
+  </data>
+  <data name="SecurityCenter" xml:space="preserve">
+    <value>Centre de sécurité</value>
+  </data>
+  <data name="SecurityCenterSummaryText" xml:space="preserve">
+    <value>Vérifiez la protection du portefeuille, l’approbation de l’appareil, l’état du réseau, le mode confidentialité et le traitement des demandes dApp.</value>
+  </data>
+  <data name="SecurityCenterSummaryTitle" xml:space="preserve">
+    <value>Protection du portefeuille en un coup d’œil</value>
+  </data>
+  <data name="SecurityStatus" xml:space="preserve">
+    <value>État de sécurité</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Indisponible</value>
+  </data>
 </root>

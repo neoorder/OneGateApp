@@ -51,9 +51,9 @@
 		<string>mailto</string>
 	</array>
 	<key>NSBiometricUsageDescription</key>
-	<string>Need your Touch ID to unlock!</string>
+	<string>Use Touch ID to unlock OneGate and approve wallet actions.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Need your face to unlock!</string>
+	<string>Use Face ID to unlock OneGate and approve wallet actions.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>This app allows web games to use motion sensors for controls.</string>
 	<key>UIApplicationSceneManifest</key>
