@@ -115,15 +115,6 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Address pasted 的本地化字符串。
-        /// </summary>
-        internal static string AddressPasted {
-            get {
-                return ResourceManager.GetString("AddressPasted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 By selecting any option, you agree to {0} and {1}. 的本地化字符串。
         /// </summary>
         internal static string AgreeToTermsAndPrivacy {
@@ -405,33 +396,6 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
-        /// <summary>
-        ///   查找类似 Clipboard available 的本地化字符串。
-        /// </summary>
-        internal static string ClipboardAddressFoundTitle {
-            get {
-                return ResourceManager.GetString("ClipboardAddressFoundTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Clipboard does not contain a valid Neo address. 的本地化字符串。
-        /// </summary>
-        internal static string ClipboardAddressInvalid {
-            get {
-                return ResourceManager.GetString("ClipboardAddressInvalid", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Tap Paste to let OneGate read the clipboard and use it only if it contains a valid Neo address. 的本地化字符串。
-        /// </summary>
-        internal static string ClipboardAddressPromptText {
-            get {
-                return ResourceManager.GetString("ClipboardAddressPromptText", resourceCulture);
-            }
-        }
-        
         /// <summary>
         ///   查找类似 Collection 的本地化字符串。
         /// </summary>
@@ -1646,15 +1610,6 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
-        /// <summary>
-        ///   查找类似 Paste 的本地化字符串。
-        /// </summary>
-        internal static string Paste {
-            get {
-                return ResourceManager.GetString("Paste", resourceCulture);
-            }
-        }
-        
         /// <summary>
         ///   查找类似 Your local wallet requires its password before signing sensitive actions. 的本地化字符串。
         /// </summary>

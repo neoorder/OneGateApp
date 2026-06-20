@@ -866,21 +866,6 @@
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp測試</value>
   </data>
-  <data name="ClipboardAddressFoundTitle" xml:space="preserve">
-    <value>剪貼簿可用</value>
-  </data>
-  <data name="ClipboardAddressPromptText" xml:space="preserve">
-    <value>輕觸貼上後，OneGate 才會讀取剪貼簿；僅當其中包含有效的 Neo 地址時才會填入。</value>
-  </data>
-  <data name="ClipboardAddressInvalid" xml:space="preserve">
-    <value>剪貼簿中沒有有效的 Neo 地址。</value>
-  </data>
-  <data name="Paste" xml:space="preserve">
-    <value>貼上</value>
-  </data>
-  <data name="AddressPasted" xml:space="preserve">
-    <value>地址已貼上</value>
-  </data>
   <data name="SavedAddressTitle" xml:space="preserve">
     <value>已儲存地址</value>
   </data>

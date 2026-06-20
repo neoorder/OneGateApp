@@ -538,21 +538,6 @@ After disabling, you will need to manually enter your wallet password to authori
   <data name="UnknownAddress" xml:space="preserve">
     <value>Unknown address</value>
   </data>
-  <data name="ClipboardAddressFoundTitle" xml:space="preserve">
-    <value>Clipboard available</value>
-  </data>
-  <data name="ClipboardAddressPromptText" xml:space="preserve">
-    <value>Tap Paste to let OneGate read the clipboard and use it only if it contains a valid Neo address.</value>
-  </data>
-  <data name="ClipboardAddressInvalid" xml:space="preserve">
-    <value>Clipboard does not contain a valid Neo address.</value>
-  </data>
-  <data name="Paste" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="AddressPasted" xml:space="preserve">
-    <value>Address pasted</value>
-  </data>
   <data name="SavedAddressTitle" xml:space="preserve">
     <value>Saved address</value>
   </data>

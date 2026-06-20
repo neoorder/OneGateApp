@@ -538,21 +538,6 @@
   <data name="UnknownAddress" xml:space="preserve">
     <value>陌生地址</value>
   </data>
-  <data name="ClipboardAddressFoundTitle" xml:space="preserve">
-    <value>剪贴板可用</value>
-  </data>
-  <data name="ClipboardAddressPromptText" xml:space="preserve">
-    <value>点击粘贴后，OneGate 才会读取剪贴板；仅当其中包含有效 Neo 地址时才会填入。</value>
-  </data>
-  <data name="ClipboardAddressInvalid" xml:space="preserve">
-    <value>剪贴板中没有有效的 Neo 地址。</value>
-  </data>
-  <data name="Paste" xml:space="preserve">
-    <value>粘贴</value>
-  </data>
-  <data name="AddressPasted" xml:space="preserve">
-    <value>地址已粘贴</value>
-  </data>
   <data name="SavedAddressTitle" xml:space="preserve">
     <value>已保存地址</value>
   </data>
