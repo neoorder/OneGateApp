@@ -8,7 +8,7 @@
              BindingContext="{Binding Source={RelativeSource Self}}">
     <ContentPage.Resources>
         <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
-        <og:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+        <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.ScanQRCode}" Command="{x:Static og:Commands.ScanQRCode}" />
@@ -46,7 +46,7 @@
                 <DataTemplate x:DataType="og:News">
                     <Border StyleClass="Card" Padding="9">
                         <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto" ColumnSpacing="12" RowSpacing="5">
-                            <Border Grid.RowSpan="2" StrokeShape="RoundRectangle 10" StrokeThickness="0" WidthRequest="104" HeightRequest="66" IsVisible="{Binding ImageUrl, Converter={StaticResource IsNotNullOrEmptyConverter}}">
+                            <Border Grid.RowSpan="2" StrokeShape="RoundRectangle 10" StrokeThickness="0" WidthRequest="104" HeightRequest="66" IsVisible="{Binding ImageUrl, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
                                 <Image Aspect="AspectFill">
                                     <Image.Source>
                                         <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="90:00:00:00" />
