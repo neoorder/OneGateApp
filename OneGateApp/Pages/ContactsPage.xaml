@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              x:Class="NeoOrder.OneGate.Pages.ContactsPage"
              x:Name="Root"
              Title="{x:Static og:Strings.AddressBook}"
@@ -12,7 +13,7 @@
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="auto,*" Margin="20" RowSpacing="16">
-        <SearchBar Placeholder="{x:Static og:Strings.SearchAddressBook}" TextChanged="OnSearch" />
+        <SearchBar Placeholder="{x:Static og:Strings.SearchAddressBook}" ios:SearchBar.SearchBarStyle="Minimal" TextChanged="OnSearch" />
         <CollectionView Grid.Row="1" ItemsSource="{Binding Contacts}">
             <CollectionView.EmptyView>
                 <Grid RowDefinitions="*,auto,*">
