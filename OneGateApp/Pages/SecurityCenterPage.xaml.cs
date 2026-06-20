@@ -132,9 +132,4 @@ public partial class SecurityCenterPage : ContentPage
         string route = IsBiometricEnabled ? "//home/settings/biometric/disable" : "//home/settings/biometric/create";
         await Shell.Current.GoToAsync(route);
     }
-
-    async void OnReviewDAppsTapped(object sender, TappedEventArgs e)
-    {
-        await Shell.Current.GoToAsync("//dapps");
-    }
 }

@@ -89,7 +89,7 @@
                                 <TapGestureRecognizer Tapped="OnManagePasswordTapped" />
                             </Grid.GestureRecognizers>
                         </Grid>
-                        <BoxView HeightRequest="1" />
+                        <BoxView HeightRequest="1" IsVisible="{Binding IsBiometricAvailable}" />
                         <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="14" Padding="16,14" IsVisible="{Binding IsBiometricAvailable}">
                             <Label StyleClass="Icon, Secondary" Text="&#xe67f;" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" Spacing="2">
@@ -99,18 +99,6 @@
                             <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" />
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnManageBiometricsTapped" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                        <BoxView HeightRequest="1" IsVisible="{Binding IsBiometricAvailable}" />
-                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="14" Padding="16,14">
-                            <Label StyleClass="Icon, Secondary" Text="&#xe853;" FontSize="20" VerticalOptions="Center" />
-                            <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                <Label Text="{x:Static og:Strings.ReviewDApps}" FontAttributes="Bold" />
-                                <Label StyleClass="Secondary" Text="{x:Static og:Strings.ReviewDAppsText}" FontSize="12" LineBreakMode="TailTruncation" />
-                            </VerticalStackLayout>
-                            <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" />
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnReviewDAppsTapped" />
                             </Grid.GestureRecognizers>
                         </Grid>
                     </VerticalStackLayout>

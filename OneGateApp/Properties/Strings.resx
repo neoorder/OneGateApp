@@ -941,12 +941,6 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="ReviewBackupText" xml:space="preserve">
     <value>Open the wallet export flow and review secure storage options.</value>
   </data>
-  <data name="ReviewDApps" xml:space="preserve">
-    <value>Review dApps</value>
-  </data>
-  <data name="ReviewDAppsText" xml:space="preserve">
-    <value>Open the dApp list and only launch apps you recognize.</value>
-  </data>
   <data name="RpcStatusConnectedText" xml:space="preserve">
     <value>{0} is responding. Current block: {1:N0}.</value>
   </data>

@@ -941,12 +941,6 @@
   <data name="ReviewBackupText" xml:space="preserve">
     <value>打开钱包导出流程，查看安全保存方式。</value>
   </data>
-  <data name="ReviewDApps" xml:space="preserve">
-    <value>查看 dApp</value>
-  </data>
-  <data name="ReviewDAppsText" xml:space="preserve">
-    <value>打开 dApp 列表，仅启动您信任的应用。</value>
-  </data>
   <data name="RpcStatusConnectedText" xml:space="preserve">
     <value>{0} 正常响应。当前区块：{1:N0}。</value>
   </data>

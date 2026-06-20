@@ -1831,24 +1831,6 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Review dApps 的本地化字符串。
-        /// </summary>
-        internal static string ReviewDApps {
-            get {
-                return ResourceManager.GetString("ReviewDApps", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Open the dApp list and only launch apps you recognize. 的本地化字符串。
-        /// </summary>
-        internal static string ReviewDAppsText {
-            get {
-                return ResourceManager.GetString("ReviewDAppsText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 {0} is responding. Current block: {1:N0}. 的本地化字符串。
         /// </summary>
         internal static string RpcStatusConnectedText {
