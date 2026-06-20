@@ -18,7 +18,7 @@
             <og:DAppSearchHandler.ItemTemplate>
                 <DataTemplate x:DataType="og:DApp">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" Margin="{OnPlatform iOS='20,0', MacCatalyst='20,0', Default='5'}">
-                        <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="4" WidthRequest="30" HeightRequest="30" VerticalOptions="Center">
+                        <Border StrokeShape="RoundRectangle 8" Padding="4" WidthRequest="30" HeightRequest="30" VerticalOptions="Center">
                             <Image WidthRequest="22" HeightRequest="22" Aspect="AspectFit">
                                 <Image.Source>
                                     <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
@@ -64,7 +64,7 @@
                     <DataTemplate x:DataType="og:DApp">
                         <Border StyleClass="Card" WidthRequest="88" Padding="8">
                             <VerticalStackLayout Spacing="6">
-                                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" HorizontalOptions="Center">
+                                <Border StrokeShape="RoundRectangle 12" Padding="7" HorizontalOptions="Center">
                                     <Image WidthRequest="42" HeightRequest="42" Aspect="AspectFit">
                                         <Image.Source>
                                             <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
@@ -104,7 +104,7 @@
                     <DataTemplate x:DataType="og:DApp">
                         <Border StyleClass="Card" Padding="12">
                             <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
-                                <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" WidthRequest="52" HeightRequest="52" VerticalOptions="Center">
+                                <Border StrokeShape="RoundRectangle 12" Padding="7" WidthRequest="52" HeightRequest="52" VerticalOptions="Center">
                                     <Image WidthRequest="38" HeightRequest="38" Aspect="AspectFit">
                                         <Image.Source>
                                             <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
