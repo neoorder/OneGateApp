@@ -29,7 +29,7 @@ partial class DAppSearchHandler : SearchHandler
         if (Uri.TryCreate(keyword, UriKind.Absolute, out var uri))
         {
             if (uri.Scheme != "https") return null;
-            if (uri.Authority == SharedOptions.OneGateDomain && uri.Segments.Length == 3 && uri.Segments[1] == "app/" && int.TryParse(uri.Segments[2], out int id))
+            if (uri.Authority == SharedOptions.OneGateDomain && uri.Segments is ["/", "app/", var appIdSegment] && int.TryParse(appIdSegment, out int id))
                 return dapps.Where(p => p.Id == id);
             else
                 return dapps.Where(p => p.Url == keyword);
