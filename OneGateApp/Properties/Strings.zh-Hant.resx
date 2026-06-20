@@ -869,15 +869,6 @@
   <data name="ReceiveRequestDetails" xml:space="preserve">
     <value>請求資訊</value>
   </data>
-  <data name="RequestedAmount" xml:space="preserve">
-    <value>請求金額</value>
-  </data>
-  <data name="OptionalAmountPlaceholder" xml:space="preserve">
-    <value>0.00（選填）</value>
-  </data>
-  <data name="InvalidRequestedAmount" xml:space="preserve">
-    <value>請輸入大於 0 的金額。</value>
-  </data>
   <data name="RequestMemo" xml:space="preserve">
     <value>備註</value>
   </data>

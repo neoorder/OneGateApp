@@ -34,14 +34,6 @@
                     <Label Text="{x:Static og:Strings.ReceiveRequestDetails}" FontAttributes="Bold" />
 
                     <VerticalStackLayout Spacing="5">
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.RequestedAmount}" FontSize="12" />
-                        <Border StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                            <Entry Text="{Binding AmountText}" Keyboard="Numeric" Placeholder="{x:Static og:Strings.OptionalAmountPlaceholder}" ClearButtonVisibility="WhileEditing" og:Border.IsVisible="False" Margin="10,0" />
-                        </Border>
-                        <Label StyleClass="Danger" Text="{x:Static og:Strings.InvalidRequestedAmount}" FontSize="12" IsVisible="{Binding HasAmountError}" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Spacing="5">
                         <Label StyleClass="Secondary" Text="{x:Static og:Strings.RequestMemo}" FontSize="12" />
                         <Border StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource Panel}">
                             <Entry Text="{Binding Memo}" Placeholder="{x:Static og:Strings.RequestMemoPlaceholder}" ClearButtonVisibility="WhileEditing" og:Border.IsVisible="False" Margin="10,0" />
@@ -57,7 +49,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="{x:Static og:Strings.ShareQRCode}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" IsEnabled="{Binding IsRequestValid}" Clicked="OnShareQRCode" />
+            <Button Text="{x:Static og:Strings.ShareQRCode}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" Clicked="OnShareQRCode" />
             <Button StyleClass="Secondary" Text="{x:Static og:Strings.SaveToPhotoLibrary}" Clicked="OnSaveToPhotoLibrary" />
         </VerticalStackLayout>
     </ScrollView>

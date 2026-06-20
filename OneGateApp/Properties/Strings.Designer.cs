@@ -1139,15 +1139,6 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Enter a positive amount. 的本地化字符串。
-        /// </summary>
-        internal static string InvalidRequestedAmount {
-            get {
-                return ResourceManager.GetString("InvalidRequestedAmount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Name 的本地化字符串。
         /// </summary>
         internal static string Label {
@@ -1521,15 +1512,6 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 0.00 (optional) 的本地化字符串。
-        /// </summary>
-        internal static string OptionalAmountPlaceholder {
-            get {
-                return ResourceManager.GetString("OptionalAmountPlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Other 的本地化字符串。
         /// </summary>
         internal static string Others {
@@ -1836,15 +1818,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string RequestDataPlaceholder {
             get {
                 return ResourceManager.GetString("RequestDataPlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Requested amount 的本地化字符串。
-        /// </summary>
-        internal static string RequestedAmount {
-            get {
-                return ResourceManager.GetString("RequestedAmount", resourceCulture);
             }
         }
         

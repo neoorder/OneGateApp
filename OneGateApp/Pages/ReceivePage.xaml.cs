@@ -4,31 +4,17 @@ using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
-using System.Globalization;
 
 namespace NeoOrder.OneGate.Pages;
 
 public partial class ReceivePage : ContentPage, IQueryAttributable
 {
-    string? amountText;
     string? memo;
     string? requestData;
-    bool hasAmountError;
 
     public Wallet Wallet { get; set { field = value; OnPropertyChanged(); } }
     public WalletAccount DefaultAccount => Wallet.GetDefaultAccount()!;
     public UInt160? Asset { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressUri)); } }
-    public string? AmountText
-    {
-        get => amountText;
-        set
-        {
-            if (amountText == value) return;
-            amountText = value;
-            OnPropertyChanged();
-            OnRequestDetailsChanged();
-        }
-    }
     public string? Memo
     {
         get => memo;
@@ -51,26 +37,12 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
             OnRequestDetailsChanged();
         }
     }
-    public bool HasAmountError
-    {
-        get => hasAmountError;
-        private set
-        {
-            if (hasAmountError == value) return;
-            hasAmountError = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(IsRequestValid));
-        }
-    }
-    public bool IsRequestValid => !HasAmountError;
     public bool HasRequestSummary => !string.IsNullOrEmpty(RequestSummary);
     public string RequestSummary
     {
         get
         {
             List<string> parts = [];
-            if (!HasAmountError && TryGetRequestedAmount(out decimal amount))
-                parts.Add($"{Strings.Amount}: {FormatAmount(amount)}");
             AddSummaryPart(parts, Strings.RequestMemo, Memo);
             AddSummaryPart(parts, Strings.RequestData, RequestData);
             return string.Join(Environment.NewLine, parts);
@@ -84,8 +56,6 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
             List<string> query = [];
             if (Asset is not null)
                 query.Add($"asset={Uri.EscapeDataString(Asset.ToString())}");
-            if (!HasAmountError && TryGetRequestedAmount(out decimal amount))
-                query.Add($"amount={Uri.EscapeDataString(FormatAmount(amount))}");
             AddQueryParameter(query, "memo", Memo);
             AddQueryParameter(query, "data", RequestData);
             return query.Count == 0 ? uri : $"{uri}?{string.Join("&", query)}";
@@ -106,29 +76,9 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
 
     void OnRequestDetailsChanged()
     {
-        ValidateAmount();
         OnPropertyChanged(nameof(AddressUri));
         OnPropertyChanged(nameof(RequestSummary));
         OnPropertyChanged(nameof(HasRequestSummary));
-    }
-
-    void ValidateAmount()
-    {
-        string? value = AmountText?.Trim();
-        HasAmountError = !string.IsNullOrEmpty(value) && !TryGetRequestedAmount(out _);
-    }
-
-    bool TryGetRequestedAmount(out decimal amount)
-    {
-        string? value = AmountText?.Trim();
-        if (string.IsNullOrEmpty(value))
-        {
-            amount = 0;
-            return false;
-        }
-        bool parsed = decimal.TryParse(value, NumberStyles.Number, CultureInfo.CurrentCulture, out amount)
-            || decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out amount);
-        return parsed && amount > 0;
     }
 
     static void AddQueryParameter(List<string> query, string name, string? value)
@@ -136,11 +86,6 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
         value = value?.Trim();
         if (string.IsNullOrEmpty(value)) return;
         query.Add($"{name}={Uri.EscapeDataString(value)}");
-    }
-
-    static string FormatAmount(decimal amount)
-    {
-        return amount.ToString("0.############################", CultureInfo.InvariantCulture);
     }
 
     static void AddSummaryPart(List<string> parts, string label, string? value)
@@ -152,7 +97,6 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
 
     async void OnShareQRCode(object sender, EventArgs e)
     {
-        if (!IsRequestValid) return;
         string fileName = $"onegate-request-{DateTime.Now:yyyyMMdd-HHmmss}.png";
         string path = Path.Combine(FileSystem.CacheDirectory, fileName);
         var result = await qrCodeCard.CaptureAsync();

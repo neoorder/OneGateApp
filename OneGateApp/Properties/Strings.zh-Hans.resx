@@ -457,15 +457,6 @@
   <data name="ReceiveRequestDetails" xml:space="preserve">
     <value>请求信息</value>
   </data>
-  <data name="RequestedAmount" xml:space="preserve">
-    <value>请求金额</value>
-  </data>
-  <data name="OptionalAmountPlaceholder" xml:space="preserve">
-    <value>0.00（可选）</value>
-  </data>
-  <data name="InvalidRequestedAmount" xml:space="preserve">
-    <value>请输入大于 0 的金额。</value>
-  </data>
   <data name="RequestMemo" xml:space="preserve">
     <value>备注</value>
   </data>
