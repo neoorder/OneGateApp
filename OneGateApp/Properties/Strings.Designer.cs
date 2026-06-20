@@ -2335,15 +2335,6 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Transfer 的本地化字符串。
-        /// </summary>
-        internal static string Transfer {
-            get {
-                return ResourceManager.GetString("Transfer", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   查找类似 Transaction ID 的本地化字符串。
         /// </summary>
         internal static string TxID {
@@ -2582,15 +2573,6 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Last transfer: {0:g}.
-        /// </summary>
-        internal static string LastTransferFormat {
-            get {
-                return ResourceManager.GetString("LastTransferFormat", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   Looks up a localized string similar to Use entered address.
         /// </summary>
         internal static string UseEnteredAddress {
@@ -2608,31 +2590,5 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Associated transactions.
-        /// </summary>
-        internal static string AssociatedTransactions {
-            get {
-                return ResourceManager.GetString("AssociatedTransactions", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to No associated transactions.
-        /// </summary>
-        internal static string NoAssociatedTransactions {
-            get {
-                return ResourceManager.GetString("NoAssociatedTransactions", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Copy transaction hash.
-        /// </summary>
-        internal static string CopyTransactionHash {
-            get {
-                return ResourceManager.GetString("CopyTransactionHash", resourceCulture);
-            }
-        }
     }
 }
