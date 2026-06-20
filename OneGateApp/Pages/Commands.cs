@@ -72,16 +72,12 @@ static class Commands
         Uri? uri = parameter as Uri;
         if (dapp is null && uri is null) throw new ArgumentException("Invalid parameter type.");
         uri ??= new($"https://{SharedOptions.OneGateDomain}/app/{dapp!.Id}");
-        int appId = dapp?.Id ?? int.Parse(uri.Segments[2]);
 #if ANDROID
         var activity = Platform.CurrentActivity!;
-        string canonicalUri = $"https://{SharedOptions.OneGateDomain}/app/{appId}";
-        var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.MainActivity));
+        var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.DocumentLinkActivity));
         intent.SetAction(Android.Content.Intent.ActionView);
-        intent.SetData(Android.Net.Uri.Parse(canonicalUri));
+        intent.SetData(Android.Net.Uri.Parse(uri.AbsoluteUri));
         intent.AddFlags(Android.Content.ActivityFlags.NewDocument);
-        if (!string.IsNullOrEmpty(uri.Query))
-            intent.PutExtra("org.neoorder.onegate.ORIGINAL_URI", uri.AbsoluteUri);
         activity.StartActivity(intent);
 #else
 #if IOS || MACCATALYST

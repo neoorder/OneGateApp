@@ -1,4 +1,5 @@
 ﻿using Neo;
+using Neo.SmartContract.Native;
 using NeoOrder.OneGate.Pages;
 using NeoOrder.OneGate.Services;
 using System.Web;
@@ -20,8 +21,8 @@ class PaymentAction : AppLinkAction
             throw new ArgumentException("Invalid scheme for PaymentAction", nameof(uri));
         Recipient = uri.LocalPath;
         var nv = HttpUtility.ParseQueryString(uri.Query);
-        if (nv["asset"] is string s_asset)
-            AssetId = UInt160.Parse(s_asset);
+        if (nv["asset"] is string s_asset && !string.IsNullOrWhiteSpace(s_asset))
+            AssetId = ParseAssetId(s_asset);
         if (nv["amount"] is string s_amount)
             Amount = decimal.Parse(s_amount);
     }
@@ -61,5 +62,15 @@ class PaymentAction : AppLinkAction
         {
             return null;
         }
+    }
+
+    static UInt160 ParseAssetId(string asset)
+    {
+        return asset.Trim().ToLowerInvariant() switch
+        {
+            "neo" => NativeContract.NEO.Hash,
+            "gas" => NativeContract.GAS.Hash,
+            string value => UInt160.Parse(value)
+        };
     }
 }

@@ -19,6 +19,8 @@ while (true)
     Console.WriteLine();
     Console.WriteLine("1. Generate login QR code");
     Console.WriteLine("2. Generate login deep link");
+    Console.WriteLine("3. Generate payment QR code");
+    Console.WriteLine("4. Generate neo payment deep link");
     Console.WriteLine("0. Exit");
     Console.WriteLine();
     Console.Write("Select a function: ");
@@ -40,6 +42,12 @@ while (true)
                 break;
             case "2":
                 GenerateDeepLink();
+                break;
+            case "3":
+                GeneratePaymentQrCode();
+                break;
+            case "4":
+                GeneratePaymentDeepLink();
                 break;
             default:
                 Console.WriteLine("Unknown selection.");
@@ -119,6 +127,59 @@ static void GenerateDeepLink()
     Console.WriteLine($"Sent deep link through {FormatSendTarget(target.Value)}.");
 }
 
+static void GeneratePaymentQrCode()
+{
+    ClearScreen();
+    Console.WriteLine("Generate payment QR code");
+    Console.WriteLine();
+
+    PaymentOptions payment = ReadPaymentOptions();
+    string paymentUri = CreatePaymentUri(payment);
+    string outputPath = ReadText("SVG output path", ToolDefaults.PaymentOutput);
+    int size = ReadInt("SVG size in pixels", 420, min: 128);
+    bool renderTerminalQr = ReadYesNo("Render terminal QR code", defaultValue: true);
+
+    string fullOutputPath = Path.GetFullPath(outputPath);
+    Directory.CreateDirectory(Path.GetDirectoryName(fullOutputPath)!);
+    File.WriteAllText(fullOutputPath, CreateSvg(paymentUri, size), Encoding.UTF8);
+
+    Console.WriteLine();
+    WritePaymentSummary(payment, paymentUri);
+    Console.WriteLine($"SVG:       {fullOutputPath}");
+    Console.WriteLine();
+
+    if (renderTerminalQr)
+    {
+        RenderTerminalQr(paymentUri);
+        Console.WriteLine();
+    }
+
+    Console.WriteLine("QR content:");
+    Console.WriteLine(paymentUri);
+}
+
+static void GeneratePaymentDeepLink()
+{
+    ClearScreen();
+    Console.WriteLine("Generate neo payment deep link");
+    Console.WriteLine();
+
+    PaymentOptions payment = ReadPaymentOptions();
+    string deepLink = CreatePaymentUri(payment);
+
+    Console.WriteLine();
+    WritePaymentSummary(payment, deepLink);
+    Console.WriteLine();
+
+    SendTarget? target = ReadDeepLinkSendTarget();
+    if (target is null)
+        return;
+
+    string? device = ReadSendDevice(target.Value);
+    SendDeepLink(deepLink, target.Value, device);
+    Console.WriteLine($"Sent deep link through {FormatSendTarget(target.Value)}.");
+}
+
 static ChallengeOptions ReadQrChallengeOptions()
 {
     string domain = ReadRequiredText("Domain shown in OneGate", ToolDefaults.Domain);
@@ -140,6 +201,14 @@ static DeepLinkOptions ReadDeepLinkOptions()
     string dapp = ReadDAppIdentifier();
     string host = ReadDeepLinkHost();
     return new DeepLinkOptions(challenge, dapp, host);
+}
+
+static PaymentOptions ReadPaymentOptions()
+{
+    string recipient = ReadRequiredText("Recipient Neo address", ToolDefaults.PaymentRecipientAddress);
+    string? asset = ReadOptionalAsset();
+    string? amount = ReadOptionalAmount();
+    return new PaymentOptions(recipient, asset, amount);
 }
 
 static string ReadHttpsCallback()
@@ -206,6 +275,48 @@ static string? ReadOptionalText(string label)
     Console.Write($"{label}: ");
     string? value = Console.ReadLine();
     return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+}
+
+static string? ReadOptionalAsset()
+{
+    while (true)
+    {
+        string? value = ReadOptionalTextWithDefault("Asset (neo/gas/<assetId>, type none to omit)", ToolDefaults.NeoAsset);
+        if (value is null)
+            return null;
+        if (IsValidPaymentAsset(value))
+            return NormalizePaymentAsset(value);
+
+        Console.WriteLine("Asset must be neo, gas, or 0x followed by 40 hexadecimal characters.");
+    }
+}
+
+static string? ReadOptionalAmount()
+{
+    while (true)
+    {
+        string? value = ReadOptionalTextWithDefault("Amount (empty to omit)", null);
+        if (value is null)
+            return null;
+        if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result) && result >= 0)
+            return result.ToString("G29", CultureInfo.InvariantCulture);
+
+        Console.WriteLine("Amount must be a non-negative decimal number.");
+    }
+}
+
+static string? ReadOptionalTextWithDefault(string label, string? defaultValue)
+{
+    Console.Write(defaultValue is null ? $"{label}: " : $"{label} [{defaultValue}]: ");
+    string? value = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(value))
+        return defaultValue;
+
+    value = value.Trim();
+    if (value.Equals("none", StringComparison.OrdinalIgnoreCase) || value == "-")
+        return null;
+
+    return value;
 }
 
 static SendTarget? ReadDeepLinkSendTarget()
@@ -330,6 +441,19 @@ static string CreateDeepLink(string json, DeepLinkOptions options)
     string dapp = Uri.EscapeDataString(options.DAppIdentifier);
     string payload = Uri.EscapeDataString(json);
     return $"neoauth://{host}/authenticate?dapp={dapp}&payload={payload}";
+}
+
+static string CreatePaymentUri(PaymentOptions options)
+{
+    string uri = $"neo:{Uri.EscapeDataString(options.Recipient)}";
+    List<string> query = [];
+    if (options.Asset is not null)
+        query.Add("asset=" + Uri.EscapeDataString(options.Asset));
+    if (options.Amount is not null)
+        query.Add("amount=" + Uri.EscapeDataString(options.Amount));
+    if (query.Count > 0)
+        uri += "?" + string.Join('&', query);
+    return uri;
 }
 
 static string CreateSvg(string content, int size)
@@ -543,6 +667,22 @@ static bool IsValidDAppIdentifier(string value)
     return Regex.IsMatch(value, @"^[a-z][a-z0-9]*(\.[a-z][a-z0-9]*)+$", RegexOptions.CultureInvariant);
 }
 
+static bool IsValidPaymentAsset(string value)
+{
+    return value.Equals("neo", StringComparison.OrdinalIgnoreCase)
+        || value.Equals("gas", StringComparison.OrdinalIgnoreCase)
+        || Regex.IsMatch(value, @"^0x[0-9a-fA-F]{40}$", RegexOptions.CultureInvariant);
+}
+
+static string NormalizePaymentAsset(string value)
+{
+    if (value.Equals("neo", StringComparison.OrdinalIgnoreCase))
+        return "neo";
+    if (value.Equals("gas", StringComparison.OrdinalIgnoreCase))
+        return "gas";
+    return value;
+}
+
 static void WritePayloadSummary(AuthenticationChallengePayload payload)
 {
     Console.WriteLine("Request:");
@@ -552,6 +692,17 @@ static void WritePayloadSummary(AuthenticationChallengePayload payload)
         Console.WriteLine($"Callback:  {payload.Callback}");
     Console.WriteLine($"Timestamp: {payload.Timestamp}");
     Console.WriteLine("Valid for: 5 minutes from timestamp");
+}
+
+static void WritePaymentSummary(PaymentOptions payment, string paymentUri)
+{
+    Console.WriteLine("Payment:");
+    Console.WriteLine($"Recipient: {payment.Recipient}");
+    Console.WriteLine($"Asset:     {payment.Asset ?? "(default in OneGate)"}");
+    Console.WriteLine($"Amount:    {payment.Amount ?? "(not specified)"}");
+    Console.WriteLine();
+    Console.WriteLine("Payment URI:");
+    Console.WriteLine(paymentUri);
 }
 
 static string FormatSendTarget(SendTarget target)
@@ -600,6 +751,8 @@ sealed record ChallengeOptions(string Domain, string? Callback, uint Network);
 
 sealed record DeepLinkOptions(ChallengeOptions Challenge, string DAppIdentifier, string DeepLinkHost);
 
+sealed record PaymentOptions(string Recipient, string? Asset, string? Amount);
+
 sealed class AuthenticationChallengePayload
 {
     public string Action { get; init; } = "Authentication";
@@ -639,4 +792,7 @@ static class ToolDefaults
     public const string DeepLinkHost = "wallet";
     public const string OneGateDomain = "onegate.space";
     public const string Output = "artifacts/login-qr.svg";
+    public const string PaymentOutput = "artifacts/payment-qr.svg";
+    public const string PaymentRecipientAddress = "NVg7LjGcUSrgxgjX3zEgqaksfMaiS8Z6e1";
+    public const string NeoAsset = "neo";
 }
