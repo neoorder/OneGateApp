@@ -866,4 +866,103 @@
   <data name="DAppTesting" xml:space="preserve">
     <value>Тест DApp</value>
   </data>
+  <data name="Available" xml:space="preserve">
+    <value>Доступно</value>
+  </data>
+  <data name="BiometricAvailableText" xml:space="preserve">
+    <value>Биометрия устройства доступна, но не включена для подтверждения операций кошелька.</value>
+  </data>
+  <data name="BiometricEnabledText" xml:space="preserve">
+    <value>Защищенные действия могут использовать биометрию на этом устройстве.</value>
+  </data>
+  <data name="BiometricStatus" xml:space="preserve">
+    <value>Биометрия</value>
+  </data>
+  <data name="BiometricUnavailableSecurityText" xml:space="preserve">
+    <value>Биометрия устройства недоступна. Подтверждение паролем кошелька остается активным.</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Проверка</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Подключено</value>
+  </data>
+  <data name="ConnectionIssue" xml:space="preserve">
+    <value>Проблема с подключением</value>
+  </data>
+  <data name="DAppAuthorization" xml:space="preserve">
+    <value>Авторизация dApp</value>
+  </data>
+  <data name="DAppAuthorizationStatus" xml:space="preserve">
+    <value>Только сеанс</value>
+  </data>
+  <data name="DAppAuthorizationText" xml:space="preserve">
+    <value>dApp должны каждый раз запрашивать действия с кошельком через OneGate. Постоянные подтверждения не сохраняются.</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Отключено</value>
+  </data>
+  <data name="LastCheckedAt" xml:space="preserve">
+    <value>Последняя проверка: {0}</value>
+  </data>
+  <data name="ManageBiometrics" xml:space="preserve">
+    <value>Управление биометрией</value>
+  </data>
+  <data name="ManageWalletPassword" xml:space="preserve">
+    <value>Управление паролем кошелька</value>
+  </data>
+  <data name="ManageWalletPasswordText" xml:space="preserve">
+    <value>Измените пароль, используемый для разблокировки и подписи этим кошельком.</value>
+  </data>
+  <data name="NetworkStatus" xml:space="preserve">
+    <value>Состояние сети</value>
+  </data>
+  <data name="PasswordProtected" xml:space="preserve">
+    <value>Защищено</value>
+  </data>
+  <data name="PasswordProtectedText" xml:space="preserve">
+    <value>Ваш локальный кошелек требует пароль перед подписью чувствительных действий.</value>
+  </data>
+  <data name="PasswordStatus" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="PrivacyMode" xml:space="preserve">
+    <value>Режим конфиденциальности</value>
+  </data>
+  <data name="PrivacyModeText" xml:space="preserve">
+    <value>Скрывайте балансы на экранах кошелька, когда вы находитесь в общественном месте или демонстрируете экран.</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Проверить</value>
+  </data>
+  <data name="ReviewBackup" xml:space="preserve">
+    <value>Проверить резервную копию восстановления</value>
+  </data>
+  <data name="ReviewBackupText" xml:space="preserve">
+    <value>Откройте экспорт кошелька и проверьте варианты безопасного хранения.</value>
+  </data>
+  <data name="RpcStatusConnectedText" xml:space="preserve">
+    <value>{0} отвечает. Текущий блок: {1:N0}.</value>
+  </data>
+  <data name="RpcStatusUnavailableText" xml:space="preserve">
+    <value>{0} не ответил. Переводы могут не проходить, пока соединение не восстановится.</value>
+  </data>
+  <data name="SecurityActions" xml:space="preserve">
+    <value>Действия безопасности</value>
+  </data>
+  <data name="SecurityCenter" xml:space="preserve">
+    <value>Центр безопасности</value>
+  </data>
+  <data name="SecurityCenterSummaryText" xml:space="preserve">
+    <value>Проверьте защиту кошелька, подтверждение устройства, состояние сети, режим конфиденциальности и обработку запросов dApp.</value>
+  </data>
+  <data name="SecurityCenterSummaryTitle" xml:space="preserve">
+    <value>Защита кошелька с первого взгляда</value>
+  </data>
+  <data name="SecurityStatus" xml:space="preserve">
+    <value>Состояние безопасности</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Недоступно</value>
+  </data>
 </root>

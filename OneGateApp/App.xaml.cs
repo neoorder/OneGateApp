@@ -1,5 +1,4 @@
-﻿using Neo;
-using Neo.Wallets;
+﻿using Neo.Wallets;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Pages;
@@ -42,64 +41,16 @@ public partial class App : Application
 
     internal bool ProcessAppLinkUri(Uri uri)
     {
-        appLinkAction = uri.Scheme switch
-        {
-            "neo" => ProcessNeoScheme(uri),
-            "neoauth" => ProcessNeoAuthScheme(uri),
-            "https" => ProcessHttpsScheme(uri),
-            _ => null
-        };
+        appLinkAction = AppLinkAction.TryCreate(uri);
         if (appLinkAction is null) return false;
 #if IOS
         bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
         if (!supportMultiWindow && Windows.Count > 0 && Windows[0].Page is AppShell shell)
         {
-            appLinkAction.GotoRoute(shell);
+            _ = appLinkAction.GotoRoute(shell);
         }
 #endif
         return true;
-    }
-
-    AppLinkAction? ProcessNeoScheme(Uri uri)
-    {
-        ProtocolSettings protocolSettings = serviceProvider.GetRequiredService<ProtocolSettings>();
-        try
-        {
-            return new PaymentAction(uri, protocolSettings);
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    static AppLinkAction? ProcessNeoAuthScheme(Uri uri)
-    {
-        try
-        {
-            return new AuthenticationAction(uri);
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    static AppLinkAction? ProcessHttpsScheme(Uri uri)
-    {
-        try
-        {
-            return uri.Segments[1] switch
-            {
-                "app/" => new LaunchDAppAction(uri),
-                "news/" => new ViewNewsAction(uri),
-                _ => null,
-            };
-        }
-        catch
-        {
-            return null;
-        }
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
