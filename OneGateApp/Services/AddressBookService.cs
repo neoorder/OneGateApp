@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Neo;
 using Neo.Wallets;
 using NeoOrder.OneGate.Data;
-using NeoOrder.OneGate.Pages;
 using NeoOrder.OneGate.Properties;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
@@ -69,12 +68,10 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
     {
         Contact[] contacts = await dbContext.Contacts
             .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry || p.TransferCount > 0)
+            .Where(p => p.IsAddressBookEntry)
             .ToArrayAsync();
         return contacts
-            .OrderByDescending(p => p.IsAddressBookEntry)
-            .ThenByDescending(p => p.LastUsedAt ?? DateTimeOffset.MinValue)
-            .ThenBy(p => p.DisplayName)
+            .OrderBy(p => p.DisplayName)
             .ToArray();
     }
 
@@ -82,7 +79,7 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
     {
         Contact[] contacts = await dbContext.Contacts
             .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry || p.TransferCount > 0)
+            .Where(p => p.IsAddressBookEntry)
             .ToArrayAsync();
 
         IEnumerable<Contact> filtered;
@@ -90,10 +87,7 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         if (filter.Length == 0)
         {
             filtered = contacts
-                .Where(p => p.LastUsedAt is not null || p.IsAddressBookEntry)
-                .OrderByDescending(p => p.LastUsedAt ?? DateTimeOffset.MinValue)
-                .ThenByDescending(p => p.IsAddressBookEntry)
-                .ThenBy(p => p.DisplayName);
+                .OrderBy(p => p.DisplayName);
         }
         else
         {
@@ -104,7 +98,6 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
                     (p.Note?.Contains(filter, StringComparison.OrdinalIgnoreCase) ?? false))
                 .OrderByDescending(p => string.Equals(p.Label, filter, StringComparison.OrdinalIgnoreCase))
                 .ThenByDescending(p => p.Address.StartsWith(filter, StringComparison.OrdinalIgnoreCase))
-                .ThenByDescending(p => p.LastUsedAt ?? DateTimeOffset.MinValue)
                 .ThenBy(p => p.DisplayName);
         }
 
@@ -120,60 +113,5 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
             });
         }
         return result.Take(limit).ToArray();
-    }
-
-    public async Task<ContactTransfer[]> GetTransfersAsync(string address)
-    {
-        return await dbContext.ContactTransfers
-            .AsNoTracking()
-            .Where(p => p.Address == address)
-            .OrderByDescending(p => p.CreatedAt)
-            .ToArrayAsync();
-    }
-
-    public async Task RecordTransferAsync(string address, string transactionHash, string? assetSymbol, string? amount, string? memo = null)
-    {
-        if (!TryNormalizeAddress(address, out string normalized))
-            normalized = address;
-
-        bool exists = await dbContext.ContactTransfers.AnyAsync(p => p.TransactionHash == transactionHash && p.Address == normalized);
-        if (exists) return;
-
-        DateTimeOffset now = DateTimeOffset.UtcNow;
-        Contact? contact = await dbContext.Contacts.FirstOrDefaultAsync(p => p.Address == normalized);
-        if (contact is null)
-        {
-            dbContext.Contacts.Add(new Contact
-            {
-                Address = normalized,
-                Label = "",
-                IsAddressBookEntry = false,
-                LastUsedAt = now,
-                TransferCount = 1,
-                LastTransactionHash = transactionHash
-            });
-        }
-        else
-        {
-            contact.LastUsedAt = now;
-            contact.TransferCount++;
-            contact.LastTransactionHash = transactionHash;
-            // DbContext uses global NoTracking (see MauiProgram), so the entity returned by the
-            // query is detached. Attach it as Modified, otherwise SaveChangesAsync persists nothing.
-            dbContext.Contacts.Update(contact);
-        }
-
-        dbContext.ContactTransfers.Add(new ContactTransfer
-        {
-            Address = normalized,
-            TransactionHash = transactionHash,
-            CreatedAt = now,
-            AssetSymbol = assetSymbol,
-            Amount = amount,
-            Memo = memo
-        });
-
-        await dbContext.SaveChangesAsync();
-        GlobalStates.Invalidate<ContactsPage>();
     }
 }
