@@ -49,8 +49,6 @@ public partial class SecurityCenterPage : ContentPage
 
     async Task RefreshAsync()
     {
-        if (IsRefreshing) return;
-        IsRefreshing = true;
         suppressToggleUpdates = true;
         try
         {

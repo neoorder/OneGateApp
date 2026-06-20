@@ -9,7 +9,7 @@
              Shell.TabBarIsVisible="False">
     <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
         <ScrollView>
-            <VerticalStackLayout Margin="20,20,20,120" Spacing="18">
+            <VerticalStackLayout Margin="20" Spacing="18">
                 <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="18">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="14">
                         <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="48" HeightRequest="48" VerticalOptions="Start">
