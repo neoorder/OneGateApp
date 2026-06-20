@@ -136,6 +136,9 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         if (!TryNormalizeAddress(address, out string normalized))
             normalized = address;
 
+        bool exists = await dbContext.ContactTransfers.AnyAsync(p => p.TransactionHash == transactionHash && p.Address == normalized);
+        if (exists) return;
+
         DateTimeOffset now = DateTimeOffset.UtcNow;
         Contact? contact = await dbContext.Contacts.FirstOrDefaultAsync(p => p.Address == normalized);
         if (contact is null)
@@ -160,19 +163,15 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
             dbContext.Contacts.Update(contact);
         }
 
-        bool exists = await dbContext.ContactTransfers.AnyAsync(p => p.TransactionHash == transactionHash && p.Address == normalized);
-        if (!exists)
+        dbContext.ContactTransfers.Add(new ContactTransfer
         {
-            dbContext.ContactTransfers.Add(new ContactTransfer
-            {
-                Address = normalized,
-                TransactionHash = transactionHash,
-                CreatedAt = now,
-                AssetSymbol = assetSymbol,
-                Amount = amount,
-                Memo = memo
-            });
-        }
+            Address = normalized,
+            TransactionHash = transactionHash,
+            CreatedAt = now,
+            AssetSymbol = assetSymbol,
+            Amount = amount,
+            Memo = memo
+        });
 
         await dbContext.SaveChangesAsync();
         GlobalStates.Invalidate<ContactsPage>();

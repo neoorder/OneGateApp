@@ -36,6 +36,18 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
             CREATE INDEX IF NOT EXISTS [IX_ContactTransfers_Address_CreatedAt]
             ON [ContactTransfers] ([Address], [CreatedAt])
             """);
+        Database.ExecuteSqlRaw("""
+            DELETE FROM [ContactTransfers]
+            WHERE [Id] NOT IN (
+                SELECT MIN([Id])
+                FROM [ContactTransfers]
+                GROUP BY [Address], [TransactionHash]
+            )
+            """);
+        Database.ExecuteSqlRaw("""
+            CREATE UNIQUE INDEX IF NOT EXISTS [IX_ContactTransfers_Address_TransactionHash]
+            ON [ContactTransfers] ([Address], [TransactionHash])
+            """);
     }
 
     void AddColumnIfMissing(string table, string column, string definition)
