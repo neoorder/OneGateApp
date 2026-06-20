@@ -33,33 +33,6 @@
                     <Editor Text="{Binding Contact.Note}" AutoSize="TextChanges" HeightRequest="80" og:Border.IsVisible="False" />
                 </ContentView>
             </Border>
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.AssociatedTransactions}" />
-            <CollectionView ItemsSource="{Binding Transactions}" HeightRequest="190" Margin="0,-16,0,0">
-                <CollectionView.EmptyView>
-                    <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="14">
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.NoAssociatedTransactions}" />
-                    </Border>
-                </CollectionView.EmptyView>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="og:ContactTransfer">
-                        <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="12">
-                            <Grid ColumnDefinitions="*,auto" ColumnSpacing="12">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label Text="{Binding DisplayTitle}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
-                                    <Label StyleClass="Secondary" Text="{Binding DisplaySubtitle}" FontSize="12" LineBreakMode="TailTruncation" />
-                                </VerticalStackLayout>
-                                <Label Grid.Column="1" StyleClass="Icon, Secondary" Text="&#xe602;" VerticalOptions="Center" />
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnTransactionTapped" CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
         <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="20">

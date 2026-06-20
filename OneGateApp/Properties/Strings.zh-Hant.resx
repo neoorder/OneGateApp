@@ -382,9 +382,6 @@
   <data name="EnterCustomAddress" xml:space="preserve">
     <value>輸入自訂地址</value>
   </data>
-  <data name="Transfer" xml:space="preserve">
-    <value>轉帳</value>
-  </data>
   <data name="From" xml:space="preserve">
     <value>轉出地址</value>
   </data>
@@ -974,22 +971,10 @@
   <data name="RecentRecipient" xml:space="preserve">
     <value>最近轉帳地址</value>
   </data>
-  <data name="LastTransferFormat" xml:space="preserve">
-    <value>上次轉帳：{0:g}</value>
-  </data>
   <data name="UseEnteredAddress" xml:space="preserve">
     <value>使用輸入的地址</value>
   </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>搜尋名字、地址或備註</value>
-  </data>
-  <data name="AssociatedTransactions" xml:space="preserve">
-    <value>關聯交易</value>
-  </data>
-  <data name="NoAssociatedTransactions" xml:space="preserve">
-    <value>暫無關聯交易</value>
-  </data>
-  <data name="CopyTransactionHash" xml:space="preserve">
-    <value>複製交易雜湊</value>
   </data>
 </root>
