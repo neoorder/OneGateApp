@@ -20,6 +20,7 @@ partial class BridgeWebViewHandler
     protected override void ConnectHandler(Android.Webkit.WebView platformView)
     {
         base.ConnectHandler(platformView);
+        platformView.Settings.DomStorageEnabled = true;
         platformView.Settings.JavaScriptEnabled = true;
         platformView.AddJavascriptInterface(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
     }
