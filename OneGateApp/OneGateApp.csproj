@@ -32,10 +32,16 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU' and $([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('iossimulator'))!='true'">
 		<CodesignKey>Apple Development: Created via API (K222UWB5LF)</CodesignKey>
 		<CodesignProvision>VS: org.neoorder.onegate Development</CodesignProvision>
 		<ProvisioningType>manual</ProvisioningType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU' and $([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('iossimulator'))=='true'">
+		<CodesignKey>-</CodesignKey>
+		<CodesignProvision></CodesignProvision>
+		<ProvisioningType></ProvisioningType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
@@ -77,6 +83,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+		<PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.13.0.2" />
 		<PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.2.0" />
 		<PackageReference Include="Xamarin.Google.Android.Play.App.Update" Version="2.1.0.16" />
 	</ItemGroup>

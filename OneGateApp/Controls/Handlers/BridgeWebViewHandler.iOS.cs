@@ -30,26 +30,44 @@ partial class BridgeWebViewHandler
     }
 
     static readonly BridgeWebViewUIDelegate uiDelegate = new();
+    const string BridgeShim = """
+        window.__OneGateBridge = {
+            invoke: function(payload) {
+                window.webkit.messageHandlers.__OneGateBridge.postMessage(payload);
+            }
+        };
+        """;
 
     protected override WKWebView CreatePlatformView()
     {
         var config = new WKWebViewConfiguration();
         var controller = new WKUserContentController();
-        string shim = """
-            window.__OneGateBridge = {
-                invoke: function(payload) {
-                    window.webkit.messageHandlers.__OneGateBridge.postMessage(payload);
-                }
-            };
-            """;
-        var script = new WKUserScript(new NSString(shim), WKUserScriptInjectionTime.AtDocumentStart, true);
-        controller.AddUserScript(script);
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
+        InstallUserScripts(controller);
         config.UserContentController = controller;
         return new MauiWKWebView(CGRect.Empty, this, config)
         {
             UIDelegate = uiDelegate
         };
+    }
+
+    partial void UpdateDocumentStartScriptCore()
+    {
+        if (PlatformView is WKWebView webView)
+            InstallUserScripts(webView.Configuration.UserContentController);
+    }
+
+    void InstallUserScripts(WKUserContentController controller)
+    {
+        controller.RemoveAllUserScripts();
+        controller.AddUserScript(CreateDocumentStartScript(BridgeShim));
+        if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
+            controller.AddUserScript(CreateDocumentStartScript(BridgeWebView.DocumentStartScript));
+    }
+
+    static WKUserScript CreateDocumentStartScript(string source)
+    {
+        return new WKUserScript(new NSString(source), WKUserScriptInjectionTime.AtDocumentStart, true);
     }
 }
 #endif

@@ -45,14 +45,18 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        string url;
+        Uri? launchUri = GetLaunchUri(query);
         if (query.TryGetValue("dapp", out var value))
         {
             DApp = (DApp)value;
-            Url = DApp.Url;
+            url = launchUri is null
+                ? DApp.Url
+                : DAppLaunchUri.ApplyLaunchParameters(DApp.Url, launchUri);
         }
         else
         {
-            Uri uri = query["uri"] as Uri ?? new(WebUtility.UrlDecode((string)query["uri"]));
+            Uri uri = launchUri ?? throw new ArgumentException("Missing launch URI.");
             if (DAppLaunchUri.TryGetAppId(uri, out int id))
             {
                 var response = await httpClient.GetAsync($"/api/dapp/{id}");
@@ -62,7 +66,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     return;
                 }
                 DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
-                Url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, uri);
+                url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, uri);
             }
             else
             {
@@ -74,9 +78,11 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     Url = uri.AbsoluteUri,
                     Languages = ["en"]
                 };
-                Url = uri.AbsoluteUri;
+                url = uri.AbsoluteUri;
             }
         }
+        webView.DocumentStartScript = CreateDapiProviderScript();
+        Url = url;
         if (DApp.Id > 0)
         {
             List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
@@ -89,6 +95,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             await dbContext.Settings.PutAsync("dapps/recent", recents);
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
         }
+    }
+
+    static Uri? GetLaunchUri(IDictionary<string, object> query)
+    {
+        if (!query.TryGetValue("uri", out var value))
+            return null;
+        return value as Uri ?? new(WebUtility.UrlDecode((string)value));
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
@@ -111,13 +124,32 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     async void OnNavigated(object sender, WebNavigatedEventArgs e)
     {
         if (e.Result != WebNavigationResult.Success) return;
-        BridgeWebView webView = (BridgeWebView)sender;
+        await InjectDapiProviderAsync((BridgeWebView)sender);
+    }
+
+    async Task InjectDapiProviderAsync(BridgeWebView webView)
+    {
+        await webView.EvaluateJavaScriptAsync(CreateDapiProviderScript());
+    }
+
+    string CreateDapiProviderScript()
+    {
         string script = $$"""
             (function () {
-                if (window.__OneGateDapiInjected) return;
-                window.__OneGateDapiInjected = true;
+                function dispatchReady(provider) {
+                    window.dispatchEvent(new CustomEvent('Neo.DapiProvider.ready', {
+                        detail: {
+                            provider: provider
+                        }
+                    }));
+                }
 
                 const pending = new Map();
+                if (window.__OneGateDapiInjected && window.OneGateDapiProvider) {
+                    dispatchReady(window.OneGateDapiProvider);
+                    return;
+                }
+                window.__OneGateDapiInjected = true;
 
                 function createId() {
                     return 'onegate_' + Date.now() + '_' + Math.random().toString(16).slice(2);
@@ -207,20 +239,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             
                 window.OneGateDapiProvider = deepFreeze(provider);
 
-                function dispatchReady() {
-                    window.dispatchEvent(new CustomEvent('Neo.DapiProvider.ready', {
-                        detail: {
-                            provider: window.OneGateDapiProvider
-                        }
-                    }));
-                }
+                dispatchReady(window.OneGateDapiProvider);
 
-                dispatchReady();
-
-                window.addEventListener('Neo.DapiProvider.request', dispatchReady);
+                window.addEventListener('Neo.DapiProvider.request', function() {
+                    dispatchReady(window.OneGateDapiProvider);
+                });
             })();
             """.ReplaceLineEndings("");
-        await webView.EvaluateJavaScriptAsync(script);
+        return script;
     }
 
     static bool IsCrossDomain(Uri uriOld, Uri uriNew)

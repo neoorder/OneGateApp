@@ -72,17 +72,8 @@ static class Commands
         Uri? uri = parameter as Uri;
         if (dapp is null && uri is null) throw new ArgumentException("Invalid parameter type.");
         uri ??= new($"https://{SharedOptions.OneGateDomain}/app/{dapp!.Id}");
-        int appId = dapp?.Id ?? int.Parse(uri.Segments[2]);
 #if ANDROID
-        var activity = Platform.CurrentActivity!;
-        string canonicalUri = $"https://{SharedOptions.OneGateDomain}/app/{appId}";
-        var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.MainActivity));
-        intent.SetAction(Android.Content.Intent.ActionView);
-        intent.SetData(Android.Net.Uri.Parse(canonicalUri));
-        intent.AddFlags(Android.Content.ActivityFlags.NewDocument);
-        if (DAppLaunchUri.HasLaunchParameters(uri))
-            intent.PutExtra("org.neoorder.onegate.ORIGINAL_URI", uri.AbsoluteUri);
-        activity.StartActivity(intent);
+        await LaunchDAppInCurrentWindowAsync(dapp, uri);
 #else
 #if IOS || MACCATALYST
         bool supportOpenWithDeepLink = false;
@@ -91,9 +82,7 @@ static class Commands
 #endif
         if (!supportOpenWithDeepLink || !await Launcher.TryOpenAsync(uri))
         {
-            Dictionary<string, object> parameters = new();
-            if (dapp != null) parameters["dapp"] = dapp;
-            parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
+            Dictionary<string, object> parameters = GetLaunchDAppParameters(dapp, uri);
 #if IOS
             bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
 #else
@@ -112,6 +101,19 @@ static class Commands
         }
 #endif
     });
+
+    static Dictionary<string, object> GetLaunchDAppParameters(DApp? dapp, Uri uri)
+    {
+        Dictionary<string, object> parameters = new();
+        if (dapp != null) parameters["dapp"] = dapp;
+        parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
+        return parameters;
+    }
+
+    static Task LaunchDAppInCurrentWindowAsync(DApp? dapp, Uri uri)
+    {
+        return Shell.Current.GoToAsync("launch", GetLaunchDAppParameters(dapp, uri));
+    }
 
     public static AsyncCommand CheckForUpdates { get; } = new(static async parameter =>
     {

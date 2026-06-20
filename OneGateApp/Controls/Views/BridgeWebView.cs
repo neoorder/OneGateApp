@@ -1,11 +1,25 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
+using NeoOrder.OneGate.Controls.Handlers;
 
 namespace NeoOrder.OneGate.Controls.Views;
 
 public partial class BridgeWebView : WebView
 {
+    public static readonly BindableProperty DocumentStartScriptProperty = BindableProperty.Create(
+        nameof(DocumentStartScript),
+        typeof(string),
+        typeof(BridgeWebView),
+        null,
+        propertyChanged: OnDocumentStartScriptChanged);
+
     public event EventHandler<BridgeWebView, JsonObject>? InvokedFromJavaScript;
+
+    public string? DocumentStartScript
+    {
+        get => (string?)GetValue(DocumentStartScriptProperty);
+        set => SetValue(DocumentStartScriptProperty, value);
+    }
 
     internal void OnMessage(string payload)
     {
@@ -29,5 +43,11 @@ public partial class BridgeWebView : WebView
             InvokedFromJavaScript?.Invoke(this, request);
         else
             MainThread.BeginInvokeOnMainThread(() => InvokedFromJavaScript?.Invoke(this, request));
+    }
+
+    static void OnDocumentStartScriptChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is BridgeWebView { Handler: BridgeWebViewHandler handler })
+            handler.UpdateDocumentStartScript();
     }
 }
