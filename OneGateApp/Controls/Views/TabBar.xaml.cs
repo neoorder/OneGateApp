@@ -11,6 +11,7 @@ public partial class TabBar : ContentView
     public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(TabBar), defaultValue: 14.0);
     public static readonly BindableProperty TabColorProperty = BindableProperty.Create(nameof(TabColor), typeof(Color), typeof(TabBar));
     public static readonly BindableProperty SelectedTabColorProperty = BindableProperty.Create(nameof(SelectedTabColor), typeof(Color), typeof(TabBar));
+    public static readonly BindableProperty SelectedTabBackgroundColorProperty = BindableProperty.Create(nameof(SelectedTabBackgroundColor), typeof(Color), typeof(TabBar));
     public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(double), typeof(TabBar), defaultValue: 10.0);
 
     public IReadOnlyList<string>? Tabs
@@ -51,6 +52,12 @@ public partial class TabBar : ContentView
         set => SetValue(SelectedTabColorProperty, value);
     }
 
+    public Color SelectedTabBackgroundColor
+    {
+        get => (Color)GetValue(SelectedTabBackgroundColorProperty);
+        set => SetValue(SelectedTabBackgroundColorProperty, value);
+    }
+
     public int SelectedIndex
     {
         get
@@ -73,6 +80,7 @@ public partial class TabBar : ContentView
     {
         this.SetAppThemeColor(TabColorProperty, (AppThemeColor)Application.Current!.Resources["Secondary"]);
         this.SetAppThemeColor(SelectedTabColorProperty, (AppThemeColor)Application.Current.Resources["Primary"]);
+        this.SetAppThemeColor(SelectedTabBackgroundColorProperty, (AppThemeColor)Application.Current.Resources["SelectedTabBackground"]);
         InitializeComponent();
     }
 
@@ -95,7 +103,7 @@ public partial class TabBar : ContentView
 
     void Tab_Tapped(object sender, TappedEventArgs e)
     {
-        Label label = (Label)sender;
-        SelectedTab = label.Text;
+        if (sender is Border { Content: Label label })
+            SelectedTab = label.Text;
     }
 }
