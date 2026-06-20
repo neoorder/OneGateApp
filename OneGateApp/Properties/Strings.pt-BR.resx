@@ -866,4 +866,103 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="DAppTesting" xml:space="preserve">
     <value>Teste de DApp</value>
   </data>
+  <data name="Available" xml:space="preserve">
+    <value>Disponível</value>
+  </data>
+  <data name="BiometricAvailableText" xml:space="preserve">
+    <value>A biometria do dispositivo está disponível, mas não está ativada para aprovação da carteira.</value>
+  </data>
+  <data name="BiometricEnabledText" xml:space="preserve">
+    <value>Ações protegidas podem usar a biometria deste dispositivo.</value>
+  </data>
+  <data name="BiometricStatus" xml:space="preserve">
+    <value>Biometria</value>
+  </data>
+  <data name="BiometricUnavailableSecurityText" xml:space="preserve">
+    <value>A biometria do dispositivo não está disponível. A aprovação por senha da carteira continua ativa.</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Verificando</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Conectado</value>
+  </data>
+  <data name="ConnectionIssue" xml:space="preserve">
+    <value>Problema de conexão</value>
+  </data>
+  <data name="DAppAuthorization" xml:space="preserve">
+    <value>Autorização de dApp</value>
+  </data>
+  <data name="DAppAuthorizationStatus" xml:space="preserve">
+    <value>Somente sessão</value>
+  </data>
+  <data name="DAppAuthorizationText" xml:space="preserve">
+    <value>dApps devem solicitar ações da carteira pelo OneGate a cada vez. Aprovações persistentes não são armazenadas.</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Desativado</value>
+  </data>
+  <data name="LastCheckedAt" xml:space="preserve">
+    <value>Última verificação: {0}</value>
+  </data>
+  <data name="ManageBiometrics" xml:space="preserve">
+    <value>Gerenciar biometria</value>
+  </data>
+  <data name="ManageWalletPassword" xml:space="preserve">
+    <value>Gerenciar senha da carteira</value>
+  </data>
+  <data name="ManageWalletPasswordText" xml:space="preserve">
+    <value>Altere a senha usada para desbloquear e assinar com esta carteira.</value>
+  </data>
+  <data name="NetworkStatus" xml:space="preserve">
+    <value>Status da rede</value>
+  </data>
+  <data name="PasswordProtected" xml:space="preserve">
+    <value>Protegida</value>
+  </data>
+  <data name="PasswordProtectedText" xml:space="preserve">
+    <value>Sua carteira local exige a senha antes de assinar ações sensíveis.</value>
+  </data>
+  <data name="PasswordStatus" xml:space="preserve">
+    <value>Senha</value>
+  </data>
+  <data name="PrivacyMode" xml:space="preserve">
+    <value>Modo de privacidade</value>
+  </data>
+  <data name="PrivacyModeText" xml:space="preserve">
+    <value>Oculta saldos nas telas da carteira quando você está em público ou compartilhando a tela.</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Revisar</value>
+  </data>
+  <data name="ReviewBackup" xml:space="preserve">
+    <value>Revisar backup de recuperação</value>
+  </data>
+  <data name="ReviewBackupText" xml:space="preserve">
+    <value>Abra o fluxo de exportação da carteira e revise opções de armazenamento seguro.</value>
+  </data>
+  <data name="RpcStatusConnectedText" xml:space="preserve">
+    <value>{0} está respondendo. Bloco atual: {1:N0}.</value>
+  </data>
+  <data name="RpcStatusUnavailableText" xml:space="preserve">
+    <value>{0} não respondeu. Transferências podem falhar até a conexão ser recuperada.</value>
+  </data>
+  <data name="SecurityActions" xml:space="preserve">
+    <value>Ações de segurança</value>
+  </data>
+  <data name="SecurityCenter" xml:space="preserve">
+    <value>Central de segurança</value>
+  </data>
+  <data name="SecurityCenterSummaryText" xml:space="preserve">
+    <value>Revise a proteção da carteira, aprovação do dispositivo, status da rede, modo de privacidade e tratamento de solicitações de dApp.</value>
+  </data>
+  <data name="SecurityCenterSummaryTitle" xml:space="preserve">
+    <value>Proteção da carteira em resumo</value>
+  </data>
+  <data name="SecurityStatus" xml:space="preserve">
+    <value>Status de segurança</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Indisponível</value>
+  </data>
 </root>
