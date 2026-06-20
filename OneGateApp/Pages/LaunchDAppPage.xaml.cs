@@ -105,6 +105,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         if (DApp is null) return;
         Uri uriOld = new(DApp.Url);
         Uri uriNew = new(uriOld, e.Url);
+        if (uriNew.Scheme == "about" && uriNew.AbsoluteUri == "about:blank")
+            return;
         if (IsCrossDomain(uriOld, uriNew))
         {
             e.Cancel = true;
