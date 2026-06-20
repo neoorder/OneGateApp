@@ -304,7 +304,7 @@
     <value>创建生物识别凭证</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>检测到您的设备支持生物识别。设置后，您可以用生物识别解锁 OneGate 并授权钱包操作，无需每次输入密码。</value>
+    <value>检测到您的设备支持生物识别，是否创建生物识别凭证以简化登录？</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>已阻止外部链接跳转</value>
@@ -507,6 +507,9 @@
   </data>
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>地址已存在</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>名称已存在</value>
   </data>
   <data name="EditContact" xml:space="preserve">
     <value>编辑地址</value>
@@ -964,5 +967,29 @@
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>最近转账地址</value>
+  </data>
+  <data name="LastTransferFormat" xml:space="preserve">
+    <value>上次转账：{0:g}</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>使用输入的地址</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>搜索名字、地址或备注</value>
+  </data>
+  <data name="AssociatedTransactions" xml:space="preserve">
+    <value>关联交易</value>
+  </data>
+  <data name="NoAssociatedTransactions" xml:space="preserve">
+    <value>暂无关联交易</value>
+  </data>
+  <data name="CopyTransactionHash" xml:space="preserve">
+    <value>复制交易哈希</value>
   </data>
 </root>
