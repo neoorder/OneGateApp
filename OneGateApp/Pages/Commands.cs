@@ -73,7 +73,8 @@ static class Commands
         if (dapp is null && uri is null) throw new ArgumentException("Invalid parameter type.");
         uri ??= new($"https://{SharedOptions.OneGateDomain}/app/{dapp!.Id}");
 #if ANDROID
-        await LaunchDAppInCurrentWindowAsync(dapp, uri);
+        if (!LaunchDAppInNewAndroidDocument(dapp, uri))
+            OpenLaunchDAppWindow(dapp, uri);
 #else
 #if IOS || MACCATALYST
         bool supportOpenWithDeepLink = false;
@@ -90,9 +91,7 @@ static class Commands
 #endif
             if (supportMultiWindow)
             {
-                LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
-                page.ApplyQueryAttributes(parameters);
-                Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
+                OpenLaunchDAppWindow(dapp, uri);
             }
             else
             {
@@ -102,6 +101,29 @@ static class Commands
 #endif
     });
 
+#if ANDROID
+    static bool LaunchDAppInNewAndroidDocument(DApp? dapp, Uri uri)
+    {
+        int appId = dapp?.Id ?? 0;
+        if (appId <= 0 && !DAppLaunchUri.TryGetAppId(uri, out appId))
+            return false;
+
+        var activity = Platform.CurrentActivity;
+        if (activity is null)
+            return false;
+
+        string canonicalUri = $"https://{SharedOptions.OneGateDomain}/app/{appId}";
+        var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.MainActivity));
+        intent.SetAction(Android.Content.Intent.ActionView);
+        intent.SetData(Android.Net.Uri.Parse(canonicalUri));
+        intent.AddFlags(Android.Content.ActivityFlags.NewDocument);
+        if (!string.Equals(uri.AbsoluteUri, canonicalUri, StringComparison.Ordinal))
+            intent.PutExtra("org.neoorder.onegate.ORIGINAL_URI", uri.AbsoluteUri);
+        activity.StartActivity(intent);
+        return true;
+    }
+#endif
+
     static Dictionary<string, object> GetLaunchDAppParameters(DApp? dapp, Uri uri)
     {
         Dictionary<string, object> parameters = new();
@@ -110,9 +132,12 @@ static class Commands
         return parameters;
     }
 
-    static Task LaunchDAppInCurrentWindowAsync(DApp? dapp, Uri uri)
+    static void OpenLaunchDAppWindow(DApp? dapp, Uri uri)
     {
-        return Shell.Current.GoToAsync("launch", GetLaunchDAppParameters(dapp, uri));
+        Dictionary<string, object> parameters = GetLaunchDAppParameters(dapp, uri);
+        LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
+        page.ApplyQueryAttributes(parameters);
+        Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
     }
 
     public static AsyncCommand CheckForUpdates { get; } = new(static async parameter =>
