@@ -304,7 +304,7 @@
     <value>创建生物识别凭证</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>检测到您的设备支持生物识别，是否创建生物识别凭证以简化登录？</value>
+    <value>检测到您的设备支持生物识别。设置后，您可以用生物识别解锁 OneGate 并授权钱包操作，无需每次输入密码。</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>已阻止外部链接跳转</value>
@@ -910,5 +910,104 @@
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp测试</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>可用</value>
+  </data>
+  <data name="BiometricAvailableText" xml:space="preserve">
+    <value>设备支持生物识别，但尚未启用于钱包授权。</value>
+  </data>
+  <data name="BiometricEnabledText" xml:space="preserve">
+    <value>受保护操作可在本设备上使用生物识别授权。</value>
+  </data>
+  <data name="BiometricStatus" xml:space="preserve">
+    <value>生物识别</value>
+  </data>
+  <data name="BiometricUnavailableSecurityText" xml:space="preserve">
+    <value>当前设备不可用生物识别。钱包密码授权仍然有效。</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>检查中</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>已连接</value>
+  </data>
+  <data name="ConnectionIssue" xml:space="preserve">
+    <value>连接异常</value>
+  </data>
+  <data name="DAppAuthorization" xml:space="preserve">
+    <value>dApp 授权</value>
+  </data>
+  <data name="DAppAuthorizationStatus" xml:space="preserve">
+    <value>仅当前会话</value>
+  </data>
+  <data name="DAppAuthorizationText" xml:space="preserve">
+    <value>dApp 每次执行钱包操作都必须通过 OneGate 请求，不会保存长期授权。</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>未启用</value>
+  </data>
+  <data name="LastCheckedAt" xml:space="preserve">
+    <value>上次检查：{0}</value>
+  </data>
+  <data name="ManageBiometrics" xml:space="preserve">
+    <value>管理生物识别</value>
+  </data>
+  <data name="ManageWalletPassword" xml:space="preserve">
+    <value>管理钱包密码</value>
+  </data>
+  <data name="ManageWalletPasswordText" xml:space="preserve">
+    <value>修改用于解锁和签名的钱包密码。</value>
+  </data>
+  <data name="NetworkStatus" xml:space="preserve">
+    <value>网络状态</value>
+  </data>
+  <data name="PasswordProtected" xml:space="preserve">
+    <value>已保护</value>
+  </data>
+  <data name="PasswordProtectedText" xml:space="preserve">
+    <value>本地钱包在签名敏感操作前需要钱包密码。</value>
+  </data>
+  <data name="PasswordStatus" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="PrivacyMode" xml:space="preserve">
+    <value>隐私模式</value>
+  </data>
+  <data name="PrivacyModeText" xml:space="preserve">
+    <value>在公共场合或共享屏幕时隐藏钱包余额。</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="ReviewBackup" xml:space="preserve">
+    <value>查看恢复备份</value>
+  </data>
+  <data name="ReviewBackupText" xml:space="preserve">
+    <value>打开钱包导出流程，查看安全保存方式。</value>
+  </data>
+  <data name="RpcStatusConnectedText" xml:space="preserve">
+    <value>{0} 正常响应。当前区块：{1:N0}。</value>
+  </data>
+  <data name="RpcStatusUnavailableText" xml:space="preserve">
+    <value>{0} 暂无响应。连接恢复前，转账可能失败。</value>
+  </data>
+  <data name="SecurityActions" xml:space="preserve">
+    <value>安全操作</value>
+  </data>
+  <data name="SecurityCenter" xml:space="preserve">
+    <value>安全中心</value>
+  </data>
+  <data name="SecurityCenterSummaryText" xml:space="preserve">
+    <value>集中查看钱包保护、设备授权、网络状态、隐私模式和 dApp 请求处理。</value>
+  </data>
+  <data name="SecurityCenterSummaryTitle" xml:space="preserve">
+    <value>钱包保护概览</value>
+  </data>
+  <data name="SecurityStatus" xml:space="preserve">
+    <value>安全状态</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>不可用</value>
   </data>
 </root>

@@ -866,4 +866,103 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="DAppTesting" xml:space="preserve">
     <value>Pengujian DApp</value>
   </data>
+  <data name="Available" xml:space="preserve">
+    <value>Tersedia</value>
+  </data>
+  <data name="BiometricAvailableText" xml:space="preserve">
+    <value>Biometrik perangkat tersedia, tetapi belum diaktifkan untuk persetujuan dompet.</value>
+  </data>
+  <data name="BiometricEnabledText" xml:space="preserve">
+    <value>Tindakan terlindungi dapat menggunakan biometrik perangkat di perangkat ini.</value>
+  </data>
+  <data name="BiometricStatus" xml:space="preserve">
+    <value>Biometrik</value>
+  </data>
+  <data name="BiometricUnavailableSecurityText" xml:space="preserve">
+    <value>Biometrik perangkat tidak tersedia. Persetujuan dengan kata sandi dompet tetap aktif.</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Memeriksa</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Terhubung</value>
+  </data>
+  <data name="ConnectionIssue" xml:space="preserve">
+    <value>Masalah koneksi</value>
+  </data>
+  <data name="DAppAuthorization" xml:space="preserve">
+    <value>Otorisasi dApp</value>
+  </data>
+  <data name="DAppAuthorizationStatus" xml:space="preserve">
+    <value>Hanya sesi</value>
+  </data>
+  <data name="DAppAuthorizationText" xml:space="preserve">
+    <value>dApp harus meminta tindakan dompet melalui OneGate setiap kali. Persetujuan permanen tidak disimpan.</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Dinonaktifkan</value>
+  </data>
+  <data name="LastCheckedAt" xml:space="preserve">
+    <value>Terakhir diperiksa: {0}</value>
+  </data>
+  <data name="ManageBiometrics" xml:space="preserve">
+    <value>Kelola biometrik</value>
+  </data>
+  <data name="ManageWalletPassword" xml:space="preserve">
+    <value>Kelola kata sandi dompet</value>
+  </data>
+  <data name="ManageWalletPasswordText" xml:space="preserve">
+    <value>Ubah kata sandi yang digunakan untuk membuka kunci dan menandatangani dengan dompet ini.</value>
+  </data>
+  <data name="NetworkStatus" xml:space="preserve">
+    <value>Status jaringan</value>
+  </data>
+  <data name="PasswordProtected" xml:space="preserve">
+    <value>Terlindungi</value>
+  </data>
+  <data name="PasswordProtectedText" xml:space="preserve">
+    <value>Dompet lokal Anda memerlukan kata sandinya sebelum menandatangani tindakan sensitif.</value>
+  </data>
+  <data name="PasswordStatus" xml:space="preserve">
+    <value>Kata sandi</value>
+  </data>
+  <data name="PrivacyMode" xml:space="preserve">
+    <value>Mode privasi</value>
+  </data>
+  <data name="PrivacyModeText" xml:space="preserve">
+    <value>Sembunyikan saldo di layar dompet saat Anda berada di tempat umum atau membagikan layar.</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Tinjau</value>
+  </data>
+  <data name="ReviewBackup" xml:space="preserve">
+    <value>Tinjau cadangan pemulihan</value>
+  </data>
+  <data name="ReviewBackupText" xml:space="preserve">
+    <value>Buka alur ekspor dompet dan tinjau opsi penyimpanan aman.</value>
+  </data>
+  <data name="RpcStatusConnectedText" xml:space="preserve">
+    <value>{0} merespons. Blok saat ini: {1:N0}.</value>
+  </data>
+  <data name="RpcStatusUnavailableText" xml:space="preserve">
+    <value>{0} tidak merespons. Transfer dapat gagal sampai koneksi pulih.</value>
+  </data>
+  <data name="SecurityActions" xml:space="preserve">
+    <value>Tindakan keamanan</value>
+  </data>
+  <data name="SecurityCenter" xml:space="preserve">
+    <value>Pusat Keamanan</value>
+  </data>
+  <data name="SecurityCenterSummaryText" xml:space="preserve">
+    <value>Tinjau perlindungan dompet, persetujuan perangkat, status jaringan, mode privasi, dan penanganan permintaan dApp.</value>
+  </data>
+  <data name="SecurityCenterSummaryTitle" xml:space="preserve">
+    <value>Perlindungan dompet sekilas</value>
+  </data>
+  <data name="SecurityStatus" xml:space="preserve">
+    <value>Status keamanan</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Tidak tersedia</value>
+  </data>
 </root>

@@ -214,6 +214,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Available 的本地化字符串。
+        /// </summary>
+        internal static string Available {
+            get {
+                return ResourceManager.GetString("Available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 I have written down and securely backed up the above mnemonic phrase 的本地化字符串。
         /// </summary>
         internal static string BackupMnemonicCheckBoxText {
@@ -241,6 +250,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Device biometrics are available but not enabled for wallet approval. 的本地化字符串。
+        /// </summary>
+        internal static string BiometricAvailableText {
+            get {
+                return ResourceManager.GetString("BiometricAvailableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Biometric credential created successfully 的本地化字符串。
         /// </summary>
         internal static string BiometricCredentialCreatedText {
@@ -255,6 +273,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string BiometricDisabledText {
             get {
                 return ResourceManager.GetString("BiometricDisabledText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Protected actions can use device biometrics on this device. 的本地化字符串。
+        /// </summary>
+        internal static string BiometricEnabledText {
+            get {
+                return ResourceManager.GetString("BiometricEnabledText", resourceCulture);
             }
         }
         
@@ -275,6 +302,24 @@ namespace NeoOrder.OneGate.Properties {
         internal static string BiometricResetText {
             get {
                 return ResourceManager.GetString("BiometricResetText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Biometrics 的本地化字符串。
+        /// </summary>
+        internal static string BiometricStatus {
+            get {
+                return ResourceManager.GetString("BiometricStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Device biometrics are not available. Wallet password approval remains active. 的本地化字符串。
+        /// </summary>
+        internal static string BiometricUnavailableSecurityText {
+            get {
+                return ResourceManager.GetString("BiometricUnavailableSecurityText", resourceCulture);
             }
         }
         
@@ -343,6 +388,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Checking 的本地化字符串。
+        /// </summary>
+        internal static string Checking {
+            get {
+                return ResourceManager.GetString("Checking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Checking for updates 的本地化字符串。
         /// </summary>
         internal static string CheckingForUpdates {
@@ -375,6 +429,24 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ConfirmSecurityRiskAcknowledgement {
             get {
                 return ResourceManager.GetString("ConfirmSecurityRiskAcknowledgement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Connected 的本地化字符串。
+        /// </summary>
+        internal static string Connected {
+            get {
+                return ResourceManager.GetString("Connected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Connection issue 的本地化字符串。
+        /// </summary>
+        internal static string ConnectionIssue {
+            get {
+                return ResourceManager.GetString("ConnectionIssue", resourceCulture);
             }
         }
         
@@ -460,7 +532,7 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Your device supports biometric authentication. Create a biometric credential to simplify sign-in? 的本地化字符串。
+        ///   查找类似 Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time. 的本地化字符串。
         /// </summary>
         internal static string CreateBiometricCredentialText {
             get {
@@ -492,6 +564,33 @@ namespace NeoOrder.OneGate.Properties {
         internal static string CurrentPassword {
             get {
                 return ResourceManager.GetString("CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 dApp authorization 的本地化字符串。
+        /// </summary>
+        internal static string DAppAuthorization {
+            get {
+                return ResourceManager.GetString("DAppAuthorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Session-only 的本地化字符串。
+        /// </summary>
+        internal static string DAppAuthorizationStatus {
+            get {
+                return ResourceManager.GetString("DAppAuthorizationStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 dApps must request wallet actions through OneGate each time. Persistent approvals are not stored. 的本地化字符串。
+        /// </summary>
+        internal static string DAppAuthorizationText {
+            get {
+                return ResourceManager.GetString("DAppAuthorizationText", resourceCulture);
             }
         }
         
@@ -624,7 +723,7 @@ namespace NeoOrder.OneGate.Properties {
         /// <summary>
         ///   查找类似 Deleting a wallet is an irreversible and high-risk action. Once deleted, all data related to this wallet on the current device (including account information, transaction history, and local cache) will be permanently removed and cannot be recovered.
         ///
-        ///Please make sure you have securely backed up the wallet’s mnemonic phrase or private key, and that the backup is accurate and safely stored. If you have not completed the backup or if it is lost, you will not be able to restore the wallet after deletion, and th [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///Please make sure you have securely backed up the wallet’s mnemonic phrase or private key, and that the backup is accurate and safely stored. If you have not completed the backup or if it is lost, you will not be able to restore the wallet after deletion, and  [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string DeleteWalletWarningText {
             get {
@@ -676,6 +775,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string DisableBiometricText {
             get {
                 return ResourceManager.GetString("DisableBiometricText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Disabled 的本地化字符串。
+        /// </summary>
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
             }
         }
         
@@ -1076,6 +1184,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Last checked: {0} 的本地化字符串。
+        /// </summary>
+        internal static string LastCheckedAt {
+            get {
+                return ResourceManager.GetString("LastCheckedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Loading 的本地化字符串。
         /// </summary>
         internal static string Loading {
@@ -1126,6 +1243,33 @@ namespace NeoOrder.OneGate.Properties {
         internal static string LoginRequestText {
             get {
                 return ResourceManager.GetString("LoginRequestText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Manage biometrics 的本地化字符串。
+        /// </summary>
+        internal static string ManageBiometrics {
+            get {
+                return ResourceManager.GetString("ManageBiometrics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Manage wallet password 的本地化字符串。
+        /// </summary>
+        internal static string ManageWalletPassword {
+            get {
+                return ResourceManager.GetString("ManageWalletPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Change the password used to unlock and sign with this wallet. 的本地化字符串。
+        /// </summary>
+        internal static string ManageWalletPasswordText {
+            get {
+                return ResourceManager.GetString("ManageWalletPasswordText", resourceCulture);
             }
         }
         
@@ -1197,7 +1341,7 @@ namespace NeoOrder.OneGate.Properties {
         ///
         ///Please note: The NEP-2 key and its corresponding password are both required. If someone obtains both, they can control and transfer your assets. If you lose the NEP-2 key or forget the password, your assets cannot be recovered.
         ///
-        ///It is recommended to store the NEP-2 key and password separately and back them up securely. Avoid keeping them on the same device or within the [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///It is recommended to store the NEP-2 key and password separately and back them up securely. Avoid keeping them on the same device or within [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string Nep2PrivateKeyWarning {
             get {
@@ -1211,6 +1355,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Network {
             get {
                 return ResourceManager.GetString("Network", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Network status 的本地化字符串。
+        /// </summary>
+        internal static string NetworkStatus {
+            get {
+                return ResourceManager.GetString("NetworkStatus", resourceCulture);
             }
         }
         
@@ -1422,11 +1575,38 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Protected 的本地化字符串。
+        /// </summary>
+        internal static string PasswordProtected {
+            get {
+                return ResourceManager.GetString("PasswordProtected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Password-protected private key (NEP-2) 的本地化字符串。
         /// </summary>
         internal static string PasswordProtectedPrivateKeyNep2 {
             get {
                 return ResourceManager.GetString("PasswordProtectedPrivateKeyNep2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Your local wallet requires its password before signing sensitive actions. 的本地化字符串。
+        /// </summary>
+        internal static string PasswordProtectedText {
+            get {
+                return ResourceManager.GetString("PasswordProtectedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Password 的本地化字符串。
+        /// </summary>
+        internal static string PasswordStatus {
+            get {
+                return ResourceManager.GetString("PasswordStatus", resourceCulture);
             }
         }
         
@@ -1485,6 +1665,24 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Privacy mode 的本地化字符串。
+        /// </summary>
+        internal static string PrivacyMode {
+            get {
+                return ResourceManager.GetString("PrivacyMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Hide balances in wallet screens when you are in public or sharing your screen. 的本地化字符串。
+        /// </summary>
+        internal static string PrivacyModeText {
+            get {
+                return ResourceManager.GetString("PrivacyModeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Privacy Policy 的本地化字符串。
         /// </summary>
         internal static string PrivacyPolicy {
@@ -1516,7 +1714,7 @@ namespace NeoOrder.OneGate.Properties {
         ///
         ///Make sure to perform this action in a secure, offline environment where no one can observe you. Do not take screenshots, photos, or copy it to chat apps, email, or cloud storage. Never share your private key with anyone.
         ///
-        ///Please note: We do not store or manage your private key. If it is lost, forgotten, or damaged, it cannot b [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///Please note: We do not store or manage your private key. If it is lost, forgotten, or damaged, it cann [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string PrivateKeyExportWarning {
             get {
@@ -1732,6 +1930,51 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Review 的本地化字符串。
+        /// </summary>
+        internal static string Review {
+            get {
+                return ResourceManager.GetString("Review", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Review recovery backup 的本地化字符串。
+        /// </summary>
+        internal static string ReviewBackup {
+            get {
+                return ResourceManager.GetString("ReviewBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Open the wallet export flow and review secure storage options. 的本地化字符串。
+        /// </summary>
+        internal static string ReviewBackupText {
+            get {
+                return ResourceManager.GetString("ReviewBackupText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} is responding. Current block: {1:N0}. 的本地化字符串。
+        /// </summary>
+        internal static string RpcStatusConnectedText {
+            get {
+                return ResourceManager.GetString("RpcStatusConnectedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} did not respond. Transfers may fail until the connection recovers. 的本地化字符串。
+        /// </summary>
+        internal static string RpcStatusUnavailableText {
+            get {
+                return ResourceManager.GetString("RpcStatusUnavailableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Save to gallery 的本地化字符串。
         /// </summary>
         internal static string SaveToPhotoLibrary {
@@ -1782,6 +2025,51 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Security {
             get {
                 return ResourceManager.GetString("Security", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Security actions 的本地化字符串。
+        /// </summary>
+        internal static string SecurityActions {
+            get {
+                return ResourceManager.GetString("SecurityActions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Security Center 的本地化字符串。
+        /// </summary>
+        internal static string SecurityCenter {
+            get {
+                return ResourceManager.GetString("SecurityCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Review wallet protection, device approval, network status, privacy mode, and dApp request handling. 的本地化字符串。
+        /// </summary>
+        internal static string SecurityCenterSummaryText {
+            get {
+                return ResourceManager.GetString("SecurityCenterSummaryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Wallet protection at a glance 的本地化字符串。
+        /// </summary>
+        internal static string SecurityCenterSummaryTitle {
+            get {
+                return ResourceManager.GetString("SecurityCenterSummaryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Security status 的本地化字符串。
+        /// </summary>
+        internal static string SecurityStatus {
+            get {
+                return ResourceManager.GetString("SecurityStatus", resourceCulture);
             }
         }
         
@@ -2187,6 +2475,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string TxID {
             get {
                 return ResourceManager.GetString("TxID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unavailable 的本地化字符串。
+        /// </summary>
+        internal static string Unavailable {
+            get {
+                return ResourceManager.GetString("Unavailable", resourceCulture);
             }
         }
         
