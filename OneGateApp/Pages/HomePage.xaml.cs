@@ -1,5 +1,6 @@
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
+using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Services;
 using System.Net;
 
@@ -62,9 +63,8 @@ public partial class HomePage : ContentPage
     async void OnBannerTapped(object sender, TappedEventArgs e)
     {
         string url = (string)e.Parameter!;
-        Uri uri = new(url);
-        if (uri.Scheme == "https" && uri.Authority == SharedOptions.OneGateDomain && uri.Segments is ["/", "app/", _])
-            await Commands.LaunchDApp.ExecuteAsync(uri);
+        if (LaunchDAppAction.TryCreate(url) is LaunchDAppAction action)
+            await Commands.LaunchDApp.ExecuteAsync(action.Uri);
         else
             await Commands.OpenUrl.ExecuteAsync(url);
     }

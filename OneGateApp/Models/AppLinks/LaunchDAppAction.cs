@@ -5,17 +5,16 @@ namespace NeoOrder.OneGate.Models.AppLinks;
 
 class LaunchDAppAction : AppLinkAction
 {
-    readonly Uri uri;
-
     public LaunchDAppAction(Uri uri)
     {
         if (!DAppLaunchUri.TryGetAppId(uri, out int appId))
             throw new ArgumentException("Invalid dApp URI.", nameof(uri));
-        this.uri = uri;
+        Uri = uri;
         AppId = appId;
     }
 
     protected override string Route => "launch";
+    public Uri Uri { get; }
     public int AppId { get; }
 
     protected override Page CreatePage(IServiceProvider serviceProvider)
@@ -27,7 +26,28 @@ class LaunchDAppAction : AppLinkAction
     {
         return new Dictionary<string, object>
         {
-            ["uri"] = uri
+            ["uri"] = Uri
         };
+    }
+
+    public static new LaunchDAppAction? TryCreate(string? uri)
+    {
+        if (string.IsNullOrEmpty(uri)) return null;
+        if (Uri.TryCreate(uri, UriKind.Absolute, out var result))
+            return TryCreate(result);
+        return null;
+    }
+
+    public static new LaunchDAppAction? TryCreate(Uri? uri)
+    {
+        if (uri is null) return null;
+        try
+        {
+            return new(uri);
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

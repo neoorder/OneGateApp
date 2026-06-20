@@ -3,12 +3,12 @@ using Neo;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Models;
+using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using SkiaSharp;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Web;
 using ZXing.Common;
 using ZXing.Net.Maui;
 
@@ -131,20 +131,21 @@ public partial class ScanPage : ContentPage, IQueryAttributable
 
     async Task<bool> ProcessNeoSchemeAsync(Uri uri)
     {
+        PaymentAction? payment = PaymentAction.TryCreate(uri);
+        if (payment is null) return false;
         try
         {
-            uri.LocalPath.ToScriptHash(protocolSettings.AddressVersion);
+            payment.Recipient.ToScriptHash(protocolSettings.AddressVersion);
         }
         catch
         {
             return false;
         }
-        var nv = HttpUtility.ParseQueryString(uri.Query);
         string query = "?address=" + uri.LocalPath;
-        if (nv["asset"] is string s_asset)
-            query += $"&asset={UInt160.Parse(s_asset)}";
-        if (nv["amount"] is string s_amount)
-            query += $"&amount={decimal.Parse(s_amount)}";
+        if (payment.AssetId is not null)
+            query += $"&asset={payment.AssetId}";
+        if (payment.Amount.HasValue)
+            query += $"&amount={payment.Amount}";
         switch (action)
         {
             case "RecognizeAddress":
@@ -161,10 +162,14 @@ public partial class ScanPage : ContentPage, IQueryAttributable
 
     async Task<bool> ProcessHttpsSchemeAsync(Uri uri)
     {
-        if (uri.Host == SharedOptions.OneGateDomain)
+        switch (AppLinkAction.TryCreate(uri))
         {
-            if (await ProcessDappUriAsync(uri)) return true;
-            if (await ProcessNewsUriAsync(uri)) return true;
+            case LaunchDAppAction link:
+                if (await ProcessDappUriAsync(link)) return true;
+                break;
+            case ViewNewsAction link:
+                if (await ProcessNewsUriAsync(link)) return true;
+                break;
         }
         if (action is null)
         {
@@ -175,31 +180,23 @@ public partial class ScanPage : ContentPage, IQueryAttributable
         return false;
     }
 
-    async Task<bool> ProcessDappUriAsync(Uri uri)
+    async Task<bool> ProcessDappUriAsync(LaunchDAppAction link)
     {
-        if (!DAppLaunchUri.TryGetAppId(uri, out _)) return false;
         if (action is null)
         {
             await Shell.Current.GoToAsync("..");
-            await Commands.LaunchDApp.ExecuteAsync(uri);
+            await Commands.LaunchDApp.ExecuteAsync(link.Uri);
             return true;
         }
         return false;
     }
 
-    async Task<bool> ProcessNewsUriAsync(Uri uri)
+    async Task<bool> ProcessNewsUriAsync(ViewNewsAction link)
     {
-        if (uri.Segments.Length != 3) return false;
-        if (uri.Segments[1] != "news/") return false;
-        if (!int.TryParse(uri.Segments[2], out int appId)) return false;
-        if (appId <= 0) return false;
         if (action is null)
         {
             await Shell.Current.GoToAsync("..");
-            await Shell.Current.GoToAsync("//home/news/details", new Dictionary<string, object>
-            {
-                ["uri"] = uri
-            });
+            await link.GotoRoute(Shell.Current);
             return true;
         }
         return false;

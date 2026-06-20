@@ -4,6 +4,7 @@ using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Views;
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
@@ -57,16 +58,16 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         else
         {
             Uri uri = launchUri ?? throw new ArgumentException("Missing launch URI.");
-            if (DAppLaunchUri.TryGetAppId(uri, out int id))
+            if (LaunchDAppAction.TryCreate(uri) is LaunchDAppAction action)
             {
-                var response = await httpClient.GetAsync($"/api/dapp/{id}");
+                var response = await httpClient.GetAsync($"/api/dapp/{action.AppId}");
                 if (!response.IsSuccessStatusCode)
                 {
                     await this.GoBackOrCloseAsync();
                     return;
                 }
                 DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
-                url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, uri);
+                url = DAppLaunchUri.ApplyLaunchParameters(DApp.Url, action.Uri);
             }
             else
             {
