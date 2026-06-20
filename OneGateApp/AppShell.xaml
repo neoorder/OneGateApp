@@ -4,7 +4,8 @@
        xmlns:og="http://schemas.neoorder.org/onegate/controls"
        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
        x:Class="NeoOrder.OneGate.AppShell"
-       Title="OneGate">
+       Title="OneGate"
+       Shell.TabBarIsVisible="{OnIdiom Desktop=False, Tablet=False, Default=True}">
     <Shell.Resources>
         <FontImageSource x:Key="HomeIconChecked" FontFamily="Icons" Glyph="&#xe64d;" Color="{toolkit:AppThemeResource Primary}" />
         <FontImageSource x:Key="HomeIconUnchecked" FontFamily="Icons" Glyph="&#xe609;" Color="{toolkit:AppThemeResource Primary}" />
