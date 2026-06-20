@@ -155,6 +155,9 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
             contact.LastUsedAt = now;
             contact.TransferCount++;
             contact.LastTransactionHash = transactionHash;
+            // DbContext uses global NoTracking (see MauiProgram), so the entity returned by the
+            // query is detached. Attach it as Modified, otherwise SaveChangesAsync persists nothing.
+            dbContext.Contacts.Update(contact);
         }
 
         bool exists = await dbContext.ContactTransfers.AnyAsync(p => p.TransactionHash == transactionHash && p.Address == normalized);
