@@ -8,13 +8,13 @@
        Shell.TabBarIsVisible="{OnIdiom Desktop=False, Tablet=False, Default=True}">
     <Shell.Resources>
         <FontImageSource x:Key="HomeIconChecked" FontFamily="Icons" Glyph="&#xe64d;" Color="{toolkit:AppThemeResource Primary}" />
-        <FontImageSource x:Key="HomeIconUnchecked" FontFamily="Icons" Glyph="&#xe609;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="HomeIconUnchecked" FontFamily="Icons" Glyph="&#xe609;" Color="{toolkit:AppThemeResource Secondary}" />
         <FontImageSource x:Key="DAppsIconChecked" FontFamily="Icons" Glyph="&#xe853;" Color="{toolkit:AppThemeResource Primary}" />
-        <FontImageSource x:Key="DAppsIconUnchecked" FontFamily="Icons" Glyph="&#xe792;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="DAppsIconUnchecked" FontFamily="Icons" Glyph="&#xe792;" Color="{toolkit:AppThemeResource Secondary}" />
         <FontImageSource x:Key="GamingIconChecked" FontFamily="Icons" Glyph="&#xea56;" Color="{toolkit:AppThemeResource Primary}" />
-        <FontImageSource x:Key="GamingIconUnchecked" FontFamily="Icons" Glyph="&#xea45;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="GamingIconUnchecked" FontFamily="Icons" Glyph="&#xea45;" Color="{toolkit:AppThemeResource Secondary}" />
         <FontImageSource x:Key="WalletIconChecked" FontFamily="Icons" Glyph="&#xe852;" Color="{toolkit:AppThemeResource Primary}" />
-        <FontImageSource x:Key="WalletIconUnchecked" FontFamily="Icons" Glyph="&#xe798;" Color="{toolkit:AppThemeResource Primary}" />
+        <FontImageSource x:Key="WalletIconUnchecked" FontFamily="Icons" Glyph="&#xe798;" Color="{toolkit:AppThemeResource Secondary}" />
     </Shell.Resources>
     <Shell.Behaviors>
         <og:AdaptiveStateBehavior>
