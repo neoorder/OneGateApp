@@ -11,18 +11,6 @@
              Shell.TabBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout Padding="20,20,20,32" Spacing="18">
-            <Border Padding="16" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 8">
-                <Grid ColumnDefinitions="auto,*" ColumnSpacing="12">
-                    <Border WidthRequest="44" HeightRequest="44" StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Primary}">
-                        <Label StyleClass="Icon" Text="&#xe7dd;" TextColor="{toolkit:AppThemeResource Accent}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
-                    <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                        <Label Text="{x:Static og:Strings.ReceiveRequestTitle}" FontAttributes="Bold" FontSize="18" />
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.ReceiveRequestSubtitle}" FontSize="12" LineBreakMode="WordWrap" />
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
             <Border x:Name="qrCodeCard" Padding="18" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" StrokeShape="RoundRectangle 8">
                 <Border.Shadow>
                     <Shadow Brush="Black" Offset="0,8" Radius="12" Opacity="0.18" />
@@ -67,16 +55,6 @@
                         </Border>
                     </VerticalStackLayout>
                 </VerticalStackLayout>
-            </Border>
-
-            <Border Padding="16" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 8">
-                <Grid ColumnDefinitions="auto,*" ColumnSpacing="12">
-                    <Label StyleClass="Icon" Text="&#xe744;" FontSize="24" VerticalOptions="Start" />
-                    <VerticalStackLayout Grid.Column="1" Spacing="4">
-                        <Label Text="{x:Static og:Strings.ReceiveAddressSafetyTitle}" FontAttributes="Bold" />
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.ReceiveAddressSafetyText}" FontSize="12" LineBreakMode="WordWrap" />
-                    </VerticalStackLayout>
-                </Grid>
             </Border>
 
             <Grid ColumnDefinitions="*,*" ColumnSpacing="12">

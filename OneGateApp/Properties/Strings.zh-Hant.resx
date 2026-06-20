@@ -866,12 +866,6 @@
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp測試</value>
   </data>
-  <data name="ReceiveRequestTitle" xml:space="preserve">
-    <value>建立收款請求</value>
-  </data>
-  <data name="ReceiveRequestSubtitle" xml:space="preserve">
-    <value>分享 QR Code 前，可新增選填的付款資訊。</value>
-  </data>
   <data name="ReceiveRequestDetails" xml:space="preserve">
     <value>請求資訊</value>
   </data>
@@ -895,12 +889,6 @@
   </data>
   <data name="RequestDataPlaceholder" xml:space="preserve">
     <value>選填付款參考</value>
-  </data>
-  <data name="ReceiveAddressSafetyTitle" xml:space="preserve">
-    <value>分享前請確認</value>
-  </data>
-  <data name="ReceiveAddressSafetyText" xml:space="preserve">
-    <value>只將此 Neo 地址分享給您信任的人。金額、備註和資料僅為請求資訊；資金只會在付款方檢視並確認後才轉出。</value>
   </data>
   <data name="CopyRequestLink" xml:space="preserve">
     <value>複製請求</value>
