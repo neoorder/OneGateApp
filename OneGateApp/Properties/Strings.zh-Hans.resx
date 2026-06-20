@@ -508,6 +508,9 @@
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>地址已存在</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>名称已存在</value>
+  </data>
   <data name="EditContact" xml:space="preserve">
     <value>编辑地址</value>
   </data>
@@ -865,5 +868,29 @@
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp测试</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>最近转账地址</value>
+  </data>
+  <data name="LastTransferFormat" xml:space="preserve">
+    <value>上次转账：{0:g}</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>使用输入的地址</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>搜索名字、地址或备注</value>
+  </data>
+  <data name="AssociatedTransactions" xml:space="preserve">
+    <value>关联交易</value>
+  </data>
+  <data name="NoAssociatedTransactions" xml:space="preserve">
+    <value>暂无关联交易</value>
+  </data>
+  <data name="CopyTransactionHash" xml:space="preserve">
+    <value>复制交易哈希</value>
   </data>
 </root>

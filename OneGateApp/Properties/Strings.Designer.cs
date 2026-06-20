@@ -104,6 +104,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AddressAlreadyExists", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Name already exists.
+        /// </summary>
+        internal static string LabelAlreadyExists {
+            get {
+                return ResourceManager.GetString("LabelAlreadyExists", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Address Book 的本地化字符串。
@@ -2254,6 +2263,78 @@ namespace NeoOrder.OneGate.Properties {
         internal static string WifPrivateKeyWarning {
             get {
                 return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        internal static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Recent transfer.
+        /// </summary>
+        internal static string RecentRecipient {
+            get {
+                return ResourceManager.GetString("RecentRecipient", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Last transfer: {0:g}.
+        /// </summary>
+        internal static string LastTransferFormat {
+            get {
+                return ResourceManager.GetString("LastTransferFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use entered address.
+        /// </summary>
+        internal static string UseEnteredAddress {
+            get {
+                return ResourceManager.GetString("UseEnteredAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Search name, address, or note.
+        /// </summary>
+        internal static string SearchAddressBook {
+            get {
+                return ResourceManager.GetString("SearchAddressBook", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Associated transactions.
+        /// </summary>
+        internal static string AssociatedTransactions {
+            get {
+                return ResourceManager.GetString("AssociatedTransactions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to No associated transactions.
+        /// </summary>
+        internal static string NoAssociatedTransactions {
+            get {
+                return ResourceManager.GetString("NoAssociatedTransactions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Copy transaction hash.
+        /// </summary>
+        internal static string CopyTransactionHash {
+            get {
+                return ResourceManager.GetString("CopyTransactionHash", resourceCulture);
             }
         }
     }
