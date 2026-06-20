@@ -508,6 +508,9 @@
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>地址已存在</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>名稱已存在</value>
+  </data>
   <data name="EditContact" xml:space="preserve">
     <value>編輯地址</value>
   </data>
@@ -964,5 +967,29 @@
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>備註</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>最近轉帳地址</value>
+  </data>
+  <data name="LastTransferFormat" xml:space="preserve">
+    <value>上次轉帳：{0:g}</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>使用輸入的地址</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>搜尋名字、地址或備註</value>
+  </data>
+  <data name="AssociatedTransactions" xml:space="preserve">
+    <value>關聯交易</value>
+  </data>
+  <data name="NoAssociatedTransactions" xml:space="preserve">
+    <value>暫無關聯交易</value>
+  </data>
+  <data name="CopyTransactionHash" xml:space="preserve">
+    <value>複製交易雜湊</value>
   </data>
 </root>
