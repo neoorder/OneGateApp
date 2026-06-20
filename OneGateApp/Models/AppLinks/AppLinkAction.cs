@@ -1,4 +1,6 @@
-﻿namespace NeoOrder.OneGate.Models.AppLinks;
+﻿using NeoOrder.OneGate.Services;
+
+namespace NeoOrder.OneGate.Models.AppLinks;
 
 abstract class AppLinkAction
 {
@@ -16,11 +18,43 @@ abstract class AppLinkAction
         return new NavigationPage(page);
     }
 
-    public async void GotoRoute(AppShell shell)
+    public async Task GotoRoute(Shell shell)
     {
         if (CreateQuery() is IDictionary<string, object> query)
             await shell.GoToAsync(Route, query);
         else
             await shell.GoToAsync(Route);
+    }
+
+    public static AppLinkAction? TryCreate(string? uri)
+    {
+        if (string.IsNullOrEmpty(uri)) return null;
+        if (Uri.TryCreate(uri, UriKind.Absolute, out var result))
+            return TryCreate(result);
+        return null;
+    }
+
+    public static AppLinkAction? TryCreate(Uri? uri)
+    {
+        if (uri is null) return null;
+        if (!uri.IsAbsoluteUri) return null;
+        return uri.Scheme switch
+        {
+            "neo" => PaymentAction.TryCreate(uri),
+            "neoauth" => AuthenticationAction.TryCreate(uri),
+            "https" => ProcessHttpsScheme(uri),
+            _ => null
+        };
+    }
+
+    static AppLinkAction? ProcessHttpsScheme(Uri uri)
+    {
+        if (uri.Authority != SharedOptions.OneGateDomain) return null;
+        return uri.Segments switch
+        {
+            ["/", "app/", _] => LaunchDAppAction.TryCreate(uri),
+            ["/", "news/", _] => ViewNewsAction.TryCreate(uri),
+            _ => null
+        };
     }
 }
