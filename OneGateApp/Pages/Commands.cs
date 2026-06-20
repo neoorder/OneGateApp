@@ -113,7 +113,7 @@ static class Commands
             return false;
 
         string canonicalUri = $"https://{SharedOptions.OneGateDomain}/app/{appId}";
-        var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.MainActivity));
+        var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.DocumentLinkActivity));
         intent.SetAction(Android.Content.Intent.ActionView);
         intent.SetData(Android.Net.Uri.Parse(canonicalUri));
         intent.AddFlags(Android.Content.ActivityFlags.NewDocument);
