@@ -11,12 +11,20 @@ public class ActivityLogService(ApplicationDbContext dbContext)
 
     public async Task<IReadOnlyList<ActivityRecord>> GetRecentAsync()
     {
-        List<ActivityRecord>? records = await dbContext.Settings.GetAsync<List<ActivityRecord>>(RecordsKey);
-        return records?
-            .Where(p => p.CreatedAt != default)
-            .OrderByDescending(p => p.CreatedAt)
-            .Take(MaxRecords)
-            .ToArray() ?? [];
+        try
+        {
+            List<ActivityRecord>? records = await dbContext.Settings.GetAsync<List<ActivityRecord>>(RecordsKey);
+            return records?
+                .Where(p => p.CreatedAt != default)
+                .OrderByDescending(p => p.CreatedAt)
+                .Take(MaxRecords)
+                .ToArray() ?? [];
+        }
+        catch
+        {
+            // Activity history is diagnostic. Corrupt local data must not break Settings.
+            return [];
+        }
     }
 
     public async Task RecordDAppConnectionAsync(DApp dapp)
@@ -36,7 +44,7 @@ public class ActivityLogService(ApplicationDbContext dbContext)
 
     public async Task RecordTransactionAsync(DApp dapp, UInt256 transactionHash)
     {
-        ActivityRecordKind kind = IsOneGateVault(dapp) ? ActivityRecordKind.VaultOperation : ActivityRecordKind.Transaction;
+        ActivityRecordKind kind = IsOneGateVault(dapp) ? ActivityRecordKind.OneGateVaultTransaction : ActivityRecordKind.Transaction;
         await RecordAsync(kind, dapp, transactionHash.ToString());
     }
 

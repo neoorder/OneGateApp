@@ -989,4 +989,85 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="Unavailable" xml:space="preserve">
     <value>No disponible</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Actividad</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Centro de actividad</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Abre una dApp, aprueba el acceso a la wallet, firma un mensaje o envia una transaccion para iniciar la linea de tiempo local.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>Aun no hay actividad registrada</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Revisa conexiones de dApps, autorizaciones de wallet, firmas, transacciones enviadas y transacciones de OneGate Vault registradas en este dispositivo.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Linea de tiempo de actividad de tu wallet</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>Conectado a {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} registros</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Firma aprobada para {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Origen: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transaccion {0} desde {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transaccion enviada desde {0}</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>Transaccion de OneGate Vault enviada desde {0}</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>Acceso a la wallet aprobado para {0}</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Conexion</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Conexiones</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Ultima actividad: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>Sin actividad reciente</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Actividad reciente</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Firmas</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaccion</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transacciones</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp desconocida</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Origen desconocido</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Autorizacion de wallet</value>
+  </data>
 </root>

@@ -6,7 +6,7 @@ public enum ActivityRecordKind
     WalletAuthorization,
     Signature,
     Transaction,
-    VaultOperation
+    OneGateVaultTransaction
 }
 
 public class ActivityRecord

@@ -1002,7 +1002,7 @@
     <value>暂无活动记录</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>集中查看本设备记录的 dApp 连接、钱包授权、签名、已提交交易和 Vault 操作。</value>
+    <value>集中查看本设备记录的 dApp 连接、钱包授权、签名、已提交交易和 OneGate Vault 交易。</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>钱包活动时间线</value>
@@ -1025,8 +1025,8 @@
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>已从 {0} 提交交易</value>
   </data>
-  <data name="ActivityVaultOperationTitle" xml:space="preserve">
-    <value>已从 {0} 提交 Vault 操作</value>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>已从 {0} 提交 OneGate Vault 交易</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>已为 {0} 授权钱包访问</value>
@@ -1064,11 +1064,8 @@
   <data name="UnknownSource" xml:space="preserve">
     <value>未知来源</value>
   </data>
-  <data name="Vault" xml:space="preserve">
-    <value>Vault</value>
-  </data>
-  <data name="VaultOperation" xml:space="preserve">
-    <value>Vault 操作</value>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>钱包授权</value>

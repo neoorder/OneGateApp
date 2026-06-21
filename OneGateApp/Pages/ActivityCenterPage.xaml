@@ -45,7 +45,7 @@
                     <Border Grid.Row="1" Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="14">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{Binding VaultCount}" FontAttributes="Bold" FontSize="22" />
-                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Vault}" FontSize="12" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.OneGateVault}" FontSize="12" />
                         </VerticalStackLayout>
                     </Border>
                 </Grid>

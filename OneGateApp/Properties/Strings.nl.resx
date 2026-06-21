@@ -989,4 +989,85 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="Unavailable" xml:space="preserve">
     <value>Niet beschikbaar</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Activiteit</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Activiteitencentrum</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Open een dApp, keur wallettoegang goed, onderteken een bericht of dien een transactie in om de lokale activiteitstijdlijn te starten.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>Nog geen activiteit vastgelegd</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Bekijk dApp-verbindingen, walletautorisaties, handtekeningen, ingediende transacties en OneGate Vault-transacties die op dit apparaat zijn vastgelegd.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Activiteitstijdlijn van je wallet</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>Verbonden met {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} records</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Handtekening goedgekeurd voor {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Bron: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transactie {0} vanaf {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transactie ingediend vanaf {0}</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>OneGate Vault-transactie ingediend vanaf {0}</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>Wallettoegang goedgekeurd voor {0}</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Verbinding</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Verbindingen</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Laatste activiteit: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>Geen recente activiteit</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Recente activiteit</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Handtekening</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Handtekeningen</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transactie</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transacties</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Onbekende dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Onbekende bron</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Walletautorisatie</value>
+  </data>
 </root>

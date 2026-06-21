@@ -33,7 +33,7 @@ public partial class ActivityCenterPage : ContentPage
     public int ConnectionCount => Activities.Count(p => p.Kind is ActivityRecordKind.DAppConnection or ActivityRecordKind.WalletAuthorization);
     public int SignatureCount => Activities.Count(p => p.Kind == ActivityRecordKind.Signature);
     public int TransactionCount => Activities.Count(p => p.Kind == ActivityRecordKind.Transaction);
-    public int VaultCount => Activities.Count(p => p.Kind == ActivityRecordKind.VaultOperation);
+    public int VaultCount => Activities.Count(p => p.Kind == ActivityRecordKind.OneGateVaultTransaction);
     public string LastActivityText => HasActivities
         ? string.Format(Strings.LastActivityAt, Activities[0].CreatedAtText)
         : Strings.NoRecentActivity;
@@ -83,7 +83,7 @@ public sealed class ActivityCenterItem
         ActivityRecordKind.WalletAuthorization => "\ue738",
         ActivityRecordKind.Signature => "\ue67f",
         ActivityRecordKind.Transaction => "\ue64e",
-        ActivityRecordKind.VaultOperation => "\ue927",
+        ActivityRecordKind.OneGateVaultTransaction => "\ue927",
         _ => "\ue625"
     };
     public string KindText => Kind switch
@@ -92,7 +92,7 @@ public sealed class ActivityCenterItem
         ActivityRecordKind.WalletAuthorization => Strings.WalletAuthorization,
         ActivityRecordKind.Signature => Strings.Signature,
         ActivityRecordKind.Transaction => Strings.Transaction,
-        ActivityRecordKind.VaultOperation => Strings.VaultOperation,
+        ActivityRecordKind.OneGateVaultTransaction => Strings.OneGateVault,
         _ => Strings.Activity
     };
     public string Title => Kind switch
@@ -101,7 +101,7 @@ public sealed class ActivityCenterItem
         ActivityRecordKind.WalletAuthorization => string.Format(Strings.ActivityWalletAuthorizationTitle, DAppName),
         ActivityRecordKind.Signature => string.Format(Strings.ActivitySignatureTitle, DAppName),
         ActivityRecordKind.Transaction => string.Format(Strings.ActivityTransactionTitle, DAppName),
-        ActivityRecordKind.VaultOperation => string.Format(Strings.ActivityVaultOperationTitle, DAppName),
+        ActivityRecordKind.OneGateVaultTransaction => string.Format(Strings.ActivityOneGateVaultTransactionTitle, DAppName),
         _ => DAppName
     };
     public string Description

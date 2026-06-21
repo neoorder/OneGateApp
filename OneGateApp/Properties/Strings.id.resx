@@ -989,4 +989,85 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Aktivitas</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Pusat Aktivitas</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Buka dApp, setujui akses dompet, tanda tangani pesan, atau kirim transaksi untuk memulai linimasa aktivitas lokal.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>Belum ada aktivitas yang direkam</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Tinjau koneksi dApp, otorisasi dompet, tanda tangan, transaksi terkirim, dan transaksi OneGate Vault yang direkam di perangkat ini.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Linimasa aktivitas dompet Anda</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>Terhubung ke {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} catatan</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Tanda tangan disetujui untuk {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Sumber: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transaksi {0} dari {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transaksi dikirim dari {0}</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>Transaksi OneGate Vault dikirim dari {0}</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>Akses dompet disetujui untuk {0}</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Koneksi</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Koneksi</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Aktivitas terakhir: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>Tidak ada aktivitas terbaru</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Aktivitas terbaru</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Tanda tangan</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Tanda tangan</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaksi</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transaksi</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp tidak dikenal</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Sumber tidak dikenal</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Otorisasi dompet</value>
+  </data>
 </root>

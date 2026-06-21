@@ -178,7 +178,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Review dApp connections, wallet authorizations, signatures, submitted transactions, and Vault activity recorded on this device. 的本地化字符串。
+        ///   查找类似 Review dApp connections, wallet authorizations, signatures, submitted transactions, and OneGate Vault transactions recorded on this device. 的本地化字符串。
         /// </summary>
         internal static string ActivityCenterSummaryText {
             get {
@@ -250,11 +250,11 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Vault operation submitted from {0} 的本地化字符串。
+        ///   查找类似 OneGate Vault transaction submitted from {0} 的本地化字符串。
         /// </summary>
-        internal static string ActivityVaultOperationTitle {
+        internal static string ActivityOneGateVaultTransactionTitle {
             get {
-                return ResourceManager.GetString("ActivityVaultOperationTitle", resourceCulture);
+                return ResourceManager.GetString("ActivityOneGateVaultTransactionTitle", resourceCulture);
             }
         }
 
@@ -2767,20 +2767,11 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Vault 的本地化字符串。
+        ///   查找类似 OneGate Vault 的本地化字符串。
         /// </summary>
-        internal static string Vault {
+        internal static string OneGateVault {
             get {
-                return ResourceManager.GetString("Vault", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Vault operation 的本地化字符串。
-        /// </summary>
-        internal static string VaultOperation {
-            get {
-                return ResourceManager.GetString("VaultOperation", resourceCulture);
+                return ResourceManager.GetString("OneGateVault", resourceCulture);
             }
         }
         
