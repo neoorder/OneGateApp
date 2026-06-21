@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.ActivityCenterPage"
+             Title="{x:Static og:Strings.ActivityCenter}"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+        <ScrollView>
+            <VerticalStackLayout Margin="20" Spacing="18">
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="18">
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="14">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="48" HeightRequest="48" VerticalOptions="Start">
+                            <Label StyleClass="Icon" Text="&#xe60c;" TextColor="White" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="6">
+                            <Label Text="{x:Static og:Strings.ActivityCenterSummaryTitle}" FontAttributes="Bold" FontSize="20" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.ActivityCenterSummaryText}" LineBreakMode="WordWrap" />
+                            <Label StyleClass="Secondary" Text="{Binding LastActivityText}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*" RowDefinitions="auto,auto" ColumnSpacing="10" RowSpacing="10">
+                    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="14">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding ConnectionCount}" FontAttributes="Bold" FontSize="22" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Connections}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="14">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding SignatureCount}" FontAttributes="Bold" FontSize="22" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Signatures}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Row="1" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="14">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding TransactionCount}" FontAttributes="Bold" FontSize="22" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Transactions}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="14">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding VaultCount}" FontAttributes="Bold" FontSize="22" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Vault}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Label StyleClass="Secondary" Text="{x:Static og:Strings.RecentActivity}" />
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="18" IsVisible="{Binding IsEmpty}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{x:Static og:Strings.ActivityCenterEmptyTitle}" FontAttributes="Bold" />
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.ActivityCenterEmptyText}" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </Border>
+                <VerticalStackLayout Spacing="10" IsVisible="{Binding HasActivities}" BindableLayout.ItemsSource="{Binding Activities}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="og:ActivityCenterItem">
+                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16">
+                                <Grid ColumnDefinitions="auto,*" ColumnSpacing="14">
+                                    <Label StyleClass="Icon, Secondary" Text="{Binding IconGlyph}" FontSize="22" VerticalOptions="Start" />
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
+                                            <Label Text="{Binding Title}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                            <Label Grid.Column="1" StyleClass="Secondary" Text="{Binding CreatedAtText}" FontSize="11" HorizontalOptions="End" />
+                                        </Grid>
+                                        <Label StyleClass="Secondary" Text="{Binding KindText}" FontSize="12" />
+                                        <Label StyleClass="Secondary" Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

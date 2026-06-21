@@ -10,15 +10,17 @@ public partial class SettingsPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
     readonly TokenManager tokenManager;
+    readonly ActivityLogService activityLogService;
 
     public LoadingService LoadingService { get; set { field = value; OnPropertyChanged(); } }
     public SettingEntryGroup[]? SettingEntries { get; set { field = value; OnPropertyChanged(); } }
 
-    public SettingsPage(ApplicationDbContext dbContext, TokenManager tokenManager)
+    public SettingsPage(ApplicationDbContext dbContext, TokenManager tokenManager, ActivityLogService activityLogService)
     {
         this.LoadingService = new(LoadSettingsAsync);
         this.dbContext = dbContext;
         this.tokenManager = tokenManager;
+        this.activityLogService = activityLogService;
         InitializeComponent();
         LoadingService.BeginLoad();
     }
@@ -56,6 +58,12 @@ public partial class SettingsPage : ContentPage
             CurrentValue = (await tokenManager.GetHiddenTokenCountAsync()).ToString(),
             Command = Commands.GotoPage,
             CommandParameter = "//home/settings/assets/hidden"
+        });
+        yield return (Strings.General, new SettingEntry(Strings.ActivityCenter)
+        {
+            CurrentValue = await GetActivitySummaryTextAsync(),
+            Command = Commands.GotoPage,
+            CommandParameter = "//home/settings/activity"
         });
         yield return (Strings.Security, new SettingEntry(Strings.SecurityCenter)
         {
@@ -105,5 +113,11 @@ public partial class SettingsPage : ContentPage
         if (string.IsNullOrEmpty(lang)) return Strings.SystemLanguage;
         CultureInfo culture = new(lang);
         return culture.NativeName;
+    }
+
+    async Task<string> GetActivitySummaryTextAsync()
+    {
+        int count = (await activityLogService.GetRecentAsync()).Count;
+        return count == 0 ? Strings.NoRecentActivity : string.Format(Strings.ActivityRecordCount, count);
     }
 }

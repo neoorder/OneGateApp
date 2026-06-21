@@ -989,4 +989,88 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Unavailable" xml:space="preserve">
     <value>Unavailable</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Activity Center</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Open a dApp, approve wallet access, sign a message, or submit a transaction to start the local activity timeline.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>No activity recorded yet</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Review dApp connections, wallet authorizations, signatures, submitted transactions, and Vault activity recorded on this device.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Your wallet activity timeline</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>Connected to {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} records</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Signature approved for {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Source: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transaction {0} from {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transaction submitted from {0}</value>
+  </data>
+  <data name="ActivityVaultOperationTitle" xml:space="preserve">
+    <value>Vault operation submitted from {0}</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>Wallet access approved for {0}</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Connections</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Last activity: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>No recent activity</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Recent activity</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Signatures</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaction</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Unknown dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Unknown source</value>
+  </data>
+  <data name="Vault" xml:space="preserve">
+    <value>Vault</value>
+  </data>
+  <data name="VaultOperation" xml:space="preserve">
+    <value>Vault operation</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Wallet authorization</value>
+  </data>
 </root>
