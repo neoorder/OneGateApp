@@ -2643,5 +2643,32 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("TransactionFailed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        internal static string Pending {
+            get {
+                return ResourceManager.GetString("Pending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retry.
+        /// </summary>
+        internal static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Still waiting for confirmation.
+        /// </summary>
+        internal static string TransactionStillPending {
+            get {
+                return ResourceManager.GetString("TransactionStillPending", resourceCulture);
+            }
+        }
     }
 }

@@ -995,4 +995,13 @@
   <data name="TransactionFailed" xml:space="preserve">
     <value>交易失敗</value>
   </data>
+  <data name="Pending" xml:space="preserve">
+    <value>待確認</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>重試</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>仍在等待確認</value>
+  </data>
 </root>

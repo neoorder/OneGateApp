@@ -27,11 +27,24 @@ public partial class SendingPage : ContentPage, IQueryAttributable
             OnPropertyChanged(nameof(IsConfirming));
             OnPropertyChanged(nameof(IsSucceeded));
             OnPropertyChanged(nameof(IsFailed));
+            OnPropertyChanged(nameof(IsTimedOut));
         }
     }
-    public bool IsConfirming => Succeeded is null;
+    public bool TimedOut
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsConfirming));
+            OnPropertyChanged(nameof(IsTimedOut));
+        }
+    }
+    public bool IsConfirming => Succeeded is null && !TimedOut;
     public bool IsSucceeded => Succeeded == true;
     public bool IsFailed => Succeeded == false;
+    public bool IsTimedOut => Succeeded is null && TimedOut;
 
     public long Fee => (Transaction?.SystemFee + Transaction?.NetworkFee) ?? 0;
     public BigDecimal DecimalFee => new((BigInteger)Fee, NativeContract.GAS.Decimals);
@@ -67,6 +80,7 @@ public partial class SendingPage : ContentPage, IQueryAttributable
 
     async void QueryTransactionStatus()
     {
+        TimedOut = false;
         try
         {
             for (int i = 0; i < 10; i++)
@@ -87,10 +101,18 @@ public partial class SendingPage : ContentPage, IQueryAttributable
                 Succeeded = await QueryExecutionSucceededAsync();
                 break;
             }
+            // The transaction never appeared in a block within the polling window; stop the
+            // spinner and let the user retry instead of confirming forever.
+            if (Succeeded is null) TimedOut = true;
         }
         catch (OperationCanceledException)
         {
         }
+    }
+
+    void OnRetry(object sender, EventArgs e)
+    {
+        QueryTransactionStatus();
     }
 
     // Block inclusion is not success: a transaction can be included in a block yet revert
