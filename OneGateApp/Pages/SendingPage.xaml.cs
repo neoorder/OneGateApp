@@ -5,6 +5,7 @@ using Neo.VM;
 using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Services.RPC;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -103,7 +104,7 @@ public partial class SendingPage : ContentPage, IQueryAttributable
             JsonNode? execution = log["executions"] is JsonArray executions && executions.Count > 0 ? executions[0] : null;
             return execution?["vmstate"]?.GetValue<string>() == nameof(VMState.HALT);
         }
-        catch (RpcException)
+        catch (Exception ex) when (ex is RpcException or HttpRequestException or JsonException)
         {
             // Application log unavailable; the transaction is in a block but the execution result
             // is unknown. Avoid a false "failed" by treating it as confirmed.
