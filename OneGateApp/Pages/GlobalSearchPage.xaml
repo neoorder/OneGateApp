@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.GlobalSearchPage"
              Title="{x:Static og:Strings.GlobalSearch}"
              BindingContext="{Binding Source={RelativeSource Self}}"
@@ -36,7 +37,15 @@
                                         VerticalOptions="Center">
                                     <Label StyleClass="Icon, Secondary"
                                            Text="{Binding IconGlyph}"
+                                           IsVisible="{Binding HasIconGlyph}"
                                            FontSize="22"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Image Source="{Binding IconImageSource}"
+                                           IsVisible="{Binding HasIconImage}"
+                                           WidthRequest="30"
+                                           HeightRequest="30"
+                                           Aspect="AspectFit"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center" />
                                 </Border>
@@ -50,9 +59,21 @@
                                            FontSize="12"
                                            MaxLines="1"
                                            LineBreakMode="MiddleTruncation" />
-                                    <Label StyleClass="Secondary"
-                                           Text="{Binding TypeText}"
-                                           FontSize="11" />
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Label StyleClass="Secondary"
+                                               Text="{Binding TypeText}"
+                                               FontSize="11"
+                                               VerticalOptions="Center" />
+                                        <Border StrokeShape="RoundRectangle 6"
+                                                BackgroundColor="{toolkit:AppThemeResource BrandMuted}"
+                                                Padding="6,1"
+                                                IsVisible="{Binding IsRecentDApp}">
+                                            <Label Text="{x:Static og:Strings.GlobalSearchRecentlyUsed}"
+                                                   TextColor="{toolkit:AppThemeResource Brand}"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold" />
+                                        </Border>
+                                    </HorizontalStackLayout>
                                 </VerticalStackLayout>
                                 <Label Grid.Column="2"
                                        StyleClass="Icon, Secondary"

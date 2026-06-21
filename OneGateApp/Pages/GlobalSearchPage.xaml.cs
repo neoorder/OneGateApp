@@ -15,9 +15,11 @@ public partial class GlobalSearchPage : ContentPage
     readonly TokenManager tokenManager;
 
     bool hasLoaded;
+    int searchVersion;
     string query = "";
-    IReadOnlyList<AssetInfo> assets = [];
-    Contact[] contacts = [];
+    IReadOnlyList<GlobalSearchIndex<AssetInfo>> assetIndex = [];
+    IReadOnlyList<GlobalSearchIndex<Contact>> contactIndex = [];
+    IReadOnlyList<GlobalSearchIndex<DApp>> dappIndex = [];
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
@@ -33,14 +35,15 @@ public partial class GlobalSearchPage : ContentPage
         }
     } = [];
     public bool HasResults => Results.Length > 0;
-    public bool IsEmpty => !LoadingService.IsLoading && Results.Length == 0;
+    public bool HasQuery => !string.IsNullOrWhiteSpace(query);
+    public bool IsEmpty => HasQuery && !LoadingService.IsLoading && Results.Length == 0;
 
     public GlobalSearchPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, TokenManager tokenManager)
     {
         this.dbContext = dbContext;
         this.tokenManager = tokenManager;
         DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
-        LoadingService = new(LoadAssetsAsync, LoadContactsAsync, LoadDAppsAsync);
+        LoadingService = new(LoadSearchDataAsync);
         LoadingService.Loaded += OnLoaded;
         LoadingService.PropertyChanged += (_, e) =>
         {
@@ -58,19 +61,27 @@ public partial class GlobalSearchPage : ContentPage
         Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(250), () => searchBar.Focus());
     }
 
-    async Task LoadAssetsAsync()
+    async Task LoadSearchDataAsync()
     {
-        assets = await tokenManager.LoadAssetsAsync();
-    }
-
-    async Task LoadContactsAsync()
-    {
-        contacts = await dbContext.Contacts.AsNoTracking().ToArrayAsync();
-    }
-
-    async Task LoadDAppsAsync()
-    {
+        IReadOnlyList<AssetInfo> assets = await tokenManager.LoadAssetsAsync();
+        assetIndex = assets
+            .Select(p => new GlobalSearchIndex<AssetInfo>(p, p.Token.Symbol, p.Token.Name, p.Token.Hash.ToString()))
+            .ToArray();
+        contactIndex = (await dbContext.Contacts.AsNoTracking().ToArrayAsync())
+            .Select(p => new GlobalSearchIndex<Contact>(p, p.Label, p.Address))
+            .ToArray();
+        List<int> recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
         await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
+        dappIndex = DApps
+            .Where(p => p.IsRegularApp)
+            .Select(p => new GlobalSearchIndex<DApp>(
+                p,
+                recentDAppIds.IndexOf(p.Id),
+                p.NameLocalizer.Localize(),
+                p.DescriptionLocalizer?.Localize(),
+                p.Url,
+                p.Tags is null ? null : string.Join(' ', p.Tags.Select(DApp.LocalizeTag))))
+            .ToArray();
     }
 
     void OnLoaded(object? sender, EventArgs e)
@@ -82,7 +93,20 @@ public partial class GlobalSearchPage : ContentPage
     void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {
         query = e.NewTextValue ?? "";
-        UpdateResults();
+        OnPropertyChanged(nameof(HasQuery));
+        OnPropertyChanged(nameof(IsEmpty));
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            searchVersion++;
+            Results = [];
+            return;
+        }
+        int version = ++searchVersion;
+        Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(200), () =>
+        {
+            if (version == searchVersion)
+                UpdateResults();
+        });
     }
 
     async void OnSearchButtonPressed(object sender, EventArgs e)
@@ -105,20 +129,28 @@ public partial class GlobalSearchPage : ContentPage
         }
 
         string filter = query.Trim();
+        GlobalSearchIndex<DApp>[] matchingDApps = dappIndex
+            .Where(p => p.Matches(filter))
+            .OrderBy(p => p.RecentRank < 0 ? int.MaxValue : p.RecentRank)
+            .ThenBy(p => p.Item.NameLocalizer.Localize(), StringComparer.CurrentCultureIgnoreCase)
+            .Take(MaxResultsPerGroup)
+            .ToArray();
         Results =
         [
-            ..assets
-                .Where(p => MatchesAsset(p, filter))
+            ..matchingDApps
+                .Where(p => p.IsRecent)
+                .Select(p => GlobalSearchResult.FromDApp(p.Item, p.IsRecent)),
+            ..assetIndex
+                .Where(p => p.Matches(filter))
                 .Take(MaxResultsPerGroup)
-                .Select(GlobalSearchResult.FromAsset),
-            ..contacts
-                .Where(p => Contains(p.Label, filter) || Contains(p.Address, filter))
+                .Select(p => GlobalSearchResult.FromAsset(p.Item)),
+            ..contactIndex
+                .Where(p => p.Matches(filter))
                 .Take(MaxResultsPerGroup)
-                .Select(GlobalSearchResult.FromContact),
-            ..DApps
-                .Where(p => p.IsRegularApp && MatchesDApp(p, filter))
-                .Take(MaxResultsPerGroup)
-                .Select(GlobalSearchResult.FromDApp)
+                .Select(p => GlobalSearchResult.FromContact(p.Item)),
+            ..matchingDApps
+                .Where(p => !p.IsRecent)
+                .Select(p => GlobalSearchResult.FromDApp(p.Item, p.IsRecent))
         ];
     }
 
@@ -145,25 +177,35 @@ public partial class GlobalSearchPage : ContentPage
         }
     }
 
-    static bool MatchesAsset(AssetInfo asset, string filter)
-    {
-        return Contains(asset.Token.Symbol, filter)
-            || Contains(asset.Token.Name, filter)
-            || Contains(asset.Token.Hash.ToString(), filter);
-    }
-
-    static bool MatchesDApp(DApp dapp, string filter)
-    {
-        return Contains(dapp.NameLocalizer.Localize(), filter)
-            || Contains(dapp.DescriptionLocalizer?.Localize(), filter)
-            || Contains(dapp.Url, filter)
-            || dapp.Tags?.Any(p => Contains(DApp.LocalizeTag(p), filter)) == true;
-    }
-
-    static bool Contains(string? value, string filter)
+    internal static bool Contains(string? value, string filter)
     {
         return value?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true;
     }
+}
+
+public sealed class GlobalSearchIndex<T>
+{
+    readonly string[] values;
+
+    public GlobalSearchIndex(T item, params string?[] values)
+        : this(item, -1, values)
+    {
+    }
+
+    public GlobalSearchIndex(T item, int recentRank, params string?[] values)
+    {
+        Item = item;
+        RecentRank = recentRank;
+        this.values = values
+            .Where(p => !string.IsNullOrWhiteSpace(p))
+            .Select(p => p!)
+            .ToArray();
+    }
+
+    public T Item { get; }
+    public int RecentRank { get; }
+    public bool IsRecent => RecentRank >= 0;
+    public bool Matches(string filter) => values.Any(p => GlobalSearchPage.Contains(p, filter));
 }
 
 public enum GlobalSearchResultType
@@ -179,6 +221,10 @@ public sealed class GlobalSearchResult
     public required string Title { get; init; }
     public required string Subtitle { get; init; }
     public required string IconGlyph { get; init; }
+    public string? IconImageSource { get; init; }
+    public bool HasIconImage => !string.IsNullOrWhiteSpace(IconImageSource);
+    public bool HasIconGlyph => !HasIconImage;
+    public bool IsRecentDApp { get; init; }
     public AssetInfo? Asset { get; init; }
     public Contact? Contact { get; init; }
     public DApp? DApp { get; init; }
@@ -198,6 +244,7 @@ public sealed class GlobalSearchResult
             Title = asset.Token.Symbol,
             Subtitle = $"{asset.Token.Name} - {asset.DisplayBalance}",
             IconGlyph = "\ue852",
+            IconImageSource = asset.Token.Icon ?? "tokens_icon_default.png",
             Asset = asset
         };
     }
@@ -214,7 +261,7 @@ public sealed class GlobalSearchResult
         };
     }
 
-    public static GlobalSearchResult FromDApp(DApp dapp)
+    public static GlobalSearchResult FromDApp(DApp dapp, bool isRecent)
     {
         return new()
         {
@@ -222,6 +269,8 @@ public sealed class GlobalSearchResult
             Title = dapp.NameLocalizer.Localize() ?? dapp.Url,
             Subtitle = TryGetHost(dapp.Url) ?? dapp.Url,
             IconGlyph = "\ue792",
+            IconImageSource = dapp.IconUrl,
+            IsRecentDApp = isRecent,
             DApp = dapp
         };
     }

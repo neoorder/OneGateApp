@@ -169,6 +169,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Recently used 的本地化字符串。
+        /// </summary>
+        internal static string GlobalSearchRecentlyUsed {
+            get {
+                return ResourceManager.GetString("GlobalSearchRecentlyUsed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Asset 的本地化字符串。
         /// </summary>
         internal static string Asset {

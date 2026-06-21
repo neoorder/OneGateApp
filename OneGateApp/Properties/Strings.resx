@@ -123,6 +123,9 @@
   <data name="GlobalSearch" xml:space="preserve">
     <value>Global Search</value>
   </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Recently used</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>I have written down and securely backed up the above mnemonic phrase</value>
   </data>
