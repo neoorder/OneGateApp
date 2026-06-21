@@ -7,8 +7,7 @@ namespace NeoOrder.OneGate.Services;
 static class SharedOptions
 {
     public const string OneGateDomain = "onegate.space";
-    // Crash analytics endpoint. Set this to your Sentry DSN to enable crash reporting;
-    // an empty value leaves the Sentry SDK disabled.
+    // Sentry DSN. Set this to enable crash reporting; an empty value leaves Sentry disabled.
     public const string SentryDsn = "";
     public static readonly string DbPath = Path.Combine(FileSystem.AppDataDirectory, "settings.db3");
     public static readonly string CacheDbPath = Path.Combine(FileSystem.CacheDirectory, "cache.db3");

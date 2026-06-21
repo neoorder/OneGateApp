@@ -32,8 +32,12 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder()
-            .UseMauiApp<App>()
-            .UseSentry(ConfigureSentry)
+            .UseMauiApp<App>();
+
+        if (!string.IsNullOrWhiteSpace(SharedOptions.SentryDsn))
+            builder.UseSentry(ConfigureSentry);
+
+        builder
             .UseMauiCommunityToolkit(ConfigureMauiCommunityToolkit)
             .UseScreenSecurity()
             .UseBarcodeReader()
