@@ -520,8 +520,8 @@
         <Setter Property="Shell.UnselectedColor" Value="{toolkit:AppThemeResource Secondary}" />
         <Setter Property="Shell.NavBarHasShadow" Value="False" />
         <Setter Property="Shell.TabBarBackgroundColor" Value="{toolkit:AppThemeResource Panel}" />
-        <Setter Property="Shell.TabBarForegroundColor" Value="{toolkit:AppThemeResource Brand}" />
-        <Setter Property="Shell.TabBarTitleColor" Value="{toolkit:AppThemeResource Brand}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{toolkit:AppThemeResource Primary}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{toolkit:AppThemeResource Primary}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{toolkit:AppThemeResource Secondary}" />
         <Setter Property="Shell.FlyoutBackground" Value="{toolkit:AppThemeResource PageBackground}" />
     </Style>
