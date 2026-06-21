@@ -9,6 +9,9 @@ namespace NeoOrder.OneGate.Services;
 
 public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolSettings protocolSettings)
 {
+    const string NoCaseCollation = "NOCASE";
+    const string LikeEscape = "\\";
+
     public bool TryNormalizeAddress(string? value, out string address)
     {
         address = "";
@@ -19,7 +22,7 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
             address = hash.ToAddress(protocolSettings.AddressVersion);
             return true;
         }
-        catch
+        catch (FormatException)
         {
             return false;
         }
@@ -34,9 +37,8 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         if (query.Length == 0) return null;
         string[] matches = dbContext.Contacts
             .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry)
-            .AsEnumerable()
-            .Where(p => string.Equals(p.Label, query, StringComparison.OrdinalIgnoreCase))
+            .Where(p => p.IsAddressBookEntry &&
+                EF.Functions.Collate(p.Label, NoCaseCollation) == query)
             .Select(p => p.Address)
             .Take(2)
             .ToArray();
@@ -48,13 +50,13 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         string normalizedLabel = label?.Trim() ?? "";
         if (normalizedLabel.Length == 0) return true;
         string? normalizedAddress = TryNormalizeAddress(currentAddress, out string address) ? address : null;
-        return !dbContext.Contacts
+        IQueryable<Contact> matches = dbContext.Contacts
             .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry)
-            .AsEnumerable()
-            .Any(p =>
-                !string.Equals(p.Address, normalizedAddress, StringComparison.Ordinal) &&
-                string.Equals(p.Label, normalizedLabel, StringComparison.OrdinalIgnoreCase));
+            .Where(p => p.IsAddressBookEntry &&
+                EF.Functions.Collate(p.Label, NoCaseCollation) == normalizedLabel);
+        if (normalizedAddress is not null)
+            matches = matches.Where(p => p.Address != normalizedAddress);
+        return !matches.Any();
     }
 
     public async Task<Contact?> FindByAddressAsync(string address)
@@ -66,45 +68,48 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
 
     public async Task<Contact[]> GetEntriesAsync()
     {
-        Contact[] contacts = await dbContext.Contacts
+        return await dbContext.Contacts
             .AsNoTracking()
             .Where(p => p.IsAddressBookEntry)
+            .OrderBy(p => p.Label == "" ? p.Address : p.Label)
             .ToArrayAsync();
-        return contacts
-            .OrderBy(p => p.DisplayName)
-            .ToArray();
     }
 
     public async Task<Contact[]> GetSuggestionsAsync(string? query, int limit = 8)
     {
-        Contact[] contacts = await dbContext.Contacts
-            .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry)
-            .ToArrayAsync();
-
-        IEnumerable<Contact> filtered;
         string filter = query?.Trim() ?? "";
+        IQueryable<Contact> contacts = dbContext.Contacts
+            .AsNoTracking()
+            .Where(p => p.IsAddressBookEntry);
+        Contact[] result;
         if (filter.Length == 0)
         {
-            filtered = contacts
-                .OrderBy(p => p.DisplayName);
+            result = await contacts
+                .OrderBy(p => p.Label == "" ? p.Address : p.Label)
+                .Take(limit)
+                .ToArrayAsync();
         }
         else
         {
-            filtered = contacts
+            string containsPattern = "%" + EscapeLikePattern(filter) + "%";
+            string prefixPattern = EscapeLikePattern(filter) + "%";
+            result = await contacts
                 .Where(p =>
-                    p.Address.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
-                    p.Label.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
-                    (p.Note?.Contains(filter, StringComparison.OrdinalIgnoreCase) ?? false))
-                .OrderByDescending(p => string.Equals(p.Label, filter, StringComparison.OrdinalIgnoreCase))
-                .ThenByDescending(p => p.Address.StartsWith(filter, StringComparison.OrdinalIgnoreCase))
-                .ThenBy(p => p.DisplayName);
+                    EF.Functions.Like(EF.Functions.Collate(p.Address, NoCaseCollation), containsPattern, LikeEscape) ||
+                    EF.Functions.Like(EF.Functions.Collate(p.Label, NoCaseCollation), containsPattern, LikeEscape) ||
+                    (p.Note != null && EF.Functions.Like(EF.Functions.Collate(p.Note, NoCaseCollation), containsPattern, LikeEscape)))
+                .OrderByDescending(p => EF.Functions.Collate(p.Label, NoCaseCollation) == filter)
+                .ThenByDescending(p => EF.Functions.Collate(p.Address, NoCaseCollation) == filter)
+                .ThenByDescending(p => EF.Functions.Like(EF.Functions.Collate(p.Address, NoCaseCollation), prefixPattern, LikeEscape))
+                .ThenBy(p => p.Label == "" ? p.Address : p.Label)
+                .Take(limit)
+                .ToArrayAsync();
         }
 
-        List<Contact> result = filtered.Take(limit).ToList();
-        if (TryNormalizeAddress(filter, out string normalized) && result.All(p => p.Address != normalized))
+        List<Contact> suggestions = result.ToList();
+        if (TryNormalizeAddress(filter, out string normalized) && suggestions.All(p => p.Address != normalized))
         {
-            result.Insert(0, new Contact
+            suggestions.Insert(0, new Contact
             {
                 Address = normalized,
                 Label = "",
@@ -112,6 +117,14 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
                 Note = Strings.UseEnteredAddress
             });
         }
-        return result.Take(limit).ToArray();
+        return suggestions.Take(limit).ToArray();
+    }
+
+    static string EscapeLikePattern(string value)
+    {
+        return value
+            .Replace(LikeEscape, LikeEscape + LikeEscape, StringComparison.Ordinal)
+            .Replace("%", LikeEscape + "%", StringComparison.Ordinal)
+            .Replace("_", LikeEscape + "_", StringComparison.Ordinal);
     }
 }
