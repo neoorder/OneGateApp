@@ -15,7 +15,6 @@ public partial class SecurityCenterPage : ContentPage
     readonly ApplicationDbContext dbContext;
     readonly RpcClient rpcClient;
     bool suppressToggleUpdates;
-    bool hasRpcConnectionIssue;
 
     public Command RefreshCommand { get; }
     public bool IsRefreshing { get; set { field = value; OnPropertyChanged(); } }
@@ -25,7 +24,6 @@ public partial class SecurityCenterPage : ContentPage
     public string RpcStatus { get; set { field = value; OnPropertyChanged(); } } = Strings.Checking;
     public string RpcStatusText { get; set { field = value; OnPropertyChanged(); } } = "";
     public string LastCheckedText { get; set { field = value; OnPropertyChanged(); } } = "";
-    public string SecurityRecommendationText { get; set { field = value; OnPropertyChanged(); } } = Strings.SecurityRecommendationReviewBackupText;
     public string PrivacyModeStatus => IsPrivacyModeEnabled ? Strings.Enabled : Strings.Disabled;
     public string BiometricStatus => IsBiometricEnabled ? Strings.Enabled : IsBiometricAvailable ? Strings.Available : Strings.Unavailable;
     public string BiometricStatusText => IsBiometricEnabled
@@ -58,7 +56,6 @@ public partial class SecurityCenterPage : ContentPage
             IsBiometricAvailable = await DataProtectionService.CheckAvailabilityAsync();
             IsBiometricEnabled = await dbContext.Settings.ExistsAsync("biometric/credential");
             await RefreshRpcStatusAsync();
-            RefreshSecurityRecommendation();
         }
         finally
         {
@@ -73,25 +70,14 @@ public partial class SecurityCenterPage : ContentPage
         try
         {
             uint blockCount = await rpcClient.GetBlockCount().WaitAsync(TimeSpan.FromSeconds(8));
-            hasRpcConnectionIssue = false;
             RpcStatus = Strings.Connected;
             RpcStatusText = string.Format(Strings.RpcStatusConnectedText, SharedOptions.RpcServerUri.Host, blockCount);
         }
         catch
         {
-            hasRpcConnectionIssue = true;
             RpcStatus = Strings.ConnectionIssue;
             RpcStatusText = string.Format(Strings.RpcStatusUnavailableText, SharedOptions.RpcServerUri.Host);
         }
-    }
-
-    void RefreshSecurityRecommendation()
-    {
-        SecurityRecommendationText = hasRpcConnectionIssue
-            ? Strings.SecurityRecommendationConnectionIssueText
-            : IsBiometricAvailable && !IsBiometricEnabled
-                ? Strings.SecurityRecommendationBiometricText
-                : Strings.SecurityRecommendationReviewBackupText;
     }
 
     async void OnPrivacyModeToggled(object sender, ToggledEventArgs e)

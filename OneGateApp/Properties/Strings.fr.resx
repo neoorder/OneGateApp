@@ -983,6 +983,9 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Protection du portefeuille en un coup d’œil</value>
   </data>
+  <data name="SecurityBackupStatusText" xml:space="preserve">
+    <value>Confirmez que votre phrase de récupération ou votre clé privée est sauvegardée avant d’utiliser ce portefeuille pour les dApps ou les transferts.</value>
+  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>État de sécurité</value>
   </data>

@@ -983,6 +983,9 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Perlindungan dompet sekilas</value>
   </data>
+  <data name="SecurityBackupStatusText" xml:space="preserve">
+    <value>Pastikan frasa pemulihan atau kunci privat sudah dicadangkan sebelum mengandalkan dompet ini untuk dApp atau transfer.</value>
+  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Status keamanan</value>
   </data>

@@ -983,6 +983,9 @@
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>錢包保護概覽</value>
   </data>
+  <data name="SecurityBackupStatusText" xml:space="preserve">
+    <value>在使用此錢包連接 dApp 或轉帳前，請確認助記詞或私鑰已安全備份。</value>
+  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>安全狀態</value>
   </data>

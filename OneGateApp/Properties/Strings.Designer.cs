@@ -2002,42 +2002,6 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Suggested next step 的本地化字符串。
-        /// </summary>
-        internal static string SecurityRecommendation {
-            get {
-                return ResourceManager.GetString("SecurityRecommendation", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Enable biometrics so wallet approval has a faster device-level checkpoint. 的本地化字符串。
-        /// </summary>
-        internal static string SecurityRecommendationBiometricText {
-            get {
-                return ResourceManager.GetString("SecurityRecommendationBiometricText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Check the network connection before sending transactions or approving dApp requests. 的本地化字符串。
-        /// </summary>
-        internal static string SecurityRecommendationConnectionIssueText {
-            get {
-                return ResourceManager.GetString("SecurityRecommendationConnectionIssueText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Review recovery backup first, then keep checking dApp origins and signing details before approval. 的本地化字符串。
-        /// </summary>
-        internal static string SecurityRecommendationReviewBackupText {
-            get {
-                return ResourceManager.GetString("SecurityRecommendationReviewBackupText", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   查找类似 Security status 的本地化字符串。
         /// </summary>
         internal static string SecurityStatus {

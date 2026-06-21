@@ -983,6 +983,9 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Cüzdan korumasına hızlı bakış</value>
   </data>
+  <data name="SecurityBackupStatusText" xml:space="preserve">
+    <value>Bu cüzdanı dApp’ler veya transferler için kullanmadan önce kurtarma ifadenizin ya da özel anahtarınızın yedeklendiğini doğrulayın.</value>
+  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Güvenlik durumu</value>
   </data>
