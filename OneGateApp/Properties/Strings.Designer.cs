@@ -584,7 +584,113 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppAuthorizationText", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 OneGate is checking this dApp origin. 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustCheckingOrigin {
+            get {
+                return ResourceManager.GetString("DAppTrustCheckingOrigin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Origin: {0}
+        ///Source: {1}
+        ///Transport: {2}
+        ///Wallet: {3}
+        ///
+        ///This dApp can request wallet accounts, balances, signatures, and transactions through OneGate dAPI.
+        ///Signing and transaction requests still require OneGate confirmation before they can continue.
+        ///Navigation away from this origin is blocked inside the dApp browser. 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustDetailMessage {
+            get {
+                return ResourceManager.GetString("DAppTrustDetailMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 External 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustExternal {
+            get {
+                return ResourceManager.GetString("DAppTrustExternal", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Loading origin 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustLoadingOrigin {
+            get {
+                return ResourceManager.GetString("DAppTrustLoadingOrigin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No wallet 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustNoWallet {
+            get {
+                return ResourceManager.GetString("DAppTrustNoWallet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Not secure 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustNotSecure {
+            get {
+                return ResourceManager.GetString("DAppTrustNotSecure", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Official 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustOfficial {
+            get {
+                return ResourceManager.GetString("DAppTrustOfficial", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} | {1} | {2} 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustTitleFormat {
+            get {
+                return ResourceManager.GetString("DAppTrustTitleFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 HTTPS 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustTransportHttps {
+            get {
+                return ResourceManager.GetString("DAppTrustTransportHttps", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown origin 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustUnknownOrigin {
+            get {
+                return ResourceManager.GetString("DAppTrustUnknownOrigin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet ready 的本地化字符串。
+        /// </summary>
+        internal static string DAppTrustWalletReady {
+            get {
+                return ResourceManager.GetString("DAppTrustWalletReady", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 DApp Testing 的本地化字符串。
         /// </summary>

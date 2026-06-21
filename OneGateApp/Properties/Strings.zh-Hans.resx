@@ -923,6 +923,46 @@
   <data name="DAppAuthorizationText" xml:space="preserve">
     <value>dApp 每次执行钱包操作都必须通过 OneGate 请求，不会保存长期授权。</value>
   </data>
+  <data name="DAppTrustCheckingOrigin" xml:space="preserve">
+    <value>OneGate 正在检查此 dApp 来源。</value>
+  </data>
+  <data name="DAppTrustDetailMessage" xml:space="preserve">
+    <value>来源：{0}
+状态：{1}
+传输：{2}
+钱包：{3}
+
+此 dApp 可以通过 OneGate dAPI 请求钱包账户、余额、签名和交易。
+签名和交易请求仍需要经过 OneGate 确认后才能继续。
+dApp 浏览器会阻止离开此来源的跳转。</value>
+  </data>
+  <data name="DAppTrustExternal" xml:space="preserve">
+    <value>外部</value>
+  </data>
+  <data name="DAppTrustLoadingOrigin" xml:space="preserve">
+    <value>正在检查来源</value>
+  </data>
+  <data name="DAppTrustNoWallet" xml:space="preserve">
+    <value>未选择钱包</value>
+  </data>
+  <data name="DAppTrustNotSecure" xml:space="preserve">
+    <value>不安全</value>
+  </data>
+  <data name="DAppTrustOfficial" xml:space="preserve">
+    <value>官方</value>
+  </data>
+  <data name="DAppTrustTitleFormat" xml:space="preserve">
+    <value>{0} | {1} | {2}</value>
+  </data>
+  <data name="DAppTrustTransportHttps" xml:space="preserve">
+    <value>HTTPS</value>
+  </data>
+  <data name="DAppTrustUnknownOrigin" xml:space="preserve">
+    <value>未知来源</value>
+  </data>
+  <data name="DAppTrustWalletReady" xml:space="preserve">
+    <value>钱包就绪</value>
+  </data>
   <data name="Disabled" xml:space="preserve">
     <value>未启用</value>
   </data>

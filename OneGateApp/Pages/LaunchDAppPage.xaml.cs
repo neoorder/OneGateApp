@@ -8,6 +8,7 @@ using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
+using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json.Nodes;
@@ -30,9 +31,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
-    public string TrustTitle { get; private set { field = value; OnPropertyChanged(); } } = "Loading origin";
+    public string TrustTitle { get; private set { field = value; OnPropertyChanged(); } } = Strings.DAppTrustLoadingOrigin;
     public Color TrustIndicatorColor { get; private set { field = value; OnPropertyChanged(); } } = Color.FromArgb("#A0A8B5");
-    string TrustDetailMessage { get; set; } = "OneGate is checking this dApp origin.";
+    string TrustDetailMessage { get; set; } = Strings.DAppTrustCheckingOrigin;
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
@@ -154,29 +155,20 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     void UpdateTrustBar()
     {
         Uri? uri = TryCreateAbsoluteUri(Url);
-        string origin = uri?.Host ?? "Unknown origin";
+        string origin = uri?.Host ?? Strings.DAppTrustUnknownOrigin;
         bool isHttps = string.Equals(uri?.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase);
         bool isCatalogApp = DApp.Id > 0 && DApp.IsActive;
         bool hasWallet = walletProvider.GetWallet()?.GetDefaultAccount() is not null;
 
-        string sourceStatus = isCatalogApp ? "Official" : "External";
-        string transportStatus = isHttps ? "HTTPS" : "Not secure";
-        string walletStatus = hasWallet ? "Wallet ready" : "No wallet";
+        string sourceStatus = isCatalogApp ? Strings.DAppTrustOfficial : Strings.DAppTrustExternal;
+        string transportStatus = isHttps ? Strings.DAppTrustTransportHttps : Strings.DAppTrustNotSecure;
+        string walletStatus = hasWallet ? Strings.DAppTrustWalletReady : Strings.DAppTrustNoWallet;
 
-        TrustTitle = $"{origin} | {sourceStatus} | {walletStatus}";
+        TrustTitle = string.Format(CultureInfo.CurrentUICulture, Strings.DAppTrustTitleFormat, origin, sourceStatus, walletStatus);
         TrustIndicatorColor = isHttps
             ? isCatalogApp ? Color.FromArgb("#19B36B") : Color.FromArgb("#EAB308")
             : Color.FromArgb("#D63E49");
-        TrustDetailMessage = $"""
-            Origin: {origin}
-            Source: {sourceStatus}
-            Transport: {transportStatus}
-            Wallet: {walletStatus}
-
-            This dApp can request wallet accounts, balances, signatures, and transactions through OneGate's dAPI.
-            Signing and transaction requests still require OneGate confirmation before they can continue.
-            Navigation away from this origin is blocked inside the dApp browser.
-            """;
+        TrustDetailMessage = string.Format(CultureInfo.CurrentUICulture, Strings.DAppTrustDetailMessage, origin, sourceStatus, transportStatus, walletStatus);
     }
 
     static Uri? TryCreateAbsoluteUri(string? value)

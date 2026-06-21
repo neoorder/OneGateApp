@@ -923,6 +923,46 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="DAppAuthorizationText" xml:space="preserve">
     <value>dApps must request wallet actions through OneGate each time. Persistent approvals are not stored.</value>
   </data>
+  <data name="DAppTrustCheckingOrigin" xml:space="preserve">
+    <value>OneGate is checking this dApp origin.</value>
+  </data>
+  <data name="DAppTrustDetailMessage" xml:space="preserve">
+    <value>Origin: {0}
+Source: {1}
+Transport: {2}
+Wallet: {3}
+
+This dApp can request wallet accounts, balances, signatures, and transactions through OneGate dAPI.
+Signing and transaction requests still require OneGate confirmation before they can continue.
+Navigation away from this origin is blocked inside the dApp browser.</value>
+  </data>
+  <data name="DAppTrustExternal" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="DAppTrustLoadingOrigin" xml:space="preserve">
+    <value>Loading origin</value>
+  </data>
+  <data name="DAppTrustNoWallet" xml:space="preserve">
+    <value>No wallet</value>
+  </data>
+  <data name="DAppTrustNotSecure" xml:space="preserve">
+    <value>Not secure</value>
+  </data>
+  <data name="DAppTrustOfficial" xml:space="preserve">
+    <value>Official</value>
+  </data>
+  <data name="DAppTrustTitleFormat" xml:space="preserve">
+    <value>{0} | {1} | {2}</value>
+  </data>
+  <data name="DAppTrustTransportHttps" xml:space="preserve">
+    <value>HTTPS</value>
+  </data>
+  <data name="DAppTrustUnknownOrigin" xml:space="preserve">
+    <value>Unknown origin</value>
+  </data>
+  <data name="DAppTrustWalletReady" xml:space="preserve">
+    <value>Wallet ready</value>
+  </data>
   <data name="Disabled" xml:space="preserve">
     <value>Disabled</value>
   </data>
