@@ -538,6 +538,30 @@ Depois de desativá-la, será necessário digitar manualmente a senha da carteir
   <data name="UnknownAddress" xml:space="preserve">
     <value>Endereço desconhecido</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Endereço salvo</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Este endereço de recebimento corresponde a "{0}" na sua agenda de endereços local.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Seu endereço da carteira</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Este endereço pertence à carteira atual. Você pode continuar, mas confirme que a transferência para si mesmo é intencional.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Endereço desconhecido</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Este endereço não está salvo na sua agenda de endereços. Verifique cuidadosamente o endereço completo; transferências em blockchain não podem ser revertidas.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Estimativa de taxas</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>O OneGate estima as taxas de rede e de sistema na próxima tela, antes da assinatura. Transferências de GAS devem deixar GAS suficiente para cobrir tanto o valor da transferência quanto as taxas.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Enviando transação</value>
   </data>
@@ -964,5 +988,32 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponível</value>
+  </data>
+  <data name="Official" xml:space="preserve">
+    <value>Oficial</value>
+  </data>
+  <data name="OneGateVaultOfficial" xml:space="preserve">
+    <value>OneGate Vault oficial</value>
+  </data>
+  <data name="OneGateVaultOfficialText" xml:space="preserve">
+    <value>Operado pela R3E Network para a experiência OneGate. As aprovações da carteira ainda usam as confirmações de conexão e assinatura do OneGate.</value>
+  </data>
+  <data name="OneGateVaultStatusActive" xml:space="preserve">
+    <value>Ativo</value>
+  </data>
+  <data name="OneGateVaultStatusUnavailable" xml:space="preserve">
+    <value>Indisponível</value>
+  </data>
+  <data name="OneGateVaultRules" xml:space="preserve">
+    <value>Regras</value>
+  </data>
+  <data name="OneGateVaultRulesText" xml:space="preserve">
+    <value>Use a dApp Vault existente para revisar regras do pool, elegibilidade e prazo de resgate antes de conectar ou assinar.</value>
+  </data>
+  <data name="OneGateVaultHistory" xml:space="preserve">
+    <value>Histórico</value>
+  </data>
+  <data name="OneGateVaultHistoryText" xml:space="preserve">
+    <value>As ações do Vault aparecem na dApp e no histórico de transações on-chain após uma operação assinada.</value>
   </data>
 </root>

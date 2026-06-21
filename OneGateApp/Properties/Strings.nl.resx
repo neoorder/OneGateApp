@@ -538,6 +538,30 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   <data name="UnknownAddress" xml:space="preserve">
     <value>Onbekend adres</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Opgeslagen adres</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Dit ontvangstadres komt overeen met "{0}" in uw lokale adresboek.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Uw walletadres</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Dit adres hoort bij de huidige wallet. U kunt doorgaan, maar controleer of overboeken naar uzelf de bedoeling is.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Onbekend adres</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Dit adres is niet opgeslagen in uw adresboek. Controleer het volledige adres zorgvuldig; blockchain-overboekingen kunnen niet worden teruggedraaid.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Kostenraming</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate raamt netwerk- en systeemkosten op het volgende scherm voordat u ondertekent. GAS-overboekingen moeten genoeg GAS overhouden om zowel het overboekingsbedrag als de kosten te dekken.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Transactie verzenden</value>
   </data>
@@ -964,5 +988,32 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Niet beschikbaar</value>
+  </data>
+  <data name="Official" xml:space="preserve">
+    <value>Officieel</value>
+  </data>
+  <data name="OneGateVaultOfficial" xml:space="preserve">
+    <value>Officiële OneGate Vault</value>
+  </data>
+  <data name="OneGateVaultOfficialText" xml:space="preserve">
+    <value>Beheerd door R3E Network voor de OneGate-ervaring. Walletgoedkeuringen gebruiken nog steeds de verbindings- en handtekeningbevestigingen van OneGate.</value>
+  </data>
+  <data name="OneGateVaultStatusActive" xml:space="preserve">
+    <value>Actief</value>
+  </data>
+  <data name="OneGateVaultStatusUnavailable" xml:space="preserve">
+    <value>Niet beschikbaar</value>
+  </data>
+  <data name="OneGateVaultRules" xml:space="preserve">
+    <value>Regels</value>
+  </data>
+  <data name="OneGateVaultRulesText" xml:space="preserve">
+    <value>Gebruik de bestaande Vault dApp om poolregels, geschiktheid en claimtiming te controleren voordat u verbindt of ondertekent.</value>
+  </data>
+  <data name="OneGateVaultHistory" xml:space="preserve">
+    <value>Geschiedenis</value>
+  </data>
+  <data name="OneGateVaultHistoryText" xml:space="preserve">
+    <value>Vault-acties verschijnen na een ondertekende bewerking in de dApp en in de on-chain transactiegeschiedenis.</value>
   </data>
 </root>

@@ -538,6 +538,30 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
   <data name="UnknownAddress" xml:space="preserve">
     <value>Alamat tidak dikenal</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Alamat tersimpan</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Alamat penerima ini cocok dengan "{0}" di buku alamat lokal Anda.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Alamat dompet Anda</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Alamat ini milik dompet saat ini. Anda dapat melanjutkan, tetapi pastikan transfer ke diri sendiri memang disengaja.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Alamat tidak dikenal</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Alamat ini tidak tersimpan di buku alamat Anda. Periksa alamat lengkap dengan saksama; transfer blockchain tidak dapat dibatalkan.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Estimasi biaya</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate memperkirakan biaya jaringan dan sistem di layar berikutnya sebelum Anda menandatangani. Transfer GAS harus menyisakan GAS yang cukup untuk menutup jumlah transfer dan biaya.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Mengirim transaksi</value>
   </data>
@@ -964,5 +988,32 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
+  </data>
+  <data name="Official" xml:space="preserve">
+    <value>Resmi</value>
+  </data>
+  <data name="OneGateVaultOfficial" xml:space="preserve">
+    <value>OneGate Vault resmi</value>
+  </data>
+  <data name="OneGateVaultOfficialText" xml:space="preserve">
+    <value>Dioperasikan oleh R3E Network untuk pengalaman OneGate. Persetujuan dompet tetap menggunakan konfirmasi koneksi dan tanda tangan OneGate.</value>
+  </data>
+  <data name="OneGateVaultStatusActive" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  <data name="OneGateVaultStatusUnavailable" xml:space="preserve">
+    <value>Tidak tersedia</value>
+  </data>
+  <data name="OneGateVaultRules" xml:space="preserve">
+    <value>Aturan</value>
+  </data>
+  <data name="OneGateVaultRulesText" xml:space="preserve">
+    <value>Gunakan dApp Vault yang ada untuk meninjau aturan pool, kelayakan, dan waktu klaim sebelum menghubungkan atau menandatangani.</value>
+  </data>
+  <data name="OneGateVaultHistory" xml:space="preserve">
+    <value>Riwayat</value>
+  </data>
+  <data name="OneGateVaultHistoryText" xml:space="preserve">
+    <value>Tindakan Vault muncul di dalam dApp dan di riwayat transaksi on-chain setelah operasi ditandatangani.</value>
   </data>
 </root>

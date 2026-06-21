@@ -538,6 +538,30 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
   <data name="UnknownAddress" xml:space="preserve">
     <value>Dirección desconocida</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Dirección guardada</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Esta dirección de recepción coincide con "{0}" en tu libreta de direcciones local.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Tu dirección de billetera</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Esta dirección pertenece a la billetera actual. Puedes continuar, pero confirma que la transferencia a ti mismo es intencional.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Dirección desconocida</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Esta dirección no está guardada en tu libreta de direcciones. Verifica cuidadosamente la dirección completa; las transferencias en blockchain no se pueden revertir.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Estimación de comisiones</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate estima las comisiones de red y de sistema en la siguiente pantalla, antes de que firmes. Las transferencias de GAS deben dejar suficiente GAS para cubrir tanto el importe de la transferencia como las comisiones.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Enviando transacción</value>
   </data>
@@ -964,5 +988,32 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>No disponible</value>
+  </data>
+  <data name="Official" xml:space="preserve">
+    <value>Oficial</value>
+  </data>
+  <data name="OneGateVaultOfficial" xml:space="preserve">
+    <value>OneGate Vault oficial</value>
+  </data>
+  <data name="OneGateVaultOfficialText" xml:space="preserve">
+    <value>Operado por R3E Network para la experiencia OneGate. Las aprobaciones de la billetera siguen usando las confirmaciones de conexión y firma de OneGate.</value>
+  </data>
+  <data name="OneGateVaultStatusActive" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="OneGateVaultStatusUnavailable" xml:space="preserve">
+    <value>No disponible</value>
+  </data>
+  <data name="OneGateVaultRules" xml:space="preserve">
+    <value>Reglas</value>
+  </data>
+  <data name="OneGateVaultRulesText" xml:space="preserve">
+    <value>Use la dApp Vault existente para revisar las reglas del pool, la elegibilidad y los plazos de reclamo antes de conectar o firmar.</value>
+  </data>
+  <data name="OneGateVaultHistory" xml:space="preserve">
+    <value>Historial</value>
+  </data>
+  <data name="OneGateVaultHistoryText" xml:space="preserve">
+    <value>Las acciones de Vault aparecen dentro de la dApp y en el historial de transacciones en cadena después de una operación firmada.</value>
   </data>
 </root>

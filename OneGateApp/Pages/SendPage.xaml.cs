@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Neo;
 using Neo.Network.P2P.Payloads;
 using Neo.SmartContract;
@@ -9,6 +10,7 @@ using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Popups;
 using NeoOrder.OneGate.Controls.Views;
 using NeoOrder.OneGate.Controls.Views.Validation;
+using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Properties;
@@ -26,19 +28,57 @@ public partial class SendPage : ContentPage, IQueryAttributable
     readonly Wallet wallet;
     readonly RpcClient rpcClient;
     readonly TokenManager tokenManager;
+    readonly ApplicationDbContext dbContext;
+    Contact[]? contacts;
+    int addressInsightVersion;
 
     public IReadOnlyList<AssetInfo>? Assets { get; set { field = value; OnPropertyChanged(); } }
     public required AssetInfo SelectedAsset { get; set { field = value; OnPropertyChanged(); } }
-    public string? ToAddress { get; set { field = value; OnPropertyChanged(); } }
+    public string? ToAddress
+    {
+        get;
+        set
+        {
+            if (field == value) return;
+            field = value;
+            OnPropertyChanged();
+            _ = RefreshAddressInsightsAsync();
+        }
+    }
     public decimal Amount { get; set { field = value; OnPropertyChanged(); } }
+    public Contact? MatchedContact { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
+    public bool IsOwnWalletAddress { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
+    public bool IsUnknownValidAddress { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
+    public bool HasAddressInsight => MatchedContact is not null || IsOwnWalletAddress || IsUnknownValidAddress;
+    public string AddressInsightTitle
+    {
+        get
+        {
+            if (MatchedContact is not null) return Strings.SavedAddressTitle;
+            if (IsOwnWalletAddress) return Strings.OwnWalletAddressTitle;
+            if (IsUnknownValidAddress) return Strings.UnknownAddressRiskTitle;
+            return string.Empty;
+        }
+    }
+    public string AddressInsightText
+    {
+        get
+        {
+            if (MatchedContact is not null) return string.Format(Strings.SavedAddressText, MatchedContact.Label);
+            if (IsOwnWalletAddress) return Strings.OwnWalletAddressText;
+            if (IsUnknownValidAddress) return Strings.UnknownAddressRiskText;
+            return string.Empty;
+        }
+    }
 
-    public SendPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, RpcClient rpcClient, TokenManager tokenManager)
+    public SendPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, RpcClient rpcClient, TokenManager tokenManager, ApplicationDbContext dbContext)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.wallet = walletProvider.GetWallet()!;
         this.rpcClient = rpcClient;
         this.tokenManager = tokenManager;
+        this.dbContext = dbContext;
         InitializeComponent();
     }
 
@@ -108,6 +148,61 @@ public partial class SendPage : ContentPage, IQueryAttributable
         }
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        contacts = null;
+        await RefreshAddressInsightsAsync();
+    }
+
+    async Task EnsureContactsLoadedAsync()
+    {
+        contacts ??= await dbContext.Contacts.AsNoTracking().ToArrayAsync();
+    }
+
+    async Task RefreshAddressInsightsAsync()
+    {
+        int version = ++addressInsightVersion;
+        try
+        {
+            await EnsureContactsLoadedAsync();
+        }
+        catch
+        {
+            contacts = [];
+        }
+        if (version != addressInsightVersion) return;
+
+        Contact? matchedContact = null;
+        bool isOwnWalletAddress = false;
+        bool isUnknownValidAddress = false;
+        if (TryReadAddress(ToAddress, out string address))
+        {
+            UInt160 scriptHash = address.ToScriptHash(protocolSettings.AddressVersion);
+            matchedContact = contacts!.FirstOrDefault(p => p.Address == address);
+            isOwnWalletAddress = wallet.Contains(scriptHash);
+            isUnknownValidAddress = matchedContact is null && !isOwnWalletAddress;
+        }
+        MatchedContact = matchedContact;
+        IsOwnWalletAddress = isOwnWalletAddress;
+        IsUnknownValidAddress = isUnknownValidAddress;
+    }
+
+    bool TryReadAddress(string? value, out string address)
+    {
+        address = value?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(address)) return false;
+        try
+        {
+            address.ToScriptHash(protocolSettings.AddressVersion);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     async void OnSelectAsset(object sender, TappedEventArgs e)
     {
         if (Assets is null) return;
@@ -127,19 +222,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
 
     void OnValidateAddress(object sender, CustomValidationEventArgs e)
     {
-        if (e.Value is not string address)
-        {
-            e.IsValid = false;
-            return;
-        }
-        try
-        {
-            address.ToScriptHash(protocolSettings.AddressVersion);
-        }
-        catch
-        {
-            e.IsValid = false;
-        }
+        e.IsValid = e.Value is string address && TryReadAddress(address, out _);
     }
 
     void OnSelectAllBalance(object sender, EventArgs e)
@@ -160,7 +243,8 @@ public partial class SendPage : ContentPage, IQueryAttributable
         {
             WalletAccount account = wallet.GetDefaultAccount()!;
             UInt160 from = account.ScriptHash;
-            UInt160 to = ToAddress!.ToScriptHash(protocolSettings.AddressVersion);
+            if (!TryReadAddress(ToAddress, out string toAddress)) return;
+            UInt160 to = toAddress.ToScriptHash(protocolSettings.AddressVersion);
             BigInteger amount = BigDecimal.Parse(entryAmount.Text, SelectedAsset.Token.Decimals).Value;
             TransactionIntent[] intents = [new TransferIntent
             {

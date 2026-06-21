@@ -24,8 +24,13 @@ partial class BridgeWebViewHandler
         platformView.Settings.DomStorageEnabled = true;
         platformView.Settings.JavaScriptEnabled = true;
         platformView.AddJavascriptInterface(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
-        if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript) && WebViewFeature.IsFeatureSupported(WebViewFeature.DocumentStartScript))
-            WebViewCompat.AddDocumentStartJavaScript(platformView, BridgeWebView.DocumentStartScript, ["*"]);
+        if (WebViewFeature.IsFeatureSupported(WebViewFeature.DocumentStartScript))
+        {
+            string script = Views.BridgeWebView.CreateRpcScript();
+            if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
+                script += BridgeWebView.DocumentStartScript;
+            WebViewCompat.AddDocumentStartJavaScript(platformView, script, ["*"]);
+        }
     }
 }
 #endif

@@ -538,6 +538,30 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
   <data name="UnknownAddress" xml:space="preserve">
     <value>Indirizzo sconosciuto</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Indirizzo salvato</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Questo indirizzo del destinatario corrisponde a "{0}" nella rubrica locale.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Il tuo indirizzo wallet</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Questo indirizzo appartiene al wallet corrente. Puoi continuare, ma verifica che il trasferimento a te stesso sia intenzionale.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Indirizzo sconosciuto</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Questo indirizzo non è salvato nella tua rubrica. Verifica con attenzione l’indirizzo completo; i trasferimenti blockchain non possono essere annullati.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Stima commissioni</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate stima le commissioni di rete e di sistema nella schermata successiva, prima della firma. I trasferimenti GAS devono lasciare abbastanza GAS per coprire sia l’importo del trasferimento sia le commissioni.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Invio transazione</value>
   </data>
@@ -964,5 +988,32 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Non disponibile</value>
+  </data>
+  <data name="Official" xml:space="preserve">
+    <value>Ufficiale</value>
+  </data>
+  <data name="OneGateVaultOfficial" xml:space="preserve">
+    <value>OneGate Vault ufficiale</value>
+  </data>
+  <data name="OneGateVaultOfficialText" xml:space="preserve">
+    <value>Gestito da R3E Network per l’esperienza OneGate. Le approvazioni del portafoglio usano ancora le conferme di connessione e firma di OneGate.</value>
+  </data>
+  <data name="OneGateVaultStatusActive" xml:space="preserve">
+    <value>Attivo</value>
+  </data>
+  <data name="OneGateVaultStatusUnavailable" xml:space="preserve">
+    <value>Non disponibile</value>
+  </data>
+  <data name="OneGateVaultRules" xml:space="preserve">
+    <value>Regole</value>
+  </data>
+  <data name="OneGateVaultRulesText" xml:space="preserve">
+    <value>Usa la dApp Vault esistente per rivedere regole del pool, idoneità e tempi di richiesta prima di connetterti o firmare.</value>
+  </data>
+  <data name="OneGateVaultHistory" xml:space="preserve">
+    <value>Cronologia</value>
+  </data>
+  <data name="OneGateVaultHistoryText" xml:space="preserve">
+    <value>Le azioni Vault appaiono nella dApp e nella cronologia delle transazioni on-chain dopo un’operazione firmata.</value>
   </data>
 </root>
