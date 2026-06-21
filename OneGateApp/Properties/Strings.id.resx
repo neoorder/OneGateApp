@@ -786,6 +786,12 @@ Dengan melanjutkan, Anda menyatakan bahwa Anda sepenuhnya memahami dan menerima 
   <data name="Gaming" xml:space="preserve">
     <value>Game</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Tarik ke bawah untuk menyegarkan katalog game.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Baru dimainkan</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Jenis game</value>
   </data>

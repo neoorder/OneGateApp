@@ -786,6 +786,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>Игры</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Потяните вниз, чтобы обновить каталог игр.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Недавно сыгранные</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Тип игры</value>
   </data>

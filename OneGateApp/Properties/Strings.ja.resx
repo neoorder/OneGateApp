@@ -786,6 +786,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>ゲーム</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>下に引いてゲームカタログを更新します。</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>最近プレイ</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>ゲームタイプ</value>
   </data>

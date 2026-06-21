@@ -786,6 +786,12 @@ Khi tiếp tục, bạn xác nhận rằng bạn đã hiểu đầy đủ và ch
   <data name="Gaming" xml:space="preserve">
     <value>Trò chơi</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Kéo xuống để làm mới danh mục trò chơi.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Đã chơi gần đây</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Thể loại trò chơi</value>
   </data>

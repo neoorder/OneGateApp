@@ -786,6 +786,12 @@ Al continuar, usted reconoce que comprende plenamente y acepta todos los riesgos
   <data name="Gaming" xml:space="preserve">
     <value>Juegos</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Desliza hacia abajo para actualizar el catálogo de juegos.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Jugados recientemente</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Tipo de juego</value>
   </data>
