@@ -538,6 +538,30 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
   <data name="UnknownAddress" xml:space="preserve">
     <value>Bilinmeyen adres</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Kayıtlı adres</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Bu alıcı adresi, yerel adres defterinizdeki "{0}" ile eşleşiyor.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Cüzdan adresiniz</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Bu adres mevcut cüzdana ait. Devam edebilirsiniz, ancak kendinize transferin kasıtlı olduğundan emin olun.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Bilinmeyen adres</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Bu adres adres defterinizde kayıtlı değil. Tam adresi dikkatle doğrulayın; blockchain transferleri geri alınamaz.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Ücret tahmini</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate, imzalamadan önce sonraki ekranda ağ ve sistem ücretlerini tahmin eder. GAS transferlerinde hem transfer tutarını hem de ücretleri karşılayacak kadar GAS bırakılmalıdır.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>İşlem gönderiliyor</value>
   </data>
