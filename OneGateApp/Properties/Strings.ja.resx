@@ -424,6 +424,63 @@
   <data name="ExecutionResult" xml:space="preserve">
     <value>実行結果</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>資産の変化</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>デコード済みの転送要求から推定されます。</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>資産ハッシュ</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>支払いアドレス</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>直接的な資産移動はデコードされませんでした。署名前にコントラクト詳細を確認してください。</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>リスク確認</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>承認前にこれらの項目を確認してください。</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>リクエスト詳細</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>不明な資産変化</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate はこの要求を明確な資産移動としてデコードできませんでした。</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>コントラクト要求</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>コントラクトとメソッドを確認してください。スマートコントラクトは実行中に残高を変更できます。</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>実行警告</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>プレビュー実行は正常に完了しませんでした。署名が失敗するか、手数料を消費する可能性があります。</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>{0} に送信</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>{0} から受信</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>このウォレット内の転送</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} から {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>成功</value>
   </data>

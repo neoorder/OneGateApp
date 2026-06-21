@@ -424,6 +424,63 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
   <data name="ExecutionResult" xml:space="preserve">
     <value>Hasil eksekusi</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>Perubahan aset</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>Diperkirakan dari permintaan transfer yang didekode.</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>Hash aset</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>Alamat pembayaran</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>Tidak ada perpindahan aset langsung yang didekode. Tinjau detail kontrak sebelum menandatangani.</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>Tinjauan risiko</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>Periksa item ini sebelum menyetujui.</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>Detail permintaan</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>Perubahan aset tidak diketahui</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate tidak dapat mendekode permintaan ini menjadi perpindahan aset yang jelas.</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>Permintaan kontrak</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>Tinjau kontrak dan metodenya. Smart contract dapat mengubah saldo saat eksekusi.</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>Peringatan eksekusi</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>Eksekusi pratinjau tidak selesai dengan sukses. Penandatanganan dapat gagal atau tetap menghabiskan biaya.</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>Mengirim ke {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>Menerima dari {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>Transfer di dalam wallet ini</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} ke {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Berhasil</value>
   </data>

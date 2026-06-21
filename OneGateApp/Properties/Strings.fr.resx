@@ -424,6 +424,63 @@ Après désactivation, vous devrez saisir manuellement le mot de passe du portef
   <data name="ExecutionResult" xml:space="preserve">
     <value>Résultat de l’exécution</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>Variations d’actifs</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>Estimées à partir des demandes de transfert décodées.</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>Hash de l’actif</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>Adresse de paiement</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>Aucun mouvement direct d’actif n’a été décodé. Vérifiez les détails du contrat avant de signer.</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>Analyse des risques</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>Vérifiez ces éléments avant d’approuver.</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>Détails de la demande</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>Variations d’actifs inconnues</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate n’a pas pu décoder cette demande en mouvements d’actifs clairs.</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>Demande de contrat</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>Vérifiez le contrat et la méthode. Les contrats intelligents peuvent modifier les soldes pendant l’exécution.</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>Avertissement d’exécution</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>L’exécution d’aperçu ne s’est pas terminée correctement. La signature peut échouer ou quand même consommer des frais.</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>Envoi à {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>Réception depuis {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>Transfert dans ce portefeuille</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} vers {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Succès</value>
   </data>

@@ -92,6 +92,9 @@ public partial class SendTransactionPopup : MyPopup<bool>
                         Title = transfer.Asset.Symbol,
                         AmountText = $"{GetAmountPrefix(fromWallet, toWallet)}{transfer.DisplayAmount}",
                         DetailText = GetTransferDetail(transfer.From, transfer.To, fromWallet, toWallet),
+                        AssetHashText = transfer.Asset.Hash.ToString(),
+                        PaymentAddressText = FullAddress(transfer.From),
+                        ReceivingAddressText = FullAddress(transfer.To),
                         IsOutgoing = fromWallet && !toWallet,
                         IsIncoming = toWallet && !fromWallet
                     });
@@ -104,6 +107,9 @@ public partial class SendTransactionPopup : MyPopup<bool>
                         Title = nftTransfer.Asset.Name,
                         AmountText = $"{GetAmountPrefix(nftFromWallet, nftToWallet)}{Strings.NFT}",
                         DetailText = GetTransferDetail(nftTransfer.From, nftTransfer.To, nftFromWallet, nftToWallet),
+                        AssetHashText = (nftTransfer.Asset.TokenInfo?.Hash ?? nftTransfer.Asset.CollectionId).ToString(),
+                        PaymentAddressText = FullAddress(nftTransfer.From),
+                        ReceivingAddressText = FullAddress(nftTransfer.To),
                         IsOutgoing = nftFromWallet && !nftToWallet,
                         IsIncoming = nftToWallet && !nftFromWallet
                     });
@@ -160,6 +166,11 @@ public partial class SendTransactionPopup : MyPopup<bool>
     {
         string address = hash.ToAddress(protocolSettings.AddressVersion);
         return address.Length <= 12 ? address : $"{address[..6]}...{address[^4..]}";
+    }
+
+    string FullAddress(UInt160 hash)
+    {
+        return hash.ToAddress(protocolSettings.AddressVersion);
     }
 
     static string GetAmountPrefix(bool fromWallet, bool toWallet)

@@ -424,6 +424,63 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
   <data name="ExecutionResult" xml:space="preserve">
     <value>Kết quả thực thi</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>Thay đổi tài sản</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>Ước tính từ các yêu cầu chuyển khoản đã giải mã.</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>Hash tài sản</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>Địa chỉ thanh toán</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>Không giải mã được chuyển động tài sản trực tiếp. Hãy xem chi tiết hợp đồng trước khi ký.</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>Xem xét rủi ro</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>Kiểm tra các mục này trước khi phê duyệt.</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>Chi tiết yêu cầu</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>Thay đổi tài sản không xác định</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate không thể giải mã yêu cầu này thành các chuyển động tài sản rõ ràng.</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>Yêu cầu hợp đồng</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>Xem lại hợp đồng và phương thức. Hợp đồng thông minh có thể thay đổi số dư trong khi thực thi.</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>Cảnh báo thực thi</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>Lần thực thi xem trước không hoàn tất thành công. Việc ký có thể thất bại hoặc vẫn tiêu tốn phí.</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>Gửi đến {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>Nhận từ {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>Chuyển trong ví này</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} đến {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Thành công</value>
   </data>

@@ -424,6 +424,63 @@
   <data name="ExecutionResult" xml:space="preserve">
     <value>執行結果</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>資產變化</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>根據已解析的轉帳請求估算。</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>資產雜湊</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>付款地址</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>未解析出直接資產轉移；簽名前請檢查合約詳情。</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>風險檢查</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>核准前請確認以下資訊。</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>請求詳情</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>未知資產變化</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate 無法將此請求解析為明確的資產變化。</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>合約請求</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>請檢查合約和方法。智慧合約可能在執行期間改變餘額。</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>執行預警</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>預覽執行未成功完成；簽名可能失敗，也可能仍消耗手續費。</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>傳送至 {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>接收自 {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>錢包內部轉帳</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} 至 {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>成功</value>
   </data>

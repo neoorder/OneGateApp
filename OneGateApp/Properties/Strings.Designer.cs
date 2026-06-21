@@ -169,6 +169,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Asset hash 的本地化字符串。
+        /// </summary>
+        internal static string AssetHash {
+            get {
+                return ResourceManager.GetString("AssetHash", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Assets hidden 的本地化字符串。
         /// </summary>
         internal static string AssetHidden {
@@ -1760,6 +1769,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string PasswordProtectedPrivateKeyNep2 {
             get {
                 return ResourceManager.GetString("PasswordProtectedPrivateKeyNep2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Payment address 的本地化字符串。
+        /// </summary>
+        internal static string PaymentAddress {
+            get {
+                return ResourceManager.GetString("PaymentAddress", resourceCulture);
             }
         }
 

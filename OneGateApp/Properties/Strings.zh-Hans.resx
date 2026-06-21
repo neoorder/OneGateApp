@@ -430,6 +430,12 @@
   <data name="AssetChangesText" xml:space="preserve">
     <value>根据已解析的转账请求估算。</value>
   </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>资产哈希</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>付款地址</value>
+  </data>
   <data name="NoDirectAssetChanges" xml:space="preserve">
     <value>未解析出直接资产转移；签名前请检查合约详情。</value>
   </data>

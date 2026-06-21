@@ -424,6 +424,63 @@
   <data name="ExecutionResult" xml:space="preserve">
     <value>Результат выполнения</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>Изменения активов</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>Оценено по декодированным запросам перевода.</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>Хэш актива</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>Адрес оплаты</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>Прямое движение активов не декодировано. Проверьте детали контракта перед подписью.</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>Проверка рисков</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>Проверьте эти пункты перед подтверждением.</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>Детали запроса</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>Неизвестные изменения активов</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate не смог декодировать этот запрос в понятные движения активов.</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>Запрос контракта</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>Проверьте контракт и метод. Смарт-контракты могут изменять балансы во время выполнения.</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>Предупреждение выполнения</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>Предварительное выполнение не завершилось успешно. Подпись может не пройти или всё равно израсходовать комиссии.</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>Отправка на {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>Получение от {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>Перевод внутри этого кошелька</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} на {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Успешно</value>
   </data>

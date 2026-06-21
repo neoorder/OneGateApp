@@ -424,6 +424,63 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
   <data name="ExecutionResult" xml:space="preserve">
     <value>Yürütme sonucu</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>Varlık değişiklikleri</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>Çözümlenen transfer isteklerinden tahmin edilir.</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>Varlık hash’i</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>Ödeme adresi</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>Doğrudan varlık hareketi çözümlenemedi. İmzalamadan önce sözleşme ayrıntılarını inceleyin.</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>Risk incelemesi</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>Onaylamadan önce bu öğeleri kontrol edin.</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>İstek ayrıntıları</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>Bilinmeyen varlık değişiklikleri</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate bu isteği net varlık hareketlerine çözemedi.</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>Sözleşme isteği</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>Sözleşmeyi ve metodu inceleyin. Akıllı sözleşmeler yürütme sırasında bakiyeleri değiştirebilir.</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>Yürütme uyarısı</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>Önizleme yürütmesi başarıyla tamamlanmadı. İmzalama başarısız olabilir veya yine de ücret tüketebilir.</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>{0} adresine gönderiliyor</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>{0} adresinden alınıyor</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>Bu cüzdan içinde transfer</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Başarılı</value>
   </data>

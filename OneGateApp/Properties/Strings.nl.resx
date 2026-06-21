@@ -424,6 +424,63 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   <data name="ExecutionResult" xml:space="preserve">
     <value>Uitvoeringsresultaat</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>Assetwijzigingen</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>Geschat op basis van gedecodeerde overdrachtsverzoeken.</value>
+  </data>
+  <data name="AssetHash" xml:space="preserve">
+    <value>Asset-hash</value>
+  </data>
+  <data name="PaymentAddress" xml:space="preserve">
+    <value>Betaaladres</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>Er is geen directe assetbeweging gedecodeerd. Controleer contractdetails voordat je ondertekent.</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>Risicobeoordeling</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>Controleer deze items voordat je goedkeurt.</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>Verzoekdetails</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>Onbekende assetwijzigingen</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate kon dit verzoek niet decoderen naar duidelijke assetbewegingen.</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>Contractverzoek</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>Controleer het contract en de methode. Smart contracts kunnen saldi wijzigen tijdens uitvoering.</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>Uitvoeringswaarschuwing</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>De voorbeeldexecutie is niet succesvol voltooid. Ondertekenen kan mislukken of toch kosten verbruiken.</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>Verzenden naar {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>Ontvangen van {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>Overdracht binnen deze wallet</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} naar {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Geslaagd</value>
   </data>

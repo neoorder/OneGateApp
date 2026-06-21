@@ -28,7 +28,7 @@
                         <VerticalStackLayout BindableLayout.ItemsSource="{Binding AssetChanges}" IsVisible="{Binding HasAssetChanges}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate x:DataType="og:TransactionPreviewAssetChange">
-                                    <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,auto" ColumnSpacing="12" Padding="0,10">
+                                    <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,auto,auto" ColumnSpacing="12" RowSpacing="6" Padding="0,10">
                                         <Label Text="{Binding Title}" FontAttributes="Bold" MaxLines="1" LineBreakMode="TailTruncation" />
                                         <Label Grid.Column="1" Text="{Binding AmountText}" FontAttributes="Bold" HorizontalOptions="End">
                                             <Label.Triggers>
@@ -41,6 +41,14 @@
                                             </Label.Triggers>
                                         </Label>
                                         <Label Grid.Row="1" Grid.ColumnSpan="2" StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" LineBreakMode="TailTruncation" />
+                                        <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="auto,*" RowDefinitions="auto,auto,auto" RowSpacing="3" ColumnSpacing="10">
+                                            <Label Text="{x:Static og:Strings.AssetHash}" StyleClass="Secondary" FontSize="11" />
+                                            <Label Grid.Column="1" Text="{Binding AssetHashText}" StyleClass="Secondary" FontSize="11" LineBreakMode="MiddleTruncation" HorizontalOptions="End" />
+                                            <Label Grid.Row="1" Text="{x:Static og:Strings.PaymentAddress}" StyleClass="Secondary" FontSize="11" />
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding PaymentAddressText}" StyleClass="Secondary" FontSize="11" LineBreakMode="MiddleTruncation" HorizontalOptions="End" />
+                                            <Label Grid.Row="2" Text="{x:Static og:Strings.ReceivingAddress}" StyleClass="Secondary" FontSize="11" />
+                                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding ReceivingAddressText}" StyleClass="Secondary" FontSize="11" LineBreakMode="MiddleTruncation" HorizontalOptions="End" />
+                                        </Grid>
                                     </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
