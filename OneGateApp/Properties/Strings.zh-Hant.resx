@@ -866,6 +866,30 @@
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp測試</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>已儲存地址</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>此收款地址與本地地址簿中的「{0}」相符。</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>您的錢包地址</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>此地址屬於目前的錢包。您可以繼續，但請確認您是有意向自己轉帳。</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>陌生地址</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>此地址未儲存在地址簿中。請仔細核對完整地址；區塊鏈轉帳無法撤銷。</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>費用預估</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate 會在下一個畫面簽名前估算網路費與系統費。GAS 轉帳必須保留足夠的 GAS，以同時支付轉帳金額與費用。</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>可用</value>
   </data>
@@ -976,5 +1000,8 @@
   </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>搜尋名字、地址或備註</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>轉帳</value>
   </data>
 </root>

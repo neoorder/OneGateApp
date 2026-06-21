@@ -538,6 +538,30 @@
   <data name="UnknownAddress" xml:space="preserve">
     <value>陌生地址</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>已保存地址</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>该收款方匹配本地地址簿中的“{0}”。</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>你的钱包地址</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>该地址属于当前钱包。你可以继续，但请确认向自己转账是有意操作。</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>陌生地址</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>该地址未保存在地址簿中。请仔细核对完整地址；区块链转账无法撤销。</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>费用预估</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate 会在下一屏、签名前估算网络费和系统费。GAS 转账必须保留足够 GAS 同时覆盖转账金额和费用。</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>正在发送交易</value>
   </data>
@@ -976,5 +1000,8 @@
   </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>搜索名字、地址或备注</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>转账</value>
   </data>
 </root>
