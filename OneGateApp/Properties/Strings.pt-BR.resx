@@ -989,4 +989,7 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponível</value>
   </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transação falhou</value>
+  </data>
 </root>

@@ -989,4 +989,7 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
   </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaksi gagal</value>
+  </data>
 </root>
