@@ -228,6 +228,119 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 const entries = [];
                 let panel;
                 let logList;
+                const inputEventTypes = new Set([
+                    "click",
+                    "contextmenu",
+                    "dblclick",
+                    "keydown",
+                    "keypress",
+                    "keyup",
+                    "mousedown",
+                    "mousemove",
+                    "mouseout",
+                    "mouseover",
+                    "mouseup",
+                    "pointercancel",
+                    "pointerdown",
+                    "pointermove",
+                    "pointerout",
+                    "pointerover",
+                    "pointerup",
+                    "touchcancel",
+                    "touchend",
+                    "touchmove",
+                    "touchstart",
+                    "wheel"
+                ]);
+                const originalAddEventListener = EventTarget.prototype.addEventListener;
+                const originalRemoveEventListener = EventTarget.prototype.removeEventListener;
+                const listenerWrappers = new WeakMap();
+
+                function eventTargetsPanel(event) {
+                    if (!panel)
+                        return false;
+                    if (typeof event.composedPath === "function")
+                        return event.composedPath().indexOf(panel) >= 0;
+                    return event.target && typeof panel.contains === "function" && panel.contains(event.target);
+                }
+
+                function getCapture(options) {
+                    return typeof options === "boolean" ? options : !!(options && options.capture);
+                }
+
+                function canWrapListener(listener) {
+                    return typeof listener === "function" || (listener && typeof listener === "object" && typeof listener.handleEvent === "function");
+                }
+
+                function getListenerEntries(target, listener, create) {
+                    let targetMap = listenerWrappers.get(target);
+                    if (!targetMap) {
+                        if (!create)
+                            return null;
+                        targetMap = new WeakMap();
+                        listenerWrappers.set(target, targetMap);
+                    }
+
+                    let entries = targetMap.get(listener);
+                    if (!entries) {
+                        if (!create)
+                            return null;
+                        entries = [];
+                        targetMap.set(listener, entries);
+                    }
+                    return entries;
+                }
+
+                function getWrappedListener(target, type, listener, options) {
+                    if (!inputEventTypes.has(type) || !canWrapListener(listener))
+                        return listener;
+
+                    const capture = getCapture(options);
+                    const entries = getListenerEntries(target, listener, true);
+                    const existing = entries.find(function(entry) {
+                        return entry.type === type && entry.capture === capture;
+                    });
+                    if (existing)
+                        return existing.wrapped;
+
+                    const wrapped = function(event) {
+                        if (eventTargetsPanel(event))
+                            return;
+                        if (typeof listener === "function")
+                            return listener.call(this, event);
+                        return listener.handleEvent.call(listener, event);
+                    };
+                    entries.push({ type: type, capture: capture, wrapped: wrapped });
+                    return wrapped;
+                }
+
+                function removeWrappedListener(target, type, listener, options) {
+                    if (!inputEventTypes.has(type) || !canWrapListener(listener))
+                        return listener;
+
+                    const entries = getListenerEntries(target, listener, false);
+                    if (!entries)
+                        return listener;
+
+                    const capture = getCapture(options);
+                    const index = entries.findIndex(function(entry) {
+                        return entry.type === type && entry.capture === capture;
+                    });
+                    if (index < 0)
+                        return listener;
+
+                    const entry = entries[index];
+                    entries.splice(index, 1);
+                    return entry.wrapped;
+                }
+
+                EventTarget.prototype.addEventListener = function(type, listener, options) {
+                    return originalAddEventListener.call(this, type, getWrappedListener(this, type, listener, options), options);
+                };
+
+                EventTarget.prototype.removeEventListener = function(type, listener, options) {
+                    return originalRemoveEventListener.call(this, type, removeWrappedListener(this, type, listener, options), options);
+                };
 
                 function format(value) {
                     if (value instanceof Error)
@@ -307,7 +420,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     const button = document.createElement("button");
                     button.type = "button";
                     button.textContent = text;
-                    button.addEventListener("click", function(event) {
+                    originalAddEventListener.call(button, "click", function(event) {
                         event.preventDefault();
                         event.stopPropagation();
                         onClick();
@@ -349,6 +462,11 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
                     panel.appendChild(header);
                     panel.appendChild(logList);
+                    inputEventTypes.forEach(function(type) {
+                        originalAddEventListener.call(panel, type, function(event) {
+                            event.stopPropagation();
+                        });
+                    });
                     (document.body || document.documentElement).appendChild(panel);
                     render();
                 }

@@ -11,6 +11,8 @@ namespace NeoOrder.OneGate.Controls.Handlers;
 
 partial class BridgeWebViewHandler
 {
+    const string SyncPrompt = "__OneGateBridgeSync";
+
     class ScriptHandler(Action<string> onMessage) : NSObject, IWKScriptMessageHandler
     {
         public void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
@@ -21,8 +23,15 @@ partial class BridgeWebViewHandler
 
     BridgeWebViewUIDelegate? uiDelegate;
 
-    class BridgeWebViewUIDelegate(IWebViewHandler handler) : MauiWebViewUIDelegate(handler)
+    class BridgeWebViewUIDelegate : MauiWebViewUIDelegate
     {
+        readonly IWebViewHandler handler;
+
+        public BridgeWebViewUIDelegate(IWebViewHandler handler) : base(handler)
+        {
+            this.handler = handler;
+        }
+
         public override void RequestDeviceOrientationAndMotionPermission(
             WKWebView webView,
             WKSecurityOrigin origin,
@@ -31,6 +40,26 @@ partial class BridgeWebViewHandler
         {
             decisionHandler(frame.MainFrame ? WKPermissionDecision.Grant : WKPermissionDecision.Deny);
         }
+
+#pragma warning disable CS0672
+        public override void RunJavaScriptTextInputPanel(
+            WKWebView webView,
+            string prompt,
+            string? defaultText,
+            WKFrameInfo frame,
+            Action<string> completionHandler)
+        {
+            if (frame.MainFrame && prompt == SyncPrompt && handler.VirtualView is Views.BridgeWebView bridgeWebView)
+            {
+                completionHandler(bridgeWebView.OnSyncMessage(defaultText ?? string.Empty));
+                return;
+            }
+
+#pragma warning disable CS0618
+            base.RunJavaScriptTextInputPanel(webView, prompt, defaultText, frame, completionHandler);
+#pragma warning restore CS0618
+        }
+#pragma warning restore CS0672
     }
 
     static partial void ConfigureMapper(PropertyMapper<IWebView, IWebViewHandler> mapper)
@@ -54,6 +83,9 @@ partial class BridgeWebViewHandler
             window.__OneGateBridge = {
                 invoke: function(payload) {
                     window.webkit.messageHandlers.__OneGateBridge.postMessage(payload);
+                },
+                invokeSync: function(payload) {
+                    return window.prompt("__OneGateBridgeSync", payload);
                 }
             };
             """;
