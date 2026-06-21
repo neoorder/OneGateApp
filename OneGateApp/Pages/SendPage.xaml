@@ -43,7 +43,7 @@
                 </og:ValidationMessage>
                 <Border Padding="12" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 5" IsVisible="{Binding HasAddressInsight}">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="10">
-                        <Label StyleClass="Icon" Text="&#xe744;" FontSize="20" VerticalOptions="Start" />
+                        <Label StyleClass="Icon" Text="&#xe83d;" FontSize="20" VerticalOptions="Start" />
                         <VerticalStackLayout Grid.Column="1" Spacing="3">
                             <Label Text="{Binding AddressInsightTitle}" FontAttributes="Bold" FontSize="13" />
                             <Label StyleClass="Secondary" Text="{Binding AddressInsightText}" FontSize="12" LineBreakMode="WordWrap" />
@@ -83,7 +83,7 @@
                 </Grid>
                 <Border Padding="12" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 5">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="10">
-                        <Label StyleClass="Icon" Text="&#xe744;" FontSize="20" VerticalOptions="Start" />
+                        <Label StyleClass="Icon" Text="&#xeda3;" FontSize="20" VerticalOptions="Start" />
                         <VerticalStackLayout Grid.Column="1" Spacing="3">
                             <Label Text="{x:Static og:Strings.FeeEstimateNoticeTitle}" FontAttributes="Bold" FontSize="13" />
                             <Label StyleClass="Secondary" Text="{x:Static og:Strings.FeeEstimateNoticeText}" FontSize="12" LineBreakMode="WordWrap" />
