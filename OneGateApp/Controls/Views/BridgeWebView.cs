@@ -8,15 +8,17 @@ namespace NeoOrder.OneGate.Controls.Views;
 public partial class BridgeWebView : WebView
 {
     public const string BridgeInvokeFunctionName = "__OneGateInvoke";
+    public const string BridgeInvokeSyncFunctionName = "__OneGateInvokeSync";
     public const string BridgeCallbackName = "__OneGateBridgeCallback";
     const string SystemCallMethodPrefix = "onegate.system.";
     const string SystemCallInvokeFunctionName = "__OneGateSystemInvoke";
-
-    readonly ConcurrentDictionary<string, Func<JsonArray?, Task<JsonNode?>>> systemCallHandlers = new(StringComparer.Ordinal);
-
-    public event EventHandler<BridgeWebView, JsonObject>? InvokedFromJavaScript;
+    const string SystemCallInvokeSyncFunctionName = "__OneGateSystemInvokeSync";
 
     public static readonly BindableProperty DocumentStartScriptProperty = BindableProperty.Create(nameof(DocumentStartScript), typeof(string), typeof(BridgeWebView));
+    readonly ConcurrentDictionary<string, Func<JsonArray?, Task<JsonNode?>>> asyncSystemCallHandlers = new(StringComparer.Ordinal);
+    readonly ConcurrentDictionary<string, Func<JsonArray?, JsonNode?>> syncSystemCallHandlers = new(StringComparer.Ordinal);
+
+    public event EventHandler<BridgeWebView, JsonObject>? InvokedFromJavaScript;
 
     public string? DocumentStartScript { get => (string?)GetValue(DocumentStartScriptProperty); set => SetValue(DocumentStartScriptProperty, value); }
 
@@ -55,10 +57,41 @@ public partial class BridgeWebView : WebView
                 }
 
                 window.{{BridgeInvokeFunctionName}} = invoke;
+                window.{{BridgeInvokeSyncFunctionName}} = function(method, params) {
+                    if (!window.__OneGateBridge || typeof window.__OneGateBridge.invokeSync !== 'function')
+                        throw new Error('Synchronous bridge is not available.');
+
+                    const request = {
+                        jsonrpc: "2.0",
+                        id: createId(),
+                        method: method,
+                        params: params
+                    };
+                    let response = window.__OneGateBridge.invokeSync(JSON.stringify(request));
+                    if (typeof response === 'string')
+                        response = JSON.parse(response);
+
+                    if (!response || response.jsonrpc !== "2.0" || response.id !== request.id)
+                        throw new Error('Invalid synchronous bridge response.');
+
+                    if (response.error) {
+                        const error = new Error(response.error.message || 'Synchronous bridge invocation failed.');
+                        error.code = response.error.code;
+                        error.data = response.error.data;
+                        throw error;
+                    }
+
+                    return response.result;
+                };
                 window.{{SystemCallInvokeFunctionName}} = function(method, params) {
                     if (method.indexOf('{{SystemCallMethodPrefix}}') === 0)
                         return invoke(method, params);
                     return invoke('{{SystemCallMethodPrefix}}' + method, params);
+                };
+                window.{{SystemCallInvokeSyncFunctionName}} = function(method, params) {
+                    if (method.indexOf('{{SystemCallMethodPrefix}}') === 0)
+                        return window.{{BridgeInvokeSyncFunctionName}}(method, params);
+                    return window.{{BridgeInvokeSyncFunctionName}}('{{SystemCallMethodPrefix}}' + method, params);
                 };
 
                 window.{{BridgeCallbackName}} = function(response) {
@@ -86,12 +119,12 @@ public partial class BridgeWebView : WebView
 
     protected void RegisterSystemCallHandler(string method, Func<JsonArray?, JsonNode?> handler)
     {
-        RegisterSystemCallHandler(method, args => Task.FromResult(handler(args)));
+        syncSystemCallHandlers[method] = handler;
     }
 
     protected void RegisterSystemCallHandler(string method, Func<JsonArray?, Task<JsonNode?>> handler)
     {
-        systemCallHandlers[method] = handler;
+        asyncSystemCallHandlers[method] = handler;
     }
 
     internal void OnMessage(string payload)
@@ -99,14 +132,7 @@ public partial class BridgeWebView : WebView
         JsonObject? request;
         try
         {
-            if (string.IsNullOrWhiteSpace(payload)) return;
-            request = JsonNode.Parse(payload) as JsonObject;
-            if (request is null) return;
-            if (request["jsonrpc"] is not JsonValue jsonrpc || jsonrpc.GetValueKind() != JsonValueKind.String || jsonrpc.GetValue<string>() != "2.0") return;
-            if (request["method"]?.GetValueKind() != JsonValueKind.String) return;
-            if (request["params"] is not null && request["params"] is not JsonArray) return;
-            if (request["id"] is not JsonValue id) return;
-            if (id.GetValueKind() != JsonValueKind.String && id.GetValueKind() != JsonValueKind.Number) return;
+            request = ParseRpcRequest(payload);
         }
         catch
         {
@@ -127,6 +153,125 @@ public partial class BridgeWebView : WebView
             MainThread.BeginInvokeOnMainThread(() => InvokedFromJavaScript?.Invoke(this, request));
     }
 
+    internal string OnSyncMessage(string payload)
+    {
+        if (MainThread.IsMainThread)
+            return HandleSyncMessage(payload);
+
+        return MainThread.InvokeOnMainThreadAsync(() => HandleSyncMessage(payload)).GetAwaiter().GetResult();
+    }
+
+    string HandleSyncMessage(string payload)
+    {
+        JsonObject? request = null;
+        try
+        {
+            request = ParseRpcRequest(payload);
+            string method = request["method"]!.GetValue<string>();
+            if (TryGetSystemCallMethod(method, out string? systemMethod))
+                return HandleSyncSystemCall(request, systemMethod).ToJsonString();
+            return InvokeSynchronouslyFromJavaScript(request).ToJsonString();
+        }
+        catch (OperationCanceledException)
+        {
+            return CreateRpcErrorResponse(request, 10006, "Operation cancelled").ToJsonString();
+        }
+        catch (JsonException)
+        {
+            return CreateRpcErrorResponse(request, 10002, "Invalid request").ToJsonString();
+        }
+        catch (ArgumentException)
+        {
+            return CreateRpcErrorResponse(request, 10002, "Invalid request").ToJsonString();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return CreateRpcErrorResponse(request, 10001, ex.Message).ToJsonString();
+        }
+        catch (Exception ex)
+        {
+            return CreateRpcErrorResponse(request, 10000, ex.Message).ToJsonString();
+        }
+    }
+
+    protected virtual JsonObject InvokeSynchronouslyFromJavaScript(JsonObject request)
+    {
+        return CreateRpcErrorResponse(request, -32601, "Method not found");
+    }
+
+    JsonObject HandleSyncSystemCall(JsonObject request, string method)
+    {
+        JsonObject response = CreateRpcResponse(request);
+        try
+        {
+            syncSystemCallHandlers.TryGetValue(method, out Func<JsonArray?, JsonNode?>? handler);
+
+            if (handler is null)
+                throw new InvalidOperationException("System method not found");
+
+            response["result"] = handler(request["params"] as JsonArray)?.DeepClone();
+        }
+        catch (OperationCanceledException)
+        {
+            response["error"] = CreateSystemCallError(10006, "Operation cancelled");
+        }
+        catch (InvalidOperationException ex)
+        {
+            response["error"] = CreateSystemCallError(10001, ex.Message);
+        }
+        catch (Exception ex)
+        {
+            response["error"] = CreateSystemCallError(10000, ex.Message);
+        }
+
+        return response;
+    }
+
+    static JsonObject ParseRpcRequest(string payload)
+    {
+        if (string.IsNullOrEmpty(payload))
+            throw new ArgumentException("Invalid request", nameof(payload));
+
+        JsonObject request = JsonNode.Parse(payload) as JsonObject
+            ?? throw new ArgumentException("Invalid request", nameof(payload));
+
+        if (request["jsonrpc"] is not JsonValue jsonrpc || jsonrpc.GetValueKind() != JsonValueKind.String || jsonrpc.GetValue<string>() != "2.0")
+            throw new ArgumentException("Invalid request", nameof(payload));
+        if (request["method"]?.GetValueKind() != JsonValueKind.String)
+            throw new ArgumentException("Invalid request", nameof(payload));
+        if (request["params"] is not null && request["params"] is not JsonArray)
+            throw new ArgumentException("Invalid request", nameof(payload));
+        if (request["id"] is not JsonValue id)
+            throw new ArgumentException("Invalid request", nameof(payload));
+        if (id.GetValueKind() != JsonValueKind.String && id.GetValueKind() != JsonValueKind.Number)
+            throw new ArgumentException("Invalid request", nameof(payload));
+
+        return request;
+    }
+
+    static JsonObject CreateRpcErrorResponse(JsonObject? request, int code, string message)
+    {
+        return new()
+        {
+            ["jsonrpc"] = "2.0",
+            ["id"] = request?["id"]?.DeepClone(),
+            ["error"] = new JsonObject
+            {
+                ["code"] = code,
+                ["message"] = message
+            }
+        };
+    }
+
+    static JsonObject CreateRpcResponse(JsonObject request)
+    {
+        return new()
+        {
+            ["jsonrpc"] = "2.0",
+            ["id"] = request["id"]?.DeepClone()
+        };
+    }
+
     void DispatchSystemCall(JsonObject request, string method)
     {
         if (MainThread.IsMainThread)
@@ -137,14 +282,10 @@ public partial class BridgeWebView : WebView
 
     async Task HandleSystemCallAsync(JsonObject request, string method)
     {
-        JsonObject response = new()
-        {
-            ["jsonrpc"] = "2.0",
-            ["id"] = request["id"]?.DeepClone()
-        };
+        JsonObject response = CreateRpcResponse(request);
         try
         {
-            systemCallHandlers.TryGetValue(method, out Func<JsonArray?, Task<JsonNode?>>? handler);
+            asyncSystemCallHandlers.TryGetValue(method, out Func<JsonArray?, Task<JsonNode?>>? handler);
 
             if (handler is null)
                 throw new InvalidOperationException("System method not found");

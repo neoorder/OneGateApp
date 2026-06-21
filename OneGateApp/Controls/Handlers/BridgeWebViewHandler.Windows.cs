@@ -2,11 +2,24 @@
 
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
+using System.Runtime.InteropServices;
 
 namespace NeoOrder.OneGate.Controls.Handlers;
 
 partial class BridgeWebViewHandler
 {
+    const string SyncHostObjectName = "OneGateBridgeSync";
+
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    public class SyncScriptHandler(Func<string, string> onMessage)
+    {
+        public string InvokeSync(string payload)
+        {
+            return onMessage(payload);
+        }
+    }
+
     protected override void ConnectHandler(WebView2 platformView)
     {
         base.ConnectHandler(platformView);
@@ -24,10 +37,14 @@ partial class BridgeWebViewHandler
     {
         sender.CoreWebView2.Settings.IsWebMessageEnabled = true;
         sender.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
+        sender.CoreWebView2.AddHostObjectToScript(SyncHostObjectName, new SyncScriptHandler(BridgeWebView.OnSyncMessage));
         string shim = """
             window.__OneGateBridge = {
                 invoke: function(payload) {
                     window.chrome.webview.postMessage(payload);
+                },
+                invokeSync: function(payload) {
+                    return window.chrome.webview.hostObjects.sync.OneGateBridgeSync.InvokeSync(payload);
                 }
             };
             """;
