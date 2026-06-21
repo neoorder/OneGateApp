@@ -22,7 +22,7 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
             {
                 if (tokens.Any(p => p.Hash == hash)) continue;
                 try { tokens.Add(await rpcClient.GetTokenInfo(hash)); }
-                catch { /* custom token no longer resolvable on chain; skip */ }
+                catch (RpcException) { /* custom token no longer resolvable on chain; skip */ }
             }
         }
         if (!includeHiddens)
