@@ -289,6 +289,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
                 return;
             }
             GlobalStates.Invalidate<WalletPage>();
+            serviceProvider.GetServiceOrCreateInstance<PendingTransactionService>().Enqueue(tx.Hash);
             await Shell.Current.GoToAsync("//wallet/sending", new Dictionary<string, object>
             {
                 ["tx"] = tx,

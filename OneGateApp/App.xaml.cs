@@ -1,4 +1,5 @@
-﻿using Neo.Wallets;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Neo.Wallets;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Pages;
@@ -37,6 +38,8 @@ public partial class App : Application
         }
         httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
         httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.CurrentUICulture.Name);
+
+        _ = serviceProvider.GetRequiredService<PendingTransactionService>().StartAsync();
     }
 
     internal bool ProcessAppLinkUri(Uri uri)
