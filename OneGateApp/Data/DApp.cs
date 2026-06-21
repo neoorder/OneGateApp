@@ -10,7 +10,8 @@ namespace NeoOrder.OneGate.Data;
 public class DApp : IComparable<DApp>, IShareable, IVersioned
 {
     const int OneGateVaultDAppId = 23;
-    const string OneGateVaultUrlSegment = "neomini.app/miniapps/miniapp-gas-lucky-pool";
+    const string OneGateVaultHost = "neomini.app";
+    const string OneGateVaultPath = "/miniapps/miniapp-gas-lucky-pool";
 
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
@@ -34,7 +35,7 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
 
     public bool IsGamingApp => !string.IsNullOrWhiteSpace(GameType);
     public bool IsRegularApp => !IsGamingApp;
-    public bool IsOneGateVault => Id == OneGateVaultDAppId || Url.Contains(OneGateVaultUrlSegment, StringComparison.OrdinalIgnoreCase);
+    public bool IsOneGateVault => Id == OneGateVaultDAppId || IsOneGateVaultUrl(Url);
     public string OneGateVaultStatusText => IsActive ? Strings.OneGateVaultStatusActive : Strings.OneGateVaultStatusUnavailable;
     public string? GameTypeDisplayName => LocalizeGameType(GameType);
     public Dictionary<string, string> NameLocalizer => field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Name)!;
@@ -57,5 +58,13 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
     {
         if (string.IsNullOrWhiteSpace(gameType)) return null;
         return Strings.ResourceManager.GetString($"GameType{gameType}") ?? gameType;
+    }
+
+    static bool IsOneGateVaultUrl(string url)
+    {
+        if (!Uri.TryCreate(url, UriKind.Absolute, out Uri? uri)) return false;
+        return uri.Scheme == Uri.UriSchemeHttps
+            && string.Equals(uri.Host, OneGateVaultHost, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(uri.AbsolutePath.TrimEnd('/'), OneGateVaultPath, StringComparison.OrdinalIgnoreCase);
     }
 }

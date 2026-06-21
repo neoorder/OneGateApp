@@ -54,7 +54,13 @@
                     <Label StyleClass="Secondary" Text="{x:Static og:Strings.OneGateVaultOfficialText}" FontSize="12" LineBreakMode="WordWrap" />
                     <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
                         <Label StyleClass="Secondary" Text="{x:Static og:Strings.Status}" FontSize="12" VerticalOptions="Center" />
-                        <Label Grid.Column="1" Text="{Binding OneGateVaultStatusText}" TextColor="{toolkit:AppThemeResource Success}" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="{Binding OneGateVaultStatusText}" TextColor="{toolkit:AppThemeResource Success}" FontSize="12" FontAttributes="Bold" VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsActive}" Value="False">
+                                    <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </Grid>
                     <VerticalStackLayout Spacing="4">
                         <Label Text="{x:Static og:Strings.OneGateVaultRules}" FontAttributes="Bold" FontSize="13" />
