@@ -989,4 +989,22 @@
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
   </data>
+  <data name="AddToken" xml:space="preserve">
+    <value>新增代幣</value>
+  </data>
+  <data name="AddTokenText" xml:space="preserve">
+    <value>輸入 NEP-17 合約雜湊以新增自訂代幣。</value>
+  </data>
+  <data name="ContractHashPlaceholder" xml:space="preserve">
+    <value>0x… 合約雜湊</value>
+  </data>
+  <data name="InvalidContractHash" xml:space="preserve">
+    <value>請輸入有效的合約雜湊。</value>
+  </data>
+  <data name="TokenNotFound" xml:space="preserve">
+    <value>該合約上未找到 NEP-17 代幣。</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>新增</value>
+  </data>
 </root>

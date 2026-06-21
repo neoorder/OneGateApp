@@ -989,4 +989,22 @@
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
   </data>
+  <data name="AddToken" xml:space="preserve">
+    <value>添加代币</value>
+  </data>
+  <data name="AddTokenText" xml:space="preserve">
+    <value>输入 NEP-17 合约哈希以添加自定义代币。</value>
+  </data>
+  <data name="ContractHashPlaceholder" xml:space="preserve">
+    <value>0x… 合约哈希</value>
+  </data>
+  <data name="InvalidContractHash" xml:space="preserve">
+    <value>请输入有效的合约哈希。</value>
+  </data>
+  <data name="TokenNotFound" xml:space="preserve">
+    <value>该合约上未找到 NEP-17 代币。</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
 </root>

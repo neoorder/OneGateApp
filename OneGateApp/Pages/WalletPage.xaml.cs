@@ -1,7 +1,9 @@
 using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Extensions;
 using Neo;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
+using NeoOrder.OneGate.Controls.Popups;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
@@ -13,6 +15,7 @@ public partial class WalletPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
     readonly TokenManager tokenManager;
+    readonly IServiceProvider serviceProvider;
 
     public LoadingService LoadingService { get; set { field = value; OnPropertyChanged(); } }
     public Wallet Wallet { get; set { field = value; OnPropertyChanged(); } }
@@ -23,9 +26,10 @@ public partial class WalletPage : ContentPage
     public IReadOnlyList<NFT>? NFTs { get; set { field = value; OnPropertyChanged(); } }
     public string TotalValuation { get; set { field = value; OnPropertyChanged(); } } = "N/A";
 
-    public WalletPage(ApplicationDbContext dbContext, IWalletProvider walletProvider, TokenManager tokenManager)
+    public WalletPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, TokenManager tokenManager)
     {
         this.LoadingService = new(RefreshWallet, LoadAssetsAsync, LoadNFTsAsync);
+        this.serviceProvider = serviceProvider;
         this.dbContext = dbContext;
         this.tokenManager = tokenManager;
         Wallet = walletProvider.GetWallet()!;
@@ -91,5 +95,13 @@ public partial class WalletPage : ContentPage
     {
         NFT nft = (NFT)e.Parameter!;
         await Shell.Current.GoToAsync("//wallet/nft/details", new Dictionary<string, object> { ["nft"] = nft });
+    }
+
+    async void OnAddToken(object sender, EventArgs e)
+    {
+        AddTokenPopup popup = serviceProvider.GetServiceOrCreateInstance<AddTokenPopup>();
+        var result = await this.ShowPopupAsync<bool>(popup);
+        if (result.Result)
+            LoadingService.BeginLoad();
     }
 }

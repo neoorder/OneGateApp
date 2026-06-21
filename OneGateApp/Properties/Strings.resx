@@ -989,4 +989,22 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Unavailable" xml:space="preserve">
     <value>Unavailable</value>
   </data>
+  <data name="AddToken" xml:space="preserve">
+    <value>Add token</value>
+  </data>
+  <data name="AddTokenText" xml:space="preserve">
+    <value>Enter a NEP-17 contract hash to track a custom token.</value>
+  </data>
+  <data name="ContractHashPlaceholder" xml:space="preserve">
+    <value>0x… contract hash</value>
+  </data>
+  <data name="InvalidContractHash" xml:space="preserve">
+    <value>Enter a valid contract hash.</value>
+  </data>
+  <data name="TokenNotFound" xml:space="preserve">
+    <value>No NEP-17 token found at this contract.</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
 </root>

@@ -2625,5 +2625,59 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add token.
+        /// </summary>
+        internal static string AddToken {
+            get {
+                return ResourceManager.GetString("AddToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a NEP-17 contract hash to track a custom token..
+        /// </summary>
+        internal static string AddTokenText {
+            get {
+                return ResourceManager.GetString("AddTokenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0x… contract hash.
+        /// </summary>
+        internal static string ContractHashPlaceholder {
+            get {
+                return ResourceManager.GetString("ContractHashPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a valid contract hash..
+        /// </summary>
+        internal static string InvalidContractHash {
+            get {
+                return ResourceManager.GetString("InvalidContractHash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No NEP-17 token found at this contract..
+        /// </summary>
+        internal static string TokenNotFound {
+            get {
+                return ResourceManager.GetString("TokenNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
     }
 }
