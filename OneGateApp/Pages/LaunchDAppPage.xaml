@@ -22,6 +22,7 @@
         </ToolbarItem>
         <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding DApp}" />
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
+        <ToolbarItem x:Name="developerToolsButton" Order="Primary" IconImageSource="{FontImageSource &#xe716;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Clicked="OnDeveloperToolsClicked" />
     </ContentPage.ToolbarItems>
     <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />
 </ContentPage>
