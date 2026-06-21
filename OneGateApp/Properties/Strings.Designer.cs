@@ -1022,6 +1022,60 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 {0} games ready 的本地化字符串。
+        /// </summary>
+        internal static string GamingCatalogStatus {
+            get {
+                return ResourceManager.GetString("GamingCatalogStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Pull down to refresh the game catalog. 的本地化字符串。
+        /// </summary>
+        internal static string GamingEmptyState {
+            get {
+                return ResourceManager.GetString("GamingEmptyState", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recently played 的本地化字符串。
+        /// </summary>
+        internal static string GamingRecentPlayed {
+            get {
+                return ResourceManager.GetString("GamingRecentPlayed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet connected: {0} 的本地化字符串。
+        /// </summary>
+        internal static string GamingWalletConnected {
+            get {
+                return ResourceManager.GetString("GamingWalletConnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet not connected 的本地化字符串。
+        /// </summary>
+        internal static string GamingWalletNotConnected {
+            get {
+                return ResourceManager.GetString("GamingWalletNotConnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet connection 的本地化字符串。
+        /// </summary>
+        internal static string GamingWalletStatus {
+            get {
+                return ResourceManager.GetString("GamingWalletStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 General 的本地化字符串。
         /// </summary>
         internal static string General {
