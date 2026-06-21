@@ -538,6 +538,30 @@
   <data name="UnknownAddress" xml:space="preserve">
     <value>Неизвестный адрес</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Сохраненный адрес</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Этот адрес получателя совпадает с «{0}» в вашей локальной адресной книге.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Ваш адрес кошелька</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Этот адрес принадлежит текущему кошельку. Вы можете продолжить, но убедитесь, что перевод самому себе является намеренным.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Неизвестный адрес</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Этот адрес не сохранен в вашей адресной книге. Внимательно проверьте полный адрес; переводы в блокчейне нельзя отменить.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Оценка комиссии</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate оценивает сетевую и системную комиссии на следующем экране перед подписанием. При переводе GAS нужно оставить достаточно GAS, чтобы покрыть и сумму перевода, и комиссии.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Отправка транзакции</value>
   </data>
@@ -964,5 +988,23 @@
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
+  </data>
+  <data name="ReceiveRequestDetails" xml:space="preserve">
+    <value>Детали запроса</value>
+  </data>
+  <data name="RequestMemo" xml:space="preserve">
+    <value>Заметка</value>
+  </data>
+  <data name="RequestMemoPlaceholder" xml:space="preserve">
+    <value>Счет, заказ или примечание</value>
+  </data>
+  <data name="RequestData" xml:space="preserve">
+    <value>Справочные данные</value>
+  </data>
+  <data name="RequestDataPlaceholder" xml:space="preserve">
+    <value>Необязательная ссылка платежа</value>
+  </data>
+  <data name="ShareQRCode" xml:space="preserve">
+    <value>Поделиться QR-кодом</value>
   </data>
 </root>

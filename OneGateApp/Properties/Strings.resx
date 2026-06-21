@@ -556,6 +556,30 @@ After disabling, you will need to manually enter your wallet password to authori
   <data name="UnknownAddress" xml:space="preserve">
     <value>Unknown address</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Saved address</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>This recipient matches "{0}" in your local address book.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Your wallet address</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>This address belongs to the current wallet. You can continue, but make sure sending to yourself is intentional.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Unknown address</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>This address is not saved in your address book. Verify the full address carefully; blockchain transfers cannot be reversed.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Fee estimate</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate estimates network and system fees on the next screen before you sign. GAS transfers must leave enough GAS to cover both the transfer and fees.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Sending transaction</value>
   </data>

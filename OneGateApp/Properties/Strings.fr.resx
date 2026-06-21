@@ -538,6 +538,30 @@ Après désactivation, vous devrez saisir manuellement le mot de passe du portef
   <data name="UnknownAddress" xml:space="preserve">
     <value>Adresse inconnue</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Adresse enregistrée</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Cette adresse de réception correspond à « {0} » dans votre carnet d’adresses local.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Votre adresse de portefeuille</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Cette adresse appartient au portefeuille actuel. Vous pouvez continuer, mais vérifiez que le transfert vers vous-même est intentionnel.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Adresse inconnue</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Cette adresse n’est pas enregistrée dans votre carnet d’adresses. Vérifiez soigneusement l’adresse complète ; les transferts blockchain ne peuvent pas être annulés.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Estimation des frais</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate estime les frais réseau et système sur l’écran suivant, avant la signature. Les transferts GAS doivent conserver suffisamment de GAS pour couvrir à la fois le montant du transfert et les frais.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Envoi de la transaction</value>
   </data>
@@ -964,5 +988,23 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponible</value>
+  </data>
+  <data name="ReceiveRequestDetails" xml:space="preserve">
+    <value>Détails de la demande</value>
+  </data>
+  <data name="RequestMemo" xml:space="preserve">
+    <value>Mémo</value>
+  </data>
+  <data name="RequestMemoPlaceholder" xml:space="preserve">
+    <value>Facture, commande ou note</value>
+  </data>
+  <data name="RequestData" xml:space="preserve">
+    <value>Données de référence</value>
+  </data>
+  <data name="RequestDataPlaceholder" xml:space="preserve">
+    <value>Référence de paiement facultative</value>
+  </data>
+  <data name="ShareQRCode" xml:space="preserve">
+    <value>Partager le code QR</value>
   </data>
 </root>

@@ -538,6 +538,30 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
   <data name="UnknownAddress" xml:space="preserve">
     <value>Alamat tidak dikenal</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Alamat tersimpan</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Alamat penerima ini cocok dengan "{0}" di buku alamat lokal Anda.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Alamat dompet Anda</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Alamat ini milik dompet saat ini. Anda dapat melanjutkan, tetapi pastikan transfer ke diri sendiri memang disengaja.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Alamat tidak dikenal</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Alamat ini tidak tersimpan di buku alamat Anda. Periksa alamat lengkap dengan saksama; transfer blockchain tidak dapat dibatalkan.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Estimasi biaya</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate memperkirakan biaya jaringan dan sistem di layar berikutnya sebelum Anda menandatangani. Transfer GAS harus menyisakan GAS yang cukup untuk menutup jumlah transfer dan biaya.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Mengirim transaksi</value>
   </data>
@@ -964,5 +988,23 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
+  </data>
+  <data name="ReceiveRequestDetails" xml:space="preserve">
+    <value>Detail permintaan</value>
+  </data>
+  <data name="RequestMemo" xml:space="preserve">
+    <value>Memo</value>
+  </data>
+  <data name="RequestMemoPlaceholder" xml:space="preserve">
+    <value>Faktur, pesanan, atau catatan</value>
+  </data>
+  <data name="RequestData" xml:space="preserve">
+    <value>Data referensi</value>
+  </data>
+  <data name="RequestDataPlaceholder" xml:space="preserve">
+    <value>Referensi pembayaran opsional</value>
+  </data>
+  <data name="ShareQRCode" xml:space="preserve">
+    <value>Bagikan kode QR</value>
   </data>
 </root>
