@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>L’application demande à se connecter avec votre adresse de portefeuille. Autoriser ?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Demande d’accès aux comptes</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>La dApp demande à lire vos comptes de portefeuille. Autoriser ?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Créer des identifiants biométriques</value>
   </data>
@@ -918,10 +924,76 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
     <value>Autorisation dApp</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Session uniquement</value>
+    <value>Accès aux comptes géré</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>Les dApps doivent demander chaque action de portefeuille via OneGate. Les approbations persistantes ne sont pas enregistrées.</value>
+    <value>Les dApps doivent demander l’autorisation avant de lire les comptes du portefeuille via getAccounts. Les transactions et signatures nécessitent toujours une confirmation.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Apps connectées</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>Connectée {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>Lecture des comptes après approbation getAccounts</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Les actions du portefeuille nécessitent toujours une approbation</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Approuvez l’accès aux comptes lorsqu’une dApp appelle getAccounts pour la voir ici.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} dApp(s) connectées peuvent lire les comptes du portefeuille après approbation getAccounts. Les transactions et signatures nécessitent toujours une confirmation.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>Aucune dApp ne peut lire les comptes du portefeuille sans approbation getAccounts.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>dApps connectées</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0} connectées</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Aucune</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Vérifiez les dApps connectées, inspectez l’accès accordé ou déconnectez les sessions obsolètes.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>Aucune dApp n’est actuellement connectée. Consultez cette liste après avoir approuvé l’accès aux comptes.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Déconnecter</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Déconnecter toutes les dApps</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Toutes les dApps devront redemander l’accès aux comptes avant de lire les comptes du portefeuille.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>Déconnecter la dApp</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} devra redemander l’accès aux comptes avant de lire les comptes du portefeuille.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp déconnectée</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Dernière utilisation {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Toutes les dApps sont déconnectées</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>Aucune dApp connectée</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Effacer</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Désactivé</value>

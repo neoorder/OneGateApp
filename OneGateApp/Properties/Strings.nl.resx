@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>De app vraagt om met uw walletadres in te loggen. Toestaan?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Verzoek om accounttoegang</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>De dApp vraagt om je walletaccounts te lezen. Toestaan?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Biometrische verificatie instellen</value>
   </data>
@@ -918,10 +924,76 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
     <value>dApp-autorisatie</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Alleen sessie</value>
+    <value>Accounttoegang beheerd</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApps moeten walletacties telkens via OneGate aanvragen. Permanente goedkeuringen worden niet opgeslagen.</value>
+    <value>dApps moeten toestemming vragen voordat ze walletaccounts via getAccounts lezen. Transactie- en ondertekenverzoeken vereisen nog steeds bevestiging.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Verbonden apps</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>Verbonden {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>Accounts lezen na getAccounts-goedkeuring</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Walletacties vereisen nog steeds goedkeuring</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Keur accounttoegang goed wanneer een dApp getAccounts aanroept om deze hier te zien.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} verbonden dApp(s) kunnen walletaccounts lezen na getAccounts-goedkeuring. Transactie- en ondertekenverzoeken vereisen nog steeds bevestiging.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>Geen dApps kunnen walletaccounts lezen zonder getAccounts-goedkeuring.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>Verbonden dApps</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0} verbonden</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Geen</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Bekijk verbonden dApps, controleer verleende wallettoegang of verbreek oude sessies.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>Er zijn momenteel geen dApps verbonden. Bekijk deze lijst nadat je accounttoegang hebt goedgekeurd.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Verbreken</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Alle dApps verbreken</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Alle dApps moeten opnieuw accounttoegang vragen voordat ze walletaccounts kunnen lezen.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>dApp verbreken</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} moet opnieuw accounttoegang vragen voordat walletaccounts kunnen worden gelezen.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp verbroken</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Laatst gebruikt {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Alle dApps verbroken</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>Geen verbonden dApps</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Wissen</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Uitgeschakeld</value>

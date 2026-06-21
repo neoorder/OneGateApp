@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>앱이 지갑 주소로 로그인을 요청하고 있습니다. 허용하시겠습니까?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>계정 접근 요청</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>dApp이 지갑 계정 읽기를 요청합니다. 허용하시겠습니까?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>생체 인증 자격 증명 생성</value>
   </data>
@@ -918,10 +924,76 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
     <value>dApp 권한 부여</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>세션 전용</value>
+    <value>계정 접근 관리됨</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApp은 지갑 작업을 수행할 때마다 OneGate를 통해 요청해야 합니다. 지속 승인은 저장되지 않습니다.</value>
+    <value>dApp은 getAccounts로 지갑 계정을 읽기 전에 동의를 요청해야 합니다. 거래와 서명 요청은 계속 별도 확인이 필요합니다.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>연결된 앱</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>{0} 연결됨</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>getAccounts 승인 후 계정 읽기</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>지갑 작업은 계속 승인이 필요합니다</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>dApp이 getAccounts를 호출할 때 계정 접근을 승인하면 여기에 표시됩니다.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0}개의 연결된 dApp은 getAccounts 승인 후 지갑 계정을 읽을 수 있습니다. 거래와 서명 요청은 계속 확인이 필요합니다.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>getAccounts 승인 없이 지갑 계정을 읽을 수 있는 dApp이 없습니다.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>연결된 dApp</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0}개 연결됨</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>없음</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>연결된 dApp, 부여된 지갑 접근 권한을 검토하거나 오래된 세션을 해제하세요.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>현재 연결된 dApp이 없습니다. 계정 접근 승인 후 이 목록을 확인하세요.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>연결 해제</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>모든 dApp 연결 해제</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>모든 dApp은 지갑 계정을 읽기 전에 계정 접근을 다시 요청해야 합니다.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>dApp 연결 해제</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0}은 지갑 계정을 읽기 전에 계정 접근을 다시 요청해야 합니다.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp 연결 해제됨</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>마지막 사용 {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>모든 dApp 연결 해제됨</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>연결된 dApp 없음</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>지우기</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>비활성화됨</value>

@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>Uygulama, cüzdan adresinizle oturum açmanızı istiyor. İzin verilsin mi?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Hesap erişim isteği</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>dApp, cüzdan hesaplarınızı okumak istiyor. İzin verilsin mi?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Biyometrik kimlik bilgisi oluştur</value>
   </data>
@@ -918,10 +924,76 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
     <value>dApp yetkilendirmesi</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Yalnızca oturum</value>
+    <value>Hesap erişimi yönetiliyor</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApp’ler cüzdan işlemlerini her seferinde OneGate üzerinden istemelidir. Kalıcı onaylar saklanmaz.</value>
+    <value>dApp’ler getAccounts ile cüzdan hesaplarını okumadan önce izin istemelidir. İşlem ve imza istekleri yine onay gerektirir.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Bağlı uygulamalar</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>{0} bağlandı</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>getAccounts onayından sonra hesap okuma</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Cüzdan işlemleri hâlâ onay gerektirir</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Bir dApp getAccounts çağırdığında hesap erişimini onaylayın; burada görünecektir.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} bağlı dApp, getAccounts onayından sonra cüzdan hesaplarını okuyabilir. İşlem ve imza istekleri yine onay gerektirir.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>getAccounts onayı olmadan hiçbir dApp cüzdan hesaplarını okuyamaz.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>Bağlı dApp’ler</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0} bağlı</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Bağlı dApp’leri inceleyin, verilen cüzdan erişimini kontrol edin veya eski oturumları kesin.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>Şu anda bağlı dApp yok. Hesap erişimini onayladıktan sonra bu listeyi inceleyin.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Bağlantıyı kes</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Tüm dApp’lerin bağlantısını kes</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Tüm dApp’ler cüzdan hesaplarını okumadan önce hesap erişimini yeniden istemelidir.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>dApp bağlantısını kes</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0}, cüzdan hesaplarını okumadan önce hesap erişimini yeniden istemelidir.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp bağlantısı kesildi</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Son kullanım {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Tüm dApp’lerin bağlantısı kesildi</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>Bağlı dApp yok</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Temizle</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Devre dışı</value>

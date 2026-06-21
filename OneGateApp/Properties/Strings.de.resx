@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>Die App möchte sich mit Ihrer Wallet-Adresse anmelden. Zulassen?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Kontozugriffsanfrage</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>Die dApp möchte Ihre Wallet-Konten lesen. Zulassen?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Biometrische Anmeldedaten erstellen</value>
   </data>
@@ -918,10 +924,76 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
     <value>dApp-Autorisierung</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Nur Sitzung</value>
+    <value>Kontozugriff verwaltet</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApps müssen Wallet-Aktionen jedes Mal über OneGate anfragen. Dauerhafte Freigaben werden nicht gespeichert.</value>
+    <value>dApps müssen fragen, bevor sie Wallet-Konten über getAccounts lesen. Transaktions- und Signaturanfragen erfordern weiterhin eine Bestätigung.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Verbundene Apps</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>Verbunden {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>Kontenlesen nach getAccounts-Freigabe</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Wallet-Aktionen erfordern weiterhin Bestätigung</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Erlauben Sie Kontozugriff, wenn eine dApp getAccounts aufruft, damit sie hier erscheint.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} verbundene dApp(s) können nach getAccounts-Freigabe Wallet-Konten lesen. Transaktions- und Signaturanfragen erfordern weiterhin Bestätigung.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>Keine dApps können ohne getAccounts-Freigabe Wallet-Konten lesen.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>Verbundene dApps</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0} verbunden</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Keine</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Prüfen Sie verbundene dApps, gewährten Wallet-Zugriff oder trennen Sie veraltete Sitzungen.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>Derzeit sind keine dApps verbunden. Prüfen Sie diese Liste nach Freigabe des Kontozugriffs.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Trennen</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Alle dApps trennen</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Alle dApps müssen Kontozugriff erneut anfragen, bevor sie Wallet-Konten lesen können.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>dApp trennen</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} muss Kontozugriff erneut anfragen, bevor sie Wallet-Konten lesen kann.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp getrennt</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Zuletzt verwendet {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Alle dApps getrennt</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>Keine verbundenen dApps</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Leeren</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Deaktiviert</value>

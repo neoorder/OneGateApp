@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>La aplicación solicita iniciar sesión con su dirección de billetera. ¿Permitir?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Solicitud de acceso a cuentas</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>La dApp solicita leer tus cuentas de wallet. ¿Permitir?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Crear credenciales biométricas</value>
   </data>
@@ -918,10 +924,76 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
     <value>Autorización de dApp</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Solo sesión</value>
+    <value>Acceso a cuentas gestionado</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>Las dApps deben solicitar acciones de la billetera a través de OneGate cada vez. No se guardan aprobaciones persistentes.</value>
+    <value>Las dApps deben pedir permiso antes de leer cuentas de wallet mediante getAccounts. Las transacciones y firmas siguen requiriendo confirmación.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Apps conectadas</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>Conectada {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>Lectura de cuentas tras aprobar getAccounts</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Las acciones de wallet aún requieren aprobación</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Aprueba el acceso a cuentas cuando una dApp llame a getAccounts para verla aquí.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} dApp(s) conectadas pueden leer cuentas de wallet tras aprobar getAccounts. Las transacciones y firmas siguen requiriendo confirmación.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>Ninguna dApp puede leer cuentas de wallet sin aprobación de getAccounts.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>dApps conectadas</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0} conectadas</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Ninguna</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Revisa las dApps conectadas, inspecciona el acceso concedido o desconecta sesiones antiguas.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>No hay dApps conectadas. Revisa esta lista después de aprobar el acceso a cuentas.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Desconectar todas las dApps</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Todas las dApps deberán volver a solicitar acceso a cuentas antes de leer cuentas de wallet.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>Desconectar dApp</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} deberá volver a solicitar acceso a cuentas antes de leer cuentas de wallet.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp desconectada</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Último uso {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Todas las dApps desconectadas</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>No hay dApps conectadas</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Borrar</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Desactivado</value>

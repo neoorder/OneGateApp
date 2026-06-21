@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>O app está solicitando login com o endereço da sua carteira. Permitir?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Solicitação de acesso às contas</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>A dApp está solicitando ler suas contas da carteira. Permitir?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Criar credencial biométrica</value>
   </data>
@@ -918,10 +924,76 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
     <value>Autorização de dApp</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Somente sessão</value>
+    <value>Acesso às contas gerenciado</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApps devem solicitar ações da carteira pelo OneGate a cada vez. Aprovações persistentes não são armazenadas.</value>
+    <value>As dApps devem pedir permissão antes de ler contas da carteira por getAccounts. Transações e assinaturas ainda exigem confirmação.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Apps conectados</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>Conectado {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>Leitura de contas após aprovação de getAccounts</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Ações da carteira ainda exigem aprovação</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Aprove o acesso às contas quando uma dApp chamar getAccounts para vê-la aqui.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} dApp(s) conectadas podem ler contas da carteira após aprovação de getAccounts. Transações e assinaturas ainda exigem confirmação.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>Nenhuma dApp pode ler contas da carteira sem aprovação de getAccounts.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>dApps conectadas</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0} conectadas</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Nenhuma</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Revise dApps conectadas, inspecione o acesso concedido à carteira ou desconecte sessões antigas.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>Nenhuma dApp está conectada no momento. Revise esta lista após aprovar o acesso às contas.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Desconectar todas as dApps</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Todas as dApps precisarão solicitar novamente acesso às contas antes de ler contas da carteira.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>Desconectar dApp</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} precisará solicitar novamente acesso às contas antes de ler contas da carteira.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp desconectada</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Último uso {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Todas as dApps desconectadas</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>Nenhuma dApp conectada</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Limpar</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Desativado</value>

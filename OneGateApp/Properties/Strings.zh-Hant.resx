@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>應用程式正在請求使用您的錢包地址登入，是否允許？</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>帳戶存取請求</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>dApp 正在請求讀取您的錢包帳戶，是否允許？</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>建立生物識別憑證</value>
   </data>
@@ -918,10 +924,76 @@
     <value>dApp 授權</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>僅目前工作階段</value>
+    <value>帳戶存取已管理</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApp 每次執行錢包操作都必須透過 OneGate 請求，不會儲存長期授權。</value>
+    <value>dApp 透過 getAccounts 讀取錢包帳戶前必須請求授權。交易和簽名請求仍需要單獨確認。</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>已連線應用程式</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>連線時間 {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>getAccounts 授權後讀取帳戶</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>錢包操作仍需確認</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>dApp 呼叫 getAccounts 並獲得帳戶存取授權後，會顯示在這裡。</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} 個已連線 dApp 在獲得 getAccounts 授權後可以讀取錢包帳戶。交易和簽名請求仍需要確認。</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>沒有 dApp 可以在未獲得 getAccounts 授權的情況下讀取錢包帳戶。</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>已連線 dApp</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>已連線 {0} 個</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>無</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>查看已連線 dApp、檢查錢包存取權限，或中斷不再使用的連線。</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>目前沒有已連線 dApp。授權帳戶存取後可在這裡查看。</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>中斷連線</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>中斷所有 dApp</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>所有 dApp 都需要重新請求帳戶存取後，才能讀取錢包帳戶。</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>中斷 dApp</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} 需要重新請求帳戶存取後，才能讀取錢包帳戶。</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp 已中斷連線</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>上次使用 {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>已中斷所有 dApp</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>沒有已連線 dApp</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>清除</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>未啟用</value>

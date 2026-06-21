@@ -23,9 +23,9 @@ namespace NeoOrder.OneGate.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
@@ -78,6 +78,24 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
         
+        /// <summary>
+        ///   查找类似 Account access request 的本地化字符串。
+        /// </summary>
+        internal static string AccountAccessRequest {
+            get {
+                return ResourceManager.GetString("AccountAccessRequest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The dApp is requesting to read your wallet accounts. Allow? 的本地化字符串。
+        /// </summary>
+        internal static string AccountAccessRequestText {
+            get {
+                return ResourceManager.GetString("AccountAccessRequestText", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Add Address 的本地化字符串。
         /// </summary>
@@ -568,7 +586,7 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Session-only 的本地化字符串。
+        ///   查找类似 Account access managed 的本地化字符串。
         /// </summary>
         internal static string DAppAuthorizationStatus {
             get {
@@ -577,7 +595,7 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 dApps must request wallet actions through OneGate each time. Persistent approvals are not stored. 的本地化字符串。
+        ///   查找类似 dApps must ask before reading wallet accounts through getAccounts. Transaction and signature requests still require approval. 的本地化字符串。
         /// </summary>
         internal static string DAppAuthorizationText {
             get {
@@ -604,7 +622,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Account read after connect 的本地化字符串。
+        ///   查找类似 Account read after getAccounts approval 的本地化字符串。
         /// </summary>
         internal static string ConnectedAppsAccountReadPermission {
             get {
@@ -622,7 +640,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Authorize a dApp from the browser to see it here. 的本地化字符串。
+        ///   查找类似 Approve account access when a dApp calls getAccounts to see it here. 的本地化字符串。
         /// </summary>
         internal static string ConnectedAppsEmptyText {
             get {
@@ -631,7 +649,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 {0} connected dApp(s) can read wallet accounts. Transaction and signature requests still require approval. 的本地化字符串。
+        ///   查找类似 {0} connected dApp(s) can read wallet accounts after getAccounts approval. Transaction and signature requests still require approval. 的本地化字符串。
         /// </summary>
         internal static string ConnectedAppsSummaryConnected {
             get {
@@ -640,7 +658,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 No dApps can read wallet accounts without a fresh authorization. 的本地化字符串。
+        ///   查找类似 No dApps can read wallet accounts without getAccounts approval. 的本地化字符串。
         /// </summary>
         internal static string ConnectedAppsSummaryEmpty {
             get {
@@ -685,7 +703,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 No dApps are currently connected. Review this list after authorizing a dApp. 的本地化字符串。
+        ///   查找类似 No dApps are currently connected. Review this list after approving account access. 的本地化字符串。
         /// </summary>
         internal static string ConnectedDAppsSecurityTextEmpty {
             get {

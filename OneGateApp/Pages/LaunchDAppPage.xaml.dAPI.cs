@@ -42,7 +42,6 @@ partial class LaunchDAppPage
             throw new DapiException(10002, "Domain mismatch");
         if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText, payload.Domain))
             throw new DapiException(10006, "Operation cancelled");
-        await connectedDAppService.ConnectAsync(payload.Domain, DApp.NameLocalizer.Localize());
         WalletAccount account = walletProvider.GetWallet()!.GetDefaultAccount()!;
         return payload.CreateResponse(account, protocolSettings);
     }
@@ -50,8 +49,15 @@ partial class LaunchDAppPage
     [RpcMethod]
     async Task<Account[]> GetAccounts()
     {
-        if (!await connectedDAppService.IsConnectedAsync(new Uri(DApp.Url).Host))
-            return [];
+        string domain = new Uri(DApp.Url).Host;
+        string? name = DApp.NameLocalizer.Localize();
+        if (!await connectedDAppService.IsConnectedAsync(domain))
+        {
+            if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.AccountAccessRequest, Strings.AccountAccessRequestText, domain))
+                return [];
+        }
+
+        await connectedDAppService.ConnectAsync(domain, name);
         return walletProvider.GetWallet()!.GetAccounts().Select(Account.From).ToArray();
     }
 

@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>Aplikasi meminta untuk masuk menggunakan alamat wallet Anda. Izinkan?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Permintaan akses akun</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>dApp meminta membaca akun wallet Anda. Izinkan?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Buat kredensial biometrik</value>
   </data>
@@ -918,10 +924,76 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
     <value>Otorisasi dApp</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Hanya sesi</value>
+    <value>Akses akun dikelola</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApp harus meminta tindakan dompet melalui OneGate setiap kali. Persetujuan permanen tidak disimpan.</value>
+    <value>dApp harus meminta izin sebelum membaca akun wallet melalui getAccounts. Transaksi dan tanda tangan tetap memerlukan konfirmasi.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Aplikasi terhubung</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>Terhubung {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>Baca akun setelah persetujuan getAccounts</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Aksi wallet tetap memerlukan persetujuan</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Setujui akses akun saat dApp memanggil getAccounts agar muncul di sini.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} dApp terhubung dapat membaca akun wallet setelah persetujuan getAccounts. Transaksi dan tanda tangan tetap memerlukan konfirmasi.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>Tidak ada dApp yang dapat membaca akun wallet tanpa persetujuan getAccounts.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>dApp terhubung</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>{0} terhubung</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Tidak ada</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Tinjau dApp terhubung, periksa akses wallet yang diberikan, atau putuskan sesi lama.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>Saat ini tidak ada dApp yang terhubung. Tinjau daftar ini setelah menyetujui akses akun.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Putuskan</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Putuskan semua dApp</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Semua dApp harus meminta akses akun lagi sebelum membaca akun wallet.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>Putuskan dApp</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} harus meminta akses akun lagi sebelum membaca akun wallet.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp terputus</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Terakhir digunakan {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Semua dApp terputus</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>Tidak ada dApp terhubung</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Bersihkan</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Dinonaktifkan</value>

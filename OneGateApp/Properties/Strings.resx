@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>The app is requesting to sign in with your wallet address. Allow?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Account access request</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>The dApp is requesting to read your wallet accounts. Allow?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Create Biometric Credential</value>
   </data>
@@ -918,10 +924,10 @@ It is recommended to store the NEP-2 key and password separately and back them u
     <value>dApp authorization</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Session-only</value>
+    <value>Account access managed</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApps must request wallet actions through OneGate each time. Persistent approvals are not stored.</value>
+    <value>dApps must ask before reading wallet accounts through getAccounts. Transaction and signature requests still require approval.</value>
   </data>
   <data name="ConnectedApps" xml:space="preserve">
     <value>Connected Apps</value>
@@ -930,19 +936,19 @@ It is recommended to store the NEP-2 key and password separately and back them u
     <value>Connected {0}</value>
   </data>
   <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
-    <value>Account read after connect</value>
+    <value>Account read after getAccounts approval</value>
   </data>
   <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
     <value>Wallet actions still require approval</value>
   </data>
   <data name="ConnectedAppsEmptyText" xml:space="preserve">
-    <value>Authorize a dApp from the browser to see it here.</value>
+    <value>Approve account access when a dApp calls getAccounts to see it here.</value>
   </data>
   <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
-    <value>{0} connected dApp(s) can read wallet accounts. Transaction and signature requests still require approval.</value>
+    <value>{0} connected dApp(s) can read wallet accounts after getAccounts approval. Transaction and signature requests still require approval.</value>
   </data>
   <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
-    <value>No dApps can read wallet accounts without a fresh authorization.</value>
+    <value>No dApps can read wallet accounts without getAccounts approval.</value>
   </data>
   <data name="ConnectedDApps" xml:space="preserve">
     <value>Connected dApps</value>
@@ -957,7 +963,7 @@ It is recommended to store the NEP-2 key and password separately and back them u
     <value>Review connected dApps, inspect granted wallet access, or disconnect stale sessions.</value>
   </data>
   <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
-    <value>No dApps are currently connected. Review this list after authorizing a dApp.</value>
+    <value>No dApps are currently connected. Review this list after approving account access.</value>
   </data>
   <data name="Disconnect" xml:space="preserve">
     <value>Disconnect</value>

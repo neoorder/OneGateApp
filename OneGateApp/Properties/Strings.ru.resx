@@ -300,6 +300,12 @@
   <data name="LoginRequestText" xml:space="preserve">
     <value>Приложение запрашивает вход с использованием вашего адреса кошелька. Разрешить?</value>
   </data>
+  <data name="AccountAccessRequest" xml:space="preserve">
+    <value>Запрос доступа к аккаунтам</value>
+  </data>
+  <data name="AccountAccessRequestText" xml:space="preserve">
+    <value>dApp запрашивает чтение аккаунтов кошелька. Разрешить?</value>
+  </data>
   <data name="CreateBiometricCredential" xml:space="preserve">
     <value>Создать биометрические данные для входа</value>
   </data>
@@ -918,10 +924,76 @@
     <value>Авторизация dApp</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
-    <value>Только сеанс</value>
+    <value>Доступ к аккаунтам управляется</value>
   </data>
   <data name="DAppAuthorizationText" xml:space="preserve">
-    <value>dApp должны каждый раз запрашивать действия с кошельком через OneGate. Постоянные подтверждения не сохраняются.</value>
+    <value>dApp должны запрашивать согласие перед чтением аккаунтов кошелька через getAccounts. Транзакции и подписи по-прежнему требуют подтверждения.</value>
+  </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>Подключенные приложения</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>Подключено {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>Чтение аккаунтов после одобрения getAccounts</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>Действия кошелька по-прежнему требуют одобрения</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>Одобрите доступ к аккаунтам, когда dApp вызовет getAccounts, чтобы увидеть его здесь.</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>{0} подключенных dApp могут читать аккаунты кошелька после одобрения getAccounts. Транзакции и подписи по-прежнему требуют подтверждения.</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>Ни одно dApp не может читать аккаунты кошелька без одобрения getAccounts.</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>Подключенные dApp</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>Подключено: {0}</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>Проверьте подключенные dApp, предоставленный доступ к кошельку или отключите устаревшие сеансы.</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>Сейчас нет подключенных dApp. Проверьте этот список после одобрения доступа к аккаунтам.</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Отключить</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>Отключить все dApp</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>Все dApp должны снова запросить доступ к аккаунтам, прежде чем читать аккаунты кошелька.</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>Отключить dApp</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} должен снова запросить доступ к аккаунтам, прежде чем читать аккаунты кошелька.</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp отключено</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>Последнее использование {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>Все dApp отключены</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>Нет подключенных dApp</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очистить</value>
   </data>
   <data name="Disabled" xml:space="preserve">
     <value>Отключено</value>
