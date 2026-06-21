@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>App Details</value>
   </data>
+  <data name="Official" xml:space="preserve">
+    <value>Official</value>
+  </data>
+  <data name="OneGateVaultOfficial" xml:space="preserve">
+    <value>Official OneGate Vault</value>
+  </data>
+  <data name="OneGateVaultOfficialText" xml:space="preserve">
+    <value>Operated by R3E Network for the OneGate experience. Wallet approvals still use OneGate connection and signing prompts.</value>
+  </data>
+  <data name="OneGateVaultStatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="OneGateVaultStatusUnavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="OneGateVaultRules" xml:space="preserve">
+    <value>Rules</value>
+  </data>
+  <data name="OneGateVaultRulesText" xml:space="preserve">
+    <value>Use the existing Vault dApp to review pool rules, eligibility, and claim timing before connecting or signing.</value>
+  </data>
+  <data name="OneGateVaultHistory" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="OneGateVaultHistoryText" xml:space="preserve">
+    <value>Vault actions appear inside the dApp and in on-chain transaction history after a signed operation.</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Description</value>
   </data>

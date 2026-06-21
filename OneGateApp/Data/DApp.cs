@@ -9,6 +9,9 @@ namespace NeoOrder.OneGate.Data;
 
 public class DApp : IComparable<DApp>, IShareable, IVersioned
 {
+    const int OneGateVaultDAppId = 23;
+    const string OneGateVaultUrlSegment = "neomini.app/miniapps/miniapp-gas-lucky-pool";
+
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     public bool IsActive { get; set; }
@@ -31,6 +34,8 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
 
     public bool IsGamingApp => !string.IsNullOrWhiteSpace(GameType);
     public bool IsRegularApp => !IsGamingApp;
+    public bool IsOneGateVault => Id == OneGateVaultDAppId || Url.Contains(OneGateVaultUrlSegment, StringComparison.OrdinalIgnoreCase);
+    public string OneGateVaultStatusText => IsActive ? Strings.OneGateVaultStatusActive : Strings.OneGateVaultStatusUnavailable;
     public string? GameTypeDisplayName => LocalizeGameType(GameType);
     public Dictionary<string, string> NameLocalizer => field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Name)!;
     public Dictionary<string, string>? DescriptionLocalizer => Description is null ? null : field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Description);

@@ -103,7 +103,12 @@
                                 </Image>
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                                <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
+                                    <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                                    <Border Grid.Column="1" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource BrandMuted}" Padding="6,2" VerticalOptions="Center" IsVisible="{Binding IsOneGateVault}">
+                                        <Label Text="{x:Static og:Strings.Official}" TextColor="{toolkit:AppThemeResource Success}" FontSize="10" FontAttributes="Bold" />
+                                    </Border>
+                                </Grid>
                                 <Label StyleClass="Secondary" Text="{Binding Description, Converter={StaticResource LocalizerConverter}}" FontSize="10" MaxLines="2" LineBreakMode="TailTruncation" />
                             </VerticalStackLayout>
                             <Button Grid.Column="2" StyleClass="Icon" Text="&#xe605;" Margin="-20" Padding="20" VerticalOptions="Center" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />

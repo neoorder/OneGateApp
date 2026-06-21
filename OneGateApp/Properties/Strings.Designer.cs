@@ -1467,6 +1467,87 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Official 的本地化字符串。
+        /// </summary>
+        internal static string Official {
+            get {
+                return ResourceManager.GetString("Official", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Official OneGate Vault 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultOfficial {
+            get {
+                return ResourceManager.GetString("OneGateVaultOfficial", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Operated by R3E Network for the OneGate experience. Wallet approvals still use OneGate connection and signing prompts. 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultOfficialText {
+            get {
+                return ResourceManager.GetString("OneGateVaultOfficialText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 History 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultHistory {
+            get {
+                return ResourceManager.GetString("OneGateVaultHistory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Vault actions appear inside the dApp and in on-chain transaction history after a signed operation. 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultHistoryText {
+            get {
+                return ResourceManager.GetString("OneGateVaultHistoryText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Rules 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultRules {
+            get {
+                return ResourceManager.GetString("OneGateVaultRules", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Use the existing Vault dApp to review pool rules, eligibility, and claim timing before connecting or signing. 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultRulesText {
+            get {
+                return ResourceManager.GetString("OneGateVaultRulesText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Active 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultStatusActive {
+            get {
+                return ResourceManager.GetString("OneGateVaultStatusActive", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unavailable 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVaultStatusUnavailable {
+            get {
+                return ResourceManager.GetString("OneGateVaultStatusUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Open 的本地化字符串。
         /// </summary>
         internal static string Open {

@@ -43,6 +43,29 @@
                 </VerticalStackLayout>
             </Grid>
             <Button Text="{x:Static og:Strings.Open}" Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16" IsVisible="{Binding IsOneGateVault}">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
+                        <Label Text="{x:Static og:Strings.OneGateVaultOfficial}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource BrandMuted}" Padding="8,3" VerticalOptions="Center">
+                            <Label Text="{x:Static og:Strings.Official}" TextColor="{toolkit:AppThemeResource Success}" FontSize="11" FontAttributes="Bold" />
+                        </Border>
+                    </Grid>
+                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.OneGateVaultOfficialText}" FontSize="12" LineBreakMode="WordWrap" />
+                    <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.Status}" FontSize="12" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="{Binding OneGateVaultStatusText}" TextColor="{toolkit:AppThemeResource Success}" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" />
+                    </Grid>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="{x:Static og:Strings.OneGateVaultRules}" FontAttributes="Bold" FontSize="13" />
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.OneGateVaultRulesText}" FontSize="12" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="{x:Static og:Strings.OneGateVaultHistory}" FontAttributes="Bold" FontSize="13" />
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.OneGateVaultHistoryText}" FontSize="12" LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
             <Label Text="{x:Static og:Strings.GameType}" FontAttributes="Bold" IsVisible="{Binding GameType, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
             <Label Text="{Binding GameTypeDisplayName}" Margin="0,-10,0,0" IsVisible="{Binding GameType, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
             <Label Text="{x:Static og:Strings.Preview}" FontAttributes="Bold" IsVisible="{Binding Previews, Converter={StaticResource IsListNotNullOrEmptyConverter}}" />
