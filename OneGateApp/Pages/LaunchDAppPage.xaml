@@ -22,42 +22,36 @@
         </ToolbarItem>
         <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding DApp}" />
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
+        <ToolbarItem x:Name="developerToolsButton" Order="Primary" IconImageSource="{FontImageSource &#xe716;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Clicked="OnDeveloperToolsClicked" />
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
         <Border BackgroundColor="{toolkit:AppThemeResource Panel}"
                 Stroke="{toolkit:AppThemeResource Stroke}"
                 StrokeThickness="1"
-                Padding="14,8">
-            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12">
-                <HorizontalStackLayout Spacing="8">
-                    <Border WidthRequest="8"
-                            HeightRequest="8"
-                            StrokeThickness="0"
-                            StrokeShape="RoundRectangle 4"
-                            BackgroundColor="{Binding TrustIndicatorColor}"
-                            VerticalOptions="Center" />
-                    <Label Text="{Binding TrustTitle}"
-                           FontAttributes="Bold"
-                           FontSize="13"
-                           LineBreakMode="TailTruncation"
-                           TextColor="{toolkit:AppThemeResource Primary}"
-                           VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <Button Grid.Column="1"
-                        Text="Access"
+                Padding="12,6">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" HeightRequest="36">
+                <Border WidthRequest="8"
+                        HeightRequest="8"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 4"
+                        BackgroundColor="{Binding TrustIndicatorColor}"
+                        VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       Text="{Binding TrustTitle}"
+                       FontAttributes="Bold"
+                       FontSize="12"
+                       LineBreakMode="TailTruncation"
+                       TextColor="{toolkit:AppThemeResource Primary}"
+                       VerticalOptions="Center" />
+                <Button Grid.Column="2"
+                        Text="{x:Static og:Strings.AppDetails}"
                         StyleClass="Link"
                         FontSize="12"
-                        MinimumWidthRequest="68"
-                        MinimumHeightRequest="36"
-                        Padding="8,4"
+                        MinimumWidthRequest="0"
+                        MinimumHeightRequest="0"
+                        Padding="4,0"
                         Clicked="OnTrustBarInfoClicked"
                         VerticalOptions="Center" />
-                <Label Grid.Row="1"
-                       Grid.ColumnSpan="2"
-                       Text="{Binding TrustSubtitle}"
-                       FontSize="11"
-                       LineBreakMode="TailTruncation"
-                       TextColor="{toolkit:AppThemeResource Secondary}" />
             </Grid>
         </Border>
         <og:BridgeWebView Grid.Row="1"
