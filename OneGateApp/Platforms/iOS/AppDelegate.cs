@@ -31,7 +31,7 @@ public class AppDelegate : MauiUIApplicationDelegate
     [Export("application:supportedInterfaceOrientationsForWindow:")]
     public UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
     {
-        return BridgeWebView.GetSupportedInterfaceOrientations();
+        return BridgeWebView.SupportedInterfaceOrientations;
     }
 
     static bool HandleAppLink(NSUserActivity activity)
