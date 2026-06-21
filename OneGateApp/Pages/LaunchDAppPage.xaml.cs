@@ -40,6 +40,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
         InitializeComponent();
+        webView.DocumentStartScript = CreateDapiInjectionScript();
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
     }
@@ -105,6 +106,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         if (DApp is null) return;
         Uri uriOld = new(DApp.Url);
         Uri uriNew = new(uriOld, e.Url);
+        if (uriNew.Scheme == "about" && uriNew.AbsoluteUri == "about:blank")
+            return;
         if (IsCrossDomain(uriOld, uriNew))
         {
             e.Cancel = true;
@@ -112,11 +115,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         }
     }
 
-    async void OnNavigated(object sender, WebNavigatedEventArgs e)
+    string CreateDapiInjectionScript()
     {
-        if (e.Result != WebNavigationResult.Success) return;
-        BridgeWebView webView = (BridgeWebView)sender;
-        string script = $$"""
+        return $$"""
             (function () {
                 if (window.__OneGateDapiInjected) return;
                 window.__OneGateDapiInjected = true;
@@ -224,7 +225,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 window.addEventListener('Neo.DapiProvider.request', dispatchReady);
             })();
             """.ReplaceLineEndings("");
-        await webView.EvaluateJavaScriptAsync(script);
     }
 
     static bool IsCrossDomain(Uri uriOld, Uri uriNew)

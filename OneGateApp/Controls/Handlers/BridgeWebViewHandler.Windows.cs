@@ -31,7 +31,10 @@ partial class BridgeWebViewHandler
                 }
             };
             """;
-        await sender.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(shim);
+        string script = string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript)
+            ? shim
+            : shim + BridgeWebView.DocumentStartScript;
+        await sender.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
     }
 
     void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)

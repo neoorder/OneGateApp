@@ -7,6 +7,10 @@ public partial class BridgeWebView : WebView
 {
     public event EventHandler<BridgeWebView, JsonObject>? InvokedFromJavaScript;
 
+    public static readonly BindableProperty DocumentStartScriptProperty = BindableProperty.Create(nameof(DocumentStartScript), typeof(string), typeof(BridgeWebView));
+
+    public string? DocumentStartScript { get => (string?)GetValue(DocumentStartScriptProperty); set => SetValue(DocumentStartScriptProperty, value); }
+
     internal void OnMessage(string payload)
     {
         JsonObject? request;
