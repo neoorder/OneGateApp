@@ -31,9 +31,9 @@ partial class BridgeWebViewHandler
                 }
             };
             """;
-        string script = string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript)
-            ? shim
-            : shim + BridgeWebView.DocumentStartScript;
+        string script = shim + Views.BridgeWebView.CreateRpcScript();
+        if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
+            script += BridgeWebView.DocumentStartScript;
         await sender.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
     }
 

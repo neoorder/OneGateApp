@@ -148,28 +148,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 if (window.__OneGateDapiInjected) return;
                 window.__OneGateDapiInjected = true;
 
-                const pending = new Map();
-
-                function createId() {
-                    return 'onegate_' + Date.now() + '_' + Math.random().toString(16).slice(2);
-                }
-
-                function rpc(method, params) {
-                    return new Promise(function(resolve, reject) {
-                        const id = createId();
-                        pending.set(id, { resolve, reject });
-
-                        const request = {
-                            jsonrpc: "2.0",
-                            id: id,
-                            method: method,
-                            params: params
-                        };
-
-                        window.__OneGateBridge.invoke(JSON.stringify(request));
-                    });
-                }
-
                 function deepFreeze(obj, seen = new WeakSet()) {
                     if (obj === null || typeof obj !== "object")
                         return obj;
@@ -183,20 +161,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     }
                     return Object.freeze(obj);
                 }
-                        
-                window.__OneGateDapiCallback = function(response) {
-                    if (typeof response === 'string')
-                        response = JSON.parse(response);
-
-                    const item = pending.get(response.id);
-                    if (!item) return;
-                    pending.delete(response.id);
-
-                    if (response.error)
-                        item.reject(response.error);
-                    else
-                        item.resolve(response.result);
-                };
             
                 const listeners = {
                     accountchanged: new Set(),
@@ -234,7 +198,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 };
             
                 for (let method of methods)
-                    provider[method] = function () { return rpc(method, [...arguments]); };
+                    provider[method] = function () { return window.{{BridgeWebView.BridgeInvokeFunctionName}}(method, [...arguments]); };
             
                 window.OneGateDapiProvider = deepFreeze(provider);
 
@@ -447,7 +411,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)
     {
         var response = await rpcServer.HandleRequestAsync(request);
-        await webView.EvaluateJavaScriptAsync($"window.__OneGateDapiCallback({response.ToJsonString()})");
+        await webView.SendRpcRepsonseAsync(response);
     }
 
     async Task EmitEventAsync(string eventName, JsonObject? detial)
