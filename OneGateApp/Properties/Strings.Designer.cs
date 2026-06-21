@@ -2625,5 +2625,23 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        internal static string Failed {
+            get {
+                return ResourceManager.GetString("Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction failed.
+        /// </summary>
+        internal static string TransactionFailed {
+            get {
+                return ResourceManager.GetString("TransactionFailed", resourceCulture);
+            }
+        }
     }
 }
