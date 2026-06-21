@@ -424,6 +424,63 @@
   <data name="ExecutionResult" xml:space="preserve">
     <value>执行结果</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>资产变化</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>根据已解析的转账请求估算。</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>未解析出直接资产转移；签名前请检查合约详情。</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>风险检查</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>批准前请确认以下信息。</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>请求详情</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>未知资产变化</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate 无法将此请求解析为明确的资产变化。</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>合约请求</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>请检查合约和方法。智能合约可能在执行期间改变余额。</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>执行预警</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>预览执行未成功完成；签名可能失败，也可能仍消耗手续费。</value>
+  </data>
+  <data name="NetworkFeeNotice" xml:space="preserve">
+    <value>需要 GAS 手续费</value>
+  </data>
+  <data name="NetworkFeeNoticeText" xml:space="preserve">
+    <value>此交易会消耗 GAS 支付系统费和网络费。</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>发送至 {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>接收自 {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>钱包内部转账</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} 至 {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>成功</value>
   </data>

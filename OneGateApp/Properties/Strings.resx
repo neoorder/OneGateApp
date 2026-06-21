@@ -424,6 +424,63 @@ After disabling, you will need to manually enter your wallet password to authori
   <data name="ExecutionResult" xml:space="preserve">
     <value>Execution result</value>
   </data>
+  <data name="AssetChanges" xml:space="preserve">
+    <value>Asset changes</value>
+  </data>
+  <data name="AssetChangesText" xml:space="preserve">
+    <value>Estimated from decoded transfer requests.</value>
+  </data>
+  <data name="NoDirectAssetChanges" xml:space="preserve">
+    <value>No direct asset movement was decoded. Review contract details before signing.</value>
+  </data>
+  <data name="RiskReview" xml:space="preserve">
+    <value>Risk review</value>
+  </data>
+  <data name="RiskReviewText" xml:space="preserve">
+    <value>Check these items before you approve.</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>Request details</value>
+  </data>
+  <data name="UnknownAssetChanges" xml:space="preserve">
+    <value>Unknown asset changes</value>
+  </data>
+  <data name="UnknownAssetChangesText" xml:space="preserve">
+    <value>OneGate could not decode this request into clear asset movements.</value>
+  </data>
+  <data name="ContractRequest" xml:space="preserve">
+    <value>Contract request</value>
+  </data>
+  <data name="ContractRequestRiskText" xml:space="preserve">
+    <value>Review the contract and method. Smart contracts can change balances during execution.</value>
+  </data>
+  <data name="ExecutionWarning" xml:space="preserve">
+    <value>Execution warning</value>
+  </data>
+  <data name="ExecutionWarningText" xml:space="preserve">
+    <value>The preview execution did not finish successfully. Signing may fail or still consume fees.</value>
+  </data>
+  <data name="NetworkFeeNotice" xml:space="preserve">
+    <value>GAS fee required</value>
+  </data>
+  <data name="NetworkFeeNoticeText" xml:space="preserve">
+    <value>This transaction will spend GAS for system and network fees.</value>
+  </data>
+  <data name="SendingToFormat" xml:space="preserve">
+    <value>Sending to {0}</value>
+  </data>
+  <data name="ReceivingFromFormat" xml:space="preserve">
+    <value>Receiving from {0}</value>
+  </data>
+  <data name="InternalWalletTransfer" xml:space="preserve">
+    <value>Transfer inside this wallet</value>
+  </data>
+  <data name="ExternalTransferFormat" xml:space="preserve">
+    <value>{0} to {1}</value>
+  </data>
+  <data name="NFT" xml:space="preserve">
+    <value>NFT</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
   </data>

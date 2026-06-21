@@ -896,6 +896,177 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Asset changes 的本地化字符串。
+        /// </summary>
+        internal static string AssetChanges {
+            get {
+                return ResourceManager.GetString("AssetChanges", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Estimated from decoded transfer requests. 的本地化字符串。
+        /// </summary>
+        internal static string AssetChangesText {
+            get {
+                return ResourceManager.GetString("AssetChangesText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No direct asset movement was decoded. Review contract details before signing. 的本地化字符串。
+        /// </summary>
+        internal static string NoDirectAssetChanges {
+            get {
+                return ResourceManager.GetString("NoDirectAssetChanges", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Risk review 的本地化字符串。
+        /// </summary>
+        internal static string RiskReview {
+            get {
+                return ResourceManager.GetString("RiskReview", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Check these items before you approve. 的本地化字符串。
+        /// </summary>
+        internal static string RiskReviewText {
+            get {
+                return ResourceManager.GetString("RiskReviewText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Request details 的本地化字符串。
+        /// </summary>
+        internal static string RequestDetails {
+            get {
+                return ResourceManager.GetString("RequestDetails", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown asset changes 的本地化字符串。
+        /// </summary>
+        internal static string UnknownAssetChanges {
+            get {
+                return ResourceManager.GetString("UnknownAssetChanges", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 OneGate could not decode this request into clear asset movements. 的本地化字符串。
+        /// </summary>
+        internal static string UnknownAssetChangesText {
+            get {
+                return ResourceManager.GetString("UnknownAssetChangesText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Contract request 的本地化字符串。
+        /// </summary>
+        internal static string ContractRequest {
+            get {
+                return ResourceManager.GetString("ContractRequest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review the contract and method. Smart contracts can change balances during execution. 的本地化字符串。
+        /// </summary>
+        internal static string ContractRequestRiskText {
+            get {
+                return ResourceManager.GetString("ContractRequestRiskText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Execution warning 的本地化字符串。
+        /// </summary>
+        internal static string ExecutionWarning {
+            get {
+                return ResourceManager.GetString("ExecutionWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The preview execution did not finish successfully. Signing may fail or still consume fees. 的本地化字符串。
+        /// </summary>
+        internal static string ExecutionWarningText {
+            get {
+                return ResourceManager.GetString("ExecutionWarningText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 GAS fee required 的本地化字符串。
+        /// </summary>
+        internal static string NetworkFeeNotice {
+            get {
+                return ResourceManager.GetString("NetworkFeeNotice", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This transaction will spend GAS for system and network fees. 的本地化字符串。
+        /// </summary>
+        internal static string NetworkFeeNoticeText {
+            get {
+                return ResourceManager.GetString("NetworkFeeNoticeText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Sending to {0} 的本地化字符串。
+        /// </summary>
+        internal static string SendingToFormat {
+            get {
+                return ResourceManager.GetString("SendingToFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Receiving from {0} 的本地化字符串。
+        /// </summary>
+        internal static string ReceivingFromFormat {
+            get {
+                return ResourceManager.GetString("ReceivingFromFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transfer inside this wallet 的本地化字符串。
+        /// </summary>
+        internal static string InternalWalletTransfer {
+            get {
+                return ResourceManager.GetString("InternalWalletTransfer", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} to {1} 的本地化字符串。
+        /// </summary>
+        internal static string ExternalTransferFormat {
+            get {
+                return ResourceManager.GetString("ExternalTransferFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 NFT 的本地化字符串。
+        /// </summary>
+        internal static string NFT {
+            get {
+                return ResourceManager.GetString("NFT", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Export private key 的本地化字符串。
         /// </summary>
         internal static string ExportPrivateKey {
