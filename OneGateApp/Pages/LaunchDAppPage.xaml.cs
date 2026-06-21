@@ -20,6 +20,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly ProtocolSettings protocolSettings;
     readonly IWalletProvider walletProvider;
     readonly WalletAuthorizationService walletAuthorizationService;
+    readonly ConnectedDAppService connectedDAppService;
     readonly ApplicationDbContext dbContext;
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
@@ -29,12 +30,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ConnectedDAppService connectedDAppService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.walletProvider = walletProvider;
         this.walletAuthorizationService = walletAuthorizationService;
+        this.connectedDAppService = connectedDAppService;
         this.dbContext = dbContext;
         this.httpClient = httpClient;
         this.rpcServer = new(this);

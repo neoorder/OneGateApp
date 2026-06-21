@@ -899,6 +899,72 @@
   <data name="DAppAuthorizationText" xml:space="preserve">
     <value>dApp 每次执行钱包操作都必须通过 OneGate 请求，不会保存长期授权。</value>
   </data>
+  <data name="ConnectedApps" xml:space="preserve">
+    <value>已连接应用</value>
+  </data>
+  <data name="ConnectedAtFormat" xml:space="preserve">
+    <value>连接时间 {0}</value>
+  </data>
+  <data name="ConnectedAppsAccountReadPermission" xml:space="preserve">
+    <value>连接后可读取账户</value>
+  </data>
+  <data name="ConnectedAppsApprovalRequiredPermission" xml:space="preserve">
+    <value>钱包操作仍需确认</value>
+  </data>
+  <data name="ConnectedAppsEmptyText" xml:space="preserve">
+    <value>在浏览器中授权 dApp 后会显示在这里。</value>
+  </data>
+  <data name="ConnectedAppsSummaryConnected" xml:space="preserve">
+    <value>当前有 {0} 个 dApp 可以读取钱包账户；交易和签名请求仍需逐次确认。</value>
+  </data>
+  <data name="ConnectedAppsSummaryEmpty" xml:space="preserve">
+    <value>没有 dApp 可以在未重新授权的情况下读取钱包账户。</value>
+  </data>
+  <data name="ConnectedDApps" xml:space="preserve">
+    <value>已连接 dApp</value>
+  </data>
+  <data name="ConnectedDAppsCountStatus" xml:space="preserve">
+    <value>已连接 {0} 个</value>
+  </data>
+  <data name="ConnectedDAppsNoneStatus" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextConnected" xml:space="preserve">
+    <value>查看已连接 dApp、检查钱包访问权限，或断开不再使用的连接。</value>
+  </data>
+  <data name="ConnectedDAppsSecurityTextEmpty" xml:space="preserve">
+    <value>当前没有已连接的 dApp。授权 dApp 后可在这里查看。</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>断开连接</value>
+  </data>
+  <data name="DisconnectAllDApps" xml:space="preserve">
+    <value>断开所有 dApp</value>
+  </data>
+  <data name="DisconnectAllDAppsText" xml:space="preserve">
+    <value>所有 dApp 都需要重新请求访问后，才能读取钱包账户。</value>
+  </data>
+  <data name="DisconnectDApp" xml:space="preserve">
+    <value>断开 dApp</value>
+  </data>
+  <data name="DisconnectDAppText" xml:space="preserve">
+    <value>{0} 需要重新请求访问后，才能读取钱包账户。</value>
+  </data>
+  <data name="DAppDisconnected" xml:space="preserve">
+    <value>dApp 已断开</value>
+  </data>
+  <data name="LastUsedAtFormat" xml:space="preserve">
+    <value>上次使用 {0}</value>
+  </data>
+  <data name="AllDAppsDisconnected" xml:space="preserve">
+    <value>所有 dApp 已断开</value>
+  </data>
+  <data name="NoConnectedDApps" xml:space="preserve">
+    <value>没有已连接 dApp</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>清空</value>
+  </data>
   <data name="Disabled" xml:space="preserve">
     <value>未启用</value>
   </data>

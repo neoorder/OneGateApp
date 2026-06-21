@@ -16,6 +16,7 @@ public partial class AuthenticatePage : ContentPage, IQueryAttributable
 {
     readonly ProtocolSettings protocolSettings;
     readonly WalletAuthorizationService walletAuthorizationService;
+    readonly ConnectedDAppService connectedDAppService;
     readonly Wallet wallet;
     readonly HttpClient httpClient;
 
@@ -29,10 +30,11 @@ public partial class AuthenticatePage : ContentPage, IQueryAttributable
     public string NetworkText => FormatNetwork(protocolSettings.Network);
     public string CallbackText => DAppIdentifier is null ? Payload?.Callback?.ToString() ?? "--" : $"dapp://{DAppIdentifier}/auth";
 
-    public AuthenticatePage(ProtocolSettings protocolSettings, WalletAuthorizationService walletAuthorizationService, IWalletProvider walletProvider, HttpClient httpClient)
+    public AuthenticatePage(ProtocolSettings protocolSettings, WalletAuthorizationService walletAuthorizationService, ConnectedDAppService connectedDAppService, IWalletProvider walletProvider, HttpClient httpClient)
     {
         this.protocolSettings = protocolSettings;
         this.walletAuthorizationService = walletAuthorizationService;
+        this.connectedDAppService = connectedDAppService;
         this.wallet = walletProvider.GetWallet()!;
         this.httpClient = httpClient;
         InitializeComponent();
@@ -100,6 +102,7 @@ public partial class AuthenticatePage : ContentPage, IQueryAttributable
         payload.Validate(protocolSettings);
         if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText, payload.Domain))
             throw new OperationCanceledException();
+        await connectedDAppService.ConnectAsync(payload.Domain, DAppIdentifier);
         WalletAccount account = wallet.GetDefaultAccount()!;
         return payload.CreateResponse(account, protocolSettings);
     }

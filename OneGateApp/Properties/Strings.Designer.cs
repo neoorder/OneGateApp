@@ -584,6 +584,204 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppAuthorizationText", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Connected Apps 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedApps {
+            get {
+                return ResourceManager.GetString("ConnectedApps", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Connected {0} 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedAtFormat {
+            get {
+                return ResourceManager.GetString("ConnectedAtFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Account read after connect 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedAppsAccountReadPermission {
+            get {
+                return ResourceManager.GetString("ConnectedAppsAccountReadPermission", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet actions still require approval 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedAppsApprovalRequiredPermission {
+            get {
+                return ResourceManager.GetString("ConnectedAppsApprovalRequiredPermission", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Authorize a dApp from the browser to see it here. 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedAppsEmptyText {
+            get {
+                return ResourceManager.GetString("ConnectedAppsEmptyText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} connected dApp(s) can read wallet accounts. Transaction and signature requests still require approval. 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedAppsSummaryConnected {
+            get {
+                return ResourceManager.GetString("ConnectedAppsSummaryConnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No dApps can read wallet accounts without a fresh authorization. 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedAppsSummaryEmpty {
+            get {
+                return ResourceManager.GetString("ConnectedAppsSummaryEmpty", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Connected dApps 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedDApps {
+            get {
+                return ResourceManager.GetString("ConnectedDApps", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} connected 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedDAppsCountStatus {
+            get {
+                return ResourceManager.GetString("ConnectedDAppsCountStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 None 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedDAppsNoneStatus {
+            get {
+                return ResourceManager.GetString("ConnectedDAppsNoneStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review connected dApps, inspect granted wallet access, or disconnect stale sessions. 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedDAppsSecurityTextConnected {
+            get {
+                return ResourceManager.GetString("ConnectedDAppsSecurityTextConnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No dApps are currently connected. Review this list after authorizing a dApp. 的本地化字符串。
+        /// </summary>
+        internal static string ConnectedDAppsSecurityTextEmpty {
+            get {
+                return ResourceManager.GetString("ConnectedDAppsSecurityTextEmpty", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Disconnect 的本地化字符串。
+        /// </summary>
+        internal static string Disconnect {
+            get {
+                return ResourceManager.GetString("Disconnect", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Disconnect all dApps 的本地化字符串。
+        /// </summary>
+        internal static string DisconnectAllDApps {
+            get {
+                return ResourceManager.GetString("DisconnectAllDApps", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 All dApps will need to request access again before reading wallet accounts. 的本地化字符串。
+        /// </summary>
+        internal static string DisconnectAllDAppsText {
+            get {
+                return ResourceManager.GetString("DisconnectAllDAppsText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Disconnect dApp 的本地化字符串。
+        /// </summary>
+        internal static string DisconnectDApp {
+            get {
+                return ResourceManager.GetString("DisconnectDApp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} will need to request access again before reading wallet accounts. 的本地化字符串。
+        /// </summary>
+        internal static string DisconnectDAppText {
+            get {
+                return ResourceManager.GetString("DisconnectDAppText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 dApp disconnected 的本地化字符串。
+        /// </summary>
+        internal static string DAppDisconnected {
+            get {
+                return ResourceManager.GetString("DAppDisconnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Last used {0} 的本地化字符串。
+        /// </summary>
+        internal static string LastUsedAtFormat {
+            get {
+                return ResourceManager.GetString("LastUsedAtFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 All dApps disconnected 的本地化字符串。
+        /// </summary>
+        internal static string AllDAppsDisconnected {
+            get {
+                return ResourceManager.GetString("AllDAppsDisconnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No connected dApps 的本地化字符串。
+        /// </summary>
+        internal static string NoConnectedDApps {
+            get {
+                return ResourceManager.GetString("NoConnectedDApps", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Clear 的本地化字符串。
+        /// </summary>
+        internal static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 DApp Testing 的本地化字符串。

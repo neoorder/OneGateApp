@@ -14,6 +14,7 @@ public partial class SecurityCenterPage : ContentPage
 
     readonly ApplicationDbContext dbContext;
     readonly RpcClient rpcClient;
+    readonly ConnectedDAppService connectedDAppService;
     bool suppressToggleUpdates;
 
     public Command RefreshCommand { get; }
@@ -23,6 +24,7 @@ public partial class SecurityCenterPage : ContentPage
     public bool IsBiometricEnabled { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(BiometricStatus)); OnPropertyChanged(nameof(BiometricStatusText)); OnPropertyChanged(nameof(BiometricActionText)); } }
     public string RpcStatus { get; set { field = value; OnPropertyChanged(); } } = Strings.Checking;
     public string RpcStatusText { get; set { field = value; OnPropertyChanged(); } } = "";
+    public int ConnectedDAppCount { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(ConnectedDAppStatus)); OnPropertyChanged(nameof(ConnectedDAppText)); } }
     public string LastCheckedText { get; set { field = value; OnPropertyChanged(); } } = "";
     public string PrivacyModeStatus => IsPrivacyModeEnabled ? Strings.Enabled : Strings.Disabled;
     public string BiometricStatus => IsBiometricEnabled ? Strings.Enabled : IsBiometricAvailable ? Strings.Available : Strings.Unavailable;
@@ -32,11 +34,18 @@ public partial class SecurityCenterPage : ContentPage
             ? Strings.BiometricAvailableText
             : Strings.BiometricUnavailableSecurityText;
     public string BiometricActionText => IsBiometricEnabled ? Strings.DisableBiometric : Strings.CreateBiometricCredential;
+    public string ConnectedDAppStatus => ConnectedDAppCount == 0
+        ? Strings.ConnectedDAppsNoneStatus
+        : string.Format(Strings.ConnectedDAppsCountStatus, ConnectedDAppCount);
+    public string ConnectedDAppText => ConnectedDAppCount == 0
+        ? Strings.ConnectedDAppsSecurityTextEmpty
+        : Strings.ConnectedDAppsSecurityTextConnected;
 
-    public SecurityCenterPage(ApplicationDbContext dbContext, RpcClient rpcClient)
+    public SecurityCenterPage(ApplicationDbContext dbContext, RpcClient rpcClient, ConnectedDAppService connectedDAppService)
     {
         this.dbContext = dbContext;
         this.rpcClient = rpcClient;
+        this.connectedDAppService = connectedDAppService;
         RefreshCommand = new Command(async () => await RefreshAsync());
         InitializeComponent();
     }
@@ -55,6 +64,7 @@ public partial class SecurityCenterPage : ContentPage
             IsPrivacyModeEnabled = !await dbContext.Settings.GetAsync<bool>(ShowBalanceKey);
             IsBiometricAvailable = await DataProtectionService.CheckAvailabilityAsync();
             IsBiometricEnabled = await dbContext.Settings.ExistsAsync("biometric/credential");
+            ConnectedDAppCount = (await connectedDAppService.LoadAsync()).Length;
             await RefreshRpcStatusAsync();
         }
         finally
@@ -129,5 +139,10 @@ public partial class SecurityCenterPage : ContentPage
         }
         string route = IsBiometricEnabled ? "//home/settings/biometric/disable" : "//home/settings/biometric/create";
         await Shell.Current.GoToAsync(route);
+    }
+
+    async void OnConnectedAppsTapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("//home/settings/security/connected-apps");
     }
 }
