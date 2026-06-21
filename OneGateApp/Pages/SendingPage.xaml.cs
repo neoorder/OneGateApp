@@ -5,6 +5,7 @@ using Neo.VM;
 using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Services.RPC;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -13,6 +14,7 @@ public partial class SendingPage : ContentPage, IQueryAttributable
 {
     readonly CancellationTokenSource cancellation = new();
     readonly RpcClient rpcClient;
+    bool isPolling;
 
     public required Transaction Transaction { get; set { field = value; OnPropertyChanged(null); } }
     public required TransactionIntent[] Intents { get; set { field = value; OnPropertyChanged(); } }
@@ -80,9 +82,12 @@ public partial class SendingPage : ContentPage, IQueryAttributable
 
     async void QueryTransactionStatus()
     {
-        TimedOut = false;
+        if (isPolling) return;
+
+        isPolling = true;
         try
         {
+            TimedOut = false;
             for (int i = 0; i < 10; i++)
             {
                 await Task.Delay(TimeSpan.FromSeconds(15), cancellation.Token);
@@ -108,6 +113,10 @@ public partial class SendingPage : ContentPage, IQueryAttributable
         catch (OperationCanceledException)
         {
         }
+        finally
+        {
+            isPolling = false;
+        }
     }
 
     void OnRetry(object sender, EventArgs e)
@@ -123,9 +132,10 @@ public partial class SendingPage : ContentPage, IQueryAttributable
         {
             JsonObject log = await rpcClient.RpcSendAsync<JsonObject>("getapplicationlog", Transaction.Hash);
             JsonNode? execution = log["executions"] is JsonArray executions && executions.Count > 0 ? executions[0] : null;
-            return execution?["vmstate"]?.GetValue<string>() == nameof(VMState.HALT);
+            JsonNode? vmState = execution?["vmstate"];
+            return vmState is null || vmState.GetValue<string>() == nameof(VMState.HALT);
         }
-        catch (RpcException)
+        catch (Exception ex) when (ex is RpcException or HttpRequestException or JsonException or InvalidOperationException or FormatException)
         {
             // Application log unavailable; the transaction is in a block but the execution result
             // is unknown. Avoid a false "failed" by treating it as confirmed.
