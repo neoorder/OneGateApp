@@ -37,7 +37,7 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
             OnRequestDetailsChanged();
         }
     }
-    public bool HasRequestSummary => !string.IsNullOrEmpty(RequestSummary);
+    public bool HasRequestSummary => !string.IsNullOrWhiteSpace(Memo) || !string.IsNullOrWhiteSpace(RequestData);
     public string RequestSummary
     {
         get
@@ -52,7 +52,7 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
     {
         get
         {
-            string uri = $"neo:{DefaultAccount.Address}";
+            string uri = $"neo:{Uri.EscapeDataString(DefaultAccount.Address)}";
             List<string> query = [];
             if (Asset is not null)
                 query.Add($"asset={Uri.EscapeDataString(Asset.ToString())}");
@@ -99,14 +99,16 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
     {
         string fileName = $"onegate-request-{DateTime.Now:yyyyMMdd-HHmmss}.png";
         string path = Path.Combine(FileSystem.CacheDirectory, fileName);
-        var result = await qrCodeCard.CaptureAsync();
+        IScreenshotResult? result = await qrCodeCard.CaptureAsync();
         if (result is null)
         {
             await Toast.Show(Strings.ScreenshotFailed);
             return;
         }
-        await using (var stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.None))
-            await result.CopyToAsync(stream);
+
+        await using Stream screenshot = await result.OpenReadAsync();
+        await using FileStream stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.None);
+        await screenshot.CopyToAsync(stream);
         await Share.RequestAsync(new ShareFileRequest
         {
             Title = Strings.ShareQRCode,
