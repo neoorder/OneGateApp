@@ -270,6 +270,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>从相册识别二维码</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>切换手电筒</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>无法识别二维码</value>
   </data>
@@ -877,6 +880,9 @@
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>已复制到剪贴板</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>复制地址</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>余额不足，无法支付金额和手续费。您最多可发送 {0} GAS。</value>

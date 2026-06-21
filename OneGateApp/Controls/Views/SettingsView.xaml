@@ -15,16 +15,22 @@
         </CollectionView.GroupFooterTemplate>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="og:SettingEntry">
-                <Grid Margin="5,0,0,0" HeightRequest="50" ColumnDefinitions="auto,*,auto" ColumnSpacing="20">
-                    <Label Grid.Column="0" Text="{Binding Name}" FontSize="16" VerticalOptions="Center">
+                <Grid Margin="5,0,0,0"
+                      HeightRequest="50"
+                      ColumnDefinitions="auto,*,auto"
+                      ColumnSpacing="20"
+                      AutomationProperties.IsInAccessibleTree="True"
+                      SemanticProperties.Description="{Binding Name}"
+                      SemanticProperties.Hint="{Binding CurrentValue}">
+                    <Label Grid.Column="0" Text="{Binding Name}" FontSize="16" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding IsDanger}" Value="True">
                                 <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
-                    <Label Grid.Column="1" StyleClass="Secondary" Text="{Binding CurrentValue}" HorizontalOptions="End" VerticalOptions="Center" />
-                    <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" />
+                    <Label Grid.Column="1" StyleClass="Secondary" Text="{Binding CurrentValue}" HorizontalOptions="End" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
+                    <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" />
                     </Grid.GestureRecognizers>

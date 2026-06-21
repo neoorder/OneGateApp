@@ -270,6 +270,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>Galeriden QR kod tara</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Feneri aç/kapat</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>QR kod tanınamadı</value>
   </data>
@@ -877,6 +880,9 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Panoya kopyalandı</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Adresi kopyala</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Tutarı ve ücretleri karşılamak için bakiye yetersiz. Gönderebileceğiniz en yüksek tutar {0} GAS’tır.</value>

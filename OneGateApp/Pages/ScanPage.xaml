@@ -10,10 +10,19 @@
         <og:StringSelectConverter x:Key="StringSelectConverter" />
     </ContentPage.Resources>
     <Grid>
-        <zxing:CameraBarcodeReaderView x:Name="cameraView" BarcodesDetected="OnBarcodesDetected" />
+        <zxing:CameraBarcodeReaderView x:Name="cameraView" BarcodesDetected="OnBarcodesDetected" SemanticProperties.Description="{x:Static og:Strings.RecognizeQRCode}" />
         <Label Text="{x:Static og:Strings.RecognizeQRCode}" TextColor="White" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,120" />
-        <ImageButton Source="{FontImageSource &#xe607;, FontFamily=Icons}" HorizontalOptions="Start" VerticalOptions="End" Margin="60,0,0,60" Clicked="OnPickPhotoClicked" />
-        <ImageButton HorizontalOptions="End" VerticalOptions="End" Margin="0,0,60,60" Clicked="OnTorchClicked">
+        <ImageButton Source="{FontImageSource &#xe607;, FontFamily=Icons}"
+                     HorizontalOptions="Start"
+                     VerticalOptions="End"
+                     Margin="60,0,0,60"
+                     SemanticProperties.Description="{x:Static og:Strings.ScanFromPhotoLibrary}"
+                     Clicked="OnPickPhotoClicked" />
+        <ImageButton HorizontalOptions="End"
+                     VerticalOptions="End"
+                     Margin="0,0,60,60"
+                     SemanticProperties.Description="{x:Static og:Strings.ToggleFlashlight}"
+                     Clicked="OnTorchClicked">
             <ImageButton.Source>
                 <FontImageSource Glyph="{Binding IsTorchOn, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe623;&#xe621;, Source={x:Reference cameraView}}" FontFamily="Icons" />
             </ImageButton.Source>

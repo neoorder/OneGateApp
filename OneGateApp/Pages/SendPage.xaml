@@ -17,13 +17,19 @@
             <VerticalStackLayout Spacing="20" Padding="0,0,0,16">
                 <Label StyleClass="Secondary" Text="{x:Static og:Strings.Asset}" />
                 <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                    <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="10" Padding="10" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                        <Image Source="{Binding SelectedAsset.Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
+                    <Grid ColumnDefinitions="auto,*,auto"
+                          ColumnSpacing="10"
+                          Padding="10"
+                          BackgroundColor="{toolkit:AppThemeResource TextBox}"
+                          AutomationProperties.IsInAccessibleTree="True"
+                          SemanticProperties.Description="{x:Static og:Strings.SelectAsset}"
+                          SemanticProperties.Hint="{Binding SelectedAsset.Token.Symbol}">
+                        <Image Source="{Binding SelectedAsset.Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout Grid.Column="1">
-                            <Label Text="{Binding SelectedAsset.Token.Symbol}" FontAttributes="Bold" FontSize="16" />
-                            <Label StyleClass="Secondary" Text="{Binding SelectedAsset.Token.Name}" FontSize="12" />
+                            <Label Text="{Binding SelectedAsset.Token.Symbol}" FontAttributes="Bold" FontSize="16" AutomationProperties.IsInAccessibleTree="False" />
+                            <Label StyleClass="Secondary" Text="{Binding SelectedAsset.Token.Name}" FontSize="12" AutomationProperties.IsInAccessibleTree="False" />
                         </VerticalStackLayout>
-                        <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe608;" Margin="10,0" VerticalOptions="Center" IsVisible="{Binding Assets, Converter={StaticResource IsNotNullConverter}}" />
+                        <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe608;" Margin="10,0" VerticalOptions="Center" IsVisible="{Binding Assets, Converter={StaticResource IsNotNullConverter}}" AutomationProperties.IsInAccessibleTree="False" />
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSelectAsset" />
                         </Grid.GestureRecognizers>
@@ -32,9 +38,9 @@
                 <Label StyleClass="Secondary" Text="{x:Static og:Strings.ReceivingAddress}" />
                 <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
                     <Grid ColumnDefinitions="*,auto,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                        <Entry x:Name="entryAddress" Text="{Binding ToAddress}" ClearButtonVisibility="Never" og:Border.IsVisible="False" />
-                        <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe60d;" FontSize="22" Margin="10,0" VerticalOptions="Center" Clicked="OnSelectContact" />
-                        <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe69a;" FontSize="28" Margin="10,0" VerticalOptions="Center" Command="{x:Static og:Commands.ScanQRCode}" CommandParameter="?action=RecognizeAddress" />
+                        <Entry x:Name="entryAddress" Text="{Binding ToAddress}" ClearButtonVisibility="Never" og:Border.IsVisible="False" SemanticProperties.Description="{x:Static og:Strings.ReceivingAddress}" />
+                        <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe60d;" FontSize="22" Margin="10,0" VerticalOptions="Center" SemanticProperties.Description="{x:Static og:Strings.SelectContact}" Clicked="OnSelectContact" />
+                        <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe69a;" FontSize="28" Margin="10,0" VerticalOptions="Center" SemanticProperties.Description="{x:Static og:Strings.ScanQRCode}" Command="{x:Static og:Commands.ScanQRCode}" CommandParameter="?action=RecognizeAddress" />
                     </Grid>
                 </Border>
                 <og:ValidationMessage Title="{x:Static og:Strings.ReceivingAddress}" Margin="0,-16,0,0" Target="{x:Reference entryAddress}">
@@ -43,7 +49,7 @@
                 </og:ValidationMessage>
                 <Border Padding="12" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 5" IsVisible="{Binding HasAddressInsight}">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="10">
-                        <Label StyleClass="Icon" Text="&#xe83d;" FontSize="20" VerticalOptions="Start" />
+                        <Label StyleClass="Icon" Text="&#xe83d;" FontSize="20" VerticalOptions="Start" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout Grid.Column="1" Spacing="3">
                             <Label Text="{Binding AddressInsightTitle}" FontAttributes="Bold" FontSize="13" />
                             <Label StyleClass="Secondary" Text="{Binding AddressInsightText}" FontSize="12" LineBreakMode="WordWrap" />
@@ -53,7 +59,7 @@
                 <Label StyleClass="Secondary" Text="{x:Static og:Strings.Amount}" />
                 <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
                     <Grid ColumnDefinitions="*,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                        <Entry x:Name="entryAmount" Text="{Binding Amount}" Keyboard="Numeric" ClearButtonVisibility="Never" og:Border.IsVisible="False" />
+                        <Entry x:Name="entryAmount" Text="{Binding Amount}" Keyboard="Numeric" ClearButtonVisibility="Never" og:Border.IsVisible="False" SemanticProperties.Description="{x:Static og:Strings.Amount}" />
                         <Button Grid.Column="1" StyleClass="Link" Text="{x:Static og:Strings.All}" Margin="0,-10" Padding="10" VerticalOptions="Center" Clicked="OnSelectAllBalance" />
                     </Grid>
                 </Border>
@@ -83,7 +89,7 @@
                 </Grid>
                 <Border Padding="12" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 5">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="10">
-                        <Label StyleClass="Icon" Text="&#xeda3;" FontSize="20" VerticalOptions="Start" />
+                        <Label StyleClass="Icon" Text="&#xeda3;" FontSize="20" VerticalOptions="Start" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout Grid.Column="1" Spacing="3">
                             <Label Text="{x:Static og:Strings.FeeEstimateNoticeTitle}" FontAttributes="Bold" FontSize="13" />
                             <Label StyleClass="Secondary" Text="{x:Static og:Strings.FeeEstimateNoticeText}" FontSize="12" LineBreakMode="WordWrap" />

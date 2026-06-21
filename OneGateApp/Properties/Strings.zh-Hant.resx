@@ -270,6 +270,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>從相簿掃描二維碼</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>切換手電筒</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>無法辨識二維碼</value>
   </data>
@@ -853,6 +856,9 @@
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>已複製到剪貼簿</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>複製地址</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>餘額不足，無法支付金額和手續費。您最多可發送 {0} GAS。</value>
