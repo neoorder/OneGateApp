@@ -160,6 +160,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Global Search 的本地化字符串。
+        /// </summary>
+        internal static string GlobalSearch {
+            get {
+                return ResourceManager.GetString("GlobalSearch", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Asset 的本地化字符串。
         /// </summary>
         internal static string Asset {
