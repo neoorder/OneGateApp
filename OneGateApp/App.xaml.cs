@@ -37,6 +37,8 @@ public partial class App : Application
         }
         httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
         httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.CurrentUICulture.Name);
+
+        _ = CrashReporter.FlushAsync(httpClient);
     }
 
     internal bool ProcessAppLinkUri(Uri uri)

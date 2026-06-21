@@ -30,6 +30,8 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        CrashReporter.Initialize();
+
         var builder = MauiApp.CreateBuilder()
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit(ConfigureMauiCommunityToolkit)
