@@ -2,6 +2,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:og="http://schemas.neoorder.org/onegate/controls"
+                    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
                     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
     <Style TargetType="ActivityIndicator">
@@ -22,15 +23,16 @@
     <Style TargetType="Border" Class="Card">
         <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource Panel}" />
         <Setter Property="Stroke" Value="{toolkit:AppThemeResource Stroke}" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
         <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="Padding" Value="16" />
     </Style>
 
     <Style TargetType="Border" Class="Field">
-        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource PanelAlt}" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
-        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource TextBox}" />
+        <Setter Property="Stroke" Value="{toolkit:AppThemeResource Stroke}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+        <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="Padding" Value="14,8" />
     </Style>
 
@@ -383,6 +385,7 @@
         <Setter Property="PlaceholderColor" Value="{toolkit:AppThemeResource Secondary}" />
         <Setter Property="CancelButtonColor" Value="{toolkit:AppThemeResource Secondary}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="ios:SearchBar.SearchBarStyle" Value="Minimal" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
@@ -517,8 +520,8 @@
         <Setter Property="Shell.UnselectedColor" Value="{toolkit:AppThemeResource Secondary}" />
         <Setter Property="Shell.NavBarHasShadow" Value="False" />
         <Setter Property="Shell.TabBarBackgroundColor" Value="{toolkit:AppThemeResource Panel}" />
-        <Setter Property="Shell.TabBarForegroundColor" Value="{toolkit:AppThemeResource Primary}" />
-        <Setter Property="Shell.TabBarTitleColor" Value="{toolkit:AppThemeResource Primary}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{toolkit:AppThemeResource Brand}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{toolkit:AppThemeResource Brand}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{toolkit:AppThemeResource Secondary}" />
         <Setter Property="Shell.FlyoutBackground" Value="{toolkit:AppThemeResource PageBackground}" />
     </Style>
