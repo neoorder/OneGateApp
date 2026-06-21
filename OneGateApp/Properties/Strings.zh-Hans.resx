@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>应用详情</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>OneGate 目录</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>外部链接</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>这台设备上暂无最近打开记录</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>权限</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>该 dApp 可以请求连接钱包、消息签名和交易签名。OneGate 会在共享钱包数据或签名前要求确认。</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>最近活动</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>最近在这台设备上打开过</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>标签</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>简介</value>
   </data>
