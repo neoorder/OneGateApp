@@ -15,27 +15,28 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe69a;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.ScanQRCode}" />
     </ContentPage.ToolbarItems>
-    <RefreshView Margin="20,0" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
+    <RefreshView Margin="20,8" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
         <ScrollView>
-            <VerticalStackLayout Spacing="24">
-                <Border StrokeShape="RoundRectangle 10" HeightRequest="200">
+            <VerticalStackLayout Spacing="16">
+                <Border StrokeShape="RoundRectangle 18" HeightRequest="210" StrokeThickness="0">
                     <Grid>
                         <Grid.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#565B61" Offset="0.0" />
-                                <GradientStop Color="#3F4349" Offset="1.0" />
+                                <GradientStop Color="{StaticResource WalletCardStart}" Offset="0.0" />
+                                <GradientStop Color="{StaticResource WalletCardMid}" Offset="0.55" />
+                                <GradientStop Color="{StaticResource WalletCardEnd}" Offset="1.0" />
                             </LinearGradientBrush>
                         </Grid.Background>
-                        <Grid RowDefinitions="*,auto,auto">
-                            <VerticalStackLayout Padding="15" Spacing="10">
+                        <Grid>
+                            <VerticalStackLayout Padding="20" Spacing="14">
                                 <Grid ColumnDefinitions="*,auto">
-                                    <HorizontalStackLayout>
-                                        <Label Text="{Binding Wallet.Name}" TextColor="{StaticResource White}" VerticalOptions="Center" />
-                                        <Button StyleClass="Icon" Text="{Binding ShowBalance, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xeadb;&#xe869;}" TextColor="{StaticResource White}" FontSize="20" Padding="10,5" Clicked="OnToggleShowBalance" />
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Label Text="{Binding Wallet.Name}" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="16" VerticalOptions="Center" />
+                                        <Button StyleClass="Icon" Text="{Binding ShowBalance, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xeadb;&#xe869;}" TextColor="{StaticResource White}" FontSize="20" Padding="8,4" Clicked="OnToggleShowBalance" />
                                     </HorizontalStackLayout>
-                                    <Button Grid.Column="1" StyleClass="Icon" Text="&#xe64f;" TextColor="{StaticResource White}" Padding="10,5" Command="{x:Static og:Commands.GotoPage}" CommandParameter="//wallet/details" />
+                                    <Button Grid.Column="1" StyleClass="Icon" Text="&#xe64f;" TextColor="{StaticResource White}" FontSize="22" Padding="8,4" Command="{x:Static og:Commands.GotoPage}" CommandParameter="//wallet/details" />
                                 </Grid>
-                                <Label TextColor="{StaticResource White}" FontSize="28" FontAttributes="Bold">
+                                <Label TextColor="{StaticResource White}" FontSize="34" FontAttributes="Bold" Margin="0,4,0,0">
                                     <Label.Text>
                                         <MultiBinding Converter="{StaticResource HiddenTextConverter}" ConverterParameter="******">
                                             <Binding Path="TotalValuation" />
@@ -43,24 +44,47 @@
                                         </MultiBinding>
                                     </Label.Text>
                                 </Label>
+                                <BoxView HeightRequest="1" Color="{StaticResource White}" Opacity="0.16" Margin="0,4" />
                                 <Grid ColumnDefinitions="*,auto">
-                                    <Label Text="{Binding DefaultAccount.Address}" TextColor="{StaticResource White}" LineBreakMode="MiddleTruncation" VerticalOptions="Center" />
-                                    <Button Grid.Column="1" StyleClass="Icon" Text="&#xe664;" TextColor="{StaticResource White}" Padding="10,5" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding DefaultAccount.Address}" />
+                                    <Label Text="{Binding DefaultAccount.Address}" TextColor="{StaticResource White}" Opacity="0.82" FontSize="13" LineBreakMode="MiddleTruncation" VerticalOptions="Center" />
+                                    <Button Grid.Column="1" StyleClass="Icon" Text="&#xe664;" TextColor="{StaticResource White}" FontSize="20" Padding="8,4" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding DefaultAccount.Address}" />
                                 </Grid>
                             </VerticalStackLayout>
-                            <BoxView Grid.Row="1" HeightRequest="1" Color="#5f6269" />
-                            <Grid Grid.Row="2" ColumnDefinitions="*,auto,*,auto,*">
-                                <Button Grid.Column="0" Text="{x:Static og:Strings.Receive}" TextColor="{StaticResource White}" ImageSource="{FontImageSource &#xe7dd;, FontFamily=Icons, Size=20}" BackgroundColor="Transparent" Command="{x:Static og:Commands.GotoPage}" CommandParameter="//wallet/receive" />
-                                <BoxView Grid.Column="1" Color="#5f6269" WidthRequest="1" Margin="0,10" VerticalOptions="Fill" />
-                                <Button Grid.Column="2" Text="{x:Static og:Strings.Send}" TextColor="{StaticResource White}" ImageSource="{FontImageSource &#xe705;, FontFamily=Icons, Size=20}" BackgroundColor="Transparent" Clicked="OnSendClicked" />
-                                <BoxView Grid.Column="3" Color="#5f6269" WidthRequest="1" Margin="0,10" VerticalOptions="Fill" />
-                                <Button Grid.Column="4" Text="{x:Static og:Strings.Records}" TextColor="{StaticResource White}" ImageSource="{FontImageSource &#xe901;, FontFamily=Icons, Size=20}" BackgroundColor="Transparent" Command="{x:Static og:Commands.OpenUrl}" CommandParameter="{Binding ScriptHash, StringFormat='https://explorer.onegate.space/accountprofile/{0}'}" />
-                            </Grid>
                         </Grid>
-                        <Path Fill="#FFFFFF" Opacity="0.08" Data="M 0 300 L 300 0 L 0 0 Z" InputTransparent="True" />
+                        <Path Fill="{StaticResource White}" Opacity="0.10" Data="M 0 260 L 260 0 L 0 0 Z" InputTransparent="True" />
+                        <Path Fill="{StaticResource NeoGreenBright}" Opacity="0.16" Data="M 300 0 L 520 0 L 520 220 Z" HorizontalOptions="End" InputTransparent="True" />
                     </Grid>
                 </Border>
-                <og:TabBar x:Name="tabBarAssetType" FontSize="16" Spacing="20">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="4,0">
+                    <VerticalStackLayout Grid.Column="0" Spacing="7" HorizontalOptions="Center">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                            <Label StyleClass="Icon" Text="&#xe7dd;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label Text="{x:Static og:Strings.Receive}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="//wallet/receive" />
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="7" HorizontalOptions="Center">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                            <Label StyleClass="Icon" Text="&#xe705;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label Text="{x:Static og:Strings.Send}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSendClicked" />
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="2" Spacing="7" HorizontalOptions="Center">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                            <Label StyleClass="Icon" Text="&#xe901;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label Text="{x:Static og:Strings.Records}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="{Binding ScriptHash, StringFormat='https://explorer.onegate.space/accountprofile/{0}'}" />
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
+                </Grid>
+                <og:TabBar x:Name="tabBarAssetType" FontSize="14" Spacing="4">
                     <og:TabBar.Tabs>
                         <x:Array Type="{x:Type x:String}">
                             <x:Static Member="og:Strings.Asset" />
@@ -68,7 +92,8 @@
                         </x:Array>
                     </og:TabBar.Tabs>
                 </og:TabBar>
-                <CollectionView ItemsSource="{Binding Assets}" MinimumHeightRequest="150" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 0}}">
+                <Border StyleClass="Card" Padding="0" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 0}}">
+                    <CollectionView ItemsSource="{Binding Assets}" MinimumHeightRequest="150">
                     <CollectionView.EmptyView>
                         <Grid>
                             <Label IsVisible="{Binding LoadingService.IsLoading}">
@@ -80,7 +105,7 @@
                                 </Label.FormattedText>
                             </Label>
                             <VerticalStackLayout Spacing="20" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}">
-                                <Border StrokeShape="Ellipse" BackgroundColor="#e9eaee" WidthRequest="100" HeightRequest="100">
+                                <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource TextBox}" WidthRequest="100" HeightRequest="100">
                                     <Image Source="empty.png" WidthRequest="32" HeightRequest="32" />
                                 </Border>
                                 <Label StyleClass="Secondary" Text="{x:Static og:Strings.NoAssetText}" HorizontalOptions="Center" />
@@ -88,38 +113,44 @@
                         </Grid>
                     </CollectionView.EmptyView>
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="og:AssetInfo">
-                            <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="10" RowDefinitions="auto,auto" RowSpacing="2" Margin="10,0">
-                                <Image Grid.RowSpan="2" Source="{Binding Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
-                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Token.Symbol}" FontAttributes="Bold" />
-                                <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding Token.Name}" FontSize="12" />
-                                <Label Grid.Column="2" Grid.Row="0" FontAttributes="Bold" HorizontalOptions="End">
-                                    <Label.Text>
-                                        <MultiBinding Converter="{StaticResource HiddenTextConverter}" ConverterParameter="******">
-                                            <Binding Path="DecimalBalance" />
-                                            <Binding Path="ShowBalance" Source="{RelativeSource AncestorType={x:Type og:WalletPage}}" />
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                                <Label Grid.Column="2" Grid.Row="1" StyleClass="Secondary" FontSize="12" HorizontalOptions="End">
-                                    <Label.Text>
-                                        <MultiBinding Converter="{StaticResource HiddenTextConverter}" ConverterParameter="******">
-                                            <Binding Path="DisplayValuation" />
-                                            <Binding Path="ShowBalance" Source="{RelativeSource AncestorType={x:Type og:WalletPage}}" />
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnAssetTapped" CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
+                            <Grid Padding="12,10">
+                                <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12" RowDefinitions="auto,auto" RowSpacing="2">
+                                    <Border Grid.RowSpan="2" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
+                                        <Image Source="{Binding Token.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="30" HeightRequest="30" Aspect="AspectFit" />
+                                    </Border>
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Token.Symbol}" FontAttributes="Bold" FontSize="16" />
+                                    <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding Token.Name}" FontSize="12" />
+                                    <Label Grid.Column="2" Grid.Row="0" FontAttributes="Bold" FontSize="16" HorizontalOptions="End">
+                                        <Label.Text>
+                                            <MultiBinding Converter="{StaticResource HiddenTextConverter}" ConverterParameter="******">
+                                                <Binding Path="DecimalBalance" />
+                                                <Binding Path="ShowBalance" Source="{RelativeSource AncestorType={x:Type og:WalletPage}}" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Label Grid.Column="2" Grid.Row="1" StyleClass="Secondary" FontSize="12" HorizontalOptions="End">
+                                        <Label.Text>
+                                            <MultiBinding Converter="{StaticResource HiddenTextConverter}" ConverterParameter="******">
+                                                <Binding Path="DisplayValuation" />
+                                                <Binding Path="ShowBalance" Source="{RelativeSource AncestorType={x:Type og:WalletPage}}" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnAssetTapped" CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <CollectionView ItemsSource="{Binding NFTs}" MinimumHeightRequest="150" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
+                </Border>
+                <Border StyleClass="Card" Padding="0" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
+                    <CollectionView ItemsSource="{Binding NFTs}" MinimumHeightRequest="150">
                     <CollectionView.EmptyView>
                         <Grid>
                             <Label IsVisible="{Binding LoadingService.IsLoading}">
@@ -131,7 +162,7 @@
                                 </Label.FormattedText>
                             </Label>
                             <VerticalStackLayout Spacing="20" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}">
-                                <Border StrokeShape="Ellipse" BackgroundColor="#e9eaee" WidthRequest="100" HeightRequest="100">
+                                <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource TextBox}" WidthRequest="100" HeightRequest="100">
                                     <Image Source="empty.png" WidthRequest="32" HeightRequest="32" />
                                 </Border>
                                 <Label StyleClass="Secondary" Text="{x:Static og:Strings.NoNftText}" HorizontalOptions="Center" />
@@ -139,21 +170,26 @@
                         </Grid>
                     </CollectionView.EmptyView>
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="og:NFT">
-                            <Grid ColumnDefinitions="auto,*" ColumnSpacing="10" RowDefinitions="auto,auto" RowSpacing="2" Margin="10,0">
-                                <Image Grid.RowSpan="2" Source="{Binding TokenInfo.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="32" HeightRequest="32" Aspect="AspectFit" VerticalOptions="Center" />
-                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" />
-                                <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding TokenInfo.Name}" FontSize="12" />
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnNFTTapped" CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
+                            <Grid Padding="12,10">
+                                <Grid ColumnDefinitions="auto,*" ColumnSpacing="12" RowDefinitions="auto,auto" RowSpacing="2">
+                                    <Border Grid.RowSpan="2" StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="7" WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
+                                        <Image Source="{Binding TokenInfo.Icon, TargetNullValue=tokens_icon_default.png}" WidthRequest="30" HeightRequest="30" Aspect="AspectFit" />
+                                    </Border>
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" FontSize="16" />
+                                    <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding TokenInfo.Name}" FontSize="12" />
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnNFTTapped" CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+                </Border>
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>

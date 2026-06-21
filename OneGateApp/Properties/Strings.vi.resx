@@ -538,6 +538,30 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
   <data name="UnknownAddress" xml:space="preserve">
     <value>Địa chỉ không xác định</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Địa chỉ đã lưu</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Địa chỉ nhận này khớp với "{0}" trong danh bạ địa chỉ cục bộ của bạn.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Địa chỉ ví của bạn</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Địa chỉ này thuộc ví hiện tại. Bạn có thể tiếp tục, nhưng hãy xác nhận rằng việc chuyển cho chính mình là có chủ ý.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Địa chỉ không xác định</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Địa chỉ này chưa được lưu trong danh bạ địa chỉ của bạn. Hãy kiểm tra kỹ địa chỉ đầy đủ; giao dịch chuyển trên blockchain không thể hoàn tác.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Ước tính phí</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate ước tính phí mạng và phí hệ thống ở màn hình tiếp theo trước khi bạn ký. Giao dịch chuyển GAS phải để lại đủ GAS để thanh toán cả số tiền chuyển và phí.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Đang gửi giao dịch</value>
   </data>

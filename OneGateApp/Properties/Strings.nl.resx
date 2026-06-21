@@ -538,6 +538,30 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   <data name="UnknownAddress" xml:space="preserve">
     <value>Onbekend adres</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Opgeslagen adres</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Dit ontvangstadres komt overeen met "{0}" in uw lokale adresboek.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Uw walletadres</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Dit adres hoort bij de huidige wallet. U kunt doorgaan, maar controleer of overboeken naar uzelf de bedoeling is.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Onbekend adres</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Dit adres is niet opgeslagen in uw adresboek. Controleer het volledige adres zorgvuldig; blockchain-overboekingen kunnen niet worden teruggedraaid.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Kostenraming</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate raamt netwerk- en systeemkosten op het volgende scherm voordat u ondertekent. GAS-overboekingen moeten genoeg GAS overhouden om zowel het overboekingsbedrag als de kosten te dekken.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Transactie verzenden</value>
   </data>
