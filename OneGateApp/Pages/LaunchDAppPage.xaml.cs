@@ -28,6 +28,10 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
+    public string TrustTitle { get; private set { field = value; OnPropertyChanged(); } } = "Loading origin";
+    public string TrustSubtitle { get; private set { field = value; OnPropertyChanged(); } } = "Checking dApp access...";
+    public Color TrustIndicatorColor { get; private set { field = value; OnPropertyChanged(); } } = Color.FromArgb("#A0A8B5");
+    string TrustDetailMessage { get; set; } = "OneGate is checking this dApp origin.";
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
@@ -94,6 +98,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             await dbContext.Settings.PutAsync("dapps/recent", recents);
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
         }
+        UpdateTrustBar();
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
@@ -113,6 +118,45 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             e.Cancel = true;
             await Toast.Show(Strings.RedirectionBlockedText);
         }
+    }
+
+    async void OnTrustBarInfoClicked(object sender, EventArgs e)
+    {
+        await DisplayAlertAsync("DApp access", TrustDetailMessage, Strings.OK);
+    }
+
+    void UpdateTrustBar()
+    {
+        Uri? uri = TryCreateAbsoluteUri(Url);
+        string origin = uri?.Host ?? "Unknown origin";
+        bool isHttps = string.Equals(uri?.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase);
+        bool isCatalogApp = DApp.Id > 0 && DApp.IsActive;
+        bool hasWallet = walletProvider.GetWallet()?.GetDefaultAccount() is not null;
+
+        string sourceStatus = isCatalogApp ? "OneGate catalog" : "External link";
+        string transportStatus = isHttps ? "HTTPS" : "Not secure";
+        string walletStatus = hasWallet ? "Wallet API ready" : "No wallet selected";
+
+        TrustTitle = origin;
+        TrustSubtitle = $"{sourceStatus} | {transportStatus} | {walletStatus}";
+        TrustIndicatorColor = isHttps
+            ? isCatalogApp ? Color.FromArgb("#19B36B") : Color.FromArgb("#EAB308")
+            : Color.FromArgb("#D63E49");
+        TrustDetailMessage = $"""
+            Origin: {origin}
+            Source: {sourceStatus}
+            Transport: {transportStatus}
+            Wallet: {walletStatus}
+
+            This dApp can request wallet accounts, balances, signatures, and transactions through OneGate's dAPI.
+            Signing and transaction requests still require OneGate confirmation before they can continue.
+            Navigation away from this origin is blocked inside the dApp browser.
+            """;
+    }
+
+    static Uri? TryCreateAbsoluteUri(string? value)
+    {
+        return Uri.TryCreate(value, UriKind.Absolute, out Uri? uri) ? uri : null;
     }
 
     string CreateDapiInjectionScript()

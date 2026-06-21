@@ -23,5 +23,47 @@
         <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding DApp}" />
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
     </ContentPage.ToolbarItems>
-    <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />
+    <Grid RowDefinitions="Auto,*">
+        <Border BackgroundColor="{toolkit:AppThemeResource Panel}"
+                Stroke="{toolkit:AppThemeResource Stroke}"
+                StrokeThickness="1"
+                Padding="14,8">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12">
+                <HorizontalStackLayout Spacing="8">
+                    <Border WidthRequest="8"
+                            HeightRequest="8"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 4"
+                            BackgroundColor="{Binding TrustIndicatorColor}"
+                            VerticalOptions="Center" />
+                    <Label Text="{Binding TrustTitle}"
+                           FontAttributes="Bold"
+                           FontSize="13"
+                           LineBreakMode="TailTruncation"
+                           TextColor="{toolkit:AppThemeResource Primary}"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <Button Grid.Column="1"
+                        Text="Access"
+                        StyleClass="Link"
+                        FontSize="12"
+                        MinimumWidthRequest="68"
+                        MinimumHeightRequest="36"
+                        Padding="8,4"
+                        Clicked="OnTrustBarInfoClicked"
+                        VerticalOptions="Center" />
+                <Label Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Text="{Binding TrustSubtitle}"
+                       FontSize="11"
+                       LineBreakMode="TailTruncation"
+                       TextColor="{toolkit:AppThemeResource Secondary}" />
+            </Grid>
+        </Border>
+        <og:BridgeWebView Grid.Row="1"
+                          x:Name="webView"
+                          Source="{Binding Url}"
+                          Navigating="OnNavigating"
+                          InvokedFromJavaScript="OnInvokedFromJavaScript" />
+    </Grid>
 </ContentPage>
