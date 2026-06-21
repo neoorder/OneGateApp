@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>앱 상세 정보</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>OneGate 카탈로그</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>외부 링크</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>이 기기에서 최근 열림 없음</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>권한</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>이 dApp은 지갑 연결, 메시지 서명, 트랜잭션 서명을 요청할 수 있습니다. OneGate는 지갑 데이터 공유 또는 서명 전에 확인을 요청합니다.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>최근 활동</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>이 기기에서 최근 열림</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>출처</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>태그</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>설명</value>
   </data>

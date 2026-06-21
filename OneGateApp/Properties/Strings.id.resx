@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Detail aplikasi</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>Katalog OneGate</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>Tautan eksternal</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Belum dibuka baru-baru ini di perangkat ini</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Izin</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>dApp ini dapat meminta koneksi dompet, tanda tangan pesan, dan penandatanganan transaksi. OneGate meminta konfirmasi sebelum membagikan data dompet atau menandatangani.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Aktivitas terbaru</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Baru dibuka di perangkat ini</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>Sumber</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Tag</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Deskripsi</value>
   </data>

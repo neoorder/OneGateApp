@@ -82,8 +82,6 @@
                     <Label StyleClass="Secondary" Text="{Binding TagsDisplay, Source={RelativeSource AncestorType={x:Type og:DAppDetailsPage}}}" FontSize="13" />
                 </VerticalStackLayout>
             </Border>
-            <Label Text="{x:Static og:Strings.GameType}" FontAttributes="Bold" IsVisible="{Binding GameType, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
-            <Label Text="{Binding GameTypeDisplayName}" Margin="0,-10,0,0" IsVisible="{Binding GameType, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
             <Label Text="{x:Static og:Strings.Preview}" FontAttributes="Bold" IsVisible="{Binding Previews, Converter={StaticResource IsListNotNullOrEmptyConverter}}" />
             <CollectionView ItemsSource="{Binding Previews}" IsVisible="{Binding Previews, Converter={StaticResource IsListNotNullOrEmptyConverter}}">
                 <CollectionView.ItemsLayout>

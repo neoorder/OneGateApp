@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>App-Details</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>OneGate-Katalog</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>Externer Link</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Keine kürzlichen Öffnungen auf diesem Gerät</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Berechtigungen</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Diese dApp kann Wallet-Verbindung, Nachrichtensignaturen und Transaktionssignaturen anfordern. OneGate bittet um Bestätigung, bevor Wallet-Daten geteilt oder Signaturen ausgeführt werden.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Aktuelle Aktivität</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Kürzlich auf diesem Gerät geöffnet</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>Quelle</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Beschreibung</value>
   </data>

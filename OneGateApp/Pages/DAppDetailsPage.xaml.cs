@@ -39,9 +39,12 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
         SourceStatus = dapp.Id > 0 ? Strings.DAppCatalogStatus : Strings.DAppExternalStatus;
         WebsiteHost = GetHost(dapp.Website) ?? "";
         HasWebsite = !string.IsNullOrWhiteSpace(dapp.Website);
-        TagsDisplay = dapp.Tags is { Length: > 0 }
-            ? string.Join(", ", dapp.Tags.Select(DApp.LocalizeTag))
-            : "";
+        TagsDisplay = string.Join(", ", (dapp.Tags ?? [])
+            .Select(DApp.LocalizeTag)
+            .Append(dapp.GameTypeDisplayName)
+            .OfType<string>()
+            .Where(p => !string.IsNullOrWhiteSpace(p))
+            .Distinct(StringComparer.CurrentCultureIgnoreCase));
         HasTags = !string.IsNullOrWhiteSpace(TagsDisplay);
 
         List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");

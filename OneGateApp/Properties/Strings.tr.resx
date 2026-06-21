@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Uygulama ayrıntıları</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>OneGate kataloğu</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>Harici bağlantı</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Bu cihazda son açılma yok</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>İzinler</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Bu dApp cüzdan bağlantısı, mesaj imzaları ve işlem imzalama isteyebilir. OneGate, cüzdan verilerini paylaşmadan veya imzalamadan önce onay ister.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Son etkinlik</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Bu cihazda yakın zamanda açıldı</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>Kaynak</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Etiketler</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Açıklama</value>
   </data>
