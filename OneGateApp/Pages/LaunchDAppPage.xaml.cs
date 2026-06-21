@@ -40,7 +40,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
         InitializeComponent();
-        webView.DocumentStartScript = CreateDapiInjectionScript();
+        webView.DocumentStartScript = CreateDocumentStartScript();
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
     }
