@@ -1973,7 +1973,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("SecurityCenter", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Review wallet protection, device approval, network status, privacy mode, and dApp request handling. 的本地化字符串。
         /// </summary>
@@ -1991,7 +1991,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("SecurityCenterSummaryTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Security status 的本地化字符串。
         /// </summary>
