@@ -57,7 +57,7 @@ partial class BridgeWebViewHandler
                 }
             };
             """;
-        controller.AddUserScript(CreateDocumentStartScript(shim));
+        controller.AddUserScript(CreateDocumentStartScript(shim + Views.BridgeWebView.CreateRpcScript()));
         if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
             controller.AddUserScript(CreateDocumentStartScript(BridgeWebView.DocumentStartScript));
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
