@@ -16,6 +16,8 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 {
+    const string DeveloperModeKey = "preference/developer_mode_enabled";
+
     readonly IServiceProvider serviceProvider;
     readonly ProtocolSettings protocolSettings;
     readonly IWalletProvider walletProvider;
@@ -28,6 +30,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
+    public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
@@ -39,9 +42,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.httpClient = httpClient;
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
+        IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DeveloperModeKey);
         InitializeComponent();
+        webView.DocumentStartScript = CreateDocumentStartScript();
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
+        if (!IsDeveloperToolsEnabled)
+            ToolbarItems.Remove(developerToolsButton);
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -100,11 +107,25 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         IsFavorite = !IsFavorite;
     }
 
+    async void OnDeveloperToolsClicked(object sender, EventArgs e)
+    {
+        if (!IsDeveloperToolsEnabled) return;
+        try
+        {
+            await webView.EvaluateJavaScriptAsync("window.__OneGateDevTools.toggle();");
+        }
+        catch
+        {
+        }
+    }
+
     async void OnNavigating(object sender, WebNavigatingEventArgs e)
     {
         if (DApp is null) return;
         Uri uriOld = new(DApp.Url);
         Uri uriNew = new(uriOld, e.Url);
+        if (uriNew.Scheme == "about" && uriNew.AbsoluteUri == "about:blank")
+            return;
         if (IsCrossDomain(uriOld, uriNew))
         {
             e.Cancel = true;
@@ -112,36 +133,20 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         }
     }
 
-    async void OnNavigated(object sender, WebNavigatedEventArgs e)
+    string CreateDocumentStartScript()
     {
-        if (e.Result != WebNavigationResult.Success) return;
-        BridgeWebView webView = (BridgeWebView)sender;
-        string script = $$"""
+        string script = CreateDapiInjectionScript();
+        if (IsDeveloperToolsEnabled)
+            script += CreateDeveloperToolsInjectionScript();
+        return script;
+    }
+
+    string CreateDapiInjectionScript()
+    {
+        return $$"""
             (function () {
                 if (window.__OneGateDapiInjected) return;
                 window.__OneGateDapiInjected = true;
-
-                const pending = new Map();
-
-                function createId() {
-                    return 'onegate_' + Date.now() + '_' + Math.random().toString(16).slice(2);
-                }
-
-                function rpc(method, params) {
-                    return new Promise(function(resolve, reject) {
-                        const id = createId();
-                        pending.set(id, { resolve, reject });
-
-                        const request = {
-                            jsonrpc: "2.0",
-                            id: id,
-                            method: method,
-                            params: params
-                        };
-
-                        window.__OneGateBridge.invoke(JSON.stringify(request));
-                    });
-                }
 
                 function deepFreeze(obj, seen = new WeakSet()) {
                     if (obj === null || typeof obj !== "object")
@@ -156,20 +161,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     }
                     return Object.freeze(obj);
                 }
-                        
-                window.__OneGateDapiCallback = function(response) {
-                    if (typeof response === 'string')
-                        response = JSON.parse(response);
-
-                    const item = pending.get(response.id);
-                    if (!item) return;
-                    pending.delete(response.id);
-
-                    if (response.error)
-                        item.reject(response.error);
-                    else
-                        item.resolve(response.result);
-                };
             
                 const listeners = {
                     accountchanged: new Set(),
@@ -207,7 +198,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 };
             
                 for (let method of methods)
-                    provider[method] = function () { return rpc(method, [...arguments]); };
+                    provider[method] = function () { return window.{{BridgeWebView.BridgeInvokeFunctionName}}(method, [...arguments]); };
             
                 window.OneGateDapiProvider = deepFreeze(provider);
 
@@ -224,7 +215,307 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 window.addEventListener('Neo.DapiProvider.request', dispatchReady);
             })();
             """.ReplaceLineEndings("");
-        await webView.EvaluateJavaScriptAsync(script);
+    }
+
+    static string CreateDeveloperToolsInjectionScript()
+    {
+        return """
+            (function () {
+                if (window.top !== window) return;
+                if (window.__OneGateDevTools) return;
+
+                const maxEntries = 300;
+                const entries = [];
+                let panel;
+                let logList;
+                const inputEventTypes = new Set([
+                    "click",
+                    "contextmenu",
+                    "dblclick",
+                    "keydown",
+                    "keypress",
+                    "keyup",
+                    "mousedown",
+                    "mousemove",
+                    "mouseout",
+                    "mouseover",
+                    "mouseup",
+                    "pointercancel",
+                    "pointerdown",
+                    "pointermove",
+                    "pointerout",
+                    "pointerover",
+                    "pointerup",
+                    "touchcancel",
+                    "touchend",
+                    "touchmove",
+                    "touchstart",
+                    "wheel"
+                ]);
+                const originalAddEventListener = EventTarget.prototype.addEventListener;
+                const originalRemoveEventListener = EventTarget.prototype.removeEventListener;
+                const listenerWrappers = new WeakMap();
+
+                function eventTargetsPanel(event) {
+                    if (!panel)
+                        return false;
+                    if (typeof event.composedPath === "function")
+                        return event.composedPath().indexOf(panel) >= 0;
+                    return event.target && typeof panel.contains === "function" && panel.contains(event.target);
+                }
+
+                function getCapture(options) {
+                    return typeof options === "boolean" ? options : !!(options && options.capture);
+                }
+
+                function canWrapListener(listener) {
+                    return typeof listener === "function" || (listener && typeof listener === "object" && typeof listener.handleEvent === "function");
+                }
+
+                function getListenerEntries(target, listener, create) {
+                    let targetMap = listenerWrappers.get(target);
+                    if (!targetMap) {
+                        if (!create)
+                            return null;
+                        targetMap = new WeakMap();
+                        listenerWrappers.set(target, targetMap);
+                    }
+
+                    let entries = targetMap.get(listener);
+                    if (!entries) {
+                        if (!create)
+                            return null;
+                        entries = [];
+                        targetMap.set(listener, entries);
+                    }
+                    return entries;
+                }
+
+                function getWrappedListener(target, type, listener, options) {
+                    if (!inputEventTypes.has(type) || !canWrapListener(listener))
+                        return listener;
+
+                    const capture = getCapture(options);
+                    const entries = getListenerEntries(target, listener, true);
+                    const existing = entries.find(function(entry) {
+                        return entry.type === type && entry.capture === capture;
+                    });
+                    if (existing)
+                        return existing.wrapped;
+
+                    const wrapped = function(event) {
+                        if (eventTargetsPanel(event))
+                            return;
+                        if (typeof listener === "function")
+                            return listener.call(this, event);
+                        return listener.handleEvent.call(listener, event);
+                    };
+                    entries.push({ type: type, capture: capture, wrapped: wrapped });
+                    return wrapped;
+                }
+
+                function removeWrappedListener(target, type, listener, options) {
+                    if (!inputEventTypes.has(type) || !canWrapListener(listener))
+                        return listener;
+
+                    const entries = getListenerEntries(target, listener, false);
+                    if (!entries)
+                        return listener;
+
+                    const capture = getCapture(options);
+                    const index = entries.findIndex(function(entry) {
+                        return entry.type === type && entry.capture === capture;
+                    });
+                    if (index < 0)
+                        return listener;
+
+                    const entry = entries[index];
+                    entries.splice(index, 1);
+                    return entry.wrapped;
+                }
+
+                EventTarget.prototype.addEventListener = function(type, listener, options) {
+                    return originalAddEventListener.call(this, type, getWrappedListener(this, type, listener, options), options);
+                };
+
+                EventTarget.prototype.removeEventListener = function(type, listener, options) {
+                    return originalRemoveEventListener.call(this, type, removeWrappedListener(this, type, listener, options), options);
+                };
+
+                function format(value) {
+                    if (value instanceof Error)
+                        return value.stack || value.message;
+                    if (typeof value === "string")
+                        return value;
+                    if (typeof value === "undefined")
+                        return "undefined";
+                    if (typeof value === "function")
+                        return value.toString();
+                    try {
+                        const seen = new WeakSet();
+                        return JSON.stringify(value, function(key, item) {
+                            if (typeof item === "bigint")
+                                return item.toString() + "n";
+                            if (item && typeof item === "object") {
+                                if (seen.has(item))
+                                    return "[Circular]";
+                                seen.add(item);
+                            }
+                            return item;
+                        });
+                    } catch (error) {
+                        return String(value);
+                    }
+                }
+
+                function push(level, args) {
+                    entries.push({
+                        level: level,
+                        time: new Date().toLocaleTimeString(),
+                        message: Array.prototype.slice.call(args).map(format).join(" ")
+                    });
+                    if (entries.length > maxEntries)
+                        entries.splice(0, entries.length - maxEntries);
+                    render();
+                }
+
+                function render() {
+                    if (!logList)
+                        return;
+
+                    const atBottom = logList.scrollHeight - logList.scrollTop - logList.clientHeight < 24;
+                    logList.replaceChildren();
+                    for (const entry of entries) {
+                        const row = document.createElement("div");
+                        row.className = "onegate-devtools-entry onegate-devtools-" + entry.level;
+                        row.textContent = "[" + entry.time + "] " + entry.level + "  " + entry.message;
+                        logList.appendChild(row);
+                    }
+                    if (atBottom)
+                        logList.scrollTop = logList.scrollHeight;
+                }
+
+                function ensureStyles() {
+                    if (document.getElementById("onegate-devtools-style"))
+                        return;
+
+                    const style = document.createElement("style");
+                    style.id = "onegate-devtools-style";
+                    style.textContent =
+                        "#onegate-devtools-panel{position:fixed;left:0;right:0;bottom:0;height:min(52vh,420px);z-index:2147483646;display:none;flex-direction:column;background:rgba(17,19,24,.82);color:#f3f5f7;border-top:1px solid rgba(48,52,60,.8);box-shadow:0 -8px 24px rgba(0,0,0,.28);font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-align:left;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}" +
+                        "#onegate-devtools-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;background:rgba(25,29,36,.72);border-bottom:1px solid rgba(48,52,60,.8)}" +
+                        "#onegate-devtools-title{font-weight:700;letter-spacing:0;color:#ffffff}" +
+                        "#onegate-devtools-actions{display:flex;align-items:center;gap:6px}" +
+                        "#onegate-devtools-actions button{border:1px solid rgba(61,68,80,.85);border-radius:6px;background:rgba(37,43,52,.82);color:#f3f5f7;padding:5px 8px;font:12px system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}" +
+                        "#onegate-devtools-log{flex:1;overflow:auto;padding:8px 10px;white-space:pre-wrap;word-break:break-word}" +
+                        ".onegate-devtools-entry{padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)}" +
+                        ".onegate-devtools-error{color:#ff817a}" +
+                        ".onegate-devtools-warn{color:#f2cc60}" +
+                        ".onegate-devtools-info{color:#78a8ff}" +
+                        ".onegate-devtools-debug{color:#a9b1bd}";
+                    (document.head || document.documentElement).appendChild(style);
+                }
+
+                function createButton(text, onClick) {
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.textContent = text;
+                    originalAddEventListener.call(button, "click", function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        onClick();
+                    });
+                    return button;
+                }
+
+                function ensurePanel() {
+                    if (panel)
+                        return;
+
+                    ensureStyles();
+                    panel = document.createElement("section");
+                    panel.id = "onegate-devtools-panel";
+                    panel.setAttribute("aria-label", "OneGate DevTools");
+
+                    const header = document.createElement("div");
+                    header.id = "onegate-devtools-header";
+
+                    const title = document.createElement("div");
+                    title.id = "onegate-devtools-title";
+                    title.textContent = "OneGate DevTools";
+
+                    const actions = document.createElement("div");
+                    actions.id = "onegate-devtools-actions";
+                    actions.appendChild(createButton("Clear", function() {
+                        entries.length = 0;
+                        render();
+                    }));
+                    actions.appendChild(createButton("Close", function() {
+                        api.hide();
+                    }));
+
+                    header.appendChild(title);
+                    header.appendChild(actions);
+
+                    logList = document.createElement("div");
+                    logList.id = "onegate-devtools-log";
+
+                    panel.appendChild(header);
+                    panel.appendChild(logList);
+                    inputEventTypes.forEach(function(type) {
+                        originalAddEventListener.call(panel, type, function(event) {
+                            event.stopPropagation();
+                        });
+                    });
+                    (document.body || document.documentElement).appendChild(panel);
+                    render();
+                }
+
+                const api = {
+                    show: function() {
+                        ensurePanel();
+                        panel.style.display = "flex";
+                        render();
+                    },
+                    hide: function() {
+                        if (panel)
+                            panel.style.display = "none";
+                    },
+                    toggle: function() {
+                        ensurePanel();
+                        if (panel.style.display === "none" || panel.style.display === "")
+                            api.show();
+                        else
+                            api.hide();
+                    },
+                    clear: function() {
+                        entries.length = 0;
+                        render();
+                    },
+                    entries: entries
+                };
+
+                window.__OneGateDevTools = api;
+
+                ["log", "info", "warn", "error", "debug"].forEach(function(level) {
+                    const original = console[level];
+                    console[level] = function() {
+                        push(level, arguments);
+                        if (original)
+                            return original.apply(console, arguments);
+                    };
+                });
+
+                window.addEventListener("error", function(event) {
+                    push("error", [event.message + " @ " + event.filename + ":" + event.lineno + ":" + event.colno]);
+                });
+                window.addEventListener("unhandledrejection", function(event) {
+                    push("error", ["Unhandled rejection", event.reason]);
+                });
+
+                push("info", ["OneGate developer tools ready"]);
+            })();
+            """.ReplaceLineEndings("");
     }
 
     static bool IsCrossDomain(Uri uriOld, Uri uriNew)
@@ -238,7 +529,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)
     {
         var response = await rpcServer.HandleRequestAsync(request);
-        await webView.EvaluateJavaScriptAsync($"window.__OneGateDapiCallback({response.ToJsonString()})");
+        await webView.SendRpcRepsonseAsync(response);
     }
 
     async Task EmitEventAsync(string eventName, JsonObject? detial)

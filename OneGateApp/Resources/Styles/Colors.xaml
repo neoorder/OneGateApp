@@ -3,23 +3,38 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Color x:Key="White">#f1f3f6</Color>
-    <Color x:Key="Black">#282b34</Color>
-    <Color x:Key="Gray100">#E1E1E1</Color>
-    <Color x:Key="Gray200">#C8C8C8</Color>
-    <Color x:Key="Gray300">#ACACAC</Color>
-    <Color x:Key="Gray400">#919191</Color>
-    <Color x:Key="Gray500">#6E6E6E</Color>
-    <Color x:Key="Gray600">#404040</Color>
-    <Color x:Key="Gray900">#212121</Color>
-    <Color x:Key="Gray950">#141414</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#171A22</Color>
+    <Color x:Key="Gray100">#F2F5F8</Color>
+    <Color x:Key="Gray200">#E1E7EF</Color>
+    <Color x:Key="Gray300">#C9D1DC</Color>
+    <Color x:Key="Gray400">#A0A8B5</Color>
+    <Color x:Key="Gray500">#737B8C</Color>
+    <Color x:Key="Gray600">#4B5565</Color>
+    <Color x:Key="Gray900">#20242E</Color>
+    <Color x:Key="Gray950">#0B0F14</Color>
 
-    <toolkit:AppThemeColor x:Key="Primary" Light="{StaticResource Black}" Dark="{StaticResource White}" />
-    <toolkit:AppThemeColor x:Key="Secondary" Default="#888a96" />
-    <toolkit:AppThemeColor x:Key="Success" Default="#5bc782" />
-    <toolkit:AppThemeColor x:Key="Danger" Default="#d63e49" />
-    <toolkit:AppThemeColor x:Key="Accent" Light="{StaticResource White}" Dark="{StaticResource Black}" />
-    <toolkit:AppThemeColor x:Key="Panel" Light="White" Dark="Black" />
-    <toolkit:AppThemeColor x:Key="TextBox" Light="#e9eaee" Dark="#363B49" />
+    <Color x:Key="NeoGreen">#00B884</Color>
+    <Color x:Key="NeoGreenBright">#46F2C2</Color>
+    <Color x:Key="NeoBlue">#2563EB</Color>
+    <Color x:Key="WalletCardStart">#1C222C</Color>
+    <Color x:Key="WalletCardMid">#263241</Color>
+    <Color x:Key="WalletCardEnd">#0BA878</Color>
+
+    <toolkit:AppThemeColor x:Key="Primary" Light="{StaticResource Black}" Dark="#F4F7FB" />
+    <toolkit:AppThemeColor x:Key="Secondary" Light="{StaticResource Gray500}" Dark="#A2AAB8" />
+    <toolkit:AppThemeColor x:Key="Tertiary" Light="{StaticResource Gray400}" Dark="#727C8C" />
+    <toolkit:AppThemeColor x:Key="Success" Light="#19B36B" Dark="#5CE0A0" />
+    <toolkit:AppThemeColor x:Key="Danger" Light="#D63E49" Dark="#FF6F7B" />
+    <toolkit:AppThemeColor x:Key="Brand" Light="{StaticResource NeoGreen}" Dark="{StaticResource NeoGreenBright}" />
+    <toolkit:AppThemeColor x:Key="BrandMuted" Light="#DDF8EF" Dark="#123A32" />
+    <toolkit:AppThemeColor x:Key="Link" Light="{StaticResource NeoBlue}" Dark="#78A3FF" />
+    <toolkit:AppThemeColor x:Key="Accent" Light="{StaticResource White}" Dark="{StaticResource Gray950}" />
+    <toolkit:AppThemeColor x:Key="PageBackground" Light="#F5F7FA" Dark="#090D12" />
+    <toolkit:AppThemeColor x:Key="Panel" Light="{StaticResource White}" Dark="#111820" />
+    <toolkit:AppThemeColor x:Key="PanelAlt" Light="#F9FBFD" Dark="#18212B" />
+    <toolkit:AppThemeColor x:Key="TextBox" Light="#EEF2F6" Dark="#1D2631" />
+    <toolkit:AppThemeColor x:Key="Stroke" Light="{StaticResource Gray200}" Dark="#263241" />
+    <toolkit:AppThemeColor x:Key="SelectedTabBackground" Light="{StaticResource White}" Dark="{StaticResource WalletCardMid}" />
 
 </ResourceDictionary>

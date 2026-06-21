@@ -538,6 +538,30 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
   <data name="UnknownAddress" xml:space="preserve">
     <value>Dirección desconocida</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>Dirección guardada</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>Esta dirección de recepción coincide con "{0}" en tu libreta de direcciones local.</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>Tu dirección de billetera</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>Esta dirección pertenece a la billetera actual. Puedes continuar, pero confirma que la transferencia a ti mismo es intencional.</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>Dirección desconocida</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>Esta dirección no está guardada en tu libreta de direcciones. Verifica cuidadosamente la dirección completa; las transferencias en blockchain no se pueden revertir.</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>Estimación de comisiones</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate estima las comisiones de red y de sistema en la siguiente pantalla, antes de que firmes. Las transferencias de GAS deben dejar suficiente GAS para cubrir tanto el importe de la transferencia como las comisiones.</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>Enviando transacción</value>
   </data>
@@ -964,5 +988,20 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>No disponible</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>El nombre ya existe</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>Transferencia reciente</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>Usar dirección introducida</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Buscar nombre, dirección o nota</value>
   </data>
 </root>

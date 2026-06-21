@@ -932,6 +932,24 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 OneGate estimates network and system fees on the next screen before you sign. GAS transfers must leave enough GAS to cover both the transfer and fees. 的本地化字符串。
+        /// </summary>
+        internal static string FeeEstimateNoticeText {
+            get {
+                return ResourceManager.GetString("FeeEstimateNoticeText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Fee estimate 的本地化字符串。
+        /// </summary>
+        internal static string FeeEstimateNoticeTitle {
+            get {
+                return ResourceManager.GetString("FeeEstimateNoticeTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Field 的本地化字符串。
         /// </summary>
         internal static string Field {
@@ -1530,6 +1548,24 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 This address belongs to the current wallet. You can continue, but make sure sending to yourself is intentional. 的本地化字符串。
+        /// </summary>
+        internal static string OwnWalletAddressText {
+            get {
+                return ResourceManager.GetString("OwnWalletAddressText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Your wallet address 的本地化字符串。
+        /// </summary>
+        internal static string OwnWalletAddressTitle {
+            get {
+                return ResourceManager.GetString("OwnWalletAddressTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Password 的本地化字符串。
         /// </summary>
         internal static string Password {
@@ -1912,6 +1948,24 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 This recipient matches "{0}" in your local address book. 的本地化字符串。
+        /// </summary>
+        internal static string SavedAddressText {
+            get {
+                return ResourceManager.GetString("SavedAddressText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Saved address 的本地化字符串。
+        /// </summary>
+        internal static string SavedAddressTitle {
+            get {
+                return ResourceManager.GetString("SavedAddressTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Security actions 的本地化字符串。
         /// </summary>
         internal static string SecurityActions {
@@ -2052,6 +2106,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string SendTransactionText {
             get {
                 return ResourceManager.GetString("SendTransactionText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transfer 的本地化字符串。
+        /// </summary>
+        internal static string Transfer {
+            get {
+                return ResourceManager.GetString("Transfer", resourceCulture);
             }
         }
 
@@ -2367,6 +2430,24 @@ namespace NeoOrder.OneGate.Properties {
         internal static string UnknownAddress {
             get {
                 return ResourceManager.GetString("UnknownAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This address is not saved in your address book. Verify the full address carefully; blockchain transfers cannot be reversed. 的本地化字符串。
+        /// </summary>
+        internal static string UnknownAddressRiskText {
+            get {
+                return ResourceManager.GetString("UnknownAddressRiskText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown address 的本地化字符串。
+        /// </summary>
+        internal static string UnknownAddressRiskTitle {
+            get {
+                return ResourceManager.GetString("UnknownAddressRiskTitle", resourceCulture);
             }
         }
 
