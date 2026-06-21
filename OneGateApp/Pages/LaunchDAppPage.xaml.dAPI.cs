@@ -176,6 +176,7 @@ partial class LaunchDAppPage
             throw new DapiException(10001, "Ledger compatible signing is not supported");
         var popup = serviceProvider.GetServiceOrCreateInstance<SignMessagePopup>();
         popup.Account = account?.ToAddress(protocolSettings.AddressVersion);
+        popup.IsBase64Encoded = options?.IsBase64Encoded == true;
         popup.Message = message;
         var result = await this.ShowPopupAsync<string?>(popup);
         if (result.Result is null) throw new OperationCanceledException();

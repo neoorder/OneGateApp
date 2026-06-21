@@ -989,4 +989,10 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Çözümlenen mesaj</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Yalnızca güvendiğiniz sitelerden gelen mesajları imzalayın. Bir imza kimliğinizi kanıtlayabilir veya işlemleri yetkilendirebilir; beklenmedik ya da okunamayan bir isteği asla imzalamayın.</value>
+  </data>
 </root>

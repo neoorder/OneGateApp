@@ -989,4 +989,10 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Pesan yang didekode</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Hanya tanda tangani pesan dari situs yang Anda percaya. Tanda tangan dapat membuktikan identitas Anda atau mengotorisasi tindakan; jangan pernah menandatangani permintaan yang tidak terduga atau tidak terbaca.</value>
+  </data>
 </root>

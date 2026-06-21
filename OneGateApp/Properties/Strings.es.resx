@@ -989,4 +989,10 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="Unavailable" xml:space="preserve">
     <value>No disponible</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Mensaje decodificado</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Firma solo mensajes de sitios en los que confías. Una firma puede probar tu identidad o autorizar acciones; nunca firmes una solicitud inesperada o ilegible.</value>
+  </data>
 </root>
