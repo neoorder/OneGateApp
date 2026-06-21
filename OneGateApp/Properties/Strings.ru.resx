@@ -983,9 +983,6 @@
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Защита кошелька с первого взгляда</value>
   </data>
-  <data name="SecurityBackupStatusText" xml:space="preserve">
-    <value>Перед использованием этого кошелька для dApp или переводов убедитесь, что фраза восстановления или приватный ключ сохранены.</value>
-  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Состояние безопасности</value>
   </data>

@@ -983,9 +983,6 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Protezione del portafoglio a colpo d’occhio</value>
   </data>
-  <data name="SecurityBackupStatusText" xml:space="preserve">
-    <value>Conferma che la frase di recupero o la chiave privata sia stata salvata prima di usare questo wallet per dApp o trasferimenti.</value>
-  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Stato sicurezza</value>
   </data>

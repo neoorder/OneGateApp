@@ -983,9 +983,6 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Wallet-Schutz auf einen Blick</value>
   </data>
-  <data name="SecurityBackupStatusText" xml:space="preserve">
-    <value>Prüfen Sie, ob Ihre Wiederherstellungsphrase oder Ihr privater Schlüssel gesichert ist, bevor Sie diese Wallet für dApps oder Transfers verwenden.</value>
-  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Sicherheitsstatus</value>
   </data>

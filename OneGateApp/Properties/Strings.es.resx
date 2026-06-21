@@ -983,9 +983,6 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Protección de la billetera de un vistazo</value>
   </data>
-  <data name="SecurityBackupStatusText" xml:space="preserve">
-    <value>Confirma que tu frase de recuperación o clave privada esté respaldada antes de usar esta cartera para dApps o transferencias.</value>
-  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Estado de seguridad</value>
   </data>

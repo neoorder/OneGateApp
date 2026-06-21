@@ -983,9 +983,6 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Wallet protection at a glance</value>
   </data>
-  <data name="SecurityBackupStatusText" xml:space="preserve">
-    <value>Confirm that your recovery phrase or private key is backed up before relying on this wallet for dApps or transfers.</value>
-  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Security status</value>
   </data>

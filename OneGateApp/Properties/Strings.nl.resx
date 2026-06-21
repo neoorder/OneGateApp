@@ -983,9 +983,6 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Walletbescherming in één oogopslag</value>
   </data>
-  <data name="SecurityBackupStatusText" xml:space="preserve">
-    <value>Controleer of uw herstelzin of privésleutel is geback-upt voordat u deze wallet gebruikt voor dApps of transfers.</value>
-  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Beveiligingsstatus</value>
   </data>

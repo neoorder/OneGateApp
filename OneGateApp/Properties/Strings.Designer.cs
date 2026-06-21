@@ -1975,15 +1975,6 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Confirm that your recovery phrase or private key is backed up before relying on this wallet for dApps or transfers. 的本地化字符串。
-        /// </summary>
-        internal static string SecurityBackupStatusText {
-            get {
-                return ResourceManager.GetString("SecurityBackupStatusText", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   查找类似 Review wallet protection, device approval, network status, privacy mode, and dApp request handling. 的本地化字符串。
         /// </summary>
         internal static string SecurityCenterSummaryText {

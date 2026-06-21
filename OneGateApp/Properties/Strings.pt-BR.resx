@@ -983,9 +983,6 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Proteção da carteira em resumo</value>
   </data>
-  <data name="SecurityBackupStatusText" xml:space="preserve">
-    <value>Confirme que sua frase de recuperação ou chave privada esteja em backup antes de usar esta carteira para dApps ou transferências.</value>
-  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Status de segurança</value>
   </data>
