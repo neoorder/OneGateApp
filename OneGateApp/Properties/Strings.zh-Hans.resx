@@ -460,12 +460,6 @@
   <data name="ExecutionWarningText" xml:space="preserve">
     <value>预览执行未成功完成；签名可能失败，也可能仍消耗手续费。</value>
   </data>
-  <data name="NetworkFeeNotice" xml:space="preserve">
-    <value>需要 GAS 手续费</value>
-  </data>
-  <data name="NetworkFeeNoticeText" xml:space="preserve">
-    <value>此交易会消耗 GAS 支付系统费和网络费。</value>
-  </data>
   <data name="SendingToFormat" xml:space="preserve">
     <value>发送至 {0}</value>
   </data>

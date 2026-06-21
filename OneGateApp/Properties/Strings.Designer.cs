@@ -1004,24 +1004,6 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 GAS fee required 的本地化字符串。
-        /// </summary>
-        internal static string NetworkFeeNotice {
-            get {
-                return ResourceManager.GetString("NetworkFeeNotice", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 This transaction will spend GAS for system and network fees. 的本地化字符串。
-        /// </summary>
-        internal static string NetworkFeeNoticeText {
-            get {
-                return ResourceManager.GetString("NetworkFeeNoticeText", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   查找类似 Sending to {0} 的本地化字符串。
         /// </summary>
         internal static string SendingToFormat {

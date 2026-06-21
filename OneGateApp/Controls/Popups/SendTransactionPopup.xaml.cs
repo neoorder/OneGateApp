@@ -34,6 +34,7 @@ public partial class SendTransactionPopup : MyPopup<bool>
     public string FeeDetails => $"{DecimalSystemFee} (sys) + {DecimalNetworkFee} (net)";
     public bool HasAssetChanges => AssetChanges.Length > 0;
     public bool HasIntents => Intents?.Length > 0;
+    public bool HasRequestDetails => HasIntents && !HasAssetChanges;
     public bool HasRiskWarnings => RiskWarnings.Length > 0;
     public bool HasExecutionWarning => InvocationResult is { State: not VMState.HALT } || !string.IsNullOrWhiteSpace(InvocationResult?.Exception);
 
@@ -70,6 +71,7 @@ public partial class SendTransactionPopup : MyPopup<bool>
         OnPropertyChanged(nameof(DecimalSystemFee));
         OnPropertyChanged(nameof(DecimalNetworkFee));
         OnPropertyChanged(nameof(FeeDetails));
+        OnPropertyChanged(nameof(HasRequestDetails));
         OnPropertyChanged(nameof(HasExecutionWarning));
     }
 
@@ -94,14 +96,14 @@ public partial class SendTransactionPopup : MyPopup<bool>
                         IsIncoming = toWallet && !fromWallet
                     });
                     break;
-                case Nep11TransferIntent transfer:
-                    bool nftFromWallet = wallet.Contains(transfer.From);
-                    bool nftToWallet = wallet.Contains(transfer.To);
+                case Nep11TransferIntent nftTransfer:
+                    bool nftFromWallet = wallet.Contains(nftTransfer.From);
+                    bool nftToWallet = wallet.Contains(nftTransfer.To);
                     changes.Add(new TransactionPreviewAssetChange
                     {
-                        Title = transfer.Asset.Name,
+                        Title = nftTransfer.Asset.Name,
                         AmountText = $"{GetAmountPrefix(nftFromWallet, nftToWallet)}{Strings.NFT}",
-                        DetailText = GetTransferDetail(transfer.From, transfer.To, nftFromWallet, nftToWallet),
+                        DetailText = GetTransferDetail(nftTransfer.From, nftTransfer.To, nftFromWallet, nftToWallet),
                         IsOutgoing = nftFromWallet && !nftToWallet,
                         IsIncoming = nftToWallet && !nftFromWallet
                     });
@@ -138,14 +140,6 @@ public partial class SendTransactionPopup : MyPopup<bool>
                 Title = Strings.ExecutionWarning,
                 Message = Strings.ExecutionWarningText,
                 IsHighRisk = true
-            });
-        }
-        if (Fee > 0)
-        {
-            warnings.Add(new TransactionPreviewWarning
-            {
-                Title = Strings.NetworkFeeNotice,
-                Message = Strings.NetworkFeeNoticeText
             });
         }
         return warnings.ToArray();
