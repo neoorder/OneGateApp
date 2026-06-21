@@ -538,6 +538,30 @@
   <data name="UnknownAddress" xml:space="preserve">
     <value>不明なアドレス</value>
   </data>
+  <data name="SavedAddressTitle" xml:space="preserve">
+    <value>保存済みアドレス</value>
+  </data>
+  <data name="SavedAddressText" xml:space="preserve">
+    <value>この受取アドレスはローカルのアドレス帳にある「{0}」と一致します。</value>
+  </data>
+  <data name="OwnWalletAddressTitle" xml:space="preserve">
+    <value>あなたのウォレットアドレス</value>
+  </data>
+  <data name="OwnWalletAddressText" xml:space="preserve">
+    <value>このアドレスは現在のウォレットに属しています。続行できますが、自分自身への送金であることを確認してください。</value>
+  </data>
+  <data name="UnknownAddressRiskTitle" xml:space="preserve">
+    <value>不明なアドレス</value>
+  </data>
+  <data name="UnknownAddressRiskText" xml:space="preserve">
+    <value>このアドレスはアドレス帳に保存されていません。完全なアドレスを慎重に確認してください。ブロックチェーン送金は取り消せません。</value>
+  </data>
+  <data name="FeeEstimateNoticeTitle" xml:space="preserve">
+    <value>手数料の見積もり</value>
+  </data>
+  <data name="FeeEstimateNoticeText" xml:space="preserve">
+    <value>OneGate は次の画面で、署名前にネットワーク手数料とシステム手数料を見積もります。GAS の送金では、送金額と手数料の両方を支払うのに十分な GAS を残す必要があります。</value>
+  </data>
   <data name="SendingTransaction" xml:space="preserve">
     <value>トランザクションを送信中</value>
   </data>
