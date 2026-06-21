@@ -1919,7 +1919,16 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("SecurityCenter", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 Confirm that your recovery phrase or private key is backed up before relying on this wallet for dApps or transfers. 的本地化字符串。
+        /// </summary>
+        internal static string SecurityBackupStatusText {
+            get {
+                return ResourceManager.GetString("SecurityBackupStatusText", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Review wallet protection, device approval, network status, privacy mode, and dApp request handling. 的本地化字符串。
         /// </summary>
@@ -1937,7 +1946,43 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("SecurityCenterSummaryTitle", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 Suggested next step 的本地化字符串。
+        /// </summary>
+        internal static string SecurityRecommendation {
+            get {
+                return ResourceManager.GetString("SecurityRecommendation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Enable biometrics so wallet approval has a faster device-level checkpoint. 的本地化字符串。
+        /// </summary>
+        internal static string SecurityRecommendationBiometricText {
+            get {
+                return ResourceManager.GetString("SecurityRecommendationBiometricText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Check the network connection before sending transactions or approving dApp requests. 的本地化字符串。
+        /// </summary>
+        internal static string SecurityRecommendationConnectionIssueText {
+            get {
+                return ResourceManager.GetString("SecurityRecommendationConnectionIssueText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review recovery backup first, then keep checking dApp origins and signing details before approval. 的本地化字符串。
+        /// </summary>
+        internal static string SecurityRecommendationReviewBackupText {
+            get {
+                return ResourceManager.GetString("SecurityRecommendationReviewBackupText", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Security status 的本地化字符串。
         /// </summary>

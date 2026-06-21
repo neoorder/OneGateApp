@@ -959,6 +959,21 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>Wallet protection at a glance</value>
   </data>
+  <data name="SecurityBackupStatusText" xml:space="preserve">
+    <value>Confirm that your recovery phrase or private key is backed up before relying on this wallet for dApps or transfers.</value>
+  </data>
+  <data name="SecurityRecommendation" xml:space="preserve">
+    <value>Suggested next step</value>
+  </data>
+  <data name="SecurityRecommendationBiometricText" xml:space="preserve">
+    <value>Enable biometrics so wallet approval has a faster device-level checkpoint.</value>
+  </data>
+  <data name="SecurityRecommendationConnectionIssueText" xml:space="preserve">
+    <value>Check the network connection before sending transactions or approving dApp requests.</value>
+  </data>
+  <data name="SecurityRecommendationReviewBackupText" xml:space="preserve">
+    <value>Review recovery backup first, then keep checking dApp origins and signing details before approval.</value>
+  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>Security status</value>
   </data>

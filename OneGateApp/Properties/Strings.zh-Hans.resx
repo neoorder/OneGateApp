@@ -959,6 +959,21 @@
   <data name="SecurityCenterSummaryTitle" xml:space="preserve">
     <value>钱包保护概览</value>
   </data>
+  <data name="SecurityBackupStatusText" xml:space="preserve">
+    <value>在使用此钱包连接 dApp 或转账前，请确认助记词或私钥已经安全备份。</value>
+  </data>
+  <data name="SecurityRecommendation" xml:space="preserve">
+    <value>建议下一步</value>
+  </data>
+  <data name="SecurityRecommendationBiometricText" xml:space="preserve">
+    <value>启用生物识别，让钱包授权多一道更快捷的设备级确认。</value>
+  </data>
+  <data name="SecurityRecommendationConnectionIssueText" xml:space="preserve">
+    <value>在发送交易或批准 dApp 请求前，请先检查网络连接。</value>
+  </data>
+  <data name="SecurityRecommendationReviewBackupText" xml:space="preserve">
+    <value>先复核恢复备份，再在授权前持续检查 dApp 来源和签名详情。</value>
+  </data>
   <data name="SecurityStatus" xml:space="preserve">
     <value>安全状态</value>
   </data>
