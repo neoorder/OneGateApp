@@ -989,4 +989,16 @@
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
   </data>
+  <data name="ClaimGas" xml:space="preserve">
+    <value>領取</value>
+  </data>
+  <data name="UnclaimedGas" xml:space="preserve">
+    <value>未領取 GAS</value>
+  </data>
+  <data name="NoNeoToClaimGas" xml:space="preserve">
+    <value>需要持有 NEO 才能領取 GAS。</value>
+  </data>
+  <data name="ClaimGasConfirmText" xml:space="preserve">
+    <value>領取累積的 GAS。這會向你自己的地址發起一筆 NEO 轉帳以分發 GAS。</value>
+  </data>
 </root>

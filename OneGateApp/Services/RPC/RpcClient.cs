@@ -129,6 +129,12 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
         return result.Stack[0].GetInteger();
     }
 
+    public async Task<BigInteger> GetUnclaimedGasAsync(UInt160 account)
+    {
+        JsonObject result = await RpcSendAsync<JsonObject>("getunclaimedgas", account.ToAddress(protocolSettings.AddressVersion));
+        return BigInteger.TryParse(result["unclaimed"]?.GetValue<string>(), out BigInteger value) ? value : BigInteger.Zero;
+    }
+
     public async Task<BigInteger[]> BalanceOf(UInt160 account, UInt160[] assets)
     {
         byte[] script;

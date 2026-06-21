@@ -39,6 +39,15 @@
                     </VerticalStackLayout>
                 </Grid>
             </Border>
+            <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" IsVisible="{Binding IsNeo}">
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="10" Padding="20">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.UnclaimedGas}" />
+                        <Label Text="{Binding DisplayUnclaimedGas}" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" Text="{x:Static og:Strings.ClaimGas}" IsEnabled="{Binding HasUnclaimedGas}" Clicked="OnClaimGas" Padding="16,0" VerticalOptions="Center" />
+                </Grid>
+            </Border>
             <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}">
                 <VerticalStackLayout Padding="20,0">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="10" Padding="0,20">

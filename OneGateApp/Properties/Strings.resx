@@ -989,4 +989,16 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Unavailable" xml:space="preserve">
     <value>Unavailable</value>
   </data>
+  <data name="ClaimGas" xml:space="preserve">
+    <value>Claim</value>
+  </data>
+  <data name="UnclaimedGas" xml:space="preserve">
+    <value>Unclaimed GAS</value>
+  </data>
+  <data name="NoNeoToClaimGas" xml:space="preserve">
+    <value>You need NEO to claim GAS.</value>
+  </data>
+  <data name="ClaimGasConfirmText" xml:space="preserve">
+    <value>Claim your accrued GAS. This sends a NEO transfer to your own address, which distributes the GAS.</value>
+  </data>
 </root>

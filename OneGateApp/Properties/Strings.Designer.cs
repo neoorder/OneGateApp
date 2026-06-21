@@ -2625,5 +2625,41 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Claim.
+        /// </summary>
+        internal static string ClaimGas {
+            get {
+                return ResourceManager.GetString("ClaimGas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unclaimed GAS.
+        /// </summary>
+        internal static string UnclaimedGas {
+            get {
+                return ResourceManager.GetString("UnclaimedGas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need NEO to claim GAS..
+        /// </summary>
+        internal static string NoNeoToClaimGas {
+            get {
+                return ResourceManager.GetString("NoNeoToClaimGas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Claim your accrued GAS. This sends a NEO.
+        /// </summary>
+        internal static string ClaimGasConfirmText {
+            get {
+                return ResourceManager.GetString("ClaimGasConfirmText", resourceCulture);
+            }
+        }
     }
 }
