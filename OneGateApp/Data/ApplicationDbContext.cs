@@ -24,7 +24,7 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
         string safeColumn = SanitizeIdentifier(column);
 #pragma warning disable EF1003
         int count = Database
-            .SqlQueryRaw<int>("SELECT COUNT(*) AS \"Value\" FROM pragma_table_info('" + safeTable + "') WHERE name = '" + safeColumn + "'")
+            .SqlQueryRaw<int>("SELECT COUNT(*) AS \"Value\" FROM pragma_table_info({0}) WHERE name = {1}", safeTable, safeColumn)
             .AsEnumerable()
             .Single();
         if (count == 0)
