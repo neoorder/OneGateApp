@@ -46,5 +46,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("wallet/receive", typeof(ReceivePage));
         Routing.RegisterRoute("wallet/send", typeof(SendPage));
         Routing.RegisterRoute("wallet/sending", typeof(SendingPage));
+        Routing.RegisterRoute("wallet/transactions", typeof(TransactionHistoryPage));
     }
 }

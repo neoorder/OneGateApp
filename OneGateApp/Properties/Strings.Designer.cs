@@ -1811,7 +1811,43 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Records", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 No transaction activity found 的本地化字符串。
+        /// </summary>
+        internal static string TransactionHistoryEmpty {
+            get {
+                return ResourceManager.GetString("TransactionHistoryEmpty", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transfers for this wallet will appear here after they are indexed by the RPC node. 的本地化字符串。
+        /// </summary>
+        internal static string TransactionHistoryEmptyText {
+            get {
+                return ResourceManager.GetString("TransactionHistoryEmptyText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unable to load transaction history 的本地化字符串。
+        /// </summary>
+        internal static string TransactionHistoryLoadFailed {
+            get {
+                return ResourceManager.GetString("TransactionHistoryLoadFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Retry 的本地化字符串。
+        /// </summary>
+        internal static string TransactionHistoryRetry {
+            get {
+                return ResourceManager.GetString("TransactionHistoryRetry", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 External link navigation blocked 的本地化字符串。
         /// </summary>

@@ -439,6 +439,18 @@
   <data name="Records" xml:space="preserve">
     <value>交易记录</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>暂无交易活动</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>此钱包的转账被 RPC 节点索引后，会显示在这里。</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>无法加载交易历史</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>重试</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>资产</value>
   </data>

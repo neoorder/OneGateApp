@@ -439,6 +439,18 @@
   <data name="Records" xml:space="preserve">
     <value>取引履歴</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>No transaction activity found</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Transfers for this wallet will appear here after they are indexed by the RPC node.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Unable to load transaction history</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>資産</value>
   </data>

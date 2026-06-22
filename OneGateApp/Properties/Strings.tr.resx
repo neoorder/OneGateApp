@@ -439,6 +439,18 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
   <data name="Records" xml:space="preserve">
     <value>Geçmiş</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>No transaction activity found</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Transfers for this wallet will appear here after they are indexed by the RPC node.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Unable to load transaction history</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Varlık</value>
   </data>

@@ -80,7 +80,7 @@
                         </Border>
                         <Label Text="{x:Static og:Strings.Records}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="{Binding ScriptHash, StringFormat='https://explorer.onegate.space/accountprofile/{0}'}" />
+                            <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="//wallet/transactions" />
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
                 </Grid>
