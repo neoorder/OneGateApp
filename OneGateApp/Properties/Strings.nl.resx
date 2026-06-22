@@ -326,6 +326,9 @@ U kunt biometrische verificatie op elk moment uitschakelen.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Verifieer uw biometrie om door te gaan</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Wallet ontgrendelen</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Handeling geannuleerd</value>
   </data>
@@ -447,6 +450,30 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   </data>
   <data name="General" xml:space="preserve">
     <value>Algemeen</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Contentinstellingen</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Beperkte inhoud toestaan</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Toon DApps die mogelijk niet voor iedereen geschikt zijn. Wanneer uitgeschakeld, worden deze DApps verborgen in lijsten.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Geboortedatum selecteren</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Beperkte inhoud kan niet worden ingeschakeld op basis van de opgegeven leeftijd.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Beperkte inhoud</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Beperkte inhoud kan volwassen, gewelddadige, gok-, dating- of andere gevoelige thema's bevatten die niet geschikt zijn voor minderjarigen.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Ik begrijp het en ga door</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Scan de QR-code om mij een overboeking te sturen</value>
@@ -881,14 +908,35 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Onvoldoende saldo om het bedrag en de kosten te dekken. Het maximale bedrag dat u kunt verzenden is {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Ontwikkelaarsmodus ingeschakeld</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Ontwikkelaarstools</value>
+    <value>Ontwikkelaarscentrum</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>DApp-debugpaneel</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp-test</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp-indiening</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp-indiening: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Projectnaam</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Officiële website</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Contactgegevens</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Per e-mail indienen</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Beschikbaar</value>
