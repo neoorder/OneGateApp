@@ -451,6 +451,30 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
   <data name="General" xml:space="preserve">
     <value>Generale</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Impostazioni contenuti</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Consenti contenuti soggetti a restrizioni</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Mostra DApp che potrebbero non essere adatte a tutti. Se disattivata, queste DApp vengono nascoste dagli elenchi.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Seleziona data di nascita</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>I contenuti soggetti a restrizioni non possono essere abilitati in base all'età fornita.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Contenuti soggetti a restrizioni</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>I contenuti soggetti a restrizioni possono includere temi per adulti, violenti, gioco d'azzardo, incontri o altri temi sensibili non adatti ai minori.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Capisco e continuo</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Scansiona il codice QR per inviarmi un trasferimento</value>
   </data>

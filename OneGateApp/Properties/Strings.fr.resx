@@ -451,6 +451,30 @@ Après désactivation, vous devrez saisir manuellement le mot de passe du portef
   <data name="General" xml:space="preserve">
     <value>Général</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Paramètres de contenu</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Autoriser le contenu restreint</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Afficher les DApps qui peuvent ne pas convenir à tout le monde. Lorsque cette option est désactivée, ces DApps sont masquées dans les listes.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Sélectionner la date de naissance</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Le contenu restreint ne peut pas être activé selon l’âge indiqué.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Contenu restreint</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Le contenu restreint peut inclure des thèmes adultes, violents, liés aux jeux d’argent, aux rencontres ou d’autres thèmes sensibles qui ne conviennent pas aux mineurs.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Je comprends et continue</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Veuillez scanner le code QR pour m’envoyer un paiement</value>
   </data>

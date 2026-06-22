@@ -451,6 +451,30 @@ Depois de desativá-la, será necessário digitar manualmente a senha da carteir
   <data name="General" xml:space="preserve">
     <value>Geral</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Configurações de conteúdo</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Permitir conteúdo restrito</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Mostre DApps que podem não ser adequadas para todos. Quando desativado, essas DApps ficam ocultas nas listas.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Selecionar data de nascimento</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>O conteúdo restrito não pode ser ativado com base na idade informada.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Conteúdo restrito</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>O conteúdo restrito pode incluir temas adultos, violentos, jogos de azar, namoro ou outros temas sensíveis que não são adequados para menores.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Entendo e continuo</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Escaneie o código QR para me enviar uma transferência</value>
   </data>

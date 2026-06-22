@@ -451,6 +451,30 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   <data name="General" xml:space="preserve">
     <value>Algemeen</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Contentinstellingen</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Beperkte inhoud toestaan</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Toon DApps die mogelijk niet voor iedereen geschikt zijn. Wanneer uitgeschakeld, worden deze DApps verborgen in lijsten.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Geboortedatum selecteren</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Beperkte inhoud kan niet worden ingeschakeld op basis van de opgegeven leeftijd.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Beperkte inhoud</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Beperkte inhoud kan volwassen, gewelddadige, gok-, dating- of andere gevoelige thema's bevatten die niet geschikt zijn voor minderjarigen.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Ik begrijp het en ga door</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Scan de QR-code om mij een overboeking te sturen</value>
   </data>

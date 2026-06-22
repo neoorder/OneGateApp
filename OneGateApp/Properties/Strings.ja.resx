@@ -451,6 +451,30 @@
   <data name="General" xml:space="preserve">
     <value>一般</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>コンテンツ設定</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>制限付きコンテンツを許可</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>すべてのユーザーに適しているとは限らないDAppを表示します。無効にすると、これらのDAppは一覧から非表示になります。</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>生年月日を選択</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>入力された年齢では制限付きコンテンツを有効にできません。</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>制限付きコンテンツ</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>制限付きコンテンツには、未成年に適さない成人向け、暴力、ギャンブル、出会い、その他のセンシティブなテーマが含まれる場合があります。</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>理解して続行</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>QRコードをスキャンして送金してください</value>
   </data>

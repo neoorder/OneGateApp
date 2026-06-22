@@ -451,6 +451,30 @@ Nach der Deaktivierung müssen Sie Ihr Wallet-Passwort manuell eingeben, um den 
   <data name="General" xml:space="preserve">
     <value>Allgemein</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Inhaltseinstellungen</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Eingeschränkte Inhalte zulassen</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>DApps anzeigen, die möglicherweise nicht für alle geeignet sind. Wenn deaktiviert, werden diese DApps in Listen ausgeblendet.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Geburtsdatum auswählen</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Eingeschränkte Inhalte können basierend auf dem angegebenen Alter nicht aktiviert werden.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Eingeschränkte Inhalte</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Eingeschränkte Inhalte können Inhalte für Erwachsene, Gewalt, Glücksspiel, Dating oder andere sensible Themen enthalten, die für Minderjährige nicht geeignet sind.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Ich verstehe und fahre fort</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Bitte scannen Sie den QR-Code, um mir eine Überweisung zu senden</value>
   </data>

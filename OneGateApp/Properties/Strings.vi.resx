@@ -451,6 +451,30 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
   <data name="General" xml:space="preserve">
     <value>Chung</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Cài đặt nội dung</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Cho phép nội dung bị hạn chế</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Hiển thị các DApp có thể không phù hợp với tất cả mọi người. Khi tắt, các DApp này sẽ bị ẩn khỏi danh sách.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Chọn ngày sinh</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Không thể bật nội dung bị hạn chế dựa trên độ tuổi bạn cung cấp.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Nội dung bị hạn chế</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Nội dung bị hạn chế có thể bao gồm chủ đề người lớn, bạo lực, cờ bạc, hẹn hò hoặc các chủ đề nhạy cảm khác không phù hợp với trẻ vị thành niên.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Tôi hiểu và tiếp tục</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Vui lòng quét mã QR để chuyển tiền cho tôi</value>
   </data>
