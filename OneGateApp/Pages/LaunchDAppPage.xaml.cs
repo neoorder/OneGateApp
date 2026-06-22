@@ -182,7 +182,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     {
         string appName = DApp?.NameLocalizer.Localize() ?? GetHostOrUrl(failedUrl);
         DAppLoadErrorTitle = Strings.DAppLoadFailed;
-        DAppLoadErrorMessage = string.Format(Strings.DAppLoadFailedText, appName, result);
+        DAppLoadErrorMessage = string.Format(Strings.DAppLoadFailedText, appName, (int)result);
         HasDAppLoadError = true;
     }
 

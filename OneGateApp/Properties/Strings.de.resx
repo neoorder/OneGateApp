@@ -696,13 +696,13 @@ Möchten Sie fortfahren?</value>
     <value>Rückkehr zur DApp fehlgeschlagen</value>
   </data>
   <data name="DAppLoadFailed" xml:space="preserve">
-    <value>DApp did not load</value>
+    <value>DApp wurde nicht geladen</value>
   </data>
   <data name="DAppLoadFailedText" xml:space="preserve">
-    <value>{0} could not be loaded. Check your connection and try again. Status: {1}</value>
+    <value>{0} konnte nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut. Status: {1}</value>
   </data>
   <data name="Retry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Erneut versuchen</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Teilen</value>

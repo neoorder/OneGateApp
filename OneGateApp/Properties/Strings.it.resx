@@ -696,13 +696,13 @@ Vuoi continuare?</value>
     <value>Impossibile tornare alla DApp</value>
   </data>
   <data name="DAppLoadFailed" xml:space="preserve">
-    <value>DApp did not load</value>
+    <value>La DApp non è stata caricata</value>
   </data>
   <data name="DAppLoadFailedText" xml:space="preserve">
-    <value>{0} could not be loaded. Check your connection and try again. Status: {1}</value>
+    <value>Impossibile caricare {0}. Controlla la connessione e riprova. Stato: {1}</value>
   </data>
   <data name="Retry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Riprova</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Condividi</value>

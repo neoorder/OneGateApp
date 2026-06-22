@@ -696,13 +696,13 @@ Bạn có muốn tiếp tục không?</value>
     <value>Không thể quay lại DApp</value>
   </data>
   <data name="DAppLoadFailed" xml:space="preserve">
-    <value>DApp did not load</value>
+    <value>DApp chưa được tải</value>
   </data>
   <data name="DAppLoadFailedText" xml:space="preserve">
-    <value>{0} could not be loaded. Check your connection and try again. Status: {1}</value>
+    <value>Không thể tải {0}. Hãy kiểm tra kết nối rồi thử lại. Trạng thái: {1}</value>
   </data>
   <data name="Retry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Thử lại</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Chia sẻ</value>

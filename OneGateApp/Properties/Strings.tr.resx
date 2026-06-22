@@ -696,13 +696,13 @@ Devam etmek istiyor musunuz?</value>
     <value>DApp'e geri dönülemedi</value>
   </data>
   <data name="DAppLoadFailed" xml:space="preserve">
-    <value>DApp did not load</value>
+    <value>DApp yüklenmedi</value>
   </data>
   <data name="DAppLoadFailedText" xml:space="preserve">
-    <value>{0} could not be loaded. Check your connection and try again. Status: {1}</value>
+    <value>{0} yüklenemedi. Bağlantınızı kontrol edip tekrar deneyin. Durum: {1}</value>
   </data>
   <data name="Retry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Tekrar dene</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Paylaş</value>

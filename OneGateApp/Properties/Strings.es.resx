@@ -696,13 +696,13 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
     <value>No se pudo volver a la DApp</value>
   </data>
   <data name="DAppLoadFailed" xml:space="preserve">
-    <value>DApp did not load</value>
+    <value>La DApp no se cargó</value>
   </data>
   <data name="DAppLoadFailedText" xml:space="preserve">
-    <value>{0} could not be loaded. Check your connection and try again. Status: {1}</value>
+    <value>No se pudo cargar {0}. Revisa tu conexión e inténtalo de nuevo. Estado: {1}</value>
   </data>
   <data name="Retry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Reintentar</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Compartir</value>
