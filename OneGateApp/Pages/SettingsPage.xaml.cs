@@ -86,9 +86,9 @@ public partial class SettingsPage : ContentPage
         }
         yield return (Strings.Others, new SettingEntry(Strings.ContactUs)
         {
-            CurrentValue = "contact@neoorder.org",
+            CurrentValue = SharedOptions.ContactEmail,
             Command = Commands.LaunchUrl,
-            CommandParameter = $"mailto:contact@neoorder.org"
+            CommandParameter = $"mailto:{SharedOptions.ContactEmail}"
         });
         yield return (Strings.Others, new SettingEntry(Strings.DeveloperTools)
         {

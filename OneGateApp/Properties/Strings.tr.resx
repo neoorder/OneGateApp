@@ -909,13 +909,34 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
     <value>Tutarı ve ücretleri karşılamak için bakiye yetersiz. Gönderebileceğiniz en yüksek tutar {0} GAS’tır.</value>
   </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Geliştirici araçları</value>
+    <value>Geliştirici merkezi</value>
   </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp hata ayıklama paneli</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp Testi</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp gönderimi</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp gönderimi: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Proje adı</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Resmi web sitesi</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>İletişim bilgileri</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>E-posta ile gönder</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Kullanılabilir</value>
