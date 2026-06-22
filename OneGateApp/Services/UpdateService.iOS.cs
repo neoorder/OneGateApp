@@ -14,7 +14,7 @@ partial class UpdateService
         if (IsAppStore())
         {
             JsonObject result = (await httpClient.GetFromJsonAsync<JsonObject>("https://itunes.apple.com/lookup?id=1584915425"))!;
-            Version latest = new(result["results"]!["version"]!.GetValue<string>());
+            Version latest = new(result["results"]![0]!["version"]!.GetValue<string>());
             return latest > AppInfo.Version;
         }
         return await CheckForUpdatesFallbackAsync();
