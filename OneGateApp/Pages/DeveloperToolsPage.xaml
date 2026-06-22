@@ -7,6 +7,10 @@
              Title="{x:Static og:Strings.DeveloperTools}"
              Shell.TabBarIsVisible="False">
     <VerticalStackLayout Margin="20" Spacing="20">
+        <Grid ColumnDefinitions="*,auto" MinimumHeightRequest="44" ColumnSpacing="16">
+            <Label Text="{x:Static og:Strings.DAppDebugPanel}" FontSize="16" VerticalOptions="Center" />
+            <Switch Grid.Column="1" IsToggled="{Binding IsDAppDebugPanelEnabled}" IsEnabled="{Binding IsSettingsLoaded}" VerticalOptions="Center" Toggled="OnDAppDebugPanelToggled" />
+        </Grid>
         <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppTesting}" />
         <Entry Margin="0,-20,0,0" Keyboard="Url" ReturnType="Go" ReturnCommand="{Binding DAppTestingCommand}" ReturnCommandParameter="{Binding Text, Source={RelativeSource Self}}" />
     </VerticalStackLayout>

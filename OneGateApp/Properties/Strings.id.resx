@@ -451,6 +451,30 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
   <data name="General" xml:space="preserve">
     <value>Umum</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Pengaturan konten</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Izinkan konten terbatas</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Tampilkan DApp yang mungkin tidak cocok untuk semua orang. Jika dinonaktifkan, DApp ini disembunyikan dari daftar.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Pilih tanggal lahir</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Konten terbatas tidak dapat diaktifkan berdasarkan usia yang Anda berikan.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Konten terbatas</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Konten terbatas dapat mencakup tema dewasa, kekerasan, perjudian, kencan, atau tema sensitif lain yang tidak cocok untuk anak di bawah umur.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Saya mengerti dan lanjutkan</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Silakan pindai kode QR untuk mengirim transfer kepada saya</value>
   </data>
@@ -884,11 +908,11 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Saldo tidak cukup untuk menutupi jumlah dan biaya. Jumlah maksimum yang dapat Anda kirim adalah {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Mode pengembang diaktifkan</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
     <value>Alat pengembang</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>Panel debug DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Pengujian DApp</value>

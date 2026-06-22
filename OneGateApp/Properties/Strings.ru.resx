@@ -451,6 +451,30 @@
   <data name="General" xml:space="preserve">
     <value>Общие</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Настройки контента</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Разрешить ограниченный контент</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Показывать DApp, которые могут подходить не всем. Если выключено, эти DApp скрываются из списков.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Выберите дату рождения</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Ограниченный контент нельзя включить на основании указанного возраста.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Ограниченный контент</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Ограниченный контент может включать темы для взрослых, насилие, азартные игры, знакомства или другие чувствительные темы, не подходящие для несовершеннолетних.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Я понимаю и продолжаю</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Пожалуйста, отсканируйте QR-код, чтобы отправить мне перевод</value>
   </data>
@@ -884,11 +908,11 @@
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Недостаточно средств для покрытия суммы и комиссии. Максимальная сумма, которую вы можете отправить, составляет {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Режим разработчика включён</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
     <value>Инструменты разработчика</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>Панель отладки DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Тест DApp</value>
