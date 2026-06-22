@@ -8,6 +8,9 @@
             x:TypeArguments="og:Contact"
             CanBeDismissedByTappingOutsideOfPopup="True"
             BindingContext="{Binding Source={RelativeSource Self}}">
+    <og:MyPopup.Resources>
+        <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+    </og:MyPopup.Resources>
     <VerticalStackLayout Spacing="15">
         <Grid ColumnDefinitions="*,auto">
             <Label Text="{x:Static og:Strings.SelectContact}" FontAttributes="Bold" />
@@ -32,7 +35,7 @@
                                         <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
                                     </Border>
                                 </Grid>
-                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" LineBreakMode="TailTruncation" />
+                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding DetailText, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
                                 <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
                             </VerticalStackLayout>
                             <Grid.GestureRecognizers>

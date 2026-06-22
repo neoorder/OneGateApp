@@ -38,5 +38,5 @@ public class Contact
     public string BadgeText => IsAddressBookEntry ? Strings.AddressBook : Strings.RecentRecipient;
 
     [NotMapped]
-    public string DetailText => !string.IsNullOrWhiteSpace(Note) ? Note! : Address;
+    public string DetailText => !string.IsNullOrWhiteSpace(Note) ? Note! : "";
 }
