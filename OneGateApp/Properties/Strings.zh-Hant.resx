@@ -671,6 +671,15 @@
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>無法返回 DApp</value>
   </data>
+  <data name="DAppLoadFailed" xml:space="preserve">
+    <value>DApp 未能載入</value>
+  </data>
+  <data name="DAppLoadFailedText" xml:space="preserve">
+    <value>{0} 暫時無法載入。請檢查網路連線後重試。狀態：{1}</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>重試</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>分享</value>
   </data>

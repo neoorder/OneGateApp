@@ -26,11 +26,28 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
+    string? url;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
-    public required string Url { get; set { field = value; OnPropertyChanged(); } }
+    public string? Url
+    {
+        get => url;
+        set
+        {
+            if (url == value) return;
+            url = value;
+            if (!string.IsNullOrWhiteSpace(url))
+                BeginDAppLoad();
+            OnPropertyChanged();
+        }
+    }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
+    public bool IsDAppLoading { get; set { field = value; OnPropertyChanged(); } }
+    public bool HasDAppLoadError { get; set { field = value; OnPropertyChanged(); } }
+    public string DAppLoadErrorTitle { get; set { field = value; OnPropertyChanged(); } } = "";
+    public string DAppLoadErrorMessage { get; set { field = value; OnPropertyChanged(); } } = "";
+    public string RetryText => Strings.Retry;
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
@@ -130,7 +147,50 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         {
             e.Cancel = true;
             await Toast.Show(Strings.RedirectionBlockedText);
+            IsDAppLoading = false;
+            HasDAppLoadError = false;
+            return;
         }
+        BeginDAppLoad();
+    }
+
+    void OnNavigated(object sender, WebNavigatedEventArgs e)
+    {
+        IsDAppLoading = false;
+        if (e.Result == WebNavigationResult.Success || e.Result == WebNavigationResult.Cancel)
+        {
+            HasDAppLoadError = false;
+            return;
+        }
+        ShowDAppLoadError(e.Url, e.Result);
+    }
+
+    void OnRetryDAppClicked(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(Url)) return;
+        BeginDAppLoad();
+        webView.Reload();
+    }
+
+    void BeginDAppLoad()
+    {
+        IsDAppLoading = true;
+        HasDAppLoadError = false;
+    }
+
+    void ShowDAppLoadError(string failedUrl, WebNavigationResult result)
+    {
+        string appName = DApp?.NameLocalizer.Localize() ?? GetHostOrUrl(failedUrl);
+        DAppLoadErrorTitle = Strings.DAppLoadFailed;
+        DAppLoadErrorMessage = string.Format(Strings.DAppLoadFailedText, appName, result);
+        HasDAppLoadError = true;
+    }
+
+    static string GetHostOrUrl(string url)
+    {
+        return Uri.TryCreate(url, UriKind.Absolute, out Uri? uri) && !string.IsNullOrWhiteSpace(uri.Host)
+            ? uri.Host
+            : url;
     }
 
     string CreateDocumentStartScript()
