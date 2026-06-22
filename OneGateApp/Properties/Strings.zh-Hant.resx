@@ -885,13 +885,34 @@
     <value>餘額不足，無法支付金額和手續費。您最多可發送 {0} GAS。</value>
   </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>開發者工具</value>
+    <value>開發者中心</value>
   </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp 偵錯面板</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp測試</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp 提交</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp 提交：{0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>專案名稱</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>官網</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>聯絡方式</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>透過電子郵件提交</value>
   </data>
   <data name="SavedAddressTitle" xml:space="preserve">
     <value>已儲存地址</value>
