@@ -326,6 +326,9 @@ Sie können die biometrische Authentifizierung jederzeit deaktivieren.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Bitte bestätigen Sie Ihre biometrischen Daten, um fortzufahren</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Wallet wird entsperrt</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Vorgang abgebrochen</value>
   </data>

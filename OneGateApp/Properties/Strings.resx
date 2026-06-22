@@ -326,6 +326,9 @@ You can disable biometric authentication at any time.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Please verify your biometrics to continue</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Unlocking wallet</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operation cancelled</value>
   </data>
@@ -444,6 +447,30 @@ After disabling, you will need to manually enter your wallet password to authori
   </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Content settings</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Allow restricted content</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Show DApps that may not be suitable for everyone. When disabled, these DApps are hidden from lists.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Select birth date</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Restricted content cannot be enabled based on the age you provided.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Restricted content</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Restricted content may include adult, violent, gambling, dating, or other sensitive themes that are not suitable for minors.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>I understand and continue</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Please scan the QR code to send me a transfer</value>
