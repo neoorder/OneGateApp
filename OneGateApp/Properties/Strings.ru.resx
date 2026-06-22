@@ -909,13 +909,34 @@
     <value>Недостаточно средств для покрытия суммы и комиссии. Максимальная сумма, которую вы можете отправить, составляет {0} GAS.</value>
   </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Инструменты разработчика</value>
+    <value>Центр разработчика</value>
   </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>Панель отладки DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Тест DApp</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>Отправка DApp</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>Отправка DApp: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Название проекта</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Официальный сайт</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Контактная информация</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Отправить по электронной почте</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Доступно</value>

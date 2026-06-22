@@ -674,7 +674,70 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppTesting", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 DApp Submission 的本地化字符串。
+        /// </summary>
+        internal static string DAppSubmission {
+            get {
+                return ResourceManager.GetString("DAppSubmission", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 DApp submission: {0} 的本地化字符串。
+        /// </summary>
+        internal static string DAppSubmissionEmailSubject {
+            get {
+                return ResourceManager.GetString("DAppSubmissionEmailSubject", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Project name 的本地化字符串。
+        /// </summary>
+        internal static string ProjectName {
+            get {
+                return ResourceManager.GetString("ProjectName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 URL 的本地化字符串。
+        /// </summary>
+        internal static string DAppUrl {
+            get {
+                return ResourceManager.GetString("DAppUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Official website 的本地化字符串。
+        /// </summary>
+        internal static string OfficialWebsite {
+            get {
+                return ResourceManager.GetString("OfficialWebsite", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Contact information 的本地化字符串。
+        /// </summary>
+        internal static string ContactInformation {
+            get {
+                return ResourceManager.GetString("ContactInformation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Submit by email 的本地化字符串。
+        /// </summary>
+        internal static string SubmitByEmail {
+            get {
+                return ResourceManager.GetString("SubmitByEmail", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 {0} do not match 的本地化字符串。
         /// </summary>
@@ -813,7 +876,7 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Developer Tools 的本地化字符串。
+        ///   查找类似 Developer Center 的本地化字符串。
         /// </summary>
         internal static string DeveloperTools {
             get {

@@ -909,13 +909,34 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
     <value>No hay saldo suficiente para cubrir el importe y las comisiones. La cantidad máxima que puedes enviar es {0} GAS.</value>
   </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Herramientas de desarrollador</value>
+    <value>Centro de desarrolladores</value>
   </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>Panel de depuración de DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Prueba de DApp</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>Envío de DApp</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>Envío de DApp: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Nombre del proyecto</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Sitio web oficial</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Información de contacto</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Enviar por correo electrónico</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Disponible</value>
