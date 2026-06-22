@@ -304,7 +304,7 @@
     <value>生体認証資格情報を作成</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>お使いのデバイスは生体認証に対応しています。ログインを簡単にするため、生体認証の資格情報を作成しますか？</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>外部リンクへの遷移をブロックしました</value>

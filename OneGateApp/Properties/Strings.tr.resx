@@ -304,7 +304,7 @@
     <value>Biyometrik kimlik bilgisi oluştur</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Cihazınız biyometrik kimlik doğrulamayı destekliyor. Oturum açmayı kolaylaştırmak için biyometrik kimlik bilgisi oluşturulsun mu?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Harici bağlantıya yönlendirme engellendi</value>

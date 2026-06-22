@@ -77,12 +77,9 @@ public partial class EditContactPage : ContentPage, IQueryAttributable
         popup.IsDanger = true;
         var result = await this.ShowPopupAsync<bool>(popup);
         if (!result.Result) return;
-        Contact? contact = await dbContext.Contacts.SingleOrDefaultAsync(p => p.Address == Contact.Address);
-        if (contact is not null)
-        {
-            dbContext.Contacts.Remove(contact);
-            await dbContext.SaveChangesAsync();
-        }
+        await dbContext.Contacts
+            .Where(p => p.Address == Contact.Address)
+            .ExecuteDeleteAsync();
         await Toast.Show(Strings.ContactDeletedSuccessfully);
         GlobalStates.Invalidate<ContactsPage>();
         GlobalStates.Invalidate<SettingsPage>();

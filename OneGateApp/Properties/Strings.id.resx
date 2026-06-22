@@ -304,7 +304,7 @@
     <value>Buat kredensial biometrik</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Perangkat Anda mendukung autentikasi biometrik. Buat kredensial biometrik untuk mempermudah proses masuk?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Navigasi tautan eksternal diblokir</value>

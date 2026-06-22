@@ -304,7 +304,7 @@
     <value>Biometrische verificatie instellen</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Uw apparaat ondersteunt biometrische verificatie. Een biometrische verificatie instellen om inloggen te vereenvoudigen?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Navigatie naar externe link geblokkeerd</value>

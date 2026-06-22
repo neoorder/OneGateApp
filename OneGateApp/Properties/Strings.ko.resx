@@ -304,7 +304,7 @@
     <value>생체 인증 자격 증명 생성</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>사용자의 기기는 생체 인증을 지원합니다. 로그인 간소화를 위해 생체 인증 자격 증명을 생성하시겠습니까?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>외부 링크 이동이 차단되었습니다</value>

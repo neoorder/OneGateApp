@@ -304,7 +304,7 @@
     <value>创建生物识别凭证</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>检测到您的设备支持生物识别，是否创建生物识别凭证以简化登录？</value>
+    <value>检测到您的设备支持生物识别。设置后，您可以用生物识别解锁 OneGate 并授权钱包操作，无需每次输入密码。</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>已阻止外部链接跳转</value>

@@ -304,7 +304,7 @@
     <value>Tạo thông tin xác thực sinh trắc học</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Thiết bị của bạn hỗ trợ xác thực sinh trắc học. Bạn có muốn tạo thông tin xác thực sinh trắc học để đơn giản hóa đăng nhập không?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Đã chặn chuyển hướng liên kết bên ngoài</value>

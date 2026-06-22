@@ -304,7 +304,7 @@
     <value>Crear credenciales biométricas</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Su dispositivo admite autenticación biométrica. ¿Crear credenciales biométricas para simplificar el inicio de sesión?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Navegación a enlace externo bloqueada</value>

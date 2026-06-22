@@ -304,7 +304,7 @@
     <value>Создать биометрические данные для входа</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Ваше устройство поддерживает биометрическую аутентификацию. Создать биометрические данные для упрощения входа?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Переход по внешней ссылке заблокирован</value>
