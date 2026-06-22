@@ -40,6 +40,9 @@ public static class MauiProgram
             {
                 Controls.Handlers.Border.ConfigureHandlers();
                 handlers.AddHandler<BridgeWebView, BridgeWebViewHandler>();
+#if ANDROID
+                handlers.AddHandler<DatePicker, OneGateDatePickerHandler>();
+#endif
             })
             .ConfigureFonts(fonts =>
             {

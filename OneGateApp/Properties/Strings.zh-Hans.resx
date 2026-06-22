@@ -326,6 +326,9 @@
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>请验证您的生物信息以继续操作</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>正在解锁钱包</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>操作已取消</value>
   </data>
@@ -444,6 +447,30 @@
   </data>
   <data name="General" xml:space="preserve">
     <value>常规</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>内容设置</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>允许显示受限内容</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>显示可能不适合所有人的 DApp。关闭后，这些 DApp 会从列表中隐藏。</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>请选择出生日期</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>根据你提供的年龄，无法启用受限内容。</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>受限内容</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>受限内容可能包含不适合未成年人的成人、暴力、赌博、约会或其他敏感主题内容。</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>我理解并继续</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>请扫描二维码向我转账</value>

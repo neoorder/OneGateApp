@@ -36,17 +36,28 @@ public class WalletAuthorizationService(IServiceProvider serviceProvider, Applic
             else
             {
                 string password;
+                var progressPopup = new ProgressPopup
+                {
+                    Title = title,
+                    Message = Strings.UnlockingWallet
+                };
+                var progressTask = page.ShowPopupAsync<bool>(progressPopup);
                 try
                 {
                     password = await DataProtectionService.UnprotectAsync(credential, title, message);
+                    if (!await Task.Run(() => wallet.VerifyPassword(password)))
+                        throw new InvalidOperationException("Stored credential is invalid.");
+                    return true;
                 }
                 catch (OperationCanceledException)
                 {
                     return false;
                 }
-                if (!await Task.Run(() => wallet.VerifyPassword(password)))
-                    throw new InvalidOperationException("Stored credential is invalid.");
-                return true;
+                finally
+                {
+                    await progressPopup.CloseAsync(false);
+                    await progressTask;
+                }
             }
         }
     }
