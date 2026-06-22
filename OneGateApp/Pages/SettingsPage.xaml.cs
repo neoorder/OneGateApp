@@ -51,6 +51,12 @@ public partial class SettingsPage : ContentPage
             Command = Commands.GotoPage,
             CommandParameter = "//home/settings/news"
         });
+        yield return (Strings.General, new SettingEntry(Strings.ContentSettings)
+        {
+            CurrentValue = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext) ? Strings.Enabled : Strings.Disabled,
+            Command = Commands.GotoPage,
+            CommandParameter = "//home/settings/content"
+        });
         yield return (Strings.General, new SettingEntry(Strings.HiddenAssets)
         {
             CurrentValue = (await tokenManager.GetHiddenTokenCountAsync()).ToString(),

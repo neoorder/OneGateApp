@@ -451,6 +451,30 @@
   <data name="General" xml:space="preserve">
     <value>一般</value>
   </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>內容設定</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>允許顯示受限內容</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>顯示可能不適合所有人的 DApp。關閉後，這些 DApp 會從列表中隱藏。</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>請選擇出生日期</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>根據你提供的年齡，無法啟用受限內容。</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>受限內容</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>受限內容可能包含不適合未成年人的成人、暴力、賭博、約會或其他敏感主題內容。</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>我理解並繼續</value>
+  </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>請掃描二維碼向我轉帳</value>
   </data>
