@@ -14,11 +14,7 @@ public partial class DeveloperToolsPage : ContentPage
 
     public Command DAppTestingCommand { get; } = new(static async parameter =>
     {
-        if (Uri.TryCreate(parameter?.ToString(), UriKind.Absolute, out var uri))
-            await Shell.Current.GoToAsync("launch", new Dictionary<string, object>
-            {
-                ["uri"] = WebUtility.UrlEncode(uri.ToString())
-            });
+        await LaunchDAppAsync(parameter?.ToString());
     });
 
     public DeveloperToolsPage(ApplicationDbContext dbContext)
@@ -44,5 +40,24 @@ public partial class DeveloperToolsPage : ContentPage
     {
         if (!IsSettingsLoaded) return;
         await dbContext.Settings.PutAsync(DeveloperModeKey, e.Value);
+    }
+
+    async void OnDAppSubmissionClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//home/settings/developer/submission");
+    }
+
+    async void OnDAppTestingClicked(object sender, EventArgs e)
+    {
+        await LaunchDAppAsync(dAppTestingEntry.Text);
+    }
+
+    static async Task LaunchDAppAsync(string? value)
+    {
+        if (Uri.TryCreate(value, UriKind.Absolute, out var uri))
+            await Shell.Current.GoToAsync("launch", new Dictionary<string, object>
+            {
+                ["uri"] = WebUtility.UrlEncode(uri.ToString())
+            });
     }
 }
