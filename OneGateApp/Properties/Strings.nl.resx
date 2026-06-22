@@ -326,6 +326,9 @@ U kunt biometrische verificatie op elk moment uitschakelen.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Verifieer uw biometrie om door te gaan</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Wallet ontgrendelen</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Handeling geannuleerd</value>
   </data>

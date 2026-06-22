@@ -326,6 +326,9 @@
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>続行するには生体認証を行ってください</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>ウォレットをロック解除中</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>操作がキャンセルされました</value>
   </data>

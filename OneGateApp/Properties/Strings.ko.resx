@@ -326,6 +326,9 @@
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>계속하려면 생체 인증을 확인하세요</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>지갑 잠금 해제 중</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>작업이 취소되었습니다</value>
   </data>

@@ -326,6 +326,9 @@
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>请验证您的生物信息以继续操作</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>正在解锁钱包</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>操作已取消</value>
   </data>

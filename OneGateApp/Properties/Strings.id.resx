@@ -326,6 +326,9 @@ Anda dapat menonaktifkan autentikasi biometrik kapan saja.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Silakan verifikasi biometrik Anda untuk melanjutkan</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Membuka kunci wallet</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operasi dibatalkan</value>
   </data>
