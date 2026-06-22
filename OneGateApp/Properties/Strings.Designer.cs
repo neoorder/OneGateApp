@@ -149,7 +149,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AllowRestrictedContentDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Select birth date 的本地化字符串。
         /// </summary>
@@ -394,7 +394,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Change language 的本地化字符串。
         /// </summary>
@@ -476,7 +476,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ConfirmSecurityRiskAcknowledgement", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 I understand and continue 的本地化字符串。
         /// </summary>
@@ -658,6 +658,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 DApp Debug Panel 的本地化字符串。
+        /// </summary>
+        internal static string DAppDebugPanel {
+            get {
+                return ResourceManager.GetString("DAppDebugPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 DApp Testing 的本地化字符串。
         /// </summary>
         internal static string DAppTesting {
@@ -800,15 +809,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Developer mode enabled 的本地化字符串。
-        /// </summary>
-        internal static string DeveloperModeEnabled {
-            get {
-                return ResourceManager.GetString("DeveloperModeEnabled", resourceCulture);
             }
         }
         
