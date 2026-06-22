@@ -440,16 +440,16 @@ Après désactivation, vous devrez saisir manuellement le mot de passe du portef
     <value>Histor.</value>
   </data>
   <data name="TransactionHistoryEmpty" xml:space="preserve">
-    <value>No transaction activity found</value>
+    <value>Aucune activité de transaction trouvée</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>Transfers for this wallet will appear here after they are indexed by the RPC node.</value>
+    <value>Les transferts de ce portefeuille s’afficheront ici après leur indexation par le nœud RPC.</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
-    <value>Unable to load transaction history</value>
+    <value>Impossible de charger l’historique des transactions</value>
   </data>
   <data name="TransactionHistoryRetry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Réessayer</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Actifs</value>

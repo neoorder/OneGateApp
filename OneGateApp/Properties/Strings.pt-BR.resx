@@ -440,16 +440,16 @@ Depois de desativá-la, será necessário digitar manualmente a senha da carteir
     <value>Hist.</value>
   </data>
   <data name="TransactionHistoryEmpty" xml:space="preserve">
-    <value>No transaction activity found</value>
+    <value>Nenhuma atividade de transação encontrada</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>Transfers for this wallet will appear here after they are indexed by the RPC node.</value>
+    <value>As transferências desta carteira aparecerão aqui depois de serem indexadas pelo nó RPC.</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
-    <value>Unable to load transaction history</value>
+    <value>Não foi possível carregar o histórico de transações</value>
   </data>
   <data name="TransactionHistoryRetry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Tentar novamente</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Ativo</value>

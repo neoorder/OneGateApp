@@ -171,7 +171,7 @@ public partial class TransactionHistoryPage : ContentPage
             Title = title,
             AmountText = amountText,
             DirectionText = transfer.IsIncoming ? Strings.Receive : Strings.Send,
-            CounterpartyText = string.IsNullOrWhiteSpace(transfer.Counterparty) ? ShortHash(transfer.AssetHash.ToString()) : transfer.Counterparty,
+            CounterpartyText = string.IsNullOrWhiteSpace(transfer.Counterparty) ? Strings.Unavailable : transfer.Counterparty,
             TimeText = timeText,
             BlockText = transfer.BlockIndex is null ? null : $"#{transfer.BlockIndex}",
             TransactionHash = ShortHash(transfer.TransactionHash)
@@ -241,14 +241,14 @@ public partial class TransactionHistoryPage : ContentPage
         foreach (string key in keys)
         {
             if (obj[key] is JsonValue value)
-                return value.ToString();
+                return ReadJsonScalar(value);
         }
         return null;
     }
 
     static long ReadInt64(JsonObject obj, string key)
     {
-        return obj[key] is JsonValue value && long.TryParse(value.ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out long result)
+        return obj[key] is JsonValue value && long.TryParse(ReadJsonScalar(value), NumberStyles.Integer, CultureInfo.InvariantCulture, out long result)
             ? result
             : 0;
     }
@@ -257,10 +257,17 @@ public partial class TransactionHistoryPage : ContentPage
     {
         foreach (string key in keys)
         {
-            if (obj[key] is JsonValue value && uint.TryParse(value.ToString(), NumberStyles.Integer, CultureInfo.InvariantCulture, out uint result))
+            if (obj[key] is JsonValue value && uint.TryParse(ReadJsonScalar(value), NumberStyles.Integer, CultureInfo.InvariantCulture, out uint result))
                 return result;
         }
         return null;
+    }
+
+    static string ReadJsonScalar(JsonValue value)
+    {
+        return value.TryGetValue(out string? text)
+            ? text ?? string.Empty
+            : value.ToString();
     }
 
     sealed class RawTransfer

@@ -440,16 +440,16 @@
     <value>История</value>
   </data>
   <data name="TransactionHistoryEmpty" xml:space="preserve">
-    <value>No transaction activity found</value>
+    <value>Активность транзакций не найдена</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>Transfers for this wallet will appear here after they are indexed by the RPC node.</value>
+    <value>Переводы этого кошелька появятся здесь после индексации RPC-узлом.</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
-    <value>Unable to load transaction history</value>
+    <value>Не удалось загрузить историю транзакций</value>
   </data>
   <data name="TransactionHistoryRetry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Повторить</value>
   </data>
   <data name="Asset" xml:space="preserve">
     <value>Активы</value>
