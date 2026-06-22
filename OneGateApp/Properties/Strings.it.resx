@@ -326,6 +326,9 @@ Puoi disattivare l'autenticazione biometrica in qualsiasi momento.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Verifica i dati biometrici per continuare</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Sblocco del wallet</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operazione annullata</value>
   </data>

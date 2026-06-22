@@ -142,6 +142,60 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Allow restricted content 的本地化字符串。
+        /// </summary>
+        internal static string AllowRestrictedContent {
+            get {
+                return ResourceManager.GetString("AllowRestrictedContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Show DApps that may not be suitable for everyone. When disabled, these DApps are hidden from lists. 的本地化字符串。
+        /// </summary>
+        internal static string AllowRestrictedContentDescription {
+            get {
+                return ResourceManager.GetString("AllowRestrictedContentDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Select birth date 的本地化字符串。
+        /// </summary>
+        internal static string SelectBirthDate {
+            get {
+                return ResourceManager.GetString("SelectBirthDate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Restricted content cannot be enabled based on the age you provided. 的本地化字符串。
+        /// </summary>
+        internal static string RestrictedContentAgeRejected {
+            get {
+                return ResourceManager.GetString("RestrictedContentAgeRejected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Restricted content 的本地化字符串。
+        /// </summary>
+        internal static string RestrictedContentConfirmationTitle {
+            get {
+                return ResourceManager.GetString("RestrictedContentConfirmationTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Restricted content may include adult, violent, gambling, dating, or other sensitive themes that are not suitable for minors. 的本地化字符串。
+        /// </summary>
+        internal static string RestrictedContentConfirmationMessage {
+            get {
+                return ResourceManager.GetString("RestrictedContentConfirmationMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Amount 的本地化字符串。
         /// </summary>
         internal static string Amount {
@@ -433,6 +487,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 I understand and continue 的本地化字符串。
+        /// </summary>
+        internal static string UnderstandAndContinue {
+            get {
+                return ResourceManager.GetString("UnderstandAndContinue", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Connected 的本地化字符串。
         /// </summary>
         internal static string Connected {
@@ -483,6 +546,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ContactUs {
             get {
                 return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Content settings 的本地化字符串。
+        /// </summary>
+        internal static string ContentSettings {
+            get {
+                return ResourceManager.GetString("ContentSettings", resourceCulture);
             }
         }
 
@@ -2457,6 +2529,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string UnknownError {
             get {
                 return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unlocking wallet 的本地化字符串。
+        /// </summary>
+        internal static string UnlockingWallet {
+            get {
+                return ResourceManager.GetString("UnlockingWallet", resourceCulture);
             }
         }
 
