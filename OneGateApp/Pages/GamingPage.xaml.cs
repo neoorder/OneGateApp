@@ -14,6 +14,7 @@ public partial class GamingPage : ContentPage
     const int MaxGameColumns = 3;
 
     readonly ApplicationDbContext dbContext;
+    bool allowRestrictedContent;
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
@@ -27,10 +28,9 @@ public partial class GamingPage : ContentPage
 
     public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
     {
+        this.LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
         this.dbContext = dbContext;
-        LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
-        DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
-        DApps.CollectionLoaded += OnDAppsLoaded;
+        this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
         InitializeComponent();
 #if WINDOWS
         // Disable the search handler on Windows because it can cause layout issues there.
@@ -55,14 +55,15 @@ public partial class GamingPage : ContentPage
         UpdateGamesItemsLayout(width);
     }
 
+    async Task LoadSettingsAsync()
+    {
+        allowRestrictedContent = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext);
+        GamesIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+    }
+
     async Task LoadDAppsAsync()
     {
         await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
-    }
-
-    async Task LoadSettingsAsync()
-    {
-        GamesIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
     }
 
     void OnGameTypeChanged(object sender, EventArgs e)
@@ -79,9 +80,11 @@ public partial class GamingPage : ContentPage
             GamesItemsLayout.Span = span;
     }
 
-    void OnDAppsLoaded(object? sender, EventArgs e)
+    void OnDataLoaded(object? sender, EventArgs e)
     {
-        Games = DApps.Where(p => p.IsGamingApp).ToArray();
+        Games = DApps
+            .Where(p => p.IsGamingApp && DAppContentPolicy.IsVisible(p, allowRestrictedContent))
+            .ToArray();
         GameTypes = Games
             .Select(p => p.GameType)
             .Where(p => !string.IsNullOrWhiteSpace(p))
@@ -93,10 +96,6 @@ public partial class GamingPage : ContentPage
             .ToArray();
         HasGameTypeFilters = GameTypes.Length > 2;
         ApplyGameTypeFilter(gameTypeTabBar.SelectedTab);
-    }
-
-    void OnDataLoaded(object? sender, EventArgs e)
-    {
         LoadRecentGames();
     }
 

@@ -326,6 +326,9 @@ Biyometrik kimlik doğrulamayı istediğiniz zaman devre dışı bırakabilirsin
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Devam etmek için lütfen biyometrinizi doğrulayın</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Cüzdanın kilidi açılıyor</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>İşlem iptal edildi</value>
   </data>
