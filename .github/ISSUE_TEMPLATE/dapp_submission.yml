@@ -1,0 +1,223 @@
+name: DApp listing request
+description: Request a DApp or game to be reviewed for listing in OneGate.
+title: "[DApp Listing]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve OneGate's DApp catalog.
+
+        Please submit one DApp per issue. Include public information only; do not paste private keys, seed phrases, admin credentials, unpublished API keys, or other secrets.
+
+  - type: input
+    id: project-name
+    attributes:
+      label: Project name
+      description: The display name users should see in OneGate.
+      placeholder: OneGate Vault
+    validations:
+      required: true
+
+  - type: dropdown
+    id: listing-type
+    attributes:
+      label: Listing type
+      description: Choose the closest OneGate catalog type.
+      options:
+        - DApp
+        - Game
+        - Tool
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: introduction
+    attributes:
+      label: Short introduction
+      description: Explain what the DApp does and why it should be listed.
+      placeholder: What can OneGate users do with this DApp?
+    validations:
+      required: true
+
+  - type: input
+    id: launch-url
+    attributes:
+      label: Launch URL
+      description: The exact HTTPS URL OneGate should open in the in-app WebView.
+      placeholder: https://example.com/app
+    validations:
+      required: true
+
+  - type: input
+    id: official-website
+    attributes:
+      label: Official website
+      description: The canonical website for the project or organization.
+      placeholder: https://example.com
+    validations:
+      required: true
+
+  - type: input
+    id: icon-url
+    attributes:
+      label: Icon URL
+      description: A square app icon URL, preferably 512x512 PNG/WebP with a transparent or solid background.
+      placeholder: https://example.com/icon.png
+    validations:
+      required: true
+
+  - type: textarea
+    id: preview-assets
+    attributes:
+      label: Preview assets
+      description: Add URLs for screenshots, videos, or preview images that can be used during review.
+      placeholder: |
+        https://example.com/screenshot-1.png
+        https://example.com/screenshot-2.png
+
+  - type: input
+    id: developer
+    attributes:
+      label: Developer or publisher
+      description: The team, company, or individual responsible for the DApp.
+      placeholder: NeoOrder
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact information
+      description: Public email, Discord, Telegram, X/Twitter, or another way the OneGate team can reach the maintainer.
+      placeholder: dev@example.com
+    validations:
+      required: true
+
+  - type: input
+    id: category-tags
+    attributes:
+      label: Category and tags
+      description: Suggested catalog category and tags.
+      placeholder: DeFi, Wallet, Gaming, NFT, Governance
+    validations:
+      required: true
+
+  - type: input
+    id: languages
+    attributes:
+      label: Supported languages
+      description: List the UI languages supported by the DApp.
+      placeholder: en, zh-Hans, zh-Hant
+    validations:
+      required: true
+
+  - type: dropdown
+    id: supported-networks
+    attributes:
+      label: Supported networks
+      description: Select every network this DApp supports.
+      multiple: true
+      options:
+        - Neo N3 MainNet
+        - Neo N3 TestNet
+        - Neo X MainNet
+        - Neo X TestNet
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: wallet-integration
+    attributes:
+      label: Wallet integration
+      description: Select every integration path the DApp supports or plans to support.
+      multiple: true
+      options:
+        - OneGate dAPI
+        - NeoLine-compatible provider
+        - WalletConnect
+        - No wallet connection required
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: wallet-permissions
+    attributes:
+      label: Wallet permissions and methods
+      description: List the wallet methods or permissions the DApp needs.
+      placeholder: |
+        getAccounts: read the active account address
+        invoke: submit claim transactions
+        signMessage: optional login proof
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mobile-readiness
+    attributes:
+      label: Mobile readiness
+      description: OneGate runs DApps inside mobile WebViews, so mobile layout matters.
+      options:
+        - Verified on iOS and Android mobile WebViews
+        - Responsive mobile browser support
+        - Desktop-first, mobile improvements planned
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: mobile-validation
+    attributes:
+      label: Mobile validation notes
+      description: Share devices, browsers, WebViews, known layout limits, or reproduction steps for wallet flows.
+      placeholder: |
+        iOS Safari / WebView:
+        Android Chrome / WebView:
+        Known issues:
+
+  - type: dropdown
+    id: content-risk
+    attributes:
+      label: Content and risk level
+      description: Select the closest review category.
+      options:
+        - General audience
+        - Financial or trading activity
+        - Game
+        - Restricted or age-gated content
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: security-notes
+    attributes:
+      label: Security and compliance notes
+      description: Mention audits, open-source repositories, contracts, third-party scripts, tracking, content restrictions, or other security-sensitive details.
+      placeholder: |
+        Audit:
+        Source code:
+        Contract hashes:
+        Third-party services:
+        Privacy / tracking:
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Anything else reviewers should know.
+
+  - type: checkboxes
+    id: submitter-confirmation
+    attributes:
+      label: Submitter confirmation
+      options:
+        - label: I confirm the submitted URLs are official project URLs or I have permission to request this listing.
+          required: true
+        - label: I understand OneGate may reject, delay, or remove listings for security, quality, legal, App Store, or user-experience reasons.
+          required: true
+        - label: I confirm this issue does not include private keys, seed phrases, credentials, or other secrets.
+          required: true
