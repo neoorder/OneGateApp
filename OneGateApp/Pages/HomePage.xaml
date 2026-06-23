@@ -15,7 +15,7 @@
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.Settings}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="settings" />
     </ContentPage.ToolbarItems>
     <RefreshView Margin="20,0" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
-        <CollectionView ItemsSource="{Binding News}" EmptyView="{x:Static og:Strings.DefaultEmptyViewMessage}" MinimumHeightRequest="20" SelectionMode="Single">
+        <CollectionView ItemsSource="{Binding News}" EmptyView="{x:Static og:Strings.DefaultEmptyViewMessage}" MinimumHeightRequest="20" SelectionMode="None">
             <CollectionView.Header>
                 <VerticalStackLayout Spacing="20" Padding="{OnPlatform iOS='0,0,0,20', Default='0'}">
                     <!-- There are some issues with CarouselView on WinUI, so we disable looping on that platform to prevent potential crashes. -->
@@ -41,18 +41,22 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:News">
-                    <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto" ColumnSpacing="10">
-                        <Image Grid.RowSpan="2" Aspect="AspectFill" WidthRequest="112" HeightRequest="63">
-                            <Image.Source>
-                                <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="90:00:00:00" />
-                            </Image.Source>
-                        </Image>
-                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" FontAttributes="Bold" MaxLines="2" LineBreakMode="TailTruncation" />
-                        <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding Subtitle}" FontSize="10" FontAttributes="Italic" LineBreakMode="NoWrap" VerticalOptions="End" />
-                        <Grid.GestureRecognizers>
+                    <Border StyleClass="Card" Padding="10" StrokeShape="RoundRectangle 12" SemanticProperties.Description="{Binding Title}">
+                        <Grid ColumnDefinitions="112,*" RowDefinitions="auto,auto" ColumnSpacing="12" MinimumHeightRequest="82">
+                            <Border Grid.RowSpan="2" WidthRequest="112" HeightRequest="82" StrokeShape="RoundRectangle 10" StrokeThickness="0" BackgroundColor="{toolkit:AppThemeResource PanelAlt}" VerticalOptions="Center">
+                                <Image Aspect="AspectFill">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="90:00:00:00" />
+                                    </Image.Source>
+                                </Image>
+                            </Border>
+                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" FontAttributes="Bold" FontSize="15" MaxLines="2" LineBreakMode="TailTruncation" VerticalOptions="Start" />
+                            <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding Subtitle}" FontSize="12" LineBreakMode="TailTruncation" VerticalOptions="End" />
+                        </Grid>
+                        <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnNewsTapped" CommandParameter="{Binding .}" />
-                        </Grid.GestureRecognizers>
-                    </Grid>
+                        </Border.GestureRecognizers>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
