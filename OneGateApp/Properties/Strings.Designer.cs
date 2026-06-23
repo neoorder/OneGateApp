@@ -604,6 +604,24 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Preparing DApp 的本地化字符串。
+        /// </summary>
+        internal static string DAppPreparing {
+            get {
+                return ResourceManager.GetString("DAppPreparing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Games with large assets may take a moment. 的本地化字符串。
+        /// </summary>
+        internal static string DAppPreparingText {
+            get {
+                return ResourceManager.GetString("DAppPreparingText", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 DApp Testing 的本地化字符串。
         /// </summary>
         internal static string DAppTesting {

@@ -701,6 +701,12 @@
   <data name="DAppLoadFailedText" xml:space="preserve">
     <value>{0} 暂时无法加载。请检查网络连接后重试。状态：{1}</value>
   </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>正在准备 DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>大型游戏资源较多，可能还需要一点时间。</value>
+  </data>
   <data name="Retry" xml:space="preserve">
     <value>重试</value>
   </data>

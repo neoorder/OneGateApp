@@ -701,6 +701,12 @@
   <data name="DAppLoadFailedText" xml:space="preserve">
     <value>{0}을(를) 불러올 수 없습니다. 연결을 확인한 후 다시 시도하세요. 상태: {1}</value>
   </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>DApp 준비 중</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>용량이 큰 게임은 시간이 조금 걸릴 수 있습니다.</value>
+  </data>
   <data name="Retry" xml:space="preserve">
     <value>다시 시도</value>
   </data>

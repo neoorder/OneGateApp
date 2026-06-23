@@ -701,6 +701,12 @@ Deseja continuar?</value>
   <data name="DAppLoadFailedText" xml:space="preserve">
     <value>Não foi possível carregar {0}. Verifique sua conexão e tente novamente. Status: {1}</value>
   </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>Preparando a DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Jogos com recursos grandes podem levar alguns instantes.</value>
+  </data>
   <data name="Retry" xml:space="preserve">
     <value>Tentar novamente</value>
   </data>

@@ -701,6 +701,12 @@ Do you want to continue?</value>
   <data name="DAppLoadFailedText" xml:space="preserve">
     <value>{0} could not be loaded. Check your connection and try again. Status: {1}</value>
   </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>Preparing DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Games with large assets may take a moment.</value>
+  </data>
   <data name="Retry" xml:space="preserve">
     <value>Retry</value>
   </data>

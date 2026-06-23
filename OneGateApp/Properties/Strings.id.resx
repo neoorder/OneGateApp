@@ -701,6 +701,12 @@ Apakah Anda ingin melanjutkan?</value>
   <data name="DAppLoadFailedText" xml:space="preserve">
     <value>{0} tidak dapat dimuat. Periksa koneksi Anda dan coba lagi. Status: {1}</value>
   </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>Menyiapkan DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Game dengan aset besar mungkin perlu waktu sebentar.</value>
+  </data>
   <data name="Retry" xml:space="preserve">
     <value>Coba lagi</value>
   </data>

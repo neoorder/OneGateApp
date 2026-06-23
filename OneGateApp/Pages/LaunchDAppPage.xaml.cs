@@ -17,6 +17,7 @@ namespace NeoOrder.OneGate.Pages;
 public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 {
     const string DeveloperModeKey = "preference/developer_mode_enabled";
+    const int DAppPreparationDurationMs = 12000;
 
     readonly IServiceProvider serviceProvider;
     readonly ProtocolSettings protocolSettings;
@@ -26,6 +27,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
+    CancellationTokenSource? dappPreparationCancellation;
     string? url;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
@@ -44,6 +46,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDAppLoading { get; set { field = value; OnPropertyChanged(); } }
+    public bool IsDAppPreparing { get; set { field = value; OnPropertyChanged(); } }
     public bool HasDAppLoadError { get; set { field = value; OnPropertyChanged(); } }
     public string DAppLoadErrorTitle { get; set { field = value; OnPropertyChanged(); } } = "";
     public string DAppLoadErrorMessage { get; set { field = value; OnPropertyChanged(); } } = "";
@@ -66,6 +69,12 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             ToolbarItems.Remove(addToHomeScreenButton);
         if (!IsDeveloperToolsEnabled)
             ToolbarItems.Remove(developerToolsButton);
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        CancelDAppPreparation();
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -148,6 +157,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             e.Cancel = true;
             await Toast.Show(Strings.RedirectionBlockedText);
             IsDAppLoading = false;
+            IsDAppPreparing = false;
             HasDAppLoadError = false;
             return;
         }
@@ -160,6 +170,10 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         if (e.Result == WebNavigationResult.Success || e.Result == WebNavigationResult.Cancel)
         {
             HasDAppLoadError = false;
+            if (e.Result == WebNavigationResult.Success)
+                BeginDAppPreparation();
+            else
+                IsDAppPreparing = false;
             return;
         }
         ShowDAppLoadError(e.Url, e.Result);
@@ -174,16 +188,52 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     void BeginDAppLoad()
     {
+        CancelDAppPreparation();
         IsDAppLoading = true;
+        IsDAppPreparing = false;
         HasDAppLoadError = false;
     }
 
     void ShowDAppLoadError(string failedUrl, WebNavigationResult result)
     {
+        CancelDAppPreparation();
         string appName = DApp?.NameLocalizer.Localize() ?? GetHostOrUrl(failedUrl);
         DAppLoadErrorTitle = Strings.DAppLoadFailed;
         DAppLoadErrorMessage = string.Format(Strings.DAppLoadFailedText, appName, (int)result);
         HasDAppLoadError = true;
+    }
+
+    void BeginDAppPreparation()
+    {
+        CancelDAppPreparation();
+        dappPreparationCancellation = new();
+        IsDAppPreparing = true;
+        _ = WatchDAppPreparationAsync(dappPreparationCancellation.Token);
+    }
+
+    void CancelDAppPreparation()
+    {
+        dappPreparationCancellation?.Cancel();
+        dappPreparationCancellation?.Dispose();
+        dappPreparationCancellation = null;
+        IsDAppPreparing = false;
+    }
+
+    async Task WatchDAppPreparationAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            await Task.Delay(DAppPreparationDurationMs, cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+        finally
+        {
+            if (!cancellationToken.IsCancellationRequested)
+                MainThread.BeginInvokeOnMainThread(() => IsDAppPreparing = false);
+        }
     }
 
     static string GetHostOrUrl(string url)

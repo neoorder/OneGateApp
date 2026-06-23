@@ -701,6 +701,12 @@ Bạn có muốn tiếp tục không?</value>
   <data name="DAppLoadFailedText" xml:space="preserve">
     <value>Không thể tải {0}. Hãy kiểm tra kết nối rồi thử lại. Trạng thái: {1}</value>
   </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>Đang chuẩn bị DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Trò chơi có tài nguyên lớn có thể mất thêm một chút thời gian.</value>
+  </data>
   <data name="Retry" xml:space="preserve">
     <value>Thử lại</value>
   </data>

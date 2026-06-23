@@ -701,6 +701,12 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
   <data name="DAppLoadFailedText" xml:space="preserve">
     <value>No se pudo cargar {0}. Revisa tu conexión e inténtalo de nuevo. Estado: {1}</value>
   </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>Preparando la DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Los juegos con recursos grandes pueden tardar un momento.</value>
+  </data>
   <data name="Retry" xml:space="preserve">
     <value>Reintentar</value>
   </data>
