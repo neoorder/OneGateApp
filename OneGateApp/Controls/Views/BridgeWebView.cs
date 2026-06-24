@@ -140,43 +140,39 @@ public partial class BridgeWebView : WebView
                     "landscape-secondary"
                 ]);
                 let orientation = window.screen.orientation;
-                if (!orientation) {
-                    orientation = {};
+                function define(target, name, descriptor) {
+                    if (!target)
+                        return;
+
                     try {
-                        Object.defineProperty(window.screen, "orientation", {
-                            configurable: true,
-                            enumerable: true,
-                            value: orientation
-                        });
-                    } catch (_) {
-                        window.screen.orientation = orientation;
-                    }
-                }
-                function define(name, descriptor) {
-                    try {
-                        Object.defineProperty(orientation, name, descriptor);
+                        Object.defineProperty(target, name, descriptor);
                     } catch (_) {
                         if ("value" in descriptor) {
-                            try { orientation[name] = descriptor.value; } catch (_) {}
+                            try { target[name] = descriptor.value; } catch (_) {}
                         }
                     }
                 }
 
-                define("lock", {
-                    configurable: true,
-                    value: function(lockType) {
-                        if (typeof lockType !== "string" || !supportedLockTypes.has(lockType))
-                            return Promise.reject(new TypeError("Invalid screen orientation lock type."));
-                        return window.{{SystemCallInvokeFunctionName}}("screen.orientation.lock", [lockType]);
-                    }
-                });
+                function install(target) {
+                    define(target, "lock", {
+                        configurable: true,
+                        value: function(lockType) {
+                            if (typeof lockType !== "string" || !supportedLockTypes.has(lockType))
+                                return Promise.reject(new TypeError("Invalid screen orientation lock type."));
+                            return window.{{SystemCallInvokeFunctionName}}("screen.orientation.lock", [lockType]);
+                        }
+                    });
 
-                define("unlock", {
-                    configurable: true,
-                    value: function() {
-                        window.{{SystemCallInvokeSyncFunctionName}}("screen.orientation.unlock", []);
-                    }
-                });
+                    define(target, "unlock", {
+                        configurable: true,
+                        value: function() {
+                            window.{{SystemCallInvokeSyncFunctionName}}("screen.orientation.unlock", []);
+                        }
+                    });
+                }
+
+                const orientationPrototype = Object.getPrototypeOf(orientation);
+                install(orientationPrototype);
             })();
             (function () {
                 if (window.__OneGateFullscreenInjected) return;
