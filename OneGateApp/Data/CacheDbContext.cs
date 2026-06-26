@@ -9,6 +9,27 @@ public partial class CacheDbContext(DbContextOptions<CacheDbContext> options) : 
     public DbSet<Banner> Banners { get; set; }
     public DbSet<News> News { get; set; }
     public DbSet<DApp> DApps { get; set; }
+
+    internal async Task EnsureMigrationsAsync()
+    {
+        await Migration_AddProperty_DApps_Warnings_20260622();
+    }
+
+    async Task Migration_AddProperty_DApps_Warnings_20260622()
+    {
+        HashSet<string> actualColumns = new(StringComparer.OrdinalIgnoreCase);
+        await Database.OpenConnectionAsync();
+        await using (var command = Database.GetDbConnection().CreateCommand())
+        {
+            command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+                actualColumns.Add(reader.GetString(0));
+        }
+
+        if (!actualColumns.Contains(nameof(DApp.Warnings)))
+            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [Warnings] INTEGER NOT NULL DEFAULT 0");
+    }
 }
 
 static class CacheDbContextFactoryExtensions
@@ -25,6 +46,7 @@ static class CacheDbContextFactoryExtensions
             Directory.CreateDirectory(cacheDirectory);
             dbContext = await dbContextFactory.CreateDbContextAsync();
             await dbContext.Database.EnsureCreatedAsync();
+            await dbContext.EnsureMigrationsAsync();
             return dbContext;
         }
         catch

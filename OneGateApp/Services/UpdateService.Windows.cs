@@ -25,13 +25,14 @@ partial class UpdateService
         {
             var updates = await context.GetAppAndOptionalStorePackageUpdatesAsync();
             if (updates.Count == 0)
-                throw new InvalidOperationException("No update available.");
+                throw new UpdateUnavailableException();
             var result = await context.RequestDownloadAndInstallStorePackageUpdatesAsync(updates);
             switch (result.OverallState)
             {
                 case StorePackageUpdateState.Completed:
                     bool accepted = await Shell.Current.DisplayAlertAsync(Strings.UpdateApp, Strings.UpdateInstalledRestartNow, Strings.Restart, Strings.Cancel);
                     if (accepted) Application.Current!.Quit();
+                    IsUpdating = false;
                     break;
                 case StorePackageUpdateState.Canceled:
                     IsUpdating = false;
