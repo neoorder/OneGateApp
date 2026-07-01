@@ -442,6 +442,18 @@ Après désactivation, vous devrez saisir manuellement le mot de passe du portef
   <data name="Records" xml:space="preserve">
     <value>Histor.</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>Aucune activité de transaction trouvée</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Les transferts de ce portefeuille s’afficheront ici après leur indexation par le nœud RPC.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Impossible de charger l’historique des transactions</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Réessayer</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Actifs</value>
   </data>

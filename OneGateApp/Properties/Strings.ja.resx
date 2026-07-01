@@ -442,6 +442,18 @@
   <data name="Records" xml:space="preserve">
     <value>取引履歴</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>取引アクティビティが見つかりません</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>このウォレットの転送は、RPC ノードでインデックスされるとここに表示されます。</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>取引履歴を読み込めません</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>再試行</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>資産</value>
   </data>

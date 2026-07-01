@@ -442,6 +442,18 @@ Depois de desativá-la, será necessário digitar manualmente a senha da carteir
   <data name="Records" xml:space="preserve">
     <value>Hist.</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>Nenhuma atividade de transação encontrada</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>As transferências desta carteira aparecerão aqui depois de serem indexadas pelo nó RPC.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Não foi possível carregar o histórico de transações</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Tentar novamente</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Ativo</value>
   </data>

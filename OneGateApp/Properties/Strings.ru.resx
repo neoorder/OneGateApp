@@ -442,6 +442,18 @@
   <data name="Records" xml:space="preserve">
     <value>История</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>Активность транзакций не найдена</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Переводы этого кошелька появятся здесь после индексации RPC-узлом.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Не удалось загрузить историю транзакций</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Повторить</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Активы</value>
   </data>

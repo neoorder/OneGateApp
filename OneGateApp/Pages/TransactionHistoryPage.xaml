@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             x:Class="NeoOrder.OneGate.Pages.TransactionHistoryPage"
+             Title="{x:Static og:Strings.Records}"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <RefreshView Margin="20,8" IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+        <CollectionView ItemsSource="{Binding Transactions}" MinimumHeightRequest="200">
+            <CollectionView.EmptyView>
+                <Grid RowDefinitions="*,auto,*">
+                    <VerticalStackLayout Grid.Row="1" Spacing="18" HorizontalOptions="Center" MaximumWidthRequest="420">
+                        <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" WidthRequest="34" HeightRequest="34" HorizontalOptions="Center" />
+                        <Label IsVisible="{Binding IsLoading}" FontAttributes="Bold" HorizontalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static og:Strings.Loading}" />
+                                    <Span Text="…" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <VerticalStackLayout Spacing="10" IsVisible="{Binding HasLoadError}">
+                            <Label Text="{x:Static og:Strings.TransactionHistoryLoadFailed}" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" />
+                            <Label StyleClass="Secondary" Text="{Binding LoadErrorMessage}" HorizontalTextAlignment="Center" />
+                            <Button Text="{x:Static og:Strings.TransactionHistoryRetry}" Padding="34,13" HorizontalOptions="Center" Command="{Binding RefreshCommand}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="10" IsVisible="{Binding IsEmpty}">
+                            <Label Text="{x:Static og:Strings.TransactionHistoryEmpty}" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.TransactionHistoryEmptyText}" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="og:TransactionHistoryItem">
+                    <Border StyleClass="Card" Padding="14">
+                        <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,auto" ColumnSpacing="12" RowSpacing="5">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding AmountText}" FontAttributes="Bold" FontSize="16" HorizontalOptions="End" />
+                            <Label Grid.Row="1" Grid.Column="0" StyleClass="Secondary" Text="{Binding CounterpartyText}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            <Label Grid.Row="1" Grid.Column="1" StyleClass="Secondary" Text="{Binding DirectionText}" FontSize="12" HorizontalOptions="End" />
+                            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="10">
+                                <Label StyleClass="Secondary" Text="{Binding TimeText}" FontSize="12" />
+                                <Label StyleClass="Secondary" Text="{Binding BlockText}" FontSize="12" IsVisible="{Binding HasBlockText}" />
+                                <Label StyleClass="Secondary" Text="{Binding TransactionHash}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

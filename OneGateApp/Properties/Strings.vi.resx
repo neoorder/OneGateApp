@@ -442,6 +442,18 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
   <data name="Records" xml:space="preserve">
     <value>Lịch sử</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>Không tìm thấy hoạt động giao dịch</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Các khoản chuyển của ví này sẽ xuất hiện ở đây sau khi được nút RPC lập chỉ mục.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Không thể tải lịch sử giao dịch</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Thử lại</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Tài sản</value>
   </data>

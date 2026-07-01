@@ -442,6 +442,18 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   <data name="Records" xml:space="preserve">
     <value>Historie</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>Geen transactieactiviteit gevonden</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Overboekingen voor deze wallet verschijnen hier nadat ze door de RPC-node zijn geïndexeerd.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Transactiegeschiedenis kan niet worden geladen</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Opnieuw proberen</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Asset</value>
   </data>

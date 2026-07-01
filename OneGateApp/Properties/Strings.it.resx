@@ -442,6 +442,18 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
   <data name="Records" xml:space="preserve">
     <value>Storico</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>Nessuna attività di transazione trovata</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>I trasferimenti di questo wallet appariranno qui dopo essere stati indicizzati dal nodo RPC.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Impossibile caricare la cronologia delle transazioni</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Riprova</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Asset</value>
   </data>

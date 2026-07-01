@@ -442,6 +442,18 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
   <data name="Records" xml:space="preserve">
     <value>Geçmiş</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>İşlem etkinliği bulunamadı</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Bu cüzdanın transferleri RPC düğümü tarafından dizine eklendikten sonra burada görünür.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>İşlem geçmişi yüklenemiyor</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Tekrar dene</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Varlık</value>
   </data>

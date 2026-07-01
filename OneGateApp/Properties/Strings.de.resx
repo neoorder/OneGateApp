@@ -442,6 +442,18 @@ Nach der Deaktivierung müssen Sie Ihr Wallet-Passwort manuell eingeben, um den 
   <data name="Records" xml:space="preserve">
     <value>Verlauf</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>Keine Transaktionsaktivität gefunden</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Überweisungen für dieses Wallet erscheinen hier, nachdem sie vom RPC-Knoten indexiert wurden.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>Transaktionsverlauf kann nicht geladen werden</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Vermögenswerte</value>
   </data>

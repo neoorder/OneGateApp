@@ -442,6 +442,18 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
   <data name="Records" xml:space="preserve">
     <value>Movs.</value>
   </data>
+  <data name="TransactionHistoryEmpty" xml:space="preserve">
+    <value>No se encontró actividad de transacciones</value>
+  </data>
+  <data name="TransactionHistoryEmptyText" xml:space="preserve">
+    <value>Las transferencias de esta billetera aparecerán aquí después de que el nodo RPC las indexe.</value>
+  </data>
+  <data name="TransactionHistoryLoadFailed" xml:space="preserve">
+    <value>No se puede cargar el historial de transacciones</value>
+  </data>
+  <data name="TransactionHistoryRetry" xml:space="preserve">
+    <value>Reintentar</value>
+  </data>
   <data name="Asset" xml:space="preserve">
     <value>Activos</value>
   </data>
