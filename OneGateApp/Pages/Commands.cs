@@ -72,7 +72,19 @@ static class Commands
         Uri? uri = parameter as Uri;
         if (dapp is null && uri is null) throw new ArgumentException("Invalid parameter type.");
         uri ??= new($"https://{SharedOptions.OneGateDomain}/app/{dapp!.Id}");
+        Dictionary<string, object> GetLaunchParameters()
+        {
+            Dictionary<string, object> parameters = new();
+            if (dapp != null) parameters["dapp"] = dapp;
+            parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
+            return parameters;
+        }
 #if ANDROID
+        if (Application.Current?.Windows.FirstOrDefault(window => window.Page is NeoOrder.OneGate.AppShell)?.Page is Shell shell)
+        {
+            await shell.GoToAsync("launch", GetLaunchParameters());
+            return;
+        }
         var activity = Platform.CurrentActivity!;
         var intent = new Android.Content.Intent(activity, typeof(Platforms.Android.DocumentLinkActivity));
         intent.SetAction(Android.Content.Intent.ActionView);
@@ -87,9 +99,7 @@ static class Commands
 #endif
         if (!supportOpenWithDeepLink || !await Launcher.TryOpenAsync(uri))
         {
-            Dictionary<string, object> parameters = new();
-            if (dapp != null) parameters["dapp"] = dapp;
-            parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
+            Dictionary<string, object> parameters = GetLaunchParameters();
 #if IOS
             bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
 #else

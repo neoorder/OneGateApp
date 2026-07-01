@@ -656,7 +656,43 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppAuthorizationText", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 DApp did not load 的本地化字符串。
+        /// </summary>
+        internal static string DAppLoadFailed {
+            get {
+                return ResourceManager.GetString("DAppLoadFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} could not be loaded. Check your connection and try again. Status: {1} 的本地化字符串。
+        /// </summary>
+        internal static string DAppLoadFailedText {
+            get {
+                return ResourceManager.GetString("DAppLoadFailedText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Preparing DApp 的本地化字符串。
+        /// </summary>
+        internal static string DAppPreparing {
+            get {
+                return ResourceManager.GetString("DAppPreparing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Games with large assets may take a moment. 的本地化字符串。
+        /// </summary>
+        internal static string DAppPreparingText {
+            get {
+                return ResourceManager.GetString("DAppPreparingText", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 DApp Debug Panel 的本地化字符串。
         /// </summary>
@@ -1955,7 +1991,16 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("RedirectionBlockedText", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 Retry 的本地化字符串。
+        /// </summary>
+        internal static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Re-enter password 的本地化字符串。
         /// </summary>

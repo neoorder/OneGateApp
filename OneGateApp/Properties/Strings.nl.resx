@@ -722,6 +722,21 @@ Wilt u doorgaan?</value>
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>Kan niet terugkeren naar de DApp</value>
   </data>
+  <data name="DAppLoadFailed" xml:space="preserve">
+    <value>DApp is niet geladen</value>
+  </data>
+  <data name="DAppLoadFailedText" xml:space="preserve">
+    <value>{0} kan niet worden geladen. Controleer je verbinding en probeer het opnieuw. Status: {1}</value>
+  </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>DApp voorbereiden</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Games met grote assets kunnen even duren.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Opnieuw proberen</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>Delen</value>
   </data>

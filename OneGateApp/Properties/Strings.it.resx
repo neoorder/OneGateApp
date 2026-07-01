@@ -722,6 +722,21 @@ Vuoi continuare?</value>
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>Impossibile tornare alla DApp</value>
   </data>
+  <data name="DAppLoadFailed" xml:space="preserve">
+    <value>La DApp non è stata caricata</value>
+  </data>
+  <data name="DAppLoadFailedText" xml:space="preserve">
+    <value>Impossibile caricare {0}. Controlla la connessione e riprova. Stato: {1}</value>
+  </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>Preparazione della DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>I giochi con risorse grandi possono richiedere qualche istante.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Riprova</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>Condividi</value>
   </data>

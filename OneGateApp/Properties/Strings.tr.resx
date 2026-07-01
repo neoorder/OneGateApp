@@ -722,6 +722,21 @@ Devam etmek istiyor musunuz?</value>
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>DApp'e geri dönülemedi</value>
   </data>
+  <data name="DAppLoadFailed" xml:space="preserve">
+    <value>DApp yüklenmedi</value>
+  </data>
+  <data name="DAppLoadFailedText" xml:space="preserve">
+    <value>{0} yüklenemedi. Bağlantınızı kontrol edip tekrar deneyin. Durum: {1}</value>
+  </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>DApp hazırlanıyor</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Büyük kaynaklara sahip oyunlar biraz zaman alabilir.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Tekrar dene</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>Paylaş</value>
   </data>

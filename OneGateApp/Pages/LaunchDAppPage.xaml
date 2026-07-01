@@ -24,5 +24,38 @@
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
         <ToolbarItem x:Name="developerToolsButton" Order="Primary" IconImageSource="{FontImageSource &#xe716;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Clicked="OnDeveloperToolsClicked" />
     </ContentPage.ToolbarItems>
-    <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />
+    <Grid>
+        <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" Navigated="OnNavigated" InvokedFromJavaScript="OnInvokedFromJavaScript" />
+        <Grid BackgroundColor="{toolkit:AppThemeResource PageBackground}" IsVisible="{Binding IsDAppLoading}">
+            <VerticalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+                <ActivityIndicator IsRunning="{Binding IsDAppLoading}" WidthRequest="32" HeightRequest="32" />
+                <Label FontAttributes="Bold" HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static og:Strings.Loading}" />
+                            <Span Text="…" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </Grid>
+        <Grid Padding="16" InputTransparent="True" IsVisible="{Binding IsDAppPreparing}" VerticalOptions="Start">
+            <Border StyleClass="Card" HorizontalOptions="Center" MaximumWidthRequest="420">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                    <Border BackgroundColor="{toolkit:AppThemeResource Brand}" StrokeThickness="0" StrokeShape="Ellipse" WidthRequest="10" HeightRequest="10" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="{x:Static og:Strings.DAppPreparing}" FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="1" />
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppPreparingText}" FontSize="12" LineBreakMode="TailTruncation" MaxLines="2" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid BackgroundColor="{toolkit:AppThemeResource PageBackground}" IsVisible="{Binding HasDAppLoadError}" Padding="32">
+            <VerticalStackLayout Spacing="16" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="420">
+                <Label Text="{Binding DAppLoadErrorTitle}" FontAttributes="Bold" FontSize="22" HorizontalTextAlignment="Center" />
+                <Label StyleClass="Secondary" Text="{Binding DAppLoadErrorMessage}" HorizontalTextAlignment="Center" />
+                <Button Text="{Binding RetryText}" Padding="36,14" Clicked="OnRetryDAppClicked" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>

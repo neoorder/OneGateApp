@@ -722,6 +722,21 @@
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>Не удалось вернуться в DApp</value>
   </data>
+  <data name="DAppLoadFailed" xml:space="preserve">
+    <value>DApp не загрузилась</value>
+  </data>
+  <data name="DAppLoadFailedText" xml:space="preserve">
+    <value>Не удалось загрузить {0}. Проверьте подключение и повторите попытку. Статус: {1}</value>
+  </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>Подготовка DApp</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>Игры с крупными ресурсами могут загружаться немного дольше.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Повторить</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>Поделиться</value>
   </data>
