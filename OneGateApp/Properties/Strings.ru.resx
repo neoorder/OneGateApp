@@ -1037,4 +1037,10 @@
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Декодированное сообщение</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Подписывайте только сообщения с сайтов, которым вы доверяете. Подпись может подтвердить вашу личность или разрешить действия; никогда не подписывайте неожиданный или нечитаемый запрос.</value>
+  </data>
 </root>

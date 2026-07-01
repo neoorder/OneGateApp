@@ -2769,5 +2769,23 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decoded message.
+        /// </summary>
+        internal static string DecodedMessage {
+            get {
+                return ResourceManager.GetString("DecodedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only sign messages from sites you trust..
+        /// </summary>
+        internal static string SignMessageRiskWarning {
+            get {
+                return ResourceManager.GetString("SignMessageRiskWarning", resourceCulture);
+            }
+        }
     }
 }

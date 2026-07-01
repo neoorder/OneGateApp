@@ -1037,4 +1037,10 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="Unavailable" xml:space="preserve">
     <value>Nicht verfügbar</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Dekodierte Nachricht</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Signieren Sie nur Nachrichten von Websites, denen Sie vertrauen. Eine Signatur kann Ihre Identität nachweisen oder Aktionen autorisieren – signieren Sie niemals eine unerwartete oder unlesbare Anfrage.</value>
+  </data>
 </root>

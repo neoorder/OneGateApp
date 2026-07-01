@@ -1037,4 +1037,10 @@
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>解码后内容</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>只为你信任的站点签名。签名可证明你的身份或授权操作——切勿对意外或无法读懂的请求签名。</value>
+  </data>
 </root>

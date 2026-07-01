@@ -1037,4 +1037,10 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="Unavailable" xml:space="preserve">
     <value>Non disponibile</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Messaggio decodificato</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Firma solo messaggi da siti di cui ti fidi. Una firma può provare la tua identità o autorizzare azioni; non firmare mai una richiesta inattesa o illeggibile.</value>
+  </data>
 </root>

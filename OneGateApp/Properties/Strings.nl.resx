@@ -1037,4 +1037,10 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="Unavailable" xml:space="preserve">
     <value>Niet beschikbaar</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Gedecodeerd bericht</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Onderteken alleen berichten van sites die u vertrouwt. Een handtekening kan uw identiteit bewijzen of acties autoriseren; onderteken nooit een onverwacht of onleesbaar verzoek.</value>
+  </data>
 </root>

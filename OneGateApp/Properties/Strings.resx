@@ -1037,4 +1037,10 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Unavailable" xml:space="preserve">
     <value>Unavailable</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Decoded message</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Only sign messages from sites you trust. A signature can prove your identity or authorize actions — never sign an unexpected or unreadable request.</value>
+  </data>
 </root>
