@@ -1037,19 +1037,4 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="Unavailable" xml:space="preserve">
     <value>No disponible</value>
   </data>
-  <data name="LabelAlreadyExists" xml:space="preserve">
-    <value>El nombre ya existe</value>
-  </data>
-  <data name="Note" xml:space="preserve">
-    <value>Nota</value>
-  </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>Transferencia reciente</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>Usar dirección introducida</value>
-  </data>
-  <data name="SearchAddressBook" xml:space="preserve">
-    <value>Buscar nombre, dirección o nota</value>
-  </data>
 </root>

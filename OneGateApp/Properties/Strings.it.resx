@@ -1037,19 +1037,4 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="Unavailable" xml:space="preserve">
     <value>Non disponibile</value>
   </data>
-  <data name="LabelAlreadyExists" xml:space="preserve">
-    <value>Il nome esiste già</value>
-  </data>
-  <data name="Note" xml:space="preserve">
-    <value>Nota</value>
-  </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>Trasferimento recente</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>Usa l'indirizzo inserito</value>
-  </data>
-  <data name="SearchAddressBook" xml:space="preserve">
-    <value>Cerca nome, indirizzo o nota</value>
-  </data>
 </root>

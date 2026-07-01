@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Neo;
 using Neo.Wallets;
 using NeoOrder.OneGate.Data;
-using NeoOrder.OneGate.Properties;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Services;
@@ -112,9 +111,8 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
             suggestions.Insert(0, new Contact
             {
                 Address = normalized,
-                Label = "",
-                IsAddressBookEntry = false,
-                Note = Strings.UseEnteredAddress
+                Label = normalized,
+                IsAddressBookEntry = false
             });
         }
         return suggestions.Take(limit).ToArray();

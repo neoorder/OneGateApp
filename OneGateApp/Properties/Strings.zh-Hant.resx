@@ -385,6 +385,9 @@
   <data name="EnterCustomAddress" xml:space="preserve">
     <value>輸入自訂地址</value>
   </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>轉帳</value>
+  </data>
   <data name="From" xml:space="preserve">
     <value>轉出地址</value>
   </data>
@@ -531,9 +534,6 @@
   </data>
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>地址已存在</value>
-  </data>
-  <data name="LabelAlreadyExists" xml:space="preserve">
-    <value>名稱已存在</value>
   </data>
   <data name="EditContact" xml:space="preserve">
     <value>編輯地址</value>
@@ -1036,20 +1036,5 @@
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
-  </data>
-  <data name="Note" xml:space="preserve">
-    <value>備註</value>
-  </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>最近轉帳地址</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>使用輸入的地址</value>
-  </data>
-  <data name="SearchAddressBook" xml:space="preserve">
-    <value>搜尋名字、地址或備註</value>
-  </data>
-  <data name="Transfer" xml:space="preserve">
-    <value>轉帳</value>
   </data>
 </root>

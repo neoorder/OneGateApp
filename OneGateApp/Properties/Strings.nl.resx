@@ -1037,19 +1037,4 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="Unavailable" xml:space="preserve">
     <value>Niet beschikbaar</value>
   </data>
-  <data name="LabelAlreadyExists" xml:space="preserve">
-    <value>Naam bestaat al</value>
-  </data>
-  <data name="Note" xml:space="preserve">
-    <value>Notitie</value>
-  </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>Recente overdracht</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>Ingevoerd adres gebruiken</value>
-  </data>
-  <data name="SearchAddressBook" xml:space="preserve">
-    <value>Zoek naam, adres of notitie</value>
-  </data>
 </root>
