@@ -15,12 +15,32 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
     public async Task<IReadOnlyList<TokenInfo>> LoadTokensAsync(bool includeHiddens = false)
     {
         List<TokenInfo> tokens = EmbeddedResource.LoadJson<List<TokenInfo>>("tokens.json");
+        UInt160[]? custom = await dbContext.Settings.GetAsync<UInt160[]>("tokens/custom");
+        if (custom is not null)
+        {
+            foreach (UInt160 hash in custom)
+            {
+                if (tokens.Any(p => p.Hash == hash)) continue;
+                try { tokens.Add(await rpcClient.GetTokenInfo(hash)); }
+                catch (RpcException) { /* custom token no longer resolvable on chain; skip */ }
+            }
+        }
         if (!includeHiddens)
         {
             UInt160[]? hiddens = await dbContext.Settings.GetAsync<UInt160[]>("tokens/hidden");
             if (hiddens != null) tokens.RemoveAll(p => hiddens.Contains(p.Hash));
         }
         return tokens;
+    }
+
+    // Resolve a NEP-17 by contract hash (throws if not a valid token) and persist it as a user-added token.
+    public async Task<TokenInfo> AddCustomTokenAsync(UInt160 hash)
+    {
+        TokenInfo token = await rpcClient.GetTokenInfo(hash);
+        UInt160[] custom = await dbContext.Settings.GetAsync<UInt160[]>("tokens/custom") ?? [];
+        if (!custom.Contains(hash))
+            await dbContext.Settings.PutAsync("tokens/custom", custom.Append(hash).ToArray());
+        return token;
     }
 
     public async Task<AssetInfo> LoadAssetAsync(UInt160 assetId)

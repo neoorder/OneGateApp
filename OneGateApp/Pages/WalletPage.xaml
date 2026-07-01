@@ -13,6 +13,7 @@
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Clicked="OnAddToken" />
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe69a;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.ScanQRCode}" />
     </ContentPage.ToolbarItems>
     <RefreshView Margin="20,8" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
