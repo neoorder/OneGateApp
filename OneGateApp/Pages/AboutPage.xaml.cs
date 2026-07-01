@@ -27,16 +27,16 @@ public partial class AboutPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        updateService.UpdateAvailable += OnUpdateAvailable;
+        updateService.UpdateStatusChanged += OnUpdateStatusChanged;
     }
 
     protected override void OnDisappearing()
     {
-        updateService.UpdateAvailable -= OnUpdateAvailable;
+        updateService.UpdateStatusChanged -= OnUpdateStatusChanged;
         base.OnDisappearing();
     }
 
-    void OnUpdateAvailable(object? sender, EventArgs e)
+    void OnUpdateStatusChanged(object? sender, EventArgs e)
     {
         LoadingService.BeginLoad();
     }

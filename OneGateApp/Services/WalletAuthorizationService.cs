@@ -36,12 +36,7 @@ public class WalletAuthorizationService(IServiceProvider serviceProvider, Applic
             else
             {
                 string password;
-                var progressPopup = new ProgressPopup
-                {
-                    Title = title,
-                    Message = Strings.UnlockingWallet
-                };
-                var progressTask = page.ShowPopupAsync<bool>(progressPopup);
+                using var progressOverlay = new ProgressWindowOverlay(page.GetParentWindow(), title, Strings.UnlockingWallet);
                 try
                 {
                     password = await DataProtectionService.UnprotectAsync(credential, title, message);
@@ -52,11 +47,6 @@ public class WalletAuthorizationService(IServiceProvider serviceProvider, Applic
                 catch (OperationCanceledException)
                 {
                     return false;
-                }
-                finally
-                {
-                    await progressPopup.CloseAsync(false);
-                    await progressTask;
                 }
             }
         }
