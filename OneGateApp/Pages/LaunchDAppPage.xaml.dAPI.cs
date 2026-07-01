@@ -62,6 +62,21 @@ partial class LaunchDAppPage
     }
 
     [RpcMethod]
+    async Task<DAppAsset> PickAsset()
+    {
+        IReadOnlyList<AssetInfo> assets = await tokenManager.LoadAssetsAsync();
+        if (assets.Count == 0)
+            throw new DapiException(10000, "No assets available");
+
+        var popup = serviceProvider.GetServiceOrCreateInstance<SelectAssetPopup>();
+        popup.Assets = assets;
+        popup.SelectedHash = assets[0].Token.Hash;
+        var result = await this.ShowPopupAsync<AssetInfo?>(popup);
+        AssetInfo asset = result.Result ?? throw new OperationCanceledException();
+        return DAppAsset.From(asset);
+    }
+
+    [RpcMethod]
     async Task<BigInteger> GetBalance(UInt160 asset, UInt160 account)
     {
         return await rpcClient.BalanceOf(asset, account);

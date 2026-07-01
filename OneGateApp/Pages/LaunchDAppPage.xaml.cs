@@ -26,13 +26,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
+    readonly TokenManager tokenManager;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, TokenManager tokenManager, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
@@ -42,6 +43,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.httpClient = httpClient;
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
+        this.tokenManager = tokenManager;
         IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DeveloperModeKey);
         InitializeComponent();
         webView.DocumentStartScript = CreateDocumentStartScript();
@@ -167,7 +169,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     networkchanged: new Set()
                 };
 
-                const methods = ["authenticate", "getAccounts", "pickAddress", "getBalance", "send", "call", "invoke", "makeTransaction", "sign", "signMessage", "relay", "getBlock", "getBlockCount", "getTransaction", "getApplicationLog", "getStorage", "getTokenInfo"];
+                const methods = ["authenticate", "getAccounts", "pickAddress", "pickAsset", "getBalance", "send", "call", "invoke", "makeTransaction", "sign", "signMessage", "relay", "getBlock", "getBlockCount", "getTransaction", "getApplicationLog", "getStorage", "getTokenInfo"];
 
                 const provider = {
                     name: '{{AppInfo.Name}}',
