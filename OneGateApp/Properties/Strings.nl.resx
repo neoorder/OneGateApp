@@ -1037,22 +1037,4 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="Unavailable" xml:space="preserve">
     <value>Niet beschikbaar</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>Verzoekdetails</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>Memo</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>Factuur, bestelling of notitie</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>Referentiegegevens</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>Optionele betalingsreferentie</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>QR-code delen</value>
-  </data>
 </root>

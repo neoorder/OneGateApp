@@ -1037,22 +1037,4 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>Detail permintaan</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>Memo</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>Faktur, pesanan, atau catatan</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>Data referensi</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>Referensi pembayaran opsional</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>Bagikan kode QR</value>
-  </data>
 </root>

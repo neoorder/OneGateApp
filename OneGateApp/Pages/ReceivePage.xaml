@@ -21,7 +21,6 @@
                         <zxing:BarcodeGeneratorView Format="QrCode" Value="{Binding AddressUri}" />
                     </ContentView>
                     <Label Text="{Binding Wallet.Name}" FontAttributes="Bold" HorizontalOptions="Center" />
-                    <Label StyleClass="Secondary" Text="{Binding RequestSummary}" FontSize="12" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" IsVisible="{Binding HasRequestSummary}" />
                     <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
                         <Label StyleClass="Secondary" Text="{Binding DefaultAccount.Address}" LineBreakMode="MiddleTruncation" VerticalOptions="Center" />
                         <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="20" Padding="10" VerticalOptions="Center" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding DefaultAccount.Address}" />
@@ -29,27 +28,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border Padding="16" BackgroundColor="{toolkit:AppThemeResource TextBox}" StrokeShape="RoundRectangle 8">
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="{x:Static og:Strings.ReceiveRequestDetails}" FontAttributes="Bold" />
-
-                    <VerticalStackLayout Spacing="5">
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.RequestMemo}" FontSize="12" />
-                        <Border StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                            <Entry Text="{Binding Memo}" Placeholder="{x:Static og:Strings.RequestMemoPlaceholder}" ClearButtonVisibility="WhileEditing" og:Border.IsVisible="False" Margin="10,0" />
-                        </Border>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Spacing="5">
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.RequestData}" FontSize="12" />
-                        <Border StrokeShape="RoundRectangle 5" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                            <Entry Text="{Binding RequestData}" Placeholder="{x:Static og:Strings.RequestDataPlaceholder}" ClearButtonVisibility="WhileEditing" og:Border.IsVisible="False" Margin="10,0" />
-                        </Border>
-                    </VerticalStackLayout>
-                </VerticalStackLayout>
-            </Border>
-
-            <Button Text="{x:Static og:Strings.ShareQRCode}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" Clicked="OnShareQRCode" />
+            <Button Text="{x:Static og:Strings.Share}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" Clicked="OnShareQRCode" />
             <Button StyleClass="Secondary" Text="{x:Static og:Strings.SaveToPhotoLibrary}" Clicked="OnSaveToPhotoLibrary" />
         </VerticalStackLayout>
     </ScrollView>

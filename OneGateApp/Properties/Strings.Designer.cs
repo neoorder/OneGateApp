@@ -1912,15 +1912,6 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Request details 的本地化字符串。
-        /// </summary>
-        internal static string ReceiveRequestDetails {
-            get {
-                return ResourceManager.GetString("ReceiveRequestDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Receiving address 的本地化字符串。
         /// </summary>
         internal static string ReceivingAddress {
@@ -1971,42 +1962,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string RepeatPassword {
             get {
                 return ResourceManager.GetString("RepeatPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Reference data 的本地化字符串。
-        /// </summary>
-        internal static string RequestData {
-            get {
-                return ResourceManager.GetString("RequestData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Optional payment reference 的本地化字符串。
-        /// </summary>
-        internal static string RequestDataPlaceholder {
-            get {
-                return ResourceManager.GetString("RequestDataPlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Memo 的本地化字符串。
-        /// </summary>
-        internal static string RequestMemo {
-            get {
-                return ResourceManager.GetString("RequestMemo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Invoice, order, or note 的本地化字符串。
-        /// </summary>
-        internal static string RequestMemoPlaceholder {
-            get {
-                return ResourceManager.GetString("RequestMemoPlaceholder", resourceCulture);
             }
         }
         
@@ -2322,15 +2277,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ShareAppText {
             get {
                 return ResourceManager.GetString("ShareAppText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Share QR 的本地化字符串。
-        /// </summary>
-        internal static string ShareQRCode {
-            get {
-                return ResourceManager.GetString("ShareQRCode", resourceCulture);
             }
         }
         

@@ -481,24 +481,6 @@
   <data name="ReceiveQRCodeText" xml:space="preserve">
     <value>该地址可接收 Neo 平台上的所有资产。</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>请求信息</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>备注</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>发票、订单或说明</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>参考数据</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>可选付款参考</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>分享二维码</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>保存到相册</value>
   </data>

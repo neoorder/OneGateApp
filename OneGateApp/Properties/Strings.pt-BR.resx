@@ -1037,22 +1037,4 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponível</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>Detalhes da solicitação</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>Memo</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>Fatura, pedido ou observação</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>Dados de referência</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>Referência de pagamento opcional</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>Compartilhar QR Code</value>
-  </data>
 </root>

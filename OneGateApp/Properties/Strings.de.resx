@@ -1037,22 +1037,4 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="Unavailable" xml:space="preserve">
     <value>Nicht verfügbar</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>Anfragedetails</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>Notiz</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>Rechnung, Bestellung oder Hinweis</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>Referenzdaten</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>Optionale Zahlungsreferenz</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>QR-Code teilen</value>
-  </data>
 </root>

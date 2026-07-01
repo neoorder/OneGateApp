@@ -1037,22 +1037,4 @@
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>Детали запроса</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>Заметка</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>Счет, заказ или примечание</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>Справочные данные</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>Необязательная ссылка платежа</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>Поделиться QR-кодом</value>
-  </data>
 </root>

@@ -1037,22 +1037,4 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>İstek ayrıntıları</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>Not</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>Fatura, sipariş veya not</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>Referans verileri</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>İsteğe bağlı ödeme referansı</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>QR kodunu paylaş</value>
-  </data>
 </root>

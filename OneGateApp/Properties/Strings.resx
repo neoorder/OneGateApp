@@ -481,24 +481,6 @@ After disabling, you will need to manually enter your wallet password to authori
   <data name="ReceiveQRCodeText" xml:space="preserve">
     <value>This address can receive all assets on the Neo platform.</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>Request details</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>Memo</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>Invoice, order, or note</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>Reference data</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>Optional payment reference</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>Share QR</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Save to gallery</value>
   </data>

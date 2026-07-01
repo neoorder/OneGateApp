@@ -1037,22 +1037,4 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="Unavailable" xml:space="preserve">
     <value>사용할 수 없음</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>요청 세부 정보</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>메모</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>청구서, 주문 또는 메모</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>참조 데이터</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>선택적 결제 참조</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>QR 코드 공유</value>
-  </data>
 </root>

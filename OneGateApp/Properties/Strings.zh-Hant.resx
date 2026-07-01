@@ -893,24 +893,6 @@
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp測試</value>
   </data>
-  <data name="ReceiveRequestDetails" xml:space="preserve">
-    <value>請求資訊</value>
-  </data>
-  <data name="RequestMemo" xml:space="preserve">
-    <value>備註</value>
-  </data>
-  <data name="RequestMemoPlaceholder" xml:space="preserve">
-    <value>發票、訂單或說明</value>
-  </data>
-  <data name="RequestData" xml:space="preserve">
-    <value>參考資料</value>
-  </data>
-  <data name="RequestDataPlaceholder" xml:space="preserve">
-    <value>選填付款參考</value>
-  </data>
-  <data name="ShareQRCode" xml:space="preserve">
-    <value>分享 QR Code</value>
-  </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 提交</value>
   </data>

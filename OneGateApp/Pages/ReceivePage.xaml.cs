@@ -9,45 +9,9 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class ReceivePage : ContentPage, IQueryAttributable
 {
-    string? memo;
-    string? requestData;
-
     public Wallet Wallet { get; set { field = value; OnPropertyChanged(); } }
     public WalletAccount DefaultAccount => Wallet.GetDefaultAccount()!;
     public UInt160? Asset { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressUri)); } }
-    public string? Memo
-    {
-        get => memo;
-        set
-        {
-            if (memo == value) return;
-            memo = value;
-            OnPropertyChanged();
-            OnRequestDetailsChanged();
-        }
-    }
-    public string? RequestData
-    {
-        get => requestData;
-        set
-        {
-            if (requestData == value) return;
-            requestData = value;
-            OnPropertyChanged();
-            OnRequestDetailsChanged();
-        }
-    }
-    public bool HasRequestSummary => !string.IsNullOrWhiteSpace(Memo) || !string.IsNullOrWhiteSpace(RequestData);
-    public string RequestSummary
-    {
-        get
-        {
-            List<string> parts = [];
-            AddSummaryPart(parts, Strings.RequestMemo, Memo);
-            AddSummaryPart(parts, Strings.RequestData, RequestData);
-            return string.Join(Environment.NewLine, parts);
-        }
-    }
     public string AddressUri
     {
         get
@@ -56,8 +20,6 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
             List<string> query = [];
             if (Asset is not null)
                 query.Add($"asset={Uri.EscapeDataString(Asset.ToString())}");
-            AddQueryParameter(query, "memo", Memo);
-            AddQueryParameter(query, "data", RequestData);
             return query.Count == 0 ? uri : $"{uri}?{string.Join("&", query)}";
         }
     }
@@ -72,27 +34,6 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
     {
         if (query.TryGetValue("asset", out var asset))
             Asset = (string)asset;
-    }
-
-    void OnRequestDetailsChanged()
-    {
-        OnPropertyChanged(nameof(AddressUri));
-        OnPropertyChanged(nameof(RequestSummary));
-        OnPropertyChanged(nameof(HasRequestSummary));
-    }
-
-    static void AddQueryParameter(List<string> query, string name, string? value)
-    {
-        value = value?.Trim();
-        if (string.IsNullOrEmpty(value)) return;
-        query.Add($"{name}={Uri.EscapeDataString(value)}");
-    }
-
-    static void AddSummaryPart(List<string> parts, string label, string? value)
-    {
-        value = value?.Trim();
-        if (string.IsNullOrEmpty(value)) return;
-        parts.Add($"{label}: {value}");
     }
 
     async void OnShareQRCode(object sender, EventArgs e)
@@ -111,7 +52,7 @@ public partial class ReceivePage : ContentPage, IQueryAttributable
         await screenshot.CopyToAsync(stream);
         await Share.RequestAsync(new ShareFileRequest
         {
-            Title = Strings.ShareQRCode,
+            Title = Strings.Share,
             File = new ShareFile(path)
         });
     }
