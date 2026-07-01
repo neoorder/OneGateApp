@@ -304,7 +304,7 @@
     <value>Biyometrik kimlik bilgisi oluştur</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Cihazınız biyometrik kimlik doğrulamayı destekliyor. Oturum açmayı kolaylaştırmak için biyometrik kimlik bilgisi oluşturulsun mu?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Harici bağlantıya yönlendirme engellendi</value>
@@ -1036,5 +1036,20 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Ad zaten var</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Not</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>Son transfer</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>Girilen adresi kullan</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Ad, adres veya not ara</value>
   </data>
 </root>

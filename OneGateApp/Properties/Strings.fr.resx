@@ -304,7 +304,7 @@
     <value>Créer des identifiants biométriques</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>Votre appareil prend en charge l’authentification biométrique. Créer des identifiants biométriques pour simplifier la connexion ?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>Navigation vers un lien externe bloquée</value>
@@ -1036,5 +1036,20 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponible</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Le nom existe déjà</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>Transfert récent</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>Utiliser l'adresse saisie</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Rechercher un nom, une adresse ou une note</value>
   </data>
 </root>

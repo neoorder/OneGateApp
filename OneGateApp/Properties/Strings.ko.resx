@@ -304,7 +304,7 @@
     <value>생체 인증 자격 증명 생성</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>사용자의 기기는 생체 인증을 지원합니다. 로그인 간소화를 위해 생체 인증 자격 증명을 생성하시겠습니까?</value>
+    <value>Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time.</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>외부 링크 이동이 차단되었습니다</value>
@@ -1036,5 +1036,20 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>사용할 수 없음</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>이름이 이미 있습니다</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>최근 전송</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>입력한 주소 사용</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>이름, 주소 또는 메모 검색</value>
   </data>
 </root>

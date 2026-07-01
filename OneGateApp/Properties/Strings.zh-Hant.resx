@@ -304,7 +304,7 @@
     <value>建立生物識別憑證</value>
   </data>
   <data name="CreateBiometricCredentialText" xml:space="preserve">
-    <value>偵測到您的裝置支援生物識別，是否建立生物識別憑證以簡化登入？</value>
+    <value>偵測到您的裝置支援生物識別。設定後，您可以用生物識別解鎖 OneGate 並授權錢包操作，無需每次輸入密碼。</value>
   </data>
   <data name="RedirectionBlockedText" xml:space="preserve">
     <value>已阻止外部連結跳轉</value>
@@ -384,9 +384,6 @@
   </data>
   <data name="EnterCustomAddress" xml:space="preserve">
     <value>輸入自訂地址</value>
-  </data>
-  <data name="Transfer" xml:space="preserve">
-    <value>轉帳</value>
   </data>
   <data name="From" xml:space="preserve">
     <value>轉出地址</value>
@@ -534,6 +531,9 @@
   </data>
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>地址已存在</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>名稱已存在</value>
   </data>
   <data name="EditContact" xml:space="preserve">
     <value>編輯地址</value>
@@ -1036,5 +1036,20 @@
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>備註</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>最近轉帳地址</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>使用輸入的地址</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>搜尋名字、地址或備註</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>轉帳</value>
   </data>
 </root>

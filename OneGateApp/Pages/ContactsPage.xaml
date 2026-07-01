@@ -4,14 +4,18 @@
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.ContactsPage"
+             x:Name="Root"
              Title="{x:Static og:Strings.AddressBook}"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <CollectionView ItemsSource="{Binding Contacts}" Margin="20">
+    <Grid RowDefinitions="auto,*" Margin="20" RowSpacing="16">
+        <Border StrokeShape="RoundRectangle 28" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="18,0" HeightRequest="56">
+            <Entry Placeholder="{x:Static og:Strings.SearchAddressBook}" ClearButtonVisibility="WhileEditing" og:Border.IsVisible="False" TextChanged="OnSearch" />
+        </Border>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Contacts}">
             <CollectionView.EmptyView>
                 <Grid RowDefinitions="*,auto,*">
                     <VerticalStackLayout Spacing="20" VerticalOptions="Center">
@@ -29,18 +33,29 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
-                    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                        <Label Text="{Binding Label}" FontAttributes="Bold" />
-                        <Grid ColumnDefinitions="*,auto">
-                            <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" />
-                            <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Margin="-20" Padding="20" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                    <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16">
+                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                            <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="42" HeightRequest="42" VerticalOptions="Start">
+                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
+                                    <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
+                                    <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3" VerticalOptions="Start">
+                                        <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
+                                    </Border>
+                                </Grid>
+                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="13" LineBreakMode="TailTruncation" />
+                                <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Padding="8" WidthRequest="44" HeightRequest="44" VerticalOptions="Center" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="{Binding Address, StringFormat='edit?address={0}'}" />
+                            </Grid.GestureRecognizers>
                         </Grid>
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnContactTapped" CommandParameter="{Binding .}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </ScrollView>
+    </Grid>
 </ContentPage>
