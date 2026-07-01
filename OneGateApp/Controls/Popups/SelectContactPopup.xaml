@@ -10,7 +10,7 @@
             BindingContext="{Binding Source={RelativeSource Self}}">
     <VerticalStackLayout Spacing="15">
         <Grid ColumnDefinitions="*,auto">
-            <Label Text="{x:Static og:Strings.SelectContact}" FontAttributes="Bold" />
+            <Label Text="{Binding Title}" FontAttributes="Bold" />
             <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" Margin="-10" Padding="10" Clicked="OnCancel" />
         </Grid>
         <SearchBar Placeholder="{x:Static og:Strings.Search}" ios:SearchBar.SearchBarStyle="Minimal" TextChanged="OnSearch" />

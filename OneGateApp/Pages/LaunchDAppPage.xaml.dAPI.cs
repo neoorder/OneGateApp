@@ -17,6 +17,7 @@ using NeoOrder.OneGate.Services.RPC;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Text.Json.Nodes;
+using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Pages;
 
@@ -59,6 +60,22 @@ partial class LaunchDAppPage
         if (!string.IsNullOrEmpty(prompt)) popup.Message = prompt;
         var result = await this.ShowPopupAsync<string>(popup);
         return result.Result ?? throw new OperationCanceledException();
+    }
+
+    [RpcMethod]
+    async Task<AddressBookContact> PickContact(PickContactOptions? options)
+    {
+        var popup = serviceProvider.GetServiceOrCreateInstance<SelectContactPopup>();
+        if (!string.IsNullOrWhiteSpace(options?.Title))
+        {
+            string title = options.Title.Trim();
+            popup.Title = title[..Math.Min(title.Length, 80)];
+        }
+
+        var result = await this.ShowPopupAsync<Contact?>(popup);
+        Contact contact = result.Result ?? throw new OperationCanceledException();
+        UInt160 hash = contact.Address.ToScriptHash(protocolSettings.AddressVersion);
+        return AddressBookContact.From(contact, hash);
     }
 
     [RpcMethod]

@@ -9,6 +9,7 @@ public partial class SelectContactPopup : MyPopup<Contact?>
     readonly ApplicationDbContext dbContext;
     Contact[]? contacts_all;
 
+    public string Title { get; set { field = value; OnPropertyChanged(); } } = Properties.Strings.SelectContact;
     public required Contact[] Contacts { get; set { field = value; OnPropertyChanged(); } }
 
     public SelectContactPopup(ApplicationDbContext dbContext)
