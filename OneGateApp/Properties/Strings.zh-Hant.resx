@@ -789,6 +789,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>遊戲</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>下拉重新整理遊戲目錄。</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>最近玩過</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>遊戲類型</value>
   </data>

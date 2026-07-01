@@ -32,25 +32,55 @@
     <RefreshView Margin="20,0" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
         <CollectionView ItemsSource="{Binding GamesFiltered}" MinimumHeightRequest="20">
             <CollectionView.Header>
-                <VerticalStackLayout Spacing="20">
+                <VerticalStackLayout Spacing="16">
                     <Border StrokeShape="RoundRectangle 10" StrokeThickness="0" HeightRequest="132">
                         <Image Source="gaming_banner.webp" Aspect="AspectFill" />
                     </Border>
+                    <VerticalStackLayout Spacing="8" IsVisible="{Binding HasRecentGames}">
+                        <Label Text="{x:Static og:Strings.GamingRecentPlayed}" FontAttributes="Bold" />
+                        <CollectionView ItemsSource="{Binding GamesRecent}" HeightRequest="104">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="og:DApp">
+                                    <Border StyleClass="Card" WidthRequest="96" HeightRequest="96" Padding="8,10">
+                                        <Grid RowDefinitions="48,*" RowSpacing="4">
+                                            <Image WidthRequest="44" HeightRequest="44" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
+                                                <Image.Source>
+                                                    <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Label Grid.Row="1" Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="12" MaxLines="1" LineBreakMode="TailTruncation" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                        </Grid>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
                     <og:TabBar x:Name="gameTypeTabBar" Tabs="{Binding GameTypes}" IsVisible="{Binding HasGameTypeFilters}" Spacing="18" Margin="0,10" SelectedTabChanged="OnGameTypeChanged" />
                 </VerticalStackLayout>
             </CollectionView.Header>
             <CollectionView.EmptyView>
-                <Grid RowDefinitions="120">
-                    <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="{x:Static og:Strings.Loading}" />
-                                <Span Text="…" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label Text="{x:Static og:Strings.DefaultEmptyViewMessage}" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" VerticalOptions="Center" />
-                </Grid>
+                <Border StyleClass="Card" HeightRequest="120">
+                    <Grid>
+                        <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static og:Strings.Loading}" />
+                                    <Span Text="…" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <VerticalStackLayout Spacing="4" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{x:Static og:Strings.DefaultEmptyViewMessage}" HorizontalTextAlignment="Center" />
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.GamingEmptyState}" FontSize="12" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
             </CollectionView.EmptyView>
             <CollectionView.ItemsLayout>
                 <GridItemsLayout x:Name="GamesItemsLayout" Orientation="Vertical" Span="1" HorizontalItemSpacing="28" />

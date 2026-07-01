@@ -813,6 +813,12 @@ Continuando, confermi di aver compreso pienamente e accettato tutti i rischi ass
   <data name="Gaming" xml:space="preserve">
     <value>Giochi</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Trascina verso il basso per aggiornare il catalogo dei giochi.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Giocati di recente</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Tipo di gioco</value>
   </data>

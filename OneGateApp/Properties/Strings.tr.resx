@@ -813,6 +813,12 @@ Devam ederek, ilgili tüm riskleri tamamen anladığınızı ve kabul ettiğiniz
   <data name="Gaming" xml:space="preserve">
     <value>Oyun</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Oyun kataloğunu yenilemek için aşağı çekin.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Son oynananlar</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Oyun türü</value>
   </data>

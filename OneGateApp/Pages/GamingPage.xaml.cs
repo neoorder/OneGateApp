@@ -2,6 +2,7 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
+using System.Collections.ObjectModel;
 using TabBar = NeoOrder.OneGate.Controls.Views.TabBar;
 
 namespace NeoOrder.OneGate.Pages;
@@ -17,6 +18,9 @@ public partial class GamingPage : ContentPage
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
+    public List<int> GamesIdRecent { get; private set; } = [];
+    public ObservableCollection<DApp> GamesRecent { get; private set { field = value; OnPropertyChanged(); } } = [];
+    public bool HasRecentGames { get; private set { field = value; OnPropertyChanged(); } }
     public DApp[] Games { get; private set { field = value; OnPropertyChanged(); } } = [];
     public DApp[] GamesFiltered { get; private set { field = value; OnPropertyChanged(); } } = [];
     public string[] GameTypes { get; private set { field = value; OnPropertyChanged(); } } = [Strings.All];
@@ -41,6 +45,8 @@ public partial class GamingPage : ContentPage
         base.OnAppearing();
         if (this.ShouldRefresh())
             LoadingService.BeginLoad();
+        else
+            LoadRecentGames();
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -52,6 +58,7 @@ public partial class GamingPage : ContentPage
     async Task LoadSettingsAsync()
     {
         allowRestrictedContent = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext);
+        GamesIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
     }
 
     async Task LoadDAppsAsync()
@@ -89,6 +96,15 @@ public partial class GamingPage : ContentPage
             .ToArray();
         HasGameTypeFilters = GameTypes.Length > 2;
         ApplyGameTypeFilter(gameTypeTabBar.SelectedTab);
+        LoadRecentGames();
+    }
+
+    void LoadRecentGames()
+    {
+        GamesRecent = new(GamesIdRecent
+            .Select(id => Games.FirstOrDefault(p => p.Id == id))
+            .OfType<DApp>());
+        HasRecentGames = GamesRecent.Count > 0;
     }
 
     void ApplyGameTypeFilter(string? selectedGameType)

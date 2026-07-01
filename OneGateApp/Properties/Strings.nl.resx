@@ -813,6 +813,12 @@ Door door te gaan bevestigt u dat u alle bijbehorende risico's volledig begrijpt
   <data name="Gaming" xml:space="preserve">
     <value>Games</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Trek omlaag om de gamecatalogus te vernieuwen.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Recent gespeeld</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Speltype</value>
   </data>

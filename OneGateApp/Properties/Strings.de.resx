@@ -813,6 +813,12 @@ Mit dem Fortfahren bestätigen Sie, dass Sie alle damit verbundenen Risiken voll
   <data name="Gaming" xml:space="preserve">
     <value>Gaming</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Zum Aktualisieren des Spielekatalogs nach unten ziehen.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Zuletzt gespielt</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Spieltyp</value>
   </data>

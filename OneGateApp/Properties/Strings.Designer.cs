@@ -1157,6 +1157,24 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Pull down to refresh the game catalog. 的本地化字符串。
+        /// </summary>
+        internal static string GamingEmptyState {
+            get {
+                return ResourceManager.GetString("GamingEmptyState", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recently played 的本地化字符串。
+        /// </summary>
+        internal static string GamingRecentPlayed {
+            get {
+                return ResourceManager.GetString("GamingRecentPlayed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 General 的本地化字符串。
         /// </summary>
         internal static string General {

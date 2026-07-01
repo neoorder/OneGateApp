@@ -813,6 +813,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>게임</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>아래로 당겨 게임 카탈로그를 새로고침하세요.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>최근 플레이</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>게임 유형</value>
   </data>
