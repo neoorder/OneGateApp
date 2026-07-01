@@ -2,12 +2,42 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.DeveloperToolsPage"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Title="{x:Static og:Strings.DeveloperTools}"
              Shell.TabBarIsVisible="False">
-    <VerticalStackLayout Margin="20" Spacing="20">
-        <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppTesting}" />
-        <Entry Margin="0,-20,0,0" Keyboard="Url" ReturnType="Go" ReturnCommand="{Binding DAppTestingCommand}" ReturnCommandParameter="{Binding Text, Source={RelativeSource Self}}" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Margin="20" Spacing="18">
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppSubmission}" />
+            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="14" Padding="16,14">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="{x:Static og:Strings.SubmitByEmail}" FontAttributes="Bold" />
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppSubmission}" FontSize="12" LineBreakMode="TailTruncation" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="1" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDAppSubmissionClicked" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Border>
+
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppTesting}" />
+            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16,14">
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="12">
+                    <Entry x:Name="dAppTestingEntry" Keyboard="Url" Placeholder="{x:Static og:Strings.DAppUrl}" ReturnType="Go" ReturnCommand="{Binding DAppTestingCommand}" ReturnCommandParameter="{Binding Text, Source={RelativeSource Self}}" />
+                    <Button Grid.Column="1" Text="{x:Static og:Strings.Open}" Clicked="OnDAppTestingClicked" />
+                </Grid>
+            </Border>
+
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Settings}" />
+            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="14" Padding="16,14">
+                    <Label Text="{x:Static og:Strings.DAppDebugPanel}" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Switch Grid.Column="1" IsToggled="{Binding IsDAppDebugPanelEnabled}" IsEnabled="{Binding IsSettingsLoaded}" VerticalOptions="Center" Toggled="OnDAppDebugPanelToggled" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -112,12 +112,6 @@ static class Commands
     public static AsyncCommand CheckForUpdates { get; } = new(static async parameter =>
     {
         bool silent = parameter is true;
-        var dbContext = Application.Current!.Handler.GetRequiredService<ApplicationDbContext>();
-        if (await dbContext.Settings.GetAsync<bool>("system/updates"))
-        {
-            if (!silent) await Toast.Show(Strings.NewVersionAvailable);
-            return;
-        }
         if (!silent) await Toast.Show(Strings.CheckingForUpdates + "…");
         UpdateService service = Application.Current!.Handler.GetRequiredService<UpdateService>();
         bool updateAvailable;
@@ -132,7 +126,6 @@ static class Commands
         }
         if (updateAvailable)
         {
-            await dbContext.Settings.PutAsync("system/updates", true);
             if (!silent) await Toast.Show(Strings.NewVersionAvailable);
         }
         else
@@ -144,7 +137,18 @@ static class Commands
     public static AsyncCommand UpdateApp { get; } = new(static async _ =>
     {
         UpdateService service = Application.Current!.Handler.GetRequiredService<UpdateService>();
-        await service.UpdateAsync();
+        try
+        {
+            await service.UpdateAsync();
+        }
+        catch (UpdateUnavailableException)
+        {
+            await Toast.Show(Strings.NoUpdatesAvailable);
+        }
+        catch (Exception ex)
+        {
+            await Toast.Show(ex.Message);
+        }
     });
 }
 

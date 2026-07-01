@@ -332,6 +332,9 @@ Biyometrik kimlik doğrulamayı istediğiniz zaman devre dışı bırakabilirsin
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Devam etmek için lütfen biyometrinizi doğrulayın</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Cüzdanın kilidi açılıyor</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>İşlem iptal edildi</value>
   </data>
@@ -453,6 +456,30 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
   </data>
   <data name="General" xml:space="preserve">
     <value>Genel</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>İçerik ayarları</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Kısıtlı içeriğe izin ver</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Herkes için uygun olmayabilecek DApp'leri göster. Devre dışı bırakıldığında bu DApp'ler listelerde gizlenir.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Doğum tarihi seç</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Verdiğiniz yaşa göre kısıtlı içerik etkinleştirilemez.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Kısıtlı içerik</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Kısıtlı içerik; yetişkinlere yönelik, şiddet, kumar, flört veya reşit olmayanlar için uygun olmayan diğer hassas temaları içerebilir.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Anlıyorum ve devam ediyorum</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Bana transfer göndermek için lütfen QR kodu tarayın</value>
@@ -887,14 +914,35 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Tutarı ve ücretleri karşılamak için bakiye yetersiz. Gönderebileceğiniz en yüksek tutar {0} GAS’tır.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Geliştirici modu etkinleştirildi</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Geliştirici araçları</value>
+    <value>Geliştirici merkezi</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>DApp hata ayıklama paneli</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp Testi</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp gönderimi</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp gönderimi: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Proje adı</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Resmi web sitesi</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>İletişim bilgileri</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>E-posta ile gönder</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Kullanılabilir</value>

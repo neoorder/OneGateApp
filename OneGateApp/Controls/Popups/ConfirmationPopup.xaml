@@ -12,8 +12,8 @@
             <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" Margin="-10" Padding="10" Clicked="OnCancel" />
         </Grid>
         <Label Text="{Binding Message}" />
-        <Grid ColumnDefinitions="*,auto,*" Margin="-15,0,-15,-15">
-            <BoxView Grid.ColumnSpan="3" HeightRequest="1" VerticalOptions="Start" />
+        <BoxView HeightRequest="1" Margin="-15,0" />
+        <Grid ColumnDefinitions="*,auto,*" Margin="-15">
             <Button Grid.Column="0" StyleClass="Secondary" Text="{x:Static og:Strings.Cancel}" BorderWidth="0" Clicked="OnCancel" />
             <BoxView Grid.Column="1" WidthRequest="1" VerticalOptions="Fill" />
             <Button Grid.Column="2" Text="{Binding AcceptText}" TextColor="#5676e7" BackgroundColor="Transparent" Clicked="OnAccept">

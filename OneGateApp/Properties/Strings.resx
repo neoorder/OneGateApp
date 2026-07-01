@@ -332,6 +332,9 @@ You can disable biometric authentication at any time.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Please verify your biometrics to continue</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Unlocking wallet</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operation cancelled</value>
   </data>
@@ -453,6 +456,30 @@ After disabling, you will need to manually enter your wallet password to authori
   </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Content settings</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Allow restricted content</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Show DApps that may not be suitable for everyone. When disabled, these DApps are hidden from lists.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Select birth date</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Restricted content cannot be enabled based on the age you provided.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Restricted content</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Restricted content may include adult, violent, gambling, dating, or other sensitive themes that are not suitable for minors.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>I understand and continue</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Please scan the QR code to send me a transfer</value>
@@ -887,14 +914,35 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Insufficient balance to cover the amount and fees. The maximum you can send is {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Developer mode enabled</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Developer Tools</value>
+    <value>Developer Center</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>DApp Debug Panel</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp Testing</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp Submission</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp submission: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Project name</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Official website</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Contact information</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Submit by email</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Available</value>

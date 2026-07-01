@@ -42,7 +42,7 @@ partial class DataProtectionService
 
     public static partial async Task<string> UnprotectAsync(byte[] protectedData, string? title, string? message)
     {
-        if (!await AuthenticateAsync(message))
+        if (!await AuthenticateAsync(title, message))
             throw new OperationCanceledException();
         var provider = new DataProtectionProvider("LOCAL=user");
         IBuffer buffer = CryptographicBuffer.CreateFromByteArray(protectedData);
