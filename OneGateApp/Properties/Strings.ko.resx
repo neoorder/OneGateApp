@@ -1037,4 +1037,19 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="Unavailable" xml:space="preserve">
     <value>사용할 수 없음</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>실패</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>트랜잭션 실패</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>대기 중</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>다시 시도</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>아직 확인 대기 중</value>
+  </data>
 </root>

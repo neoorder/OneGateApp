@@ -1037,4 +1037,19 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="Unavailable" xml:space="preserve">
     <value>Non disponibile</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Non riuscito</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transazione non riuscita</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>In sospeso</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Riprova</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Ancora in attesa di conferma</value>
+  </data>
 </root>

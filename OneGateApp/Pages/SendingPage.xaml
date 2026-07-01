@@ -8,17 +8,18 @@
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
-        <toolkit:IsNullConverter x:Key="IsNullConverter" />
-        <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
         <og:TimestampConverter x:Key="TimestampConverter" />
     </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="20">
-            <ActivityIndicator IsRunning="True" Color="{toolkit:AppThemeResource Secondary}" WidthRequest="64" HeightRequest="64" IsVisible="{Binding BlockTime, Converter={StaticResource IsNullConverter}}" />
-            <Border StrokeShape="Ellipse" BackgroundColor="#5bc782" WidthRequest="64" HeightRequest="64" IsVisible="{Binding BlockTime, Converter={StaticResource IsNotNullConverter}}">
+            <ActivityIndicator IsRunning="True" Color="{toolkit:AppThemeResource Secondary}" WidthRequest="64" HeightRequest="64" IsVisible="{Binding IsConfirming}" />
+            <Border StrokeShape="Ellipse" BackgroundColor="#5bc782" WidthRequest="64" HeightRequest="64" IsVisible="{Binding IsSucceeded}">
                 <Image Source="{FontImageSource &#xe9b0;, FontFamily=Icons, Color=#f1f3f6}" WidthRequest="32" HeightRequest="32" />
             </Border>
-            <Label IsVisible="{Binding BlockTime, Converter={StaticResource IsNullConverter}}" HorizontalOptions="Center">
+            <Border StrokeShape="Ellipse" BackgroundColor="#e25c5c" WidthRequest="64" HeightRequest="64" IsVisible="{Binding IsFailed}">
+                <Image Source="{FontImageSource &#xe6b5;, FontFamily=Icons, Color=#f1f3f6}" WidthRequest="32" HeightRequest="32" />
+            </Border>
+            <Label IsVisible="{Binding IsConfirming}" HorizontalOptions="Center">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="{x:Static og:Strings.TransactionConfirming}" />
@@ -26,7 +27,10 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label Text="{x:Static og:Strings.TransactionSucceeded}" IsVisible="{Binding BlockTime, Converter={StaticResource IsNotNullConverter}}" HorizontalOptions="Center" />
+            <Label Text="{x:Static og:Strings.TransactionSucceeded}" IsVisible="{Binding IsSucceeded}" HorizontalOptions="Center" />
+            <Label Text="{x:Static og:Strings.TransactionFailed}" TextColor="#e25c5c" IsVisible="{Binding IsFailed}" HorizontalOptions="Center" />
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.TransactionStillPending}" IsVisible="{Binding IsTimedOut}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+            <Button Text="{x:Static og:Strings.Retry}" IsVisible="{Binding IsTimedOut}" Clicked="OnRetry" HorizontalOptions="Center" />
             <Grid RowDefinitions="1,1">
                 <BoxView Grid.Row="0" Color="{AppThemeBinding Light='#e0e5ed', Dark='#1E2128'}" />
                 <BoxView Grid.Row="1" Color="{AppThemeBinding Light='#fafafa', Dark='#3A3F49'}" />
@@ -45,8 +49,10 @@
                     <BoxView HeightRequest="1" />
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
                         <Label StyleClass="Secondary" Text="{x:Static og:Strings.Status}" VerticalOptions="Center" />
-                        <Label Grid.Column="1" Text="{x:Static og:Strings.Confirming}" IsVisible="{Binding BlockTime, Converter={StaticResource IsNullConverter}}" HorizontalOptions="End" />
-                        <Label Grid.Column="1" Text="{x:Static og:Strings.Success}" TextColor="#5bc782" IsVisible="{Binding BlockTime, Converter={StaticResource IsNotNullConverter}}" HorizontalOptions="End" />
+                        <Label Grid.Column="1" Text="{x:Static og:Strings.Confirming}" IsVisible="{Binding IsConfirming}" HorizontalOptions="End" />
+                        <Label Grid.Column="1" Text="{x:Static og:Strings.Success}" TextColor="#5bc782" IsVisible="{Binding IsSucceeded}" HorizontalOptions="End" />
+                        <Label Grid.Column="1" Text="{x:Static og:Strings.Failed}" TextColor="#e25c5c" IsVisible="{Binding IsFailed}" HorizontalOptions="End" />
+                        <Label Grid.Column="1" Text="{x:Static og:Strings.Pending}" IsVisible="{Binding IsTimedOut}" HorizontalOptions="End" />
                     </Grid>
                     <BoxView HeightRequest="1" />
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
