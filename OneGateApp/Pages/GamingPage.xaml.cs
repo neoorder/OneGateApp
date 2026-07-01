@@ -12,6 +12,9 @@ public partial class GamingPage : ContentPage
     const double HorizontalPageMargin = 40;
     const int MaxGameColumns = 3;
 
+    readonly ApplicationDbContext dbContext;
+    bool allowRestrictedContent;
+
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
     public DApp[] Games { get; private set { field = value; OnPropertyChanged(); } } = [];
@@ -19,16 +22,17 @@ public partial class GamingPage : ContentPage
     public string[] GameTypes { get; private set { field = value; OnPropertyChanged(); } } = [Strings.All];
     public bool HasGameTypeFilters { get; private set { field = value; OnPropertyChanged(); } }
 
-    public GamingPage(IServiceProvider serviceProvider)
+    public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
     {
-        this.LoadingService = new(LoadDAppsAsync);
+        this.LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
+        this.dbContext = dbContext;
         this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
-        this.DApps.CollectionLoaded += OnDAppsLoaded;
         InitializeComponent();
 #if WINDOWS
         // Disable the search handler on Windows because it can cause layout issues there.
         Shell.SetSearchHandler(this, null);
 #endif
+        LoadingService.Loaded += OnDataLoaded;
         LoadingService.BeginLoad();
     }
 
@@ -43,6 +47,11 @@ public partial class GamingPage : ContentPage
     {
         base.OnSizeAllocated(width, height);
         UpdateGamesItemsLayout(width);
+    }
+
+    async Task LoadSettingsAsync()
+    {
+        allowRestrictedContent = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext);
     }
 
     async Task LoadDAppsAsync()
@@ -64,9 +73,11 @@ public partial class GamingPage : ContentPage
             GamesItemsLayout.Span = span;
     }
 
-    void OnDAppsLoaded(object? sender, EventArgs e)
+    void OnDataLoaded(object? sender, EventArgs e)
     {
-        Games = DApps.Where(p => p.IsGamingApp).ToArray();
+        Games = DApps
+            .Where(p => p.IsGamingApp && DAppContentPolicy.IsVisible(p, allowRestrictedContent))
+            .ToArray();
         GameTypes = Games
             .Select(p => p.GameType)
             .Where(p => !string.IsNullOrWhiteSpace(p))
