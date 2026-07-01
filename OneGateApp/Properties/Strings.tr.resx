@@ -1037,4 +1037,7 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
   </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>İşlem başarısız</value>
+  </data>
 </root>

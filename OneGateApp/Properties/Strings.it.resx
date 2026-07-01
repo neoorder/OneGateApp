@@ -1037,4 +1037,7 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="Unavailable" xml:space="preserve">
     <value>Non disponibile</value>
   </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transazione non riuscita</value>
+  </data>
 </root>

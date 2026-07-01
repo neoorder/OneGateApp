@@ -1037,4 +1037,7 @@
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
   </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Транзакция не удалась</value>
+  </data>
 </root>

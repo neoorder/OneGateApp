@@ -1037,4 +1037,7 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Unavailable" xml:space="preserve">
     <value>Unavailable</value>
   </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaction failed</value>
+  </data>
 </root>

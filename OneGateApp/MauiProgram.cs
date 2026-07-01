@@ -9,6 +9,7 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Resources;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
+using Plugin.LocalNotification;
 using Plugin.Maui.ScreenSecurity;
 using ZXing.Net.Maui.Controls;
 
@@ -35,6 +36,7 @@ public static class MauiProgram
             .UseMauiCommunityToolkit(ConfigureMauiCommunityToolkit)
             .UseScreenSecurity()
             .UseBarcodeReader()
+            .UseLocalNotification()
             .RegisterServices()
             .ConfigureMauiHandlers(handlers =>
             {
@@ -110,6 +112,7 @@ public static class MauiProgram
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddSingleton<TokenManager>();
         builder.Services.AddSingleton<RpcClient>();
+        builder.Services.AddSingleton<PendingTransactionService>();
         builder.Services.AddSingleton<UpdateService>();
         builder.Services.AddSingleton<IHomeShortcutService, HomeShortcutService>();
         return builder;
