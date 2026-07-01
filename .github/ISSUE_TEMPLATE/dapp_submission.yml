@@ -1,5 +1,5 @@
-name: DApp listing request
-description: Request a DApp or game to be reviewed for listing in OneGate.
+name: OneGate listing request
+description: Request a DApp, game, tool, or other project to be reviewed for listing in OneGate.
 title: "[DApp Listing]: "
 labels: ["enhancement"]
 body:
@@ -8,7 +8,7 @@ body:
       value: |
         Thanks for helping improve OneGate's DApp catalog.
 
-        Please submit one DApp per issue. Include public information only; do not paste private keys, seed phrases, admin credentials, unpublished API keys, or other secrets.
+        Please submit one listing per issue. Include public information only; do not paste private keys, seed phrases, admin credentials, unpublished API keys, or other secrets.
 
   - type: input
     id: project-name
