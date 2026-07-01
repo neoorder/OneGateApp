@@ -8,25 +8,41 @@
             x:TypeArguments="og:Contact"
             CanBeDismissedByTappingOutsideOfPopup="True"
             BindingContext="{Binding Source={RelativeSource Self}}">
+    <og:MyPopup.Resources>
+        <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+    </og:MyPopup.Resources>
     <VerticalStackLayout Spacing="15">
         <Grid ColumnDefinitions="*,auto">
             <Label Text="{x:Static og:Strings.SelectContact}" FontAttributes="Bold" />
             <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" Margin="-10" Padding="10" Clicked="OnCancel" />
         </Grid>
-        <SearchBar Placeholder="{x:Static og:Strings.Search}" ios:SearchBar.SearchBarStyle="Minimal" TextChanged="OnSearch" />
-        <CollectionView ItemsSource="{Binding Contacts}" HeightRequest="300">
+        <SearchBar Placeholder="{x:Static og:Strings.SearchAddressBook}" ios:SearchBar.SearchBarStyle="Minimal" TextChanged="OnSearch" />
+        <CollectionView ItemsSource="{Binding Contacts}" HeightRequest="320">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
-                    <VerticalStackLayout Padding="10" Spacing="5" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                        <Label Text="{Binding Label}" FontAttributes="Bold" FontSize="16" />
-                        <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" />
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnSelectContact" CommandParameter="{Binding .}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
+                    <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="14">
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="12">
+                            <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="38" HeightRequest="38" VerticalOptions="Start">
+                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
+                                    <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
+                                    <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3" VerticalOptions="Start">
+                                        <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
+                                    </Border>
+                                </Grid>
+                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding DetailText, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
+                                <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            </VerticalStackLayout>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSelectContact" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

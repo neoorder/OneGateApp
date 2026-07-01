@@ -1037,4 +1037,19 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Ad zaten var</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Not</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>Son transfer</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>Girilen adresi kullan</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Ad, adres veya not ara</value>
+  </data>
 </root>

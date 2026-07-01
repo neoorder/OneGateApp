@@ -1037,4 +1037,19 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Nama sudah ada</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Catatan</value>
+  </data>
+  <data name="RecentRecipient" xml:space="preserve">
+    <value>Transfer terbaru</value>
+  </data>
+  <data name="UseEnteredAddress" xml:space="preserve">
+    <value>Gunakan alamat yang dimasukkan</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Cari nama, alamat, atau catatan</value>
+  </data>
 </root>

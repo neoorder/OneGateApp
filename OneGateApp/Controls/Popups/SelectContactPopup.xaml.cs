@@ -1,36 +1,36 @@
-using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Services;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Controls.Popups;
 
 public partial class SelectContactPopup : MyPopup<Contact?>
 {
-    readonly ApplicationDbContext dbContext;
-    Contact[]? contacts_all;
+    readonly AddressBookService addressBookService;
+    int searchRequestId;
 
-    public required Contact[] Contacts { get; set { field = value; OnPropertyChanged(); } }
+    public Contact[] Contacts { get; set { field = value; OnPropertyChanged(); } } = [];
 
-    public SelectContactPopup(ApplicationDbContext dbContext)
+    public SelectContactPopup(AddressBookService addressBookService)
     {
-        this.dbContext = dbContext;
+        this.addressBookService = addressBookService;
         InitializeComponent();
         LoadData();
     }
 
-    void OnSearch(object sender, TextChangedEventArgs e)
+    async void OnSearch(object sender, TextChangedEventArgs e)
     {
-        contacts_all ??= Contacts;
-        if (string.IsNullOrWhiteSpace(e.NewTextValue))
+        int requestId = Interlocked.Increment(ref searchRequestId);
+        try
         {
-            Contacts = contacts_all;
+            Contact[] contacts = await addressBookService.GetSuggestionsAsync(e.NewTextValue, 30);
+            if (requestId == searchRequestId)
+                Contacts = contacts;
         }
-        else
+        catch (Exception ex)
         {
-            string filter = e.NewTextValue.Trim();
-            Contacts = contacts_all
-                .Where(p => p.Label.Contains(filter, StringComparison.OrdinalIgnoreCase))
-                .ToArray();
+            System.Diagnostics.Debug.WriteLine(ex);
+            if (requestId == searchRequestId)
+                Contacts = [];
         }
     }
 
@@ -47,11 +47,14 @@ public partial class SelectContactPopup : MyPopup<Contact?>
 
     async void LoadData()
     {
-        await Task.WhenAll(LoadContactsAsync());
-    }
-
-    async Task LoadContactsAsync()
-    {
-        Contacts = await dbContext.Contacts.ToArrayAsync();
+        try
+        {
+            Contacts = await addressBookService.GetEntriesAsync();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+            Contacts = [];
+        }
     }
 }
