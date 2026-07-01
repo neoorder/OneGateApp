@@ -62,6 +62,22 @@ partial class LaunchDAppPage
     }
 
     [RpcMethod]
+    async Task<bool> Share(DAppShareRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.Text) && string.IsNullOrWhiteSpace(request.Uri))
+            throw new DapiException(10002, "Share text or URI is required");
+
+        await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new Microsoft.Maui.ApplicationModel.DataTransfer.ShareTextRequest
+        {
+            Title = request.Title,
+            Text = request.Text,
+            Uri = request.Uri,
+            Subject = request.Subject
+        });
+        return true;
+    }
+
+    [RpcMethod]
     async Task<BigInteger> GetBalance(UInt160 asset, UInt160 account)
     {
         return await rpcClient.BalanceOf(asset, account);
