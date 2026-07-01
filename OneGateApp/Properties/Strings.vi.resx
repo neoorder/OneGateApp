@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>Ứng dụng</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Tim kiem toan cuc</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Mới sử dụng</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Tôi đã ghi lại và sao lưu an toàn cụm từ ghi nhớ ở trên</value>
   </data>

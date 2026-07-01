@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>Applications</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Recherche globale</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Utilisé récemment</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>J’ai noté et sauvegardé en lieu sûr la phrase mnémonique ci-dessus</value>
   </data>
