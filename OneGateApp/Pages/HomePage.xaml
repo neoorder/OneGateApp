@@ -10,7 +10,7 @@
         <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe751;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="//home/search" />
+        <ToolbarItem Order="Primary" Text="{x:Static og:Strings.GlobalSearch}" IconImageSource="{FontImageSource &#xe751;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="//home/search" />
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.ScanQRCode}" Command="{x:Static og:Commands.ScanQRCode}" />
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.AddressBook}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="contacts" />
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.Settings}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="settings" />
