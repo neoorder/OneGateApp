@@ -31,6 +31,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
+    public bool IsGameRuntimeMode { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(IsNavigationChromeVisible)); } }
+    public bool IsNavigationChromeVisible => !IsGameRuntimeMode;
 
     public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
@@ -49,6 +51,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             ToolbarItems.Remove(addToHomeScreenButton);
         if (!IsDeveloperToolsEnabled)
             ToolbarItems.Remove(developerToolsButton);
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (DApp is not null)
+            ApplyRuntimeMode();
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -88,6 +97,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 Url = uri.AbsoluteUri;
             }
         }
+        ApplyRuntimeMode();
         if (DApp.Id > 0)
         {
             List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
@@ -117,6 +127,19 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         catch
         {
         }
+    }
+
+    async void OnGameRuntimeExitClicked(object sender, EventArgs e)
+    {
+        await this.GoBackOrCloseAsync();
+    }
+
+    void ApplyRuntimeMode()
+    {
+        IsGameRuntimeMode = DApp.IsGamingApp;
+        Shell.SetNavBarIsVisible(this, IsNavigationChromeVisible);
+        NavigationPage.SetHasNavigationBar(this, IsNavigationChromeVisible);
+        SafeAreaEdges = IsGameRuntimeMode ? SafeAreaEdges.None : SafeAreaEdges.All;
     }
 
     async void OnNavigating(object sender, WebNavigatingEventArgs e)
