@@ -17,6 +17,7 @@ using NeoOrder.OneGate.Services.RPC;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Text.Json.Nodes;
+using ZXing.Net.Maui;
 
 namespace NeoOrder.OneGate.Pages;
 
@@ -59,6 +60,19 @@ partial class LaunchDAppPage
         if (!string.IsNullOrEmpty(prompt)) popup.Message = prompt;
         var result = await this.ShowPopupAsync<string>(popup);
         return result.Result ?? throw new OperationCanceledException();
+    }
+
+    [RpcMethod]
+    async Task<string> ScanQRCode()
+    {
+        if (!BarcodeScanning.IsSupported)
+            throw new DapiException(10001, "QR scanning is not supported");
+
+        var page = serviceProvider.GetServiceOrCreateInstance<ScanPage>();
+        var completion = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
+        page.ReturnRawResult(completion);
+        await Navigation.PushAsync(page);
+        return await completion.Task;
     }
 
     [RpcMethod]

@@ -17,6 +17,7 @@ namespace NeoOrder.OneGate.Pages;
 public partial class ScanPage : ContentPage, IQueryAttributable
 {
     readonly ProtocolSettings protocolSettings;
+    TaskCompletionSource<string>? rawResultCompletion;
     string? action;
 
     public ScanPage(ProtocolSettings protocolSettings)
@@ -35,10 +36,16 @@ public partial class ScanPage : ContentPage, IQueryAttributable
             this.action = (string)action;
     }
 
+    public void ReturnRawResult(TaskCompletionSource<string> completion)
+    {
+        rawResultCompletion = completion;
+    }
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
         cameraView.IsDetecting = false;
+        rawResultCompletion?.TrySetCanceled();
     }
 
     async void OnBarcodesDetected(object sender, BarcodeDetectionEventArgs e)
@@ -95,6 +102,13 @@ public partial class ScanPage : ContentPage, IQueryAttributable
 
     async Task ProcessScanResultAsync(string result)
     {
+        if (rawResultCompletion is not null)
+        {
+            rawResultCompletion.TrySetResult(result);
+            await Navigation.PopAsync();
+            return;
+        }
+
         try
         {
             if (Uri.TryCreate(result, UriKind.Absolute, out var uri))
