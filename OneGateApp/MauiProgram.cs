@@ -10,6 +10,7 @@ using NeoOrder.OneGate.Resources;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using Plugin.Maui.ScreenSecurity;
+using Sentry.Maui;
 using ZXing.Net.Maui.Controls;
 
 [assembly: XmlnsDefinition("http://schemas.neoorder.org/onegate/controls", "NeoOrder.OneGate.Controls.Behaviors")]
@@ -31,7 +32,12 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder()
-            .UseMauiApp<App>()
+            .UseMauiApp<App>();
+
+        if (!string.IsNullOrWhiteSpace(SharedOptions.SentryDsn))
+            builder.UseSentry(ConfigureSentry);
+
+        builder
             .UseMauiCommunityToolkit(ConfigureMauiCommunityToolkit)
             .UseScreenSecurity()
             .UseBarcodeReader()
@@ -56,6 +62,17 @@ public static class MauiProgram
 #endif
 
         return builder.Build();
+    }
+
+    static void ConfigureSentry(SentryMauiOptions options)
+    {
+        options.Dsn = SharedOptions.SentryDsn;
+        options.SendDefaultPii = false;     // wallet: never attach user identifiers
+        options.AttachScreenshot = false;   // avoid capturing on-screen balances/addresses
+        options.TracesSampleRate = 0.0;     // crash reporting only, no performance tracing
+#if DEBUG
+        options.Debug = true;
+#endif
     }
 
     static void ConfigureMauiCommunityToolkit(Options options)

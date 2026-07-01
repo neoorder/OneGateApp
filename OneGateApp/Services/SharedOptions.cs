@@ -8,6 +8,8 @@ static class SharedOptions
 {
     public const string OneGateDomain = "onegate.space";
     public const string ContactEmail = "contact@neoorder.org";
+    // Sentry DSN. Set this to enable crash reporting; an empty value leaves Sentry disabled.
+    public const string SentryDsn = "";
     public static readonly string DbPath = Path.Combine(FileSystem.AppDataDirectory, "settings.db3");
     public static readonly string CacheDbPath = Path.Combine(FileSystem.CacheDirectory, "cache.db3");
     public static readonly string WalletPath = Path.Combine(FileSystem.AppDataDirectory, "wallet.json");
