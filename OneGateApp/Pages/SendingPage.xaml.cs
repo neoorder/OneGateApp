@@ -1,9 +1,11 @@
 using Neo;
 using Neo.Network.P2P.Payloads;
 using Neo.SmartContract.Native;
+using Neo.VM;
 using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Services.RPC;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -16,6 +18,21 @@ public partial class SendingPage : ContentPage, IQueryAttributable
     public required Transaction Transaction { get; set { field = value; OnPropertyChanged(null); } }
     public required TransactionIntent[] Intents { get; set { field = value; OnPropertyChanged(); } }
     public ulong? BlockTime { get; set { field = value; OnPropertyChanged(); } }
+    public bool? Succeeded
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsConfirming));
+            OnPropertyChanged(nameof(IsSucceeded));
+            OnPropertyChanged(nameof(IsFailed));
+        }
+    }
+    public bool IsConfirming => Succeeded is null;
+    public bool IsSucceeded => Succeeded == true;
+    public bool IsFailed => Succeeded == false;
 
     public long Fee => (Transaction?.SystemFee + Transaction?.NetworkFee) ?? 0;
     public BigDecimal DecimalFee => new((BigInteger)Fee, NativeContract.GAS.Decimals);
@@ -65,12 +82,33 @@ public partial class SendingPage : ContentPage, IQueryAttributable
                 {
                     continue;
                 }
-                BlockTime = tx["blocktime"]?.GetValue<ulong>();
-                if (BlockTime.HasValue) break;
+                ulong? blockTime = tx["blocktime"]?.GetValue<ulong>();
+                if (!blockTime.HasValue) continue;
+                BlockTime = blockTime;
+                Succeeded = await QueryExecutionSucceededAsync();
+                break;
             }
         }
         catch (OperationCanceledException)
         {
+        }
+    }
+
+    // Block inclusion is not success: a transaction can be included in a block yet revert
+    // (VMState.FAULT). Read the application log and require HALT before reporting success.
+    async Task<bool> QueryExecutionSucceededAsync()
+    {
+        try
+        {
+            JsonObject log = await rpcClient.RpcSendAsync<JsonObject>("getapplicationlog", Transaction.Hash);
+            JsonNode? execution = log["executions"] is JsonArray executions && executions.Count > 0 ? executions[0] : null;
+            return execution?["vmstate"]?.GetValue<string>() == nameof(VMState.HALT);
+        }
+        catch (Exception ex) when (ex is RpcException or HttpRequestException or JsonException)
+        {
+            // Application log unavailable; the transaction is in a block but the execution result
+            // is unknown. Avoid a false "failed" by treating it as confirmed.
+            return true;
         }
     }
 }
