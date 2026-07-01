@@ -167,7 +167,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     networkchanged: new Set()
                 };
 
-                const methods = ["authenticate", "getAccounts", "pickAddress", "getBalance", "send", "call", "invoke", "makeTransaction", "sign", "signMessage", "relay", "getBlock", "getBlockCount", "getTransaction", "getApplicationLog", "getStorage", "getTokenInfo"];
+                const methods = ["authenticate", "getAccounts", "pickAddress", "share", "getBalance", "send", "call", "invoke", "makeTransaction", "sign", "signMessage", "relay", "getBlock", "getBlockCount", "getTransaction", "getApplicationLog", "getStorage", "getTokenInfo"];
 
                 const provider = {
                     name: '{{AppInfo.Name}}',
