@@ -1037,4 +1037,85 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Etkinlik</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Etkinlik Merkezi</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Yerel etkinlik zaman cizelgesini baslatmak icin bir dApp acin, cuzdan erisimini onaylayin, mesaj imzalayin veya islem gonderin.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>Henuz etkinlik kaydedilmedi</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Bu cihazda kaydedilen dApp baglantilarini, cuzdan yetkilendirmelerini, imzalari, gonderilen islemleri ve OneGate Vault islemlerini inceleyin.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Cuzdan etkinlik zaman cizelgeniz</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>{0} ile baglandi</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} kayit</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>{0} icin imza onaylandi</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Kaynak: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>{1} kaynagindan islem {0}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>{0} kaynagindan islem gonderildi</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>{0} kaynagindan OneGate Vault islemi gonderildi</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>{0} icin cuzdan erisimi onaylandi</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Baglanti</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Baglantilar</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Son etkinlik: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>Son etkinlik yok</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Son etkinlik</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Imza</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Imzalar</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Islem</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Islemler</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Bilinmeyen dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Bilinmeyen kaynak</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Cuzdan yetkilendirmesi</value>
+  </data>
 </root>

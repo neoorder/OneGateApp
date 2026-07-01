@@ -1037,4 +1037,85 @@
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Активность</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Центр активности</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Откройте dApp, подтвердите доступ кошелька, подпишите сообщение или отправьте транзакцию, чтобы начать локальную ленту активности.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>Активность пока не записана</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Просматривайте подключения dApp, разрешения кошелька, подписи, отправленные транзакции и транзакции OneGate Vault, записанные на этом устройстве.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Лента активности вашего кошелька</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>Подключено к {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} записей</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Подпись для {0} подтверждена</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Источник: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Транзакция {0} от {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Транзакция отправлена из {0}</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>Транзакция OneGate Vault отправлена из {0}</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>Доступ кошелька для {0} подтвержден</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Подключение</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Подключения</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Последняя активность: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>Нет недавней активности</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Недавняя активность</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Подпись</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Подписи</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Транзакция</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Транзакции</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Неизвестный dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Неизвестный источник</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Разрешение кошелька</value>
+  </data>
 </root>

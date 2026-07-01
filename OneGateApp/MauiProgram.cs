@@ -109,6 +109,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IWalletProvider, WalletProvider>();
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddSingleton<TokenManager>();
+        builder.Services.AddSingleton<ActivityLogService>();
         builder.Services.AddSingleton<RpcClient>();
         builder.Services.AddSingleton<UpdateService>();
         builder.Services.AddSingleton<IHomeShortcutService, HomeShortcutService>();

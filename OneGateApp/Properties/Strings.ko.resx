@@ -1037,4 +1037,85 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="Unavailable" xml:space="preserve">
     <value>사용할 수 없음</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>활동</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>활동 센터</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>dApp을 열거나 지갑 접근을 승인하거나 메시지에 서명하거나 트랜잭션을 제출하면 로컬 활동 타임라인이 시작됩니다.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>아직 기록된 활동이 없습니다</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>이 기기에 기록된 dApp 연결, 지갑 승인, 서명, 제출된 트랜잭션, OneGate Vault 트랜잭션을 확인합니다.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>지갑 활동 타임라인</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>{0}에 연결됨</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>기록 {0}개</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>{0}에 대한 서명 승인됨</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>출처: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>{1}의 트랜잭션 {0}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>{0}에서 트랜잭션 제출됨</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>{0}에서 OneGate Vault 트랜잭션 제출됨</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>{0}에 대한 지갑 접근 승인됨</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>연결</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>연결</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>마지막 활동: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>최근 활동 없음</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>최근 활동</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>서명</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>서명</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>트랜잭션</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>트랜잭션</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>알 수 없는 dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>알 수 없는 출처</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>지갑 승인</value>
+  </data>
 </root>

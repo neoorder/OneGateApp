@@ -1037,4 +1037,85 @@
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>活动</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>活动中心</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>打开 dApp、授权钱包访问、签名消息或提交交易后，本地活动时间线会开始记录。</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>暂无活动记录</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>集中查看本设备记录的 dApp 连接、钱包授权、签名、已提交交易和 OneGate Vault 交易。</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>钱包活动时间线</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>已连接到 {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} 条记录</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>已为 {0} 批准签名</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>来源：{0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>交易 {0}，来自 {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>已从 {0} 提交交易</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>已从 {0} 提交 OneGate Vault 交易</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>已为 {0} 授权钱包访问</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>连接</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>连接</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>最近活动：{0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>暂无最近活动</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>最近活动</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>签名</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>签名</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>未知 dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>未知来源</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>钱包授权</value>
+  </data>
 </root>

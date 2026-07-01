@@ -1037,4 +1037,85 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="Unavailable" xml:space="preserve">
     <value>Không khả dụng</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Hoat dong</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Trung tam hoat dong</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Mo dApp, phe duyet quyen truy cap vi, ky tin nhan hoac gui giao dich de bat dau dong thoi gian hoat dong cuc bo.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>Chua ghi nhan hoat dong nao</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Xem cac ket noi dApp, uy quyen vi, chu ky, giao dich da gui va giao dich OneGate Vault duoc ghi tren thiet bi nay.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Dong thoi gian hoat dong vi cua ban</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>Da ket noi voi {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} ban ghi</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Da phe duyet chu ky cho {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Nguon: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Giao dich {0} tu {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Da gui giao dich tu {0}</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>Da gui giao dich OneGate Vault tu {0}</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>Da phe duyet quyen truy cap vi cho {0}</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Ket noi</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Ket noi</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Hoat dong gan nhat: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>Khong co hoat dong gan day</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Hoat dong gan day</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Chu ky</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Chu ky</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Giao dich</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Giao dich</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp khong xac dinh</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Nguon khong xac dinh</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Uy quyen vi</value>
+  </data>
 </root>

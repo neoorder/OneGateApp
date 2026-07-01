@@ -1037,4 +1037,85 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponível</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Atividade</value>
+  </data>
+  <data name="ActivityCenter" xml:space="preserve">
+    <value>Central de atividades</value>
+  </data>
+  <data name="ActivityCenterEmptyText" xml:space="preserve">
+    <value>Abra um dApp, aprove o acesso da carteira, assine uma mensagem ou envie uma transacao para iniciar a linha do tempo local.</value>
+  </data>
+  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+    <value>Nenhuma atividade registrada ainda</value>
+  </data>
+  <data name="ActivityCenterSummaryText" xml:space="preserve">
+    <value>Revise conexoes de dApps, autorizacoes de carteira, assinaturas, transacoes enviadas e transacoes do OneGate Vault registradas neste dispositivo.</value>
+  </data>
+  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
+    <value>Linha do tempo de atividades da sua carteira</value>
+  </data>
+  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
+    <value>Conectado a {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} registros</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Assinatura aprovada para {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Origem: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transacao {0} de {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transacao enviada de {0}</value>
+  </data>
+  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
+    <value>Transacao do OneGate Vault enviada de {0}</value>
+  </data>
+  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
+    <value>Acesso da carteira aprovado para {0}</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Conexao</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Conexoes</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Ultima atividade: {0}</value>
+  </data>
+  <data name="NoRecentActivity" xml:space="preserve">
+    <value>Nenhuma atividade recente</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Atividade recente</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Assinatura</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Assinaturas</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transacao</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transacoes</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp desconhecido</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Origem desconhecida</value>
+  </data>
+  <data name="OneGateVault" xml:space="preserve">
+    <value>OneGate Vault</value>
+  </data>
+  <data name="WalletAuthorization" xml:space="preserve">
+    <value>Autorizacao da carteira</value>
+  </data>
 </root>

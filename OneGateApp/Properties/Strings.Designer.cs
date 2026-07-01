@@ -194,6 +194,132 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Amount", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Activity 的本地化字符串。
+        /// </summary>
+        internal static string Activity {
+            get {
+                return ResourceManager.GetString("Activity", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Activity Center 的本地化字符串。
+        /// </summary>
+        internal static string ActivityCenter {
+            get {
+                return ResourceManager.GetString("ActivityCenter", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Open a dApp, approve wallet access, sign a message, or submit a transaction to start the local activity timeline. 的本地化字符串。
+        /// </summary>
+        internal static string ActivityCenterEmptyText {
+            get {
+                return ResourceManager.GetString("ActivityCenterEmptyText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No activity recorded yet 的本地化字符串。
+        /// </summary>
+        internal static string ActivityCenterEmptyTitle {
+            get {
+                return ResourceManager.GetString("ActivityCenterEmptyTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review dApp connections, wallet authorizations, signatures, submitted transactions, and OneGate Vault transactions recorded on this device. 的本地化字符串。
+        /// </summary>
+        internal static string ActivityCenterSummaryText {
+            get {
+                return ResourceManager.GetString("ActivityCenterSummaryText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Your wallet activity timeline 的本地化字符串。
+        /// </summary>
+        internal static string ActivityCenterSummaryTitle {
+            get {
+                return ResourceManager.GetString("ActivityCenterSummaryTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Connected to {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityDAppConnectionTitle {
+            get {
+                return ResourceManager.GetString("ActivityDAppConnectionTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} records 的本地化字符串。
+        /// </summary>
+        internal static string ActivityRecordCount {
+            get {
+                return ResourceManager.GetString("ActivityRecordCount", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signature approved for {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivitySignatureTitle {
+            get {
+                return ResourceManager.GetString("ActivitySignatureTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Source: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivitySourceDescription {
+            get {
+                return ResourceManager.GetString("ActivitySourceDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction {0} from {1} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityTransactionDescription {
+            get {
+                return ResourceManager.GetString("ActivityTransactionDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction submitted from {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityTransactionTitle {
+            get {
+                return ResourceManager.GetString("ActivityTransactionTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 OneGate Vault transaction submitted from {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityOneGateVaultTransactionTitle {
+            get {
+                return ResourceManager.GetString("ActivityOneGateVaultTransactionTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet access approved for {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityWalletAuthorizationTitle {
+            get {
+                return ResourceManager.GetString("ActivityWalletAuthorizationTitle", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 App Details 的本地化字符串。
@@ -494,6 +620,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Connected", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Connection 的本地化字符串。
+        /// </summary>
+        internal static string Connection {
+            get {
+                return ResourceManager.GetString("Connection", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Connection issue 的本地化字符串。
@@ -501,6 +636,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ConnectionIssue {
             get {
                 return ResourceManager.GetString("ConnectionIssue", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Connections 的本地化字符串。
+        /// </summary>
+        internal static string Connections {
+            get {
+                return ResourceManager.GetString("Connections", resourceCulture);
             }
         }
         
@@ -1326,6 +1470,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("LastCheckedAt", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Last activity: {0} 的本地化字符串。
+        /// </summary>
+        internal static string LastActivityAt {
+            get {
+                return ResourceManager.GetString("LastActivityAt", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Loading 的本地化字符串。
@@ -1499,6 +1652,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string NetworkStatus {
             get {
                 return ResourceManager.GetString("NetworkStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No recent activity 的本地化字符串。
+        /// </summary>
+        internal static string NoRecentActivity {
+            get {
+                return ResourceManager.GetString("NoRecentActivity", resourceCulture);
             }
         }
         
@@ -1928,6 +2090,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Recent", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Recent activity 的本地化字符串。
+        /// </summary>
+        internal static string RecentActivity {
+            get {
+                return ResourceManager.GetString("RecentActivity", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Scan QR code 的本地化字符串。
@@ -2315,6 +2486,24 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("SigningIn", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Signature 的本地化字符串。
+        /// </summary>
+        internal static string Signature {
+            get {
+                return ResourceManager.GetString("Signature", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signatures 的本地化字符串。
+        /// </summary>
+        internal static string Signatures {
+            get {
+                return ResourceManager.GetString("Signatures", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Sign in with Neo 的本地化字符串。
@@ -2495,6 +2684,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("TransactionConfirming", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Transaction 的本地化字符串。
+        /// </summary>
+        internal static string Transaction {
+            get {
+                return ResourceManager.GetString("Transaction", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Transaction details 的本地化字符串。
@@ -2511,6 +2709,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string TransactionSucceeded {
             get {
                 return ResourceManager.GetString("TransactionSucceeded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transactions 的本地化字符串。
+        /// </summary>
+        internal static string Transactions {
+            get {
+                return ResourceManager.GetString("Transactions", resourceCulture);
             }
         }
         
@@ -2576,6 +2783,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("UnknownAddressRiskTitle", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Unknown dApp 的本地化字符串。
+        /// </summary>
+        internal static string UnknownDApp {
+            get {
+                return ResourceManager.GetString("UnknownDApp", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Unknown error 的本地化字符串。
@@ -2583,6 +2799,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string UnknownError {
             get {
                 return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown source 的本地化字符串。
+        /// </summary>
+        internal static string UnknownSource {
+            get {
+                return ResourceManager.GetString("UnknownSource", resourceCulture);
             }
         }
         
@@ -2684,6 +2909,15 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("VerifyPasswordToContinue", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 OneGate Vault 的本地化字符串。
+        /// </summary>
+        internal static string OneGateVault {
+            get {
+                return ResourceManager.GetString("OneGateVault", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Wallet 的本地化字符串。
@@ -2700,6 +2934,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string WalletAddress {
             get {
                 return ResourceManager.GetString("WalletAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet authorization 的本地化字符串。
+        /// </summary>
+        internal static string WalletAuthorization {
+            get {
+                return ResourceManager.GetString("WalletAuthorization", resourceCulture);
             }
         }
         
