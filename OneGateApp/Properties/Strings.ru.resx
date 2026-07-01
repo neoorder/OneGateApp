@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Сведения о приложении</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>Каталог OneGate</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>Внешняя ссылка</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Нет недавних запусков на этом устройстве</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Разрешения</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Это dApp может запрашивать подключение кошелька, подписи сообщений и подпись транзакций. OneGate запрашивает подтверждение перед передачей данных кошелька или подписанием.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Недавняя активность</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Недавно открывалось на этом устройстве</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>Источник</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Теги</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Описание</value>
   </data>

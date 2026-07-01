@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Détails de l’application</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>Catalogue OneGate</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>Lien externe</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Aucune ouverture récente sur cet appareil</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Autorisations</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Cette dApp peut demander la connexion au portefeuille, des signatures de messages et la signature de transactions. OneGate demande confirmation avant de partager les données du portefeuille ou de signer.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Activité récente</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Récemment ouverte sur cet appareil</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Étiquettes</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Description</value>
   </data>

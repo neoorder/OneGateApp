@@ -205,6 +205,87 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 OneGate catalog 的本地化字符串。
+        /// </summary>
+        internal static string DAppCatalogStatus {
+            get {
+                return ResourceManager.GetString("DAppCatalogStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 External link 的本地化字符串。
+        /// </summary>
+        internal static string DAppExternalStatus {
+            get {
+                return ResourceManager.GetString("DAppExternalStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No recent opens on this device 的本地化字符串。
+        /// </summary>
+        internal static string DAppNotRecentlyOpened {
+            get {
+                return ResourceManager.GetString("DAppNotRecentlyOpened", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Permissions 的本地化字符串。
+        /// </summary>
+        internal static string DAppPermissions {
+            get {
+                return ResourceManager.GetString("DAppPermissions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This dApp can request wallet connection, message signatures, and transaction signing. OneGate asks for confirmation before sharing wallet data or signing. 的本地化字符串。
+        /// </summary>
+        internal static string DAppPermissionsSummary {
+            get {
+                return ResourceManager.GetString("DAppPermissionsSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recent activity 的本地化字符串。
+        /// </summary>
+        internal static string DAppRecentActivity {
+            get {
+                return ResourceManager.GetString("DAppRecentActivity", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recently opened on this device 的本地化字符串。
+        /// </summary>
+        internal static string DAppRecentlyOpened {
+            get {
+                return ResourceManager.GetString("DAppRecentlyOpened", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Source 的本地化字符串。
+        /// </summary>
+        internal static string DAppSource {
+            get {
+                return ResourceManager.GetString("DAppSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Tags 的本地化字符串。
+        /// </summary>
+        internal static string DAppTags {
+            get {
+                return ResourceManager.GetString("DAppTags", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Apps 的本地化字符串。
         /// </summary>
         internal static string Apps {

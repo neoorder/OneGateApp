@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>アプリの詳細</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>OneGate カタログ</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>外部リンク</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>このデバイスで最近開かれていません</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>権限</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>この dApp はウォレット接続、メッセージ署名、トランザクション署名を要求できます。OneGate はウォレットデータの共有や署名前に確認を求めます。</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>最近のアクティビティ</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>このデバイスで最近開きました</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>ソース</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>タグ</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>説明</value>
   </data>

@@ -249,6 +249,33 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Appdetails</value>
   </data>
+  <data name="DAppCatalogStatus" xml:space="preserve">
+    <value>OneGate-catalogus</value>
+  </data>
+  <data name="DAppExternalStatus" xml:space="preserve">
+    <value>Externe link</value>
+  </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Geen recente openingen op dit apparaat</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Machtigingen</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Deze dApp kan om een walletverbinding, berichtondertekeningen en transactiesondertekening vragen. OneGate vraagt om bevestiging voordat walletgegevens worden gedeeld of er wordt ondertekend.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Recente activiteit</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Recent geopend op dit apparaat</value>
+  </data>
+  <data name="DAppSource" xml:space="preserve">
+    <value>Bron</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Beschrijving</value>
   </data>
