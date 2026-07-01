@@ -6,6 +6,7 @@
              x:Class="NeoOrder.OneGate.Pages.LaunchDAppPage"
              BindingContext="{Binding Source={RelativeSource Self}}"
              SafeAreaEdges="All"
+             Shell.NavBarIsVisible="{Binding IsNavigationChromeVisible}"
              Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
         <og:LocalizerConverter x:Key="LocalizerConverter" />
@@ -24,5 +25,24 @@
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
         <ToolbarItem x:Name="developerToolsButton" Order="Primary" IconImageSource="{FontImageSource &#xe716;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Clicked="OnDeveloperToolsClicked" />
     </ContentPage.ToolbarItems>
-    <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />
+    <Grid>
+        <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />
+        <Button StyleClass="Icon"
+                Text="&#xe6b5;"
+                FontSize="22"
+                WidthRequest="44"
+                HeightRequest="44"
+                MinimumWidthRequest="44"
+                MinimumHeightRequest="44"
+                Padding="0"
+                Margin="{OnPlatform Android='12,28,0,0', iOS='12,58,0,0', Default='12'}"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                BackgroundColor="#990B0F14"
+                TextColor="{StaticResource White}"
+                ZIndex="1"
+                IsVisible="{Binding IsGameRuntimeMode}"
+                AutomationProperties.Name="{x:Static og:Strings.Cancel}"
+                Clicked="OnGameRuntimeExitClicked" />
+    </Grid>
 </ContentPage>
