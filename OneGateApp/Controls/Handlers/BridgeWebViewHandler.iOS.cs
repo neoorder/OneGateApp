@@ -93,7 +93,9 @@ partial class BridgeWebViewHandler
         if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
             controller.AddUserScript(CreateDocumentStartScript(BridgeWebView.DocumentStartScript));
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
+#if MACCATALYST
         config.Preferences.ElementFullscreenEnabled = true;
+#endif
         config.UserContentController = controller;
         return new MauiWKWebView(CGRect.Empty, this, config);
     }
