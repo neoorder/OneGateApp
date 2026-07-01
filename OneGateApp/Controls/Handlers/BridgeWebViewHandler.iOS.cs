@@ -65,6 +65,7 @@ partial class BridgeWebViewHandler
     static partial void ConfigureMapper(PropertyMapper<IWebView, IWebViewHandler> mapper)
     {
         mapper[nameof(WKUIDelegate)] = MapBridgeWKUIDelegate;
+        mapper.AppendToMapping(nameof(Views.BridgeWebView.DocumentStartScript), MapDocumentStartScript);
     }
 
     static void MapBridgeWKUIDelegate(IWebViewHandler handler, IWebView webView)
@@ -73,6 +74,15 @@ partial class BridgeWebViewHandler
             return;
 
         bridgeHandler.PlatformView.UIDelegate = bridgeHandler.uiDelegate ??= new BridgeWebViewUIDelegate(bridgeHandler);
+    }
+
+    static void MapDocumentStartScript(IWebViewHandler handler, IWebView webView)
+    {
+        if (handler is not BridgeWebViewHandler bridgeHandler)
+            return;
+
+        if (bridgeHandler.PlatformView is WKWebView platformView && !string.IsNullOrWhiteSpace(bridgeHandler.BridgeWebView.DocumentStartScript))
+            platformView.Configuration.UserContentController.AddUserScript(CreateDocumentStartScript(bridgeHandler.BridgeWebView.DocumentStartScript));
     }
 
     protected override WKWebView CreatePlatformView()

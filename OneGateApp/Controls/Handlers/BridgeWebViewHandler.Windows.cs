@@ -1,6 +1,7 @@
 ﻿#if WINDOWS
 
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Maui.Handlers;
 using Microsoft.Web.WebView2.Core;
 
 namespace NeoOrder.OneGate.Controls.Handlers;
@@ -8,6 +9,11 @@ namespace NeoOrder.OneGate.Controls.Handlers;
 partial class BridgeWebViewHandler
 {
     const string SyncPrompt = "__OneGateBridgeSync";
+
+    static partial void ConfigureMapper(PropertyMapper<IWebView, IWebViewHandler> mapper)
+    {
+        mapper.AppendToMapping(nameof(Views.BridgeWebView.DocumentStartScript), MapDocumentStartScript);
+    }
 
     protected override void ConnectHandler(WebView2 platformView)
     {
@@ -42,6 +48,15 @@ partial class BridgeWebViewHandler
         if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
             script += BridgeWebView.DocumentStartScript;
         await sender.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
+    }
+
+    static async void MapDocumentStartScript(IWebViewHandler handler, IWebView webView)
+    {
+        if (handler is not BridgeWebViewHandler bridgeHandler)
+            return;
+
+        if (bridgeHandler.PlatformView?.CoreWebView2 is { } coreWebView2 && !string.IsNullOrWhiteSpace(bridgeHandler.BridgeWebView.DocumentStartScript))
+            await coreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(bridgeHandler.BridgeWebView.DocumentStartScript);
     }
 
     void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)

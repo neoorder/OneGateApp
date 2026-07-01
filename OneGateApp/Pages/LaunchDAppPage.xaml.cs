@@ -26,6 +26,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
+    Window? lifecycleWindow;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
@@ -44,11 +45,27 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.rpcClient = rpcClient;
         IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DeveloperModeKey);
         InitializeComponent();
-        webView.DocumentStartScript = CreateDocumentStartScript();
+        ConfigureDocumentStartScript();
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
         if (!IsDeveloperToolsEnabled)
             ToolbarItems.Remove(developerToolsButton);
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        AttachGameRuntimeLifecycle();
+        EmitGameRuntimeEvent("runtimevisible", "page.appearing");
+        EmitGameRuntimeEvent("runtimeresume", "page.appearing");
+    }
+
+    protected override void OnDisappearing()
+    {
+        EmitGameRuntimeEvent("runtimepause", "page.disappearing");
+        EmitGameRuntimeEvent("runtimehidden", "page.disappearing");
+        DetachGameRuntimeLifecycle();
+        base.OnDisappearing();
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -56,6 +73,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         if (query.TryGetValue("dapp", out var value))
         {
             DApp = (DApp)value;
+            ConfigureDocumentStartScript();
             Url = DApp.Url;
         }
         else
@@ -70,6 +88,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     return;
                 }
                 DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
+                ConfigureDocumentStartScript();
                 if (string.IsNullOrEmpty(uri.Query))
                     Url = DApp.Url;
                 else
@@ -85,6 +104,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     Url = uri.AbsoluteUri,
                     Languages = ["en"]
                 };
+                ConfigureDocumentStartScript();
                 Url = uri.AbsoluteUri;
             }
         }
@@ -116,6 +136,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         }
         catch
         {
+            // The WebView may already be unloading during native lifecycle transitions.
         }
     }
 
@@ -136,9 +157,16 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     string CreateDocumentStartScript()
     {
         string script = CreateDapiInjectionScript();
+        if (DApp is { IsGamingApp: true })
+            script += CreateGameRuntimeInjectionScript();
         if (IsDeveloperToolsEnabled)
             script += CreateDeveloperToolsInjectionScript();
         return script;
+    }
+
+    void ConfigureDocumentStartScript()
+    {
+        webView.DocumentStartScript = CreateDocumentStartScript();
     }
 
     string CreateDapiInjectionScript()
@@ -164,7 +192,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             
                 const listeners = {
                     accountchanged: new Set(),
-                    networkchanged: new Set()
+                    networkchanged: new Set(),
+                    runtimehidden: new Set(),
+                    runtimepause: new Set(),
+                    runtimeresume: new Set(),
+                    runtimevisible: new Set(),
+                    webglcontextlost: new Set(),
+                    webglcontextrestored: new Set()
                 };
 
                 const methods = ["authenticate", "getAccounts", "pickAddress", "getBalance", "send", "call", "invoke", "makeTransaction", "sign", "signMessage", "relay", "getBlock", "getBlockCount", "getTransaction", "getApplicationLog", "getStorage", "getTokenInfo"];
@@ -213,6 +247,100 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 dispatchReady();
 
                 window.addEventListener('Neo.DapiProvider.request', dispatchReady);
+            })();
+            """.ReplaceLineEndings("");
+    }
+
+    static string CreateGameRuntimeInjectionScript()
+    {
+        return """
+            (function () {
+                if (window.__OneGateGameRuntimeInjected) return;
+                window.__OneGateGameRuntimeInjected = true;
+
+                function createDetail(reason) {
+                    return {
+                        reason: reason,
+                        visibilityState: document.visibilityState || "visible",
+                        timestamp: Date.now()
+                    };
+                }
+
+                function emit(eventName, detail) {
+                    detail = detail || createDetail("runtime");
+                    const provider = window.OneGateDapiProvider;
+                    if (provider && typeof provider.__emit === "function")
+                        provider.__emit(eventName, detail);
+                    window.dispatchEvent(new CustomEvent("OneGate.GameRuntime." + eventName, { detail: detail }));
+                }
+
+                function describeCanvas(canvas) {
+                    if (!canvas)
+                        return {};
+
+                    return {
+                        id: canvas.id || "",
+                        width: canvas.width || 0,
+                        height: canvas.height || 0,
+                        clientWidth: canvas.clientWidth || 0,
+                        clientHeight: canvas.clientHeight || 0
+                    };
+                }
+
+                function handleVisibilityChange() {
+                    if (document.hidden) {
+                        emit("runtimepause", createDetail("document.visibilitychange"));
+                        emit("runtimehidden", createDetail("document.visibilitychange"));
+                    } else {
+                        emit("runtimevisible", createDetail("document.visibilitychange"));
+                        emit("runtimeresume", createDetail("document.visibilitychange"));
+                    }
+                }
+
+                document.addEventListener("visibilitychange", handleVisibilityChange, true);
+                window.addEventListener("pagehide", function() {
+                    emit("runtimepause", createDetail("pagehide"));
+                    emit("runtimehidden", createDetail("pagehide"));
+                }, true);
+                window.addEventListener("pageshow", function() {
+                    emit("runtimevisible", createDetail("pageshow"));
+                    emit("runtimeresume", createDetail("pageshow"));
+                }, true);
+                window.addEventListener("blur", function() {
+                    emit("runtimepause", createDetail("window.blur"));
+                }, true);
+                window.addEventListener("focus", function() {
+                    emit("runtimeresume", createDetail("window.focus"));
+                }, true);
+
+                document.addEventListener("webglcontextlost", function(event) {
+                    emit("webglcontextlost", {
+                        reason: "webglcontextlost",
+                        statusMessage: event.statusMessage || "",
+                        canvas: describeCanvas(event.target),
+                        timestamp: Date.now()
+                    });
+                }, true);
+                document.addEventListener("webglcontextrestored", function(event) {
+                    emit("webglcontextrestored", {
+                        reason: "webglcontextrestored",
+                        canvas: describeCanvas(event.target),
+                        timestamp: Date.now()
+                    });
+                }, true);
+
+                window.OneGateGameRuntime = Object.freeze({
+                    version: 1,
+                    reload: function() {
+                        window.location.reload();
+                    },
+                    on: function(eventName, listener) {
+                        window.OneGateDapiProvider.on(eventName, listener);
+                    },
+                    removeListener: function(eventName, listener) {
+                        window.OneGateDapiProvider.removeListener(eventName, listener);
+                    }
+                });
             })();
             """.ReplaceLineEndings("");
     }
@@ -568,6 +696,68 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     {
         var response = await rpcServer.HandleRequestAsync(request);
         await webView.SendRpcRepsonseAsync(response);
+    }
+
+    void AttachGameRuntimeLifecycle()
+    {
+        if (DApp is not { IsGamingApp: true }) return;
+        if (lifecycleWindow == Window) return;
+        DetachGameRuntimeLifecycle();
+        if (Window is null) return;
+        lifecycleWindow = Window;
+        lifecycleWindow.Activated += OnRuntimeWindowActivated;
+        lifecycleWindow.Deactivated += OnRuntimeWindowDeactivated;
+        lifecycleWindow.Resumed += OnRuntimeWindowResumed;
+        lifecycleWindow.Stopped += OnRuntimeWindowStopped;
+    }
+
+    void DetachGameRuntimeLifecycle()
+    {
+        if (lifecycleWindow is null) return;
+        lifecycleWindow.Activated -= OnRuntimeWindowActivated;
+        lifecycleWindow.Deactivated -= OnRuntimeWindowDeactivated;
+        lifecycleWindow.Resumed -= OnRuntimeWindowResumed;
+        lifecycleWindow.Stopped -= OnRuntimeWindowStopped;
+        lifecycleWindow = null;
+    }
+
+    void OnRuntimeWindowActivated(object? sender, EventArgs e)
+    {
+        EmitGameRuntimeEvent("runtimevisible", "window.activated");
+        EmitGameRuntimeEvent("runtimeresume", "window.activated");
+    }
+
+    void OnRuntimeWindowDeactivated(object? sender, EventArgs e)
+    {
+        EmitGameRuntimeEvent("runtimepause", "window.deactivated");
+    }
+
+    void OnRuntimeWindowResumed(object? sender, EventArgs e)
+    {
+        EmitGameRuntimeEvent("runtimevisible", "window.resumed");
+        EmitGameRuntimeEvent("runtimeresume", "window.resumed");
+    }
+
+    void OnRuntimeWindowStopped(object? sender, EventArgs e)
+    {
+        EmitGameRuntimeEvent("runtimepause", "window.stopped");
+        EmitGameRuntimeEvent("runtimehidden", "window.stopped");
+    }
+
+    async void EmitGameRuntimeEvent(string eventName, string reason)
+    {
+        if (DApp is not { IsGamingApp: true }) return;
+        try
+        {
+            await EmitEventAsync(eventName, new()
+            {
+                ["reason"] = reason,
+                ["timestamp"] = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            });
+        }
+        catch
+        {
+        }
     }
 
     async Task EmitEventAsync(string eventName, JsonObject? detial)
