@@ -586,6 +586,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Copy address 的本地化字符串。
+        /// </summary>
+        internal static string CopyAddress {
+            get {
+                return ResourceManager.GetString("CopyAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Create Biometric Credential 的本地化字符串。
         /// </summary>
         internal static string CreateBiometricCredential {
@@ -2037,6 +2046,15 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
         
+        /// <summary>
+        ///   查找类似 Toggle flashlight 的本地化字符串。
+        /// </summary>
+        internal static string ToggleFlashlight {
+            get {
+                return ResourceManager.GetString("ToggleFlashlight", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Scan 的本地化字符串。
         /// </summary>

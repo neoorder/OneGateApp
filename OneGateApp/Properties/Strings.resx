@@ -270,6 +270,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>Scan QR code from gallery</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Toggle flashlight</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>Unable to recognize the QR code</value>
   </data>
@@ -904,6 +907,9 @@ It is recommended to store the NEP-2 key and password separately and back them u
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Copied to Clipboard</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Copy address</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Insufficient balance to cover the amount and fees. The maximum you can send is {0} GAS.</value>

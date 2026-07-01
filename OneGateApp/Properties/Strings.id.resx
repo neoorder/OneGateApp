@@ -270,6 +270,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>Pindai kode QR dari galeri</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Alihkan senter</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>Tidak dapat mengenali kode QR</value>
   </data>
@@ -904,6 +907,9 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Disalin ke clipboard</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Salin alamat</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Saldo tidak cukup untuk menutupi jumlah dan biaya. Jumlah maksimum yang dapat Anda kirim adalah {0} GAS.</value>

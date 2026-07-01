@@ -20,7 +20,7 @@
                 <Label Text="{Binding Wallet.Name}" FontAttributes="Bold" HorizontalOptions="Center" />
                 <Grid ColumnDefinitions="*,auto">
                     <Label StyleClass="Secondary" Text="{Binding DefaultAccount.Address}" LineBreakMode="MiddleTruncation" VerticalOptions="Center" />
-                    <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="20" Margin="-20" Padding="20" VerticalOptions="Center" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding DefaultAccount.Address}" />
+                    <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="20" Margin="-20" Padding="20" VerticalOptions="Center" SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding DefaultAccount.Address}" />
                 </Grid>
             </VerticalStackLayout>
         </Border>

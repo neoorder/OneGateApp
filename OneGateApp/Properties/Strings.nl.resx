@@ -270,6 +270,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>QR-code uit galerij scannen</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Zaklamp schakelen</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>QR-code kan niet worden herkend</value>
   </data>
@@ -904,6 +907,9 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Gekopieerd naar klembord</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Adres kopiëren</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Onvoldoende saldo om het bedrag en de kosten te dekken. Het maximale bedrag dat u kunt verzenden is {0} GAS.</value>

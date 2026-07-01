@@ -8,7 +8,7 @@
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
+        <ToolbarItem Order="Primary" Text="{x:Static og:Strings.AddNewAddress}" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <CollectionView ItemsSource="{Binding Contacts}" Margin="20">
@@ -16,7 +16,7 @@
                 <Grid RowDefinitions="*,auto,*">
                     <VerticalStackLayout Spacing="20" VerticalOptions="Center">
                         <Border StrokeShape="Ellipse" BackgroundColor="#e9eaee" WidthRequest="100" HeightRequest="100">
-                            <Image Source="empty.png" WidthRequest="32" HeightRequest="32" />
+                            <Image Source="empty.png" WidthRequest="32" HeightRequest="32" AutomationProperties.IsInAccessibleTree="False" />
                         </Border>
                         <Label Text="{x:Static og:Strings.NoAddress}" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
                         <Label StyleClass="Secondary" Text="{x:Static og:Strings.NoAddressText}" Margin="0,-10,0,0" HorizontalOptions="Center" />
@@ -29,11 +29,11 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
-                    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                        <Label Text="{Binding Label}" FontAttributes="Bold" />
+                    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="{toolkit:AppThemeResource Panel}" AutomationProperties.IsInAccessibleTree="True" SemanticProperties.Description="{Binding Label}" SemanticProperties.Hint="{Binding Address}">
+                        <Label Text="{Binding Label}" FontAttributes="Bold" AutomationProperties.IsInAccessibleTree="False" />
                         <Grid ColumnDefinitions="*,auto">
-                            <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" />
-                            <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Margin="-20" Padding="20" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                            <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" AutomationProperties.IsInAccessibleTree="False" />
+                            <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Margin="-20" Padding="20" SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
                         </Grid>
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnContactTapped" CommandParameter="{Binding .}" />
