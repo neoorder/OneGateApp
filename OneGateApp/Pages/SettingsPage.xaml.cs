@@ -51,6 +51,12 @@ public partial class SettingsPage : ContentPage
             Command = Commands.GotoPage,
             CommandParameter = "//home/settings/news"
         });
+        yield return (Strings.General, new SettingEntry(Strings.ContentSettings)
+        {
+            CurrentValue = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext) ? Strings.Enabled : Strings.Disabled,
+            Command = Commands.GotoPage,
+            CommandParameter = "//home/settings/content"
+        });
         yield return (Strings.General, new SettingEntry(Strings.HiddenAssets)
         {
             CurrentValue = (await tokenManager.GetHiddenTokenCountAsync()).ToString(),
@@ -80,18 +86,15 @@ public partial class SettingsPage : ContentPage
         }
         yield return (Strings.Others, new SettingEntry(Strings.ContactUs)
         {
-            CurrentValue = "contact@neoorder.org",
+            CurrentValue = SharedOptions.ContactEmail,
             Command = Commands.LaunchUrl,
-            CommandParameter = $"mailto:contact@neoorder.org"
+            CommandParameter = $"mailto:{SharedOptions.ContactEmail}"
         });
-        if (await dbContext.Settings.GetAsync<bool>("preference/developer_mode_enabled"))
+        yield return (Strings.Others, new SettingEntry(Strings.DeveloperTools)
         {
-            yield return (Strings.Others, new SettingEntry(Strings.DeveloperTools)
-            {
-                Command = Commands.GotoPage,
-                CommandParameter = "//home/settings/developer"
-            });
-        }
+            Command = Commands.GotoPage,
+            CommandParameter = "//home/settings/developer"
+        });
         yield return (Strings.Others, new SettingEntry(Strings.About)
         {
             Command = Commands.GotoPage,

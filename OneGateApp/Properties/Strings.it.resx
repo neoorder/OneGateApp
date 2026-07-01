@@ -332,6 +332,9 @@ Puoi disattivare l'autenticazione biometrica in qualsiasi momento.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Verifica i dati biometrici per continuare</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Sblocco del wallet</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operazione annullata</value>
   </data>
@@ -453,6 +456,30 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
   </data>
   <data name="General" xml:space="preserve">
     <value>Generale</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Impostazioni contenuti</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Consenti contenuti soggetti a restrizioni</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Mostra DApp che potrebbero non essere adatte a tutti. Se disattivata, queste DApp vengono nascoste dagli elenchi.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Seleziona data di nascita</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>I contenuti soggetti a restrizioni non possono essere abilitati in base all'età fornita.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Contenuti soggetti a restrizioni</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>I contenuti soggetti a restrizioni possono includere temi per adulti, violenti, gioco d'azzardo, incontri o altri temi sensibili non adatti ai minori.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Capisco e continuo</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Scansiona il codice QR per inviarmi un trasferimento</value>
@@ -887,14 +914,35 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Saldo insufficiente per coprire l’importo e le commissioni. L’importo massimo che puoi inviare è {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Modalità sviluppatore attivata</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Strumenti sviluppatore</value>
+    <value>Centro sviluppatori</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>Pannello di debug DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Test DApp</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>Invio DApp</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>Invio DApp: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Nome del progetto</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Sito web ufficiale</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Informazioni di contatto</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Invia via email</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Disponibile</value>

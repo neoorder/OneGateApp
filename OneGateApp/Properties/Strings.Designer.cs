@@ -131,7 +131,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AddressBook", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 By selecting any option, you agree to {0} and {1}. 的本地化字符串。
         /// </summary>
@@ -150,6 +150,60 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
         
+        /// <summary>
+        ///   查找类似 Allow restricted content 的本地化字符串。
+        /// </summary>
+        internal static string AllowRestrictedContent {
+            get {
+                return ResourceManager.GetString("AllowRestrictedContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Show DApps that may not be suitable for everyone. When disabled, these DApps are hidden from lists. 的本地化字符串。
+        /// </summary>
+        internal static string AllowRestrictedContentDescription {
+            get {
+                return ResourceManager.GetString("AllowRestrictedContentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Select birth date 的本地化字符串。
+        /// </summary>
+        internal static string SelectBirthDate {
+            get {
+                return ResourceManager.GetString("SelectBirthDate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Restricted content cannot be enabled based on the age you provided. 的本地化字符串。
+        /// </summary>
+        internal static string RestrictedContentAgeRejected {
+            get {
+                return ResourceManager.GetString("RestrictedContentAgeRejected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Restricted content 的本地化字符串。
+        /// </summary>
+        internal static string RestrictedContentConfirmationTitle {
+            get {
+                return ResourceManager.GetString("RestrictedContentConfirmationTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Restricted content may include adult, violent, gambling, dating, or other sensitive themes that are not suitable for minors. 的本地化字符串。
+        /// </summary>
+        internal static string RestrictedContentConfirmationMessage {
+            get {
+                return ResourceManager.GetString("RestrictedContentConfirmationMessage", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Amount 的本地化字符串。
         /// </summary>
@@ -413,7 +467,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CheckingForUpdates", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Collection 的本地化字符串。
         /// </summary>
@@ -441,6 +495,15 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
         
+        /// <summary>
+        ///   查找类似 I understand and continue 的本地化字符串。
+        /// </summary>
+        internal static string UnderstandAndContinue {
+            get {
+                return ResourceManager.GetString("UnderstandAndContinue", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Connected 的本地化字符串。
         /// </summary>
@@ -492,6 +555,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ContactUs {
             get {
                 return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Content settings 的本地化字符串。
+        /// </summary>
+        internal static string ContentSettings {
+            get {
+                return ResourceManager.GetString("ContentSettings", resourceCulture);
             }
         }
         
@@ -802,6 +874,15 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 DApp Debug Panel 的本地化字符串。
+        /// </summary>
+        internal static string DAppDebugPanel {
+            get {
+                return ResourceManager.GetString("DAppDebugPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 DApp Testing 的本地化字符串。
         /// </summary>
         internal static string DAppTesting {
@@ -809,7 +890,70 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppTesting", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   查找类似 DApp Submission 的本地化字符串。
+        /// </summary>
+        internal static string DAppSubmission {
+            get {
+                return ResourceManager.GetString("DAppSubmission", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 DApp submission: {0} 的本地化字符串。
+        /// </summary>
+        internal static string DAppSubmissionEmailSubject {
+            get {
+                return ResourceManager.GetString("DAppSubmissionEmailSubject", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Project name 的本地化字符串。
+        /// </summary>
+        internal static string ProjectName {
+            get {
+                return ResourceManager.GetString("ProjectName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 URL 的本地化字符串。
+        /// </summary>
+        internal static string DAppUrl {
+            get {
+                return ResourceManager.GetString("DAppUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Official website 的本地化字符串。
+        /// </summary>
+        internal static string OfficialWebsite {
+            get {
+                return ResourceManager.GetString("OfficialWebsite", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Contact information 的本地化字符串。
+        /// </summary>
+        internal static string ContactInformation {
+            get {
+                return ResourceManager.GetString("ContactInformation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Submit by email 的本地化字符串。
+        /// </summary>
+        internal static string SubmitByEmail {
+            get {
+                return ResourceManager.GetString("SubmitByEmail", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 {0} do not match 的本地化字符串。
         /// </summary>
@@ -948,16 +1092,7 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Developer mode enabled 的本地化字符串。
-        /// </summary>
-        internal static string DeveloperModeEnabled {
-            get {
-                return ResourceManager.GetString("DeveloperModeEnabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Developer Tools 的本地化字符串。
+        ///   查找类似 Developer Center 的本地化字符串。
         /// </summary>
         internal static string DeveloperTools {
             get {
@@ -1137,7 +1272,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Fee", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 OneGate estimates network and system fees on the next screen before you sign. GAS transfers must leave enough GAS to cover both the transfer and fees. 的本地化字符串。
         /// </summary>
@@ -1146,7 +1281,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("FeeEstimateNoticeText", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Fee estimate 的本地化字符串。
         /// </summary>
@@ -1753,7 +1888,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Others", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 This address belongs to the current wallet. You can continue, but make sure sending to yourself is intentional. 的本地化字符串。
         /// </summary>
@@ -1762,7 +1897,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("OwnWalletAddressText", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Your wallet address 的本地化字符串。
         /// </summary>
@@ -1825,7 +1960,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("PasswordProtectedPrivateKeyNep2", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Your local wallet requires its password before signing sensitive actions. 的本地化字符串。
         /// </summary>
@@ -2153,7 +2288,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Security", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 This recipient matches "{0}" in your local address book. 的本地化字符串。
         /// </summary>
@@ -2162,7 +2297,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("SavedAddressText", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Saved address 的本地化字符串。
         /// </summary>
@@ -2639,7 +2774,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("UnknownAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 This address is not saved in your address book. Verify the full address carefully; blockchain transfers cannot be reversed. 的本地化字符串。
         /// </summary>
@@ -2648,7 +2783,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("UnknownAddressRiskText", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查找类似 Unknown address 的本地化字符串。
         /// </summary>
@@ -2664,6 +2799,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string UnknownError {
             get {
                 return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unlocking wallet 的本地化字符串。
+        /// </summary>
+        internal static string UnlockingWallet {
+            get {
+                return ResourceManager.GetString("UnlockingWallet", resourceCulture);
             }
         }
         
