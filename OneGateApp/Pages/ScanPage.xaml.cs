@@ -104,8 +104,10 @@ public partial class ScanPage : ContentPage, IQueryAttributable
     {
         if (rawResultCompletion is not null)
         {
-            rawResultCompletion.TrySetResult(result);
-            await Navigation.PopAsync();
+            var completion = rawResultCompletion;
+            rawResultCompletion = null;
+            if (completion.TrySetResult(result))
+                await Navigation.PopAsync();
             return;
         }
 
