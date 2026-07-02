@@ -231,11 +231,12 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 let metricsPanel;
                 let metricsList;
                 let metricsTimer;
+                let metricsSamplingStarted = false;
                 const metrics = {
-                    fps: 0,
+                    fps: null,
                     frameCount: 0,
                     longFrames: 0,
-                    worstFrameMs: 0,
+                    worstFrameMs: null,
                     lastFrameAt: 0,
                     lastSampleAt: 0,
                     webglSupport: "unknown",
@@ -271,11 +272,15 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 const listenerWrappers = new WeakMap();
 
                 function eventTargetsPanel(event) {
-                    if (!panel)
+                    if (!panel && !metricsPanel)
                         return false;
-                    if (typeof event.composedPath === "function")
-                        return event.composedPath().indexOf(panel) >= 0;
-                    return event.target && typeof panel.contains === "function" && panel.contains(event.target);
+                    if (typeof event.composedPath === "function") {
+                        const path = event.composedPath();
+                        return (panel && path.indexOf(panel) >= 0) || (metricsPanel && path.indexOf(metricsPanel) >= 0);
+                    }
+                    return event.target &&
+                        ((panel && typeof panel.contains === "function" && panel.contains(event.target)) ||
+                            (metricsPanel && typeof metricsPanel.contains === "function" && metricsPanel.contains(event.target)));
                 }
 
                 function getCapture(options) {
@@ -489,9 +494,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 function buildMetricsRows() {
                     const timing = getLoadTiming();
                     return [
-                        ["FPS", Math.round(metrics.fps)],
+                        ["FPS", metrics.fps === null ? "--" : Math.round(metrics.fps)],
                         ["Long frames", metrics.longFrames],
-                        ["Worst frame", formatMetric(metrics.worstFrameMs.toFixed(1), " ms")],
+                        ["Worst frame", metrics.worstFrameMs === null ? "--" : formatMetric(metrics.worstFrameMs.toFixed(1), " ms")],
                         ["DOM ready", formatMetric(timing.domContentLoadedMs, " ms")],
                         ["Load", formatMetric(timing.loadMs, " ms")],
                         ["WebGL", metrics.webglSupport],
@@ -526,6 +531,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 }
 
                 function startMetricsTimer() {
+                    ensureMetricsSampling();
                     if (metricsTimer)
                         return;
                     metricsTimer = window.setInterval(renderMetrics, 1000);
@@ -547,7 +553,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         const delta = now - metrics.lastFrameAt;
                         if (delta > 50)
                             metrics.longFrames++;
-                        if (delta > metrics.worstFrameMs)
+                        if (metrics.worstFrameMs === null || delta > metrics.worstFrameMs)
                             metrics.worstFrameMs = delta;
                     }
 
@@ -563,6 +569,15 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     }
 
                     window.requestAnimationFrame(trackFrame);
+                }
+
+                function ensureMetricsSampling() {
+                    if (metricsSamplingStarted)
+                        return;
+                    metricsSamplingStarted = true;
+                    metrics.webglSupport = detectWebGLSupport();
+                    if (typeof window.requestAnimationFrame === "function")
+                        window.requestAnimationFrame(trackFrame);
                 }
 
                 function ensureStyles() {
@@ -722,6 +737,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                             api.hideMetrics();
                     },
                     getMetrics: function() {
+                        ensureMetricsSampling();
                         return {
                             rows: buildMetricsRows(),
                             fps: metrics.fps,
@@ -762,9 +778,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     renderMetrics();
                 }, true);
 
-                metrics.webglSupport = detectWebGLSupport();
-                if (typeof window.requestAnimationFrame === "function")
-                    window.requestAnimationFrame(trackFrame);
                 push("info", ["OneGate developer tools ready"]);
             })();
             """.ReplaceLineEndings("");
