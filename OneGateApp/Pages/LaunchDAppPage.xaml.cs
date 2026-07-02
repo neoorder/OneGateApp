@@ -45,7 +45,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.rpcClient = rpcClient;
         IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DeveloperModeKey);
         InitializeComponent();
-        ConfigureDocumentStartScript();
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
         if (!IsDeveloperToolsEnabled)
@@ -314,6 +313,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 }, true);
 
                 document.addEventListener("webglcontextlost", function(event) {
+                    event.preventDefault();
                     emit("webglcontextlost", {
                         reason: "webglcontextlost",
                         statusMessage: event.statusMessage || "",
@@ -757,6 +757,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         }
         catch
         {
+            // Native lifecycle callbacks can race with WebView navigation or teardown.
         }
     }
 

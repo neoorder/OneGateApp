@@ -9,6 +9,7 @@ namespace NeoOrder.OneGate.Controls.Handlers;
 partial class BridgeWebViewHandler
 {
     const string SyncPrompt = "__OneGateBridgeSync";
+    string? installedDocumentStartScript;
 
     static partial void ConfigureMapper(PropertyMapper<IWebView, IWebViewHandler> mapper)
     {
@@ -48,6 +49,7 @@ partial class BridgeWebViewHandler
         if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
             script += BridgeWebView.DocumentStartScript;
         await sender.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
+        installedDocumentStartScript = BridgeWebView.DocumentStartScript;
     }
 
     static async void MapDocumentStartScript(IWebViewHandler handler, IWebView webView)
@@ -55,8 +57,19 @@ partial class BridgeWebViewHandler
         if (handler is not BridgeWebViewHandler bridgeHandler)
             return;
 
-        if (bridgeHandler.PlatformView?.CoreWebView2 is { } coreWebView2 && !string.IsNullOrWhiteSpace(bridgeHandler.BridgeWebView.DocumentStartScript))
-            await coreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(bridgeHandler.BridgeWebView.DocumentStartScript);
+        string? script = bridgeHandler.BridgeWebView.DocumentStartScript;
+        if (bridgeHandler.PlatformView?.CoreWebView2 is not { } coreWebView2 || string.IsNullOrWhiteSpace(script) || script == bridgeHandler.installedDocumentStartScript)
+            return;
+
+        try
+        {
+            await coreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
+            bridgeHandler.installedDocumentStartScript = script;
+        }
+        catch
+        {
+            // The WebView2 instance can shut down while MAUI is remapping properties.
+        }
     }
 
     void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)

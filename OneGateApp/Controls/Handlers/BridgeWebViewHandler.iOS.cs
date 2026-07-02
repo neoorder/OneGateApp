@@ -22,6 +22,7 @@ partial class BridgeWebViewHandler
     }
 
     BridgeWebViewUIDelegate? uiDelegate;
+    string? installedDocumentStartScript;
 
     class BridgeWebViewUIDelegate : MauiWebViewUIDelegate
     {
@@ -81,8 +82,8 @@ partial class BridgeWebViewHandler
         if (handler is not BridgeWebViewHandler bridgeHandler)
             return;
 
-        if (bridgeHandler.PlatformView is WKWebView platformView && !string.IsNullOrWhiteSpace(bridgeHandler.BridgeWebView.DocumentStartScript))
-            platformView.Configuration.UserContentController.AddUserScript(CreateDocumentStartScript(bridgeHandler.BridgeWebView.DocumentStartScript));
+        if (bridgeHandler.PlatformView is WKWebView platformView)
+            bridgeHandler.AddDocumentStartScript(platformView.Configuration.UserContentController, bridgeHandler.BridgeWebView.DocumentStartScript);
     }
 
     protected override WKWebView CreatePlatformView()
@@ -100,8 +101,7 @@ partial class BridgeWebViewHandler
             };
             """;
         controller.AddUserScript(CreateDocumentStartScript(shim + Views.BridgeWebView.CreateRpcScript()));
-        if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
-            controller.AddUserScript(CreateDocumentStartScript(BridgeWebView.DocumentStartScript));
+        AddDocumentStartScript(controller, BridgeWebView.DocumentStartScript);
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
 #if MACCATALYST
         config.Preferences.ElementFullscreenEnabled = true;
@@ -113,6 +113,15 @@ partial class BridgeWebViewHandler
     static WKUserScript CreateDocumentStartScript(string script)
     {
         return new WKUserScript(new NSString(script), WKUserScriptInjectionTime.AtDocumentStart, true);
+    }
+
+    void AddDocumentStartScript(WKUserContentController controller, string? script)
+    {
+        if (string.IsNullOrWhiteSpace(script) || script == installedDocumentStartScript)
+            return;
+
+        controller.AddUserScript(CreateDocumentStartScript(script));
+        installedDocumentStartScript = script;
     }
 }
 #endif
