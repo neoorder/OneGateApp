@@ -10,6 +10,8 @@ namespace NeoOrder.OneGate.Controls.Handlers;
 
 partial class BridgeWebViewHandler
 {
+    string? installedDocumentStartScript;
+
     class ScriptHandler(Action<string> onMessage, Func<string, string> onSyncMessage) : Java.Lang.Object
     {
         [JavascriptInterface]
@@ -43,7 +45,6 @@ partial class BridgeWebViewHandler
         platformView.Settings.JavaScriptEnabled = true;
         platformView.AddJavascriptInterface(new ScriptHandler(BridgeWebView.OnMessage, BridgeWebView.OnSyncMessage), "__OneGateBridge");
         platformView.SetWebViewClient(new BridgeWebViewClient(this));
-        InstallDocumentStartScript(platformView);
     }
 
     static partial void ConfigureMapper(PropertyMapper<IWebView, IWebViewHandler> mapper)
@@ -65,7 +66,11 @@ partial class BridgeWebViewHandler
         string script = Views.BridgeWebView.CreateRpcScript();
         if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
             script += BridgeWebView.DocumentStartScript;
+        if (script == installedDocumentStartScript)
+            return;
+
         WebViewCompat.AddDocumentStartJavaScript(platformView, script, ["*"]);
+        installedDocumentStartScript = script;
     }
 
     void InjectBridgeScript(Android.Webkit.WebView? platformView)
