@@ -65,7 +65,7 @@ Use the following as review thresholds. These are not automatic runtime blocks.
 | First visible loading UI | <= 2 s | 2-5 s | > 5 s or blank screen |
 | First interaction on Wi-Fi simulator | <= 10 s | 10-20 s | > 20 s |
 | Long-frame rate during first minute | < 8% | 8-15% | > 15% |
-| Android PSS during first minute | < 300 MB | 300-450 MB | > 450 MB |
+| Android-only PSS during first minute | < 300 MB | 300-450 MB | > 450 MB |
 | First-load transfer size | <= 8 MB | 8-20 MB | > 20 MB |
 | Largest single first-load asset | <= 5 MB | 5-10 MB | > 10 MB |
 
@@ -150,7 +150,7 @@ Use this template in issue or PR comments:
 A game is ready for listing or promotion when:
 
 - Android and iOS both load without blank-screen failure.
-- First interaction and memory are within the performance gate or justified.
+- First interaction and performance metrics are within the gate or justified.
 - Mobile layout is usable without OneGate-side DOM/CSS adaptation.
 - Wallet prompts are user-initiated and recover from cancellation/failure.
 - Optional native capabilities are feature-detected.
