@@ -61,9 +61,9 @@ load the main script.
 
 ```html
 <main id="game-root">
-  <section id="loading">
-    <strong>Loading</strong>
-    <progress max="100" value="0"></progress>
+  <section id="loading" role="status" aria-live="polite" aria-labelledby="loading-title">
+    <strong id="loading-title">Loading</strong>
+    <progress max="100" value="0" aria-label="Loading progress"></progress>
   </section>
 </main>
 <script type="module" src="/src/main.ts"></script>
@@ -83,9 +83,21 @@ import {
 } from "@onegate/game-sdk";
 
 let onegate: OneGateGameClient | undefined;
+let onegatePromise: Promise<OneGateGameClient> | undefined;
 
 export async function getOneGate() {
-  onegate ??= await createOneGateGameClient({ timeoutMs: 5000 });
+  if (onegate) {
+    return onegate;
+  }
+
+  onegatePromise ??= createOneGateGameClient({ timeoutMs: 5000 });
+  try {
+    onegate = await onegatePromise;
+  } catch (error) {
+    onegatePromise = undefined;
+    throw error;
+  }
+
   return onegate;
 }
 
@@ -147,7 +159,12 @@ await app.init({
   resolution: Math.min(window.devicePixelRatio, 2)
 });
 
-document.getElementById("game-root")!.appendChild(app.canvas);
+const root = document.getElementById("game-root");
+if (!root) {
+  throw new Error("Missing #game-root container");
+}
+
+root.appendChild(app.canvas);
 ```
 
 Clamp effective resolution on mobile. Rendering at full high-DPI resolution can
@@ -195,6 +212,11 @@ const disposePause = onegate.onRuntimeEvent("runtimepause", () => {
 const disposeResume = onegate.onRuntimeEvent("runtimeresume", () => {
   game.resume();
 });
+
+window.addEventListener("pagehide", () => {
+  disposePause();
+  disposeResume();
+}, { once: true });
 ```
 
 Always keep a browser fallback through `visibilitychange`, `pagehide`, and
