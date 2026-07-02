@@ -86,7 +86,10 @@ runtime hint and can fail on some platforms.
 ```ts
 import { lockOrientation } from "@onegate/game-sdk";
 
-await lockOrientation("landscape");
+const orientationLocked = await lockOrientation("landscape");
+if (!orientationLocked) {
+  // Keep the responsive layout active when the host cannot lock orientation.
+}
 ```
 
 ## Development principles

@@ -259,7 +259,7 @@ export function getOneGateGameRuntime(): OneGateGameRuntime | undefined {
   return window.OneGateGameRuntime;
 }
 
-export async function lockOrientation(orientation: OneGateOrientationLockType): Promise<void> {
+export async function lockOrientation(orientation: OneGateOrientationLockType): Promise<boolean> {
   if (typeof window === "undefined") {
     throw new Error("Orientation locking requires a browser or WebView runtime.");
   }
@@ -268,27 +268,33 @@ export async function lockOrientation(orientation: OneGateOrientationLockType): 
   const nativeLock = screenOrientation?.lock;
   if (typeof nativeLock === "function") {
     await nativeLock.call(screenOrientation, orientation);
-    return;
+    return true;
   }
 
   if (window.__OneGateSystemInvoke) {
     await window.__OneGateSystemInvoke("screen.orientation.lock", [orientation]);
+    return true;
   }
+
+  return false;
 }
 
-export async function unlockOrientation(): Promise<void> {
+export async function unlockOrientation(): Promise<boolean> {
   if (typeof window === "undefined") {
-    return;
+    return false;
   }
 
   const screenOrientation = window.screen.orientation as LockableScreenOrientation | undefined;
   const nativeUnlock = screenOrientation?.unlock;
   if (typeof nativeUnlock === "function") {
     nativeUnlock.call(screenOrientation);
-    return;
+    return true;
   }
 
   if (window.__OneGateSystemInvoke) {
     await window.__OneGateSystemInvoke("screen.orientation.unlock", []);
+    return true;
   }
+
+  return false;
 }
