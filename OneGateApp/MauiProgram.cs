@@ -111,6 +111,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<TokenManager>();
         builder.Services.AddSingleton<RpcClient>();
         builder.Services.AddSingleton<UpdateService>();
+        builder.Services.AddSingleton<GameManifestService>();
         builder.Services.AddSingleton<IHomeShortcutService, HomeShortcutService>();
         return builder;
     }

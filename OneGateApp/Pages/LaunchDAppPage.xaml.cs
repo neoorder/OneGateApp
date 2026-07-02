@@ -4,12 +4,14 @@ using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Views;
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -26,13 +28,15 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
+    readonly GameManifestService gameManifestService;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
+    public GameManifest? GameManifest { get; private set { field = value; OnPropertyChanged(); } }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, GameManifestService gameManifestService, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
@@ -42,9 +46,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.httpClient = httpClient;
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
+        this.gameManifestService = gameManifestService;
         IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DeveloperModeKey);
         InitializeComponent();
-        webView.DocumentStartScript = CreateDocumentStartScript();
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
         if (!IsDeveloperToolsEnabled)
@@ -55,7 +59,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     {
         if (query.TryGetValue("dapp", out var value))
         {
-            DApp = (DApp)value;
+            await ConfigureDAppAsync((DApp)value);
             Url = DApp.Url;
         }
         else
@@ -69,7 +73,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     await this.GoBackOrCloseAsync();
                     return;
                 }
-                DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
+                await ConfigureDAppAsync((await response.Content.ReadFromJsonAsync<DApp>())!);
                 if (string.IsNullOrEmpty(uri.Query))
                     Url = DApp.Url;
                 else
@@ -77,14 +81,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             }
             else
             {
-                DApp = new DApp
+                await ConfigureDAppAsync(new DApp
                 {
                     Id = 0,
                     IsActive = false,
                     Name = $"{{\"en\":\"{uri.Host}\"}}",
                     Url = uri.AbsoluteUri,
                     Languages = ["en"]
-                };
+                });
                 Url = uri.AbsoluteUri;
             }
         }
@@ -100,6 +104,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             await dbContext.Settings.PutAsync("dapps/recent", recents);
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
         }
+    }
+
+    async Task ConfigureDAppAsync(DApp dapp)
+    {
+        DApp = dapp;
+        GameManifest = await gameManifestService.LoadAsync(dapp);
+        webView.DocumentStartScript = CreateDocumentStartScript();
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
@@ -178,6 +189,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     network: {{protocolSettings.Network}},
                     supportedNetworks: [{{protocolSettings.Network}}],
                     icon: 'https://{{SharedOptions.OneGateDomain}}/images/logo.png',
+                    gameManifest: deepFreeze({{JsonSerializer.Serialize(GameManifest, NeoOrder.OneGate.Models.GameManifest.JsonSerializerOptions)}}),
                     website: 'https://{{SharedOptions.OneGateDomain}}',
                     extra: {},
 

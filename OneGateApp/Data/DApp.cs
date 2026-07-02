@@ -20,6 +20,8 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
     public string[]? Tags { get; set; }
     [MaxLength(16)]
     public string? GameType { get; set; }
+    [Url]
+    public string? GameManifestUrl { get; set; }
     public required string[] Languages { get; set; }
     [MaxLength(32)]
     public string? Developer { get; set; }
@@ -32,6 +34,7 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
 
     public bool IsGamingApp => !string.IsNullOrWhiteSpace(GameType);
     public bool IsRegularApp => !IsGamingApp;
+    public bool HasGameManifest => IsGamingApp && !string.IsNullOrWhiteSpace(GameManifestUrl);
     public string? GameTypeDisplayName => LocalizeGameType(GameType);
     public Dictionary<string, string> NameLocalizer => field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Name)!;
     public Dictionary<string, string>? DescriptionLocalizer => Description is null ? null : field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Description);
