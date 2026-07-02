@@ -62,8 +62,10 @@ partial class LaunchDAppPage
     }
 
     [RpcMethod]
-    async Task<bool> Share(DAppShareRequest request)
+    async Task<bool> Share(DAppShareRequest? request)
     {
+        if (request is null)
+            throw new DapiException(10002, "Share request is required");
         if (string.IsNullOrWhiteSpace(request.Text) && string.IsNullOrWhiteSpace(request.Uri))
             throw new DapiException(10002, "Share text or URI is required");
 
