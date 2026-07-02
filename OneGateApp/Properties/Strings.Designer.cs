@@ -10,8 +10,8 @@
 
 namespace NeoOrder.OneGate.Properties {
     using System;
-    
-    
+
+
     /// <summary>
     ///   一个强类型的资源类，用于查找本地化的字符串等。
     /// </summary>
@@ -1040,6 +1040,24 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Export diagnostics 的本地化字符串。
+        /// </summary>
+        internal static string ExportDiagnostics {
+            get {
+                return ResourceManager.GetString("ExportDiagnostics", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Failed to export diagnostics 的本地化字符串。
+        /// </summary>
+        internal static string ExportDiagnosticsFailed {
+            get {
+                return ResourceManager.GetString("ExportDiagnosticsFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Favorites 的本地化字符串。
         /// </summary>
         internal static string Favorite {
@@ -1637,6 +1655,15 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
         
+        /// <summary>
+        ///   查找类似 OneGate runtime diagnostics 的本地化字符串。
+        /// </summary>
+        internal static string OneGateRuntimeDiagnostics {
+            get {
+                return ResourceManager.GetString("OneGateRuntimeDiagnostics", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Open NFT link 的本地化字符串。
         /// </summary>

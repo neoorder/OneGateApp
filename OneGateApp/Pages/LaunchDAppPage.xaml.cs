@@ -134,18 +134,18 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         try
         {
             JsonObject report = await CreateRuntimeDiagnosticsReportAsync();
-            string fileName = $"onegate-runtime-diagnostics-{DateTimeOffset.UtcNow:yyyyMMddHHmmss}.json";
+            string fileName = $"onegate-runtime-diagnostics-{DateTimeOffset.UtcNow:yyyyMMddHHmmssfff}-{Guid.NewGuid():N}.json";
             string filePath = Path.Combine(FileSystem.CacheDirectory, fileName);
             await File.WriteAllTextAsync(filePath, report.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
             await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new Microsoft.Maui.ApplicationModel.DataTransfer.ShareFileRequest
             {
-                Title = "OneGate runtime diagnostics",
+                Title = Strings.OneGateRuntimeDiagnostics,
                 File = new Microsoft.Maui.ApplicationModel.DataTransfer.ShareFile(filePath, "application/json")
             });
         }
         catch
         {
-            await Toast.Show("Failed to export diagnostics");
+            await Toast.Show(Strings.ExportDiagnosticsFailed);
         }
     }
 
