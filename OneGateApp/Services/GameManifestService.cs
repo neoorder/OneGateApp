@@ -17,17 +17,28 @@ public sealed class GameManifestService(HttpClient httpClient)
 
         try
         {
-            using var response = await httpClient.GetAsync(uri, cancellationToken);
+            using var response = await httpClient.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
             if (!response.IsSuccessStatusCode)
                 return null;
             if (response.Content.Headers.ContentLength > MaxManifestBytes)
                 return null;
 
-            byte[] content = await response.Content.ReadAsByteArrayAsync(cancellationToken);
-            if (content.Length > MaxManifestBytes)
-                return null;
+            await using var contentStream = await response.Content.ReadAsStreamAsync(cancellationToken);
+            using var content = new MemoryStream();
+            byte[] buffer = new byte[8192];
+            int totalBytesRead = 0;
+            int bytesRead;
+            while ((bytesRead = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), cancellationToken)) > 0)
+            {
+                totalBytesRead += bytesRead;
+                if (totalBytesRead > MaxManifestBytes)
+                    return null;
 
-            var manifest = JsonSerializer.Deserialize<GameManifest>(content, GameManifest.JsonSerializerOptions);
+                content.Write(buffer, 0, bytesRead);
+            }
+
+            content.Position = 0;
+            var manifest = await JsonSerializer.DeserializeAsync<GameManifest>(content, GameManifest.JsonSerializerOptions, cancellationToken);
             return manifest?.IsSupportedSchemaVersion == true ? manifest : null;
         }
         catch (Exception ex) when (ex is HttpRequestException or JsonException or NotSupportedException or TaskCanceledException or ArgumentException or InvalidOperationException)

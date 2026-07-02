@@ -20,32 +20,46 @@ public partial class CacheDbContext(DbContextOptions<CacheDbContext> options) : 
     {
         HashSet<string> actualColumns = new(StringComparer.OrdinalIgnoreCase);
         await Database.OpenConnectionAsync();
-        await using (var command = Database.GetDbConnection().CreateCommand())
+        try
         {
-            command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
-            await using var reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-                actualColumns.Add(reader.GetString(0));
-        }
+            await using (var command = Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
+                await using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                    actualColumns.Add(reader.GetString(0));
+            }
 
-        if (!actualColumns.Contains(nameof(DApp.Warnings)))
-            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [Warnings] INTEGER NOT NULL DEFAULT 0");
+            if (!actualColumns.Contains(nameof(DApp.Warnings)))
+                await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [Warnings] INTEGER NOT NULL DEFAULT 0");
+        }
+        finally
+        {
+            await Database.CloseConnectionAsync();
+        }
     }
 
     async Task Migration_AddProperty_DApps_GameManifestUrl_20260702()
     {
         HashSet<string> actualColumns = new(StringComparer.OrdinalIgnoreCase);
         await Database.OpenConnectionAsync();
-        await using (var command = Database.GetDbConnection().CreateCommand())
+        try
         {
-            command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
-            await using var reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-                actualColumns.Add(reader.GetString(0));
-        }
+            await using (var command = Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
+                await using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                    actualColumns.Add(reader.GetString(0));
+            }
 
-        if (!actualColumns.Contains(nameof(DApp.GameManifestUrl)))
-            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [GameManifestUrl] TEXT NULL");
+            if (!actualColumns.Contains(nameof(DApp.GameManifestUrl)))
+                await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [GameManifestUrl] TEXT NULL");
+        }
+        finally
+        {
+            await Database.CloseConnectionAsync();
+        }
     }
 }
 
