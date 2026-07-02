@@ -77,6 +77,10 @@ Good contribution areas include:
 
 For larger changes, opening an issue first is recommended.
 
+Developer-facing GameFi publishing guidance:
+
+- [GameFi asset budget and CDN cache policy](docs/gamefi-asset-budget-and-cache-policy.md)
+
 ## License
 
 MIT License
