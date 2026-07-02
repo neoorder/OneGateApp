@@ -10,6 +10,7 @@ using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -48,7 +49,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
         if (!IsDeveloperToolsEnabled)
+        {
             ToolbarItems.Remove(developerToolsButton);
+            ToolbarItems.Remove(exportDiagnosticsButton);
+        }
+        else
+        {
+            ToolbarItems.Remove(exportDiagnosticsButton);
+        }
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -100,6 +108,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             await dbContext.Settings.PutAsync("dapps/recent", recents);
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
         }
+        UpdateDiagnosticsExportButton();
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
@@ -116,6 +125,41 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         }
         catch
         {
+        }
+    }
+
+    async void OnExportDiagnosticsClicked(object sender, EventArgs e)
+    {
+        if (!IsDeveloperToolsEnabled || DApp is not { IsGamingApp: true }) return;
+        try
+        {
+            JsonObject report = await CreateRuntimeDiagnosticsReportAsync();
+            string fileName = $"onegate-runtime-diagnostics-{DateTimeOffset.UtcNow:yyyyMMddHHmmss}.json";
+            string filePath = Path.Combine(FileSystem.CacheDirectory, fileName);
+            await File.WriteAllTextAsync(filePath, report.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+            await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new Microsoft.Maui.ApplicationModel.DataTransfer.ShareFileRequest
+            {
+                Title = "OneGate runtime diagnostics",
+                File = new Microsoft.Maui.ApplicationModel.DataTransfer.ShareFile(filePath, "application/json")
+            });
+        }
+        catch
+        {
+            await Toast.Show("Failed to export diagnostics");
+        }
+    }
+
+    void UpdateDiagnosticsExportButton()
+    {
+        if (!IsDeveloperToolsEnabled) return;
+        if (DApp is { IsGamingApp: true })
+        {
+            if (!ToolbarItems.Contains(exportDiagnosticsButton))
+                ToolbarItems.Add(exportDiagnosticsButton);
+        }
+        else
+        {
+            ToolbarItems.Remove(exportDiagnosticsButton);
         }
     }
 
@@ -166,6 +210,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     accountchanged: new Set(),
                     networkchanged: new Set()
                 };
+                const nativeApiCallCounts = {};
 
                 const methods = ["authenticate", "getAccounts", "pickAddress", "getBalance", "send", "call", "invoke", "makeTransaction", "sign", "signMessage", "relay", "getBlock", "getBlockCount", "getTransaction", "getApplicationLog", "getStorage", "getTokenInfo"];
 
@@ -197,8 +242,17 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     }
                 };
             
+                window.__OneGateGetDapiDiagnostics = function () {
+                    return {
+                        nativeApiCallCounts: Object.assign({}, nativeApiCallCounts)
+                    };
+                };
+
                 for (let method of methods)
-                    provider[method] = function () { return window.{{BridgeWebView.BridgeInvokeFunctionName}}(method, [...arguments]); };
+                    provider[method] = function () {
+                        nativeApiCallCounts[method] = (nativeApiCallCounts[method] || 0) + 1;
+                        return window.{{BridgeWebView.BridgeInvokeFunctionName}}(method, [...arguments]);
+                    };
             
                 window.OneGateDapiProvider = deepFreeze(provider);
 
@@ -213,6 +267,155 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 dispatchReady();
 
                 window.addEventListener('Neo.DapiProvider.request', dispatchReady);
+            })();
+            """.ReplaceLineEndings("");
+    }
+
+    async Task<JsonObject> CreateRuntimeDiagnosticsReportAsync()
+    {
+        JsonNode? webViewSnapshot = await TryReadWebViewDiagnosticsAsync();
+        return new JsonObject
+        {
+            ["schemaVersion"] = 1,
+            ["generatedAt"] = DateTimeOffset.UtcNow.ToString("O"),
+            ["oneGate"] = new JsonObject
+            {
+                ["version"] = AppInfo.Current.VersionString,
+                ["build"] = AppInfo.Current.BuildString,
+                ["packageName"] = AppInfo.Current.PackageName
+            },
+            ["device"] = new JsonObject
+            {
+                ["platform"] = DeviceInfo.Platform.ToString(),
+                ["version"] = DeviceInfo.VersionString,
+                ["model"] = DeviceInfo.Model,
+                ["manufacturer"] = DeviceInfo.Manufacturer,
+                ["idiom"] = DeviceInfo.Idiom.ToString()
+            },
+            ["dapp"] = new JsonObject
+            {
+                ["id"] = DApp.Id,
+                ["isActive"] = DApp.IsActive,
+                ["isGamingApp"] = DApp.IsGamingApp,
+                ["gameType"] = DApp.GameType,
+                ["origin"] = TryGetOrigin(DApp.Url),
+                ["currentUrl"] = CreateRedactedUrl(Url)
+            },
+            ["webView"] = webViewSnapshot
+        };
+    }
+
+    async Task<JsonNode?> TryReadWebViewDiagnosticsAsync()
+    {
+        try
+        {
+            string? result = await webView.EvaluateJavaScriptAsync(CreateWebViewDiagnosticsScript());
+            if (string.IsNullOrWhiteSpace(result))
+                return null;
+
+            JsonNode? parsed = JsonNode.Parse(result);
+            if (parsed is JsonValue value && value.TryGetValue<string>(out string? nested) && !string.IsNullOrWhiteSpace(nested))
+                parsed = JsonNode.Parse(nested);
+            return parsed;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    static string? TryGetOrigin(string? url)
+    {
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+            return null;
+        return uri.GetLeftPart(UriPartial.Authority);
+    }
+
+    static JsonObject? CreateRedactedUrl(string? url)
+    {
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+            return null;
+        return new JsonObject
+        {
+            ["origin"] = uri.GetLeftPart(UriPartial.Authority),
+            ["path"] = uri.AbsolutePath,
+            ["hasQuery"] = !string.IsNullOrEmpty(uri.Query),
+            ["hasFragment"] = !string.IsNullOrEmpty(uri.Fragment)
+        };
+    }
+
+    static string CreateWebViewDiagnosticsScript()
+    {
+        return """
+            (function () {
+                function redactUrl(value) {
+                    try {
+                        const url = new URL(value, location.href);
+                        return {
+                            origin: url.origin,
+                            path: url.pathname,
+                            hasQuery: url.search.length > 0,
+                            hasFragment: url.hash.length > 0
+                        };
+                    } catch (_) {
+                        return null;
+                    }
+                }
+
+                function navigationTiming() {
+                    const nav = performance.getEntriesByType("navigation")[0];
+                    if (!nav) return null;
+                    return {
+                        type: nav.type,
+                        startTime: Math.round(nav.startTime),
+                        duration: Math.round(nav.duration),
+                        domInteractive: Math.round(nav.domInteractive),
+                        domContentLoadedEventEnd: Math.round(nav.domContentLoadedEventEnd),
+                        loadEventEnd: Math.round(nav.loadEventEnd),
+                        transferSize: nav.transferSize || 0,
+                        encodedBodySize: nav.encodedBodySize || 0,
+                        decodedBodySize: nav.decodedBodySize || 0
+                    };
+                }
+
+                function recentResources() {
+                    return performance.getEntriesByType("resource").slice(-50).map(function(entry) {
+                        return {
+                            name: redactUrl(entry.name),
+                            initiatorType: entry.initiatorType,
+                            duration: Math.round(entry.duration),
+                            transferSize: entry.transferSize || 0,
+                            encodedBodySize: entry.encodedBodySize || 0,
+                            decodedBodySize: entry.decodedBodySize || 0
+                        };
+                    });
+                }
+
+                const provider = window.OneGateDapiProvider;
+                const dapiDiagnostics = typeof window.__OneGateGetDapiDiagnostics === "function"
+                    ? window.__OneGateGetDapiDiagnostics()
+                    : null;
+
+                return JSON.stringify({
+                    url: redactUrl(location.href),
+                    title: document.title || null,
+                    visibilityState: document.visibilityState,
+                    userAgent: navigator.userAgent,
+                    provider: provider ? {
+                        name: provider.name,
+                        version: provider.version,
+                        dapiVersion: provider.dapiVersion,
+                        network: provider.network,
+                        supportedNetworks: provider.supportedNetworks,
+                        compatibility: provider.compatibility
+                    } : null,
+                    gameRuntime: window.OneGateGameRuntime ? {
+                        version: window.OneGateGameRuntime.version
+                    } : null,
+                    dapiDiagnostics: dapiDiagnostics,
+                    timing: navigationTiming(),
+                    recentResources: recentResources()
+                });
             })();
             """.ReplaceLineEndings("");
     }
