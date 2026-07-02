@@ -136,8 +136,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     void ApplyRuntimeMode()
     {
-        IsGameRuntimeMode = DApp.IsGamingApp;
-        Shell.SetNavBarIsVisible(this, IsNavigationChromeVisible);
+        IsGameRuntimeMode = DApp?.IsGamingApp == true;
         NavigationPage.SetHasNavigationBar(this, IsNavigationChromeVisible);
         SafeAreaEdges = IsGameRuntimeMode ? SafeAreaEdges.None : SafeAreaEdges.All;
     }
