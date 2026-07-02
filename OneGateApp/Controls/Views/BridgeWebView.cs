@@ -30,6 +30,7 @@ public partial class BridgeWebView : WebView
         RegisterSystemCallHandler("fullscreen.enter", EnterFullscreenSystemAsync);
         RegisterSystemCallHandler("fullscreen.exit", ExitFullscreenSystemAsync);
 #endif
+        Navigated += OnNavigated;
         Unloaded += (_, _) => RestoreHostState();
         HandlerChanging += (_, e) =>
         {
@@ -431,6 +432,22 @@ public partial class BridgeWebView : WebView
     {
         ArgumentNullException.ThrowIfNull(response);
         return EvaluateJavaScriptAsync($"window.{BridgeCallbackName}({response.ToJsonString()})");
+    }
+
+    async void OnNavigated(object? sender, WebNavigatedEventArgs e)
+    {
+        try
+        {
+            string script = CreateRpcScript();
+            if (!string.IsNullOrWhiteSpace(DocumentStartScript))
+                script += DocumentStartScript;
+            await EvaluateJavaScriptAsync(script);
+        }
+        catch
+        {
+            // The document-start path is preferred; this fallback is best effort for WebView runtimes
+            // that do not support document-start injection.
+        }
     }
 
     protected void RegisterSystemCallHandler(string method, Func<JsonArray?, JsonNode?> handler)

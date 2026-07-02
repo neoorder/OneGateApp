@@ -29,7 +29,17 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly TokenManager tokenManager;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
-    public required string Url { get; set { field = value; OnPropertyChanged(); } }
+    string url = null!;
+    public required string Url
+    {
+        get => url;
+        set
+        {
+            if (url == value) return;
+            url = value;
+            OnPropertyChanged();
+        }
+    }
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
 
