@@ -1,0 +1,19 @@
+{
+  "name": "@onegate/game-sdk",
+  "version": "0.1.0",
+  "description": "TypeScript helpers for GameFi dApps running inside OneGate.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}
