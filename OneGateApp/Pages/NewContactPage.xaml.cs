@@ -62,8 +62,7 @@ public partial class NewContactPage : ContentPage, IQueryAttributable
         dbContext.Contacts.Add(new Contact
         {
             Address = Address!,
-            Label = Label!,
-            IsAddressBookEntry = true
+            Label = Label!
         });
         await dbContext.SaveChangesAsync();
         await Toast.Show(Strings.ContactAddedSuccessfully);

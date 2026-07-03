@@ -13,5 +13,4 @@ public class Contact
     public required string Label { get; set; }
     [MaxLength(500)]
     public string? Note { get; set; }
-    public bool IsAddressBookEntry { get; set; }
 }
