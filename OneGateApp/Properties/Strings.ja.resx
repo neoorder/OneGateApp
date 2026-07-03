@@ -1043,12 +1043,6 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="Note" xml:space="preserve">
     <value>メモ</value>
   </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>最近の送金</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>入力したアドレスを使用</value>
-  </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>名前、アドレス、メモを検索</value>
   </data>

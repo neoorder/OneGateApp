@@ -1043,12 +1043,6 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="Note" xml:space="preserve">
     <value>Notiz</value>
   </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>Letzte Überweisung</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>Eingegebene Adresse verwenden</value>
-  </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>Name, Adresse oder Notiz suchen</value>
   </data>

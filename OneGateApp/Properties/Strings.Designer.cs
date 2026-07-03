@@ -2788,23 +2788,6 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Recent transfer.
-        /// </summary>
-        internal static string RecentRecipient {
-            get {
-                return ResourceManager.GetString("RecentRecipient", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Use entered address.
-        /// </summary>
-        internal static string UseEnteredAddress {
-            get {
-                return ResourceManager.GetString("UseEnteredAddress", resourceCulture);
-            }
-        }
 
         /// <summary>
         ///   Looks up a localized string similar to Search name, address, or note.

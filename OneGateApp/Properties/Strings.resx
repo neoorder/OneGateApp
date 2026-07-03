@@ -1040,12 +1040,6 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Note" xml:space="preserve">
     <value>Note</value>
   </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>Recent transfer</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>Use entered address</value>
-  </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>Search name, address, or note</value>
   </data>

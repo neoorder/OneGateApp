@@ -13,10 +13,9 @@ public class Contact
     [Unicode(false)]
     public required string Address { get; set; }
     [MaxLength(100)]
-    public string Label { get; set; } = "";
+    public required string Label { get; set; }
     [MaxLength(500)]
     public string? Note { get; set; }
-    public bool IsAddressBookEntry { get; set; } = true;
 
     [NotMapped]
     public string DisplayName => !string.IsNullOrWhiteSpace(Label) ? Label : ShortAddress;
@@ -35,7 +34,7 @@ public class Contact
     public string ShortAddress => Address.Length <= 14 ? Address : $"{Address[..6]}...{Address[^6..]}";
 
     [NotMapped]
-    public string BadgeText => IsAddressBookEntry ? Strings.AddressBook : Strings.RecentRecipient;
+    public string BadgeText => Strings.AddressBook;
 
     [NotMapped]
     public string DetailText => !string.IsNullOrWhiteSpace(Note) ? Note! : Address;

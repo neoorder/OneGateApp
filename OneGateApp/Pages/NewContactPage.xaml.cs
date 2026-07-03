@@ -62,7 +62,7 @@ public partial class NewContactPage : ContentPage, IQueryAttributable
             e.IsValid = false;
             return;
         }
-        e.IsValid = !dbContext.Contacts.Any(p => p.Address == address && p.IsAddressBookEntry)
+        e.IsValid = !dbContext.Contacts.Any(p => p.Address == address)
             && !wallet.Contains(address.ToScriptHash(protocolSettings.AddressVersion));
     }
 
@@ -93,15 +93,13 @@ public partial class NewContactPage : ContentPage, IQueryAttributable
             {
                 Address = address,
                 Label = label,
-                Note = Note?.Trim(),
-                IsAddressBookEntry = true
+                Note = Note?.Trim()
             });
         }
         else
         {
             contact.Label = label;
             contact.Note = Note?.Trim();
-            contact.IsAddressBookEntry = true;
         }
         await dbContext.SaveChangesAsync();
         await Toast.Show(Strings.ContactAddedSuccessfully);

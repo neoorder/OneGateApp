@@ -53,8 +53,7 @@ public partial class EditContactPage : ContentPage, IQueryAttributable
             .Where(p => p.Address == Contact.Address)
             .ExecuteUpdateAsync(builder => builder
                 .SetProperty(p => p.Label, _ => label)
-                .SetProperty(p => p.Note, _ => note)
-                .SetProperty(p => p.IsAddressBookEntry, _ => true));
+                .SetProperty(p => p.Note, _ => note));
         await Toast.Show(Strings.ContactUpdatedSuccessfully);
         GlobalStates.Invalidate<ContactsPage>();
         GlobalStates.Invalidate<SettingsPage>();

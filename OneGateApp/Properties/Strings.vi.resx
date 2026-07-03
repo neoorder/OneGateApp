@@ -1043,12 +1043,6 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="Note" xml:space="preserve">
     <value>Ghi chú</value>
   </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>Giao dịch chuyển gần đây</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>Dùng địa chỉ đã nhập</value>
-  </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>Tìm tên, địa chỉ hoặc ghi chú</value>
   </data>

@@ -9,13 +9,12 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
 
     public void EnsureMigrations()
     {
-        Migration_AddressBookHistory_20260619();
+        Migration_AddressBook_20260619();
     }
 
-    void Migration_AddressBookHistory_20260619()
+    void Migration_AddressBook_20260619()
     {
         AddColumnIfMissing("Contacts", "Note", "TEXT NULL");
-        AddColumnIfMissing("Contacts", "IsAddressBookEntry", "INTEGER NOT NULL DEFAULT 1");
     }
 
     void AddColumnIfMissing(string table, string column, string definition)
