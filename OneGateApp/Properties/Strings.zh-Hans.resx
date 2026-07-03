@@ -1040,12 +1040,6 @@
   <data name="Note" xml:space="preserve">
     <value>备注</value>
   </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>最近转账地址</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>使用输入的地址</value>
-  </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>搜索名字、地址或备注</value>
   </data>

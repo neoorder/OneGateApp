@@ -1043,12 +1043,6 @@
   <data name="Note" xml:space="preserve">
     <value>Заметка</value>
   </data>
-  <data name="RecentRecipient" xml:space="preserve">
-    <value>Недавний перевод</value>
-  </data>
-  <data name="UseEnteredAddress" xml:space="preserve">
-    <value>Использовать введенный адрес</value>
-  </data>
   <data name="SearchAddressBook" xml:space="preserve">
     <value>Поиск имени, адреса или заметки</value>
   </data>

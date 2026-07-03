@@ -37,8 +37,7 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         if (query.Length == 0) return null;
         string[] matches = dbContext.Contacts
             .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry &&
-                EF.Functions.Collate(p.Label, NoCaseCollation) == query)
+            .Where(p => EF.Functions.Collate(p.Label, NoCaseCollation) == query)
             .Select(p => p.Address)
             .Take(2)
             .ToArray();
@@ -52,8 +51,7 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         string? normalizedAddress = TryNormalizeAddress(currentAddress, out string address) ? address : null;
         IQueryable<Contact> matches = dbContext.Contacts
             .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry &&
-                EF.Functions.Collate(p.Label, NoCaseCollation) == normalizedLabel);
+            .Where(p => EF.Functions.Collate(p.Label, NoCaseCollation) == normalizedLabel);
         if (normalizedAddress is not null)
             matches = matches.Where(p => p.Address != normalizedAddress);
         return !matches.Any();
@@ -70,7 +68,6 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
     {
         return await dbContext.Contacts
             .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry)
             .OrderBy(p => p.Label == "" ? p.Address : p.Label)
             .ToArrayAsync();
     }
@@ -79,8 +76,7 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
     {
         string filter = query?.Trim() ?? "";
         IQueryable<Contact> contacts = dbContext.Contacts
-            .AsNoTracking()
-            .Where(p => p.IsAddressBookEntry);
+            .AsNoTracking();
         Contact[] result;
         if (filter.Length == 0)
         {
@@ -106,18 +102,7 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
                 .ToArrayAsync();
         }
 
-        List<Contact> suggestions = result.ToList();
-        if (TryNormalizeAddress(filter, out string normalized) && suggestions.All(p => p.Address != normalized))
-        {
-            suggestions.Insert(0, new Contact
-            {
-                Address = normalized,
-                Label = "",
-                IsAddressBookEntry = false,
-                Note = Strings.UseEnteredAddress
-            });
-        }
-        return suggestions.Take(limit).ToArray();
+        return result;
     }
 
     static string EscapeLikePattern(string value)
