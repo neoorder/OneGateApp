@@ -42,9 +42,16 @@ abstract class AppLinkAction
         {
             "neo" => PaymentAction.TryCreate(uri),
             "neoauth" => AuthenticationAction.TryCreate(uri),
+            SharedOptions.OneGateScheme => ProcessOneGateScheme(uri),
             "https" => ProcessHttpsScheme(uri),
             _ => null
         };
+    }
+
+    static AppLinkAction? ProcessOneGateScheme(Uri uri)
+    {
+        if (!TryNormalizeOneGateUri(uri, out Uri? webUri)) return null;
+        return ProcessHttpsScheme(webUri);
     }
 
     static AppLinkAction? ProcessHttpsScheme(Uri uri)
@@ -56,5 +63,27 @@ abstract class AppLinkAction
             ["/", "news/", _] => ViewNewsAction.TryCreate(uri),
             _ => null
         };
+    }
+
+    static bool TryNormalizeOneGateUri(Uri uri, out Uri webUri)
+    {
+        webUri = null!;
+        string path = uri.Authority switch
+        {
+            "" => uri.AbsolutePath,
+            SharedOptions.OneGateDomain => uri.AbsolutePath,
+            _ => $"/{uri.Authority}{uri.AbsolutePath}"
+        };
+
+        if (string.IsNullOrWhiteSpace(path) || path == "/") return false;
+
+        var builder = new UriBuilder(Uri.UriSchemeHttps, SharedOptions.OneGateDomain)
+        {
+            Path = path.TrimStart('/'),
+            Query = uri.Query.TrimStart('?'),
+            Fragment = uri.Fragment.TrimStart('#')
+        };
+        webUri = builder.Uri;
+        return true;
     }
 }

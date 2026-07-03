@@ -9,6 +9,10 @@ namespace NeoOrder.OneGate.Platforms.Android;
 [Activity(Theme = "@style/OneGate.SplashTheme", LaunchMode = LaunchMode.Multiple, DocumentLaunchMode = DocumentLaunchMode.IntoExisting, TaskAffinity = "org.neoorder.onegate.document", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density, Exported = true)]
 [IntentFilter([Intent.ActionView], Categories = [Intent.CategoryDefault, Intent.CategoryBrowsable], DataScheme = "https", DataHost = SharedOptions.OneGateDomain, DataPathPrefix = "/app/", AutoVerify = true)]
 [IntentFilter([Intent.ActionView], Categories = [Intent.CategoryDefault, Intent.CategoryBrowsable], DataScheme = "https", DataHost = SharedOptions.OneGateDomain, DataPathPrefix = "/news/", AutoVerify = true)]
+[IntentFilter([Intent.ActionView], Categories = [Intent.CategoryDefault, Intent.CategoryBrowsable], DataScheme = SharedOptions.OneGateScheme, DataHost = SharedOptions.OneGateDomain, DataPathPrefix = "/app/")]
+[IntentFilter([Intent.ActionView], Categories = [Intent.CategoryDefault, Intent.CategoryBrowsable], DataScheme = SharedOptions.OneGateScheme, DataHost = SharedOptions.OneGateDomain, DataPathPrefix = "/news/")]
+[IntentFilter([Intent.ActionView], Categories = [Intent.CategoryDefault, Intent.CategoryBrowsable], DataScheme = SharedOptions.OneGateScheme, DataHost = "app", DataPathPrefix = "/")]
+[IntentFilter([Intent.ActionView], Categories = [Intent.CategoryDefault, Intent.CategoryBrowsable], DataScheme = SharedOptions.OneGateScheme, DataHost = "news", DataPathPrefix = "/")]
 public class DocumentLinkActivity : OneGateActivity
 {
     protected override void OnCreate(Bundle? savedInstanceState)

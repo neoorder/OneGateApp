@@ -40,6 +40,14 @@
 				<string>neoauth</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>org.neoorder.onegate</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>onegate</string>
+			</array>
+		</dict>
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>

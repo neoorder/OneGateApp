@@ -6,6 +6,7 @@ namespace NeoOrder.OneGate.Services;
 
 static class SharedOptions
 {
+    public const string OneGateScheme = "onegate";
     public const string OneGateDomain = "onegate.space";
     public const string ContactEmail = "contact@neoorder.org";
     public static readonly string DbPath = Path.Combine(FileSystem.AppDataDirectory, "settings.db3");
