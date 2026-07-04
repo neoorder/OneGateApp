@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Neo;
 using Neo.Wallets;
 using NeoOrder.OneGate.Data;
-using NeoOrder.OneGate.Properties;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Services;
