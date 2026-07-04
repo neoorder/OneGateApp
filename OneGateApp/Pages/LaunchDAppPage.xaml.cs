@@ -99,6 +99,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 recents.RemoveAt(recents.Count - 1);
             await dbContext.Settings.PutAsync("dapps/recent", recents);
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
+            if (DApp.IsGamingApp) GlobalStates.Invalidate<GamingPage>();
         }
     }
 
@@ -395,6 +396,42 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         logList.scrollTop = logList.scrollHeight;
                 }
 
+                function getEntriesText() {
+                    return entries.map(function(entry) {
+                        return "[" + entry.time + "] " + entry.level + "  " + entry.message;
+                    }).join("\n");
+                }
+
+                function copyTextFallback(text) {
+                    const textarea = document.createElement("textarea");
+                    textarea.value = text;
+                    textarea.setAttribute("readonly", "");
+                    textarea.style.position = "fixed";
+                    textarea.style.left = "-9999px";
+                    textarea.style.top = "0";
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    textarea.setSelectionRange(0, textarea.value.length);
+                    let copied = false;
+                    try {
+                        copied = document.execCommand("copy");
+                    } finally {
+                        textarea.remove();
+                    }
+                    return copied;
+                }
+
+                function copyEntries() {
+                    const text = getEntriesText();
+                    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function")
+                        return navigator.clipboard.writeText(text).catch(function() {
+                            copyTextFallback(text);
+                        });
+
+                    copyTextFallback(text);
+                    return Promise.resolve();
+                }
+
                 function ensureStyles() {
                     if (document.getElementById("onegate-devtools-style"))
                         return;
@@ -450,6 +487,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         entries.length = 0;
                         render();
                     }));
+                    actions.appendChild(createButton("Copy", copyEntries));
                     actions.appendChild(createButton("Close", function() {
                         api.hide();
                     }));
@@ -492,6 +530,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         entries.length = 0;
                         render();
                     },
+                    copy: copyEntries,
                     entries: entries
                 };
 
