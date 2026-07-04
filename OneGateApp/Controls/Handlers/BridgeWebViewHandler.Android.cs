@@ -43,12 +43,20 @@ partial class BridgeWebViewHandler
         public override bool OnShowFileChooser(Android.Webkit.WebView? webView, IValueCallback? filePathCallback, FileChooserParams? fileChooserParams)
         {
             CancelPendingFileChooser();
-            if (filePathCallback is null || fileChooserParams is null)
+            if (filePathCallback is null)
                 return false;
+            if (fileChooserParams is null)
+            {
+                filePathCallback.OnReceiveValue(null);
+                return true;
+            }
 
             Activity? activity = Platform.CurrentActivity;
             if (activity is null)
-                return false;
+            {
+                filePathCallback.OnReceiveValue(null);
+                return true;
+            }
 
             pendingFilePathCallback = filePathCallback;
             try
