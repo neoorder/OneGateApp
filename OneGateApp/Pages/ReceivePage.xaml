@@ -10,7 +10,7 @@
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ScrollView>
-        <VerticalStackLayout Padding="20,20,20,32" Spacing="18">
+        <Grid Padding="20" RowDefinitions="auto,*,auto" RowSpacing="18" MinimumHeightRequest="{Binding Height, Source={RelativeSource AncestorType={x:Type ContentPage}}}">
             <Border x:Name="qrCodeCard" Padding="18" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" StrokeShape="RoundRectangle 8">
                 <Border.Shadow>
                     <Shadow Brush="Black" Offset="0,8" Radius="12" Opacity="0.18" />
@@ -27,9 +27,10 @@
                     </Grid>
                 </VerticalStackLayout>
             </Border>
-
-            <Button Text="{x:Static og:Strings.Share}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" Clicked="OnShareQRCode" />
-            <Button StyleClass="Secondary" Text="{x:Static og:Strings.SaveToPhotoLibrary}" Clicked="OnSaveToPhotoLibrary" />
-        </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="2" Spacing="18">
+                <Button Text="{x:Static og:Strings.Share}" ImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Size=18, Color={toolkit:AppThemeResource Accent}}" Clicked="OnShareQRCode" />
+                <Button StyleClass="Secondary" Text="{x:Static og:Strings.SaveToPhotoLibrary}" Clicked="OnSaveToPhotoLibrary" />
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>
