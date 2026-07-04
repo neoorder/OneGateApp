@@ -10,6 +10,7 @@ namespace NeoOrder.OneGate.Pages;
 public partial class DAppsPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
+    bool allowRestrictedContent;
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
@@ -28,7 +29,6 @@ public partial class DAppsPage : ContentPage
         this.LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
         this.dbContext = dbContext;
         this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
-        this.DApps.CollectionLoaded += OnDAppsLoaded;
         InitializeComponent();
 #if WINDOWS
         // Disable the search handler on Windows
@@ -74,6 +74,7 @@ public partial class DAppsPage : ContentPage
 
     async Task LoadSettingsAsync()
     {
+        allowRestrictedContent = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext);
         DAppsIdFavorite = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite") ?? [];
         DAppsIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
     }
@@ -83,9 +84,11 @@ public partial class DAppsPage : ContentPage
         await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
     }
 
-    void OnDAppsLoaded(object? sender, EventArgs e)
+    void OnDataLoaded(object? sender, EventArgs e)
     {
-        DAppsRegular = DApps.Where(p => p.IsRegularApp).ToArray();
+        DAppsRegular = DApps
+            .Where(p => p.IsRegularApp && DAppContentPolicy.IsVisible(p, allowRestrictedContent))
+            .ToArray();
         DAppsFiltered = DAppsRegular;
         DAppCategories = DAppsRegular
             .SelectMany(p => p.Tags ?? [])
@@ -93,12 +96,9 @@ public partial class DAppsPage : ContentPage
             .Select(DApp.LocalizeTag)
             .Prepend(Strings.All)
             .ToArray();
-    }
 
-    void OnDataLoaded(object? sender, EventArgs e)
-    {
-        DAppsFavorite = new(DAppsIdFavorite.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>().Where(p => p.IsRegularApp));
-        DAppsRecent = new(DAppsIdRecent.Select(id => DApps.FirstOrDefault(p => p.Id == id)).OfType<DApp>().Where(p => p.IsRegularApp));
+        DAppsFavorite = new(DAppsIdFavorite.Select(id => DAppsRegular.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
+        DAppsRecent = new(DAppsIdRecent.Select(id => DAppsRegular.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
         HasFavoriteOrRecent = DAppsFavorite.Count > 0 || DAppsRecent.Count > 0;
         if (tabbarFavoriteOrRecent.SelectedTab == tabbarFavoriteOrRecent.Tabs![0])
             DAppsFavoriteOrRecent = DAppsRecent;

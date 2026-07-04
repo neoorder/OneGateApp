@@ -1,6 +1,4 @@
-using CommunityToolkit.Maui.Alerts;
 using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
@@ -29,25 +27,18 @@ public partial class AboutPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        updateService.UpdateAvailable += OnUpdateAvailable;
+        updateService.UpdateStatusChanged += OnUpdateStatusChanged;
     }
 
     protected override void OnDisappearing()
     {
-        updateService.UpdateAvailable -= OnUpdateAvailable;
+        updateService.UpdateStatusChanged -= OnUpdateStatusChanged;
         base.OnDisappearing();
     }
 
-    void OnUpdateAvailable(object? sender, EventArgs e)
+    void OnUpdateStatusChanged(object? sender, EventArgs e)
     {
         LoadingService.BeginLoad();
-    }
-
-    async void OnKonamiCodeEntered(object sender, EventArgs e)
-    {
-        await dbContext.Settings.PutAsync("preference/developer_mode_enabled", true);
-        GlobalStates.Invalidate<SettingsPage>();
-        await Toast.Show(Strings.DeveloperModeEnabled);
     }
 
     async Task LoadSettingsAsync()
