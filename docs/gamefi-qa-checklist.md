@@ -17,7 +17,7 @@ Each game submission or game runtime PR should include:
 - Game URL and origin.
 - Manifest URL, if available.
 - Screenshots for Android and iOS.
-- Wallet integration notes, including which OneGate APIs are used.
+- Wallet integration notes, including which accepted OneGate dAPI methods are used.
 - Known limitations and any exceeded performance budget.
 
 ## Submission Preflight
@@ -88,19 +88,12 @@ optimization, lazy loading, lower mobile resolution, or a documented reason.
 Do not store private keys, seed phrases, wallet passwords, or full signing
 payloads in game storage.
 
-## Optional Native Capabilities
+## Proposed or Unaccepted Capabilities
 
-Games may use optional OneGate capabilities when available:
-
-- Address picker
-- QR scanner
-- Asset picker
-- Share sheet
-- Game runtime lifecycle events
-- Orientation helpers
-
-The game must feature-detect optional capabilities and hide or degrade UI when a
-capability is unavailable.
+Do not require, document, or test proposed OneGate APIs as part of this
+checklist until they are accepted and shipped. If a game needs an app-level
+capability that is not part of the current dAPI surface, record it as a separate
+product/API proposal instead of treating it as a QA requirement.
 
 ## Platform Test Matrix
 
@@ -134,7 +127,7 @@ Use this template in issue or PR comments:
 - Layout:
 - Performance:
 - Wallet:
-- Optional native capabilities:
+- Proposed or unaccepted API needs:
 - Security/privacy:
 - Known limitations:
 
@@ -153,7 +146,7 @@ A game is ready for listing or promotion when:
 - First interaction and performance metrics are within the gate or justified.
 - Mobile layout is usable without OneGate-side DOM/CSS adaptation.
 - Wallet prompts are user-initiated and recover from cancellation/failure.
-- Optional native capabilities are feature-detected.
+- The game does not depend on proposed or unaccepted OneGate APIs.
 - Review screenshots are uploaded externally and not committed to the repo.
 
 ## Non-goals
