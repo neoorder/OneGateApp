@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>Uygulamalar</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Genel arama</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Son kullanılan</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Yukarıdaki kurtarma ifadesini yazdım ve güvenli şekilde yedekledim</value>
   </data>
@@ -812,6 +818,12 @@ Devam ederek, ilgili tüm riskleri tamamen anladığınızı ve kabul ettiğiniz
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>Oyun</value>
+  </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Oyun kataloğunu yenilemek için aşağı çekin.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Son oynananlar</value>
   </data>
   <data name="GameType" xml:space="preserve">
     <value>Oyun türü</value>

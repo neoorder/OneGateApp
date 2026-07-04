@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>Приложения</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Глобальный поиск</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Недавно использовалось</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Я записал и надежно сохранил приведённую выше мнемоническую фразу</value>
   </data>
@@ -812,6 +818,12 @@
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>Игры</value>
+  </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Потяните вниз, чтобы обновить каталог игр.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Недавно сыгранные</value>
   </data>
   <data name="GameType" xml:space="preserve">
     <value>Тип игры</value>
