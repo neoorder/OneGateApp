@@ -178,6 +178,67 @@ body:
         Android Chrome / WebView:
         Known issues:
 
+  - type: markdown
+    attributes:
+      value: |
+        ### Game-specific review fields
+
+        Complete these fields when the listing type is Game. They help reviewers check mobile runtime fit, performance risk, wallet integration, and licensing before a game is listed.
+
+  - type: input
+    id: game-manifest-url
+    attributes:
+      label: Game manifest URL
+      description: Optional URL for `onegate-game.json` or an equivalent public manifest.
+      placeholder: https://example.com/onegate-game.json
+
+  - type: dropdown
+    id: game-runtime-mode
+    attributes:
+      label: Game runtime preference
+      description: Choose the expected runtime behavior for games.
+      options:
+        - Not a game
+        - Standard DApp WebView
+        - Fullscreen game runtime
+        - Landscape preferred
+        - Portrait preferred
+        - Other
+
+  - type: textarea
+    id: game-resource-budget
+    attributes:
+      label: Game resource and performance budget
+      description: Summarize first-load size, major JS/WASM/audio/texture assets, expected FPS, memory expectations, and cache strategy.
+      placeholder: |
+        Initial download size:
+        Largest JS/WASM assets:
+        Texture/audio budget:
+        Expected FPS:
+        Cache headers / hashed filenames:
+
+  - type: textarea
+    id: game-wallet-usage
+    attributes:
+      label: Game wallet and settlement flow
+      description: Explain when the game asks for wallet access, signing, transactions, or chain settlement.
+      placeholder: |
+        Wallet connect timing:
+        Signing methods:
+        Transaction methods:
+        Off-chain / on-chain settlement:
+
+  - type: textarea
+    id: game-licensing
+    attributes:
+      label: Game licensing and brand rights
+      description: List licenses or permissions for game art, music, ROMs, brands, third-party IP, and user-generated content.
+      placeholder: |
+        Art / audio license:
+        Brand or IP permission:
+        ROM / emulator content:
+        User-generated content policy:
+
   - type: dropdown
     id: content-risk
     attributes:
