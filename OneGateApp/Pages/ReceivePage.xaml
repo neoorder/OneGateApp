@@ -6,7 +6,6 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="NeoOrder.OneGate.Pages.ReceivePage"
              Title="{x:Static og:Strings.Receive}"
-             SafeAreaEdges="All"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ScrollView>
