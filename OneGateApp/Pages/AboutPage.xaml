@@ -10,8 +10,5 @@
         <Image Source="logo_vertical.png" WidthRequest="128" />
         <Label Grid.Row="1" StyleClass="Secondary" Text="{Binding AppInfo.VersionString}" HorizontalOptions="Center" />
         <og:SettingsView Grid.Row="2" Settings="{Binding SettingEntries}" />
-        <Grid.Behaviors>
-            <og:KonamiCodeBehavior KonamiCodeEntered="OnKonamiCodeEntered" />
-        </Grid.Behaviors>
     </Grid>
 </ContentPage>
