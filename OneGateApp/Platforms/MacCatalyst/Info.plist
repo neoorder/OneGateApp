@@ -52,6 +52,8 @@
 	</array>
 	<key>NSBiometricUsageDescription</key>
 	<string>Use Touch ID to unlock OneGate and approve wallet actions.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app allows dApps to use the camera for QR code scanning.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID to unlock OneGate and approve wallet actions.</string>
 	<key>NSMotionUsageDescription</key>

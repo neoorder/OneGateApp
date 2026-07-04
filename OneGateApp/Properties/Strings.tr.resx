@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>Uygulamalar</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Genel arama</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Son kullanılan</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Yukarıdaki kurtarma ifadesini yazdım ve güvenli şekilde yedekledim</value>
@@ -813,6 +819,12 @@ Devam ederek, ilgili tüm riskleri tamamen anladığınızı ve kabul ettiğiniz
   <data name="Gaming" xml:space="preserve">
     <value>Oyun</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Oyun kataloğunu yenilemek için aşağı çekin.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Son oynananlar</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Oyun türü</value>
   </data>
@@ -964,6 +976,12 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp yetkilendirmesi</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Kamera erişimi</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} kameranızı kullanmak istiyor.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Yalnızca oturum</value>

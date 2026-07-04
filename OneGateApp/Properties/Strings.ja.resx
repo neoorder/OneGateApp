@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>アプリ</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>グローバル検索</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>最近使用</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>上記のニーモニックフレーズを書き写し、安全にバックアップしました</value>
@@ -813,6 +819,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>ゲーム</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>下に引いてゲームカタログを更新します。</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>最近プレイ</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>ゲームタイプ</value>
   </data>
@@ -964,6 +976,12 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp の承認</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>カメラへのアクセス</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} がカメラの使用を求めています。</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>セッションのみ</value>

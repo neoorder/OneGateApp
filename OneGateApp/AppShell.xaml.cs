@@ -17,6 +17,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("home/contacts", typeof(ContactsPage));
         Routing.RegisterRoute("home/contacts/edit", typeof(EditContactPage));
         Routing.RegisterRoute("home/contacts/new", typeof(NewContactPage));
+        Routing.RegisterRoute("home/search", typeof(GlobalSearchPage));
         Routing.RegisterRoute("home/news/details", typeof(NewsDetailsPage));
         Routing.RegisterRoute("home/settings", typeof(SettingsPage));
         Routing.RegisterRoute("home/settings/about", typeof(AboutPage));

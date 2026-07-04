@@ -101,6 +101,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 recents.RemoveAt(recents.Count - 1);
             await dbContext.Settings.PutAsync("dapps/recent", recents);
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
+            if (DApp.IsGamingApp) GlobalStates.Invalidate<GamingPage>();
         }
         await activityLogService.RecordDAppConnectionAsync(DApp);
     }
@@ -231,6 +232,21 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 const entries = [];
                 let panel;
                 let logList;
+                let metricsPanel;
+                let metricsList;
+                let metricsTimer;
+                let metricsSamplingStarted = false;
+                const metrics = {
+                    fps: null,
+                    frameCount: 0,
+                    longFrames: 0,
+                    worstFrameMs: null,
+                    lastFrameAt: 0,
+                    lastSampleAt: 0,
+                    webglSupport: "unknown",
+                    webglContextLost: 0,
+                    webglContextRestored: 0
+                };
                 const inputEventTypes = new Set([
                     "click",
                     "contextmenu",
@@ -260,11 +276,15 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 const listenerWrappers = new WeakMap();
 
                 function eventTargetsPanel(event) {
-                    if (!panel)
+                    if (!panel && !metricsPanel)
                         return false;
-                    if (typeof event.composedPath === "function")
-                        return event.composedPath().indexOf(panel) >= 0;
-                    return event.target && typeof panel.contains === "function" && panel.contains(event.target);
+                    if (typeof event.composedPath === "function") {
+                        const path = event.composedPath();
+                        return (panel && path.indexOf(panel) >= 0) || (metricsPanel && path.indexOf(metricsPanel) >= 0);
+                    }
+                    return event.target &&
+                        ((panel && typeof panel.contains === "function" && panel.contains(event.target)) ||
+                            (metricsPanel && typeof metricsPanel.contains === "function" && metricsPanel.contains(event.target)));
                 }
 
                 function getCapture(options) {
@@ -434,6 +454,136 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     return Promise.resolve();
                 }
 
+                function detectWebGLSupport() {
+                    try {
+                        const canvas = document.createElement("canvas");
+                        if (canvas.getContext("webgl2"))
+                            return "WebGL2";
+                        if (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+                            return "WebGL";
+                    } catch (_) {
+                    }
+                    return "unavailable";
+                }
+
+                function getLoadTiming() {
+                    const navigation = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+                    if (navigation) {
+                        return {
+                            domContentLoadedMs: navigation.domContentLoadedEventEnd > 0 ? Math.round(navigation.domContentLoadedEventEnd) : null,
+                            loadMs: navigation.loadEventEnd > 0 ? Math.round(navigation.loadEventEnd) : null
+                        };
+                    }
+
+                    if (performance.timing) {
+                        const timing = performance.timing;
+                        return {
+                            domContentLoadedMs: timing.domContentLoadedEventEnd > 0 ? timing.domContentLoadedEventEnd - timing.navigationStart : null,
+                            loadMs: timing.loadEventEnd > 0 ? timing.loadEventEnd - timing.navigationStart : null
+                        };
+                    }
+
+                    return {
+                        domContentLoadedMs: document.readyState === "loading" ? null : Math.round(performance.now()),
+                        loadMs: document.readyState === "complete" ? Math.round(performance.now()) : null
+                    };
+                }
+
+                function formatMetric(value, suffix) {
+                    if (value === null || typeof value === "undefined")
+                        return "--";
+                    return suffix ? value + suffix : String(value);
+                }
+
+                function buildMetricsRows() {
+                    const timing = getLoadTiming();
+                    return [
+                        ["FPS", metrics.fps === null ? "--" : Math.round(metrics.fps)],
+                        ["Long frames", metrics.longFrames],
+                        ["Worst frame", metrics.worstFrameMs === null ? "--" : formatMetric(metrics.worstFrameMs.toFixed(1), " ms")],
+                        ["DOM ready", formatMetric(timing.domContentLoadedMs, " ms")],
+                        ["Load", formatMetric(timing.loadMs, " ms")],
+                        ["WebGL", metrics.webglSupport],
+                        ["Context lost", metrics.webglContextLost],
+                        ["Context restored", metrics.webglContextRestored],
+                        ["Origin", location.origin || "--"],
+                        ["URL", location.href]
+                    ];
+                }
+
+                function renderMetrics() {
+                    if (!metricsList)
+                        return;
+
+                    metricsList.replaceChildren();
+                    for (const row of buildMetricsRows()) {
+                        const item = document.createElement("div");
+                        item.className = "onegate-devtools-metric";
+
+                        const label = document.createElement("span");
+                        label.className = "onegate-devtools-metric-label";
+                        label.textContent = row[0];
+
+                        const value = document.createElement("span");
+                        value.className = "onegate-devtools-metric-value";
+                        value.textContent = row[1];
+
+                        item.appendChild(label);
+                        item.appendChild(value);
+                        metricsList.appendChild(item);
+                    }
+                }
+
+                function startMetricsTimer() {
+                    ensureMetricsSampling();
+                    if (metricsTimer)
+                        return;
+                    metricsTimer = window.setInterval(renderMetrics, 1000);
+                    renderMetrics();
+                }
+
+                function stopMetricsTimer() {
+                    if (!metricsTimer)
+                        return;
+                    window.clearInterval(metricsTimer);
+                    metricsTimer = null;
+                }
+
+                function trackFrame(now) {
+                    if (!metrics.lastSampleAt)
+                        metrics.lastSampleAt = now;
+
+                    if (metrics.lastFrameAt) {
+                        const delta = now - metrics.lastFrameAt;
+                        if (delta > 50)
+                            metrics.longFrames++;
+                        if (metrics.worstFrameMs === null || delta > metrics.worstFrameMs)
+                            metrics.worstFrameMs = delta;
+                    }
+
+                    metrics.lastFrameAt = now;
+                    metrics.frameCount++;
+
+                    const sampleWindow = now - metrics.lastSampleAt;
+                    if (sampleWindow >= 1000) {
+                        metrics.fps = metrics.frameCount * 1000 / sampleWindow;
+                        metrics.frameCount = 0;
+                        metrics.lastSampleAt = now;
+                        renderMetrics();
+                    }
+
+                    window.requestAnimationFrame(trackFrame);
+                }
+
+                function ensureMetricsSampling() {
+                    if (metricsSamplingStarted)
+                        return;
+                    metricsSamplingStarted = true;
+                    metrics.webglSupport = detectWebGLSupport();
+                    if (typeof window.requestAnimationFrame === "function")
+                        window.requestAnimationFrame(trackFrame);
+                }
+
                 function ensureStyles() {
                     if (document.getElementById("onegate-devtools-style"))
                         return;
@@ -447,6 +597,12 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         "#onegate-devtools-actions{display:flex;align-items:center;gap:6px}" +
                         "#onegate-devtools-actions button{border:1px solid rgba(61,68,80,.85);border-radius:6px;background:rgba(37,43,52,.82);color:#f3f5f7;padding:5px 8px;font:12px system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}" +
                         "#onegate-devtools-log{flex:1;overflow:auto;padding:8px 10px;white-space:pre-wrap;word-break:break-word}" +
+                        "#onegate-devtools-metrics{position:fixed;top:10px;right:10px;z-index:2147483645;display:none;width:min(360px,calc(100vw - 20px));max-height:calc(100vh - 20px);overflow:auto;border:1px solid rgba(72,81,96,.9);border-radius:8px;background:rgba(17,19,24,.86);color:#f3f5f7;box-shadow:0 12px 32px rgba(0,0,0,.28);font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}" +
+                        "#onegate-devtools-metrics-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:1px solid rgba(72,81,96,.8);font-weight:700}" +
+                        "#onegate-devtools-metrics-body{display:grid;gap:1px;padding:8px 10px}" +
+                        ".onegate-devtools-metric{display:grid;grid-template-columns:104px minmax(0,1fr);gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}" +
+                        ".onegate-devtools-metric-label{color:#a9b1bd}" +
+                        ".onegate-devtools-metric-value{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f3f5f7}" +
                         ".onegate-devtools-entry{padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)}" +
                         ".onegate-devtools-error{color:#ff817a}" +
                         ".onegate-devtools-warn{color:#f2cc60}" +
@@ -465,6 +621,38 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         onClick();
                     });
                     return button;
+                }
+
+                function ensureMetricsPanel() {
+                    if (metricsPanel)
+                        return;
+
+                    ensureStyles();
+                    metricsPanel = document.createElement("section");
+                    metricsPanel.id = "onegate-devtools-metrics";
+                    metricsPanel.setAttribute("aria-label", "OneGate performance HUD");
+
+                    const header = document.createElement("div");
+                    header.id = "onegate-devtools-metrics-header";
+                    header.textContent = "Performance HUD";
+
+                    const closeButton = createButton("Close", function() {
+                        api.hideMetrics();
+                    });
+                    header.appendChild(closeButton);
+
+                    metricsList = document.createElement("div");
+                    metricsList.id = "onegate-devtools-metrics-body";
+
+                    metricsPanel.appendChild(header);
+                    metricsPanel.appendChild(metricsList);
+                    inputEventTypes.forEach(function(type) {
+                        originalAddEventListener.call(metricsPanel, type, function(event) {
+                            event.stopPropagation();
+                        });
+                    });
+                    (document.body || document.documentElement).appendChild(metricsPanel);
+                    renderMetrics();
                 }
 
                 function ensurePanel() {
@@ -490,6 +678,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         render();
                     }));
                     actions.appendChild(createButton("Copy", copyEntries));
+                    actions.appendChild(createButton("HUD", function() {
+                        api.toggleMetrics();
+                    }));
                     actions.appendChild(createButton("Close", function() {
                         api.hide();
                     }));
@@ -532,6 +723,35 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         entries.length = 0;
                         render();
                     },
+                    showMetrics: function() {
+                        ensureMetricsPanel();
+                        metricsPanel.style.display = "block";
+                        startMetricsTimer();
+                    },
+                    hideMetrics: function() {
+                        if (metricsPanel)
+                            metricsPanel.style.display = "none";
+                        stopMetricsTimer();
+                    },
+                    toggleMetrics: function() {
+                        ensureMetricsPanel();
+                        if (metricsPanel.style.display === "none" || metricsPanel.style.display === "")
+                            api.showMetrics();
+                        else
+                            api.hideMetrics();
+                    },
+                    getMetrics: function() {
+                        ensureMetricsSampling();
+                        return {
+                            rows: buildMetricsRows(),
+                            fps: metrics.fps,
+                            longFrames: metrics.longFrames,
+                            worstFrameMs: metrics.worstFrameMs,
+                            webglSupport: metrics.webglSupport,
+                            webglContextLost: metrics.webglContextLost,
+                            webglContextRestored: metrics.webglContextRestored
+                        };
+                    },
                     copy: copyEntries,
                     entries: entries
                 };
@@ -553,6 +773,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 window.addEventListener("unhandledrejection", function(event) {
                     push("error", ["Unhandled rejection", event.reason]);
                 });
+                document.addEventListener("webglcontextlost", function() {
+                    metrics.webglContextLost++;
+                    renderMetrics();
+                }, true);
+                document.addEventListener("webglcontextrestored", function() {
+                    metrics.webglContextRestored++;
+                    renderMetrics();
+                }, true);
 
                 push("info", ["OneGate developer tools ready"]);
             })();
