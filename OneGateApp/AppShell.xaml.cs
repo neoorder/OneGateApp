@@ -24,7 +24,9 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("home/settings/assets/hidden", typeof(HiddenAssetsPage));
         Routing.RegisterRoute("home/settings/biometric/create", typeof(CreateBiometricPage));
         Routing.RegisterRoute("home/settings/biometric/disable", typeof(DisableBiometricPage));
+        Routing.RegisterRoute("home/settings/content", typeof(ContentSettingsPage));
         Routing.RegisterRoute("home/settings/developer", typeof(DeveloperToolsPage));
+        Routing.RegisterRoute("home/settings/developer/submission", typeof(DAppSubmissionPage));
         Routing.RegisterRoute("home/settings/language", typeof(LanguagePage));
         Routing.RegisterRoute("home/settings/news", typeof(NewsSettingsPage));
         Routing.RegisterRoute("home/settings/security", typeof(SecurityCenterPage));

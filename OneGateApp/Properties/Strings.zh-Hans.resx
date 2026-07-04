@@ -326,6 +326,9 @@
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>请验证您的生物信息以继续操作</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>正在解锁钱包</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>操作已取消</value>
   </data>
@@ -447,6 +450,30 @@
   </data>
   <data name="General" xml:space="preserve">
     <value>常规</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>内容设置</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>允许显示受限内容</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>显示可能不适合所有人的 DApp。关闭后，这些 DApp 会从列表中隐藏。</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>请选择出生日期</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>根据你提供的年龄，无法启用受限内容。</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>受限内容</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>受限内容可能包含不适合未成年人的成人、暴力、赌博、约会或其他敏感主题内容。</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>我理解并继续</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>请扫描二维码向我转账</value>
@@ -881,14 +908,35 @@
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>余额不足，无法支付金额和手续费。您最多可发送 {0} GAS。</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>开发者模式已启用</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>开发者工具</value>
+    <value>开发者中心</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>DApp 调试面板</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp测试</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp 提交</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp 提交：{0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>项目名称</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>官网</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>联系方式</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>通过电子邮件提交</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>可用</value>

@@ -326,6 +326,9 @@ Vous pouvez désactiver l’authentification biométrique à tout moment.</value
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Veuillez vérifier vos données biométriques pour continuer</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Déverrouillage du portefeuille</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Opération annulée</value>
   </data>
@@ -447,6 +450,30 @@ Après désactivation, vous devrez saisir manuellement le mot de passe du portef
   </data>
   <data name="General" xml:space="preserve">
     <value>Général</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Paramètres de contenu</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Autoriser le contenu restreint</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Afficher les DApps qui peuvent ne pas convenir à tout le monde. Lorsque cette option est désactivée, ces DApps sont masquées dans les listes.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Sélectionner la date de naissance</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Le contenu restreint ne peut pas être activé selon l’âge indiqué.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Contenu restreint</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Le contenu restreint peut inclure des thèmes adultes, violents, liés aux jeux d’argent, aux rencontres ou d’autres thèmes sensibles qui ne conviennent pas aux mineurs.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Je comprends et continue</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Veuillez scanner le code QR pour m’envoyer un paiement</value>
@@ -881,14 +908,35 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Solde insuffisant pour couvrir le montant et les frais. Le montant maximal que vous pouvez envoyer est de {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Mode développeur activé</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Outils de développement</value>
+    <value>Centre développeur</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>Panneau de débogage DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Test DApp</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>Soumission de DApp</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>Soumission de DApp : {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Nom du projet</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Site web officiel</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Coordonnées</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Envoyer par e-mail</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Disponible</value>

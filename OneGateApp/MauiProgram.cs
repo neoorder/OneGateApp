@@ -40,6 +40,9 @@ public static class MauiProgram
             {
                 Controls.Handlers.Border.ConfigureHandlers();
                 handlers.AddHandler<BridgeWebView, BridgeWebViewHandler>();
+#if ANDROID
+                handlers.AddHandler<DatePicker, OneGateDatePickerHandler>();
+#endif
             })
             .ConfigureFonts(fonts =>
             {
@@ -105,6 +108,7 @@ public static class MauiProgram
         });
         builder.Services.AddSingleton<IWalletProvider, WalletProvider>();
         builder.Services.AddTransient<WalletAuthorizationService>();
+        builder.Services.AddTransient<AddressBookService>();
         builder.Services.AddSingleton<TokenManager>();
         builder.Services.AddSingleton<ActivityLogService>();
         builder.Services.AddSingleton<RpcClient>();
