@@ -1,5 +1,6 @@
 ﻿using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Pages;
+using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 
 namespace NeoOrder.OneGate.Controls.Handlers;
@@ -7,6 +8,11 @@ namespace NeoOrder.OneGate.Controls.Handlers;
 partial class DAppSearchHandler : SearchHandler
 {
     public readonly static BindableProperty DAppsProperty = BindableProperty.Create(nameof(DApps), typeof(IList<DApp>), typeof(DAppSearchHandler));
+
+    public DAppSearchHandler()
+    {
+        Placeholder = Strings.Search;
+    }
 
     public IList<DApp>? DApps
     {
