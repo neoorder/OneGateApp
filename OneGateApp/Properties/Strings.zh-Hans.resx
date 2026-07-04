@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>应用</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>全局搜索</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>最近使用</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>我已抄写并妥善备份上述助记词</value>
   </data>
@@ -914,14 +920,35 @@
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>余额不足，无法支付金额和手续费。您最多可发送 {0} GAS。</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>开发者模式已启用</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>开发者工具</value>
+    <value>开发者中心</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>DApp 调试面板</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DApp测试</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp 提交</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp 提交：{0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>项目名称</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>官网</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>联系方式</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>通过电子邮件提交</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>可用</value>

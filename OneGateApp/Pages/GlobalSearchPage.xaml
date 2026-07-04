@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.GlobalSearchPage"
+             Title="{x:Static og:Strings.GlobalSearch}"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Margin="20" Spacing="14">
+            <SearchBar x:Name="searchBar"
+                       ios:SearchBar.SearchBarStyle="Minimal"
+                       Placeholder="{x:Static og:Strings.Search}"
+                       TextChanged="OnSearchTextChanged"
+                       SearchButtonPressed="OnSearchButtonPressed" />
+            <ActivityIndicator IsRunning="{Binding LoadingService.IsLoading}"
+                               IsVisible="{Binding LoadingService.IsLoading}"
+                               HorizontalOptions="Center" />
+            <Border StyleClass="Card" IsVisible="{Binding IsEmpty}">
+                <Label StyleClass="Secondary"
+                       Text="{x:Static og:Strings.DefaultEmptyViewMessage}"
+                       HorizontalOptions="Center" />
+            </Border>
+            <VerticalStackLayout Spacing="8"
+                                 IsVisible="{Binding HasResults}"
+                                 BindableLayout.ItemsSource="{Binding Results}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="og:GlobalSearchResult">
+                        <Border StyleClass="Card" Padding="12">
+                            <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
+                                <Border StrokeShape="RoundRectangle 12"
+                                        Padding="8"
+                                        WidthRequest="48"
+                                        HeightRequest="48"
+                                        VerticalOptions="Center">
+                                    <Grid>
+                                        <Label StyleClass="Icon, Secondary"
+                                               Text="{Binding IconGlyph}"
+                                               IsVisible="{Binding HasIconGlyph}"
+                                               FontSize="22"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center" />
+                                        <Image Source="{Binding IconImageSource}"
+                                               IsVisible="{Binding HasIconImage}"
+                                               WidthRequest="30"
+                                               HeightRequest="30"
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                                    <Label Text="{Binding Title}"
+                                           FontAttributes="Bold"
+                                           FontSize="16"
+                                           LineBreakMode="TailTruncation" />
+                                    <Label StyleClass="Secondary"
+                                           Text="{Binding Subtitle}"
+                                           FontSize="12"
+                                           MaxLines="1"
+                                           LineBreakMode="MiddleTruncation" />
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Label StyleClass="Secondary"
+                                               Text="{Binding TypeText}"
+                                               FontSize="11"
+                                               VerticalOptions="Center" />
+                                        <Border StrokeShape="RoundRectangle 6"
+                                                BackgroundColor="{toolkit:AppThemeResource BrandMuted}"
+                                                Padding="6,1"
+                                                IsVisible="{Binding IsRecentDApp}">
+                                            <Label Text="{x:Static og:Strings.GlobalSearchRecentlyUsed}"
+                                                   TextColor="{toolkit:AppThemeResource Brand}"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold" />
+                                        </Border>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2"
+                                       StyleClass="Icon, Secondary"
+                                       Text="&#xe70a;"
+                                       FontSize="12"
+                                       VerticalOptions="Center" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnResultTapped" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
