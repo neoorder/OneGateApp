@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>应用</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>全局搜索</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>最近使用</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>我已抄写并妥善备份上述助记词</value>
   </data>

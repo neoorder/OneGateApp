@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>앱</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>전체 검색</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>최근 사용</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>위의 복구 구문을 기록하고 안전하게 백업했습니다</value>
   </data>

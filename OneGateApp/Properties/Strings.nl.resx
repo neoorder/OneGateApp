@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>Apps</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Globaal zoeken</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Recent gebruikt</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Ik heb de bovenstaande herstelzin opgeschreven en veilig opgeslagen</value>
   </data>
