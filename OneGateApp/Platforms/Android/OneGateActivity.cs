@@ -1,3 +1,4 @@
+using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using AndroidX.Core.View;
@@ -7,6 +8,15 @@ namespace NeoOrder.OneGate.Platforms.Android;
 
 public abstract class OneGateActivity : MauiAppCompatActivity
 {
+    internal sealed class ActivityResultReceivedEventArgs(int requestCode, Result resultCode, Intent? data) : EventArgs
+    {
+        public int RequestCode { get; } = requestCode;
+        public Result ResultCode { get; } = resultCode;
+        public Intent? Data { get; } = data;
+    }
+
+    internal static event EventHandler<ActivityResultReceivedEventArgs>? ActivityResultReceived;
+
     protected static bool TryGetUri(Intent intent, out Uri uri)
     {
         string url = intent.GetStringExtra("org.neoorder.onegate.ORIGINAL_URI")
@@ -48,6 +58,12 @@ public abstract class OneGateActivity : MauiAppCompatActivity
     {
         base.OnConfigurationChanged(newConfig);
         ApplySystemBarStyle();
+    }
+
+    protected override void OnActivityResult(int requestCode, Result resultCode, Intent? data)
+    {
+        base.OnActivityResult(requestCode, resultCode, data);
+        ActivityResultReceived?.Invoke(this, new ActivityResultReceivedEventArgs(requestCode, resultCode, data));
     }
 
     void ApplySystemBarStyle()
