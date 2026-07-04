@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>Aplicaciones</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Busqueda global</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Usado recientemente</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>He anotado y respaldado de forma segura la frase mnemónica anterior</value>
@@ -326,6 +332,9 @@ Puede desactivar la autenticación biométrica en cualquier momento.</value>
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Por favor, verifique sus datos biométricos para continuar</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Desbloqueando la billetera</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operación cancelada</value>
   </data>
@@ -459,6 +468,30 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
   </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Configuración de contenido</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Permitir contenido restringido</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Mostrar DApps que pueden no ser adecuadas para todos. Cuando está desactivado, estas DApps se ocultan de las listas.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Seleccionar fecha de nacimiento</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>No se puede activar el contenido restringido según la edad proporcionada.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Contenido restringido</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>El contenido restringido puede incluir temas para adultos, violencia, juegos de azar, citas u otros temas sensibles que no son adecuados para menores.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Entiendo y continúo</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Escanee el código QR para enviarme una transferencia</value>
@@ -798,6 +831,12 @@ Al continuar, usted reconoce que comprende plenamente y acepta todos los riesgos
   <data name="Gaming" xml:space="preserve">
     <value>Juegos</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Desliza hacia abajo para actualizar el catálogo de juegos.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Jugados recientemente</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Tipo de juego</value>
   </data>
@@ -893,14 +932,35 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>No hay saldo suficiente para cubrir el importe y las comisiones. La cantidad máxima que puedes enviar es {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Modo de desarrollador activado</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Herramientas de desarrollador</value>
+    <value>Centro de desarrolladores</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>Panel de depuración de DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Prueba de DApp</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>Envío de DApp</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>Envío de DApp: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Nombre del proyecto</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Sitio web oficial</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Información de contacto</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Enviar por correo electrónico</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Disponible</value>
@@ -928,6 +988,12 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>Autorización de dApp</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Acceso a la cámara</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} quiere usar la cámara.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Solo sesión</value>

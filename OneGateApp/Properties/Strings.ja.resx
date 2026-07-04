@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>アプリ</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>グローバル検索</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>最近使用</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>上記のニーモニックフレーズを書き写し、安全にバックアップしました</value>
@@ -326,6 +332,9 @@
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>続行するには生体認証を行ってください</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>ウォレットをロック解除中</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>操作がキャンセルされました</value>
   </data>
@@ -459,6 +468,30 @@
   </data>
   <data name="General" xml:space="preserve">
     <value>一般</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>コンテンツ設定</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>制限付きコンテンツを許可</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>すべてのユーザーに適しているとは限らないDAppを表示します。無効にすると、これらのDAppは一覧から非表示になります。</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>生年月日を選択</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>入力された年齢では制限付きコンテンツを有効にできません。</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>制限付きコンテンツ</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>制限付きコンテンツには、未成年に適さない成人向け、暴力、ギャンブル、出会い、その他のセンシティブなテーマが含まれる場合があります。</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>理解して続行</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>QRコードをスキャンして送金してください</value>
@@ -798,6 +831,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>ゲーム</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>下に引いてゲームカタログを更新します。</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>最近プレイ</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>ゲームタイプ</value>
   </data>
@@ -893,14 +932,35 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>金額と手数料を賄うのに十分な残高がありません。送信できる最大額は {0} GAS です。</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>開発者モードを有効にしました</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>開発者ツール</value>
+    <value>開発者センター</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>DApp デバッグパネル</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>DAppテスト</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>DApp 提出</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>DApp 提出: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>プロジェクト名</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>公式サイト</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>連絡先</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>メールで送信</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>利用可能</value>
@@ -928,6 +988,12 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp の承認</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>カメラへのアクセス</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} がカメラの使用を求めています。</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>セッションのみ</value>

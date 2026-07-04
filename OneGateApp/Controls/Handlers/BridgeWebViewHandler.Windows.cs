@@ -1,24 +1,13 @@
-﻿#if WINDOWS
+#if WINDOWS
 
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
-using System.Runtime.InteropServices;
 
 namespace NeoOrder.OneGate.Controls.Handlers;
 
 partial class BridgeWebViewHandler
 {
-    const string SyncHostObjectName = "OneGateBridgeSync";
-
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDual)]
-    public class SyncScriptHandler(Func<string, string> onMessage)
-    {
-        public string InvokeSync(string payload)
-        {
-            return onMessage(payload);
-        }
-    }
+    const string SyncPrompt = "__OneGateBridgeSync";
 
     protected override void ConnectHandler(WebView2 platformView)
     {
@@ -30,6 +19,8 @@ partial class BridgeWebViewHandler
     {
         platformView.CoreWebView2Initialized -= PlatformView_CoreWebView2Initialized;
         platformView.CoreWebView2?.WebMessageReceived -= CoreWebView2_WebMessageReceived;
+        platformView.CoreWebView2?.ScriptDialogOpening -= CoreWebView2_ScriptDialogOpening;
+        platformView.CoreWebView2?.PermissionRequested -= CoreWebView2_PermissionRequested;
         base.DisconnectHandler(platformView);
     }
 
@@ -37,14 +28,15 @@ partial class BridgeWebViewHandler
     {
         sender.CoreWebView2.Settings.IsWebMessageEnabled = true;
         sender.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
-        sender.CoreWebView2.AddHostObjectToScript(SyncHostObjectName, new SyncScriptHandler(BridgeWebView.OnSyncMessage));
+        sender.CoreWebView2.ScriptDialogOpening += CoreWebView2_ScriptDialogOpening;
+        sender.CoreWebView2.PermissionRequested += CoreWebView2_PermissionRequested;
         string shim = """
             window.__OneGateBridge = {
                 invoke: function(payload) {
                     window.chrome.webview.postMessage(payload);
                 },
                 invokeSync: function(payload) {
-                    return window.chrome.webview.hostObjects.sync.OneGateBridgeSync.InvokeSync(payload);
+                    return window.prompt("__OneGateBridgeSync", payload);
                 }
             };
             """;
@@ -54,9 +46,34 @@ partial class BridgeWebViewHandler
         await sender.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
     }
 
+    void CoreWebView2_PermissionRequested(CoreWebView2 sender, CoreWebView2PermissionRequestedEventArgs args)
+    {
+        if (args.PermissionKind != CoreWebView2PermissionKind.Camera)
+            return;
+
+        args.SavesInProfile = false;
+        if (IsSameWebOrigin(args.Uri, sender.Source))
+        {
+            args.State = CoreWebView2PermissionState.Default;
+            return;
+        }
+
+        args.State = CoreWebView2PermissionState.Deny;
+        args.Handled = true;
+    }
+
     void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)
     {
         BridgeWebView.OnMessage(args.TryGetWebMessageAsString());
+    }
+
+    void CoreWebView2_ScriptDialogOpening(CoreWebView2 sender, CoreWebView2ScriptDialogOpeningEventArgs args)
+    {
+        if (args.Kind != CoreWebView2ScriptDialogKind.Prompt || args.Message != SyncPrompt)
+            return;
+
+        args.ResultText = BridgeWebView.OnSyncMessage(args.DefaultText ?? string.Empty);
+        args.Accept();
     }
 }
 #endif
