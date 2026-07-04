@@ -452,7 +452,7 @@
     <value>取引アクティビティが見つかりません</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>このウォレットの転送は、RPC ノードでインデックスされるとここに表示されます。</value>
+    <value>このウォレットの転送は、ネットワークから取得できるようになるとここに表示されます。</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
     <value>取引履歴を読み込めません</value>

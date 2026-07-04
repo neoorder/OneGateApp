@@ -2011,7 +2011,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Transfers for this wallet will appear here after they are indexed by the RPC node. 的本地化字符串。
+        ///   查找类似 Transfers for this wallet will appear here after they are available from the network. 的本地化字符串。
         /// </summary>
         internal static string TransactionHistoryEmptyText {
             get {

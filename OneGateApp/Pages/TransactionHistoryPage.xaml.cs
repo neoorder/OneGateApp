@@ -89,13 +89,15 @@ public partial class TransactionHistoryPage : ContentPage
 
     async Task<IEnumerable<RawTransfer>> LoadNep17TransfersAsync(string address)
     {
-        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep17transfers", address);
+        long endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep17transfers", address, 0, endTime);
         return EnumerateTransfers(result, isNep11: false);
     }
 
     async Task<IEnumerable<RawTransfer>> LoadNep11TransfersAsync(string address)
     {
-        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep11transfers", address);
+        long endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep11transfers", address, 0, endTime);
         return EnumerateTransfers(result, isNep11: true);
     }
 

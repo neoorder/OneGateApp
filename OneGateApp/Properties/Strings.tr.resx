@@ -452,7 +452,7 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
     <value>İşlem etkinliği bulunamadı</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>Bu cüzdanın transferleri RPC düğümü tarafından dizine eklendikten sonra burada görünür.</value>
+    <value>Bu cüzdanın transferleri ağdan kullanılabilir olduğunda burada görünür.</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
     <value>İşlem geçmişi yüklenemiyor</value>

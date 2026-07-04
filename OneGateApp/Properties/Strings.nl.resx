@@ -452,7 +452,7 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
     <value>Geen transactieactiviteit gevonden</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>Overboekingen voor deze wallet verschijnen hier nadat ze door de RPC-node zijn geïndexeerd.</value>
+    <value>Overboekingen voor deze wallet verschijnen hier zodra ze via het netwerk beschikbaar zijn.</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
     <value>Transactiegeschiedenis kan niet worden geladen</value>

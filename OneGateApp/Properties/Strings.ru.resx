@@ -452,7 +452,7 @@
     <value>Активность транзакций не найдена</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>Переводы этого кошелька появятся здесь после индексации RPC-узлом.</value>
+    <value>Переводы этого кошелька появятся здесь, когда станут доступны из сети.</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
     <value>Не удалось загрузить историю транзакций</value>

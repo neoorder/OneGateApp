@@ -452,7 +452,7 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
     <value>Tidak ada aktivitas transaksi ditemukan</value>
   </data>
   <data name="TransactionHistoryEmptyText" xml:space="preserve">
-    <value>Transfer untuk dompet ini akan muncul di sini setelah diindeks oleh node RPC.</value>
+    <value>Transfer untuk dompet ini akan muncul di sini setelah tersedia dari jaringan.</value>
   </data>
   <data name="TransactionHistoryLoadFailed" xml:space="preserve">
     <value>Tidak dapat memuat riwayat transaksi</value>
