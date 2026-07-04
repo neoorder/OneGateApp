@@ -44,8 +44,7 @@ public class ActivityLogService(ApplicationDbContext dbContext)
 
     public async Task RecordTransactionAsync(DApp dapp, UInt256 transactionHash)
     {
-        ActivityRecordKind kind = IsOneGateVault(dapp) ? ActivityRecordKind.OneGateVaultTransaction : ActivityRecordKind.Transaction;
-        await RecordAsync(kind, dapp, transactionHash.ToString());
+        await RecordAsync(ActivityRecordKind.Transaction, dapp, transactionHash.ToString());
     }
 
     async Task RecordAsync(ActivityRecordKind kind, DApp dapp, string? transactionHash = null)
@@ -77,12 +76,5 @@ public class ActivityLogService(ApplicationDbContext dbContext)
         if (Uri.TryCreate(url, UriKind.Absolute, out Uri? uri))
             return uri.Host;
         return null;
-    }
-
-    static bool IsOneGateVault(DApp dapp)
-    {
-        if (dapp.Url.Contains("miniapp-gas-lucky-pool", StringComparison.OrdinalIgnoreCase))
-            return true;
-        return dapp.NameLocalizer.Values.Any(p => p.Contains("OneGate Vault", StringComparison.OrdinalIgnoreCase));
     }
 }

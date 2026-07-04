@@ -1050,7 +1050,7 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
     <value>Nessuna attivita registrata</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Rivedi connessioni dApp, autorizzazioni del wallet, firme, transazioni inviate e transazioni OneGate Vault registrate su questo dispositivo.</value>
+    <value>Rivedi connessioni dApp, autorizzazioni del wallet, firme e transazioni inviate registrate su questo dispositivo.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Cronologia attivita del tuo wallet</value>
@@ -1072,9 +1072,6 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Transazione inviata da {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>Transazione OneGate Vault inviata da {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Accesso al wallet approvato per {0}</value>
@@ -1111,9 +1108,6 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Origine sconosciuta</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Autorizzazione wallet</value>

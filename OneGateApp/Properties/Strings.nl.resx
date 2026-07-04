@@ -1050,7 +1050,7 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
     <value>Nog geen activiteit vastgelegd</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Bekijk dApp-verbindingen, walletautorisaties, handtekeningen, ingediende transacties en OneGate Vault-transacties die op dit apparaat zijn vastgelegd.</value>
+    <value>Bekijk dApp-verbindingen, walletautorisaties, handtekeningen en ingediende transacties die op dit apparaat zijn vastgelegd.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Activiteitstijdlijn van je wallet</value>
@@ -1072,9 +1072,6 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Transactie ingediend vanaf {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>OneGate Vault-transactie ingediend vanaf {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Wallettoegang goedgekeurd voor {0}</value>
@@ -1111,9 +1108,6 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Onbekende bron</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Walletautorisatie</value>

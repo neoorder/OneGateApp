@@ -1050,7 +1050,7 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
     <value>Chua ghi nhan hoat dong nao</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Xem cac ket noi dApp, uy quyen vi, chu ky, giao dich da gui va giao dich OneGate Vault duoc ghi tren thiet bi nay.</value>
+    <value>Xem cac ket noi dApp, uy quyen vi, chu ky va giao dich da gui duoc ghi tren thiet bi nay.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Dong thoi gian hoat dong vi cua ban</value>
@@ -1072,9 +1072,6 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Da gui giao dich tu {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>Da gui giao dich OneGate Vault tu {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Da phe duyet quyen truy cap vi cho {0}</value>
@@ -1111,9 +1108,6 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Nguon khong xac dinh</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Uy quyen vi</value>

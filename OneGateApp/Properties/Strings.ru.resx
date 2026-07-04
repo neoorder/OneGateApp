@@ -1050,7 +1050,7 @@
     <value>Активность пока не записана</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Просматривайте подключения dApp, разрешения кошелька, подписи, отправленные транзакции и транзакции OneGate Vault, записанные на этом устройстве.</value>
+    <value>Просматривайте подключения dApp, разрешения кошелька, подписи и отправленные транзакции, записанные на этом устройстве.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Лента активности вашего кошелька</value>
@@ -1072,9 +1072,6 @@
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Транзакция отправлена из {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>Транзакция OneGate Vault отправлена из {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Доступ кошелька для {0} подтвержден</value>
@@ -1111,9 +1108,6 @@
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Неизвестный источник</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Разрешение кошелька</value>

@@ -1050,7 +1050,7 @@ It is recommended to store the NEP-2 key and password separately and back them u
     <value>No activity recorded yet</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Review dApp connections, wallet authorizations, signatures, submitted transactions, and OneGate Vault transactions recorded on this device.</value>
+    <value>Review dApp connections, wallet authorizations, signatures, and submitted transactions recorded on this device.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Your wallet activity timeline</value>
@@ -1072,9 +1072,6 @@ It is recommended to store the NEP-2 key and password separately and back them u
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Transaction submitted from {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>OneGate Vault transaction submitted from {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Wallet access approved for {0}</value>
@@ -1111,9 +1108,6 @@ It is recommended to store the NEP-2 key and password separately and back them u
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Unknown source</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Wallet authorization</value>

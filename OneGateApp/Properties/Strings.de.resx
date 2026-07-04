@@ -1050,7 +1050,7 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
     <value>Noch keine Aktivitat aufgezeichnet</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Prufe dApp-Verbindungen, Wallet-Autorisierungen, Signaturen, gesendete Transaktionen und OneGate Vault-Transaktionen, die auf diesem Gerat aufgezeichnet wurden.</value>
+    <value>Prufe dApp-Verbindungen, Wallet-Autorisierungen, Signaturen und gesendete Transaktionen, die auf diesem Gerat aufgezeichnet wurden.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Deine Wallet-Aktivitatschronik</value>
@@ -1072,9 +1072,6 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Transaktion von {0} gesendet</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>OneGate Vault-Transaktion von {0} gesendet</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Wallet-Zugriff fur {0} genehmigt</value>
@@ -1111,9 +1108,6 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Unbekannte Quelle</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Wallet-Autorisierung</value>

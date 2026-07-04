@@ -1050,7 +1050,7 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
     <value>Aucune activite enregistree</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Consultez les connexions dApp, les autorisations de portefeuille, les signatures, les transactions envoyees et les transactions OneGate Vault enregistrees sur cet appareil.</value>
+    <value>Consultez les connexions dApp, les autorisations de portefeuille, les signatures et les transactions envoyees enregistrees sur cet appareil.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Fil d activite de votre portefeuille</value>
@@ -1072,9 +1072,6 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Transaction envoyee depuis {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>Transaction OneGate Vault envoyee depuis {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Acces au portefeuille approuve pour {0}</value>
@@ -1111,9 +1108,6 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Source inconnue</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Autorisation du portefeuille</value>

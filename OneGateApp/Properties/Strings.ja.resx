@@ -1050,7 +1050,7 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
     <value>まだアクティビティは記録されていません</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>このデバイスに記録された dApp 接続、ウォレット承認、署名、送信済みトランザクション、OneGate Vault トランザクションを確認します。</value>
+    <value>このデバイスに記録された dApp 接続、ウォレット承認、署名、送信済みトランザクションを確認します。</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>ウォレットのアクティビティ履歴</value>
@@ -1072,9 +1072,6 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>{0} からトランザクションを送信しました</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>{0} から OneGate Vault トランザクションを送信しました</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>{0} のウォレットアクセスを承認しました</value>
@@ -1111,9 +1108,6 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>不明なソース</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>ウォレット承認</value>

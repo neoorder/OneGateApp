@@ -1050,7 +1050,7 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
     <value>Nenhuma atividade registrada ainda</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Revise conexoes de dApps, autorizacoes de carteira, assinaturas, transacoes enviadas e transacoes do OneGate Vault registradas neste dispositivo.</value>
+    <value>Revise conexoes de dApps, autorizacoes de carteira, assinaturas e transacoes enviadas registradas neste dispositivo.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Linha do tempo de atividades da sua carteira</value>
@@ -1072,9 +1072,6 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Transacao enviada de {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>Transacao do OneGate Vault enviada de {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Acesso da carteira aprovado para {0}</value>
@@ -1111,9 +1108,6 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Origem desconhecida</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Autorizacao da carteira</value>

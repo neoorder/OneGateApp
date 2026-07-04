@@ -1050,7 +1050,7 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
     <value>Henuz etkinlik kaydedilmedi</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Bu cihazda kaydedilen dApp baglantilarini, cuzdan yetkilendirmelerini, imzalari, gonderilen islemleri ve OneGate Vault islemlerini inceleyin.</value>
+    <value>Bu cihazda kaydedilen dApp baglantilarini, cuzdan yetkilendirmelerini, imzalari ve gonderilen islemleri inceleyin.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Cuzdan etkinlik zaman cizelgeniz</value>
@@ -1072,9 +1072,6 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>{0} kaynagindan islem gonderildi</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>{0} kaynagindan OneGate Vault islemi gonderildi</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>{0} icin cuzdan erisimi onaylandi</value>
@@ -1111,9 +1108,6 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Bilinmeyen kaynak</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Cuzdan yetkilendirmesi</value>

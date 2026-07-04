@@ -1050,7 +1050,7 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
     <value>Belum ada aktivitas yang direkam</value>
   </data>
   <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Tinjau koneksi dApp, otorisasi dompet, tanda tangan, transaksi terkirim, dan transaksi OneGate Vault yang direkam di perangkat ini.</value>
+    <value>Tinjau koneksi dApp, otorisasi dompet, tanda tangan, dan transaksi terkirim yang direkam di perangkat ini.</value>
   </data>
   <data name="ActivityCenterSummaryTitle" xml:space="preserve">
     <value>Linimasa aktivitas dompet Anda</value>
@@ -1072,9 +1072,6 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
     <value>Transaksi dikirim dari {0}</value>
-  </data>
-  <data name="ActivityOneGateVaultTransactionTitle" xml:space="preserve">
-    <value>Transaksi OneGate Vault dikirim dari {0}</value>
   </data>
   <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
     <value>Akses dompet disetujui untuk {0}</value>
@@ -1111,9 +1108,6 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="UnknownSource" xml:space="preserve">
     <value>Sumber tidak dikenal</value>
-  </data>
-  <data name="OneGateVault" xml:space="preserve">
-    <value>OneGate Vault</value>
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Otorisasi dompet</value>
