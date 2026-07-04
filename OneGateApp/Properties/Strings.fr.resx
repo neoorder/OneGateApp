@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>Applications</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Recherche globale</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Utilisé récemment</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>J’ai noté et sauvegardé en lieu sûr la phrase mnémonique ci-dessus</value>
@@ -813,6 +819,12 @@ En continuant, vous reconnaissez comprendre pleinement et accepter tous les risq
   <data name="Gaming" xml:space="preserve">
     <value>Jeux</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Tirez vers le bas pour actualiser le catalogue de jeux.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Joués récemment</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Type de jeu</value>
   </data>
@@ -964,6 +976,12 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>Autorisation dApp</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Accès à la caméra</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} souhaite utiliser votre caméra.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Session uniquement</value>
