@@ -11,4 +11,6 @@ public class Contact
     public required string Address { get; set; }
     [MaxLength(100)]
     public required string Label { get; set; }
+    [MaxLength(500)]
+    public string? Note { get; set; }
 }
