@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -976,6 +976,12 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp の承認</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>カメラへのアクセス</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} がカメラの使用を求めています。</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>セッションのみ</value>
