@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>Apps</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Global Search</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Recently used</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>I have written down and securely backed up the above mnemonic phrase</value>
   </data>
@@ -812,6 +818,12 @@ By continuing, you acknowledge that you fully understand and accept all associat
   </data>
   <data name="Gaming" xml:space="preserve">
     <value>Gaming</value>
+  </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Pull down to refresh the game catalog.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Recently played</value>
   </data>
   <data name="GameType" xml:space="preserve">
     <value>Game type</value>
