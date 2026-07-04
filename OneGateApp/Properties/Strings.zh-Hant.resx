@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>應用</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>全域搜尋</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>最近使用</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>我已抄寫並妥善備份上述助記詞</value>
@@ -789,6 +795,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>遊戲</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>下拉重新整理遊戲目錄。</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>最近玩過</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>遊戲類型</value>
   </data>
@@ -964,6 +976,12 @@
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp 授權</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>相機存取</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} 想要使用您的相機。</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>僅目前工作階段</value>

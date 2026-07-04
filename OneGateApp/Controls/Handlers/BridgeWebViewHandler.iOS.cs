@@ -1,4 +1,4 @@
-﻿#if IOS || MACCATALYST
+#if IOS || MACCATALYST
 
 using CoreGraphics;
 using Foundation;
@@ -39,6 +39,16 @@ partial class BridgeWebViewHandler
             Action<WKPermissionDecision> decisionHandler)
         {
             decisionHandler(frame.MainFrame ? WKPermissionDecision.Grant : WKPermissionDecision.Deny);
+        }
+
+        public override void RequestMediaCapturePermission(
+            WKWebView webView,
+            WKSecurityOrigin origin,
+            WKFrameInfo frame,
+            WKMediaCaptureType type,
+            Action<WKPermissionDecision> decisionHandler)
+        {
+            decisionHandler(frame.MainFrame && type == WKMediaCaptureType.Camera ? WKPermissionDecision.Prompt : WKPermissionDecision.Deny);
         }
 
 #pragma warning disable CS0672
@@ -93,7 +103,9 @@ partial class BridgeWebViewHandler
         if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
             controller.AddUserScript(CreateDocumentStartScript(BridgeWebView.DocumentStartScript));
         controller.AddScriptMessageHandler(new ScriptHandler(BridgeWebView.OnMessage), "__OneGateBridge");
+#if MACCATALYST
         config.Preferences.ElementFullscreenEnabled = true;
+#endif
         config.UserContentController = controller;
         return new MauiWKWebView(CGRect.Empty, this, config);
     }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>Aplikasi</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Pencarian global</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Baru digunakan</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Saya telah menuliskan dan mencadangkan frasa mnemonik di atas dengan aman</value>
@@ -813,6 +819,12 @@ Dengan melanjutkan, Anda menyatakan bahwa Anda sepenuhnya memahami dan menerima 
   <data name="Gaming" xml:space="preserve">
     <value>Game</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Tarik ke bawah untuk menyegarkan katalog game.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Baru dimainkan</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Jenis game</value>
   </data>
@@ -964,6 +976,12 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>Otorisasi dApp</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Akses kamera</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} ingin menggunakan kamera Anda.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Hanya sesi</value>

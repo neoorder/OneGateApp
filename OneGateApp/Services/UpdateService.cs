@@ -1,16 +1,30 @@
-﻿namespace NeoOrder.OneGate.Services;
+using NeoOrder.OneGate.Data;
 
-public partial class UpdateService(HttpClient httpClient)
+namespace NeoOrder.OneGate.Services;
+
+public partial class UpdateService(HttpClient httpClient, ApplicationDbContext dbContext)
 {
-    public event EventHandler? UpdateAvailable;
+    public event EventHandler? UpdateStatusChanged;
 
     public bool IsUpdating { get; private set; }
 
     public async Task<bool> CheckForUpdatesAsync()
     {
+        if (await dbContext.Settings.GetAsync<bool>("system/updates"))
+            return true;
+
         bool available = await CheckForUpdatesInternalAsync();
-        if (available) UpdateAvailable?.Invoke(this, EventArgs.Empty);
+        if (available) await SetUpdateAvailableAsync(true);
         return available;
+    }
+
+    async Task SetUpdateAvailableAsync(bool available)
+    {
+        if (available)
+            await dbContext.Settings.PutAsync("system/updates", true);
+        else
+            await dbContext.Settings.DeleteAsync("system/updates");
+        UpdateStatusChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private partial Task<bool> CheckForUpdatesInternalAsync();
@@ -29,6 +43,12 @@ public partial class UpdateService(HttpClient httpClient)
         {
             await UpdateInternalAsync();
         }
+        catch (UpdateUnavailableException)
+        {
+            IsUpdating = false;
+            await SetUpdateAvailableAsync(false);
+            throw;
+        }
         catch
         {
             IsUpdating = false;
@@ -42,5 +62,12 @@ public partial class UpdateService(HttpClient httpClient)
     {
         await Browser.OpenAsync($"https://{SharedOptions.OneGateDomain}/download", BrowserLaunchMode.External);
         IsUpdating = false;
+    }
+}
+
+class UpdateUnavailableException : InvalidOperationException
+{
+    public UpdateUnavailableException() : base("No update available.")
+    {
     }
 }
