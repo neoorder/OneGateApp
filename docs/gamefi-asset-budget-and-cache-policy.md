@@ -21,27 +21,31 @@ OneGate dApp runtime.
 It does not change normal dApps, does not add app chrome, does not add a trust
 bar, and does not adapt third-party game layout inside OneGate.
 
-## Recommended Budgets
+## Reference Budget Bands
 
 Budgets are measured after transport compression when possible. Teams should
 report both compressed and uncompressed totals when submitting a game.
 
-| Area | Target | Warning | Notes |
+These bands apply to the first mobile-playable slice, not the full game. Large
+games may exceed these values when they provide a staged loading plan, visible
+progress, retry behavior, and a documented mobile asset strategy.
+
+| Area | Preferred | Review attention | Notes |
 | --- | ---: | ---: | --- |
 | HTML plus critical CSS and bootstrap JS | 750 KB | 1.5 MB | Enough to paint loading UI and start fetching the first scene. |
-| Total first interactive load | 4 MB | 8 MB | Includes JS, WASM, textures, audio needed before first interaction. |
-| JS plus WASM required before first interaction | 2 MB | 4 MB | Split optional engine modules and chain features into later chunks. |
-| First-scene textures | 3 MB | 6 MB | Prefer WebP or AVIF for UI art and compressed GPU texture formats when available. |
+| First mobile-playable slice | 8 MB | 20 MB | Includes JS, WASM, textures, audio needed before first interaction. Larger games should stream later scenes. |
+| JS plus WASM required before first interaction | 4 MB | 10 MB | Split optional engine modules and chain features into later chunks. |
+| First-scene textures | 6 MB | 15 MB | Prefer WebP or AVIF for UI art and compressed GPU texture formats when available. |
 | First-scene audio | 500 KB | 1 MB | Defer music packs and voice lines until after first interaction. |
-| Largest single asset | 3 MB | 5 MB | Large files should have visible progress and retry behavior. |
+| Largest single asset | 5 MB | 15 MB | Large files should have visible progress and retry behavior. |
 | Time to visible loading UI on Wi-Fi simulator | 1 s | 2 s | The user should see game-owned progress, not a blank WebView. |
-| Time to first interaction on Wi-Fi simulator | 5 s | 10 s | Heavier games must show progress and allow retry. |
+| Time to first interaction on Wi-Fi simulator | 10 s | 30 s | Heavier games must show progress and allow retry. |
 
-These are review thresholds, not hard runtime limits. A game can exceed a
-warning threshold if the game team documents why the asset is required and the
-loading experience remains acceptable on Android and iOS.
+These are review reference bands, not hard runtime limits. A game can exceed
+the review-attention band if the game team documents why the assets are
+required and the loading experience remains acceptable on Android and iOS.
 
-## Required Loading Behavior
+## Expected Loading Behavior
 
 Every listed game should render its own loading state before large assets are
 downloaded.
@@ -115,7 +119,7 @@ Game submissions should include:
 - CDN cache headers for `index.html`, manifest, JS, WASM, textures, and audio.
 - Android and iOS screenshots showing loading, first interaction, and wallet
   connection state.
-- Notes for any budget warning threshold that is exceeded.
+- Notes for any reference band that is exceeded.
 - Confirmation that screenshots are uploaded as PR or issue assets and are not
   committed to the repository.
 
@@ -125,7 +129,7 @@ Future OneGate diagnostics may report these values when available:
 
 - Entry URL and origin.
 - Manifest URL and schema version.
-- Declared asset budget.
+- Declared first mobile-playable slice size and staged loading plan.
 - Observed navigation timing and first visible loading UI timing.
 - WebView platform and app version.
 - Last load error or timeout.
