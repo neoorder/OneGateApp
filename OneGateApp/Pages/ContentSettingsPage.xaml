@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             x:Class="NeoOrder.OneGate.Pages.ContentSettingsPage"
+             Title="{x:Static og:Strings.ContentSettings}"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Margin="20" Spacing="16">
+            <Grid ColumnDefinitions="*,auto" MinimumHeightRequest="44" ColumnSpacing="16">
+                <Label Text="{x:Static og:Strings.AllowRestrictedContent}" FontSize="16" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding AllowRestrictedContent}" IsEnabled="{Binding IsSettingsLoaded}" VerticalOptions="Center" Toggled="OnAllowRestrictedContentToggled" />
+            </Grid>
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.AllowRestrictedContentDescription}" />
+            <VerticalStackLayout IsVisible="{Binding IsBirthDateSelectionVisible}" Spacing="12">
+                <Label Text="{x:Static og:Strings.SelectBirthDate}" FontSize="16" />
+                <DatePicker Date="{Binding BirthDate}" MinimumDate="{Binding MinimumBirthDate}" MaximumDate="{Binding MaximumBirthDate}" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Button Text="{x:Static og:Strings.Cancel}" Clicked="OnRestrictedContentFlowCanceled" />
+                    <Button Grid.Column="1" Text="{x:Static og:Strings.Continue}" Clicked="OnBirthDateContinueClicked" />
+                </Grid>
+            </VerticalStackLayout>
+            <VerticalStackLayout IsVisible="{Binding IsRestrictedContentConfirmationVisible}" Spacing="12">
+                <Label Text="{x:Static og:Strings.RestrictedContentConfirmationTitle}" FontSize="16" />
+                <Label StyleClass="Secondary" Text="{x:Static og:Strings.RestrictedContentConfirmationMessage}" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Button Text="{x:Static og:Strings.Cancel}" Clicked="OnRestrictedContentFlowCanceled" />
+                    <Button Grid.Column="1" Text="{x:Static og:Strings.UnderstandAndContinue}" Clicked="OnRestrictedContentConfirmed" />
+                </Grid>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

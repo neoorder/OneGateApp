@@ -148,28 +148,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 if (window.__OneGateDapiInjected) return;
                 window.__OneGateDapiInjected = true;
 
-                const pending = new Map();
-
-                function createId() {
-                    return 'onegate_' + Date.now() + '_' + Math.random().toString(16).slice(2);
-                }
-
-                function rpc(method, params) {
-                    return new Promise(function(resolve, reject) {
-                        const id = createId();
-                        pending.set(id, { resolve, reject });
-
-                        const request = {
-                            jsonrpc: "2.0",
-                            id: id,
-                            method: method,
-                            params: params
-                        };
-
-                        window.__OneGateBridge.invoke(JSON.stringify(request));
-                    });
-                }
-
                 function deepFreeze(obj, seen = new WeakSet()) {
                     if (obj === null || typeof obj !== "object")
                         return obj;
@@ -183,20 +161,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     }
                     return Object.freeze(obj);
                 }
-                        
-                window.__OneGateDapiCallback = function(response) {
-                    if (typeof response === 'string')
-                        response = JSON.parse(response);
-
-                    const item = pending.get(response.id);
-                    if (!item) return;
-                    pending.delete(response.id);
-
-                    if (response.error)
-                        item.reject(response.error);
-                    else
-                        item.resolve(response.result);
-                };
             
                 const listeners = {
                     accountchanged: new Set(),
@@ -234,7 +198,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 };
             
                 for (let method of methods)
-                    provider[method] = function () { return rpc(method, [...arguments]); };
+                    provider[method] = function () { return window.{{BridgeWebView.BridgeInvokeFunctionName}}(method, [...arguments]); };
             
                 window.OneGateDapiProvider = deepFreeze(provider);
 
@@ -264,6 +228,119 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 const entries = [];
                 let panel;
                 let logList;
+                const inputEventTypes = new Set([
+                    "click",
+                    "contextmenu",
+                    "dblclick",
+                    "keydown",
+                    "keypress",
+                    "keyup",
+                    "mousedown",
+                    "mousemove",
+                    "mouseout",
+                    "mouseover",
+                    "mouseup",
+                    "pointercancel",
+                    "pointerdown",
+                    "pointermove",
+                    "pointerout",
+                    "pointerover",
+                    "pointerup",
+                    "touchcancel",
+                    "touchend",
+                    "touchmove",
+                    "touchstart",
+                    "wheel"
+                ]);
+                const originalAddEventListener = EventTarget.prototype.addEventListener;
+                const originalRemoveEventListener = EventTarget.prototype.removeEventListener;
+                const listenerWrappers = new WeakMap();
+
+                function eventTargetsPanel(event) {
+                    if (!panel)
+                        return false;
+                    if (typeof event.composedPath === "function")
+                        return event.composedPath().indexOf(panel) >= 0;
+                    return event.target && typeof panel.contains === "function" && panel.contains(event.target);
+                }
+
+                function getCapture(options) {
+                    return typeof options === "boolean" ? options : !!(options && options.capture);
+                }
+
+                function canWrapListener(listener) {
+                    return typeof listener === "function" || (listener && typeof listener === "object" && typeof listener.handleEvent === "function");
+                }
+
+                function getListenerEntries(target, listener, create) {
+                    let targetMap = listenerWrappers.get(target);
+                    if (!targetMap) {
+                        if (!create)
+                            return null;
+                        targetMap = new WeakMap();
+                        listenerWrappers.set(target, targetMap);
+                    }
+
+                    let entries = targetMap.get(listener);
+                    if (!entries) {
+                        if (!create)
+                            return null;
+                        entries = [];
+                        targetMap.set(listener, entries);
+                    }
+                    return entries;
+                }
+
+                function getWrappedListener(target, type, listener, options) {
+                    if (!inputEventTypes.has(type) || !canWrapListener(listener))
+                        return listener;
+
+                    const capture = getCapture(options);
+                    const entries = getListenerEntries(target, listener, true);
+                    const existing = entries.find(function(entry) {
+                        return entry.type === type && entry.capture === capture;
+                    });
+                    if (existing)
+                        return existing.wrapped;
+
+                    const wrapped = function(event) {
+                        if (eventTargetsPanel(event))
+                            return;
+                        if (typeof listener === "function")
+                            return listener.call(this, event);
+                        return listener.handleEvent.call(listener, event);
+                    };
+                    entries.push({ type: type, capture: capture, wrapped: wrapped });
+                    return wrapped;
+                }
+
+                function removeWrappedListener(target, type, listener, options) {
+                    if (!inputEventTypes.has(type) || !canWrapListener(listener))
+                        return listener;
+
+                    const entries = getListenerEntries(target, listener, false);
+                    if (!entries)
+                        return listener;
+
+                    const capture = getCapture(options);
+                    const index = entries.findIndex(function(entry) {
+                        return entry.type === type && entry.capture === capture;
+                    });
+                    if (index < 0)
+                        return listener;
+
+                    const entry = entries[index];
+                    entries.splice(index, 1);
+                    return entry.wrapped;
+                }
+
+                EventTarget.prototype.addEventListener = function(type, listener, options) {
+                    return originalAddEventListener.call(this, type, getWrappedListener(this, type, listener, options), options);
+                };
+
+                EventTarget.prototype.removeEventListener = function(type, listener, options) {
+                    return originalRemoveEventListener.call(this, type, removeWrappedListener(this, type, listener, options), options);
+                };
 
                 function format(value) {
                     if (value instanceof Error)
@@ -318,6 +395,42 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         logList.scrollTop = logList.scrollHeight;
                 }
 
+                function getEntriesText() {
+                    return entries.map(function(entry) {
+                        return "[" + entry.time + "] " + entry.level + "  " + entry.message;
+                    }).join("\n");
+                }
+
+                function copyTextFallback(text) {
+                    const textarea = document.createElement("textarea");
+                    textarea.value = text;
+                    textarea.setAttribute("readonly", "");
+                    textarea.style.position = "fixed";
+                    textarea.style.left = "-9999px";
+                    textarea.style.top = "0";
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    textarea.setSelectionRange(0, textarea.value.length);
+                    let copied = false;
+                    try {
+                        copied = document.execCommand("copy");
+                    } finally {
+                        textarea.remove();
+                    }
+                    return copied;
+                }
+
+                function copyEntries() {
+                    const text = getEntriesText();
+                    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function")
+                        return navigator.clipboard.writeText(text).catch(function() {
+                            copyTextFallback(text);
+                        });
+
+                    copyTextFallback(text);
+                    return Promise.resolve();
+                }
+
                 function ensureStyles() {
                     if (document.getElementById("onegate-devtools-style"))
                         return;
@@ -343,7 +456,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     const button = document.createElement("button");
                     button.type = "button";
                     button.textContent = text;
-                    button.addEventListener("click", function(event) {
+                    originalAddEventListener.call(button, "click", function(event) {
                         event.preventDefault();
                         event.stopPropagation();
                         onClick();
@@ -373,6 +486,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         entries.length = 0;
                         render();
                     }));
+                    actions.appendChild(createButton("Copy", copyEntries));
                     actions.appendChild(createButton("Close", function() {
                         api.hide();
                     }));
@@ -385,6 +499,11 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
                     panel.appendChild(header);
                     panel.appendChild(logList);
+                    inputEventTypes.forEach(function(type) {
+                        originalAddEventListener.call(panel, type, function(event) {
+                            event.stopPropagation();
+                        });
+                    });
                     (document.body || document.documentElement).appendChild(panel);
                     render();
                 }
@@ -410,6 +529,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         entries.length = 0;
                         render();
                     },
+                    copy: copyEntries,
                     entries: entries
                 };
 
@@ -447,7 +567,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)
     {
         var response = await rpcServer.HandleRequestAsync(request);
-        await webView.EvaluateJavaScriptAsync($"window.__OneGateDapiCallback({response.ToJsonString()})");
+        await webView.SendRpcRepsonseAsync(response);
     }
 
     async Task EmitEventAsync(string eventName, JsonObject? detial)

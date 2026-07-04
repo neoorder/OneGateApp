@@ -120,6 +120,12 @@
   <data name="Apps" xml:space="preserve">
     <value>Ứng dụng</value>
   </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Tim kiem toan cuc</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Mới sử dụng</value>
+  </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Tôi đã ghi lại và sao lưu an toàn cụm từ ghi nhớ ở trên</value>
   </data>
@@ -353,6 +359,9 @@ Bạn có thể tắt xác thực sinh trắc học bất cứ lúc nào.</value
   <data name="VerifyBiometricText" xml:space="preserve">
     <value>Vui lòng xác thực sinh trắc học để tiếp tục</value>
   </data>
+  <data name="UnlockingWallet" xml:space="preserve">
+    <value>Đang mở khóa ví</value>
+  </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Thao tác đã bị hủy</value>
   </data>
@@ -474,6 +483,30 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
   </data>
   <data name="General" xml:space="preserve">
     <value>Chung</value>
+  </data>
+  <data name="ContentSettings" xml:space="preserve">
+    <value>Cài đặt nội dung</value>
+  </data>
+  <data name="AllowRestrictedContent" xml:space="preserve">
+    <value>Cho phép nội dung bị hạn chế</value>
+  </data>
+  <data name="AllowRestrictedContentDescription" xml:space="preserve">
+    <value>Hiển thị các DApp có thể không phù hợp với tất cả mọi người. Khi tắt, các DApp này sẽ bị ẩn khỏi danh sách.</value>
+  </data>
+  <data name="SelectBirthDate" xml:space="preserve">
+    <value>Chọn ngày sinh</value>
+  </data>
+  <data name="RestrictedContentAgeRejected" xml:space="preserve">
+    <value>Không thể bật nội dung bị hạn chế dựa trên độ tuổi bạn cung cấp.</value>
+  </data>
+  <data name="RestrictedContentConfirmationTitle" xml:space="preserve">
+    <value>Nội dung bị hạn chế</value>
+  </data>
+  <data name="RestrictedContentConfirmationMessage" xml:space="preserve">
+    <value>Nội dung bị hạn chế có thể bao gồm chủ đề người lớn, bạo lực, cờ bạc, hẹn hò hoặc các chủ đề nhạy cảm khác không phù hợp với trẻ vị thành niên.</value>
+  </data>
+  <data name="UnderstandAndContinue" xml:space="preserve">
+    <value>Tôi hiểu và tiếp tục</value>
   </data>
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Vui lòng quét mã QR để chuyển tiền cho tôi</value>
@@ -908,14 +941,35 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Số dư không đủ để thanh toán số tiền và phí. Số tiền tối đa bạn có thể gửi là {0} GAS.</value>
   </data>
-  <data name="DeveloperModeEnabled" xml:space="preserve">
-    <value>Đã bật chế độ nhà phát triển</value>
-  </data>
   <data name="DeveloperTools" xml:space="preserve">
-    <value>Công cụ nhà phát triển</value>
+    <value>Trung tâm nhà phát triển</value>
+  </data>
+  <data name="DAppDebugPanel" xml:space="preserve">
+    <value>Bảng gỡ lỗi DApp</value>
   </data>
   <data name="DAppTesting" xml:space="preserve">
     <value>Kiểm thử DApp</value>
+  </data>
+  <data name="DAppSubmission" xml:space="preserve">
+    <value>Gửi DApp</value>
+  </data>
+  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
+    <value>Gửi DApp: {0}</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Tên dự án</value>
+  </data>
+  <data name="DAppUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="OfficialWebsite" xml:space="preserve">
+    <value>Trang web chính thức</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Thông tin liên hệ</value>
+  </data>
+  <data name="SubmitByEmail" xml:space="preserve">
+    <value>Gửi qua email</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Khả dụng</value>
