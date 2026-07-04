@@ -12,10 +12,10 @@ Use a normal web game stack and keep the OneGate integration thin.
 | Layer | Recommended choice | Notes |
 | --- | --- | --- |
 | Build tool | Vite | Fast local dev, predictable production bundles. |
-| Language | TypeScript | Required for wallet payloads, asset manifests, and SDK integration. |
+| Language | TypeScript | Useful for wallet payloads, asset manifests, and runtime integration. |
 | Game engine | Phaser or PixiJS | Phaser for complete 2D game structure; PixiJS for custom render loops and UI-heavy games. |
 | UI overlay | Plain DOM or lightweight framework | Keep wallet dialogs and native prompts outside the canvas when possible. |
-| Wallet bridge | OneGate Game SDK | Feature-detect optional native capabilities before rendering dependent UI. |
+| Wallet bridge | Existing OneGate dAPI provider | Use accepted provider fields and dAPI methods only. |
 | Assets | Texture atlases plus WebP/AVIF | Keep first-scene assets small and lazy-load later levels. |
 | Hosting | CDN with hashed assets | Follow the GameFi asset budget and cache policy. |
 
@@ -73,40 +73,52 @@ Do not leave the WebView blank while large assets download.
 
 ## OneGate Integration
 
-Create a small integration module that waits for the provider and exposes
-feature-detected helpers to the game.
+Create a small integration module that waits for the existing OneGate dAPI
+provider. Do not depend on proposed SDKs or optional native APIs until they are
+accepted and shipped.
 
 ```ts
-import {
-  createOneGateGameClient,
-  type OneGateGameClient
-} from "@onegate/game-sdk";
+type OneGateDapiProvider = {
+  name?: string;
+  website?: string;
+  version?: string;
+  dapiVersion?: string;
+  getAccounts?: () => Promise<string[]>;
+  authenticate?: (...args: unknown[]) => Promise<unknown>;
+  send?: (...args: unknown[]) => Promise<unknown>;
+  invoke?: (...args: unknown[]) => Promise<unknown>;
+  signMessage?: (...args: unknown[]) => Promise<unknown>;
+};
 
-let onegate: OneGateGameClient | undefined;
-let onegatePromise: Promise<OneGateGameClient> | undefined;
-
-export async function getOneGate() {
-  if (onegate) {
-    return onegate;
+declare global {
+  interface Window {
+    OneGateDapiProvider?: OneGateDapiProvider;
   }
-
-  onegatePromise ??= createOneGateGameClient({ timeoutMs: 5000 });
-  try {
-    onegate = await onegatePromise;
-  } catch (error) {
-    onegatePromise = undefined;
-    throw error;
-  }
-
-  return onegate;
 }
 
-export async function chooseAddress() {
-  const client = await getOneGate();
-  if (!client.hasCapability("pickAddress")) {
-    return undefined;
+export async function getOneGate(timeoutMs = 5000) {
+  if (window.OneGateDapiProvider) {
+    return window.OneGateDapiProvider;
   }
-  return client.pickAddress("Choose a recipient");
+
+  return await new Promise<OneGateDapiProvider>((resolve, reject) => {
+    const timer = window.setTimeout(() => {
+      window.removeEventListener("Neo.DapiProvider.ready", onReady);
+      reject(new Error("OneGate dAPI provider unavailable"));
+    }, timeoutMs);
+
+    function onReady() {
+      if (!window.OneGateDapiProvider) {
+        return;
+      }
+      window.clearTimeout(timer);
+      window.removeEventListener("Neo.DapiProvider.ready", onReady);
+      resolve(window.OneGateDapiProvider);
+    }
+
+    window.addEventListener("Neo.DapiProvider.ready", onReady);
+    window.dispatchEvent(new CustomEvent("Neo.DapiProvider.request"));
+  });
 }
 ```
 
@@ -203,24 +215,21 @@ payloads in game storage.
 Games should pause expensive loops when the WebView is hidden or backgrounded.
 
 ```ts
-const onegate = await getOneGate();
+function syncGameVisibility() {
+  if (document.hidden) {
+    game.pause();
+  } else {
+    game.resume();
+  }
+}
 
-const disposePause = onegate.onRuntimeEvent("runtimepause", () => {
-  game.pause();
-});
-
-const disposeResume = onegate.onRuntimeEvent("runtimeresume", () => {
-  game.resume();
-});
-
-window.addEventListener("pagehide", () => {
-  disposePause();
-  disposeResume();
-}, { once: true });
+document.addEventListener("visibilitychange", syncGameVisibility);
+window.addEventListener("pagehide", () => game.pause());
+window.addEventListener("pageshow", syncGameVisibility);
 ```
 
-Always keep a browser fallback through `visibilitychange`, `pagehide`, and
-`pageshow` because older OneGate versions may not expose runtime events.
+Use browser-standard lifecycle events unless OneGate ships and accepts a
+dedicated runtime event API later.
 
 ## Mobile QA Checklist
 
@@ -230,13 +239,13 @@ Always keep a browser fallback through `visibilitychange`, `pagehide`, and
 - Canvas resizes correctly after rotation and app resume.
 - Audio pauses/resumes cleanly.
 - Wallet actions are triggered only by user interaction.
-- Optional native capabilities are hidden when not available.
+- The game avoids documenting or depending on unaccepted OneGate APIs.
 - Android WebView and iOS WKWebView are both tested before listing.
 
 ## Non-goals
 
 - No OneGate-side per-game DOM or CSS adaptation.
-- No assumption that every OneGate version exposes every optional capability.
+- No assumption that OneGate exposes proposed or unaccepted game APIs.
 - No desktop-first fixed-size canvas.
 - No automatic wallet prompts on load.
 - No committed generated game assets in the OneGate app repository.
