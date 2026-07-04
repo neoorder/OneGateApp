@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using NeoOrder.OneGate.Controls.Views;
 using UIKit;
 
 namespace NeoOrder.OneGate.Platforms.iOS;
@@ -25,6 +26,12 @@ public class AppDelegate : MauiUIApplicationDelegate
     {
         if (HandleAppLink(url)) return true;
         return base.OpenUrl(application, url, options);
+    }
+
+    [Export("application:supportedInterfaceOrientationsForWindow:")]
+    public UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+    {
+        return BridgeWebView.SupportedInterfaceOrientations;
     }
 
     static bool HandleAppLink(NSUserActivity activity)
