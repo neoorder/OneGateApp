@@ -194,6 +194,21 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                         listeners[event].forEach(function(fn) {
                             try { fn(e); } catch (_) {}
                         });
+                    },
+
+                    getProvider: function() {
+                        return Promise.resolve(deepFreeze({
+                            name: provider.name,
+                            website: provider.website,
+                            version: provider.version,
+                            dapiVersion: provider.dapiVersion,
+                            compatibility: provider.compatibility.slice(),
+                            extra: Object.assign({}, provider.extra, {
+                                icon: provider.icon,
+                                network: provider.network,
+                                supportedNetworks: provider.supportedNetworks.slice()
+                            })
+                        }));
                     }
                 };
             
