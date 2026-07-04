@@ -205,20 +205,11 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 OneGate catalog 的本地化字符串。
+        ///   查找类似 Third-party dApp 的本地化字符串。
         /// </summary>
-        internal static string DAppCatalogStatus {
+        internal static string DAppThirdPartyStatus {
             get {
-                return ResourceManager.GetString("DAppCatalogStatus", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 External link 的本地化字符串。
-        /// </summary>
-        internal static string DAppExternalStatus {
-            get {
-                return ResourceManager.GetString("DAppExternalStatus", resourceCulture);
+                return ResourceManager.GetString("DAppThirdPartyStatus", resourceCulture);
             }
         }
 

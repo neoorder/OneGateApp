@@ -255,11 +255,8 @@
   <data name="AppDetails" xml:space="preserve">
     <value>應用詳情</value>
   </data>
-  <data name="DAppCatalogStatus" xml:space="preserve">
-    <value>OneGate 目錄</value>
-  </data>
-  <data name="DAppExternalStatus" xml:space="preserve">
-    <value>外部連結</value>
+  <data name="DAppThirdPartyStatus" xml:space="preserve">
+    <value>第三方 dApp</value>
   </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>這台裝置上沒有最近開啟記錄</value>

@@ -255,11 +255,8 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Détails de l’application</value>
   </data>
-  <data name="DAppCatalogStatus" xml:space="preserve">
-    <value>Catalogue OneGate</value>
-  </data>
-  <data name="DAppExternalStatus" xml:space="preserve">
-    <value>Lien externe</value>
+  <data name="DAppThirdPartyStatus" xml:space="preserve">
+    <value>dApp tierce</value>
   </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>Aucune ouverture récente sur cet appareil</value>

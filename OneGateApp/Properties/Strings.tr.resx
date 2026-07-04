@@ -255,11 +255,8 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Uygulama ayrıntıları</value>
   </data>
-  <data name="DAppCatalogStatus" xml:space="preserve">
-    <value>OneGate kataloğu</value>
-  </data>
-  <data name="DAppExternalStatus" xml:space="preserve">
-    <value>Harici bağlantı</value>
+  <data name="DAppThirdPartyStatus" xml:space="preserve">
+    <value>Üçüncü taraf dApp</value>
   </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>Bu cihazda son açılma yok</value>

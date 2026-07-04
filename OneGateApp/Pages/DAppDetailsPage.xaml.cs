@@ -36,7 +36,7 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
         if (BindingContext is not DApp dapp) return;
 
         SourceHost = GetHost(dapp.Url) ?? dapp.Url;
-        SourceStatus = dapp.Id > 0 ? Strings.DAppCatalogStatus : Strings.DAppExternalStatus;
+        SourceStatus = Strings.DAppThirdPartyStatus;
         WebsiteHost = GetHost(dapp.Website) ?? "";
         HasWebsite = !string.IsNullOrWhiteSpace(dapp.Website);
         TagsDisplay = string.Join(", ", (dapp.Tags ?? [])
