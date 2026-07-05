@@ -15,6 +15,7 @@ namespace NeoOrder.OneGate.Pages;
 public partial class TransactionHistoryPage : ContentPage
 {
     const int DisplayLimit = 50;
+    const long EarliestTransferTimestamp = 1;
 
     readonly IWalletProvider walletProvider;
     readonly ProtocolSettings protocolSettings;
@@ -90,14 +91,14 @@ public partial class TransactionHistoryPage : ContentPage
     async Task<IEnumerable<RawTransfer>> LoadNep17TransfersAsync(string address)
     {
         long endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep17transfers", address, 0, endTime);
+        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep17transfers", address, EarliestTransferTimestamp, endTime);
         return EnumerateTransfers(result, isNep11: false);
     }
 
     async Task<IEnumerable<RawTransfer>> LoadNep11TransfersAsync(string address)
     {
         long endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep11transfers", address, 0, endTime);
+        JsonObject result = await rpcClient.RpcSendAsync<JsonObject>("getnep11transfers", address, EarliestTransferTimestamp, endTime);
         return EnumerateTransfers(result, isNep11: true);
     }
 
