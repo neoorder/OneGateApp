@@ -15,7 +15,6 @@ Each game submission or game runtime PR should include:
 - iOS simulator or device name and OS version.
 - OneGate app version or commit SHA.
 - Game URL and origin.
-- Manifest URL, if available.
 - Screenshots for Android and iOS.
 - Wallet integration notes, including which accepted OneGate dAPI methods are used.
 - Known limitations and any exceeded performance budget.
@@ -28,7 +27,6 @@ Each game submission or game runtime PR should include:
 | Stable origin | Wallet/authentication domain matches the listed game origin. |
 | Metadata | Name, icon, description, developer, language, and category are present. |
 | Licensing | Brand, title, music, game art, and third-party IP usage are documented. |
-| Manifest | Optional `onegate-game.json` is reachable and matches the listed build. |
 | Screenshots | Uploaded externally, not committed to the repository. |
 
 ## Loading and Failure States
