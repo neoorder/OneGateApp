@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,12 @@
   </resheader>
   <data name="Apps" xml:space="preserve">
     <value>Приложения</value>
+  </data>
+  <data name="GlobalSearch" xml:space="preserve">
+    <value>Глобальный поиск</value>
+  </data>
+  <data name="GlobalSearchRecentlyUsed" xml:space="preserve">
+    <value>Недавно использовалось</value>
   </data>
   <data name="BackupMnemonicCheckBoxText" xml:space="preserve">
     <value>Я записал и надежно сохранил приведённую выше мнемоническую фразу</value>
@@ -813,6 +819,12 @@
   <data name="Gaming" xml:space="preserve">
     <value>Игры</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Потяните вниз, чтобы обновить каталог игр.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Недавно сыгранные</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Тип игры</value>
   </data>
@@ -938,6 +950,51 @@
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Отправить по электронной почте</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Пожаловаться</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Сообщите нам, что не так с этим DApp. Если потребуются подробности, мы можем связаться с вами по электронной почте.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Причина</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>Электронная почта</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Дополнительные сведения (необязательно)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Жалоба отправлена</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Вы уже отправляли жалобу на этот DApp за последние 24 часа.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Не удалось отправить жалобу. Повторите попытку.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Введите действительный адрес электронной почты.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Мошенничество или фишинг</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Вредоносное ПО или вредоносное поведение</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Незаконный контент</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Неприемлемый контент</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Нарушение авторских прав</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Другое</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Доступно</value>
   </data>
@@ -964,6 +1021,12 @@
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>Авторизация dApp</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Доступ к камере</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} запрашивает доступ к камере.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Только сеанс</value>
@@ -1036,5 +1099,11 @@
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Транзакция не удалась</value>
   </data>
 </root>
