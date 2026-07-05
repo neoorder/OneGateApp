@@ -1,4 +1,5 @@
 using Neo;
+using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 
@@ -6,23 +7,22 @@ namespace NeoOrder.OneGate.Services;
 
 public class ActivityLogService(ApplicationDbContext dbContext)
 {
-    const string RecordsKey = "activity/records";
     const int MaxRecords = 50;
 
     public async Task<IReadOnlyList<ActivityRecord>> GetRecentAsync()
     {
         try
         {
-            List<ActivityRecord>? records = await dbContext.Settings.GetAsync<List<ActivityRecord>>(RecordsKey);
-            return records?
+            return await dbContext.ActivityRecords
                 .Where(p => p.CreatedAt != default)
                 .OrderByDescending(p => p.CreatedAt)
+                .ThenByDescending(p => p.Id)
                 .Take(MaxRecords)
-                .ToArray() ?? [];
+                .ToArrayAsync();
         }
         catch
         {
-            // Activity history is diagnostic. Corrupt local data must not break Settings.
+            // Activity history is diagnostic. Corrupt local data must not break the app.
             return [];
         }
     }
@@ -51,8 +51,7 @@ public class ActivityLogService(ApplicationDbContext dbContext)
     {
         try
         {
-            List<ActivityRecord> records = await dbContext.Settings.GetAsync<List<ActivityRecord>>(RecordsKey) ?? [];
-            records.Insert(0, new()
+            await dbContext.ActivityRecords.AddAsync(new()
             {
                 Kind = kind,
                 CreatedAt = DateTimeOffset.UtcNow,
@@ -61,9 +60,16 @@ public class ActivityLogService(ApplicationDbContext dbContext)
                 DAppHost = TryGetHost(dapp.Url),
                 TransactionHash = transactionHash
             });
-            if (records.Count > MaxRecords)
-                records.RemoveRange(MaxRecords, records.Count - MaxRecords);
-            await dbContext.Settings.PutAsync(RecordsKey, records);
+            await dbContext.SaveChangesAsync();
+
+            int[] staleIds = await dbContext.ActivityRecords
+                .OrderByDescending(p => p.CreatedAt)
+                .ThenByDescending(p => p.Id)
+                .Skip(MaxRecords)
+                .Select(p => p.Id)
+                .ToArrayAsync();
+            if (staleIds.Length > 0)
+                await dbContext.ActivityRecords.Where(p => staleIds.Contains(p.Id)).ExecuteDeleteAsync();
         }
         catch
         {

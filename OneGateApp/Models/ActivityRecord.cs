@@ -10,6 +10,7 @@ public enum ActivityRecordKind
 
 public class ActivityRecord
 {
+    public int Id { get; set; }
     public ActivityRecordKind Kind { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public int? DAppId { get; set; }
