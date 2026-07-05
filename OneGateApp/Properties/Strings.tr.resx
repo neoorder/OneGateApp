@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -950,6 +950,51 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="SubmitByEmail" xml:space="preserve">
     <value>E-posta ile gönder</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Bildir</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Bu DApp ile ilgili sorunu bize bildirin. Daha fazla ayrıntıya ihtiyaç duyarsak sizinle e-posta ile iletişime geçebiliriz.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Neden</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Ek ayrıntılar (isteğe bağlı)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Bildirim gönderildi</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Bu DApp&apos;i son 24 saat içinde zaten bildirdiniz.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Bildirim gönderilemedi. Lütfen tekrar deneyin.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Geçerli bir e-posta adresi girin.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Dolandırıcılık veya kimlik avı</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Kötü amaçlı yazılım veya zararlı davranış</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Yasa dışı içerik</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Uygunsuz içerik</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Telif hakkı sorunu</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Diğer</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Kullanılabilir</value>
   </data>
@@ -976,6 +1021,12 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp yetkilendirmesi</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Kamera erişimi</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} kameranızı kullanmak istiyor.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Yalnızca oturum</value>
@@ -1048,5 +1099,11 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Başarısız</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>İşlem başarısız</value>
   </data>
 </root>

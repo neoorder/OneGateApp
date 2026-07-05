@@ -1,4 +1,4 @@
-﻿#if WINDOWS
+#if WINDOWS
 
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
@@ -20,6 +20,7 @@ partial class BridgeWebViewHandler
         platformView.CoreWebView2Initialized -= PlatformView_CoreWebView2Initialized;
         platformView.CoreWebView2?.WebMessageReceived -= CoreWebView2_WebMessageReceived;
         platformView.CoreWebView2?.ScriptDialogOpening -= CoreWebView2_ScriptDialogOpening;
+        platformView.CoreWebView2?.PermissionRequested -= CoreWebView2_PermissionRequested;
         base.DisconnectHandler(platformView);
     }
 
@@ -28,6 +29,7 @@ partial class BridgeWebViewHandler
         sender.CoreWebView2.Settings.IsWebMessageEnabled = true;
         sender.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
         sender.CoreWebView2.ScriptDialogOpening += CoreWebView2_ScriptDialogOpening;
+        sender.CoreWebView2.PermissionRequested += CoreWebView2_PermissionRequested;
         string shim = """
             window.__OneGateBridge = {
                 invoke: function(payload) {
@@ -42,6 +44,22 @@ partial class BridgeWebViewHandler
         if (!string.IsNullOrWhiteSpace(BridgeWebView.DocumentStartScript))
             script += BridgeWebView.DocumentStartScript;
         await sender.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(script);
+    }
+
+    void CoreWebView2_PermissionRequested(CoreWebView2 sender, CoreWebView2PermissionRequestedEventArgs args)
+    {
+        if (args.PermissionKind != CoreWebView2PermissionKind.Camera)
+            return;
+
+        args.SavesInProfile = false;
+        if (IsSameWebOrigin(args.Uri, sender.Source))
+        {
+            args.State = CoreWebView2PermissionState.Default;
+            return;
+        }
+
+        args.State = CoreWebView2PermissionState.Deny;
+        args.Handled = true;
     }
 
     void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)

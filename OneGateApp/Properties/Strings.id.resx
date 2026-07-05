@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -950,6 +950,51 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Kirim melalui email</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Laporkan</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Beri tahu kami apa yang salah dengan DApp ini. Kami mungkin menghubungi Anda melalui email jika memerlukan detail tambahan.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Alasan</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Detail tambahan (opsional)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Laporan terkirim</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Anda sudah melaporkan DApp ini dalam 24 jam terakhir.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Tidak dapat mengirim laporan. Silakan coba lagi.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Masukkan alamat email yang valid.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Penipuan atau phishing</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Malware atau perilaku berbahaya</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Konten ilegal</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Konten tidak pantas</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Masalah hak cipta</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Lainnya</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Tersedia</value>
   </data>
@@ -976,6 +1021,12 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>Otorisasi dApp</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Akses kamera</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} ingin menggunakan kamera Anda.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Hanya sesi</value>
@@ -1048,5 +1099,11 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Gagal</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaksi gagal</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -950,6 +950,51 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="SubmitByEmail" xml:space="preserve">
     <value>メールで送信</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>報告</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>この DApp の問題点をお知らせください。詳細が必要な場合はメールでご連絡することがあります。</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>理由</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>メール</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>追加情報（任意）</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>報告を送信しました</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>この DApp は過去 24 時間以内にすでに報告済みです。</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>報告を送信できませんでした。もう一度お試しください。</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>有効なメールアドレスを入力してください。</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>詐欺またはフィッシング</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>マルウェアまたは有害な動作</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>違法なコンテンツ</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>不適切なコンテンツ</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>著作権の問題</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>その他</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>利用可能</value>
   </data>
@@ -976,6 +1021,12 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp の承認</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>カメラへのアクセス</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} がカメラの使用を求めています。</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>セッションのみ</value>
@@ -1048,5 +1099,11 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>利用不可</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>トランザクション失敗</value>
   </data>
 </root>

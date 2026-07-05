@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -950,6 +950,51 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Per E-Mail einreichen</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Melden</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Teile uns mit, was mit dieser DApp nicht stimmt. Wir kontaktieren dich ggf. per E-Mail, wenn wir weitere Details benötigen.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Grund</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Zusätzliche Details (optional)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Meldung gesendet</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Du hast diese DApp in den letzten 24 Stunden bereits gemeldet.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Meldung konnte nicht gesendet werden. Bitte versuche es erneut.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Bitte gib eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Betrug oder Phishing</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Malware oder schädliches Verhalten</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Illegale Inhalte</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Unangemessene Inhalte</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Urheberrechtsproblem</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Verfügbar</value>
   </data>
@@ -976,6 +1021,12 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp-Autorisierung</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Kamerazugriff</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} möchte Ihre Kamera verwenden.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Nur Sitzung</value>
@@ -1048,5 +1099,11 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Nicht verfügbar</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Fehlgeschlagen</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaktion fehlgeschlagen</value>
   </data>
 </root>
