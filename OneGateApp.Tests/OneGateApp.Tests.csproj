@@ -5,13 +5,22 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <OneGateAppProjectPath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\OneGateApp\OneGateApp.csproj'))</OneGateAppProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OneGateApp\OneGateApp.csproj" ReferenceOutputAssembly="false" BuildReference="false" SkipGetTargetFrameworkProperties="true" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>OneGateAppProjectPath</_Parameter1>
+      <_Parameter2>$(OneGateAppProjectPath)</_Parameter2>
+    </AssemblyAttribute>
   </ItemGroup>
 
   <ItemGroup>
