@@ -950,6 +950,51 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="SubmitByEmail" xml:space="preserve">
     <value>이메일로 제출</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>신고</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>이 DApp에 어떤 문제가 있는지 알려주세요. 추가 정보가 필요하면 이메일로 연락드릴 수 있습니다.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>신고 사유</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>이메일</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>추가 설명 (선택 사항)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>신고가 제출되었습니다</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>최근 24시간 이내에 이미 이 DApp을 신고했습니다.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>신고를 제출할 수 없습니다. 다시 시도해 주세요.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>유효한 이메일 주소를 입력하세요.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>사기 또는 피싱</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>악성 소프트웨어 또는 유해한 동작</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>불법 콘텐츠</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>부적절한 콘텐츠</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>저작권 문제</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>기타</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>사용 가능</value>
   </data>
