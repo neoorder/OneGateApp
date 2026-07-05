@@ -1175,4 +1175,10 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Autorisation du portefeuille</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Échec</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaction échouée</value>
+  </data>
 </root>

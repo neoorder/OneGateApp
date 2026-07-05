@@ -1175,4 +1175,10 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Wallet authorization</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaction failed</value>
+  </data>
 </root>

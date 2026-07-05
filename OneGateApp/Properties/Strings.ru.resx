@@ -1175,4 +1175,10 @@
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Разрешение кошелька</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Транзакция не удалась</value>
+  </data>
 </root>

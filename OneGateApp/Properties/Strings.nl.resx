@@ -1175,4 +1175,10 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Walletautorisatie</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Mislukt</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transactie mislukt</value>
+  </data>
 </root>

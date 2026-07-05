@@ -1175,4 +1175,10 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="WalletAuthorization" xml:space="preserve">
     <value>Cuzdan yetkilendirmesi</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Başarısız</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>İşlem başarısız</value>
+  </data>
 </root>
