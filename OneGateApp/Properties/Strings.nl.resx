@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -965,6 +965,51 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Per e-mail indienen</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Melden</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Laat ons weten wat er mis is met deze DApp. We kunnen per e-mail contact met je opnemen als we meer details nodig hebben.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Reden</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Aanvullende details (optioneel)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Melding verzonden</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Je hebt deze DApp in de afgelopen 24 uur al gemeld.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Melding kan niet worden verzonden. Probeer het opnieuw.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Voer een geldig e-mailadres in.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Oplichting of phishing</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Malware of schadelijk gedrag</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Illegale inhoud</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Ongepaste inhoud</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Auteursrechtprobleem</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Overig</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Beschikbaar</value>
   </data>
@@ -991,6 +1036,12 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp-autorisatie</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Cameratoegang</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} wil uw camera gebruiken.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Alleen sessie</value>
@@ -1063,5 +1114,11 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Niet beschikbaar</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Mislukt</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transactie mislukt</value>
   </data>
 </root>
