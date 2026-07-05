@@ -1,7 +1,9 @@
 using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Extensions;
 using Neo;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
+using NeoOrder.OneGate.Controls.Popups;
 using NeoOrder.OneGate.Controls.Views;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models.AppLinks;
@@ -57,6 +59,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         {
             DApp = (DApp)value;
             Url = DApp.Url;
+            UpdateReportButton();
         }
         else
         {
@@ -74,6 +77,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     Url = DApp.Url;
                 else
                     Url = DApp.Url + uri.Query;
+                UpdateReportButton();
             }
             else
             {
@@ -86,6 +90,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                     Languages = ["en"]
                 };
                 Url = uri.AbsoluteUri;
+                UpdateReportButton();
             }
         }
         if (DApp.Id > 0)
@@ -118,6 +123,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         catch
         {
         }
+    }
+
+    async void OnReportClicked(object sender, EventArgs e)
+    {
+        if (!DApp.CanReport) return;
+        var popup = serviceProvider.GetServiceOrCreateInstance<DAppReportPopup>();
+        popup.DApp = DApp;
+        await this.ShowPopupAsync<bool>(popup);
     }
 
     async void OnNavigating(object sender, WebNavigatingEventArgs e)
@@ -790,6 +803,12 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         if (uriOld.Authority == uriNew.Authority) return false;
         if (uriNew.Authority.EndsWith("." + uriOld.Authority)) return false;
         return true;
+    }
+
+    void UpdateReportButton()
+    {
+        if (!DApp.CanReport)
+            ToolbarItems.Remove(reportButton);
     }
 
     async void OnInvokedFromJavaScript(BridgeWebView webView, JsonObject request)

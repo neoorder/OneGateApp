@@ -956,6 +956,51 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Gửi qua email</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Báo cáo</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Hãy cho chúng tôi biết DApp này có vấn đề gì. Chúng tôi có thể liên hệ với bạn qua email nếu cần thêm chi tiết.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Lý do</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Chi tiết bổ sung (không bắt buộc)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Đã gửi báo cáo</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Bạn đã báo cáo DApp này trong 24 giờ qua.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Không thể gửi báo cáo. Vui lòng thử lại.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Nhập địa chỉ email hợp lệ.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Lừa đảo hoặc giả mạo</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Phần mềm độc hại hoặc hành vi gây hại</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Nội dung bất hợp pháp</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Nội dung không phù hợp</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Vấn đề bản quyền</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Khác</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Khả dụng</value>
   </data>
@@ -1060,5 +1105,11 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   </data>
   <data name="Unavailable" xml:space="preserve">
     <value>Không khả dụng</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Giao dịch thất bại</value>
   </data>
 </root>
