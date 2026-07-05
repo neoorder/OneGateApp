@@ -67,9 +67,8 @@ documents.
 | Resource | Cache-Control | Extra requirements |
 | --- | --- | --- |
 | `index.html` | `no-cache` or `max-age=60, must-revalidate` | Must revalidate so catalog updates can take effect. |
-| `onegate-game.json` | `no-cache` or `max-age=60, must-revalidate` | Must represent the current listed build. |
 | Hashed JS/CSS/WASM/assets | `public, max-age=31536000, immutable` | Filename must include a content hash. |
-| Service worker | `no-cache` | Avoid trapping old bridge behavior or stale manifest data. |
+| Service worker | `no-cache` | Avoid trapping old bridge behavior or stale entry data. |
 | API/config JSON | `no-cache` or a short explicit TTL | Do not cache wallet/session-specific responses as immutable assets. |
 
 ### Content Types
@@ -77,7 +76,7 @@ documents.
 - JavaScript: `application/javascript`
 - CSS: `text/css`
 - WASM: `application/wasm`
-- JSON manifests: `application/json`
+- JSON config: `application/json`
 - WebP: `image/webp`
 - AVIF: `image/avif`
 
@@ -89,34 +88,18 @@ streaming behavior, especially for WASM.
 - Use content-hashed filenames for immutable bundles, for example
   `game.ab12cd34.js`.
 - Do not rely on query-string versioning for large immutable assets.
-- Keep the entry URL stable and move versioning into hashed assets plus the
-  optional game manifest metadata.
+- Keep the entry URL stable and move versioning into hashed assets.
 - Avoid CDN rewrites that serve different content under the same immutable URL.
-
-## Manifest Linkage
-
-When a game publishes an optional `onegate-game.json`, it should include the
-same asset-budget values used for listing review. The OneGate app should treat
-missing manifests as current behavior.
-
-Recommended manifest fields for this policy:
-
-- `assetBudget.initialBytes`
-- `assetBudget.totalFirstLoadBytes`
-- `assetBudget.jsWasmBytes`
-- `assetBudget.textureBytes`
-- `assetBudget.audioBytes`
-- `version`
-- `packageHash`
 
 ## Submission Checklist
 
 Game submissions should include:
 
-- Entry URL and manifest URL, if available.
+- Entry URL and game origin.
 - Largest ten first-load assets with compressed and uncompressed sizes.
 - Total first interactive load size.
-- CDN cache headers for `index.html`, manifest, JS, WASM, textures, and audio.
+- CDN cache headers for `index.html`, JS, WASM, textures, audio, and runtime
+  config JSON if used.
 - Android and iOS screenshots showing loading, first interaction, and wallet
   connection state.
 - Notes for any reference band that is exceeded.
@@ -128,7 +111,6 @@ Game submissions should include:
 Future OneGate diagnostics may report these values when available:
 
 - Entry URL and origin.
-- Manifest URL and schema version.
 - Declared first mobile-playable slice size and staged loading plan.
 - Observed navigation timing and first visible loading UI timing.
 - WebView platform and app version.
