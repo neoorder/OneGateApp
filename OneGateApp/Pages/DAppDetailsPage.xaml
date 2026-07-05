@@ -22,6 +22,7 @@
         </ToolbarItem>
         <ToolbarItem x:Name="addToHomeScreenButton" Order="Primary" IconImageSource="{FontImageSource &#xe612;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.AddToHomeScreen}" CommandParameter="{Binding .}" />
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding .}" />
+        <ToolbarItem x:Name="reportButton" Order="Secondary" Text="{x:Static og:Strings.Report}" Clicked="OnReportClicked" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="14">

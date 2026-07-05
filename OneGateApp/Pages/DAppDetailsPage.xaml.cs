@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Extensions;
+using NeoOrder.OneGate.Controls.Popups;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
@@ -6,6 +8,7 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class DAppDetailsPage : ContentPage, IQueryAttributable
 {
+    readonly IServiceProvider serviceProvider;
     readonly ApplicationDbContext dbContext;
 
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
@@ -17,8 +20,9 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
     public string TagsDisplay { get; private set { field = value; OnPropertyChanged(); } } = "";
     public bool HasTags { get; private set { field = value; OnPropertyChanged(); } }
 
-    public DAppDetailsPage(ApplicationDbContext dbContext, IHomeShortcutService homeShortcutService)
+    public DAppDetailsPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IHomeShortcutService homeShortcutService)
     {
+        this.serviceProvider = serviceProvider;
         this.dbContext = dbContext;
         InitializeComponent();
         if (!homeShortcutService.IsSupported)
@@ -47,6 +51,7 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
             .Distinct(StringComparer.CurrentCultureIgnoreCase));
         HasTags = !string.IsNullOrWhiteSpace(TagsDisplay);
 
+        if (!dapp.CanReport) ToolbarItems.Remove(reportButton);
         List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
         IsFavorite = favorites?.Contains(dapp.Id) ?? false;
         List<int>? recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent");
@@ -66,5 +71,14 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
         if (Uri.TryCreate(url, UriKind.Absolute, out Uri? uri))
             return uri.Host;
         return url;
+    }
+
+    async void OnReportClicked(object sender, EventArgs e)
+    {
+        DApp dapp = (DApp)BindingContext;
+        if (!dapp.CanReport) return;
+        var popup = serviceProvider.GetServiceOrCreateInstance<DAppReportPopup>();
+        popup.DApp = dapp;
+        await this.ShowPopupAsync<bool>(popup);
     }
 }

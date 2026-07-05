@@ -1,4 +1,4 @@
-﻿#if IOS || MACCATALYST
+#if IOS || MACCATALYST
 
 using CoreGraphics;
 using Foundation;
@@ -39,6 +39,16 @@ partial class BridgeWebViewHandler
             Action<WKPermissionDecision> decisionHandler)
         {
             decisionHandler(frame.MainFrame ? WKPermissionDecision.Grant : WKPermissionDecision.Deny);
+        }
+
+        public override void RequestMediaCapturePermission(
+            WKWebView webView,
+            WKSecurityOrigin origin,
+            WKFrameInfo frame,
+            WKMediaCaptureType type,
+            Action<WKPermissionDecision> decisionHandler)
+        {
+            decisionHandler(frame.MainFrame && type == WKMediaCaptureType.Camera ? WKPermissionDecision.Prompt : WKPermissionDecision.Deny);
         }
 
 #pragma warning disable CS0672

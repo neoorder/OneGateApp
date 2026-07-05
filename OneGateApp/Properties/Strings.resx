@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -843,6 +843,12 @@ By continuing, you acknowledge that you fully understand and accept all associat
   <data name="Gaming" xml:space="preserve">
     <value>Gaming</value>
   </data>
+  <data name="GamingEmptyState" xml:space="preserve">
+    <value>Pull down to refresh the game catalog.</value>
+  </data>
+  <data name="GamingRecentPlayed" xml:space="preserve">
+    <value>Recently played</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Game type</value>
   </data>
@@ -968,6 +974,51 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Submit by email</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Tell us what is wrong with this DApp. We may contact you by email if we need more details.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Additional details (optional)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Report submitted</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>You have already reported this DApp in the last 24 hours.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Unable to submit report. Please try again.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Email must be a valid email address.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Scam or phishing</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Malware or harmful behavior</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Illegal content</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Inappropriate content</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Copyright issue</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Available</value>
   </data>
@@ -994,6 +1045,12 @@ It is recommended to store the NEP-2 key and password separately and back them u
   </data>
   <data name="DAppAuthorization" xml:space="preserve">
     <value>dApp authorization</value>
+  </data>
+  <data name="DAppCameraPermissionTitle" xml:space="preserve">
+    <value>Camera access</value>
+  </data>
+  <data name="DAppCameraPermissionText" xml:space="preserve">
+    <value>{0} wants to use your camera.</value>
   </data>
   <data name="DAppAuthorizationStatus" xml:space="preserve">
     <value>Session-only</value>
