@@ -1058,4 +1058,52 @@
   <data name="TransactionFailed" xml:space="preserve">
     <value>交易失败</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>举报</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>请告诉我们这个 DApp 存在什么问题。如需更多信息，我们可能会通过电子邮件联系您。</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>举报原因</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>电子邮件</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>补充说明（可选）</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>举报已提交</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>您已在过去 24 小时内举报过这个 DApp。</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>无法提交举报，请稍后重试。</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>请输入有效的电子邮件地址。</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>诈骗或钓鱼</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>恶意软件或有害行为</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>违法内容</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>不当内容</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>版权问题</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>其它</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>失败</value>
+  </data>
 </root>
