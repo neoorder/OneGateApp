@@ -255,9 +255,6 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Appdetails</value>
   </data>
-  <data name="DAppThirdPartyStatus" xml:space="preserve">
-    <value>dApp van derden</value>
-  </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>Geen recente openingen op dit apparaat</value>
   </data>
@@ -272,9 +269,6 @@
   </data>
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>Recent geopend op dit apparaat</value>
-  </data>
-  <data name="DAppSource" xml:space="preserve">
-    <value>Bron</value>
   </data>
   <data name="DAppTags" xml:space="preserve">
     <value>Tags</value>

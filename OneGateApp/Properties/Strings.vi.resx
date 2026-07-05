@@ -255,9 +255,6 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Chi tiết ứng dụng</value>
   </data>
-  <data name="DAppThirdPartyStatus" xml:space="preserve">
-    <value>dApp bên thứ ba</value>
-  </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>Chưa mở gần đây trên thiết bị này</value>
   </data>
@@ -272,9 +269,6 @@
   </data>
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>Đã mở gần đây trên thiết bị này</value>
-  </data>
-  <data name="DAppSource" xml:space="preserve">
-    <value>Nguồn</value>
   </data>
   <data name="DAppTags" xml:space="preserve">
     <value>Thẻ</value>

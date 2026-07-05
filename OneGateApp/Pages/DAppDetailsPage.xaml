@@ -47,25 +47,6 @@
             </Border>
             <Button Text="{x:Static og:Strings.Open}" Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
             <Border StyleClass="Card">
-                <VerticalStackLayout Spacing="10">
-                    <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
-                        <Label Text="{x:Static og:Strings.DAppSource}" FontAttributes="Bold" VerticalOptions="Center" />
-                        <Border Grid.Column="1" StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource BrandMuted}" Padding="10,4">
-                            <Label Text="{Binding SourceStatus, Source={RelativeSource AncestorType={x:Type og:DAppDetailsPage}}}" TextColor="{toolkit:AppThemeResource Brand}" FontAttributes="Bold" FontSize="12" />
-                        </Border>
-                    </Grid>
-                    <Label StyleClass="Secondary" Text="{Binding SourceHost, Source={RelativeSource AncestorType={x:Type og:DAppDetailsPage}}}" FontSize="13" LineBreakMode="MiddleTruncation" />
-                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" IsVisible="{Binding HasWebsite, Source={RelativeSource AncestorType={x:Type og:DAppDetailsPage}}}">
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.Website}" FontSize="12" />
-                        <Label Grid.Column="1" StyleClass="Link" Text="{Binding WebsiteHost, Source={RelativeSource AncestorType={x:Type og:DAppDetailsPage}}}" FontSize="12" LineBreakMode="MiddleTruncation">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="{Binding Website}" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
-            <Border StyleClass="Card">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{x:Static og:Strings.DAppPermissions}" FontAttributes="Bold" />
                     <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppPermissionsSummary}" FontSize="13" />

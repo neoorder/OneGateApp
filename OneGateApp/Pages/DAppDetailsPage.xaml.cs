@@ -12,10 +12,6 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
     readonly ApplicationDbContext dbContext;
 
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
-    public string SourceHost { get; private set { field = value; OnPropertyChanged(); } } = "";
-    public string SourceStatus { get; private set { field = value; OnPropertyChanged(); } } = "";
-    public string WebsiteHost { get; private set { field = value; OnPropertyChanged(); } } = "";
-    public bool HasWebsite { get; private set { field = value; OnPropertyChanged(); } }
     public string RecentActivityText { get; private set { field = value; OnPropertyChanged(); } } = "";
     public string TagsDisplay { get; private set { field = value; OnPropertyChanged(); } } = "";
     public bool HasTags { get; private set { field = value; OnPropertyChanged(); } }
@@ -39,10 +35,6 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
         base.OnBindingContextChanged();
         if (BindingContext is not DApp dapp) return;
 
-        SourceHost = GetHost(dapp.Url) ?? dapp.Url;
-        SourceStatus = Strings.DAppThirdPartyStatus;
-        WebsiteHost = GetHost(dapp.Website) ?? "";
-        HasWebsite = !string.IsNullOrWhiteSpace(dapp.Website);
         TagsDisplay = string.Join(", ", (dapp.Tags ?? [])
             .Select(DApp.LocalizeTag)
             .Append(dapp.GameTypeDisplayName)
@@ -63,14 +55,6 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
     void OnFavoriteClicked(object sender, EventArgs e)
     {
         IsFavorite = !IsFavorite;
-    }
-
-    static string? GetHost(string? url)
-    {
-        if (string.IsNullOrWhiteSpace(url)) return null;
-        if (Uri.TryCreate(url, UriKind.Absolute, out Uri? uri))
-            return uri.Host;
-        return url;
     }
 
     async void OnReportClicked(object sender, EventArgs e)

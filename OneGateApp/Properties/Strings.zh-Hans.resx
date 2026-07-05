@@ -255,9 +255,6 @@
   <data name="AppDetails" xml:space="preserve">
     <value>应用详情</value>
   </data>
-  <data name="DAppThirdPartyStatus" xml:space="preserve">
-    <value>第三方 dApp</value>
-  </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>这台设备上暂无最近打开记录</value>
   </data>
@@ -272,9 +269,6 @@
   </data>
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>最近在这台设备上打开过</value>
-  </data>
-  <data name="DAppSource" xml:space="preserve">
-    <value>来源</value>
   </data>
   <data name="DAppTags" xml:space="preserve">
     <value>标签</value>

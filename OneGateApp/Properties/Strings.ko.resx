@@ -255,9 +255,6 @@
   <data name="AppDetails" xml:space="preserve">
     <value>앱 상세 정보</value>
   </data>
-  <data name="DAppThirdPartyStatus" xml:space="preserve">
-    <value>서드파티 dApp</value>
-  </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>이 기기에서 최근 열림 없음</value>
   </data>
@@ -272,9 +269,6 @@
   </data>
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>이 기기에서 최근 열림</value>
-  </data>
-  <data name="DAppSource" xml:space="preserve">
-    <value>출처</value>
   </data>
   <data name="DAppTags" xml:space="preserve">
     <value>태그</value>

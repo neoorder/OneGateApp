@@ -255,9 +255,6 @@
   <data name="AppDetails" xml:space="preserve">
     <value>アプリの詳細</value>
   </data>
-  <data name="DAppThirdPartyStatus" xml:space="preserve">
-    <value>サードパーティ dApp</value>
-  </data>
   <data name="DAppNotRecentlyOpened" xml:space="preserve">
     <value>このデバイスで最近開かれていません</value>
   </data>
@@ -272,9 +269,6 @@
   </data>
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>このデバイスで最近開きました</value>
-  </data>
-  <data name="DAppSource" xml:space="preserve">
-    <value>ソース</value>
   </data>
   <data name="DAppTags" xml:space="preserve">
     <value>タグ</value>

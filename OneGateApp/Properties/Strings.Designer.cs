@@ -205,15 +205,6 @@ namespace NeoOrder.OneGate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Third-party dApp 的本地化字符串。
-        /// </summary>
-        internal static string DAppThirdPartyStatus {
-            get {
-                return ResourceManager.GetString("DAppThirdPartyStatus", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   查找类似 No recent opens on this device 的本地化字符串。
         /// </summary>
         internal static string DAppNotRecentlyOpened {
@@ -255,15 +246,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string DAppRecentlyOpened {
             get {
                 return ResourceManager.GetString("DAppRecentlyOpened", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Source 的本地化字符串。
-        /// </summary>
-        internal static string DAppSource {
-            get {
-                return ResourceManager.GetString("DAppSource", resourceCulture);
             }
         }
 
