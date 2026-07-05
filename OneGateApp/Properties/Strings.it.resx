@@ -1109,4 +1109,10 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="SearchAddressBook" xml:space="preserve">
     <value>Cerca nome, indirizzo o nota</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Non riuscito</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transazione non riuscita</value>
+  </data>
 </root>
