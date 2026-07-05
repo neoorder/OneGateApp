@@ -80,13 +80,6 @@ static class Commands
         intent.AddFlags(Android.Content.ActivityFlags.NewDocument);
         activity.StartActivity(intent);
 #else
-        Dictionary<string, object> GetLaunchParameters()
-        {
-            Dictionary<string, object> parameters = new();
-            if (dapp != null) parameters["dapp"] = dapp;
-            parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
-            return parameters;
-        }
 #if IOS || MACCATALYST
         bool supportOpenWithDeepLink = false;
 #else
@@ -94,7 +87,9 @@ static class Commands
 #endif
         if (!supportOpenWithDeepLink || !await Launcher.TryOpenAsync(uri))
         {
-            Dictionary<string, object> parameters = GetLaunchParameters();
+            Dictionary<string, object> parameters = new();
+            if (dapp != null) parameters["dapp"] = dapp;
+            parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
 #if IOS
             bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
 #else
