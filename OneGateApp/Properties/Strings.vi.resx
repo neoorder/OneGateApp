@@ -1100,4 +1100,10 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="Unavailable" xml:space="preserve">
     <value>Không khả dụng</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Giao dịch thất bại</value>
+  </data>
 </root>

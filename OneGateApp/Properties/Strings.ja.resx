@@ -1100,4 +1100,10 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="Unavailable" xml:space="preserve">
     <value>利用不可</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>トランザクション失敗</value>
+  </data>
 </root>
