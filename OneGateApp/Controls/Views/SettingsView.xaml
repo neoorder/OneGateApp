@@ -30,7 +30,7 @@
                         </Label.Triggers>
                     </Label>
                     <Label Grid.Column="1" StyleClass="Secondary" Text="{Binding CurrentValue}" HorizontalOptions="End" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
-                    <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
+                    <Label Grid.Column="2" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" />
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" />
                     </Grid.GestureRecognizers>
