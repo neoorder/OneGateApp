@@ -1109,4 +1109,10 @@
   <data name="SearchAddressBook" xml:space="preserve">
     <value>Поиск имени, адреса или заметки</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Транзакция не удалась</value>
+  </data>
 </root>

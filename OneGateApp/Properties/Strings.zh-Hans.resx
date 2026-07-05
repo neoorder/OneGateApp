@@ -1109,4 +1109,10 @@
   <data name="Transfer" xml:space="preserve">
     <value>转账</value>
   </data>
+  <data name="Failed" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>交易失败</value>
+  </data>
 </root>
