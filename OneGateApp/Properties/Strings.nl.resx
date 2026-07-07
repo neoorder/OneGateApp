@@ -1100,6 +1100,18 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="Unavailable" xml:space="preserve">
     <value>Niet beschikbaar</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>Betalingsverzoek</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} vraagt om een betaling. Controleer de details voordat je doorgaat.</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>Betaling voltooid</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Mislukt</value>
   </data>

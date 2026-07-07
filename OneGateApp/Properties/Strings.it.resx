@@ -1100,6 +1100,18 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="Unavailable" xml:space="preserve">
     <value>Non disponibile</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>Richiesta di pagamento</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} richiede un pagamento. Controlla i dettagli prima di continuare.</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>Dettagli</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>Pagamento completato</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Non riuscito</value>
   </data>

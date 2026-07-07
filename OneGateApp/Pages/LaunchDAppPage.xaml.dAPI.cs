@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Extensions;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Extensions;
 using Neo;
 using Neo.Cryptography;
 using Neo.Extensions;
@@ -16,6 +17,7 @@ using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -83,6 +85,33 @@ partial class LaunchDAppPage
             Data = data
         }];
         return await SignAndSendAsync(tx, intents);
+    }
+
+    [RpcMethod]
+    async Task<DAppPaymentResult> RequestPayment(DAppPaymentRequest request)
+    {
+        request.Validate();
+        Wallet wallet = walletProvider.GetWallet()!;
+        WalletAccount account = request.From is null ? wallet.GetDefaultAccount()! : wallet.GetAccount(request.From)
+            ?? throw new DapiException(10003, "Account not found");
+        Transaction tx = await rpcClient.MakeTransactionAsync(request.Asset, account.ScriptHash, request.To, request.Amount, request.Data);
+        TransactionIntent[] intents = [new TransferIntent
+        {
+            Asset = await rpcClient.GetTokenInfo(request.Asset),
+            From = account.ScriptHash,
+            To = request.To,
+            Amount = request.Amount,
+            Data = request.Data
+        }];
+        UInt256 hash = await SignAndSendAsync(tx, intents, popup =>
+        {
+            popup.Title = Strings.DAppPaymentRequest;
+            popup.Message = string.Format(Strings.DAppPaymentRequestText, DApp.NameLocalizer.Localize() ?? DApp.Url);
+            popup.RequestDetails = request.DisplayDetails;
+        });
+        DAppPaymentResult result = await WaitForPaymentResultAsync(hash, request.ConfirmationTimeout);
+        await Toast.Make(Strings.DAppPaymentSucceeded).Show();
+        return result;
     }
 
     [RpcMethod]
@@ -240,7 +269,7 @@ partial class LaunchDAppPage
         return await rpcClient.GetTokenInfo(hash);
     }
 
-    async Task<UInt256> SignAndSendAsync(Transaction tx, TransactionIntent[]? intents)
+    async Task<UInt256> SignAndSendAsync(Transaction tx, TransactionIntent[]? intents, Action<SendTransactionPopup>? configurePopup = null)
     {
         var popup = serviceProvider.GetServiceOrCreateInstance<SendTransactionPopup>();
         popup.Transaction = tx;
@@ -253,6 +282,7 @@ partial class LaunchDAppPage
             }
         }
         popup.Intents = intents;
+        configurePopup?.Invoke(popup);
         var result = await this.ShowPopupAsync<bool>(popup);
         if (!result.Result) throw new OperationCanceledException();
         var context = new ContractParametersContext(null!, tx, protocolSettings.Network);
@@ -262,5 +292,52 @@ partial class LaunchDAppPage
             throw new DapiException(10001, "Multisignature transaction requires more signatures");
         tx.Witnesses = context.GetWitnesses();
         return await rpcClient.SendRawTransaction(tx);
+    }
+
+    async Task<DAppPaymentResult> WaitForPaymentResultAsync(UInt256 hash, TimeSpan timeout)
+    {
+        DateTime deadline = DateTime.UtcNow + timeout;
+        while (DateTime.UtcNow < deadline)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            JsonObject tx;
+            try
+            {
+                tx = await rpcClient.RpcSendAsync<JsonObject>("getrawtransaction", hash, true);
+            }
+            catch (RpcException)
+            {
+                continue;
+            }
+            ulong? blockTime = tx["blocktime"]?.GetValue<ulong>();
+            if (!blockTime.HasValue) continue;
+            bool? succeeded = await QueryPaymentExecutionSucceededAsync(hash);
+            if (!succeeded.HasValue) continue;
+            if (!succeeded.Value)
+                throw new DapiException(10004, "Payment transaction failed");
+            return new DAppPaymentResult
+            {
+                TransactionHash = hash,
+                BlockTime = blockTime,
+                Succeeded = true,
+                Confirmed = true
+            };
+        }
+        throw new DapiException(10000, "Payment confirmation timed out");
+    }
+
+    async Task<bool?> QueryPaymentExecutionSucceededAsync(UInt256 hash)
+    {
+        try
+        {
+            JsonObject log = await rpcClient.RpcSendAsync<JsonObject>("getapplicationlog", hash);
+            JsonNode? execution = log["executions"] is JsonArray executions && executions.Count > 0 ? executions[0] : null;
+            string? vmState = execution?["vmstate"]?.GetValue<string>();
+            return vmState is null ? null : vmState == nameof(VMState.HALT);
+        }
+        catch (Exception ex) when (ex is RpcException or HttpRequestException or JsonException)
+        {
+            return null;
+        }
     }
 }

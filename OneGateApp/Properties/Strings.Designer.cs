@@ -2958,6 +2958,42 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string DAppPaymentDetails {
+            get {
+                return ResourceManager.GetString("DAppPaymentDetails", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Payment request.
+        /// </summary>
+        internal static string DAppPaymentRequest {
+            get {
+                return ResourceManager.GetString("DAppPaymentRequest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is requesting a payment. Review the details before continuing..
+        /// </summary>
+        internal static string DAppPaymentRequestText {
+            get {
+                return ResourceManager.GetString("DAppPaymentRequestText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Payment completed.
+        /// </summary>
+        internal static string DAppPaymentSucceeded {
+            get {
+                return ResourceManager.GetString("DAppPaymentSucceeded", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Failed.

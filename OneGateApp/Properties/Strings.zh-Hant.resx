@@ -1100,6 +1100,18 @@
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>付款請求</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} 請求付款。繼續前請查看詳情。</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>詳情</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>付款已完成</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>失敗</value>
   </data>

@@ -1100,6 +1100,18 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="Unavailable" xml:space="preserve">
     <value>利用不可</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>支払いリクエスト</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} が支払いをリクエストしています。続行する前に詳細を確認してください。</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>支払いが完了しました</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>失敗</value>
   </data>

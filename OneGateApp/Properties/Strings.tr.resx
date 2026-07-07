@@ -1100,6 +1100,18 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="Unavailable" xml:space="preserve">
     <value>Kullanılamıyor</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>Ödeme isteği</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} ödeme istiyor. Devam etmeden önce ayrıntıları inceleyin.</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>Ayrıntılar</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>Ödeme tamamlandı</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Başarısız</value>
   </data>

@@ -1100,6 +1100,18 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="Unavailable" xml:space="preserve">
     <value>Không khả dụng</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>Yêu cầu thanh toán</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} đang yêu cầu thanh toán. Hãy xem lại chi tiết trước khi tiếp tục.</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>Thanh toán hoàn tất</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Thất bại</value>
   </data>

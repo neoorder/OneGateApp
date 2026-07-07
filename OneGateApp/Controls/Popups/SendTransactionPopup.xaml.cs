@@ -16,9 +16,11 @@ public partial class SendTransactionPopup : MyPopup<bool>
 
     public string Title { get; set { field = value; OnPropertyChanged(); } } = Strings.SendTransaction;
     public string Message { get; set { field = value; OnPropertyChanged(); } } = Strings.SendTransactionText;
+    public string? RequestDetails { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasRequestDetails)); } }
     public required Transaction Transaction { get; set { field = value; OnPropertyChanged(null); } }
     public TransactionIntent[]? Intents { get; set { field = value; OnPropertyChanged(); } }
     public InvocationResult? InvocationResult { get; set { field = value; OnPropertyChanged(); } }
+    public bool HasRequestDetails => !string.IsNullOrWhiteSpace(RequestDetails);
 
     public long Fee => (Transaction?.SystemFee + Transaction?.NetworkFee) ?? 0;
     public BigDecimal DecimalFee => new((BigInteger)Fee, NativeContract.GAS.Decimals);

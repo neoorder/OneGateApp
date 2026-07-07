@@ -1100,6 +1100,18 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>Permintaan pembayaran</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} meminta pembayaran. Tinjau detailnya sebelum melanjutkan.</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>Pembayaran selesai</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Gagal</value>
   </data>

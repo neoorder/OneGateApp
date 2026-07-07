@@ -1100,6 +1100,18 @@
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>Запрос платежа</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} запрашивает платеж. Проверьте детали перед продолжением.</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>Платеж выполнен</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Ошибка</value>
   </data>

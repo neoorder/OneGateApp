@@ -16,6 +16,14 @@
         <ScrollView MaximumHeightRequest="400">
             <VerticalStackLayout Spacing="15">
                 <Label Text="{Binding Message}" />
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" IsVisible="{Binding HasRequestDetails}">
+                    <VerticalStackLayout Padding="10,0">
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppPaymentDetails}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding RequestDetails}" HorizontalOptions="End" HorizontalTextAlignment="End" LineBreakMode="WordWrap" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
                 <og:IntentsView Intents="{Binding Intents}" />
                 <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
                     <VerticalStackLayout Padding="10,0">

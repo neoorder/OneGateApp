@@ -1100,6 +1100,18 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Unavailable" xml:space="preserve">
     <value>Unavailable</value>
   </data>
+  <data name="DAppPaymentRequest" xml:space="preserve">
+    <value>Payment request</value>
+  </data>
+  <data name="DAppPaymentRequestText" xml:space="preserve">
+    <value>{0} is requesting a payment. Review the details before continuing.</value>
+  </data>
+  <data name="DAppPaymentDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DAppPaymentSucceeded" xml:space="preserve">
+    <value>Payment completed</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Failed</value>
   </data>
