@@ -10,8 +10,8 @@
 
 namespace NeoOrder.OneGate.Properties {
     using System;
-    
-    
+
+
     /// <summary>
     ///   一个强类型的资源类，用于查找本地化的字符串等。
     /// </summary>
@@ -23,15 +23,15 @@ namespace NeoOrder.OneGate.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Strings() {
         }
-        
+
         /// <summary>
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
@@ -45,7 +45,7 @@ namespace NeoOrder.OneGate.Properties {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   重写当前线程的 CurrentUICulture 属性，对
         ///   使用此强类型资源类的所有资源查找执行重写。
@@ -59,7 +59,7 @@ namespace NeoOrder.OneGate.Properties {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   查找类似 About 的本地化字符串。
         /// </summary>
@@ -68,7 +68,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("About", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 About OneGate 的本地化字符串。
         /// </summary>
@@ -77,7 +77,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AboutOneGate", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Add Address 的本地化字符串。
         /// </summary>
@@ -86,7 +86,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AddNewAddress", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Address 的本地化字符串。
         /// </summary>
@@ -95,7 +95,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Address", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Address already exists 的本地化字符串。
         /// </summary>
@@ -104,7 +104,16 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AddressAlreadyExists", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Name already exists.
+        /// </summary>
+        internal static string LabelAlreadyExists {
+            get {
+                return ResourceManager.GetString("LabelAlreadyExists", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Address Book 的本地化字符串。
         /// </summary>
@@ -113,7 +122,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AddressBook", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 By selecting any option, you agree to {0} and {1}. 的本地化字符串。
         /// </summary>
@@ -122,7 +131,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AgreeToTermsAndPrivacy", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 All 的本地化字符串。
         /// </summary>
@@ -131,7 +140,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("All", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Allow restricted content 的本地化字符串。
         /// </summary>
@@ -140,7 +149,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AllowRestrictedContent", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Show DApps that may not be suitable for everyone. When disabled, these DApps are hidden from lists. 的本地化字符串。
         /// </summary>
@@ -149,7 +158,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AllowRestrictedContentDescription", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Select birth date 的本地化字符串。
         /// </summary>
@@ -194,7 +203,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Amount", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 App Details 的本地化字符串。
         /// </summary>
@@ -203,7 +212,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AppDetails", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Apps 的本地化字符串。
         /// </summary>
@@ -212,7 +221,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Apps", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Global Search 的本地化字符串。
         /// </summary>
@@ -239,7 +248,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Asset", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Assets hidden 的本地化字符串。
         /// </summary>
@@ -248,7 +257,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AssetHidden", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Authorizing sign-in request… 的本地化字符串。
         /// </summary>
@@ -257,7 +266,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AuthenticationInProgress", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Authorize 的本地化字符串。
         /// </summary>
@@ -266,7 +275,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Authorize", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Authorize sign in 的本地化字符串。
         /// </summary>
@@ -275,7 +284,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("AuthorizeSignIn", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Available 的本地化字符串。
         /// </summary>
@@ -284,7 +293,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Available", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 I have written down and securely backed up the above mnemonic phrase 的本地化字符串。
         /// </summary>
@@ -293,7 +302,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BackupMnemonicCheckBoxText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Balance 的本地化字符串。
         /// </summary>
@@ -302,7 +311,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Balance", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Biometric Authentication 的本地化字符串。
         /// </summary>
@@ -311,7 +320,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricAuthentication", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Device biometrics are available but not enabled for wallet approval. 的本地化字符串。
         /// </summary>
@@ -320,7 +329,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricAvailableText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Biometric credential created successfully 的本地化字符串。
         /// </summary>
@@ -329,7 +338,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricCredentialCreatedText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Biometric authentication is disabled 的本地化字符串。
         /// </summary>
@@ -338,7 +347,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricDisabledText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Protected actions can use device biometrics on this device. 的本地化字符串。
         /// </summary>
@@ -347,7 +356,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricEnabledText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 After creating a biometric credential, you can use biometrics to unlock your wallet, sign in to the app, or make payments.
         ///
@@ -358,7 +367,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricIntroductionText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Password changed. Biometric credentials have been reset. 的本地化字符串。
         /// </summary>
@@ -367,7 +376,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricResetText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Biometrics 的本地化字符串。
         /// </summary>
@@ -376,7 +385,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricStatus", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Device biometrics are not available. Wallet password approval remains active. 的本地化字符串。
         /// </summary>
@@ -385,7 +394,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricUnavailableSecurityText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Biometric authentication is temporarily unavailable 的本地化字符串。
         /// </summary>
@@ -394,7 +403,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("BiometricUnavailableText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Callback URL 的本地化字符串。
         /// </summary>
@@ -403,7 +412,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CallbackURL", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Cancel 的本地化字符串。
         /// </summary>
@@ -412,7 +421,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Change language 的本地化字符串。
         /// </summary>
@@ -421,7 +430,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ChangeLanguage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 The app will restart after changing the language.
         ///Do you want to continue? 的本地化字符串。
@@ -431,7 +440,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ChangeLanguageConfirmation", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Change Password 的本地化字符串。
         /// </summary>
@@ -440,7 +449,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ChangePassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Check for Updates 的本地化字符串。
         /// </summary>
@@ -449,7 +458,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CheckForUpdates", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Checking 的本地化字符串。
         /// </summary>
@@ -458,7 +467,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Checking", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Checking for updates 的本地化字符串。
         /// </summary>
@@ -467,7 +476,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CheckingForUpdates", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Collection 的本地化字符串。
         /// </summary>
@@ -476,7 +485,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Collection", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Confirming 的本地化字符串。
         /// </summary>
@@ -485,7 +494,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Confirming", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Please confirm that you understand the associated security risks 的本地化字符串。
         /// </summary>
@@ -494,7 +503,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ConfirmSecurityRiskAcknowledgement", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 I understand and continue 的本地化字符串。
         /// </summary>
@@ -512,7 +521,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Connected", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Connection issue 的本地化字符串。
         /// </summary>
@@ -521,7 +530,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ConnectionIssue", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Address added 的本地化字符串。
         /// </summary>
@@ -530,7 +539,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ContactAddedSuccessfully", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Address deleted 的本地化字符串。
         /// </summary>
@@ -539,7 +548,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ContactDeletedSuccessfully", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Contact updated successfully 的本地化字符串。
         /// </summary>
@@ -548,7 +557,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ContactUpdatedSuccessfully", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Contact Us 的本地化字符串。
         /// </summary>
@@ -557,7 +566,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ContactUs", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Content settings 的本地化字符串。
         /// </summary>
@@ -566,7 +575,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ContentSettings", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Continue 的本地化字符串。
         /// </summary>
@@ -575,7 +584,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Continue", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Contract 的本地化字符串。
         /// </summary>
@@ -584,7 +593,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("Contract", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Contract Invocation 的本地化字符串。
         /// </summary>
@@ -593,7 +602,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("ContractInvocation", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Copied to Clipboard 的本地化字符串。
         /// </summary>
@@ -602,7 +611,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CopiedToClipboard", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Create Biometric Credential 的本地化字符串。
         /// </summary>
@@ -611,7 +620,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CreateBiometricCredential", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Your device supports biometric authentication. Set it up to unlock OneGate and approve wallet actions without entering your password each time. 的本地化字符串。
         /// </summary>
@@ -620,7 +629,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CreateBiometricCredentialText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Create password 的本地化字符串。
         /// </summary>
@@ -629,7 +638,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CreatePassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Create wallet 的本地化字符串。
         /// </summary>
@@ -638,7 +647,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CreateWallet", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Current password 的本地化字符串。
         /// </summary>
@@ -647,7 +656,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("CurrentPassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 dApp authorization 的本地化字符串。
         /// </summary>
@@ -683,7 +692,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppAuthorizationStatus", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 dApps must request wallet actions through OneGate each time. Persistent approvals are not stored. 的本地化字符串。
         /// </summary>
@@ -692,7 +701,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppAuthorizationText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 DApp Debug Panel 的本地化字符串。
         /// </summary>
@@ -701,7 +710,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppDebugPanel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 DApp Testing 的本地化字符串。
         /// </summary>
@@ -774,2064 +783,6 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
-        /// <summary>
-        ///   查找类似 {0} do not match 的本地化字符串。
-        /// </summary>
-        internal static string DefaultCompareErrorMessage {
-            get {
-                return ResourceManager.GetString("DefaultCompareErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No content 的本地化字符串。
-        /// </summary>
-        internal static string DefaultEmptyViewMessage {
-            get {
-                return ResourceManager.GetString("DefaultEmptyViewMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} is out of range 的本地化字符串。
-        /// </summary>
-        internal static string DefaultOutOfRangeErrorMessage {
-            get {
-                return ResourceManager.GetString("DefaultOutOfRangeErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} cannot be empty 的本地化字符串。
-        /// </summary>
-        internal static string DefaultRequiredErrorMessage {
-            get {
-                return ResourceManager.GetString("DefaultRequiredErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} must be {1} characters long 的本地化字符串。
-        /// </summary>
-        internal static string DefaultStringLengthErrorMessageLength {
-            get {
-                return ResourceManager.GetString("DefaultStringLengthErrorMessageLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} must be at most {2} characters 的本地化字符串。
-        /// </summary>
-        internal static string DefaultStringLengthErrorMessageMax {
-            get {
-                return ResourceManager.GetString("DefaultStringLengthErrorMessageMax", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} must be between {1} and {2} characters 的本地化字符串。
-        /// </summary>
-        internal static string DefaultStringLengthErrorMessageMinMax {
-            get {
-                return ResourceManager.GetString("DefaultStringLengthErrorMessageMinMax", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Invalid {0} 的本地化字符串。
-        /// </summary>
-        internal static string DefaultValidatorErrorMessage {
-            get {
-                return ResourceManager.GetString("DefaultValidatorErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Delete 的本地化字符串。
-        /// </summary>
-        internal static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Confirm deletion 的本地化字符串。
-        /// </summary>
-        internal static string DeleteConfirmation {
-            get {
-                return ResourceManager.GetString("DeleteConfirmation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Are you sure you want to delete this address? 的本地化字符串。
-        /// </summary>
-        internal static string DeleteContactText {
-            get {
-                return ResourceManager.GetString("DeleteContactText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Delete wallet 的本地化字符串。
-        /// </summary>
-        internal static string DeleteWallet {
-            get {
-                return ResourceManager.GetString("DeleteWallet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 I understand the above risks and confirm that I have backed up my mnemonic phrase or private key 的本地化字符串。
-        /// </summary>
-        internal static string DeleteWalletConfirmation {
-            get {
-                return ResourceManager.GetString("DeleteWalletConfirmation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Deleting a wallet is an irreversible and high-risk action. Once deleted, all data related to this wallet on the current device (including account information, transaction history, and local cache) will be permanently removed and cannot be recovered.
-        ///
-        ///Please make sure you have securely backed up the wallet’s mnemonic phrase or private key, and that the backup is accurate and safely stored. If you have not completed the backup or if it is lost, you will not be able to restore the wallet after deletion, and  [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        internal static string DeleteWalletWarningText {
-            get {
-                return ResourceManager.GetString("DeleteWalletWarningText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Description 的本地化字符串。
-        /// </summary>
-        internal static string Description {
-            get {
-                return ResourceManager.GetString("Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Developer Center 的本地化字符串。
-        /// </summary>
-        internal static string DeveloperTools {
-            get {
-                return ResourceManager.GetString("DeveloperTools", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Disable biometric authentication 的本地化字符串。
-        /// </summary>
-        internal static string DisableBiometric {
-            get {
-                return ResourceManager.GetString("DisableBiometric", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Biometric authentication is currently enabled to authorize app access to your wallet. Disable biometric authentication?
-        ///
-        ///After disabling, you will need to manually enter your wallet password to authorize access. 的本地化字符串。
-        /// </summary>
-        internal static string DisableBiometricText {
-            get {
-                return ResourceManager.GetString("DisableBiometricText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Disabled 的本地化字符串。
-        /// </summary>
-        internal static string Disabled {
-            get {
-                return ResourceManager.GetString("Disabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Domain name 的本地化字符串。
-        /// </summary>
-        internal static string Domain {
-            get {
-                return ResourceManager.GetString("Domain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Edit address 的本地化字符串。
-        /// </summary>
-        internal static string EditContact {
-            get {
-                return ResourceManager.GetString("EditContact", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Enabled 的本地化字符串。
-        /// </summary>
-        internal static string Enabled {
-            get {
-                return ResourceManager.GetString("Enabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Enter custom address 的本地化字符串。
-        /// </summary>
-        internal static string EnterCustomAddress {
-            get {
-                return ResourceManager.GetString("EnterCustomAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Enter your mnemonic phrase, separated by spaces 的本地化字符串。
-        /// </summary>
-        internal static string EnterMnemonicPrompt {
-            get {
-                return ResourceManager.GetString("EnterMnemonicPrompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unable to access the camera 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessageCameraFailure {
-            get {
-                return ResourceManager.GetString("ErrorMessageCameraFailure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Incorrect password 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessageIncorrectPassword {
-            get {
-                return ResourceManager.GetString("ErrorMessageIncorrectPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 You must copy down and properly back up the above mnemonic phrase, otherwise your assets will be permanently lost and cannot be recovered. 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessageMnemonicBackup {
-            get {
-                return ResourceManager.GetString("ErrorMessageMnemonicBackup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Incorrect mnemonic phrase. Please enter it in the correct order 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessageMnemonicMismatch {
-            get {
-                return ResourceManager.GetString("ErrorMessageMnemonicMismatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The passwords do not match 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessagePasswordsMismatch {
-            get {
-                return ResourceManager.GetString("ErrorMessagePasswordsMismatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unable to recognize the QR code 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessageUnableReadQRCode {
-            get {
-                return ResourceManager.GetString("ErrorMessageUnableReadQRCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unsupported QR code content: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessageUnsupportedQRCode {
-            get {
-                return ResourceManager.GetString("ErrorMessageUnsupportedQRCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Execution result 的本地化字符串。
-        /// </summary>
-        internal static string ExecutionResult {
-            get {
-                return ResourceManager.GetString("ExecutionResult", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Export private key 的本地化字符串。
-        /// </summary>
-        internal static string ExportPrivateKey {
-            get {
-                return ResourceManager.GetString("ExportPrivateKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Favorites 的本地化字符串。
-        /// </summary>
-        internal static string Favorite {
-            get {
-                return ResourceManager.GetString("Favorite", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transaction fee 的本地化字符串。
-        /// </summary>
-        internal static string Fee {
-            get {
-                return ResourceManager.GetString("Fee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 OneGate estimates network and system fees on the next screen before you sign. GAS transfers must leave enough GAS to cover both the transfer and fees. 的本地化字符串。
-        /// </summary>
-        internal static string FeeEstimateNoticeText {
-            get {
-                return ResourceManager.GetString("FeeEstimateNoticeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Fee estimate 的本地化字符串。
-        /// </summary>
-        internal static string FeeEstimateNoticeTitle {
-            get {
-                return ResourceManager.GetString("FeeEstimateNoticeTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Field 的本地化字符串。
-        /// </summary>
-        internal static string Field {
-            get {
-                return ResourceManager.GetString("Field", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Format 的本地化字符串。
-        /// </summary>
-        internal static string Format {
-            get {
-                return ResourceManager.GetString("Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 From address 的本地化字符串。
-        /// </summary>
-        internal static string From {
-            get {
-                return ResourceManager.GetString("From", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Game type 的本地化字符串。
-        /// </summary>
-        internal static string GameType {
-            get {
-                return ResourceManager.GetString("GameType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Action 的本地化字符串。
-        /// </summary>
-        internal static string GameTypeAction {
-            get {
-                return ResourceManager.GetString("GameTypeAction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Board 的本地化字符串。
-        /// </summary>
-        internal static string GameTypeBoard {
-            get {
-                return ResourceManager.GetString("GameTypeBoard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Emulator 的本地化字符串。
-        /// </summary>
-        internal static string GameTypeEmulator {
-            get {
-                return ResourceManager.GetString("GameTypeEmulator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Racing 的本地化字符串。
-        /// </summary>
-        internal static string GameTypeRacing {
-            get {
-                return ResourceManager.GetString("GameTypeRacing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Gaming 的本地化字符串。
-        /// </summary>
-        internal static string Gaming {
-            get {
-                return ResourceManager.GetString("Gaming", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Pull down to refresh the game catalog. 的本地化字符串。
-        /// </summary>
-        internal static string GamingEmptyState {
-            get {
-                return ResourceManager.GetString("GamingEmptyState", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Recently played 的本地化字符串。
-        /// </summary>
-        internal static string GamingRecentPlayed {
-            get {
-                return ResourceManager.GetString("GamingRecentPlayed", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 General 的本地化字符串。
-        /// </summary>
-        internal static string General {
-            get {
-                return ResourceManager.GetString("General", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Generate mnemonic phrase 的本地化字符串。
-        /// </summary>
-        internal static string GenerateMnemonic {
-            get {
-                return ResourceManager.GetString("GenerateMnemonic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Hidden assets 的本地化字符串。
-        /// </summary>
-        internal static string HiddenAssets {
-            get {
-                return ResourceManager.GetString("HiddenAssets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Hide 的本地化字符串。
-        /// </summary>
-        internal static string Hide {
-            get {
-                return ResourceManager.GetString("Hide", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Home 的本地化字符串。
-        /// </summary>
-        internal static string Home {
-            get {
-                return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Address to import 的本地化字符串。
-        /// </summary>
-        internal static string ImportAddress {
-            get {
-                return ResourceManager.GetString("ImportAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please select an import type 的本地化字符串。
-        /// </summary>
-        internal static string ImportTypeRequired {
-            get {
-                return ResourceManager.GetString("ImportTypeRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Import via mnemonic phrase 的本地化字符串。
-        /// </summary>
-        internal static string ImportViaMnemonicCode {
-            get {
-                return ResourceManager.GetString("ImportViaMnemonicCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Import via NEP-2 的本地化字符串。
-        /// </summary>
-        internal static string ImportViaNep2 {
-            get {
-                return ResourceManager.GetString("ImportViaNep2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Import via private key 的本地化字符串。
-        /// </summary>
-        internal static string ImportViaPrivateKey {
-            get {
-                return ResourceManager.GetString("ImportViaPrivateKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Import wallet 的本地化字符串。
-        /// </summary>
-        internal static string ImportWallet {
-            get {
-                return ResourceManager.GetString("ImportWallet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Install 的本地化字符串。
-        /// </summary>
-        internal static string Install {
-            get {
-                return ResourceManager.GetString("Install", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Insufficient balance to cover the amount and fees. The maximum you can send is {0} GAS. 的本地化字符串。
-        /// </summary>
-        internal static string InsufficientBalanceForAmountAndFees {
-            get {
-                return ResourceManager.GetString("InsufficientBalanceForAmountAndFees", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Description 的本地化字符串。
-        /// </summary>
-        internal static string Introduction {
-            get {
-                return ResourceManager.GetString("Introduction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Invalid callback URL format 的本地化字符串。
-        /// </summary>
-        internal static string InvalidCallbackURLFormat {
-            get {
-                return ResourceManager.GetString("InvalidCallbackURLFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Name 的本地化字符串。
-        /// </summary>
-        internal static string Label {
-            get {
-                return ResourceManager.GetString("Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Language 的本地化字符串。
-        /// </summary>
-        internal static string Language {
-            get {
-                return ResourceManager.GetString("Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Language updated 的本地化字符串。
-        /// </summary>
-        internal static string LanguageChanged {
-            get {
-                return ResourceManager.GetString("LanguageChanged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Last checked: {0} 的本地化字符串。
-        /// </summary>
-        internal static string LastCheckedAt {
-            get {
-                return ResourceManager.GetString("LastCheckedAt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Loading 的本地化字符串。
-        /// </summary>
-        internal static string Loading {
-            get {
-                return ResourceManager.GetString("Loading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Loading wallet data 的本地化字符串。
-        /// </summary>
-        internal static string LoadingWalletData {
-            get {
-                return ResourceManager.GetString("LoadingWalletData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Your private key, mnemonic phrase, password, and other sensitive information are stored only on your local device. OneGate does not upload, sync, or store any copies. 的本地化字符串。
-        /// </summary>
-        internal static string LocalSensitiveDataNotice {
-            get {
-                return ResourceManager.GetString("LocalSensitiveDataNotice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Login request 的本地化字符串。
-        /// </summary>
-        internal static string LoginRequest {
-            get {
-                return ResourceManager.GetString("LoginRequest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Review this request before authorizing wallet access. 的本地化字符串。
-        /// </summary>
-        internal static string LoginRequestReviewText {
-            get {
-                return ResourceManager.GetString("LoginRequestReviewText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The app is requesting to sign in with your wallet address. Allow? 的本地化字符串。
-        /// </summary>
-        internal static string LoginRequestText {
-            get {
-                return ResourceManager.GetString("LoginRequestText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Manage biometrics 的本地化字符串。
-        /// </summary>
-        internal static string ManageBiometrics {
-            get {
-                return ResourceManager.GetString("ManageBiometrics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Manage wallet password 的本地化字符串。
-        /// </summary>
-        internal static string ManageWalletPassword {
-            get {
-                return ResourceManager.GetString("ManageWalletPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Change the password used to unlock and sign with this wallet. 的本地化字符串。
-        /// </summary>
-        internal static string ManageWalletPasswordText {
-            get {
-                return ResourceManager.GetString("ManageWalletPasswordText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Marketplace 的本地化字符串。
-        /// </summary>
-        internal static string Marketplace {
-            get {
-                return ResourceManager.GetString("Marketplace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Message 的本地化字符串。
-        /// </summary>
-        internal static string Message {
-            get {
-                return ResourceManager.GetString("Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Mnemonic 的本地化字符串。
-        /// </summary>
-        internal static string Mnemonic {
-            get {
-                return ResourceManager.GetString("Mnemonic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Your mnemonic phrase consists of 24 words and can be used to recover your funds. Be sure to write it down and keep it safe. Never share it with anyone. 的本地化字符串。
-        /// </summary>
-        internal static string MnemonicImportanceContent {
-            get {
-                return ResourceManager.GetString("MnemonicImportanceContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Importance of the mnemonic phrase 的本地化字符串。
-        /// </summary>
-        internal static string MnemonicImportanceTitle {
-            get {
-                return ResourceManager.GetString("MnemonicImportanceTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Name 的本地化字符串。
-        /// </summary>
-        internal static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 NEP-2 key 的本地化字符串。
-        /// </summary>
-        internal static string Nep2Key {
-            get {
-                return ResourceManager.GetString("Nep2Key", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 NEP-2 is an encrypted private key protected by a password. It requires your wallet password to use and is suitable for storage and backup.
-        ///
-        ///Please note: The NEP-2 key and its corresponding password are both required. If someone obtains both, they can control and transfer your assets. If you lose the NEP-2 key or forget the password, your assets cannot be recovered.
-        ///
-        ///It is recommended to store the NEP-2 key and password separately and back them up securely. Avoid keeping them on the same device or within [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        internal static string Nep2PrivateKeyWarning {
-            get {
-                return ResourceManager.GetString("Nep2PrivateKeyWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Network 的本地化字符串。
-        /// </summary>
-        internal static string Network {
-            get {
-                return ResourceManager.GetString("Network", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Network status 的本地化字符串。
-        /// </summary>
-        internal static string NetworkStatus {
-            get {
-                return ResourceManager.GetString("NetworkStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 News Categories 的本地化字符串。
-        /// </summary>
-        internal static string NewsCategories {
-            get {
-                return ResourceManager.GetString("NewsCategories", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 New version available 的本地化字符串。
-        /// </summary>
-        internal static string NewVersionAvailable {
-            get {
-                return ResourceManager.GetString("NewVersionAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Next 的本地化字符串。
-        /// </summary>
-        internal static string Next {
-            get {
-                return ResourceManager.GetString("Next", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No addresses 的本地化字符串。
-        /// </summary>
-        internal static string NoAddress {
-            get {
-                return ResourceManager.GetString("NoAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Your address book is empty 的本地化字符串。
-        /// </summary>
-        internal static string NoAddressText {
-            get {
-                return ResourceManager.GetString("NoAddressText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No assets in your wallet 的本地化字符串。
-        /// </summary>
-        internal static string NoAssetText {
-            get {
-                return ResourceManager.GetString("NoAssetText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No hidden assets 的本地化字符串。
-        /// </summary>
-        internal static string NoHiddenAssets {
-            get {
-                return ResourceManager.GetString("NoHiddenAssets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Open asset details in your wallet to manage settings 的本地化字符串。
-        /// </summary>
-        internal static string NoHiddenAssetsText {
-            get {
-                return ResourceManager.GetString("NoHiddenAssetsText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No NFTs in your wallet 的本地化字符串。
-        /// </summary>
-        internal static string NoNftText {
-            get {
-                return ResourceManager.GetString("NoNftText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No parameters 的本地化字符串。
-        /// </summary>
-        internal static string NoParameters {
-            get {
-                return ResourceManager.GetString("NoParameters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No news sources 的本地化字符串。
-        /// </summary>
-        internal static string NoRssText {
-            get {
-                return ResourceManager.GetString("NoRssText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No updates available 的本地化字符串。
-        /// </summary>
-        internal static string NoUpdatesAvailable {
-            get {
-                return ResourceManager.GetString("NoUpdatesAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 OK 的本地化字符串。
-        /// </summary>
-        internal static string OK {
-            get {
-                return ResourceManager.GetString("OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Open 的本地化字符串。
-        /// </summary>
-        internal static string Open {
-            get {
-                return ResourceManager.GetString("Open", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unable to return to the DApp 的本地化字符串。
-        /// </summary>
-        internal static string OpenDAppFailedText {
-            get {
-                return ResourceManager.GetString("OpenDAppFailedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Open NFT link 的本地化字符串。
-        /// </summary>
-        internal static string OpenNFTLink {
-            get {
-                return ResourceManager.GetString("OpenNFTLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Method 的本地化字符串。
-        /// </summary>
-        internal static string Operation {
-            get {
-                return ResourceManager.GetString("Operation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Operation cancelled 的本地化字符串。
-        /// </summary>
-        internal static string OperationCancelled {
-            get {
-                return ResourceManager.GetString("OperationCancelled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Other 的本地化字符串。
-        /// </summary>
-        internal static string Others {
-            get {
-                return ResourceManager.GetString("Others", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 This address belongs to the current wallet. You can continue, but make sure sending to yourself is intentional. 的本地化字符串。
-        /// </summary>
-        internal static string OwnWalletAddressText {
-            get {
-                return ResourceManager.GetString("OwnWalletAddressText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Your wallet address 的本地化字符串。
-        /// </summary>
-        internal static string OwnWalletAddressTitle {
-            get {
-                return ResourceManager.GetString("OwnWalletAddressTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Password 的本地化字符串。
-        /// </summary>
-        internal static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Password updated 的本地化字符串。
-        /// </summary>
-        internal static string PasswordChanged {
-            get {
-                return ResourceManager.GetString("PasswordChanged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please note: If you forget your wallet password, it cannot be recovered. Make sure to remember your password. 的本地化字符串。
-        /// </summary>
-        internal static string PasswordImportanceContent {
-            get {
-                return ResourceManager.GetString("PasswordImportanceContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Importance of the password 的本地化字符串。
-        /// </summary>
-        internal static string PasswordImportanceTitle {
-            get {
-                return ResourceManager.GetString("PasswordImportanceTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Protected 的本地化字符串。
-        /// </summary>
-        internal static string PasswordProtected {
-            get {
-                return ResourceManager.GetString("PasswordProtected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Password-protected private key (NEP-2) 的本地化字符串。
-        /// </summary>
-        internal static string PasswordProtectedPrivateKeyNep2 {
-            get {
-                return ResourceManager.GetString("PasswordProtectedPrivateKeyNep2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Your local wallet requires its password before signing sensitive actions. 的本地化字符串。
-        /// </summary>
-        internal static string PasswordProtectedText {
-            get {
-                return ResourceManager.GetString("PasswordProtectedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Password 的本地化字符串。
-        /// </summary>
-        internal static string PasswordStatus {
-            get {
-                return ResourceManager.GetString("PasswordStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 No permission 的本地化字符串。
-        /// </summary>
-        internal static string PermissionDenied {
-            get {
-                return ResourceManager.GetString("PermissionDenied", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Select address 的本地化字符串。
-        /// </summary>
-        internal static string PickAddress {
-            get {
-                return ResourceManager.GetString("PickAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The app requests you to select or enter an address: 的本地化字符串。
-        /// </summary>
-        internal static string PickAddressText {
-            get {
-                return ResourceManager.GetString("PickAddressText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Plain private key (WIF) 的本地化字符串。
-        /// </summary>
-        internal static string PlaintextPrivateKeyWif {
-            get {
-                return ResourceManager.GetString("PlaintextPrivateKeyWif", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Screenshots 的本地化字符串。
-        /// </summary>
-        internal static string Preview {
-            get {
-                return ResourceManager.GetString("Preview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Privacy mode 的本地化字符串。
-        /// </summary>
-        internal static string PrivacyMode {
-            get {
-                return ResourceManager.GetString("PrivacyMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Hide balances in wallet screens when you are in public or sharing your screen. 的本地化字符串。
-        /// </summary>
-        internal static string PrivacyModeText {
-            get {
-                return ResourceManager.GetString("PrivacyModeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Privacy Policy 的本地化字符串。
-        /// </summary>
-        internal static string PrivacyPolicy {
-            get {
-                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Privacy Policy 的本地化字符串。
-        /// </summary>
-        internal static string PrivacyPolicyWithBrackets {
-            get {
-                return ResourceManager.GetString("PrivacyPolicyWithBrackets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Private key 的本地化字符串。
-        /// </summary>
-        internal static string PrivateKey {
-            get {
-                return ResourceManager.GetString("PrivateKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Exporting your private key exposes full control over your wallet assets. If the private key is compromised, anyone can transfer your assets, and this cannot be reversed or recovered.
-        ///
-        ///Make sure to perform this action in a secure, offline environment where no one can observe you. Do not take screenshots, photos, or copy it to chat apps, email, or cloud storage. Never share your private key with anyone.
-        ///
-        ///Please note: We do not store or manage your private key. If it is lost, forgotten, or damaged, it cann [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        internal static string PrivateKeyExportWarning {
-            get {
-                return ResourceManager.GetString("PrivateKeyExportWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Private key security notice 的本地化字符串。
-        /// </summary>
-        internal static string PrivateKeySecurity {
-            get {
-                return ResourceManager.GetString("PrivateKeySecurity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 QR code saved 的本地化字符串。
-        /// </summary>
-        internal static string QRCodeSaved {
-            get {
-                return ResourceManager.GetString("QRCodeSaved", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Receive 的本地化字符串。
-        /// </summary>
-        internal static string Receive {
-            get {
-                return ResourceManager.GetString("Receive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 This address can receive all assets on the Neo platform. 的本地化字符串。
-        /// </summary>
-        internal static string ReceiveQRCodeText {
-            get {
-                return ResourceManager.GetString("ReceiveQRCodeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please scan the QR code to send me a transfer 的本地化字符串。
-        /// </summary>
-        internal static string ReceiveQRCodeTitle {
-            get {
-                return ResourceManager.GetString("ReceiveQRCodeTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Receiving address 的本地化字符串。
-        /// </summary>
-        internal static string ReceivingAddress {
-            get {
-                return ResourceManager.GetString("ReceivingAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Recents 的本地化字符串。
-        /// </summary>
-        internal static string Recent {
-            get {
-                return ResourceManager.GetString("Recent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Scan QR code 的本地化字符串。
-        /// </summary>
-        internal static string RecognizeQRCode {
-            get {
-                return ResourceManager.GetString("RecognizeQRCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 History 的本地化字符串。
-        /// </summary>
-        internal static string Records {
-            get {
-                return ResourceManager.GetString("Records", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 External link navigation blocked 的本地化字符串。
-        /// </summary>
-        internal static string RedirectionBlockedText {
-            get {
-                return ResourceManager.GetString("RedirectionBlockedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Re-enter password 的本地化字符串。
-        /// </summary>
-        internal static string RepeatPassword {
-            get {
-                return ResourceManager.GetString("RepeatPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Restart 的本地化字符串。
-        /// </summary>
-        internal static string Restart {
-            get {
-                return ResourceManager.GetString("Restart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Review 的本地化字符串。
-        /// </summary>
-        internal static string Review {
-            get {
-                return ResourceManager.GetString("Review", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Review recovery backup 的本地化字符串。
-        /// </summary>
-        internal static string ReviewBackup {
-            get {
-                return ResourceManager.GetString("ReviewBackup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Open the wallet export flow and review secure storage options. 的本地化字符串。
-        /// </summary>
-        internal static string ReviewBackupText {
-            get {
-                return ResourceManager.GetString("ReviewBackupText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} is responding. Current block: {1:N0}. 的本地化字符串。
-        /// </summary>
-        internal static string RpcStatusConnectedText {
-            get {
-                return ResourceManager.GetString("RpcStatusConnectedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} did not respond. Transfers may fail until the connection recovers. 的本地化字符串。
-        /// </summary>
-        internal static string RpcStatusUnavailableText {
-            get {
-                return ResourceManager.GetString("RpcStatusUnavailableText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Save to gallery 的本地化字符串。
-        /// </summary>
-        internal static string SaveToPhotoLibrary {
-            get {
-                return ResourceManager.GetString("SaveToPhotoLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Scan QR code from gallery 的本地化字符串。
-        /// </summary>
-        internal static string ScanFromPhotoLibrary {
-            get {
-                return ResourceManager.GetString("ScanFromPhotoLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Scan 的本地化字符串。
-        /// </summary>
-        internal static string ScanQRCode {
-            get {
-                return ResourceManager.GetString("ScanQRCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Screenshot failed 的本地化字符串。
-        /// </summary>
-        internal static string ScreenshotFailed {
-            get {
-                return ResourceManager.GetString("ScreenshotFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Search 的本地化字符串。
-        /// </summary>
-        internal static string Search {
-            get {
-                return ResourceManager.GetString("Search", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Security 的本地化字符串。
-        /// </summary>
-        internal static string Security {
-            get {
-                return ResourceManager.GetString("Security", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 This recipient matches "{0}" in your local address book. 的本地化字符串。
-        /// </summary>
-        internal static string SavedAddressText {
-            get {
-                return ResourceManager.GetString("SavedAddressText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Saved address 的本地化字符串。
-        /// </summary>
-        internal static string SavedAddressTitle {
-            get {
-                return ResourceManager.GetString("SavedAddressTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Security actions 的本地化字符串。
-        /// </summary>
-        internal static string SecurityActions {
-            get {
-                return ResourceManager.GetString("SecurityActions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Security Center 的本地化字符串。
-        /// </summary>
-        internal static string SecurityCenter {
-            get {
-                return ResourceManager.GetString("SecurityCenter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Review wallet protection, device approval, network status, privacy mode, and dApp request handling. 的本地化字符串。
-        /// </summary>
-        internal static string SecurityCenterSummaryText {
-            get {
-                return ResourceManager.GetString("SecurityCenterSummaryText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Wallet protection at a glance 的本地化字符串。
-        /// </summary>
-        internal static string SecurityCenterSummaryTitle {
-            get {
-                return ResourceManager.GetString("SecurityCenterSummaryTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Security status 的本地化字符串。
-        /// </summary>
-        internal static string SecurityStatus {
-            get {
-                return ResourceManager.GetString("SecurityStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Select an address from your wallet 的本地化字符串。
-        /// </summary>
-        internal static string SelectAddressFromWallet {
-            get {
-                return ResourceManager.GetString("SelectAddressFromWallet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 This recovery phrase may correspond to multiple addresses. Please select the address you want to import. 的本地化字符串。
-        /// </summary>
-        internal static string SelectAddressToImportFromMnemonic {
-            get {
-                return ResourceManager.GetString("SelectAddressToImportFromMnemonic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Select asset 的本地化字符串。
-        /// </summary>
-        internal static string SelectAsset {
-            get {
-                return ResourceManager.GetString("SelectAsset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Select recipient address 的本地化字符串。
-        /// </summary>
-        internal static string SelectContact {
-            get {
-                return ResourceManager.GetString("SelectContact", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Select import type 的本地化字符串。
-        /// </summary>
-        internal static string SelectImportType {
-            get {
-                return ResourceManager.GetString("SelectImportType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Select export format 的本地化字符串。
-        /// </summary>
-        internal static string SelectPrivateKeyFormat {
-            get {
-                return ResourceManager.GetString("SelectPrivateKeyFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Send 的本地化字符串。
-        /// </summary>
-        internal static string Send {
-            get {
-                return ResourceManager.GetString("Send", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Sending transaction 的本地化字符串。
-        /// </summary>
-        internal static string SendingTransaction {
-            get {
-                return ResourceManager.GetString("SendingTransaction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Send transaction 的本地化字符串。
-        /// </summary>
-        internal static string SendTransaction {
-            get {
-                return ResourceManager.GetString("SendTransaction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 You are initiating a transfer transaction: 的本地化字符串。
-        /// </summary>
-        internal static string SendTransactionByUserText {
-            get {
-                return ResourceManager.GetString("SendTransactionByUserText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The app is requesting to send a transaction: 的本地化字符串。
-        /// </summary>
-        internal static string SendTransactionText {
-            get {
-                return ResourceManager.GetString("SendTransactionText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Sensitive information security notice 的本地化字符串。
-        /// </summary>
-        internal static string SensitiveDataSecurityNotice {
-            get {
-                return ResourceManager.GetString("SensitiveDataSecurityNotice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Set password 的本地化字符串。
-        /// </summary>
-        internal static string SetPassword {
-            get {
-                return ResourceManager.GetString("SetPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Settings 的本地化字符串。
-        /// </summary>
-        internal static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Share 的本地化字符串。
-        /// </summary>
-        internal static string Share {
-            get {
-                return ResourceManager.GetString("Share", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 I found something interesting on OneGate: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ShareAppText {
-            get {
-                return ResourceManager.GetString("ShareAppText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Will appear after you set a password 的本地化字符串。
-        /// </summary>
-        internal static string ShownAfterSettingPassword {
-            get {
-                return ResourceManager.GetString("ShownAfterSettingPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 View original 的本地化字符串。
-        /// </summary>
-        internal static string ShowOriginalText {
-            get {
-                return ResourceManager.GetString("ShowOriginalText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Signing account 的本地化字符串。
-        /// </summary>
-        internal static string SigningAccount {
-            get {
-                return ResourceManager.GetString("SigningAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Signing in 的本地化字符串。
-        /// </summary>
-        internal static string SigningIn {
-            get {
-                return ResourceManager.GetString("SigningIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Sign in with Neo 的本地化字符串。
-        /// </summary>
-        internal static string SignInWithNeo {
-            get {
-                return ResourceManager.GetString("SignInWithNeo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Message signing 的本地化字符串。
-        /// </summary>
-        internal static string SignMessage {
-            get {
-                return ResourceManager.GetString("SignMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The app is requesting to sign a message. Allow? 的本地化字符串。
-        /// </summary>
-        internal static string SignMessageRequestText {
-            get {
-                return ResourceManager.GetString("SignMessageRequestText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The app is requesting to sign a message: 的本地化字符串。
-        /// </summary>
-        internal static string SignMessageText {
-            get {
-                return ResourceManager.GetString("SignMessageText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transaction signing 的本地化字符串。
-        /// </summary>
-        internal static string SignTransaction {
-            get {
-                return ResourceManager.GetString("SignTransaction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transaction signing failed 的本地化字符串。
-        /// </summary>
-        internal static string SignTransactionFailed {
-            get {
-                return ResourceManager.GetString("SignTransactionFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The app is requesting to sign a transaction: 的本地化字符串。
-        /// </summary>
-        internal static string SignTransactionText {
-            get {
-                return ResourceManager.GetString("SignTransactionText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Skip 的本地化字符串。
-        /// </summary>
-        internal static string Skip {
-            get {
-                return ResourceManager.GetString("Skip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Social 的本地化字符串。
-        /// </summary>
-        internal static string Social {
-            get {
-                return ResourceManager.GetString("Social", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Status 的本地化字符串。
-        /// </summary>
-        internal static string Status {
-            get {
-                return ResourceManager.GetString("Status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Success 的本地化字符串。
-        /// </summary>
-        internal static string Success {
-            get {
-                return ResourceManager.GetString("Success", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Supported languages 的本地化字符串。
-        /// </summary>
-        internal static string SupportedLanguages {
-            get {
-                return ResourceManager.GetString("SupportedLanguages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Follow system 的本地化字符串。
-        /// </summary>
-        internal static string SystemLanguage {
-            get {
-                return ResourceManager.GetString("SystemLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Terms of Service 的本地化字符串。
-        /// </summary>
-        internal static string TermsOfService {
-            get {
-                return ResourceManager.GetString("TermsOfService", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Terms of Service 的本地化字符串。
-        /// </summary>
-        internal static string TermsOfServiceWithBrackets {
-            get {
-                return ResourceManager.GetString("TermsOfServiceWithBrackets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Time 的本地化字符串。
-        /// </summary>
-        internal static string Time {
-            get {
-                return ResourceManager.GetString("Time", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Token 的本地化字符串。
-        /// </summary>
-        internal static string Token {
-            get {
-                return ResourceManager.GetString("Token", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 ID 的本地化字符串。
-        /// </summary>
-        internal static string TokenId {
-            get {
-                return ResourceManager.GetString("TokenId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Tools 的本地化字符串。
-        /// </summary>
-        internal static string Tools {
-            get {
-                return ResourceManager.GetString("Tools", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transaction pending confirmation 的本地化字符串。
-        /// </summary>
-        internal static string TransactionConfirming {
-            get {
-                return ResourceManager.GetString("TransactionConfirming", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transaction details 的本地化字符串。
-        /// </summary>
-        internal static string TransactionDetails {
-            get {
-                return ResourceManager.GetString("TransactionDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transaction successful 的本地化字符串。
-        /// </summary>
-        internal static string TransactionSucceeded {
-            get {
-                return ResourceManager.GetString("TransactionSucceeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transfer 的本地化字符串。
-        /// </summary>
-        internal static string Transfer {
-            get {
-                return ResourceManager.GetString("Transfer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Transaction ID 的本地化字符串。
-        /// </summary>
-        internal static string TxID {
-            get {
-                return ResourceManager.GetString("TxID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unavailable 的本地化字符串。
-        /// </summary>
-        internal static string Unavailable {
-            get {
-                return ResourceManager.GetString("Unavailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unhide 的本地化字符串。
-        /// </summary>
-        internal static string Unhide {
-            get {
-                return ResourceManager.GetString("Unhide", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unknown address 的本地化字符串。
-        /// </summary>
-        internal static string UnknownAddress {
-            get {
-                return ResourceManager.GetString("UnknownAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 This address is not saved in your address book. Verify the full address carefully; blockchain transfers cannot be reversed. 的本地化字符串。
-        /// </summary>
-        internal static string UnknownAddressRiskText {
-            get {
-                return ResourceManager.GetString("UnknownAddressRiskText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unknown address 的本地化字符串。
-        /// </summary>
-        internal static string UnknownAddressRiskTitle {
-            get {
-                return ResourceManager.GetString("UnknownAddressRiskTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unknown error 的本地化字符串。
-        /// </summary>
-        internal static string UnknownError {
-            get {
-                return ResourceManager.GetString("UnknownError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Unlocking wallet 的本地化字符串。
-        /// </summary>
-        internal static string UnlockingWallet {
-            get {
-                return ResourceManager.GetString("UnlockingWallet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Update app 的本地化字符串。
-        /// </summary>
-        internal static string UpdateApp {
-            get {
-                return ResourceManager.GetString("UpdateApp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The update has been downloaded. Restart now to install? 的本地化字符串。
-        /// </summary>
-        internal static string UpdateDownloadedRestartToInstall {
-            get {
-                return ResourceManager.GetString("UpdateDownloadedRestartToInstall", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The update has been installed. Restart the app to apply changes. Restart now? 的本地化字符串。
-        /// </summary>
-        internal static string UpdateInstalledRestartNow {
-            get {
-                return ResourceManager.GetString("UpdateInstalledRestartNow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Update now 的本地化字符串。
-        /// </summary>
-        internal static string UpdateNow {
-            get {
-                return ResourceManager.GetString("UpdateNow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Value 的本地化字符串。
-        /// </summary>
-        internal static string Value {
-            get {
-                return ResourceManager.GetString("Value", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please verify your biometrics to continue 的本地化字符串。
-        /// </summary>
-        internal static string VerifyBiometricText {
-            get {
-                return ResourceManager.GetString("VerifyBiometricText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Verify mnemonic phrase 的本地化字符串。
-        /// </summary>
-        internal static string VerifyMnemonic {
-            get {
-                return ResourceManager.GetString("VerifyMnemonic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please select the words in the correct order to verify. 的本地化字符串。
-        /// </summary>
-        internal static string VerifyMnemonicPrompt {
-            get {
-                return ResourceManager.GetString("VerifyMnemonicPrompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Verify password 的本地化字符串。
-        /// </summary>
-        internal static string VerifyPassword {
-            get {
-                return ResourceManager.GetString("VerifyPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Enter your wallet password to continue. 的本地化字符串。
-        /// </summary>
-        internal static string VerifyPasswordToContinue {
-            get {
-                return ResourceManager.GetString("VerifyPasswordToContinue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Wallet 的本地化字符串。
-        /// </summary>
-        internal static string Wallet {
-            get {
-                return ResourceManager.GetString("Wallet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Wallet address 的本地化字符串。
-        /// </summary>
-        internal static string WalletAddress {
-            get {
-                return ResourceManager.GetString("WalletAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Wallet deleted 的本地化字符串。
-        /// </summary>
-        internal static string WalletDeleted {
-            get {
-                return ResourceManager.GetString("WalletDeleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 This action cannot be undone. Deleting the wallet will permanently erase local data. If you have not backed up your mnemonic phrase or private key, you will not be able to recover your wallet or its assets. 的本地化字符串。
-        /// </summary>
-        internal static string WalletDeletionIrreversibleWarning {
-            get {
-                return ResourceManager.GetString("WalletDeletionIrreversibleWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Wallet name 的本地化字符串。
-        /// </summary>
-        internal static string WalletName {
-            get {
-                return ResourceManager.GetString("WalletName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Wallet settings 的本地化字符串。
-        /// </summary>
-        internal static string WalletSettings {
-            get {
-                return ResourceManager.GetString("WalletSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Website 的本地化字符串。
-        /// </summary>
-        internal static string Website {
-            get {
-                return ResourceManager.GetString("Website", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Welcome to OneGate 的本地化字符串。
-        /// </summary>
-        internal static string WelcomePageTitle {
-            get {
-                return ResourceManager.GetString("WelcomePageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 WIF is an unencrypted private key in plain text. Anyone who obtains it can directly control and transfer your assets without any additional verification.
-        ///
-        ///Only view and store it in a secure, offline environment where no one can observe you. It is recommended to write it down or store it on a reliable offline medium, and keep backups in separate locations.
-        ///
-        ///Do not take screenshots or photos, or copy it to chat apps, email, notes, cloud storage, or any online environment. Never share it with anyone. 的本地化字符串。
-        /// </summary>
-        internal static string WifPrivateKeyWarning {
-            get {
-                return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transaction failed.
-        /// </summary>
-        internal static string TransactionFailed {
-            get {
-                return ResourceManager.GetString("TransactionFailed", resourceCulture);
-            }
-        }
         /// <summary>
         ///   查找类似 Report 的本地化字符串。
         /// </summary>
@@ -2968,6 +919,2075 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 {0} do not match 的本地化字符串。
+        /// </summary>
+        internal static string DefaultCompareErrorMessage {
+            get {
+                return ResourceManager.GetString("DefaultCompareErrorMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No content 的本地化字符串。
+        /// </summary>
+        internal static string DefaultEmptyViewMessage {
+            get {
+                return ResourceManager.GetString("DefaultEmptyViewMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} is out of range 的本地化字符串。
+        /// </summary>
+        internal static string DefaultOutOfRangeErrorMessage {
+            get {
+                return ResourceManager.GetString("DefaultOutOfRangeErrorMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} cannot be empty 的本地化字符串。
+        /// </summary>
+        internal static string DefaultRequiredErrorMessage {
+            get {
+                return ResourceManager.GetString("DefaultRequiredErrorMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} must be {1} characters long 的本地化字符串。
+        /// </summary>
+        internal static string DefaultStringLengthErrorMessageLength {
+            get {
+                return ResourceManager.GetString("DefaultStringLengthErrorMessageLength", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} must be at most {2} characters 的本地化字符串。
+        /// </summary>
+        internal static string DefaultStringLengthErrorMessageMax {
+            get {
+                return ResourceManager.GetString("DefaultStringLengthErrorMessageMax", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} must be between {1} and {2} characters 的本地化字符串。
+        /// </summary>
+        internal static string DefaultStringLengthErrorMessageMinMax {
+            get {
+                return ResourceManager.GetString("DefaultStringLengthErrorMessageMinMax", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Invalid {0} 的本地化字符串。
+        /// </summary>
+        internal static string DefaultValidatorErrorMessage {
+            get {
+                return ResourceManager.GetString("DefaultValidatorErrorMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Delete 的本地化字符串。
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Confirm deletion 的本地化字符串。
+        /// </summary>
+        internal static string DeleteConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteConfirmation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Are you sure you want to delete this address? 的本地化字符串。
+        /// </summary>
+        internal static string DeleteContactText {
+            get {
+                return ResourceManager.GetString("DeleteContactText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Delete wallet 的本地化字符串。
+        /// </summary>
+        internal static string DeleteWallet {
+            get {
+                return ResourceManager.GetString("DeleteWallet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 I understand the above risks and confirm that I have backed up my mnemonic phrase or private key 的本地化字符串。
+        /// </summary>
+        internal static string DeleteWalletConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteWalletConfirmation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Deleting a wallet is an irreversible and high-risk action. Once deleted, all data related to this wallet on the current device (including account information, transaction history, and local cache) will be permanently removed and cannot be recovered.
+        ///
+        ///Please make sure you have securely backed up the wallet’s mnemonic phrase or private key, and that the backup is accurate and safely stored. If you have not completed the backup or if it is lost, you will not be able to restore the wallet after deletion, and  [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string DeleteWalletWarningText {
+            get {
+                return ResourceManager.GetString("DeleteWalletWarningText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Description 的本地化字符串。
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Developer Center 的本地化字符串。
+        /// </summary>
+        internal static string DeveloperTools {
+            get {
+                return ResourceManager.GetString("DeveloperTools", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Disable biometric authentication 的本地化字符串。
+        /// </summary>
+        internal static string DisableBiometric {
+            get {
+                return ResourceManager.GetString("DisableBiometric", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Biometric authentication is currently enabled to authorize app access to your wallet. Disable biometric authentication?
+        ///
+        ///After disabling, you will need to manually enter your wallet password to authorize access. 的本地化字符串。
+        /// </summary>
+        internal static string DisableBiometricText {
+            get {
+                return ResourceManager.GetString("DisableBiometricText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Disabled 的本地化字符串。
+        /// </summary>
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Domain name 的本地化字符串。
+        /// </summary>
+        internal static string Domain {
+            get {
+                return ResourceManager.GetString("Domain", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Edit address 的本地化字符串。
+        /// </summary>
+        internal static string EditContact {
+            get {
+                return ResourceManager.GetString("EditContact", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Enabled 的本地化字符串。
+        /// </summary>
+        internal static string Enabled {
+            get {
+                return ResourceManager.GetString("Enabled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Enter custom address 的本地化字符串。
+        /// </summary>
+        internal static string EnterCustomAddress {
+            get {
+                return ResourceManager.GetString("EnterCustomAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Enter your mnemonic phrase, separated by spaces 的本地化字符串。
+        /// </summary>
+        internal static string EnterMnemonicPrompt {
+            get {
+                return ResourceManager.GetString("EnterMnemonicPrompt", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unable to access the camera 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageCameraFailure {
+            get {
+                return ResourceManager.GetString("ErrorMessageCameraFailure", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Incorrect password 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageIncorrectPassword {
+            get {
+                return ResourceManager.GetString("ErrorMessageIncorrectPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 You must copy down and properly back up the above mnemonic phrase, otherwise your assets will be permanently lost and cannot be recovered. 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageMnemonicBackup {
+            get {
+                return ResourceManager.GetString("ErrorMessageMnemonicBackup", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Incorrect mnemonic phrase. Please enter it in the correct order 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageMnemonicMismatch {
+            get {
+                return ResourceManager.GetString("ErrorMessageMnemonicMismatch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The passwords do not match 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessagePasswordsMismatch {
+            get {
+                return ResourceManager.GetString("ErrorMessagePasswordsMismatch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unable to recognize the QR code 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageUnableReadQRCode {
+            get {
+                return ResourceManager.GetString("ErrorMessageUnableReadQRCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unsupported QR code content: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageUnsupportedQRCode {
+            get {
+                return ResourceManager.GetString("ErrorMessageUnsupportedQRCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Execution result 的本地化字符串。
+        /// </summary>
+        internal static string ExecutionResult {
+            get {
+                return ResourceManager.GetString("ExecutionResult", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Export private key 的本地化字符串。
+        /// </summary>
+        internal static string ExportPrivateKey {
+            get {
+                return ResourceManager.GetString("ExportPrivateKey", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Favorites 的本地化字符串。
+        /// </summary>
+        internal static string Favorite {
+            get {
+                return ResourceManager.GetString("Favorite", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction fee 的本地化字符串。
+        /// </summary>
+        internal static string Fee {
+            get {
+                return ResourceManager.GetString("Fee", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 OneGate estimates network and system fees on the next screen before you sign. GAS transfers must leave enough GAS to cover both the transfer and fees. 的本地化字符串。
+        /// </summary>
+        internal static string FeeEstimateNoticeText {
+            get {
+                return ResourceManager.GetString("FeeEstimateNoticeText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Fee estimate 的本地化字符串。
+        /// </summary>
+        internal static string FeeEstimateNoticeTitle {
+            get {
+                return ResourceManager.GetString("FeeEstimateNoticeTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Field 的本地化字符串。
+        /// </summary>
+        internal static string Field {
+            get {
+                return ResourceManager.GetString("Field", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Format 的本地化字符串。
+        /// </summary>
+        internal static string Format {
+            get {
+                return ResourceManager.GetString("Format", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 From address 的本地化字符串。
+        /// </summary>
+        internal static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Game type 的本地化字符串。
+        /// </summary>
+        internal static string GameType {
+            get {
+                return ResourceManager.GetString("GameType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Action 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeAction {
+            get {
+                return ResourceManager.GetString("GameTypeAction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Board 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeBoard {
+            get {
+                return ResourceManager.GetString("GameTypeBoard", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Emulator 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeEmulator {
+            get {
+                return ResourceManager.GetString("GameTypeEmulator", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Racing 的本地化字符串。
+        /// </summary>
+        internal static string GameTypeRacing {
+            get {
+                return ResourceManager.GetString("GameTypeRacing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Gaming 的本地化字符串。
+        /// </summary>
+        internal static string Gaming {
+            get {
+                return ResourceManager.GetString("Gaming", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Pull down to refresh the game catalog. 的本地化字符串。
+        /// </summary>
+        internal static string GamingEmptyState {
+            get {
+                return ResourceManager.GetString("GamingEmptyState", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recently played 的本地化字符串。
+        /// </summary>
+        internal static string GamingRecentPlayed {
+            get {
+                return ResourceManager.GetString("GamingRecentPlayed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 General 的本地化字符串。
+        /// </summary>
+        internal static string General {
+            get {
+                return ResourceManager.GetString("General", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Generate mnemonic phrase 的本地化字符串。
+        /// </summary>
+        internal static string GenerateMnemonic {
+            get {
+                return ResourceManager.GetString("GenerateMnemonic", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Hidden assets 的本地化字符串。
+        /// </summary>
+        internal static string HiddenAssets {
+            get {
+                return ResourceManager.GetString("HiddenAssets", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Hide 的本地化字符串。
+        /// </summary>
+        internal static string Hide {
+            get {
+                return ResourceManager.GetString("Hide", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Home 的本地化字符串。
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Address to import 的本地化字符串。
+        /// </summary>
+        internal static string ImportAddress {
+            get {
+                return ResourceManager.GetString("ImportAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Please select an import type 的本地化字符串。
+        /// </summary>
+        internal static string ImportTypeRequired {
+            get {
+                return ResourceManager.GetString("ImportTypeRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Import via mnemonic phrase 的本地化字符串。
+        /// </summary>
+        internal static string ImportViaMnemonicCode {
+            get {
+                return ResourceManager.GetString("ImportViaMnemonicCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Import via NEP-2 的本地化字符串。
+        /// </summary>
+        internal static string ImportViaNep2 {
+            get {
+                return ResourceManager.GetString("ImportViaNep2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Import via private key 的本地化字符串。
+        /// </summary>
+        internal static string ImportViaPrivateKey {
+            get {
+                return ResourceManager.GetString("ImportViaPrivateKey", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Import wallet 的本地化字符串。
+        /// </summary>
+        internal static string ImportWallet {
+            get {
+                return ResourceManager.GetString("ImportWallet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Install 的本地化字符串。
+        /// </summary>
+        internal static string Install {
+            get {
+                return ResourceManager.GetString("Install", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Insufficient balance to cover the amount and fees. The maximum you can send is {0} GAS. 的本地化字符串。
+        /// </summary>
+        internal static string InsufficientBalanceForAmountAndFees {
+            get {
+                return ResourceManager.GetString("InsufficientBalanceForAmountAndFees", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Description 的本地化字符串。
+        /// </summary>
+        internal static string Introduction {
+            get {
+                return ResourceManager.GetString("Introduction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Invalid callback URL format 的本地化字符串。
+        /// </summary>
+        internal static string InvalidCallbackURLFormat {
+            get {
+                return ResourceManager.GetString("InvalidCallbackURLFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Name 的本地化字符串。
+        /// </summary>
+        internal static string Label {
+            get {
+                return ResourceManager.GetString("Label", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Language 的本地化字符串。
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Language updated 的本地化字符串。
+        /// </summary>
+        internal static string LanguageChanged {
+            get {
+                return ResourceManager.GetString("LanguageChanged", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Last checked: {0} 的本地化字符串。
+        /// </summary>
+        internal static string LastCheckedAt {
+            get {
+                return ResourceManager.GetString("LastCheckedAt", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Loading 的本地化字符串。
+        /// </summary>
+        internal static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Loading wallet data 的本地化字符串。
+        /// </summary>
+        internal static string LoadingWalletData {
+            get {
+                return ResourceManager.GetString("LoadingWalletData", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Your private key, mnemonic phrase, password, and other sensitive information are stored only on your local device. OneGate does not upload, sync, or store any copies. 的本地化字符串。
+        /// </summary>
+        internal static string LocalSensitiveDataNotice {
+            get {
+                return ResourceManager.GetString("LocalSensitiveDataNotice", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Login request 的本地化字符串。
+        /// </summary>
+        internal static string LoginRequest {
+            get {
+                return ResourceManager.GetString("LoginRequest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review this request before authorizing wallet access. 的本地化字符串。
+        /// </summary>
+        internal static string LoginRequestReviewText {
+            get {
+                return ResourceManager.GetString("LoginRequestReviewText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The app is requesting to sign in with your wallet address. Allow? 的本地化字符串。
+        /// </summary>
+        internal static string LoginRequestText {
+            get {
+                return ResourceManager.GetString("LoginRequestText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Manage biometrics 的本地化字符串。
+        /// </summary>
+        internal static string ManageBiometrics {
+            get {
+                return ResourceManager.GetString("ManageBiometrics", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Manage wallet password 的本地化字符串。
+        /// </summary>
+        internal static string ManageWalletPassword {
+            get {
+                return ResourceManager.GetString("ManageWalletPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Change the password used to unlock and sign with this wallet. 的本地化字符串。
+        /// </summary>
+        internal static string ManageWalletPasswordText {
+            get {
+                return ResourceManager.GetString("ManageWalletPasswordText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Marketplace 的本地化字符串。
+        /// </summary>
+        internal static string Marketplace {
+            get {
+                return ResourceManager.GetString("Marketplace", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Message 的本地化字符串。
+        /// </summary>
+        internal static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Mnemonic 的本地化字符串。
+        /// </summary>
+        internal static string Mnemonic {
+            get {
+                return ResourceManager.GetString("Mnemonic", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Your mnemonic phrase consists of 24 words and can be used to recover your funds. Be sure to write it down and keep it safe. Never share it with anyone. 的本地化字符串。
+        /// </summary>
+        internal static string MnemonicImportanceContent {
+            get {
+                return ResourceManager.GetString("MnemonicImportanceContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Importance of the mnemonic phrase 的本地化字符串。
+        /// </summary>
+        internal static string MnemonicImportanceTitle {
+            get {
+                return ResourceManager.GetString("MnemonicImportanceTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Name 的本地化字符串。
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 NEP-2 key 的本地化字符串。
+        /// </summary>
+        internal static string Nep2Key {
+            get {
+                return ResourceManager.GetString("Nep2Key", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 NEP-2 is an encrypted private key protected by a password. It requires your wallet password to use and is suitable for storage and backup.
+        ///
+        ///Please note: The NEP-2 key and its corresponding password are both required. If someone obtains both, they can control and transfer your assets. If you lose the NEP-2 key or forget the password, your assets cannot be recovered.
+        ///
+        ///It is recommended to store the NEP-2 key and password separately and back them up securely. Avoid keeping them on the same device or within [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string Nep2PrivateKeyWarning {
+            get {
+                return ResourceManager.GetString("Nep2PrivateKeyWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Network 的本地化字符串。
+        /// </summary>
+        internal static string Network {
+            get {
+                return ResourceManager.GetString("Network", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Network status 的本地化字符串。
+        /// </summary>
+        internal static string NetworkStatus {
+            get {
+                return ResourceManager.GetString("NetworkStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 News Categories 的本地化字符串。
+        /// </summary>
+        internal static string NewsCategories {
+            get {
+                return ResourceManager.GetString("NewsCategories", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 New version available 的本地化字符串。
+        /// </summary>
+        internal static string NewVersionAvailable {
+            get {
+                return ResourceManager.GetString("NewVersionAvailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Next 的本地化字符串。
+        /// </summary>
+        internal static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No addresses 的本地化字符串。
+        /// </summary>
+        internal static string NoAddress {
+            get {
+                return ResourceManager.GetString("NoAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Your address book is empty 的本地化字符串。
+        /// </summary>
+        internal static string NoAddressText {
+            get {
+                return ResourceManager.GetString("NoAddressText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No assets in your wallet 的本地化字符串。
+        /// </summary>
+        internal static string NoAssetText {
+            get {
+                return ResourceManager.GetString("NoAssetText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No hidden assets 的本地化字符串。
+        /// </summary>
+        internal static string NoHiddenAssets {
+            get {
+                return ResourceManager.GetString("NoHiddenAssets", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Open asset details in your wallet to manage settings 的本地化字符串。
+        /// </summary>
+        internal static string NoHiddenAssetsText {
+            get {
+                return ResourceManager.GetString("NoHiddenAssetsText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No NFTs in your wallet 的本地化字符串。
+        /// </summary>
+        internal static string NoNftText {
+            get {
+                return ResourceManager.GetString("NoNftText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No parameters 的本地化字符串。
+        /// </summary>
+        internal static string NoParameters {
+            get {
+                return ResourceManager.GetString("NoParameters", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No news sources 的本地化字符串。
+        /// </summary>
+        internal static string NoRssText {
+            get {
+                return ResourceManager.GetString("NoRssText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No updates available 的本地化字符串。
+        /// </summary>
+        internal static string NoUpdatesAvailable {
+            get {
+                return ResourceManager.GetString("NoUpdatesAvailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 OK 的本地化字符串。
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Open 的本地化字符串。
+        /// </summary>
+        internal static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unable to return to the DApp 的本地化字符串。
+        /// </summary>
+        internal static string OpenDAppFailedText {
+            get {
+                return ResourceManager.GetString("OpenDAppFailedText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Open NFT link 的本地化字符串。
+        /// </summary>
+        internal static string OpenNFTLink {
+            get {
+                return ResourceManager.GetString("OpenNFTLink", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Method 的本地化字符串。
+        /// </summary>
+        internal static string Operation {
+            get {
+                return ResourceManager.GetString("Operation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Operation cancelled 的本地化字符串。
+        /// </summary>
+        internal static string OperationCancelled {
+            get {
+                return ResourceManager.GetString("OperationCancelled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Other 的本地化字符串。
+        /// </summary>
+        internal static string Others {
+            get {
+                return ResourceManager.GetString("Others", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This address belongs to the current wallet. You can continue, but make sure sending to yourself is intentional. 的本地化字符串。
+        /// </summary>
+        internal static string OwnWalletAddressText {
+            get {
+                return ResourceManager.GetString("OwnWalletAddressText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Your wallet address 的本地化字符串。
+        /// </summary>
+        internal static string OwnWalletAddressTitle {
+            get {
+                return ResourceManager.GetString("OwnWalletAddressTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Password 的本地化字符串。
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Password updated 的本地化字符串。
+        /// </summary>
+        internal static string PasswordChanged {
+            get {
+                return ResourceManager.GetString("PasswordChanged", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Please note: If you forget your wallet password, it cannot be recovered. Make sure to remember your password. 的本地化字符串。
+        /// </summary>
+        internal static string PasswordImportanceContent {
+            get {
+                return ResourceManager.GetString("PasswordImportanceContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Importance of the password 的本地化字符串。
+        /// </summary>
+        internal static string PasswordImportanceTitle {
+            get {
+                return ResourceManager.GetString("PasswordImportanceTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Protected 的本地化字符串。
+        /// </summary>
+        internal static string PasswordProtected {
+            get {
+                return ResourceManager.GetString("PasswordProtected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Password-protected private key (NEP-2) 的本地化字符串。
+        /// </summary>
+        internal static string PasswordProtectedPrivateKeyNep2 {
+            get {
+                return ResourceManager.GetString("PasswordProtectedPrivateKeyNep2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Your local wallet requires its password before signing sensitive actions. 的本地化字符串。
+        /// </summary>
+        internal static string PasswordProtectedText {
+            get {
+                return ResourceManager.GetString("PasswordProtectedText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Password 的本地化字符串。
+        /// </summary>
+        internal static string PasswordStatus {
+            get {
+                return ResourceManager.GetString("PasswordStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No permission 的本地化字符串。
+        /// </summary>
+        internal static string PermissionDenied {
+            get {
+                return ResourceManager.GetString("PermissionDenied", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Select address 的本地化字符串。
+        /// </summary>
+        internal static string PickAddress {
+            get {
+                return ResourceManager.GetString("PickAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The app requests you to select or enter an address: 的本地化字符串。
+        /// </summary>
+        internal static string PickAddressText {
+            get {
+                return ResourceManager.GetString("PickAddressText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Plain private key (WIF) 的本地化字符串。
+        /// </summary>
+        internal static string PlaintextPrivateKeyWif {
+            get {
+                return ResourceManager.GetString("PlaintextPrivateKeyWif", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Screenshots 的本地化字符串。
+        /// </summary>
+        internal static string Preview {
+            get {
+                return ResourceManager.GetString("Preview", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Privacy mode 的本地化字符串。
+        /// </summary>
+        internal static string PrivacyMode {
+            get {
+                return ResourceManager.GetString("PrivacyMode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Hide balances in wallet screens when you are in public or sharing your screen. 的本地化字符串。
+        /// </summary>
+        internal static string PrivacyModeText {
+            get {
+                return ResourceManager.GetString("PrivacyModeText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Privacy Policy 的本地化字符串。
+        /// </summary>
+        internal static string PrivacyPolicy {
+            get {
+                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Privacy Policy 的本地化字符串。
+        /// </summary>
+        internal static string PrivacyPolicyWithBrackets {
+            get {
+                return ResourceManager.GetString("PrivacyPolicyWithBrackets", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Private key 的本地化字符串。
+        /// </summary>
+        internal static string PrivateKey {
+            get {
+                return ResourceManager.GetString("PrivateKey", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Exporting your private key exposes full control over your wallet assets. If the private key is compromised, anyone can transfer your assets, and this cannot be reversed or recovered.
+        ///
+        ///Make sure to perform this action in a secure, offline environment where no one can observe you. Do not take screenshots, photos, or copy it to chat apps, email, or cloud storage. Never share your private key with anyone.
+        ///
+        ///Please note: We do not store or manage your private key. If it is lost, forgotten, or damaged, it cann [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string PrivateKeyExportWarning {
+            get {
+                return ResourceManager.GetString("PrivateKeyExportWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Private key security notice 的本地化字符串。
+        /// </summary>
+        internal static string PrivateKeySecurity {
+            get {
+                return ResourceManager.GetString("PrivateKeySecurity", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 QR code saved 的本地化字符串。
+        /// </summary>
+        internal static string QRCodeSaved {
+            get {
+                return ResourceManager.GetString("QRCodeSaved", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Receive 的本地化字符串。
+        /// </summary>
+        internal static string Receive {
+            get {
+                return ResourceManager.GetString("Receive", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This address can receive all assets on the Neo platform. 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveQRCodeText {
+            get {
+                return ResourceManager.GetString("ReceiveQRCodeText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Please scan the QR code to send me a transfer 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveQRCodeTitle {
+            get {
+                return ResourceManager.GetString("ReceiveQRCodeTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Receiving address 的本地化字符串。
+        /// </summary>
+        internal static string ReceivingAddress {
+            get {
+                return ResourceManager.GetString("ReceivingAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recents 的本地化字符串。
+        /// </summary>
+        internal static string Recent {
+            get {
+                return ResourceManager.GetString("Recent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Scan QR code 的本地化字符串。
+        /// </summary>
+        internal static string RecognizeQRCode {
+            get {
+                return ResourceManager.GetString("RecognizeQRCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 History 的本地化字符串。
+        /// </summary>
+        internal static string Records {
+            get {
+                return ResourceManager.GetString("Records", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 External link navigation blocked 的本地化字符串。
+        /// </summary>
+        internal static string RedirectionBlockedText {
+            get {
+                return ResourceManager.GetString("RedirectionBlockedText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Re-enter password 的本地化字符串。
+        /// </summary>
+        internal static string RepeatPassword {
+            get {
+                return ResourceManager.GetString("RepeatPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Restart 的本地化字符串。
+        /// </summary>
+        internal static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review 的本地化字符串。
+        /// </summary>
+        internal static string Review {
+            get {
+                return ResourceManager.GetString("Review", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review recovery backup 的本地化字符串。
+        /// </summary>
+        internal static string ReviewBackup {
+            get {
+                return ResourceManager.GetString("ReviewBackup", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Open the wallet export flow and review secure storage options. 的本地化字符串。
+        /// </summary>
+        internal static string ReviewBackupText {
+            get {
+                return ResourceManager.GetString("ReviewBackupText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} is responding. Current block: {1:N0}. 的本地化字符串。
+        /// </summary>
+        internal static string RpcStatusConnectedText {
+            get {
+                return ResourceManager.GetString("RpcStatusConnectedText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} did not respond. Transfers may fail until the connection recovers. 的本地化字符串。
+        /// </summary>
+        internal static string RpcStatusUnavailableText {
+            get {
+                return ResourceManager.GetString("RpcStatusUnavailableText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Save to gallery 的本地化字符串。
+        /// </summary>
+        internal static string SaveToPhotoLibrary {
+            get {
+                return ResourceManager.GetString("SaveToPhotoLibrary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Scan QR code from gallery 的本地化字符串。
+        /// </summary>
+        internal static string ScanFromPhotoLibrary {
+            get {
+                return ResourceManager.GetString("ScanFromPhotoLibrary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Scan 的本地化字符串。
+        /// </summary>
+        internal static string ScanQRCode {
+            get {
+                return ResourceManager.GetString("ScanQRCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Screenshot failed 的本地化字符串。
+        /// </summary>
+        internal static string ScreenshotFailed {
+            get {
+                return ResourceManager.GetString("ScreenshotFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Search 的本地化字符串。
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Security 的本地化字符串。
+        /// </summary>
+        internal static string Security {
+            get {
+                return ResourceManager.GetString("Security", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This recipient matches "{0}" in your local address book. 的本地化字符串。
+        /// </summary>
+        internal static string SavedAddressText {
+            get {
+                return ResourceManager.GetString("SavedAddressText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Saved address 的本地化字符串。
+        /// </summary>
+        internal static string SavedAddressTitle {
+            get {
+                return ResourceManager.GetString("SavedAddressTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Security actions 的本地化字符串。
+        /// </summary>
+        internal static string SecurityActions {
+            get {
+                return ResourceManager.GetString("SecurityActions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Security Center 的本地化字符串。
+        /// </summary>
+        internal static string SecurityCenter {
+            get {
+                return ResourceManager.GetString("SecurityCenter", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review wallet protection, device approval, network status, privacy mode, and dApp request handling. 的本地化字符串。
+        /// </summary>
+        internal static string SecurityCenterSummaryText {
+            get {
+                return ResourceManager.GetString("SecurityCenterSummaryText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet protection at a glance 的本地化字符串。
+        /// </summary>
+        internal static string SecurityCenterSummaryTitle {
+            get {
+                return ResourceManager.GetString("SecurityCenterSummaryTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Security status 的本地化字符串。
+        /// </summary>
+        internal static string SecurityStatus {
+            get {
+                return ResourceManager.GetString("SecurityStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Select an address from your wallet 的本地化字符串。
+        /// </summary>
+        internal static string SelectAddressFromWallet {
+            get {
+                return ResourceManager.GetString("SelectAddressFromWallet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This recovery phrase may correspond to multiple addresses. Please select the address you want to import. 的本地化字符串。
+        /// </summary>
+        internal static string SelectAddressToImportFromMnemonic {
+            get {
+                return ResourceManager.GetString("SelectAddressToImportFromMnemonic", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Select asset 的本地化字符串。
+        /// </summary>
+        internal static string SelectAsset {
+            get {
+                return ResourceManager.GetString("SelectAsset", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Select recipient address 的本地化字符串。
+        /// </summary>
+        internal static string SelectContact {
+            get {
+                return ResourceManager.GetString("SelectContact", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Select import type 的本地化字符串。
+        /// </summary>
+        internal static string SelectImportType {
+            get {
+                return ResourceManager.GetString("SelectImportType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Select export format 的本地化字符串。
+        /// </summary>
+        internal static string SelectPrivateKeyFormat {
+            get {
+                return ResourceManager.GetString("SelectPrivateKeyFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Send 的本地化字符串。
+        /// </summary>
+        internal static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Sending transaction 的本地化字符串。
+        /// </summary>
+        internal static string SendingTransaction {
+            get {
+                return ResourceManager.GetString("SendingTransaction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Send transaction 的本地化字符串。
+        /// </summary>
+        internal static string SendTransaction {
+            get {
+                return ResourceManager.GetString("SendTransaction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 You are initiating a transfer transaction: 的本地化字符串。
+        /// </summary>
+        internal static string SendTransactionByUserText {
+            get {
+                return ResourceManager.GetString("SendTransactionByUserText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The app is requesting to send a transaction: 的本地化字符串。
+        /// </summary>
+        internal static string SendTransactionText {
+            get {
+                return ResourceManager.GetString("SendTransactionText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transfer 的本地化字符串。
+        /// </summary>
+        internal static string Transfer {
+            get {
+                return ResourceManager.GetString("Transfer", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Sensitive information security notice 的本地化字符串。
+        /// </summary>
+        internal static string SensitiveDataSecurityNotice {
+            get {
+                return ResourceManager.GetString("SensitiveDataSecurityNotice", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Set password 的本地化字符串。
+        /// </summary>
+        internal static string SetPassword {
+            get {
+                return ResourceManager.GetString("SetPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Settings 的本地化字符串。
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Share 的本地化字符串。
+        /// </summary>
+        internal static string Share {
+            get {
+                return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 I found something interesting on OneGate: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ShareAppText {
+            get {
+                return ResourceManager.GetString("ShareAppText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Will appear after you set a password 的本地化字符串。
+        /// </summary>
+        internal static string ShownAfterSettingPassword {
+            get {
+                return ResourceManager.GetString("ShownAfterSettingPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 View original 的本地化字符串。
+        /// </summary>
+        internal static string ShowOriginalText {
+            get {
+                return ResourceManager.GetString("ShowOriginalText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signing account 的本地化字符串。
+        /// </summary>
+        internal static string SigningAccount {
+            get {
+                return ResourceManager.GetString("SigningAccount", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signing in 的本地化字符串。
+        /// </summary>
+        internal static string SigningIn {
+            get {
+                return ResourceManager.GetString("SigningIn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Sign in with Neo 的本地化字符串。
+        /// </summary>
+        internal static string SignInWithNeo {
+            get {
+                return ResourceManager.GetString("SignInWithNeo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Message signing 的本地化字符串。
+        /// </summary>
+        internal static string SignMessage {
+            get {
+                return ResourceManager.GetString("SignMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The app is requesting to sign a message. Allow? 的本地化字符串。
+        /// </summary>
+        internal static string SignMessageRequestText {
+            get {
+                return ResourceManager.GetString("SignMessageRequestText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The app is requesting to sign a message: 的本地化字符串。
+        /// </summary>
+        internal static string SignMessageText {
+            get {
+                return ResourceManager.GetString("SignMessageText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction signing 的本地化字符串。
+        /// </summary>
+        internal static string SignTransaction {
+            get {
+                return ResourceManager.GetString("SignTransaction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction signing failed 的本地化字符串。
+        /// </summary>
+        internal static string SignTransactionFailed {
+            get {
+                return ResourceManager.GetString("SignTransactionFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The app is requesting to sign a transaction: 的本地化字符串。
+        /// </summary>
+        internal static string SignTransactionText {
+            get {
+                return ResourceManager.GetString("SignTransactionText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Skip 的本地化字符串。
+        /// </summary>
+        internal static string Skip {
+            get {
+                return ResourceManager.GetString("Skip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Social 的本地化字符串。
+        /// </summary>
+        internal static string Social {
+            get {
+                return ResourceManager.GetString("Social", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Status 的本地化字符串。
+        /// </summary>
+        internal static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Success 的本地化字符串。
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Supported languages 的本地化字符串。
+        /// </summary>
+        internal static string SupportedLanguages {
+            get {
+                return ResourceManager.GetString("SupportedLanguages", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Follow system 的本地化字符串。
+        /// </summary>
+        internal static string SystemLanguage {
+            get {
+                return ResourceManager.GetString("SystemLanguage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Terms of Service 的本地化字符串。
+        /// </summary>
+        internal static string TermsOfService {
+            get {
+                return ResourceManager.GetString("TermsOfService", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Terms of Service 的本地化字符串。
+        /// </summary>
+        internal static string TermsOfServiceWithBrackets {
+            get {
+                return ResourceManager.GetString("TermsOfServiceWithBrackets", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Time 的本地化字符串。
+        /// </summary>
+        internal static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Token 的本地化字符串。
+        /// </summary>
+        internal static string Token {
+            get {
+                return ResourceManager.GetString("Token", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 ID 的本地化字符串。
+        /// </summary>
+        internal static string TokenId {
+            get {
+                return ResourceManager.GetString("TokenId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Tools 的本地化字符串。
+        /// </summary>
+        internal static string Tools {
+            get {
+                return ResourceManager.GetString("Tools", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction pending confirmation 的本地化字符串。
+        /// </summary>
+        internal static string TransactionConfirming {
+            get {
+                return ResourceManager.GetString("TransactionConfirming", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction details 的本地化字符串。
+        /// </summary>
+        internal static string TransactionDetails {
+            get {
+                return ResourceManager.GetString("TransactionDetails", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction successful 的本地化字符串。
+        /// </summary>
+        internal static string TransactionSucceeded {
+            get {
+                return ResourceManager.GetString("TransactionSucceeded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction ID 的本地化字符串。
+        /// </summary>
+        internal static string TxID {
+            get {
+                return ResourceManager.GetString("TxID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unavailable 的本地化字符串。
+        /// </summary>
+        internal static string Unavailable {
+            get {
+                return ResourceManager.GetString("Unavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unhide 的本地化字符串。
+        /// </summary>
+        internal static string Unhide {
+            get {
+                return ResourceManager.GetString("Unhide", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown address 的本地化字符串。
+        /// </summary>
+        internal static string UnknownAddress {
+            get {
+                return ResourceManager.GetString("UnknownAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This address is not saved in your address book. Verify the full address carefully; blockchain transfers cannot be reversed. 的本地化字符串。
+        /// </summary>
+        internal static string UnknownAddressRiskText {
+            get {
+                return ResourceManager.GetString("UnknownAddressRiskText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown address 的本地化字符串。
+        /// </summary>
+        internal static string UnknownAddressRiskTitle {
+            get {
+                return ResourceManager.GetString("UnknownAddressRiskTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown error 的本地化字符串。
+        /// </summary>
+        internal static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unlocking wallet 的本地化字符串。
+        /// </summary>
+        internal static string UnlockingWallet {
+            get {
+                return ResourceManager.GetString("UnlockingWallet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Update app 的本地化字符串。
+        /// </summary>
+        internal static string UpdateApp {
+            get {
+                return ResourceManager.GetString("UpdateApp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The update has been downloaded. Restart now to install? 的本地化字符串。
+        /// </summary>
+        internal static string UpdateDownloadedRestartToInstall {
+            get {
+                return ResourceManager.GetString("UpdateDownloadedRestartToInstall", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 The update has been installed. Restart the app to apply changes. Restart now? 的本地化字符串。
+        /// </summary>
+        internal static string UpdateInstalledRestartNow {
+            get {
+                return ResourceManager.GetString("UpdateInstalledRestartNow", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Update now 的本地化字符串。
+        /// </summary>
+        internal static string UpdateNow {
+            get {
+                return ResourceManager.GetString("UpdateNow", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Value 的本地化字符串。
+        /// </summary>
+        internal static string Value {
+            get {
+                return ResourceManager.GetString("Value", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Please verify your biometrics to continue 的本地化字符串。
+        /// </summary>
+        internal static string VerifyBiometricText {
+            get {
+                return ResourceManager.GetString("VerifyBiometricText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Verify mnemonic phrase 的本地化字符串。
+        /// </summary>
+        internal static string VerifyMnemonic {
+            get {
+                return ResourceManager.GetString("VerifyMnemonic", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Please select the words in the correct order to verify. 的本地化字符串。
+        /// </summary>
+        internal static string VerifyMnemonicPrompt {
+            get {
+                return ResourceManager.GetString("VerifyMnemonicPrompt", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Verify password 的本地化字符串。
+        /// </summary>
+        internal static string VerifyPassword {
+            get {
+                return ResourceManager.GetString("VerifyPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Enter your wallet password to continue. 的本地化字符串。
+        /// </summary>
+        internal static string VerifyPasswordToContinue {
+            get {
+                return ResourceManager.GetString("VerifyPasswordToContinue", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet 的本地化字符串。
+        /// </summary>
+        internal static string Wallet {
+            get {
+                return ResourceManager.GetString("Wallet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet address 的本地化字符串。
+        /// </summary>
+        internal static string WalletAddress {
+            get {
+                return ResourceManager.GetString("WalletAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet deleted 的本地化字符串。
+        /// </summary>
+        internal static string WalletDeleted {
+            get {
+                return ResourceManager.GetString("WalletDeleted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This action cannot be undone. Deleting the wallet will permanently erase local data. If you have not backed up your mnemonic phrase or private key, you will not be able to recover your wallet or its assets. 的本地化字符串。
+        /// </summary>
+        internal static string WalletDeletionIrreversibleWarning {
+            get {
+                return ResourceManager.GetString("WalletDeletionIrreversibleWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet name 的本地化字符串。
+        /// </summary>
+        internal static string WalletName {
+            get {
+                return ResourceManager.GetString("WalletName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Wallet settings 的本地化字符串。
+        /// </summary>
+        internal static string WalletSettings {
+            get {
+                return ResourceManager.GetString("WalletSettings", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Website 的本地化字符串。
+        /// </summary>
+        internal static string Website {
+            get {
+                return ResourceManager.GetString("Website", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Welcome to OneGate 的本地化字符串。
+        /// </summary>
+        internal static string WelcomePageTitle {
+            get {
+                return ResourceManager.GetString("WelcomePageTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 WIF is an unencrypted private key in plain text. Anyone who obtains it can directly control and transfer your assets without any additional verification.
+        ///
+        ///Only view and store it in a secure, offline environment where no one can observe you. It is recommended to write it down or store it on a reliable offline medium, and keep backups in separate locations.
+        ///
+        ///Do not take screenshots or photos, or copy it to chat apps, email, notes, cloud storage, or any online environment. Never share it with anyone. 的本地化字符串。
+        /// </summary>
+        internal static string WifPrivateKeyWarning {
+            get {
+                return ResourceManager.GetString("WifPrivateKeyWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        internal static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized string similar to Search name, address, or note.
+        /// </summary>
+        internal static string SearchAddressBook {
+            get {
+                return ResourceManager.GetString("SearchAddressBook", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Failed.
         /// </summary>
         internal static string Failed {
@@ -2976,5 +2996,40 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction failed.
+        /// </summary>
+        internal static string TransactionFailed {
+            get {
+                return ResourceManager.GetString("TransactionFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        internal static string Pending {
+            get {
+                return ResourceManager.GetString("Pending", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Retry.
+        /// </summary>
+        internal static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Still waiting for confirmation.
+        /// </summary>
+        internal static string TransactionStillPending {
+            get {
+                return ResourceManager.GetString("TransactionStillPending", resourceCulture);
+            }
+        }
     }
 }

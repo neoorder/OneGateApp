@@ -950,6 +950,51 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Envoyer par e-mail</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Signaler</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Dites-nous ce qui ne va pas avec cette DApp. Nous pouvons vous contacter par e-mail si nous avons besoin de précisions.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Motif</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Détails supplémentaires (facultatif)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Signalement envoyé</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Vous avez déjà signalé cette DApp au cours des dernières 24 heures.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Impossible d&apos;envoyer le signalement. Veuillez réessayer.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Veuillez saisir une adresse e-mail valide.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Arnaque ou hameçonnage</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Logiciel malveillant ou comportement nuisible</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Contenu illégal</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Contenu inapproprié</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Problème de droits d&apos;auteur</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Autre</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Disponible</value>
   </data>
@@ -1055,55 +1100,28 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponible</value>
   </data>
-  <data name="TransactionFailed" xml:space="preserve">
-    <value>Transaction échouée</value>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Le nom existe déjà</value>
   </data>
-  <data name="Report" xml:space="preserve">
-    <value>Signaler</value>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
   </data>
-  <data name="ReportDAppText" xml:space="preserve">
-    <value>Dites-nous ce qui ne va pas avec cette DApp. Nous pouvons vous contacter par e-mail si nous avons besoin de précisions.</value>
-  </data>
-  <data name="ReportReason" xml:space="preserve">
-    <value>Motif</value>
-  </data>
-  <data name="ReporterEmail" xml:space="preserve">
-    <value>E-mail</value>
-  </data>
-  <data name="ReportMessage" xml:space="preserve">
-    <value>Détails supplémentaires (facultatif)</value>
-  </data>
-  <data name="ReportSubmitted" xml:space="preserve">
-    <value>Signalement envoyé</value>
-  </data>
-  <data name="ReportAlreadySubmitted" xml:space="preserve">
-    <value>Vous avez déjà signalé cette DApp au cours des dernières 24 heures.</value>
-  </data>
-  <data name="ReportFailed" xml:space="preserve">
-    <value>Impossible d&apos;envoyer le signalement. Veuillez réessayer.</value>
-  </data>
-  <data name="InvalidEmailAddress" xml:space="preserve">
-    <value>Veuillez saisir une adresse e-mail valide.</value>
-  </data>
-  <data name="ReportReasonScam" xml:space="preserve">
-    <value>Arnaque ou hameçonnage</value>
-  </data>
-  <data name="ReportReasonMalware" xml:space="preserve">
-    <value>Logiciel malveillant ou comportement nuisible</value>
-  </data>
-  <data name="ReportReasonIllegalContent" xml:space="preserve">
-    <value>Contenu illégal</value>
-  </data>
-  <data name="ReportReasonInappropriateContent" xml:space="preserve">
-    <value>Contenu inapproprié</value>
-  </data>
-  <data name="ReportReasonCopyright" xml:space="preserve">
-    <value>Problème de droits d&apos;auteur</value>
-  </data>
-  <data name="ReportReasonOther" xml:space="preserve">
-    <value>Autre</value>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Rechercher un nom, une adresse ou une note</value>
   </data>
   <data name="Failed" xml:space="preserve">
     <value>Échec</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaction échouée</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>En attente</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Réessayer</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Toujours en attente de confirmation</value>
   </data>
 </root>

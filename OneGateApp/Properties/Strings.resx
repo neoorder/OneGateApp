@@ -391,9 +391,6 @@ After disabling, you will need to manually enter your wallet password to authori
   <data name="EnterCustomAddress" xml:space="preserve">
     <value>Enter custom address</value>
   </data>
-  <data name="Transfer" xml:space="preserve">
-    <value>Transfer</value>
-  </data>
   <data name="From" xml:space="preserve">
     <value>From address</value>
   </data>
@@ -540,6 +537,9 @@ After disabling, you will need to manually enter your wallet password to authori
   </data>
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>Address already exists</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Name already exists</value>
   </data>
   <data name="EditContact" xml:space="preserve">
     <value>Edit address</value>
@@ -950,6 +950,51 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Submit by email</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Tell us what is wrong with this DApp. We may contact you by email if we need more details.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Additional details (optional)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Report submitted</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>You have already reported this DApp in the last 24 hours.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Unable to submit report. Please try again.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Email must be a valid email address.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Scam or phishing</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Malware or harmful behavior</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Illegal content</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Inappropriate content</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Copyright issue</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Available</value>
   </data>
@@ -1055,55 +1100,28 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Unavailable" xml:space="preserve">
     <value>Unavailable</value>
   </data>
-  <data name="TransactionFailed" xml:space="preserve">
-    <value>Transaction failed</value>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
   </data>
-  <data name="Report" xml:space="preserve">
-    <value>Report</value>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Search name, address, or note</value>
   </data>
-  <data name="ReportDAppText" xml:space="preserve">
-    <value>Tell us what is wrong with this DApp. We may contact you by email if we need more details.</value>
-  </data>
-  <data name="ReportReason" xml:space="preserve">
-    <value>Reason</value>
-  </data>
-  <data name="ReporterEmail" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="ReportMessage" xml:space="preserve">
-    <value>Additional details (optional)</value>
-  </data>
-  <data name="ReportSubmitted" xml:space="preserve">
-    <value>Report submitted</value>
-  </data>
-  <data name="ReportAlreadySubmitted" xml:space="preserve">
-    <value>You have already reported this DApp in the last 24 hours.</value>
-  </data>
-  <data name="ReportFailed" xml:space="preserve">
-    <value>Unable to submit report. Please try again.</value>
-  </data>
-  <data name="InvalidEmailAddress" xml:space="preserve">
-    <value>Email must be a valid email address.</value>
-  </data>
-  <data name="ReportReasonScam" xml:space="preserve">
-    <value>Scam or phishing</value>
-  </data>
-  <data name="ReportReasonMalware" xml:space="preserve">
-    <value>Malware or harmful behavior</value>
-  </data>
-  <data name="ReportReasonIllegalContent" xml:space="preserve">
-    <value>Illegal content</value>
-  </data>
-  <data name="ReportReasonInappropriateContent" xml:space="preserve">
-    <value>Inappropriate content</value>
-  </data>
-  <data name="ReportReasonCopyright" xml:space="preserve">
-    <value>Copyright issue</value>
-  </data>
-  <data name="ReportReasonOther" xml:space="preserve">
-    <value>Other</value>
+  <data name="Transfer" xml:space="preserve">
+    <value>Transfer</value>
   </data>
   <data name="Failed" xml:space="preserve">
     <value>Failed</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Transaction failed</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Still waiting for confirmation</value>
   </data>
 </root>
