@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Properties;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 
 namespace NeoOrder.OneGate.Data;
@@ -17,25 +15,5 @@ public class Contact
     [MaxLength(500)]
     public string? Note { get; set; }
 
-    [NotMapped]
-    public string DisplayName => !string.IsNullOrWhiteSpace(Label) ? Label : ShortAddress;
-
-    [NotMapped]
-    public string AvatarText
-    {
-        get
-        {
-            string name = DisplayName.Trim();
-            return name.Length == 0 ? "?" : StringInfo.GetNextTextElement(name).ToUpperInvariant();
-        }
-    }
-
-    [NotMapped]
-    public string ShortAddress => Address.Length <= 14 ? Address : $"{Address[..6]}...{Address[^6..]}";
-
-    [NotMapped]
-    public string BadgeText => Strings.AddressBook;
-
-    [NotMapped]
-    public string DetailText => !string.IsNullOrWhiteSpace(Note) ? Note! : Address;
+    public string AvatarText => StringInfo.GetNextTextElement(Label).ToUpperInvariant();
 }

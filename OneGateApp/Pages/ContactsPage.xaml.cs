@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Services;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
@@ -45,7 +43,7 @@ public partial class ContactsPage : ContentPage
 
         Contacts = allContacts
             .Where(p =>
-                p.DisplayName.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                p.Label.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
                 p.Address.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
                 (p.Note?.Contains(filter, StringComparison.OrdinalIgnoreCase) ?? false))
             .ToArray();
