@@ -113,7 +113,7 @@ public sealed class PendingTransactionService(IServiceScopeFactory scopeFactory,
         }
     }
 
-    // null = not yet in a block; true = HALT; false = FAULT (reverted).
+    // null = pending or unknown; true = HALT; false = FAULT (reverted).
     async Task<bool?> TryResolveAsync(string hash)
     {
         JsonObject tx;
@@ -131,14 +131,17 @@ public sealed class PendingTransactionService(IServiceScopeFactory scopeFactory,
         {
             JsonObject log = await rpcClient.RpcSendAsync<JsonObject>("getapplicationlog", hash);
             JsonNode? execution = log["executions"] is JsonArray executions && executions.Count > 0 ? executions[0] : null;
-            JsonNode? vmState = execution?["vmstate"];
-            return vmState is null || vmState.GetValue<string>() == nameof(VMState.HALT);
+            string? vmState = execution?["vmstate"]?.GetValue<string>();
+            if (vmState is null) return null;
+            if (vmState.Contains(nameof(VMState.FAULT), StringComparison.Ordinal)) return false;
+            if (vmState.Contains(nameof(VMState.HALT), StringComparison.Ordinal)) return true;
+            return null;
         }
         catch (Exception ex) when (IsExpectedRpcOrJsonException(ex))
         {
             // The transaction is in a block but the application log is unavailable or malformed.
-            // Treat it as confirmed to avoid a false failure notification.
-            return true;
+            // Keep waiting rather than reporting an unverified success.
+            return null;
         }
     }
 
