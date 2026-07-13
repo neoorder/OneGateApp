@@ -1112,10 +1112,28 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="DAppPaymentSucceeded" xml:space="preserve">
     <value>Betaling voltooid</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Naam bestaat al</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Notitie</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Zoek naam, adres of notitie</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Mislukt</value>
   </data>
   <data name="TransactionFailed" xml:space="preserve">
     <value>Transactie mislukt</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>In behandeling</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Opnieuw proberen</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Nog steeds wachten op bevestiging</value>
   </data>
 </root>

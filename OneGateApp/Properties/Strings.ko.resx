@@ -1112,10 +1112,28 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="DAppPaymentSucceeded" xml:space="preserve">
     <value>결제가 완료되었습니다</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>이름이 이미 있습니다</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>이름, 주소 또는 메모 검색</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>실패</value>
   </data>
   <data name="TransactionFailed" xml:space="preserve">
     <value>트랜잭션 실패</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>대기 중</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>다시 시도</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>아직 확인 대기 중</value>
   </data>
 </root>
