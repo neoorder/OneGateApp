@@ -740,9 +740,6 @@ Bạn có muốn tiếp tục không?</value>
   <data name="DAppPreparingText" xml:space="preserve">
     <value>Trò chơi có tài nguyên lớn có thể mất thêm một chút thời gian.</value>
   </data>
-  <data name="Retry" xml:space="preserve">
-    <value>Thử lại</value>
-  </data>
   <data name="Share" xml:space="preserve">
     <value>Chia sẻ</value>
   </data>
@@ -1115,10 +1112,28 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="Unavailable" xml:space="preserve">
     <value>Không khả dụng</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Tên đã tồn tại</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Tìm tên, địa chỉ hoặc ghi chú</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Thất bại</value>
   </data>
   <data name="TransactionFailed" xml:space="preserve">
     <value>Giao dịch thất bại</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Đang chờ</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Thử lại</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Vẫn đang chờ xác nhận</value>
   </data>
 </root>

@@ -740,9 +740,6 @@ Möchten Sie fortfahren?</value>
   <data name="DAppPreparingText" xml:space="preserve">
     <value>Spiele mit großen Ressourcen können einen Moment dauern.</value>
   </data>
-  <data name="Retry" xml:space="preserve">
-    <value>Erneut versuchen</value>
-  </data>
   <data name="Share" xml:space="preserve">
     <value>Teilen</value>
   </data>
@@ -1115,10 +1112,28 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="Unavailable" xml:space="preserve">
     <value>Nicht verfügbar</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Name ist bereits vorhanden</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Notiz</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Name, Adresse oder Notiz suchen</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Fehlgeschlagen</value>
   </data>
   <data name="TransactionFailed" xml:space="preserve">
     <value>Transaktion fehlgeschlagen</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Ausstehend</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Wartet weiterhin auf Bestätigung</value>
   </data>
 </root>

@@ -740,9 +740,6 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
   <data name="DAppPreparingText" xml:space="preserve">
     <value>Los juegos con recursos grandes pueden tardar un momento.</value>
   </data>
-  <data name="Retry" xml:space="preserve">
-    <value>Reintentar</value>
-  </data>
   <data name="Share" xml:space="preserve">
     <value>Compartir</value>
   </data>
@@ -1115,10 +1112,28 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="Unavailable" xml:space="preserve">
     <value>No disponible</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>El nombre ya existe</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Buscar nombre, dirección o nota</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Fallido</value>
   </data>
   <data name="TransactionFailed" xml:space="preserve">
     <value>Transacción fallida</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pendiente</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Reintentar</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Aún esperando confirmación</value>
   </data>
 </root>
