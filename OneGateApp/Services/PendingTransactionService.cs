@@ -110,7 +110,7 @@ public sealed class PendingTransactionService(IServiceScopeFactory scopeFactory,
                     try { pending.RemoveAll(x => x.Hash == p.Hash); await SaveAsync(); }
                     finally { mutex.Release(); }
 
-                    if (succeeded is not null) Notify(p.Hash, succeeded.Value);
+                    if (succeeded is not null) await NotifyAsync(p.Hash, succeeded.Value);
                 }
             }
         }
@@ -152,10 +152,12 @@ public sealed class PendingTransactionService(IServiceScopeFactory scopeFactory,
         }
     }
 
-    static void Notify(string hash, bool succeeded)
+    static async Task NotifyAsync(string hash, bool succeeded)
     {
+        if (!await LocalNotificationCenter.Current.AreNotificationsEnabled()) return;
+
         string shortHash = hash.Length <= 16 ? hash : $"{hash[..10]}…{hash[^6..]}";
-        LocalNotificationCenter.Current.Show(new NotificationRequest
+        await LocalNotificationCenter.Current.Show(new NotificationRequest
         {
             NotificationId = CreateNotificationId(hash),
             Title = succeeded ? Strings.TransactionSucceeded : Strings.TransactionFailed,
