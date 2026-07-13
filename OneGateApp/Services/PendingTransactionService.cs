@@ -30,14 +30,11 @@ public sealed class PendingTransactionService(IServiceScopeFactory scopeFactory,
     readonly List<PendingTransaction> pending = [];
     Task? loop;
 
-    /// <summary>Request notification permission and resume tracking persisted pending transactions.</summary>
+    /// <summary>Resume tracking persisted pending transactions.</summary>
     public async Task StartAsync()
     {
         try
         {
-            try { await LocalNotificationCenter.Current.RequestNotificationPermission(); }
-            catch { /* permission is best-effort; tracking still works without it */ }
-
             List<PendingTransaction>? saved = await LoadAsync();
             if (saved is not { Count: > 0 }) return;
             await mutex.WaitAsync();
@@ -56,7 +53,17 @@ public sealed class PendingTransactionService(IServiceScopeFactory scopeFactory,
         }
     }
 
-    public void Enqueue(UInt256 hash) => _ = EnqueueAsync(hash.ToString());
+    public void Enqueue(UInt256 hash)
+    {
+        _ = EnqueueAsync(hash.ToString());
+        _ = RequestNotificationPermissionAsync();
+    }
+
+    static async Task RequestNotificationPermissionAsync()
+    {
+        try { await LocalNotificationCenter.Current.RequestNotificationPermission(); }
+        catch { /* permission is best-effort; tracking still works without it */ }
+    }
 
     async Task EnqueueAsync(string hash)
     {
