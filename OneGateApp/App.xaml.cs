@@ -65,10 +65,36 @@ public partial class App : Application
         }
         else
         {
+#if ANDROID
+            if (appLinkAction is AppLinkAction action)
+            {
+                appLinkAction = null;
+                var loadingPage = new ContentPage
+                {
+                    Content = new ActivityIndicator
+                    {
+                        IsRunning = true,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    }
+                };
+                var window = CreateOneGateWindow(new NavigationPage(loadingPage));
+                window.Created += (_, _) => window.Dispatcher.DispatchDelayed(
+                    TimeSpan.FromMilliseconds(100),
+                    () => window.Page = action.GetPage(serviceProvider));
+                return window;
+            }
+#endif
             page = appLinkAction?.GetPage(serviceProvider)
                 ?? serviceProvider.GetServiceOrCreateInstance<AppShell>();
             appLinkAction = null;
         }
+
+        return CreateOneGateWindow(page);
+    }
+
+    static Window CreateOneGateWindow(Page page)
+    {
         return new Window(page)
         {
             Title = "OneGate",
