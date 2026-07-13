@@ -47,14 +47,18 @@ public partial class SelectContactPopup : MyPopup<Contact?>
 
     async void LoadData()
     {
+        int requestId = Volatile.Read(ref searchRequestId);
         try
         {
-            Contacts = await addressBookService.GetEntriesAsync();
+            Contact[] contacts = await addressBookService.GetEntriesAsync();
+            if (requestId == searchRequestId)
+                Contacts = contacts;
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex);
-            Contacts = [];
+            if (requestId == searchRequestId)
+                Contacts = [];
         }
     }
 }

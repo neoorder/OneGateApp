@@ -29,12 +29,7 @@
                                 <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="5">
-                                <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
-                                    <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
-                                    <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3" VerticalOptions="Start">
-                                        <Label StyleClass="Secondary" Text="{Binding BadgeText}" FontSize="11" />
-                                    </Border>
-                                </Grid>
+                                <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
                                 <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding DetailText, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
                                 <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
                             </VerticalStackLayout>

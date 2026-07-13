@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Properties;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
@@ -32,9 +31,6 @@ public class Contact
 
     [NotMapped]
     public string ShortAddress => Address.Length <= 14 ? Address : $"{Address[..6]}...{Address[^6..]}";
-
-    [NotMapped]
-    public string BadgeText => Strings.AddressBook;
 
     [NotMapped]
     public string DetailText => !string.IsNullOrWhiteSpace(Note) ? Note : "";
