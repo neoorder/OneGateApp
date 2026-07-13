@@ -9,6 +9,10 @@ namespace NeoOrder.OneGate;
 
 public partial class App : Application
 {
+#if ANDROID
+    static readonly TimeSpan DAppWindowActivationDelay = TimeSpan.FromMilliseconds(100);
+#endif
+
     readonly IServiceProvider serviceProvider;
     readonly IWalletProvider walletProvider;
 
@@ -79,10 +83,16 @@ public partial class App : Application
                     }
                 };
                 var window = CreateOneGateWindow(new NavigationPage(loadingPage));
-                window.Created += (_, _) => window.Dispatcher.DispatchDelayed(
-                    TimeSpan.FromMilliseconds(100),
-                    () => window.Page = action.GetPage(serviceProvider));
+                window.Created += OnWindowCreated;
                 return window;
+
+                void OnWindowCreated(object? sender, EventArgs args)
+                {
+                    window.Created -= OnWindowCreated;
+                    window.Dispatcher.DispatchDelayed(
+                        DAppWindowActivationDelay,
+                        () => window.Page = action.GetPage(serviceProvider));
+                }
             }
 #endif
             page = appLinkAction?.GetPage(serviceProvider)
