@@ -391,9 +391,6 @@
   <data name="EnterCustomAddress" xml:space="preserve">
     <value>輸入自訂地址</value>
   </data>
-  <data name="Transfer" xml:space="preserve">
-    <value>轉帳</value>
-  </data>
   <data name="From" xml:space="preserve">
     <value>轉出地址</value>
   </data>
@@ -540,6 +537,9 @@
   </data>
   <data name="AddressAlreadyExists" xml:space="preserve">
     <value>地址已存在</value>
+  </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>名稱已存在</value>
   </data>
   <data name="EditContact" xml:space="preserve">
     <value>編輯地址</value>
@@ -1100,6 +1100,30 @@
   <data name="Unavailable" xml:space="preserve">
     <value>不可用</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>備註</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>搜尋名字、地址或備註</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>轉帳</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>交易失敗</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>待確認</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>重試</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>仍在等待確認</value>
+  </data>
   <data name="Activity" xml:space="preserve">
     <value>活動</value>
   </data>
@@ -1174,11 +1198,5 @@
   </data>
   <data name="WalletAuthorization" xml:space="preserve">
     <value>錢包授權</value>
-  </data>
-  <data name="Failed" xml:space="preserve">
-    <value>失敗</value>
-  </data>
-  <data name="TransactionFailed" xml:space="preserve">
-    <value>交易失敗</value>
   </data>
 </root>
