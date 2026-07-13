@@ -30,7 +30,14 @@
             </Border>
             <og:ValidationMessage Title="{x:Static og:Strings.Label}" Margin="0,-16,0,0" Target="{x:Reference entryLabel}">
                 <og:Required />
+                <og:Custom Validate="OnValidateLabelDuplicity" />
             </og:ValidationMessage>
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Note}" />
+            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
+                <ContentView Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
+                    <Editor Text="{Binding Note}" AutoSize="TextChanges" HeightRequest="80" og:Border.IsVisible="False" />
+                </ContentView>
+            </Border>
         </VerticalStackLayout>
         <og:Submit Grid.Row="1" Text="{x:Static og:Strings.OK}" Submitted="OnSubmitted" />
     </Grid>

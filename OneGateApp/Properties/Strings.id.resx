@@ -1106,10 +1106,28 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Unavailable" xml:space="preserve">
     <value>Tidak tersedia</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Nama sudah ada</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Catatan</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Cari nama, alamat, atau catatan</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>Gagal</value>
   </data>
   <data name="TransactionFailed" xml:space="preserve">
     <value>Transaksi gagal</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Menunggu</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Coba lagi</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Masih menunggu konfirmasi</value>
   </data>
 </root>
