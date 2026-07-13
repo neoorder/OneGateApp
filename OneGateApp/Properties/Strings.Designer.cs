@@ -683,7 +683,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppCameraPermissionTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Session-only 的本地化字符串。
         /// </summary>
