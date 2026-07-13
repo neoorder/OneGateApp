@@ -1100,6 +1100,15 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="Unavailable" xml:space="preserve">
     <value>利用不可</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>名前はすでに存在します</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>メモ</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>名前、アドレス、メモを検索</value>
+  </data>
   <data name="Failed" xml:space="preserve">
     <value>失敗</value>
   </data>
