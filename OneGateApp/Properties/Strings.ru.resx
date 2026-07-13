@@ -1118,4 +1118,19 @@
   <data name="Unavailable" xml:space="preserve">
     <value>Недоступно</value>
   </data>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>Имя уже существует</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Заметка</value>
+  </data>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Поиск имени, адреса или заметки</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="TransactionFailed" xml:space="preserve">
+    <value>Транзакция не удалась</value>
+  </data>
 </root>
