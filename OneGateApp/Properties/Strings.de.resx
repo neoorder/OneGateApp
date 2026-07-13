@@ -1106,4 +1106,13 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="TransactionFailed" xml:space="preserve">
     <value>Transaktion fehlgeschlagen</value>
   </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Ausstehend</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Wartet weiterhin auf Bestätigung</value>
+  </data>
 </root>

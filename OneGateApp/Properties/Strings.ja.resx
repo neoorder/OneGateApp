@@ -1106,4 +1106,13 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="TransactionFailed" xml:space="preserve">
     <value>トランザクション失敗</value>
   </data>
+  <data name="Pending" xml:space="preserve">
+    <value>保留中</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>再試行</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>まだ確認を待っています</value>
+  </data>
 </root>
