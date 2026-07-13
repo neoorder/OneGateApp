@@ -29,6 +29,8 @@
             </Label>
             <Label Text="{x:Static og:Strings.TransactionSucceeded}" IsVisible="{Binding IsSucceeded}" HorizontalOptions="Center" />
             <Label Text="{x:Static og:Strings.TransactionFailed}" TextColor="#e25c5c" IsVisible="{Binding IsFailed}" HorizontalOptions="Center" />
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.TransactionStillPending}" IsVisible="{Binding IsTimedOut}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+            <Button Text="{x:Static og:Strings.Retry}" IsVisible="{Binding IsTimedOut}" Clicked="OnRetry" HorizontalOptions="Center" />
             <Grid RowDefinitions="1,1">
                 <BoxView Grid.Row="0" Color="{AppThemeBinding Light='#e0e5ed', Dark='#1E2128'}" />
                 <BoxView Grid.Row="1" Color="{AppThemeBinding Light='#fafafa', Dark='#3A3F49'}" />
@@ -50,6 +52,7 @@
                         <Label Grid.Column="1" Text="{x:Static og:Strings.Confirming}" IsVisible="{Binding IsConfirming}" HorizontalOptions="End" />
                         <Label Grid.Column="1" Text="{x:Static og:Strings.Success}" TextColor="#5bc782" IsVisible="{Binding IsSucceeded}" HorizontalOptions="End" />
                         <Label Grid.Column="1" Text="{x:Static og:Strings.Failed}" TextColor="#e25c5c" IsVisible="{Binding IsFailed}" HorizontalOptions="End" />
+                        <Label Grid.Column="1" Text="{x:Static og:Strings.Pending}" IsVisible="{Binding IsTimedOut}" HorizontalOptions="End" />
                     </Grid>
                     <BoxView HeightRequest="1" />
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="15" Padding="0,10">
