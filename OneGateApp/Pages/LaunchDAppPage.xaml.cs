@@ -12,6 +12,7 @@ using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
@@ -19,6 +20,7 @@ namespace NeoOrder.OneGate.Pages;
 public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 {
     const string DeveloperModeKey = "preference/developer_mode_enabled";
+    const int DAppLoadTimeoutMs = 30000;
     const int DAppPreparationDurationMs = 12000;
 
     readonly IServiceProvider serviceProvider;
@@ -29,7 +31,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
+    CancellationTokenSource? dappLoadCancellation;
     CancellationTokenSource? dappPreparationCancellation;
+    Uri? pendingAppLinkUri;
     string? url;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
@@ -76,6 +80,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
+        CancelDAppLoadTimeout();
         CancelDAppPreparation();
     }
 
@@ -92,18 +97,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             Uri uri = query["uri"] as Uri ?? new(WebUtility.UrlDecode((string)query["uri"]));
             if (LaunchDAppAction.TryCreate(uri) is LaunchDAppAction action)
             {
-                var response = await httpClient.GetAsync($"/api/dapp/{action.AppId}");
-                if (!response.IsSuccessStatusCode)
-                {
-                    await this.GoBackOrCloseAsync();
-                    return;
-                }
-                DApp = (await response.Content.ReadFromJsonAsync<DApp>())!;
-                if (string.IsNullOrEmpty(uri.Query))
-                    Url = DApp.Url;
-                else
-                    Url = DApp.Url + uri.Query;
-                UpdateReportButton();
+                pendingAppLinkUri = uri;
+                if (!await TryLoadAppLinkAsync(action, uri)) return;
+                pendingAppLinkUri = null;
             }
             else
             {
@@ -119,6 +115,11 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
                 UpdateReportButton();
             }
         }
+        await RecordDAppOpenAsync();
+    }
+
+    async Task RecordDAppOpenAsync()
+    {
         if (DApp.Id > 0)
         {
             List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
@@ -180,6 +181,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     void OnNavigated(object sender, WebNavigatedEventArgs e)
     {
+        if (e.Url == "about:blank") return;
+        CancelDAppLoadTimeout();
         IsDAppLoading = false;
         if (e.Result == WebNavigationResult.Success || e.Result == WebNavigationResult.Cancel)
         {
@@ -193,24 +196,80 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         ShowDAppLoadError(e.Url, e.Result);
     }
 
-    void OnRetryDAppClicked(object sender, EventArgs e)
+    async void OnRetryDAppClicked(object sender, EventArgs e)
     {
+        if (pendingAppLinkUri is Uri uri && LaunchDAppAction.TryCreate(uri) is LaunchDAppAction action)
+        {
+            if (await TryLoadAppLinkAsync(action, uri))
+            {
+                pendingAppLinkUri = null;
+                await RecordDAppOpenAsync();
+            }
+            return;
+        }
         if (string.IsNullOrWhiteSpace(Url)) return;
         BeginDAppLoad();
         webView.Reload();
     }
 
+    async Task<bool> TryLoadAppLinkAsync(LaunchDAppAction action, Uri uri)
+    {
+        CancelDAppLoadTimeout();
+        CancelDAppPreparation();
+        IsDAppLoading = true;
+        HasDAppLoadError = false;
+        try
+        {
+            using HttpResponseMessage response = await httpClient.GetAsync($"/api/dapp/{action.AppId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                await this.GoBackOrCloseAsync();
+                return false;
+            }
+            DApp? dapp = await response.Content.ReadFromJsonAsync<DApp>();
+            if (dapp is null)
+            {
+                ShowDAppLoadError(uri.AbsoluteUri, WebNavigationResult.Failure);
+                return false;
+            }
+            DApp = dapp;
+            Url = string.IsNullOrEmpty(uri.Query) ? DApp.Url : DApp.Url + uri.Query;
+            UpdateReportButton();
+            return true;
+        }
+        catch (HttpRequestException)
+        {
+            ShowDAppLoadError(uri.AbsoluteUri, WebNavigationResult.Failure);
+            return false;
+        }
+        catch (TaskCanceledException)
+        {
+            ShowDAppLoadError(uri.AbsoluteUri, WebNavigationResult.Timeout);
+            return false;
+        }
+        catch (JsonException)
+        {
+            ShowDAppLoadError(uri.AbsoluteUri, WebNavigationResult.Failure);
+            return false;
+        }
+    }
+
     void BeginDAppLoad()
     {
+        CancelDAppLoadTimeout();
         CancelDAppPreparation();
         IsDAppLoading = true;
         IsDAppPreparing = false;
         HasDAppLoadError = false;
+        dappLoadCancellation = new();
+        _ = WatchDAppLoadAsync(Url ?? DApp?.Url ?? string.Empty, dappLoadCancellation.Token);
     }
 
     void ShowDAppLoadError(string failedUrl, WebNavigationResult result)
     {
+        CancelDAppLoadTimeout();
         CancelDAppPreparation();
+        IsDAppLoading = false;
         string appName = DApp?.NameLocalizer.Localize() ?? GetHostOrUrl(failedUrl);
         DAppLoadErrorTitle = Strings.DAppLoadFailed;
         DAppLoadErrorMessage = string.Format(Strings.DAppLoadFailedText, appName, (int)result);
@@ -219,10 +278,32 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 
     void BeginDAppPreparation()
     {
+        CancelDAppLoadTimeout();
         CancelDAppPreparation();
         dappPreparationCancellation = new();
         IsDAppPreparing = true;
         _ = WatchDAppPreparationAsync(dappPreparationCancellation.Token);
+    }
+
+    void CancelDAppLoadTimeout()
+    {
+        dappLoadCancellation?.Cancel();
+        dappLoadCancellation?.Dispose();
+        dappLoadCancellation = null;
+    }
+
+    async Task WatchDAppLoadAsync(string failedUrl, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await Task.Delay(DAppLoadTimeoutMs, cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+        if (!cancellationToken.IsCancellationRequested)
+            MainThread.BeginInvokeOnMainThread(() => ShowDAppLoadError(failedUrl, WebNavigationResult.Timeout));
     }
 
     void CancelDAppPreparation()
