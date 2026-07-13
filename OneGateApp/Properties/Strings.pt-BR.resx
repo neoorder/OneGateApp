@@ -950,6 +950,51 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Enviar por e-mail</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Denunciar</value>
+  </data>
+  <data name="ReportDAppText" xml:space="preserve">
+    <value>Conte-nos o que há de errado com este DApp. Podemos entrar em contato por email se precisarmos de mais detalhes.</value>
+  </data>
+  <data name="ReportReason" xml:space="preserve">
+    <value>Motivo</value>
+  </data>
+  <data name="ReporterEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ReportMessage" xml:space="preserve">
+    <value>Detalhes adicionais (opcional)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Denúncia enviada</value>
+  </data>
+  <data name="ReportAlreadySubmitted" xml:space="preserve">
+    <value>Você já denunciou este DApp nas últimas 24 horas.</value>
+  </data>
+  <data name="ReportFailed" xml:space="preserve">
+    <value>Não foi possível enviar a denúncia. Tente novamente.</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Insira um endereço de email válido.</value>
+  </data>
+  <data name="ReportReasonScam" xml:space="preserve">
+    <value>Golpe ou phishing</value>
+  </data>
+  <data name="ReportReasonMalware" xml:space="preserve">
+    <value>Malware ou comportamento prejudicial</value>
+  </data>
+  <data name="ReportReasonIllegalContent" xml:space="preserve">
+    <value>Conteúdo ilegal</value>
+  </data>
+  <data name="ReportReasonInappropriateContent" xml:space="preserve">
+    <value>Conteúdo inadequado</value>
+  </data>
+  <data name="ReportReasonCopyright" xml:space="preserve">
+    <value>Problema de direitos autorais</value>
+  </data>
+  <data name="ReportReasonOther" xml:space="preserve">
+    <value>Outro</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Disponível</value>
   </data>
@@ -1055,61 +1100,34 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="Unavailable" xml:space="preserve">
     <value>Indisponível</value>
   </data>
-  <data name="DecodedMessage" xml:space="preserve">
-    <value>Mensagem decodificada</value>
+  <data name="LabelAlreadyExists" xml:space="preserve">
+    <value>O nome já existe</value>
   </data>
-  <data name="SignMessageRiskWarning" xml:space="preserve">
-    <value>Assine apenas mensagens de sites em que você confia. Uma assinatura pode provar sua identidade ou autorizar ações; nunca assine uma solicitação inesperada ou ilegível.</value>
+  <data name="Note" xml:space="preserve">
+    <value>Nota</value>
   </data>
-  <data name="Report" xml:space="preserve">
-    <value>Denunciar</value>
-  </data>
-  <data name="ReportDAppText" xml:space="preserve">
-    <value>Conte-nos o que há de errado com este DApp. Podemos entrar em contato por email se precisarmos de mais detalhes.</value>
-  </data>
-  <data name="ReportReason" xml:space="preserve">
-    <value>Motivo</value>
-  </data>
-  <data name="ReporterEmail" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="ReportMessage" xml:space="preserve">
-    <value>Detalhes adicionais (opcional)</value>
-  </data>
-  <data name="ReportSubmitted" xml:space="preserve">
-    <value>Denúncia enviada</value>
-  </data>
-  <data name="ReportAlreadySubmitted" xml:space="preserve">
-    <value>Você já denunciou este DApp nas últimas 24 horas.</value>
-  </data>
-  <data name="ReportFailed" xml:space="preserve">
-    <value>Não foi possível enviar a denúncia. Tente novamente.</value>
-  </data>
-  <data name="InvalidEmailAddress" xml:space="preserve">
-    <value>Insira um endereço de email válido.</value>
-  </data>
-  <data name="ReportReasonScam" xml:space="preserve">
-    <value>Golpe ou phishing</value>
-  </data>
-  <data name="ReportReasonMalware" xml:space="preserve">
-    <value>Malware ou comportamento prejudicial</value>
-  </data>
-  <data name="ReportReasonIllegalContent" xml:space="preserve">
-    <value>Conteúdo ilegal</value>
-  </data>
-  <data name="ReportReasonInappropriateContent" xml:space="preserve">
-    <value>Conteúdo inadequado</value>
-  </data>
-  <data name="ReportReasonCopyright" xml:space="preserve">
-    <value>Problema de direitos autorais</value>
-  </data>
-  <data name="ReportReasonOther" xml:space="preserve">
-    <value>Outro</value>
+  <data name="SearchAddressBook" xml:space="preserve">
+    <value>Buscar nome, endereço ou nota</value>
   </data>
   <data name="Failed" xml:space="preserve">
     <value>Falhou</value>
   </data>
   <data name="TransactionFailed" xml:space="preserve">
     <value>Transação falhou</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pendente</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Tentar novamente</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Ainda aguardando confirmação</value>
+  </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Mensagem decodificada</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Assine apenas mensagens de sites em que você confia. Uma assinatura pode provar sua identidade ou autorizar ações; nunca assine uma solicitação inesperada ou ilegível.</value>
   </data>
 </root>
