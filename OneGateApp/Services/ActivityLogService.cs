@@ -1,11 +1,12 @@
 using Neo;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 
 namespace NeoOrder.OneGate.Services;
 
-public class ActivityLogService(ApplicationDbContext dbContext)
+public class ActivityLogService(IServiceScopeFactory scopeFactory)
 {
     const int MaxRecords = 50;
 
@@ -13,6 +14,8 @@ public class ActivityLogService(ApplicationDbContext dbContext)
     {
         try
         {
+            using IServiceScope scope = scopeFactory.CreateScope();
+            ApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             return await dbContext.ActivityRecords
                 .Where(p => p.CreatedAt != default)
                 .OrderByDescending(p => p.CreatedAt)
@@ -51,6 +54,8 @@ public class ActivityLogService(ApplicationDbContext dbContext)
     {
         try
         {
+            using IServiceScope scope = scopeFactory.CreateScope();
+            ApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             await dbContext.ActivityRecords.AddAsync(new()
             {
                 Kind = kind,
