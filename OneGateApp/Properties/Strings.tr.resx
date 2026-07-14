@@ -1130,4 +1130,79 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="SignMessageRiskWarning" xml:space="preserve">
     <value>Yalnızca güvendiğiniz sitelerden gelen mesajları imzalayın. Bir imza kimliğinizi kanıtlayabilir veya işlemleri yetkilendirebilir; beklenmedik ya da okunamayan bir isteği asla imzalamayın.</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Etkinlik</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Etkinlik Geçmişi</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Bir dApp açın, Neo ile oturum açın, bir isteği imzalayın veya bir işlem gönderin; ilgili etkinlik burada görünecektir.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Henüz etkinlik kaydedilmedi</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Bu cihazda kaydedilen dApp ziyaretlerini, Neo oturum açma işlemlerini, imzaları ve işlemleri inceleyin.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Bu cihazdaki etkinlik geçmişi</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>{0} açıldı</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} kayıt</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>{0} için imza tamamlandı</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Kaynak: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>İşlem: {0} · Kaynak: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>{0} için işlem gönderildi</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>{0} için Neo ile oturum açıldı</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>dApp ziyareti</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Ziyaretler ve oturum açmalar</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Son etkinlik: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Etkinlik kaydı yok</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Son etkinlikler</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>İmza</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>İmzalar</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>İşlem</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>İşlemler</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Bilinmeyen dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Bilinmeyen kaynak</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Neo ile oturum açma</value>
+  </data>
 </root>
