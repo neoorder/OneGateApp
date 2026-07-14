@@ -1124,4 +1124,79 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Ancora in attesa di conferma</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Attività</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Cronologia delle attività</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Apri una dApp, accedi con Neo, firma una richiesta o invia una transazione per visualizzare qui l’attività corrispondente.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Nessuna attività registrata</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Rivedi le visite alle dApp, gli accessi con Neo, le firme e le transazioni registrate su questo dispositivo.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Cronologia delle attività su questo dispositivo</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>{0} aperta</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} record</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Firma completata per {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Origine: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transazione: {0} · Origine: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transazione inviata per {0}</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Accesso a {0} effettuato con Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Visita alla dApp</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Visite e accessi</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Ultima attività: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Nessuna attività registrata</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Attività recente</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Firme</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transazione</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transazioni</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp sconosciuta</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Origine sconosciuta</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Accesso con Neo</value>
+  </data>
 </root>

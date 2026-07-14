@@ -1124,4 +1124,79 @@
   <data name="TransactionStillPending" xml:space="preserve">
     <value>仍在等待確認</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>活動</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>活動記錄</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>開啟 dApp、使用 Neo 登入、完成簽名或提交交易後，相關活動會顯示在這裡。</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>尚未記錄活動</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>查看此裝置記錄的 dApp 開啟、Neo 登入、簽名和交易。</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>本機活動記錄</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>已開啟 {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} 筆記錄</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>已為 {0} 完成簽名</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>來源：{0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>交易：{0} · 來源：{1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>{0} 的交易已提交</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>已使用 Neo 登入 {0}</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>dApp 開啟</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>開啟與登入</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>上次活動：{0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>尚無活動記錄</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>最近活動</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>簽名</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>簽名</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>未知 dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>未知來源</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Neo 登入</value>
+  </data>
 </root>

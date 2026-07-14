@@ -1124,4 +1124,79 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Vẫn đang chờ xác nhận</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Hoạt động</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Lịch sử hoạt động</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Mở dApp, đăng nhập bằng Neo, ký một yêu cầu hoặc gửi giao dịch để hoạt động tương ứng xuất hiện tại đây.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Chưa có hoạt động nào được ghi lại</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Xem các lượt truy cập dApp, lượt đăng nhập bằng Neo, chữ ký và giao dịch được ghi lại trên thiết bị này.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Lịch sử hoạt động trên thiết bị này</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Đã mở {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} bản ghi</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Đã hoàn tất chữ ký cho {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Nguồn: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Giao dịch: {0} · Nguồn: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Đã gửi giao dịch cho {0}</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Đã đăng nhập vào {0} bằng Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Lượt truy cập dApp</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Lượt truy cập và đăng nhập</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Hoạt động gần nhất: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Không có bản ghi hoạt động</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Hoạt động gần đây</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Chữ ký</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Chữ ký</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Giao dịch</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Giao dịch</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp không xác định</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Nguồn không xác định</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Đăng nhập bằng Neo</value>
+  </data>
 </root>

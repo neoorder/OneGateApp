@@ -1124,4 +1124,79 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Nog steeds wachten op bevestiging</value>
   </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Activiteit</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Activiteitsgeschiedenis</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Open een dApp, meld je aan met Neo, voltooi een ondertekening of dien een transactie in om de bijbehorende activiteit hier te zien.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Nog geen activiteit vastgelegd</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Bekijk dApp-bezoeken, Neo-aanmeldingen, handtekeningen en transacties die op dit apparaat zijn vastgelegd.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Activiteitsgeschiedenis op dit apparaat</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>{0} geopend</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} records</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Handtekening voor {0} voltooid</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Bron: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transactie: {0} · Bron: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transactie voor {0} ingediend</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Aangemeld bij {0} met Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>dApp-bezoek</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Bezoeken en aanmeldingen</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Laatste activiteit: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Geen activiteiten vastgelegd</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Recente activiteit</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Handtekening</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Handtekeningen</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transactie</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transacties</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Onbekende dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Onbekende bron</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Neo-aanmelding</value>
+  </data>
 </root>
