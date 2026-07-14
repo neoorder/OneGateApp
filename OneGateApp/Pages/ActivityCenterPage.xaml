@@ -13,7 +13,7 @@
                 <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="18">
                     <Grid ColumnDefinitions="auto,*" ColumnSpacing="14">
                         <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="48" HeightRequest="48" VerticalOptions="Start">
-                            <Label StyleClass="Icon" Text="&#xe60c;" TextColor="White" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label StyleClass="Icon" Text="&#xe658;" TextColor="White" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Spacing="6">
                             <Label Text="{x:Static og:Strings.ActivityCenterSummaryTitle}" FontAttributes="Bold" FontSize="20" />
