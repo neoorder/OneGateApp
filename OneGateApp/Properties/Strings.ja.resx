@@ -1127,53 +1127,53 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="Activity" xml:space="preserve">
     <value>アクティビティ</value>
   </data>
-  <data name="ActivityCenter" xml:space="preserve">
-    <value>アクティビティセンター</value>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>アクティビティ履歴</value>
   </data>
-  <data name="ActivityCenterEmptyText" xml:space="preserve">
-    <value>dApp を開く、ウォレットアクセスを承認する、メッセージに署名する、またはトランザクションを送信すると、ローカルのアクティビティ履歴が開始されます。</value>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>dApp を開く、Neo でログインする、署名を完了する、またはトランザクションを送信すると、関連するアクティビティがここに表示されます。</value>
   </data>
-  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
     <value>まだアクティビティは記録されていません</value>
   </data>
-  <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>このデバイスに記録された dApp 接続、ウォレット承認、署名、送信済みトランザクションを確認します。</value>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>このデバイスに記録された dApp の閲覧、Neo ログイン、署名、トランザクションを確認します。</value>
   </data>
-  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
-    <value>ウォレットのアクティビティ履歴</value>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>このデバイスのアクティビティ履歴</value>
   </data>
-  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
-    <value>{0} に接続しました</value>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>{0} を開きました</value>
   </data>
   <data name="ActivityRecordCount" xml:space="preserve">
     <value>{0} 件の記録</value>
   </data>
   <data name="ActivitySignatureTitle" xml:space="preserve">
-    <value>{0} の署名を承認しました</value>
+    <value>{0} の署名が完了しました</value>
   </data>
   <data name="ActivitySourceDescription" xml:space="preserve">
-    <value>ソース: {0}</value>
+    <value>ソース：{0}</value>
   </data>
   <data name="ActivityTransactionDescription" xml:space="preserve">
-    <value>{1} からのトランザクション {0}</value>
+    <value>トランザクション：{0} · ソース：{1}</value>
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
-    <value>{0} からトランザクションを送信しました</value>
+    <value>{0} のトランザクションを送信しました</value>
   </data>
-  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
-    <value>{0} のウォレットアクセスを承認しました</value>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>{0} に Neo でログインしました</value>
   </data>
-  <data name="Connection" xml:space="preserve">
-    <value>接続</value>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>dApp の閲覧</value>
   </data>
-  <data name="Connections" xml:space="preserve">
-    <value>接続</value>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>閲覧とログイン</value>
   </data>
   <data name="LastActivityAt" xml:space="preserve">
-    <value>最終アクティビティ: {0}</value>
+    <value>最後のアクティビティ：{0}</value>
   </data>
-  <data name="NoRecentActivity" xml:space="preserve">
-    <value>最近のアクティビティはありません</value>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>アクティビティ記録なし</value>
   </data>
   <data name="RecentActivity" xml:space="preserve">
     <value>最近のアクティビティ</value>
@@ -1196,7 +1196,7 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="UnknownSource" xml:space="preserve">
     <value>不明なソース</value>
   </data>
-  <data name="WalletAuthorization" xml:space="preserve">
-    <value>ウォレット承認</value>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Neo ログイン</value>
   </data>
 </root>

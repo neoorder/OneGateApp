@@ -65,7 +65,7 @@ public partial class SettingsPage : ContentPage
             Command = Commands.GotoPage,
             CommandParameter = "//home/settings/assets/hidden"
         });
-        yield return (Strings.General, new SettingEntry(Strings.ActivityCenter)
+        yield return (Strings.General, new SettingEntry(Strings.ActivityHistory)
         {
             CurrentValue = await GetActivitySummaryTextAsync(),
             Command = Commands.GotoPage,
@@ -121,6 +121,6 @@ public partial class SettingsPage : ContentPage
     async Task<string> GetActivitySummaryTextAsync()
     {
         int count = (await activityLogService.GetRecentAsync()).Count;
-        return count == 0 ? Strings.NoRecentActivity : string.Format(Strings.ActivityRecordCount, count);
+        return count == 0 ? Strings.NoActivityRecords : string.Format(Strings.ActivityRecordCount, count);
     }
 }

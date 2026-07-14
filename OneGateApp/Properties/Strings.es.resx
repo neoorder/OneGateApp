@@ -1127,53 +1127,53 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="Activity" xml:space="preserve">
     <value>Actividad</value>
   </data>
-  <data name="ActivityCenter" xml:space="preserve">
-    <value>Centro de actividad</value>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Historial de actividad</value>
   </data>
-  <data name="ActivityCenterEmptyText" xml:space="preserve">
-    <value>Abre una dApp, aprueba el acceso a la wallet, firma un mensaje o envia una transaccion para iniciar la linea de tiempo local.</value>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Abre una dApp, inicia sesión con Neo, firma una solicitud o envía una transacción para que la actividad correspondiente aparezca aquí.</value>
   </data>
-  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
-    <value>Aun no hay actividad registrada</value>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Aún no hay actividad registrada</value>
   </data>
-  <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Revisa conexiones de dApps, autorizaciones de wallet, firmas y transacciones enviadas registradas en este dispositivo.</value>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Revisa las visitas a dApps, los inicios de sesión con Neo, las firmas y las transacciones registradas en este dispositivo.</value>
   </data>
-  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
-    <value>Linea de tiempo de actividad de tu wallet</value>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Historial de actividad de este dispositivo</value>
   </data>
-  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
-    <value>Conectado a {0}</value>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Se abrió {0}</value>
   </data>
   <data name="ActivityRecordCount" xml:space="preserve">
     <value>{0} registros</value>
   </data>
   <data name="ActivitySignatureTitle" xml:space="preserve">
-    <value>Firma aprobada para {0}</value>
+    <value>Firma completada para {0}</value>
   </data>
   <data name="ActivitySourceDescription" xml:space="preserve">
     <value>Origen: {0}</value>
   </data>
   <data name="ActivityTransactionDescription" xml:space="preserve">
-    <value>Transaccion {0} desde {1}</value>
+    <value>Transacción: {0} · Origen: {1}</value>
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
-    <value>Transaccion enviada desde {0}</value>
+    <value>Transacción enviada para {0}</value>
   </data>
-  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
-    <value>Acceso a la wallet aprobado para {0}</value>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Sesión iniciada en {0} con Neo</value>
   </data>
-  <data name="Connection" xml:space="preserve">
-    <value>Conexion</value>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Visita a dApp</value>
   </data>
-  <data name="Connections" xml:space="preserve">
-    <value>Conexiones</value>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Visitas e inicios de sesión</value>
   </data>
   <data name="LastActivityAt" xml:space="preserve">
-    <value>Ultima actividad: {0}</value>
+    <value>Última actividad: {0}</value>
   </data>
-  <data name="NoRecentActivity" xml:space="preserve">
-    <value>Sin actividad reciente</value>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Sin registros de actividad</value>
   </data>
   <data name="RecentActivity" xml:space="preserve">
     <value>Actividad reciente</value>
@@ -1185,7 +1185,7 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
     <value>Firmas</value>
   </data>
   <data name="Transaction" xml:space="preserve">
-    <value>Transaccion</value>
+    <value>Transacción</value>
   </data>
   <data name="Transactions" xml:space="preserve">
     <value>Transacciones</value>
@@ -1196,7 +1196,7 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="UnknownSource" xml:space="preserve">
     <value>Origen desconocido</value>
   </data>
-  <data name="WalletAuthorization" xml:space="preserve">
-    <value>Autorizacion de wallet</value>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Inicio de sesión con Neo</value>
   </data>
 </root>

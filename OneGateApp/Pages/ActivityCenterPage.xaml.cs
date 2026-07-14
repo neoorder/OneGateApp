@@ -34,7 +34,7 @@ public partial class ActivityCenterPage : ContentPage
     public int TransactionCount => Activities.Count(p => p.Kind == ActivityRecordKind.Transaction);
     public string LastActivityText => HasActivities
         ? string.Format(Strings.LastActivityAt, Activities[0].CreatedAtText)
-        : Strings.NoRecentActivity;
+        : Strings.NoActivityRecords;
 
     public ActivityCenterPage(ActivityLogService activityLogService)
     {
@@ -85,16 +85,16 @@ public sealed class ActivityCenterItem
     };
     public string KindText => Kind switch
     {
-        ActivityRecordKind.DAppConnection => Strings.Connection,
-        ActivityRecordKind.WalletAuthorization => Strings.WalletAuthorization,
+        ActivityRecordKind.DAppConnection => Strings.DAppVisit,
+        ActivityRecordKind.WalletAuthorization => Strings.NeoSignIn,
         ActivityRecordKind.Signature => Strings.Signature,
         ActivityRecordKind.Transaction => Strings.Transaction,
         _ => Strings.Activity
     };
     public string Title => Kind switch
     {
-        ActivityRecordKind.DAppConnection => string.Format(Strings.ActivityDAppConnectionTitle, DAppName),
-        ActivityRecordKind.WalletAuthorization => string.Format(Strings.ActivityWalletAuthorizationTitle, DAppName),
+        ActivityRecordKind.DAppConnection => string.Format(Strings.ActivityDAppOpenedTitle, DAppName),
+        ActivityRecordKind.WalletAuthorization => string.Format(Strings.ActivityNeoSignInTitle, DAppName),
         ActivityRecordKind.Signature => string.Format(Strings.ActivitySignatureTitle, DAppName),
         ActivityRecordKind.Transaction => string.Format(Strings.ActivityTransactionTitle, DAppName),
         _ => DAppName

@@ -1127,53 +1127,53 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="Activity" xml:space="preserve">
     <value>Activity</value>
   </data>
-  <data name="ActivityCenter" xml:space="preserve">
-    <value>Activity Center</value>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Activity History</value>
   </data>
-  <data name="ActivityCenterEmptyText" xml:space="preserve">
-    <value>Open a dApp, approve wallet access, sign a message, or submit a transaction to start the local activity timeline.</value>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Open a dApp, sign in with Neo, sign a request, or submit a transaction to see the activity here.</value>
   </data>
-  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
     <value>No activity recorded yet</value>
   </data>
-  <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Review dApp connections, wallet authorizations, signatures, and submitted transactions recorded on this device.</value>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Review dApp visits, Neo sign-ins, signatures, and transactions recorded on this device.</value>
   </data>
-  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
-    <value>Your wallet activity timeline</value>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>On-device activity history</value>
   </data>
-  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
-    <value>Connected to {0}</value>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Opened {0}</value>
   </data>
   <data name="ActivityRecordCount" xml:space="preserve">
     <value>{0} records</value>
   </data>
   <data name="ActivitySignatureTitle" xml:space="preserve">
-    <value>Signature approved for {0}</value>
+    <value>Signature completed for {0}</value>
   </data>
   <data name="ActivitySourceDescription" xml:space="preserve">
     <value>Source: {0}</value>
   </data>
   <data name="ActivityTransactionDescription" xml:space="preserve">
-    <value>Transaction {0} from {1}</value>
+    <value>Transaction: {0} · Source: {1}</value>
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
-    <value>Transaction submitted from {0}</value>
+    <value>Transaction submitted for {0}</value>
   </data>
-  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
-    <value>Wallet access approved for {0}</value>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Signed in to {0} with Neo</value>
   </data>
-  <data name="Connection" xml:space="preserve">
-    <value>Connection</value>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>dApp visit</value>
   </data>
-  <data name="Connections" xml:space="preserve">
-    <value>Connections</value>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Visits &amp; sign-ins</value>
   </data>
   <data name="LastActivityAt" xml:space="preserve">
     <value>Last activity: {0}</value>
   </data>
-  <data name="NoRecentActivity" xml:space="preserve">
-    <value>No recent activity</value>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>No activity records</value>
   </data>
   <data name="RecentActivity" xml:space="preserve">
     <value>Recent activity</value>
@@ -1196,7 +1196,7 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="UnknownSource" xml:space="preserve">
     <value>Unknown source</value>
   </data>
-  <data name="WalletAuthorization" xml:space="preserve">
-    <value>Wallet authorization</value>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Neo sign-in</value>
   </data>
 </root>

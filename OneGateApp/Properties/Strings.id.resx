@@ -1127,53 +1127,53 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="Activity" xml:space="preserve">
     <value>Aktivitas</value>
   </data>
-  <data name="ActivityCenter" xml:space="preserve">
-    <value>Pusat Aktivitas</value>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Riwayat aktivitas</value>
   </data>
-  <data name="ActivityCenterEmptyText" xml:space="preserve">
-    <value>Buka dApp, setujui akses dompet, tanda tangani pesan, atau kirim transaksi untuk memulai linimasa aktivitas lokal.</value>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Buka dApp, masuk dengan Neo, selesaikan tanda tangan, atau kirim transaksi agar aktivitas terkait muncul di sini.</value>
   </data>
-  <data name="ActivityCenterEmptyTitle" xml:space="preserve">
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
     <value>Belum ada aktivitas yang direkam</value>
   </data>
-  <data name="ActivityCenterSummaryText" xml:space="preserve">
-    <value>Tinjau koneksi dApp, otorisasi dompet, tanda tangan, dan transaksi terkirim yang direkam di perangkat ini.</value>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Tinjau kunjungan dApp, proses masuk dengan Neo, tanda tangan, dan transaksi yang direkam di perangkat ini.</value>
   </data>
-  <data name="ActivityCenterSummaryTitle" xml:space="preserve">
-    <value>Linimasa aktivitas dompet Anda</value>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Riwayat aktivitas di perangkat ini</value>
   </data>
-  <data name="ActivityDAppConnectionTitle" xml:space="preserve">
-    <value>Terhubung ke {0}</value>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Membuka {0}</value>
   </data>
   <data name="ActivityRecordCount" xml:space="preserve">
     <value>{0} catatan</value>
   </data>
   <data name="ActivitySignatureTitle" xml:space="preserve">
-    <value>Tanda tangan disetujui untuk {0}</value>
+    <value>Tanda tangan untuk {0} selesai</value>
   </data>
   <data name="ActivitySourceDescription" xml:space="preserve">
     <value>Sumber: {0}</value>
   </data>
   <data name="ActivityTransactionDescription" xml:space="preserve">
-    <value>Transaksi {0} dari {1}</value>
+    <value>Transaksi: {0} · Sumber: {1}</value>
   </data>
   <data name="ActivityTransactionTitle" xml:space="preserve">
-    <value>Transaksi dikirim dari {0}</value>
+    <value>Transaksi untuk {0} telah dikirim</value>
   </data>
-  <data name="ActivityWalletAuthorizationTitle" xml:space="preserve">
-    <value>Akses dompet disetujui untuk {0}</value>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Masuk ke {0} dengan Neo</value>
   </data>
-  <data name="Connection" xml:space="preserve">
-    <value>Koneksi</value>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Kunjungan dApp</value>
   </data>
-  <data name="Connections" xml:space="preserve">
-    <value>Koneksi</value>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Kunjungan &amp; masuk</value>
   </data>
   <data name="LastActivityAt" xml:space="preserve">
     <value>Aktivitas terakhir: {0}</value>
   </data>
-  <data name="NoRecentActivity" xml:space="preserve">
-    <value>Tidak ada aktivitas terbaru</value>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Tidak ada catatan aktivitas</value>
   </data>
   <data name="RecentActivity" xml:space="preserve">
     <value>Aktivitas terbaru</value>
@@ -1196,7 +1196,7 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="UnknownSource" xml:space="preserve">
     <value>Sumber tidak dikenal</value>
   </data>
-  <data name="WalletAuthorization" xml:space="preserve">
-    <value>Otorisasi dompet</value>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Masuk dengan Neo</value>
   </data>
 </root>
