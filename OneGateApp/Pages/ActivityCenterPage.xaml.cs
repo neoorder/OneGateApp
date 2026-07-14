@@ -77,11 +77,11 @@ public sealed class ActivityCenterItem
     public string CreatedAtText => record.CreatedAt.ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
     public string IconGlyph => Kind switch
     {
-        ActivityRecordKind.DAppConnection => "\ue60c",
-        ActivityRecordKind.WalletAuthorization => "\ue738",
-        ActivityRecordKind.Signature => "\ue67f",
-        ActivityRecordKind.Transaction => "\ue64e",
-        _ => "\ue625"
+        ActivityRecordKind.DAppConnection => "\ue665",
+        ActivityRecordKind.WalletAuthorization => "\ue899",
+        ActivityRecordKind.Signature => "\ue881",
+        ActivityRecordKind.Transaction => "\ue663",
+        _ => "\ue658"
     };
     public string KindText => Kind switch
     {
