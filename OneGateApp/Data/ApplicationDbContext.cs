@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Services;
 using System.Text.Json;
 

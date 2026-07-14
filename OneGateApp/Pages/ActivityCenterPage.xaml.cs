@@ -1,4 +1,4 @@
-using NeoOrder.OneGate.Models;
+using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using System.Globalization;

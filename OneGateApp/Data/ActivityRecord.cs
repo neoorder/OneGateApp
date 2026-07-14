@@ -1,4 +1,4 @@
-namespace NeoOrder.OneGate.Models;
+namespace NeoOrder.OneGate.Data;
 
 public enum ActivityRecordKind
 {

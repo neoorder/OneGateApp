@@ -2,7 +2,6 @@ using Neo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NeoOrder.OneGate.Data;
-using NeoOrder.OneGate.Models;
 
 namespace NeoOrder.OneGate.Services;
 
