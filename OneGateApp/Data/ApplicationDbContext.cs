@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Services;
-using System.Text.Json;
 
 namespace NeoOrder.OneGate.Data;
 
@@ -34,36 +32,6 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
                 [TransactionHash] TEXT NULL
             )
             """);
-
-        string? legacyRecords = Settings.Get("activity/records");
-        if (legacyRecords is null)
-            return;
-
-        try
-        {
-            ActivityRecord[] records = JsonSerializer.Deserialize<ActivityRecord[]>(legacyRecords, SharedOptions.JsonSerializerOptions) ?? [];
-            foreach (ActivityRecord record in records.Where(p => p.CreatedAt != default))
-            {
-                ActivityRecords.Add(new()
-                {
-                    Kind = record.Kind,
-                    CreatedAt = record.CreatedAt,
-                    DAppId = record.DAppId,
-                    DAppName = record.DAppName,
-                    DAppHost = record.DAppHost,
-                    TransactionHash = record.TransactionHash
-                });
-            }
-            SaveChanges();
-        }
-        catch
-        {
-            // Activity history is diagnostic; invalid legacy data should not block startup.
-        }
-        finally
-        {
-            Settings.Delete("activity/records");
-        }
     }
 
     void AddColumnIfMissing(string table, string column, string definition)
