@@ -29,9 +29,9 @@
                                 <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="5">
-                                <Label Text="{Binding DisplayName}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
-                                <Label StyleClass="Secondary" Text="{Binding DetailText}" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding DetailText, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
+                                <Label Text="{Binding Label}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
                                 <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                                <Label StyleClass="Secondary" Text="{Binding Note}" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding Note, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
                             </VerticalStackLayout>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnSelectContact" CommandParameter="{Binding .}" />
