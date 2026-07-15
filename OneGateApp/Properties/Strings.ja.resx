@@ -294,6 +294,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>アルバムからQRコードをスキャン</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>ライトを切り替える</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>QRコードを認識できません</value>
   </data>
@@ -934,6 +937,9 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>クリップボードにコピーしました</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>アドレスをコピー</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>金額と手数料を賄うのに十分な残高がありません。送信できる最大額は {0} GAS です。</value>

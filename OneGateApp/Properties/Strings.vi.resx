@@ -294,6 +294,9 @@
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>Quét mã QR từ thư viện ảnh</value>
   </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Bật/tắt đèn pin</value>
+  </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>Không thể nhận diện mã QR</value>
   </data>
@@ -934,6 +937,9 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   </data>
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Đã sao chép vào bảng nhớ tạm</value>
+  </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Sao chép địa chỉ</value>
   </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Số dư không đủ để thanh toán số tiền và phí. Số tiền tối đa bạn có thể gửi là {0} GAS.</value>
