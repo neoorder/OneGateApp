@@ -42,6 +42,7 @@ partial class LaunchDAppPage
             throw new DapiException(10002, "Domain mismatch");
         if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText))
             throw new DapiException(10006, "Operation cancelled");
+        await activityLogService.RecordWalletAuthorizationAsync(DApp);
         WalletAccount account = walletProvider.GetWallet()!.GetDefaultAccount()!;
         return payload.CreateResponse(account, protocolSettings);
     }
@@ -164,6 +165,7 @@ partial class LaunchDAppPage
         if (!popup_result.Result) throw new OperationCanceledException();
         if (!walletProvider.GetWallet()!.Sign(context))
             throw new DapiException(10000, "Failed to sign transaction");
+        await activityLogService.RecordSignatureAsync(DApp);
         return context;
     }
 
@@ -184,13 +186,15 @@ partial class LaunchDAppPage
             : Utility.StrictUTF8.GetBytes(message);
         account ??= result.Result.ToScriptHash(protocolSettings.AddressVersion);
         KeyPair key = walletProvider.GetWallet()!.GetAccount(account)!.GetKey()!;
-        return new SignedMessage
+        SignedMessage signedMessage = new()
         {
             Payload = payload,
             Signature = Crypto.Sign(payload, key),
             Account = account,
             PublicKey = key.PublicKey
         };
+        await activityLogService.RecordSignatureAsync(DApp);
+        return signedMessage;
     }
 
     [RpcMethod]
@@ -201,7 +205,9 @@ partial class LaunchDAppPage
         if (context.Verifiable is not Transaction tx)
             throw new DapiException(10001, "Only transaction relaying is supported");
         tx.Witnesses = context.GetWitnesses();
-        return await rpcClient.SendRawTransaction(tx);
+        UInt256 transactionHash = await rpcClient.SendRawTransaction(tx);
+        await activityLogService.RecordTransactionAsync(DApp, transactionHash);
+        return transactionHash;
     }
 
     [RpcMethod]
@@ -261,6 +267,8 @@ partial class LaunchDAppPage
         if (!context.Completed)
             throw new DapiException(10001, "Multisignature transaction requires more signatures");
         tx.Witnesses = context.GetWitnesses();
-        return await rpcClient.SendRawTransaction(tx);
+        UInt256 transactionHash = await rpcClient.SendRawTransaction(tx);
+        await activityLogService.RecordTransactionAsync(DApp, transactionHash);
+        return transactionHash;
     }
 }

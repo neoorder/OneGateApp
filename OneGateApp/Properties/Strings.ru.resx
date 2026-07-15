@@ -1133,4 +1133,88 @@
   <data name="TransactionFailed" xml:space="preserve">
     <value>Транзакция не удалась</value>
   </data>
+  <data name="Pending" xml:space="preserve">
+    <value>В ожидании</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Повторить</value>
+  </data>
+  <data name="TransactionStillPending" xml:space="preserve">
+    <value>Все еще ожидается подтверждение</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Активность</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>История активности</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Откройте dApp, войдите с помощью Neo, выполните подпись или отправьте транзакцию — соответствующая активность появится здесь.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Активность пока не записана</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Просматривайте посещения dApp, входы с помощью Neo, подписи и транзакции, записанные на этом устройстве.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>История активности на этом устройстве</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Открыто: {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} записей</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Подпись для {0} выполнена</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Источник: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Транзакция: {0} · Источник: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Транзакция для {0} отправлена</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Выполнен вход в {0} с помощью Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Посещение dApp</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Посещения и входы</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Последняя активность: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Нет записей активности</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Недавняя активность</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Подпись</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Подписи</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Транзакция</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Транзакции</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Неизвестный dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Неизвестный источник</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Вход с помощью Neo</value>
+  </data>
 </root>
