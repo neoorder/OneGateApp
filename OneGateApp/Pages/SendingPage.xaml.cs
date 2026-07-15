@@ -14,6 +14,7 @@ public partial class SendingPage : ContentPage, IQueryAttributable
 {
     readonly CancellationTokenSource cancellation = new();
     readonly RpcClient rpcClient;
+    bool isPolling;
 
     public required Transaction Transaction { get; set { field = value; OnPropertyChanged(null); } }
     public required TransactionIntent[] Intents { get; set { field = value; OnPropertyChanged(); } }
@@ -28,11 +29,24 @@ public partial class SendingPage : ContentPage, IQueryAttributable
             OnPropertyChanged(nameof(IsConfirming));
             OnPropertyChanged(nameof(IsSucceeded));
             OnPropertyChanged(nameof(IsFailed));
+            OnPropertyChanged(nameof(IsTimedOut));
         }
     }
-    public bool IsConfirming => Succeeded is null;
+    public bool TimedOut
+    {
+        get;
+        set
+        {
+            field = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsConfirming));
+            OnPropertyChanged(nameof(IsTimedOut));
+        }
+    }
+    public bool IsConfirming => Succeeded is null && !TimedOut;
     public bool IsSucceeded => Succeeded == true;
     public bool IsFailed => Succeeded == false;
+    public bool IsTimedOut => Succeeded is null && TimedOut;
 
     public long Fee => (Transaction?.SystemFee + Transaction?.NetworkFee) ?? 0;
     public BigDecimal DecimalFee => new((BigInteger)Fee, NativeContract.GAS.Decimals);
@@ -68,8 +82,12 @@ public partial class SendingPage : ContentPage, IQueryAttributable
 
     async void QueryTransactionStatus()
     {
+        if (isPolling) return;
+
+        isPolling = true;
         try
         {
+            TimedOut = false;
             for (int i = 0; i < 10; i++)
             {
                 await Task.Delay(TimeSpan.FromSeconds(15), cancellation.Token);
@@ -86,17 +104,27 @@ public partial class SendingPage : ContentPage, IQueryAttributable
                 if (!blockTime.HasValue) continue;
                 BlockTime = blockTime;
                 Succeeded = await QueryExecutionSucceededAsync();
-                break;
+                if (Succeeded.HasValue) break;
             }
+            if (Succeeded is null) TimedOut = true;
         }
         catch (OperationCanceledException)
         {
         }
+        finally
+        {
+            isPolling = false;
+        }
+    }
+
+    void OnRetry(object sender, EventArgs e)
+    {
+        QueryTransactionStatus();
     }
 
     // Block inclusion is not success: a transaction can be included in a block yet revert
     // (VMState.FAULT). Read the application log and require HALT before reporting success.
-    async Task<bool> QueryExecutionSucceededAsync()
+    async Task<bool?> QueryExecutionSucceededAsync()
     {
         try
         {
@@ -106,9 +134,7 @@ public partial class SendingPage : ContentPage, IQueryAttributable
         }
         catch (Exception ex) when (ex is RpcException or HttpRequestException or JsonException)
         {
-            // Application log unavailable; the transaction is in a block but the execution result
-            // is unknown. Avoid a false "failed" by treating it as confirmed.
-            return true;
+            return null;
         }
     }
 }
