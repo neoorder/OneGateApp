@@ -255,6 +255,24 @@
   <data name="AppDetails" xml:space="preserve">
     <value>应用详情</value>
   </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>这台设备上暂无最近打开记录</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>权限</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>该 dApp 可以请求连接钱包、消息签名和交易签名。OneGate 会在共享钱包数据或签名前要求确认。</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>最近活动</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>最近在这台设备上打开过</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>标签</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>简介</value>
   </data>
@@ -275,6 +293,9 @@
   </data>
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>从相册识别二维码</value>
+  </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>切换手电筒</value>
   </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>无法识别二维码</value>
@@ -929,6 +950,9 @@
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>已复制到剪贴板</value>
   </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>复制地址</value>
+  </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>余额不足，无法支付金额和手续费。您最多可发送 {0} GAS。</value>
   </data>
@@ -1135,5 +1159,86 @@
   </data>
   <data name="TransactionStillPending" xml:space="preserve">
     <value>仍在等待确认</value>
+  </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>解码后内容</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>只为你信任的站点签名。签名可证明你的身份或授权操作——切勿对意外或无法读懂的请求签名。</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>活动</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>活动记录</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>打开 dApp、使用 Neo 登录、完成签名或提交交易后，相关活动会显示在这里。</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>暂无活动记录</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>查看本设备记录的 dApp 访问、Neo 登录、签名和交易。</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>本机活动记录</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>已打开 {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} 条记录</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>已为 {0} 完成签名</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>来源：{0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>交易：{0} · 来源：{1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>{0} 的交易已提交</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>已使用 Neo 登录 {0}</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>dApp 访问</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>访问与登录</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>最近活动：{0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>暂无活动记录</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>最近活动</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>签名</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>签名</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>未知 dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>未知来源</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Neo 登录</value>
   </data>
 </root>
