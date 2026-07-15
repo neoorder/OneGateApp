@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace NeoOrder.OneGate.Data;
 
@@ -13,4 +14,6 @@ public class Contact
     public required string Label { get; set; }
     [MaxLength(500)]
     public string? Note { get; set; }
+
+    public string AvatarText => StringInfo.GetNextTextElement(Label).ToUpperInvariant();
 }
