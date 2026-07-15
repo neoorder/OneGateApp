@@ -255,6 +255,24 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Detail aplikasi</value>
   </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Belum dibuka baru-baru ini di perangkat ini</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Izin</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>dApp ini dapat meminta koneksi dompet, tanda tangan pesan, dan penandatanganan transaksi. OneGate meminta konfirmasi sebelum membagikan data dompet atau menandatangani.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Aktivitas terbaru</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Baru dibuka di perangkat ini</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Tag</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Deskripsi</value>
   </data>
@@ -1129,5 +1147,86 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   </data>
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Masih menunggu konfirmasi</value>
+  </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Pesan yang didekode</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Hanya tanda tangani pesan dari situs yang Anda percaya. Tanda tangan dapat membuktikan identitas Anda atau mengotorisasi tindakan; jangan pernah menandatangani permintaan yang tidak terduga atau tidak terbaca.</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Aktivitas</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Riwayat aktivitas</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Buka dApp, masuk dengan Neo, selesaikan tanda tangan, atau kirim transaksi agar aktivitas terkait muncul di sini.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Belum ada aktivitas yang direkam</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Tinjau kunjungan dApp, proses masuk dengan Neo, tanda tangan, dan transaksi yang direkam di perangkat ini.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Riwayat aktivitas di perangkat ini</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Membuka {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} catatan</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Tanda tangan untuk {0} selesai</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Sumber: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transaksi: {0} · Sumber: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transaksi untuk {0} telah dikirim</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Masuk ke {0} dengan Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Kunjungan dApp</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Kunjungan &amp; masuk</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Aktivitas terakhir: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Tidak ada catatan aktivitas</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Aktivitas terbaru</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Tanda tangan</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Tanda tangan</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaksi</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transaksi</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp tidak dikenal</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Sumber tidak dikenal</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Masuk dengan Neo</value>
   </data>
 </root>
