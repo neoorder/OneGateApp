@@ -25,6 +25,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly IWalletProvider walletProvider;
     readonly WalletAuthorizationService walletAuthorizationService;
     readonly ApplicationDbContext dbContext;
+    readonly ActivityLogService activityLogService;
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
@@ -34,13 +35,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public bool IsFavorite { get; set { field = value; OnPropertyChanged(); } }
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, ActivityLogService activityLogService, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.walletProvider = walletProvider;
         this.walletAuthorizationService = walletAuthorizationService;
         this.dbContext = dbContext;
+        this.activityLogService = activityLogService;
         this.httpClient = httpClient;
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
@@ -106,6 +108,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
             if (DApp.IsGamingApp) GlobalStates.Invalidate<GamingPage>();
         }
+        await activityLogService.RecordDAppConnectionAsync(DApp);
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)

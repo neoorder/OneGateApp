@@ -314,6 +314,7 @@
 
     <Style TargetType="Label" Class="Icon">
         <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="AutomationProperties.IsInAccessibleTree" Value="False" />
     </Style>
 
     <Style TargetType="Picker">
