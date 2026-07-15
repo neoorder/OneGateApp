@@ -255,6 +255,24 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Сведения о приложении</value>
   </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Нет недавних запусков на этом устройстве</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Разрешения</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Это dApp может запрашивать подключение кошелька, подписи сообщений и подпись транзакций. OneGate запрашивает подтверждение перед передачей данных кошелька или подписанием.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Недавняя активность</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Недавно открывалось на этом устройстве</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Теги</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Описание</value>
   </data>
@@ -275,6 +293,9 @@
   </data>
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>Сканировать QR-код из галереи</value>
+  </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Переключить фонарик</value>
   </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>Не удалось распознать QR-код</value>
@@ -917,6 +938,9 @@
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Скопировано в буфер обмена</value>
   </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Скопировать адрес</value>
+  </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Недостаточно средств для покрытия суммы и комиссии. Максимальная сумма, которую вы можете отправить, составляет {0} GAS.</value>
   </data>
@@ -1123,5 +1147,86 @@
   </data>
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Все еще ожидается подтверждение</value>
+  </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Декодированное сообщение</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Подписывайте только сообщения с сайтов, которым вы доверяете. Подпись может подтвердить вашу личность или разрешить действия; никогда не подписывайте неожиданный или нечитаемый запрос.</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Активность</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>История активности</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Откройте dApp, войдите с помощью Neo, выполните подпись или отправьте транзакцию — соответствующая активность появится здесь.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Активность пока не записана</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Просматривайте посещения dApp, входы с помощью Neo, подписи и транзакции, записанные на этом устройстве.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>История активности на этом устройстве</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Открыто: {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} записей</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Подпись для {0} выполнена</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Источник: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Транзакция: {0} · Источник: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Транзакция для {0} отправлена</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Выполнен вход в {0} с помощью Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Посещение dApp</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Посещения и входы</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Последняя активность: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Нет записей активности</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Недавняя активность</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Подпись</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Подписи</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Транзакция</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Транзакции</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>Неизвестный dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Неизвестный источник</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Вход с помощью Neo</value>
   </data>
 </root>

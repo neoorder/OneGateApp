@@ -7,7 +7,15 @@
         <og:SpinnerButtonTextConverter x:Key="SpinnerButtonTextConverter" />
     </ContentView.Resources>
     <Grid BindingContext="{Binding Source={RelativeSource AncestorType={x:Type og:SpinnerButton}}}">
-        <Button x:Name="Button" TextColor="{Binding TextColor}" FontSize="{Binding FontSize}" FontAttributes="{Binding FontAttributes}" BackgroundColor="{Binding ButtonColor}" BorderWidth="{Binding BorderWidth}" BorderColor="{Binding BorderColor}" Clicked="Button_Clicked">
+        <Button x:Name="Button"
+                TextColor="{Binding TextColor}"
+                FontSize="{Binding FontSize}"
+                FontAttributes="{Binding FontAttributes}"
+                BackgroundColor="{Binding ButtonColor}"
+                BorderWidth="{Binding BorderWidth}"
+                BorderColor="{Binding BorderColor}"
+                SemanticProperties.Description="{Binding Text}"
+                Clicked="Button_Clicked">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CommonStates">
@@ -29,6 +37,6 @@
                 </MultiBinding>
             </Button.Text>
         </Button>
-        <ActivityIndicator Color="{Binding TextColor}" WidthRequest="{Binding FontSize}" HeightRequest="{Binding FontSize}" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+        <ActivityIndicator Color="{Binding TextColor}" WidthRequest="{Binding FontSize}" HeightRequest="{Binding FontSize}" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" AutomationProperties.IsInAccessibleTree="False" />
     </Grid>
 </ContentView>
