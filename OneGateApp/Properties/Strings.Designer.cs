@@ -1045,6 +1045,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Decoded message.
+        /// </summary>
+        internal static string DecodedMessage {
+            get {
+                return ResourceManager.GetString("DecodedMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Delete 的本地化字符串。
         /// </summary>
         internal static string Delete {
@@ -2601,6 +2610,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string SignMessageRequestText {
             get {
                 return ResourceManager.GetString("SignMessageRequestText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Only sign messages from sites you trust.
+        /// </summary>
+        internal static string SignMessageRiskWarning {
+            get {
+                return ResourceManager.GetString("SignMessageRiskWarning", resourceCulture);
             }
         }
 

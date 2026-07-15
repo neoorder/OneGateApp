@@ -1142,6 +1142,12 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Ainda aguardando confirmação</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Mensagem decodificada</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Assine apenas mensagens de sites em que você confia. Uma assinatura pode provar sua identidade ou autorizar ações; nunca assine uma solicitação inesperada ou ilegível.</value>
+  </data>
   <data name="Activity" xml:space="preserve">
     <value>Atividade</value>
   </data>

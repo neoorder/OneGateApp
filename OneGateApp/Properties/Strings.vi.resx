@@ -1142,6 +1142,12 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Vẫn đang chờ xác nhận</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Tin nhắn đã giải mã</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Chỉ ký tin nhắn từ các trang bạn tin tưởng. Chữ ký có thể chứng minh danh tính hoặc cho phép hành động; đừng bao giờ ký một yêu cầu bất ngờ hoặc không đọc được.</value>
+  </data>
   <data name="Activity" xml:space="preserve">
     <value>Hoạt động</value>
   </data>

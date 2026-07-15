@@ -1142,6 +1142,12 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Toujours en attente de confirmation</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Message décodé</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Ne signez que les messages provenant de sites auxquels vous faites confiance. Une signature peut prouver votre identité ou autoriser des actions ; ne signez jamais une demande inattendue ou illisible.</value>
+  </data>
   <data name="Activity" xml:space="preserve">
     <value>Activité</value>
   </data>

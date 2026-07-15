@@ -1142,6 +1142,12 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="TransactionStillPending" xml:space="preserve">
     <value>まだ確認を待っています</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>デコード済みメッセージ</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>信頼できるサイトからのメッセージだけに署名してください。署名は本人確認や操作の承認に使われる可能性があります。予期しない、または読めないリクエストには署名しないでください。</value>
+  </data>
   <data name="Activity" xml:space="preserve">
     <value>アクティビティ</value>
   </data>
