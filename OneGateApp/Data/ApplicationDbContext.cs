@@ -6,15 +6,32 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
 {
     public DbSet<Setting> Settings { get; set; }
     public DbSet<Contact> Contacts { get; set; }
+    public DbSet<ActivityRecord> ActivityRecords { get; set; }
 
     public void EnsureMigrations()
     {
         Migration_AddressBook_20260619();
+        Migration_ActivityRecords_20260705();
     }
 
     void Migration_AddressBook_20260619()
     {
         AddColumnIfMissing("Contacts", "Note", "TEXT NULL");
+    }
+
+    void Migration_ActivityRecords_20260705()
+    {
+        Database.ExecuteSqlRaw("""
+            CREATE TABLE IF NOT EXISTS [ActivityRecords] (
+                [Id] INTEGER NOT NULL CONSTRAINT [PK_ActivityRecords] PRIMARY KEY AUTOINCREMENT,
+                [Kind] INTEGER NOT NULL,
+                [CreatedAt] TEXT NOT NULL,
+                [DAppId] INTEGER NULL,
+                [DAppName] TEXT NULL,
+                [DAppHost] TEXT NULL,
+                [TransactionHash] TEXT NULL
+            )
+            """);
     }
 
     void AddColumnIfMissing(string table, string column, string definition)
