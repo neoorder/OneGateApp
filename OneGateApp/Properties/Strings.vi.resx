@@ -255,6 +255,24 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Chi tiết ứng dụng</value>
   </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Chưa mở gần đây trên thiết bị này</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Quyền</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>dApp này có thể yêu cầu kết nối ví, chữ ký tin nhắn và ký giao dịch. OneGate yêu cầu xác nhận trước khi chia sẻ dữ liệu ví hoặc ký.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Hoạt động gần đây</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Đã mở gần đây trên thiết bị này</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Thẻ</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Mô tả</value>
   </data>
