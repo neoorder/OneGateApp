@@ -40,9 +40,9 @@
                     <Border StyleClass="Card" Padding="14">
                         <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,auto" ColumnSpacing="12" RowSpacing="5">
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding AmountText}" FontAttributes="Bold" FontSize="16" HorizontalOptions="End" />
-                            <Label Grid.Row="1" Grid.Column="0" StyleClass="Secondary" Text="{Binding CounterpartyText}" FontSize="12" LineBreakMode="MiddleTruncation" />
-                            <Label Grid.Row="1" Grid.Column="1" StyleClass="Secondary" Text="{Binding DirectionText}" FontSize="12" HorizontalOptions="End" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding AmountText}" IsVisible="{Binding HasAmountText}" FontAttributes="Bold" FontSize="16" HorizontalOptions="End" />
+                            <Label Grid.Row="1" Grid.Column="0" StyleClass="Secondary" Text="{Binding CounterpartyText}" IsVisible="{Binding HasCounterpartyText}" FontSize="12" LineBreakMode="MiddleTruncation" />
+                            <Label Grid.Row="1" Grid.Column="1" StyleClass="Secondary" Text="{Binding DirectionText}" IsVisible="{Binding HasDirectionText}" FontSize="12" HorizontalOptions="End" />
                             <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="10">
                                 <Label StyleClass="Secondary" Text="{Binding TimeText}" FontSize="12" />
                                 <Label StyleClass="Secondary" Text="{Binding BlockText}" FontSize="12" IsVisible="{Binding HasBlockText}" />

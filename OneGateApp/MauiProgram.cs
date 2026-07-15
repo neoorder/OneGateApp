@@ -107,6 +107,7 @@ public static class MauiProgram
             return ProtocolSettings.Load(stream);
         });
         builder.Services.AddSingleton<IWalletProvider, WalletProvider>();
+        builder.Services.AddSingleton<TransactionHistoryDataSource>();
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddTransient<AddressBookService>();
         builder.Services.AddSingleton<TokenManager>();
