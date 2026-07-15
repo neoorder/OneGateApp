@@ -974,6 +974,9 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Kirim melalui email</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Muat ulang</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Laporkan</value>
   </data>

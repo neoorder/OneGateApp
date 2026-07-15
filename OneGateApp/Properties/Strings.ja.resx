@@ -974,6 +974,9 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="SubmitByEmail" xml:space="preserve">
     <value>メールで送信</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>再読み込み</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>報告</value>
   </data>

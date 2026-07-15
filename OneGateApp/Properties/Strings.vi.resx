@@ -974,6 +974,9 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Gửi qua email</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Tải lại</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Báo cáo</value>
   </data>

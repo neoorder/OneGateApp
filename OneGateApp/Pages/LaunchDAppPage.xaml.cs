@@ -116,6 +116,11 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         IsFavorite = !IsFavorite;
     }
 
+    void OnReloadClicked(object sender, EventArgs e)
+    {
+        webView.Reload();
+    }
+
     async void OnDeveloperToolsClicked(object sender, EventArgs e)
     {
         if (!IsDeveloperToolsEnabled) return;
