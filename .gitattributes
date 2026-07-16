@@ -61,3 +61,10 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Cross-platform scripts and generated archives.
+###############################################################################
+*.sh     text eol=lf
+*.cmd    text eol=crlf
+*.zip    binary

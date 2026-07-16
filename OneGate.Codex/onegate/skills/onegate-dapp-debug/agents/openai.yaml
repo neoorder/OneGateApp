@@ -1,0 +1,4 @@
+interface:
+  display_name: "OneGate DApp Debug"
+  short_description: "Debug DApps with persistent signing and a NEP-21 mock"
+  default_prompt: "Use $onegate-dapp-debug to open this DApp with the OneGate Browser Mock and test its provider calls."
