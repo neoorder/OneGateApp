@@ -22,15 +22,12 @@ The integration test drives the public CLI through the daemon and uses any avail
 
 ## Package
 
-After validation, build both release archives from the project directory:
+After validation, build the release archive from the project directory:
 
 ```text
 pwsh -File scripts/Package-OneGatePlugin.ps1
 ```
 
-The script reads the release version from `onegate/.codex-plugin/plugin.json`, includes hidden plugin metadata, verifies required ZIP entries, and prints each archive's byte count and SHA-256 hash. It creates:
-
-- `dist/onegate-dapp-debug-skill-<version>.zip` for the official Skills-only submission;
-- `dist/onegate-plugin-<version>.zip` for complete local plugin distribution.
+The script reads the release version from `onegate/.codex-plugin/plugin.json`, includes hidden plugin metadata, verifies required ZIP entries, and prints the archive's byte count and SHA-256 hash. It creates `dist/onegate-plugin-<version>.zip` for the official Skills-only submission and local plugin distribution. The bundle includes the plugin manifest and its skill.
 
 Existing release archives are protected by default. Pass `-Force` only when intentionally rebuilding the same version.

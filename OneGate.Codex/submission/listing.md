@@ -13,7 +13,7 @@
 
 ## Short description
 
-Debug OneGate DApps with a persistent development identity and document-start NEP-21 Browser Mock.
+OneGate Codex Plugin
 
 ## Long description
 

@@ -35,20 +35,8 @@ if ([System.IO.Path]::IsPathRooted($OutputDirectory)) {
 }
 [System.IO.Directory]::CreateDirectory($resolvedOutputDirectory) | Out-Null
 
-$skillArchivePath = Join-Path $resolvedOutputDirectory "onegate-dapp-debug-skill-$version.zip"
 $pluginArchivePath = Join-Path $resolvedOutputDirectory "onegate-plugin-$version.zip"
 $archivePlans = @(
-    [pscustomobject]@{
-        Source = $skillDirectory
-        Root = "onegate-dapp-debug"
-        Destination = $skillArchivePath
-        RequiredEntries = @(
-            "onegate-dapp-debug/SKILL.md"
-            "onegate-dapp-debug/assets/reviewer-fixture/index.html"
-            "onegate-dapp-debug/scripts/onegate.cmd"
-            "onegate-dapp-debug/scripts/onegate.sh"
-        )
-    }
     [pscustomobject]@{
         Source = $pluginDirectory
         Root = "onegate"
@@ -56,6 +44,7 @@ $archivePlans = @(
         RequiredEntries = @(
             "onegate/.codex-plugin/plugin.json"
             "onegate/assets/logo.svg"
+            "onegate/assets/logo-dark.svg"
             "onegate/skills/onegate-dapp-debug/SKILL.md"
             "onegate/skills/onegate-dapp-debug/assets/reviewer-fixture/index.html"
         )
