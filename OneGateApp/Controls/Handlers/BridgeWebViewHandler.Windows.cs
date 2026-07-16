@@ -48,6 +48,14 @@ partial class BridgeWebViewHandler
 
     void CoreWebView2_PermissionRequested(CoreWebView2 sender, CoreWebView2PermissionRequestedEventArgs args)
     {
+        if (args.PermissionKind == CoreWebView2PermissionKind.Autoplay)
+        {
+            args.SavesInProfile = false;
+            args.State = CoreWebView2PermissionState.Allow;
+            args.Handled = true;
+            return;
+        }
+
         if (args.PermissionKind != CoreWebView2PermissionKind.Camera)
             return;
 

@@ -97,6 +97,7 @@ partial class BridgeWebViewHandler
         base.ConnectHandler(platformView);
         platformView.Settings.DomStorageEnabled = true;
         platformView.Settings.JavaScriptEnabled = true;
+        platformView.Settings.MediaPlaybackRequiresUserGesture = false;
         platformView.AddJavascriptInterface(new ScriptHandler(BridgeWebView.OnMessage, BridgeWebView.OnSyncMessage), "__OneGateBridge");
         if (WebViewFeature.IsFeatureSupported(WebViewFeature.DocumentStartScript))
         {
