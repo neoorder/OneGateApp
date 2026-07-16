@@ -1,6 +1,6 @@
 ---
 name: onegate-dapp-debug
-description: Launch and debug Neo N3 DApps with the OneGate Browser Mock. Use when a DApp needs a NEP-21 provider without an installed OneGate app, when testing persistent development-account signing, or when inspecting page state, browser logs, screenshots, and dAPI traces without changing the DApp Origin.
+description: Launch and debug Neo N3 DApps with the OneGate Browser Mock. Use when a DApp needs a NEP-21 provider or NEP-20 authentication without an installed OneGate app, when testing persistent development-account signing, or when inspecting page state, browser logs, screenshots, and dAPI traces without changing the DApp Origin.
 ---
 
 # OneGate DApp Debug
@@ -22,7 +22,7 @@ The start result includes the session id, final URL and Origin, provider metadat
 
 ## Interpret results
 
-- `getAccounts`, `pickAddress`, `getBalance`, `authenticate`, `signMessage`, and valid transaction-context `sign` calls use the persistent generated account.
+- `getAccounts`, `pickAddress`, `getBalance`, `signMessage`, and valid transaction-context `sign` calls use the persistent generated account. `authenticate` additionally validates the top-level hostname and signs the response data in the exact NEP-20 field order.
 - The bundled `offline` profile returns zero for unspecified balances. Transfer and invocation requests normally reject with `10007 INSUFFICIENT_FUNDS`; calls requiring an RPC connection reject with `10008 RPC_ERROR`.
 - A custom profile with `transactionMode: "simulate"` explicitly enables fake call and transaction-success paths. Never describe simulated hashes or relay results as chain activity.
 - Missing read fixtures reject with `10003 NOTFOUND`. Exact profile fixtures and forced errors override default behavior.

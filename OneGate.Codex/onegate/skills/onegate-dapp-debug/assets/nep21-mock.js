@@ -215,7 +215,7 @@
 
     const provider = {
         name: providerSettings.name || "OneGate Codex Plugin",
-        version: providerSettings.version || "1.0.0",
+        version: providerSettings.version || "1.0.1",
         dapiVersion: providerSettings.dapiVersion || "1.0",
         compatibility: Array.isArray(providerSettings.compatibility)
             ? clone(providerSettings.compatibility)

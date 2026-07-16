@@ -33,8 +33,8 @@ public class AuthenticationChallengePayload
             throw new InvalidOperationException("Domain cannot be empty");
         if (!Networks.Contains(protocolSettings.Network))
             throw new NotSupportedException("No supported network");
-        if (DateTimeOffset.UtcNow - DateTimeOffset.FromUnixTimeSeconds(Timestamp) > AuthenticationTimeout)
-            throw new InvalidOperationException("Request expired");
+        if ((DateTimeOffset.UtcNow - DateTimeOffset.FromUnixTimeSeconds(Timestamp)).Duration() > AuthenticationTimeout)
+            throw new InvalidOperationException("Request timestamp is outside the allowed clock tolerance");
     }
 
     public AuthenticationResponsePayload CreateResponse(WalletAccount account, ProtocolSettings protocolSettings)
@@ -44,9 +44,9 @@ public class AuthenticationChallengePayload
         using (var stream = new MemoryStream())
         using (var writer = new BinaryWriter(stream))
         {
-            writer.Write(protocolSettings.Network);
             writer.Write(Nonce);
             writer.Write(timestamp);
+            writer.Write(protocolSettings.Network);
             writer.Write(account.ScriptHash);
             writer.WriteVarString(Action);
             writer.WriteVarString(Domain);

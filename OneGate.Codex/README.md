@@ -1,6 +1,6 @@
 # OneGate Codex Plugin
 
-The installable plugin bundle is in [`onegate`](onegate). Version 1.0.0 is a Skills-only plugin for the official Plugins Directory. It implements the Browser Mock target; future OneGate desktop and mobile adapters can use the same CLI and local runtime.
+The installable plugin bundle is in [`onegate`](onegate). Version 1.0.1 is a Skills-only plugin for the official Plugins Directory. It implements the Browser Mock target; future OneGate desktop and mobile adapters can use the same CLI and local runtime.
 
 The skill invokes a stable JSON CLI through `scripts/onegate.cmd` on Windows or `scripts/onegate.sh` on macOS/Linux. These launchers find Node on `PATH`, through `ONEGATE_NODE`, or in Codex's bundled-runtime cache, so Codex does not depend on a globally configured `node` command. The CLI automatically starts an authenticated loopback-only daemon that owns live browser sessions and the development identity across separate Codex calls. There is no public MCP endpoint or fixed remote service.
 

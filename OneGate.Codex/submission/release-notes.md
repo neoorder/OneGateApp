@@ -1,5 +1,13 @@
 # Release notes
 
+## OneGate 1.0.1
+
+Protocol-correctness update for NEP-20 authentication.
+
+- Corrects the signed response-data order to `nonce`, `timestamp`, `network`, `hash`, `action`, and `domain`.
+- Rejects malformed uint64 nonces and challenge timestamps outside the five-minute clock tolerance.
+- Compares the challenge domain with the DApp hostname case-insensitively.
+
 ## OneGate 1.0.0
 
 Initial Skills-only release for the official Plugins Directory.

@@ -22,6 +22,8 @@ const FIXTURE_ONLY_READ_METHODS = new Set([
   "getTokenInfo",
 ]);
 
+const NEP20_CLOCK_TOLERANCE_SECONDS = 300;
+
 function sha256(value) {
   return createHash("sha256").update(value).digest();
 }
@@ -67,6 +69,24 @@ function uint32LE(value) {
 function uint64LE(value) {
   const result = Buffer.alloc(8);
   result.writeBigUInt64LE(value);
+  return result;
+}
+
+function requireUInt64(value, name) {
+  let result;
+  if (typeof value === "string" && /^\d+$/u.test(value)) {
+    result = BigInt(value);
+  } else if (typeof value === "number" && Number.isSafeInteger(value)) {
+    result = BigInt(value);
+  } else {
+    throw new DapiEngineError(
+      DapiErrorCode.INVALID,
+      `${name} must be an unsigned 64-bit decimal string or safe integer.`,
+    );
+  }
+  if (result < 0n || result > 0xffffffffffffffffn) {
+    throw new DapiEngineError(DapiErrorCode.INVALID, `${name} must be an unsigned 64-bit integer.`);
+  }
   return result;
 }
 
@@ -245,32 +265,25 @@ export class DapiEngine {
     if (typeof payload.domain !== "string" || payload.domain.trim().length === 0) {
       throw new DapiEngineError(DapiErrorCode.INVALID, "Domain cannot be empty.");
     }
-    if (payload.domain !== host) {
+    if (typeof host !== "string" || payload.domain.toLowerCase() !== host.toLowerCase()) {
       throw new DapiEngineError(DapiErrorCode.INVALID, "Domain mismatch.");
     }
     if (!Array.isArray(payload.networks) || !payload.networks.includes(ONEGATE_NETWORK)) {
       throw new DapiEngineError(DapiErrorCode.UNSUPPORTED, "No supported network.");
     }
-    let nonce;
-    try {
-      nonce = BigInt(payload.nonce);
-    } catch {
-      throw new DapiEngineError(DapiErrorCode.INVALID, "Nonce must be an unsigned 64-bit integer.");
-    }
-    if (nonce < 0n || nonce > 0xffffffffffffffffn) {
-      throw new DapiEngineError(DapiErrorCode.INVALID, "Nonce must be an unsigned 64-bit integer.");
-    }
+    const nonce = requireUInt64(payload.nonce, "Nonce");
     if (!Number.isInteger(payload.timestamp) || payload.timestamp < 0 || payload.timestamp > 0xffffffff) {
       throw new DapiEngineError(DapiErrorCode.INVALID, "Timestamp must be an unsigned 32-bit integer.");
     }
-    if (Math.floor(Date.now() / 1000) - payload.timestamp > 300) {
-      throw new DapiEngineError(DapiErrorCode.INVALID, "Request expired.");
+    const now = Math.floor(Date.now() / 1000);
+    if (Math.abs(now - payload.timestamp) > NEP20_CLOCK_TOLERANCE_SECONDS) {
+      throw new DapiEngineError(DapiErrorCode.INVALID, "Request timestamp is outside the allowed clock tolerance.");
     }
-    const timestamp = Math.floor(Date.now() / 1000);
+    const timestamp = now;
     const message = Buffer.concat([
-      uint32LE(ONEGATE_NETWORK),
       uint64LE(nonce),
       uint32LE(timestamp),
+      uint32LE(ONEGATE_NETWORK),
       this.identity.scriptHashBytes(),
       varString(payload.action),
       varString(payload.domain),

@@ -2,7 +2,7 @@
 
 - Submission type: Skills only
 - Plugin name: OneGate
-- Version: 1.0.0
+- Version: 1.0.1
 - Developer: NEO GLOBAL RESOURCES
 - Category: Developer Tools
 - Website: https://onegate.space

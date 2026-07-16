@@ -35,6 +35,24 @@ function sha256(value) {
   return createHash("sha256").update(value).digest();
 }
 
+function uint32LE(value) {
+  const result = Buffer.alloc(4);
+  result.writeUInt32LE(value);
+  return result;
+}
+
+function uint64LE(value) {
+  const result = Buffer.alloc(8);
+  result.writeBigUInt64LE(value);
+  return result;
+}
+
+function varString(value) {
+  const bytes = Buffer.from(value, "utf8");
+  assert.ok(bytes.length < 0xfd, "Test vector requires a single-byte varuint length.");
+  return Buffer.concat([Buffer.from([bytes.length]), bytes]);
+}
+
 function delay(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
@@ -116,7 +134,7 @@ test("platform launcher accepts an explicit compatible Node runtime", async () =
   assert.equal(result.exitCode, 0, result.stderr);
   const envelope = JSON.parse(result.stdout.trim());
   assert.equal(envelope.ok, true);
-  assert.equal(envelope.result.version, "1.0.0");
+  assert.equal(envelope.result.version, "1.0.1");
 });
 
 test("document-start source is top-level-only and carries public configuration", () => {
@@ -167,6 +185,103 @@ test("identity store persists one address until explicit regeneration", async ()
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
+});
+
+test("NEP-20 authentication signs the specified response-data layout", async () => {
+  const identity = createDevelopmentIdentity(fixedPrivateKey, "2026-07-16T00:00:00.000Z");
+  const engine = new DapiEngine({
+    identity,
+    profile: {
+      id: "nep20",
+      transactionMode: "offline",
+      provider: { network: ONEGATE_NETWORK },
+    },
+  });
+  const challenge = {
+    action: "Authentication",
+    grant_type: "Signature",
+    allowed_algorithms: ["ECDSA-P256"],
+    domain: "example.com",
+    networks: [ONEGATE_NETWORK],
+    nonce: "13458238842203010919",
+    timestamp: Math.floor(Date.now() / 1000),
+  };
+
+  const response = await engine.invoke("authenticate", [challenge], { host: "EXAMPLE.COM" });
+  assert.deepEqual(
+    {
+      algorithm: response.algorithm,
+      network: response.network,
+      pubkey: response.pubkey,
+      address: response.address,
+      nonce: response.nonce,
+    },
+    {
+      algorithm: "ECDSA-P256",
+      network: ONEGATE_NETWORK,
+      pubkey: identity.pubkey,
+      address: identity.address,
+      nonce: challenge.nonce,
+    },
+  );
+
+  const specifiedData = Buffer.concat([
+    uint64LE(BigInt(challenge.nonce)),
+    uint32LE(response.timestamp),
+    uint32LE(ONEGATE_NETWORK),
+    identity.scriptHashBytes(),
+    varString(challenge.action),
+    varString(challenge.domain),
+  ]);
+  const signature = Buffer.from(response.signature, "base64");
+  assert.equal(
+    verifyP256Signature(specifiedData, signature, Buffer.from(identity.pubkey, "hex")),
+    true,
+  );
+
+  const previousIncorrectData = Buffer.concat([
+    uint32LE(ONEGATE_NETWORK),
+    uint64LE(BigInt(challenge.nonce)),
+    uint32LE(response.timestamp),
+    identity.scriptHashBytes(),
+    varString(challenge.action),
+    varString(challenge.domain),
+  ]);
+  assert.equal(
+    verifyP256Signature(previousIncorrectData, signature, Buffer.from(identity.pubkey, "hex")),
+    false,
+  );
+});
+
+test("NEP-20 authentication rejects malformed challenges", async () => {
+  const identity = createDevelopmentIdentity(fixedPrivateKey, "2026-07-16T00:00:00.000Z");
+  const engine = new DapiEngine({ identity, profile: {} });
+  const challenge = {
+    action: "Authentication",
+    grant_type: "Signature",
+    allowed_algorithms: ["ECDSA-P256"],
+    domain: "example.com",
+    networks: [ONEGATE_NETWORK],
+    nonce: "18446744073709551615",
+    timestamp: Math.floor(Date.now() / 1000),
+  };
+
+  await assert.rejects(
+    engine.invoke("authenticate", [{ ...challenge, nonce: true }], { host: challenge.domain }),
+    (error) => error.code === 10002 && /unsigned 64-bit/u.test(error.message),
+  );
+  await assert.rejects(
+    engine.invoke("authenticate", [{ ...challenge, nonce: "0x10" }], { host: challenge.domain }),
+    (error) => error.code === 10002 && /unsigned 64-bit/u.test(error.message),
+  );
+  await assert.rejects(
+    engine.invoke("authenticate", [{ ...challenge, timestamp: challenge.timestamp + 600 }], { host: challenge.domain }),
+    (error) => error.code === 10002 && /clock tolerance/u.test(error.message),
+  );
+  await assert.rejects(
+    engine.invoke("authenticate", [challenge], { host: "attacker.example" }),
+    (error) => error.code === 10002 && /Domain mismatch/u.test(error.message),
+  );
 });
 
 test("dAPI engine signs messages and transaction contexts while offline transfers fail naturally", async () => {
@@ -253,7 +368,7 @@ test("JSON CLI keeps identity and sessions in an authenticated local daemon", as
     const help = await runCli(["help"], stateDirectory);
     assert.equal(help.exitCode, 0);
     assert.equal(help.payload.ok, true);
-    assert.equal(help.payload.result.version, "1.0.0");
+    assert.equal(help.payload.result.version, "1.0.1");
 
     const first = await runCli(["identity"], stateDirectory);
     const second = await runCli(["identity", "show"], stateDirectory);

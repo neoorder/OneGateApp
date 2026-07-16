@@ -14,7 +14,19 @@ The provider is injected only into the top-level main world. No reverse proxy, H
 
 The page sends method names and arguments through the CDP binding. The local daemon validates each request, performs signing, and returns only public results to the originating execution context. The generated private key is never inserted into the browser profile, page configuration, DOM, trace, console, or `evaluate` result.
 
-This implementation follows the [NEP-21 dAPI provider specification](https://github.com/neo-project/proposals/blob/master/nep-21.mediawiki) and mirrors current OneGate fields and method shapes where Browser Mock has the necessary local information.
+This implementation follows the [NEP-21 dAPI provider specification](https://github.com/neo-project/proposals/blob/master/nep-21.mediawiki) and mirrors current OneGate fields and method shapes where Browser Mock has the necessary local information. Its `authenticate` method implements the NEP-20 authentication scheme.
+
+## NEP-20 authentication
+
+`authenticate(challenge)` accepts the NEP-20 challenge payload and returns its response payload. The Browser Mock:
+
+- requires `action: "Authentication"`, `grant_type: "Signature"`, support for `ECDSA-P256`, and the Neo N3 network magic;
+- compares `challenge.domain` with the top-level page hostname, case-insensitively;
+- accepts a uint64 nonce as a decimal string or a JavaScript safe integer and preserves its JSON representation in the response;
+- rejects challenge timestamps more than five minutes behind or ahead of local time; and
+- signs the binary fields in the exact NEP-20 order: `nonce`, response `timestamp`, `network`, account script `hash`, `action`, then `domain`.
+
+The uint64 and uint32 fields are little-endian, `hash` is the 20-byte script hash, and the two strings use Neo `var_str` encoding. The 64-byte P-256 signature is returned as base64.
 
 ## Browser selection
 
@@ -42,7 +54,7 @@ Profiles contain public behavior only. Accounts are not configured in a profile 
   "transactionMode": "simulate",
   "provider": {
     "name": "OneGate Codex Plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "dapiVersion": "1.0",
     "network": 860833102,
     "supportedNetworks": [860833102]

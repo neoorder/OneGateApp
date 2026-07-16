@@ -2,11 +2,11 @@
 
 Effective date: July 16, 2026
 
-This policy applies to version 1.0.0 of the OneGate Codex Plugin published by NEO GLOBAL RESOURCES. It supplements the general OneGate privacy policy for the plugin's local DApp debugging features.
+This policy applies to version 1.0.1 of the OneGate Codex Plugin published by NEO GLOBAL RESOURCES. It supplements the general OneGate privacy policy for the plugin's local DApp debugging features.
 
 ## Local operation
 
-The plugin is a Skills-only development tool. Version 1.0.0 does not use a OneGate-hosted API, analytics service, telemetry endpoint, advertising service, or remote wallet service. Its Browser Mock runtime, development identity, signing operations, browser control, and reviewer fixture run on the user's device.
+The plugin is a Skills-only development tool. Version 1.0.1 does not use a OneGate-hosted API, analytics service, telemetry endpoint, advertising service, or remote wallet service. Its Browser Mock runtime, development identity, signing operations, browser control, and reviewer fixture run on the user's device.
 
 Opening a third-party DApp still causes the selected browser to connect to that DApp and any services the page uses. Those connections are controlled by the DApp and browser and are subject to their own privacy policies.
 

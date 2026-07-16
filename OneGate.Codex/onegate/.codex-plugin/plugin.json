@@ -1,6 +1,6 @@
 {
   "name": "onegate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Debug OneGate DApps through a Skills-only local runtime with a persistent development identity and a document-start NEP-21 Browser Mock.",
   "author": {
     "name": "NEO GLOBAL RESOURCES",
