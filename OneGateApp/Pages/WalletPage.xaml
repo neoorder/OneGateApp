@@ -60,7 +60,7 @@
                                          AutomationProperties.IsInAccessibleTree="True"
                                          SemanticProperties.Description="{x:Static og:Strings.Receive}">
                         <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54" AutomationProperties.IsInAccessibleTree="False">
-                            <Label StyleClass="Icon" Text="&#xe7dd;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label StyleClass="Icon" Text="&#xe7dd;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         </Border>
                         <Label Text="{x:Static og:Strings.Receive}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout.GestureRecognizers>
@@ -71,7 +71,7 @@
                                          AutomationProperties.IsInAccessibleTree="True"
                                          SemanticProperties.Description="{x:Static og:Strings.Send}">
                         <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54" AutomationProperties.IsInAccessibleTree="False">
-                            <Label StyleClass="Icon" Text="&#xe705;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label StyleClass="Icon" Text="&#xe705;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         </Border>
                         <Label Text="{x:Static og:Strings.Send}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout.GestureRecognizers>
@@ -82,7 +82,7 @@
                                          AutomationProperties.IsInAccessibleTree="True"
                                          SemanticProperties.Description="{x:Static og:Strings.Records}">
                         <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54" AutomationProperties.IsInAccessibleTree="False">
-                            <Label StyleClass="Icon" Text="&#xe901;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label StyleClass="Icon" Text="&#xe901;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         </Border>
                         <Label Text="{x:Static og:Strings.Records}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout.GestureRecognizers>
