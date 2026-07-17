@@ -58,6 +58,8 @@
 	<string>This app allows web games to use motion sensors for controls.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to photos gallery for picking photos and videos.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save payment QR codes to your photo library.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
