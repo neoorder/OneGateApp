@@ -40,7 +40,7 @@ partial class LaunchDAppPage
         }
         if (!payload.Domain.Equals(new Uri(DApp.Url).Host, StringComparison.OrdinalIgnoreCase))
             throw new DapiException(10002, "Domain mismatch");
-        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText))
+        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText, payload.Domain))
             throw new DapiException(10006, "Operation cancelled");
         await activityLogService.RecordWalletAuthorizationAsync(DApp);
         WalletAccount account = walletProvider.GetWallet()!.GetDefaultAccount()!;
