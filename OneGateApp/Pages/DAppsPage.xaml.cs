@@ -58,7 +58,11 @@ public partial class DAppsPage : ContentPage
 
     void OnCategoryChanged(object sender, EventArgs e)
     {
-        TabBar tabBar = (TabBar)sender;
+        ApplyCategoryFilter((TabBar)sender);
+    }
+
+    void ApplyCategoryFilter(TabBar tabBar)
+    {
         if (tabBar.SelectedTab == tabBar.Tabs![0])
             DAppsFiltered = DAppsRegular;
         else
@@ -99,6 +103,7 @@ public partial class DAppsPage : ContentPage
             .Select(DApp.LocalizeTag)
             .Prepend(Strings.All)
             .ToArray();
+        ApplyCategoryFilter(tabbarCategory);
 
         DAppsFavorite = new(DAppsIdFavorite.Select(id => DAppsRegular.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
         DAppsRecent = new(DAppsIdRecent.Select(id => DAppsRegular.FirstOrDefault(p => p.Id == id)).OfType<DApp>());
