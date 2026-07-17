@@ -55,7 +55,7 @@ public partial class SettingsPage : ContentPage
         });
         yield return (Strings.General, new SettingEntry(Strings.ContentSettings)
         {
-            CurrentValue = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext) ? Strings.Enabled : Strings.Disabled,
+            CurrentValue = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext) ? Strings.Enabled : Strings.Disabled,
             Command = Commands.GotoPage,
             CommandParameter = "//home/settings/content"
         });

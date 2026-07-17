@@ -18,8 +18,6 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 {
-    const string DeveloperModeKey = "preference/developer_mode_enabled";
-
     readonly IServiceProvider serviceProvider;
     readonly ProtocolSettings protocolSettings;
     readonly IWalletProvider walletProvider;
@@ -46,7 +44,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         this.httpClient = httpClient;
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
-        IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DeveloperModeKey);
+        IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DAppCatalogPolicy.DeveloperModeKey);
         InitializeComponent();
         webView.DocumentStartScript = CreateDocumentStartScript();
         if (!homeShortcutService.IsSupported)

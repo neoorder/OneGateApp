@@ -71,9 +71,10 @@ public partial class GlobalSearchPage : ContentPage
             .Select(p => new GlobalSearchIndex<Contact>(p, p.Label, p.Address))
             .ToArray();
         List<int> recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+        bool developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
         await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
         dappIndex = DApps
-            .Where(p => p.IsRegularApp)
+            .Where(p => p.IsRegularApp && DAppCatalogPolicy.IsDiscoverable(p, developerModeEnabled))
             .Select(p => new GlobalSearchIndex<DApp>(
                 p,
                 recentDAppIds.IndexOf(p.Id),

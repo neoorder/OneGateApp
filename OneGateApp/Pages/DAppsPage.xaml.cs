@@ -11,6 +11,7 @@ public partial class DAppsPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
     bool allowRestrictedContent;
+    bool developerModeEnabled;
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
@@ -74,7 +75,8 @@ public partial class DAppsPage : ContentPage
 
     async Task LoadSettingsAsync()
     {
-        allowRestrictedContent = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext);
+        allowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
+        developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
         DAppsIdFavorite = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite") ?? [];
         DAppsIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
     }
@@ -87,7 +89,8 @@ public partial class DAppsPage : ContentPage
     void OnDataLoaded(object? sender, EventArgs e)
     {
         DAppsRegular = DApps
-            .Where(p => p.IsRegularApp && DAppContentPolicy.IsVisible(p, allowRestrictedContent))
+            .Where(p => p.IsRegularApp
+                && DAppCatalogPolicy.IsVisible(p, allowRestrictedContent, developerModeEnabled))
             .ToArray();
         DAppsFiltered = DAppsRegular;
         DAppCategories = DAppsRegular
