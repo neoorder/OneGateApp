@@ -62,7 +62,6 @@
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
 		<InterfaceDefinition Include="Platforms\iOS\LaunchScreen.storyboard" />
-		<ImageAsset Include="Platforms\iOS\Assets.xcassets\**\*.*" />
 	</ItemGroup>
 
 	<ItemGroup>
