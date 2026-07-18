@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "transactionMode": "offline",
+  "provider": {
+    "name": "OneGate Codex Plugin",
+    "version": "1.0.1",
+    "dapiVersion": "1.0",
+    "compatibility": ["NEP-2", "NEP-6", "NEP-9", "NEP-11", "NEP-17", "NEP-20", "NEP-21", "NEP-33"],
+    "connected": true,
+    "network": 860833102,
+    "supportedNetworks": [860833102],
+    "icon": "https://onegate.space/images/logo.png",
+    "website": "https://onegate.space"
+  },
+  "balances": [],
+  "fixtures": [],
+  "errors": []
+}

@@ -986,6 +986,9 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Submit by email</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Report</value>
   </data>

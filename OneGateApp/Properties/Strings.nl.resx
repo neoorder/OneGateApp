@@ -986,6 +986,9 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Per e-mail indienen</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Opnieuw laden</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Melden</value>
   </data>

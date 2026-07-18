@@ -986,6 +986,9 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Envoyer par e-mail</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Recharger</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Signaler</value>
   </data>

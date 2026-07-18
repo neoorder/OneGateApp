@@ -986,6 +986,9 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="SubmitByEmail" xml:space="preserve">
     <value>이메일로 제출</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>신고</value>
   </data>

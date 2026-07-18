@@ -986,6 +986,9 @@
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Отправить по электронной почте</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Перезагрузить</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Пожаловаться</value>
   </data>

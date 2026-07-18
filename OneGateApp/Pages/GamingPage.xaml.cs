@@ -15,6 +15,7 @@ public partial class GamingPage : ContentPage
 
     readonly ApplicationDbContext dbContext;
     bool allowRestrictedContent;
+    bool developerModeEnabled;
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
@@ -57,7 +58,8 @@ public partial class GamingPage : ContentPage
 
     async Task LoadSettingsAsync()
     {
-        allowRestrictedContent = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext);
+        allowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
+        developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
         GamesIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
     }
 
@@ -83,7 +85,8 @@ public partial class GamingPage : ContentPage
     void OnDataLoaded(object? sender, EventArgs e)
     {
         Games = DApps
-            .Where(p => p.IsGamingApp && DAppContentPolicy.IsVisible(p, allowRestrictedContent))
+            .Where(p => p.IsGamingApp
+                && DAppCatalogPolicy.IsVisible(p, allowRestrictedContent, developerModeEnabled))
             .ToArray();
         GameTypes = Games
             .Select(p => p.GameType)

@@ -986,6 +986,9 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Invia via email</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Ricarica</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Segnala</value>
   </data>

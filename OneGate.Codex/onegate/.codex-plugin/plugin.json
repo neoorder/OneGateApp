@@ -1,0 +1,35 @@
+{
+  "name": "onegate",
+  "version": "1.0.1",
+  "description": "Debug OneGate DApps through a Skills-only local runtime with a persistent development identity and a document-start NEP-21 Browser Mock.",
+  "author": {
+    "name": "NEO GLOBAL RESOURCES",
+    "url": "https://onegate.space"
+  },
+  "homepage": "https://onegate.space",
+  "repository": "https://github.com/neoorder/OneGateApp",
+  "license": "MIT",
+  "keywords": ["onegate", "neo", "dapp", "nep-21", "debugging"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "OneGate",
+    "shortDescription": "OneGate Codex Plugin",
+    "longDescription": "Use the bundled Skill and local JSON CLI to open a DApp at its original URL, inject a OneGate-compatible NEP-21 provider before page scripts, reuse one persistent development account for real signatures, and inspect browser state, console output, screenshots, and dAPI traces. Browser Mock is the currently implemented debugging target.",
+    "developerName": "NEO GLOBAL RESOURCES",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://onegate.space",
+    "privacyPolicyURL": "https://github.com/neoorder/OneGateApp/blob/master/OneGate.Codex/PRIVACY.md",
+    "termsOfServiceURL": "https://onegate.space/terms.html",
+    "brandColor": "#282b34",
+    "composerIcon": "./assets/logo.svg",
+    "composerIconDark": "./assets/logo-dark.svg",
+    "logo": "./assets/logo.svg",
+    "logoDark": "./assets/logo-dark.svg",
+    "defaultPrompt": [
+      "Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.",
+      "Test this DApp's OneGate signing flow with the persistent development account.",
+      "Run this DApp with a simulated OneGate transaction profile."
+    ]
+  }
+}

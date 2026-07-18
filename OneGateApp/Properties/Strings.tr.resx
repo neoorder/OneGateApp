@@ -986,6 +986,9 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="SubmitByEmail" xml:space="preserve">
     <value>E-posta ile gönder</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Yeniden yükle</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Bildir</value>
   </data>

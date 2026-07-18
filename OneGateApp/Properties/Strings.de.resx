@@ -986,6 +986,9 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Per E-Mail einreichen</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Neu laden</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Melden</value>
   </data>

@@ -986,6 +986,9 @@
   <data name="FeeEstimateNoticeText" xml:space="preserve">
     <value>OneGate 會在下一個畫面簽名前估算網路費與系統費。GAS 轉帳必須保留足夠的 GAS，以同時支付轉帳金額與費用。</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>重新載入</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>檢舉</value>
   </data>
