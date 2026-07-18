@@ -45,6 +45,17 @@
 		<MtouchInterpreter>Neo</MtouchInterpreter>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
+		<EnableCodeSigning>true</EnableCodeSigning>
+		<EnablePackageSigning>true</EnablePackageSigning>
+		<CreatePackage>true</CreatePackage>
+		<CodesignKey>Apple Distribution: NEO GLOBAL DEVELOPMENT PTE. LTD. (3F3295APF5)</CodesignKey>
+		<CodesignProvision>OneGate Mac App Store 2026</CodesignProvision>
+		<PackageSigningKey>3rd Party Mac Developer Installer: NEO GLOBAL DEVELOPMENT PTE. LTD. (3F3295APF5)</PackageSigningKey>
+		<ProvisioningType>manual</ProvisioningType>
+		<MtouchInterpreter>Neo</MtouchInterpreter>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.png" ForegroundScale="0.5" />
