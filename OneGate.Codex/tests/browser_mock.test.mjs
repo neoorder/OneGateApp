@@ -134,7 +134,7 @@ test("platform launcher accepts an explicit compatible Node runtime", async () =
   assert.equal(result.exitCode, 0, result.stderr);
   const envelope = JSON.parse(result.stdout.trim());
   assert.equal(envelope.ok, true);
-  assert.equal(envelope.result.version, "1.0.1");
+  assert.equal(envelope.result.version, "1.0.2");
 });
 
 test("document-start source is top-level-only and carries public configuration", () => {
@@ -368,7 +368,7 @@ test("JSON CLI keeps identity and sessions in an authenticated local daemon", as
     const help = await runCli(["help"], stateDirectory);
     assert.equal(help.exitCode, 0);
     assert.equal(help.payload.ok, true);
-    assert.equal(help.payload.result.version, "1.0.1");
+    assert.equal(help.payload.result.version, "1.0.2");
 
     const first = await runCli(["identity"], stateDirectory);
     const second = await runCli(["identity", "show"], stateDirectory);

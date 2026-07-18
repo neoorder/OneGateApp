@@ -2,7 +2,7 @@
 
 - Submission type: Skills only
 - Plugin name: OneGate
-- Version: 1.0.1
+- Version: 1.0.2
 - Developer: NEO GLOBAL RESOURCES
 - Category: Developer Tools
 - Website: https://onegate.space
@@ -17,12 +17,12 @@ OneGate Codex Plugin
 
 ## Long description
 
-OneGate helps Codex open and inspect Neo N3 DApps without changing their URL or Origin. Its local Browser Mock injects a OneGate-compatible NEP-21 provider before page scripts run, reuses one persistent development account for real P-256 signing, and exposes browser status, console logs, screenshots, JavaScript evaluation, and dAPI traces. The default offline profile never broadcasts, while an explicit simulation profile can exercise fake success paths. A bundled reviewer DApp provides a reproducible end-to-end check without external hosting.
+OneGate helps Codex debug Neo N3 DApps and submit projects for review in the OneGate catalog. Its local Browser Mock injects a OneGate-compatible NEP-21 provider before page scripts run, preserves the DApp URL and Origin, reuses a persistent development account for real P-256 signing, and exposes browser diagnostics and dAPI traces without broadcasting. Its listing workflow gathers public project metadata, validates it against the official form, screens drafts for secrets, and creates a public OneGateApp issue only after the user reviews and confirms the exact request.
 
 ## Starter prompts
 
-1. Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.
-2. Test this DApp's OneGate signing flow with the persistent development account.
+1. Review this project and prepare a OneGate DApp listing request.
+2. Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.
 3. Run the bundled OneGate reviewer DApp and summarize its account, signing, and expected offline-error results.
 
 ## Availability

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Submit a OneGate DApp"
+  short_description: "Prepare and submit a OneGate listing request"
+  default_prompt: "Use $onegate-submit-dapp to prepare and submit my DApp listing request to OneGate."

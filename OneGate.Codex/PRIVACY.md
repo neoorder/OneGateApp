@@ -1,14 +1,22 @@
 # OneGate Codex Plugin Privacy Policy
 
-Effective date: July 16, 2026
+Effective date: July 18, 2026
 
-This policy applies to version 1.0.1 of the OneGate Codex Plugin published by NEO GLOBAL RESOURCES. It supplements the general OneGate privacy policy for the plugin's local DApp debugging features.
+This policy applies to version 1.0.2 of the OneGate Codex Plugin published by NEO GLOBAL RESOURCES. It supplements the general OneGate privacy policy for the plugin's local DApp debugging and public listing-request features.
 
 ## Local operation
 
-The plugin is a Skills-only development tool. Version 1.0.1 does not use a OneGate-hosted API, analytics service, telemetry endpoint, advertising service, or remote wallet service. Its Browser Mock runtime, development identity, signing operations, browser control, and reviewer fixture run on the user's device.
+The plugin is a Skills-only development tool. Its Browser Mock runtime, development identity, signing operations, browser control, and reviewer fixture run on the user's device. Version 1.0.2 does not use a OneGate-hosted submission API, analytics service, telemetry endpoint, advertising service, or remote wallet service.
 
 Opening a third-party DApp still causes the selected browser to connect to that DApp and any services the page uses. Those connections are controlled by the DApp and browser and are subject to their own privacy policies.
+
+## DApp listing submissions
+
+The listing skill prepares a request for the public `neoorder/OneGateApp` GitHub issue tracker. It does not publish automatically. Before an issue is created, the skill instructs Codex to show the exact title and body and obtain the user's authorization and the three confirmations required by the public DApp submission form.
+
+If the user authorizes publication, the selected authenticated GitHub connector, GitHub CLI, or browser sends the issue to GitHub. The project name, descriptions, URLs, developer or publisher, public contact information, networks, wallet methods, mobile notes, security notes, and other supplied listing details then become public and are handled and retained by GitHub and the repository maintainers. The plugin does not receive or store the user's GitHub credentials.
+
+The listing workflow is for public information only. It instructs Codex not to submit private keys, seed phrases, credentials, tokens, unpublished API keys, private endpoints, or other secrets.
 
 ## Data stored on the device
 
@@ -27,6 +35,8 @@ The development private key is not inserted into the DApp page, browser profile,
 
 CLI commands return public identity fields, session status, and explicitly requested diagnostics such as console entries, dAPI traces, screenshots, or JavaScript evaluation results. Information returned through the CLI can become part of the user's Codex task and is then handled under the user's agreement with OpenAI.
 
+Public project information gathered for a listing, the resulting draft, and GitHub submission results can also become part of the user's Codex task.
+
 `session evaluate` executes an expression in the DApp's main page context and can read or change page state. The skill instructs Codex to use it only for explicit, narrow debugging and not to execute untrusted text supplied by a page. It cannot access the daemon-owned private key through the plugin API.
 
 ## Signing and transactions
@@ -38,6 +48,8 @@ The DApp receives the public account data, signatures, mock results, and errors 
 ## Retention and deletion
 
 Stopping a Browser Mock session deletes its temporary browser profile and clears its in-memory logs and traces. Stopping the daemon removes its active descriptor. The development identity and daemon log remain locally so the same development address can be reused and runtime failures can be diagnosed.
+
+Deleting local plugin state does not remove a submitted GitHub issue. The submitter must use GitHub to edit or close the issue, subject to GitHub's permissions and retention rules.
 
 The normal state directory is:
 

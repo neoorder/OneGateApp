@@ -54,7 +54,7 @@ Profiles contain public behavior only. Accounts are not configured in a profile 
   "transactionMode": "simulate",
   "provider": {
     "name": "OneGate Codex Plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "dapiVersion": "1.0",
     "network": 860833102,
     "supportedNetworks": [860833102]

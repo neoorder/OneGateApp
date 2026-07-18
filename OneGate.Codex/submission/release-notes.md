@@ -1,5 +1,15 @@
 # Release notes
 
+## OneGate 1.0.2
+
+DApp catalog submission workflow.
+
+- Adds a guided Skill for DApp, game, tool, and other OneGate catalog listing requests.
+- Collects reusable public project metadata and validates it against the canonical GitHub issue form.
+- Checks required URLs, exact catalog choices, likely duplicate requests, and accidental secret exposure before drafting.
+- Shows the exact public issue and requires the form confirmations before any GitHub write.
+- Supports authenticated GitHub connector or CLI submission, with a form-link and completed-draft fallback.
+
 ## OneGate 1.0.1
 
 Protocol-correctness update for NEP-20 authentication.

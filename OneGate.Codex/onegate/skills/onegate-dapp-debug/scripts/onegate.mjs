@@ -87,7 +87,7 @@ function parseInteger(value, name) {
 
 function usage() {
   return {
-    version: "1.0.1",
+    version: "1.0.2",
     commands: [
       "doctor",
       "targets discover",
