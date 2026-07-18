@@ -847,6 +847,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Reload 的本地化字符串。
+        /// </summary>
+        internal static string Reload {
+            get {
+                return ResourceManager.GetString("Reload", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Report 的本地化字符串。
         /// </summary>
         internal static string Report {

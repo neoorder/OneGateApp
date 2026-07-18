@@ -974,6 +974,9 @@
   <data name="SubmitByEmail" xml:space="preserve">
     <value>通过电子邮件提交</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>重新载入</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>举报</value>
   </data>

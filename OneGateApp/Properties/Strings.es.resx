@@ -974,6 +974,9 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Enviar por correo electrónico</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Recargar</value>
+  </data>
   <data name="Report" xml:space="preserve">
     <value>Denunciar</value>
   </data>

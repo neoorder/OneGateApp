@@ -1,6 +1,8 @@
 #if ANDROID
 
 using Android.Webkit;
+using Android.Widget;
+using AndroidX.Core.View;
 using AndroidX.WebKit;
 using Java.Interop;
 using Microsoft.Maui;
@@ -32,6 +34,101 @@ partial class BridgeWebViewHandler
     class BridgeWebChromeClient(BridgeWebViewHandler handler) : MauiWebChromeClient(handler)
     {
         static readonly string[] VideoCaptureResources = [PermissionRequest.ResourceVideoCapture];
+        Android.Views.View? fullscreenView;
+        ICustomViewCallback? fullscreenCallback;
+        WindowInsetsControllerCompat? fullscreenInsetsController;
+        bool wereSystemBarsVisible;
+
+        public override void OnShowCustomView(Android.Views.View? view, ICustomViewCallback? callback)
+        {
+            if (fullscreenView is not null)
+            {
+                OnHideCustomView();
+                return;
+            }
+
+            if (view is null || callback is null)
+                return;
+
+            var activity = handler.MauiContext?.Context?.GetActivity() ?? Platform.CurrentActivity;
+            if (activity is null)
+                return;
+
+            fullscreenCallback = callback;
+            fullscreenView = view;
+            wereSystemBarsVisible = false;
+            fullscreenView.SetBackgroundColor(Android.Graphics.Color.White);
+
+            if (OperatingSystem.IsAndroidVersionAtLeast(30))
+            {
+                WindowCompat.SetDecorFitsSystemWindows(activity.Window!, false);
+                var controller = activity.Window!.InsetsController;
+                if (controller is not null)
+                {
+                    var windowInsets = activity.Window.DecorView.RootWindowInsets;
+                    wereSystemBarsVisible = windowInsets is null
+                        || windowInsets.IsVisible(WindowInsetsCompat.Type.NavigationBars())
+                        || windowInsets.IsVisible(WindowInsetsCompat.Type.StatusBars());
+                    if (wereSystemBarsVisible)
+                    {
+                        controller.SystemBarsBehavior = WindowInsetsControllerCompat.BehaviorShowTransientBarsBySwipe;
+                        controller.Hide(WindowInsetsCompat.Type.SystemBars());
+                    }
+                }
+            }
+            else if (OperatingSystem.IsAndroidVersionAtLeast(19))
+            {
+                var decorView = activity.Window!.DecorView;
+                fullscreenInsetsController = WindowCompat.GetInsetsController(activity.Window, decorView);
+                wereSystemBarsVisible = true;
+                if (fullscreenInsetsController is not null)
+                {
+                    fullscreenInsetsController.SystemBarsBehavior = WindowInsetsControllerCompat.BehaviorShowTransientBarsBySwipe;
+                    fullscreenInsetsController.Hide(WindowInsetsCompat.Type.SystemBars());
+                }
+                WindowCompat.SetDecorFitsSystemWindows(activity.Window, false);
+            }
+
+            if (activity.Window!.DecorView is FrameLayout layout)
+            {
+                layout.AddView(fullscreenView, new FrameLayout.LayoutParams(
+                    Android.Views.ViewGroup.LayoutParams.MatchParent,
+                    Android.Views.ViewGroup.LayoutParams.MatchParent));
+            }
+        }
+
+        public override void OnHideCustomView()
+        {
+            if (fullscreenView is null)
+                return;
+
+            var activity = handler.MauiContext?.Context?.GetActivity() ?? Platform.CurrentActivity;
+            if (activity is not null)
+            {
+                if (activity.Window!.DecorView is FrameLayout layout)
+                    layout.RemoveView(fullscreenView);
+
+                if (OperatingSystem.IsAndroidVersionAtLeast(30))
+                {
+                    WindowCompat.SetDecorFitsSystemWindows(activity.Window, true);
+                    var controller = activity.Window.InsetsController;
+                    if (controller is not null && wereSystemBarsVisible)
+                        controller.Show(WindowInsetsCompat.Type.SystemBars());
+                }
+                else if (OperatingSystem.IsAndroidVersionAtLeast(19))
+                {
+                    if (fullscreenInsetsController is not null && wereSystemBarsVisible)
+                        fullscreenInsetsController.Show(WindowInsetsCompat.Type.SystemBars());
+                    WindowCompat.SetDecorFitsSystemWindows(activity.Window, true);
+                }
+            }
+
+            fullscreenCallback?.OnCustomViewHidden();
+            fullscreenView = null;
+            fullscreenCallback = null;
+            fullscreenInsetsController = null;
+            wereSystemBarsVisible = false;
+        }
 
         public override void OnPermissionRequest(PermissionRequest? request)
         {
@@ -97,6 +194,7 @@ partial class BridgeWebViewHandler
         base.ConnectHandler(platformView);
         platformView.Settings.DomStorageEnabled = true;
         platformView.Settings.JavaScriptEnabled = true;
+        platformView.Settings.MediaPlaybackRequiresUserGesture = false;
         platformView.AddJavascriptInterface(new ScriptHandler(BridgeWebView.OnMessage, BridgeWebView.OnSyncMessage), "__OneGateBridge");
         if (WebViewFeature.IsFeatureSupported(WebViewFeature.DocumentStartScript))
         {

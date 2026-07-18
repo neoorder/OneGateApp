@@ -38,7 +38,7 @@ partial class LaunchDAppPage
         {
             throw new DapiException(10002, ex.Message);
         }
-        if (payload.Domain != new Uri(DApp.Url).Host)
+        if (!payload.Domain.Equals(new Uri(DApp.Url).Host, StringComparison.OrdinalIgnoreCase))
             throw new DapiException(10002, "Domain mismatch");
         if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.LoginRequest, Strings.LoginRequestText))
             throw new DapiException(10006, "Operation cancelled");
