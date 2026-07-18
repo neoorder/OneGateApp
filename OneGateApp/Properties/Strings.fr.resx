@@ -255,6 +255,24 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Détails de l’application</value>
   </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Aucune ouverture récente sur cet appareil</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Autorisations</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Cette dApp peut demander la connexion au portefeuille, des signatures de messages et la signature de transactions. OneGate demande confirmation avant de partager les données du portefeuille ou de signer.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Activité récente</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Récemment ouverte sur cet appareil</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Étiquettes</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -275,6 +293,9 @@
   </data>
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>Scanner le code QR depuis la galerie</value>
+  </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Activer ou désactiver la lampe torche</value>
   </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>Impossible de reconnaître le code QR</value>
@@ -732,7 +753,7 @@ Voulez-vous continuer ?</value>
     <value>La DApp n’a pas été chargée</value>
   </data>
   <data name="DAppLoadFailedText" xml:space="preserve">
-    <value>{0} n’a pas pu être chargée. Vérifiez votre connexion et réessayez. État : {1}</value>
+    <value>{0} n’a pas pu être chargée. Vérifiez votre connexion et réessayez.</value>
   </data>
   <data name="DAppPreparing" xml:space="preserve">
     <value>Préparation de la DApp</value>
@@ -929,6 +950,9 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Copié dans le presse-papiers</value>
   </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Copier l'adresse</value>
+  </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Solde insuffisant pour couvrir le montant et les frais. Le montant maximal que vous pouvez envoyer est de {0} GAS.</value>
   </data>
@@ -961,6 +985,9 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   </data>
   <data name="SubmitByEmail" xml:space="preserve">
     <value>Envoyer par e-mail</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Recharger</value>
   </data>
   <data name="Report" xml:space="preserve">
     <value>Signaler</value>
@@ -1135,5 +1162,86 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   </data>
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Toujours en attente de confirmation</value>
+  </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Message décodé</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Ne signez que les messages provenant de sites auxquels vous faites confiance. Une signature peut prouver votre identité ou autoriser des actions ; ne signez jamais une demande inattendue ou illisible.</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Activité</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Historique d’activité</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Ouvrez une dApp, connectez-vous avec Neo, signez une demande ou envoyez une transaction pour que l’activité correspondante apparaisse ici.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Aucune activité enregistrée</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Consultez les visites de dApps, les connexions avec Neo, les signatures et les transactions enregistrées sur cet appareil.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Historique d’activité sur cet appareil</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Ouverture de {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} enregistrements</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Signature effectuée pour {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Source : {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transaction : {0} · Source : {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transaction envoyée pour {0}</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Connexion à {0} avec Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Visite de dApp</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Visites et connexions</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Dernière activité : {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Aucune activité enregistrée</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Activité récente</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Signatures</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaction</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp inconnue</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Source inconnue</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Connexion avec Neo</value>
   </data>
 </root>

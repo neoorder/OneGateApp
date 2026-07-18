@@ -1,12 +1,11 @@
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Services;
 using System.Net;
 
 namespace NeoOrder.OneGate.Pages;
 
 public partial class DeveloperToolsPage : ContentPage
 {
-    const string DeveloperModeKey = "preference/developer_mode_enabled";
-
     readonly ApplicationDbContext dbContext;
 
     public bool IsDAppDebugPanelEnabled { get; set { field = value; OnPropertyChanged(); } }
@@ -32,14 +31,17 @@ public partial class DeveloperToolsPage : ContentPage
     async Task LoadSettingsAsync()
     {
         IsSettingsLoaded = false;
-        IsDAppDebugPanelEnabled = await dbContext.Settings.GetAsync<bool>(DeveloperModeKey);
+        IsDAppDebugPanelEnabled = await dbContext.Settings.GetAsync<bool>(DAppCatalogPolicy.DeveloperModeKey);
         IsSettingsLoaded = true;
     }
 
     async void OnDAppDebugPanelToggled(object sender, ToggledEventArgs e)
     {
         if (!IsSettingsLoaded) return;
-        await dbContext.Settings.PutAsync(DeveloperModeKey, e.Value);
+        await dbContext.Settings.PutAsync(DAppCatalogPolicy.DeveloperModeKey, e.Value);
+        GlobalStates.Invalidate<DAppsPage>();
+        GlobalStates.Invalidate<GamingPage>();
+        GlobalStates.Invalidate<GlobalSearchPage>();
     }
 
     async void OnDAppSubmissionClicked(object sender, EventArgs e)

@@ -214,6 +214,60 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 No recent opens on this device 的本地化字符串。
+        /// </summary>
+        internal static string DAppNotRecentlyOpened {
+            get {
+                return ResourceManager.GetString("DAppNotRecentlyOpened", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Permissions 的本地化字符串。
+        /// </summary>
+        internal static string DAppPermissions {
+            get {
+                return ResourceManager.GetString("DAppPermissions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This dApp can request wallet connection, message signatures, and transaction signing. OneGate asks for confirmation before sharing wallet data or signing. 的本地化字符串。
+        /// </summary>
+        internal static string DAppPermissionsSummary {
+            get {
+                return ResourceManager.GetString("DAppPermissionsSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recent activity 的本地化字符串。
+        /// </summary>
+        internal static string DAppRecentActivity {
+            get {
+                return ResourceManager.GetString("DAppRecentActivity", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recently opened on this device 的本地化字符串。
+        /// </summary>
+        internal static string DAppRecentlyOpened {
+            get {
+                return ResourceManager.GetString("DAppRecentlyOpened", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Tags 的本地化字符串。
+        /// </summary>
+        internal static string DAppTags {
+            get {
+                return ResourceManager.GetString("DAppTags", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Apps 的本地化字符串。
         /// </summary>
         internal static string Apps {
@@ -613,6 +667,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Copy address 的本地化字符串。
+        /// </summary>
+        internal static string CopyAddress {
+            get {
+                return ResourceManager.GetString("CopyAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Create Biometric Credential 的本地化字符串。
         /// </summary>
         internal static string CreateBiometricCredential {
@@ -683,7 +746,7 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("DAppCameraPermissionTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Session-only 的本地化字符串。
         /// </summary>
@@ -816,6 +879,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string SubmitByEmail {
             get {
                 return ResourceManager.GetString("SubmitByEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Reload 的本地化字符串。
+        /// </summary>
+        internal static string Reload {
+            get {
+                return ResourceManager.GetString("Reload", resourceCulture);
             }
         }
 
@@ -1023,6 +1095,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string DefaultValidatorErrorMessage {
             get {
                 return ResourceManager.GetString("DefaultValidatorErrorMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Decoded message.
+        /// </summary>
+        internal static string DecodedMessage {
+            get {
+                return ResourceManager.GetString("DecodedMessage", resourceCulture);
             }
         }
 
@@ -2272,6 +2353,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Toggle flashlight 的本地化字符串。
+        /// </summary>
+        internal static string ToggleFlashlight {
+            get {
+                return ResourceManager.GetString("ToggleFlashlight", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Scan 的本地化字符串。
         /// </summary>
         internal static string ScanQRCode {
@@ -2583,6 +2673,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string SignMessageRequestText {
             get {
                 return ResourceManager.GetString("SignMessageRequestText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Only sign messages from sites you trust.
+        /// </summary>
+        internal static string SignMessageRiskWarning {
+            get {
+                return ResourceManager.GetString("SignMessageRiskWarning", resourceCulture);
             }
         }
 
@@ -3067,5 +3166,231 @@ namespace NeoOrder.OneGate.Properties {
                 return ResourceManager.GetString("TransactionStillPending", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Activity 的本地化字符串。
+        /// </summary>
+        internal static string Activity {
+            get {
+                return ResourceManager.GetString("Activity", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Activity History 的本地化字符串。
+        /// </summary>
+        internal static string ActivityHistory {
+            get {
+                return ResourceManager.GetString("ActivityHistory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Open a dApp, sign in with Neo, sign a request, or submit a transaction to see the activity here. 的本地化字符串。
+        /// </summary>
+        internal static string ActivityHistoryEmptyText {
+            get {
+                return ResourceManager.GetString("ActivityHistoryEmptyText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No activity recorded yet 的本地化字符串。
+        /// </summary>
+        internal static string ActivityHistoryEmptyTitle {
+            get {
+                return ResourceManager.GetString("ActivityHistoryEmptyTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Review dApp visits, Neo sign-ins, signatures, and transactions recorded on this device. 的本地化字符串。
+        /// </summary>
+        internal static string ActivityHistorySummaryText {
+            get {
+                return ResourceManager.GetString("ActivityHistorySummaryText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 On-device activity history 的本地化字符串。
+        /// </summary>
+        internal static string ActivityHistorySummaryTitle {
+            get {
+                return ResourceManager.GetString("ActivityHistorySummaryTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Opened {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityDAppOpenedTitle {
+            get {
+                return ResourceManager.GetString("ActivityDAppOpenedTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} records 的本地化字符串。
+        /// </summary>
+        internal static string ActivityRecordCount {
+            get {
+                return ResourceManager.GetString("ActivityRecordCount", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signature completed for {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivitySignatureTitle {
+            get {
+                return ResourceManager.GetString("ActivitySignatureTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Source: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivitySourceDescription {
+            get {
+                return ResourceManager.GetString("ActivitySourceDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction: {0} · Source: {1} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityTransactionDescription {
+            get {
+                return ResourceManager.GetString("ActivityTransactionDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction submitted for {0} 的本地化字符串。
+        /// </summary>
+        internal static string ActivityTransactionTitle {
+            get {
+                return ResourceManager.GetString("ActivityTransactionTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signed in to {0} with Neo 的本地化字符串。
+        /// </summary>
+        internal static string ActivityNeoSignInTitle {
+            get {
+                return ResourceManager.GetString("ActivityNeoSignInTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 dApp visit 的本地化字符串。
+        /// </summary>
+        internal static string DAppVisit {
+            get {
+                return ResourceManager.GetString("DAppVisit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Visits &amp; sign-ins 的本地化字符串。
+        /// </summary>
+        internal static string VisitsAndSignIns {
+            get {
+                return ResourceManager.GetString("VisitsAndSignIns", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Last activity: {0} 的本地化字符串。
+        /// </summary>
+        internal static string LastActivityAt {
+            get {
+                return ResourceManager.GetString("LastActivityAt", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 No activity records 的本地化字符串。
+        /// </summary>
+        internal static string NoActivityRecords {
+            get {
+                return ResourceManager.GetString("NoActivityRecords", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Recent activity 的本地化字符串。
+        /// </summary>
+        internal static string RecentActivity {
+            get {
+                return ResourceManager.GetString("RecentActivity", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signature 的本地化字符串。
+        /// </summary>
+        internal static string Signature {
+            get {
+                return ResourceManager.GetString("Signature", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Signatures 的本地化字符串。
+        /// </summary>
+        internal static string Signatures {
+            get {
+                return ResourceManager.GetString("Signatures", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transaction 的本地化字符串。
+        /// </summary>
+        internal static string Transaction {
+            get {
+                return ResourceManager.GetString("Transaction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Transactions 的本地化字符串。
+        /// </summary>
+        internal static string Transactions {
+            get {
+                return ResourceManager.GetString("Transactions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown dApp 的本地化字符串。
+        /// </summary>
+        internal static string UnknownDApp {
+            get {
+                return ResourceManager.GetString("UnknownDApp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unknown source 的本地化字符串。
+        /// </summary>
+        internal static string UnknownSource {
+            get {
+                return ResourceManager.GetString("UnknownSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Neo sign-in 的本地化字符串。
+        /// </summary>
+        internal static string NeoSignIn {
+            get {
+                return ResourceManager.GetString("NeoSignIn", resourceCulture);
+            }
+        }
+
     }
 }

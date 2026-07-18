@@ -19,7 +19,6 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class LaunchDAppPage : ContentPage, IQueryAttributable
 {
-    const string DeveloperModeKey = "preference/developer_mode_enabled";
     const int DAppLoadTimeoutMs = 30000;
     const int DAppPreparationDurationMs = 12000;
 
@@ -28,6 +27,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     readonly IWalletProvider walletProvider;
     readonly WalletAuthorizationService walletAuthorizationService;
     readonly ApplicationDbContext dbContext;
+    readonly ActivityLogService activityLogService;
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
     readonly RpcClient rpcClient;
@@ -58,17 +58,18 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
     public string DAppLoadErrorMessage { get; set { field = value; OnPropertyChanged(); } } = "";
     public string RetryText => Strings.Retry;
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, ActivityLogService activityLogService, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.walletProvider = walletProvider;
         this.walletAuthorizationService = walletAuthorizationService;
         this.dbContext = dbContext;
+        this.activityLogService = activityLogService;
         this.httpClient = httpClient;
         this.rpcServer = new(this);
         this.rpcClient = rpcClient;
-        IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DeveloperModeKey);
+        IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DAppCatalogPolicy.DeveloperModeKey);
         InitializeComponent();
         webView.DocumentStartScript = CreateDocumentStartScript();
         if (!homeShortcutService.IsSupported)
@@ -133,11 +134,17 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
             if (DApp.IsGamingApp) GlobalStates.Invalidate<GamingPage>();
         }
+        await activityLogService.RecordDAppConnectionAsync(DApp);
     }
 
     void OnFavoriteClicked(object sender, EventArgs e)
     {
         IsFavorite = !IsFavorite;
+    }
+
+    void OnReloadClicked(object sender, EventArgs e)
+    {
+        webView.Reload();
     }
 
     async void OnDeveloperToolsClicked(object sender, EventArgs e)
@@ -272,7 +279,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable
         IsDAppLoading = false;
         string appName = DApp?.NameLocalizer.Localize() ?? GetHostOrUrl(failedUrl);
         DAppLoadErrorTitle = Strings.DAppLoadFailed;
-        DAppLoadErrorMessage = string.Format(Strings.DAppLoadFailedText, appName, (int)result);
+        DAppLoadErrorMessage = string.Format(Strings.DAppLoadFailedText, appName);
         HasDAppLoadError = true;
     }
 

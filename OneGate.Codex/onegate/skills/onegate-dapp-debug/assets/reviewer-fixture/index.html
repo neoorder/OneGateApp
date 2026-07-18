@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OneGate Browser Mock Reviewer Fixture</title>
+</head>
+<body>
+    <main>
+        <h1>OneGate Browser Mock Fixture</h1>
+        <pre id="result">pending</pre>
+    </main>
+    <script>
+        (async function runFixture() {
+            const provider = await new Promise(function (resolve, reject) {
+                const timeout = setTimeout(function () {
+                    reject(new Error("Provider ready event timed out."));
+                }, 3000);
+                window.addEventListener("Neo.DapiProvider.ready", function onReady(event) {
+                    clearTimeout(timeout);
+                    resolve(event.detail.provider);
+                }, { once: true });
+                window.dispatchEvent(new CustomEvent("Neo.DapiProvider.request", {
+                    detail: { version: "1.0" }
+                }));
+            });
+
+            const accounts = await provider.getAccounts();
+            const balance = await provider.getBalance(
+                "0x0123456789abcdef0123456789abcdef01234567",
+                accounts[0].hash
+            );
+            const signed = await provider.signMessage("fixture-message", accounts[0].hash);
+            let sendCode;
+            try {
+                await provider.send(
+                    "0x0123456789abcdef0123456789abcdef01234567",
+                    accounts[0].hash,
+                    accounts[0].hash,
+                    "1",
+                    null
+                );
+            } catch (error) {
+                sendCode = error.code;
+            }
+            let rpcCode;
+            try {
+                await provider.call({
+                    hash: "0x0123456789abcdef0123456789abcdef01234567",
+                    operation: "symbol",
+                    args: []
+                });
+            } catch (error) {
+                rpcCode = error.code;
+            }
+
+            window.__fixtureResult = {
+                mock: provider.extra.mock,
+                profile: provider.extra.profile,
+                transactionMode: provider.extra.transactionMode,
+                providerName: provider.name,
+                network: provider.network,
+                account: accounts[0].address,
+                accountHash: accounts[0].hash,
+                balance: balance,
+                signedAccount: signed.account,
+                signatureLength: signed.signature.length,
+                sendCode: sendCode,
+                rpcCode: rpcCode,
+                traceCount: window.__OneGateMock.getTrace().length
+            };
+            document.getElementById("result").textContent = JSON.stringify(window.__fixtureResult, null, 2);
+            console.info("[OneGate Fixture] complete", window.__fixtureResult);
+        })().catch(function (error) {
+            window.__fixtureResult = { error: error.message, code: error.code };
+            document.getElementById("result").textContent = JSON.stringify(window.__fixtureResult, null, 2);
+            console.error("[OneGate Fixture] failed", error);
+        });
+    </script>
+</body>
+</html>
