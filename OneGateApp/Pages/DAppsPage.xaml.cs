@@ -63,7 +63,19 @@ public partial class DAppsPage : ContentPage
 
     void ApplyCategoryFilter(TabBar tabBar)
     {
-        if (tabBar.SelectedTab == tabBar.Tabs![0])
+        if (tabBar.Tabs is not { Count: > 0 } tabs)
+        {
+            DAppsFiltered = DAppsRegular;
+            return;
+        }
+
+        if (tabBar.SelectedTab is null)
+        {
+            tabBar.SelectedTab = tabs[0];
+            return;
+        }
+
+        if (tabBar.SelectedTab == tabs[0])
             DAppsFiltered = DAppsRegular;
         else
             DAppsFiltered = DAppsRegular.Where(p => p.Tags?.Select(DApp.LocalizeTag).Contains(tabBar.SelectedTab) == true).ToArray();
