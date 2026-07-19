@@ -14,7 +14,7 @@ import path from "node:path";
 
 export const ONEGATE_NETWORK = 860833102;
 export const ONEGATE_ADDRESS_VERSION = 53;
-export const ONEGATE_RUNTIME_VERSION = "1.0.1";
+export const ONEGATE_RUNTIME_VERSION = "1.0.2";
 
 const IDENTITY_FILE = "identity.json";
 const IDENTITY_SCHEMA_VERSION = 1;

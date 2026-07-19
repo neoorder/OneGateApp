@@ -3,7 +3,7 @@
   "transactionMode": "offline",
   "provider": {
     "name": "OneGate Codex Plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "dapiVersion": "1.0",
     "compatibility": ["NEP-2", "NEP-6", "NEP-9", "NEP-11", "NEP-17", "NEP-20", "NEP-21", "NEP-33"],
     "connected": true,
