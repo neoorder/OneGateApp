@@ -255,6 +255,24 @@
   <data name="AppDetails" xml:space="preserve">
     <value>應用詳情</value>
   </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>這台裝置上沒有最近開啟記錄</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>權限</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>此 dApp 可以要求連接錢包、訊息簽章和交易簽章。OneGate 會在分享錢包資料或簽章前要求確認。</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>最近活動</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>最近在這台裝置上開啟過</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>標籤</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>簡介</value>
   </data>
@@ -275,6 +293,9 @@
   </data>
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>從相簿掃描二維碼</value>
+  </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>切換手電筒</value>
   </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>無法辨識二維碼</value>
@@ -893,23 +914,32 @@
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>已複製到剪貼簿</value>
   </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>複製地址</value>
+  </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>餘額不足，無法支付金額和手續費。您最多可發送 {0} GAS。</value>
   </data>
   <data name="DeveloperTools" xml:space="preserve">
     <value>開發者中心</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>開發者模式</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp 偵錯面板</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp測試</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>偵錯工具</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>快速啟動</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>輸入 DApp URL，在 OneGate 中開啟測試</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 提交</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp 提交：{0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>專案名稱</value>
@@ -923,8 +953,11 @@
   <data name="ContactInformation" xml:space="preserve">
     <value>聯絡方式</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>透過電子郵件提交</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>申請收錄</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>提交專案資訊，供 OneGate 審核</value>
   </data>
   <data name="SavedAddressTitle" xml:space="preserve">
     <value>已儲存地址</value>
@@ -949,6 +982,9 @@
   </data>
   <data name="FeeEstimateNoticeText" xml:space="preserve">
     <value>OneGate 會在下一個畫面簽名前估算網路費與系統費。GAS 轉帳必須保留足夠的 GAS，以同時支付轉帳金額與費用。</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>重新載入</value>
   </data>
   <data name="Report" xml:space="preserve">
     <value>檢舉</value>
@@ -1136,4 +1172,96 @@
   <data name="TransactionStillPending" xml:space="preserve">
     <value>仍在等待確認</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>解碼後內容</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>只為你信任的站點簽名。簽名可證明你的身分或授權操作——切勿對意外或無法讀懂的請求簽名。</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>活動</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>活動記錄</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>開啟 dApp、使用 Neo 登入、完成簽名或提交交易後，相關活動會顯示在這裡。</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>尚未記錄活動</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>查看此裝置記錄的 dApp 開啟、Neo 登入、簽名和交易。</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>本機活動記錄</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>已開啟 {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} 筆記錄</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>已為 {0} 完成簽名</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>來源：{0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>交易：{0} · 來源：{1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>{0} 的交易已提交</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>已使用 Neo 登入 {0}</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>dApp 開啟</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>開啟與登入</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>上次活動：{0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>尚無活動記錄</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>最近活動</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>簽名</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>簽名</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>未知 dApp</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>未知來源</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Neo 登入</value>
+  </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>遠端偵錯</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>允許同一區域網路中已信任的遠端偵錯器偵錯真實 DApp 視窗。</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>配對遠端偵錯器</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>尚無已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>忘記</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>忘記此遠端偵錯器並要求重新配對嗎？</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>已連線：{0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>正在等待已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>配對遠端偵錯器</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>遠端偵錯器「{0}」正在要求存取。指紋：{1}。僅在你信任此遠端偵錯器時授權。</value></data>
 </root>

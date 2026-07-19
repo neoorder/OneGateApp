@@ -12,7 +12,7 @@
         <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="IsStringNotNullOrWhiteSpaceConverter" />
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
+        <ToolbarItem Order="Primary" Text="{x:Static og:Strings.AddNewAddress}" IconImageSource="{FontImageSource &#xe642;, FontFamily=Icons, Size=22, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="new" />
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="auto,*" Margin="20" RowSpacing="16">
         <Border StrokeShape="RoundRectangle 28" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="18,0" HeightRequest="56">
@@ -23,7 +23,7 @@
                 <Grid RowDefinitions="*,auto,*">
                     <VerticalStackLayout Spacing="20" VerticalOptions="Center">
                         <Border StrokeShape="Ellipse" BackgroundColor="#e9eaee" WidthRequest="100" HeightRequest="100">
-                            <Image Source="empty.png" WidthRequest="32" HeightRequest="32" />
+                            <Image Source="empty.png" WidthRequest="32" HeightRequest="32" AutomationProperties.IsInAccessibleTree="False" />
                         </Border>
                         <Label Text="{x:Static og:Strings.NoAddress}" FontAttributes="Bold" FontSize="24" HorizontalOptions="Center" />
                         <Label StyleClass="Secondary" Text="{x:Static og:Strings.NoAddressText}" Margin="0,-10,0,0" HorizontalOptions="Center" />
@@ -36,23 +36,23 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:Contact">
-                    <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16">
+                    <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16" AutomationProperties.IsInAccessibleTree="True" SemanticProperties.Description="{Binding Label}" SemanticProperties.Hint="{Binding Address}">
                         <Grid ColumnDefinitions="auto,*" ColumnSpacing="12">
                             <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Primary}" WidthRequest="42" HeightRequest="42" VerticalOptions="Start">
-                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                <Label Text="{Binding AvatarText}" TextColor="{toolkit:AppThemeResource Accent}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="6">
                                 <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
-                                    <Label Text="{Binding Label}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Label}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" AutomationProperties.IsInAccessibleTree="False" />
                                     <Border Grid.Column="1" StrokeThickness="0" StrokeShape="RoundRectangle 4" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="8,3" VerticalOptions="Start">
-                                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.AddressBook}" FontSize="11" />
+                                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.AddressBook}" FontSize="11" AutomationProperties.IsInAccessibleTree="False" />
                                     </Border>
                                 </Grid>
                                 <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
-                                    <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" />
-                                    <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Padding="20" Margin="-20" VerticalOptions="Center" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                                    <Label StyleClass="Secondary" Text="{Binding Address}" FontSize="12" LineBreakMode="MiddleTruncation" AutomationProperties.IsInAccessibleTree="False" />
+                                    <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" Padding="20" Margin="-20" VerticalOptions="Center" SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
                                 </Grid>
-                                <Label StyleClass="Secondary" Text="{Binding Note}" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding Note, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}" />
+                                <Label StyleClass="Secondary" Text="{Binding Note}" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding Note, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}" AutomationProperties.IsInAccessibleTree="False" />
                             </VerticalStackLayout>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="{Binding Address, StringFormat='edit?address={0}'}" />

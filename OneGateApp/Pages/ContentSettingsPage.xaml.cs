@@ -31,7 +31,7 @@ public partial class ContentSettingsPage : ContentPage
     {
         settingsLoaded = false;
         IsSettingsLoaded = false;
-        AllowRestrictedContent = await DAppContentPolicy.GetAllowRestrictedContentAsync(dbContext);
+        AllowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
         settingsLoaded = true;
         IsSettingsLoaded = true;
     }
@@ -53,7 +53,7 @@ public partial class ContentSettingsPage : ContentPage
 
     async void OnBirthDateContinueClicked(object sender, EventArgs e)
     {
-        if (!DAppContentPolicy.IsOldEnoughForRestrictedContent(BirthDate))
+        if (!DAppCatalogPolicy.IsOldEnoughForRestrictedContent(BirthDate))
         {
             HideRestrictedContentFlow();
             SetSwitchWithoutSaving(false);
@@ -79,7 +79,7 @@ public partial class ContentSettingsPage : ContentPage
 
     async Task SetAllowRestrictedContentAsync(bool value)
     {
-        await dbContext.Settings.PutAsync(DAppContentPolicy.AllowRestrictedContentKey, value);
+        await dbContext.Settings.PutAsync(DAppCatalogPolicy.AllowRestrictedContentKey, value);
         SetSwitchWithoutSaving(value);
         GlobalStates.Invalidate<SettingsPage>();
         GlobalStates.Invalidate<DAppsPage>();

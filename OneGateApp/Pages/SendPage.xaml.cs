@@ -277,7 +277,10 @@ public partial class SendPage : ContentPage, IQueryAttributable
             if (!result.Result) return;
             var context = new ContractParametersContext(null!, tx, protocolSettings.Network);
             if (!wallet.Sign(context) || !context.Completed)
+            {
                 await Toast.Show(Strings.SignTransactionFailed);
+                return;
+            }
             tx.Witnesses = context.GetWitnesses();
             try
             {

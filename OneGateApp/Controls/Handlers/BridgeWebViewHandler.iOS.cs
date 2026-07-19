@@ -88,6 +88,8 @@ partial class BridgeWebViewHandler
     protected override WKWebView CreatePlatformView()
     {
         var config = MauiWKWebView.CreateConfiguration();
+        config.AllowsInlineMediaPlayback = true;
+        config.MediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.None;
         var controller = new WKUserContentController();
         string shim = """
             window.__OneGateBridge = {

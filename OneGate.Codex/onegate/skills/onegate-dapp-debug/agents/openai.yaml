@@ -1,0 +1,4 @@
+interface:
+  display_name: "OneGate DApp Debug"
+  short_description: "Debug DApps with Browser Mock or a paired OneGate app"
+  default_prompt: "Use $onegate-dapp-debug to choose the safe OneGate target, open this DApp, and inspect its provider calls."

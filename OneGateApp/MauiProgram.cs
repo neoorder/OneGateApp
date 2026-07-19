@@ -9,6 +9,7 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Resources;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
+using NeoOrder.OneGate.Services.RemoteDebug;
 using Plugin.Maui.ScreenSecurity;
 using ZXing.Net.Maui.Controls;
 
@@ -110,8 +111,10 @@ public static class MauiProgram
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddTransient<AddressBookService>();
         builder.Services.AddSingleton<TokenManager>();
+        builder.Services.AddSingleton<ActivityLogService>();
         builder.Services.AddSingleton<RpcClient>();
         builder.Services.AddSingleton<UpdateService>();
+        builder.Services.AddSingleton<RemoteDebugService>();
         builder.Services.AddSingleton<IHomeShortcutService, HomeShortcutService>();
         return builder;
     }

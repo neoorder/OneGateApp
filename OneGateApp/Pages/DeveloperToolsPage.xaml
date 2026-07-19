@@ -9,12 +9,20 @@
              Shell.TabBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="18">
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Settings}" />
+            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="14" Padding="16,14">
+                    <Label Text="{x:Static og:Strings.DeveloperMode}" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Switch Grid.Column="1" IsToggled="{Binding IsDeveloperModeEnabled}" IsEnabled="{Binding IsSettingsLoaded}" VerticalOptions="Center" Toggled="OnDeveloperModeToggled" />
+                </Grid>
+            </Border>
+
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppSubmission}" />
             <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
                 <Grid ColumnDefinitions="*,auto" ColumnSpacing="14" Padding="16,14">
                     <VerticalStackLayout Spacing="2">
-                        <Label Text="{x:Static og:Strings.SubmitByEmail}" FontAttributes="Bold" />
-                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppSubmission}" FontSize="12" LineBreakMode="TailTruncation" />
+                        <Label Text="{x:Static og:Strings.RequestListing}" FontAttributes="Bold" />
+                        <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppSubmissionDescription}" FontSize="12" LineBreakMode="WordWrap" MaxLines="2" />
                     </VerticalStackLayout>
                     <Label Grid.Column="1" StyleClass="Icon, Secondary" Text="&#xe70a;" FontSize="12" VerticalOptions="Center" />
                     <Grid.GestureRecognizers>
@@ -23,21 +31,47 @@
                 </Grid>
             </Border>
 
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.DAppTesting}" />
-            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16,14">
-                <Grid ColumnDefinitions="*,auto" ColumnSpacing="12">
-                    <Entry x:Name="dAppTestingEntry" Keyboard="Url" Placeholder="{x:Static og:Strings.DAppUrl}" ReturnType="Go" ReturnCommand="{Binding DAppTestingCommand}" ReturnCommandParameter="{Binding Text, Source={RelativeSource Self}}" />
-                    <Button Grid.Column="1" Text="{x:Static og:Strings.Open}" Clicked="OnDAppTestingClicked" />
-                </Grid>
-            </Border>
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding IsDeveloperModeEnabled}">
+                <Label StyleClass="Secondary" Text="{x:Static og:Strings.DebugTools}" />
 
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Settings}" />
-            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
-                <Grid ColumnDefinitions="*,auto" ColumnSpacing="14" Padding="16,14">
-                    <Label Text="{x:Static og:Strings.DAppDebugPanel}" FontAttributes="Bold" VerticalOptions="Center" />
-                    <Switch Grid.Column="1" IsToggled="{Binding IsDAppDebugPanelEnabled}" IsEnabled="{Binding IsSettingsLoaded}" VerticalOptions="Center" Toggled="OnDAppDebugPanelToggled" />
-                </Grid>
-            </Border>
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16,14">
+                    <VerticalStackLayout Spacing="10">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{x:Static og:Strings.QuickLaunch}" FontAttributes="Bold" />
+                            <Label Text="{x:Static og:Strings.QuickLaunchDescription}" FontSize="12" StyleClass="Secondary" LineBreakMode="WordWrap" MaxLines="2" />
+                        </VerticalStackLayout>
+                        <Grid ColumnDefinitions="*,auto" ColumnSpacing="12">
+                            <Entry x:Name="dAppTestingEntry" Keyboard="Url" Placeholder="{x:Static og:Strings.DAppUrl}" ReturnType="Go" ReturnCommand="{Binding DAppTestingCommand}" ReturnCommandParameter="{Binding Text, Source={RelativeSource Self}}" />
+                            <Button Grid.Column="1" Text="{x:Static og:Strings.Open}" Clicked="OnDAppTestingClicked" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16,14">
+                    <VerticalStackLayout Spacing="12">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{x:Static og:Strings.RemoteDebug}" FontAttributes="Bold" />
+                            <Label Text="{x:Static og:Strings.RemoteDebugDescription}" FontSize="12" StyleClass="Secondary" LineBreakMode="WordWrap" MaxLines="2" />
+                        </VerticalStackLayout>
+                        <Label Text="{Binding RemoteDebugStatusText}" FontAttributes="Bold" />
+                        <Button Text="{x:Static og:Strings.RemoteDebugPairDebugger}" Clicked="OnPairRemoteDebugClicked" />
+                        <Label Text="{x:Static og:Strings.RemoteDebugTrustedDebuggers}" FontAttributes="Bold" />
+                        <CollectionView ItemsSource="{Binding TrustedDebuggers}" EmptyView="{x:Static og:Strings.RemoteDebugNoTrustedDebuggers}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="*,auto" Padding="0,6" ColumnSpacing="12">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Id}" FontSize="11" StyleClass="Secondary" />
+                                        </VerticalStackLayout>
+                                        <Button Grid.Column="1" Text="{x:Static og:Strings.RemoteDebugForgetDebugger}" CommandParameter="{Binding Id}" Clicked="OnForgetRemoteDebugClicked" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

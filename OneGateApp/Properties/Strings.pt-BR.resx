@@ -255,6 +255,24 @@
   <data name="AppDetails" xml:space="preserve">
     <value>Detalhes do app</value>
   </data>
+  <data name="DAppNotRecentlyOpened" xml:space="preserve">
+    <value>Nenhuma abertura recente neste dispositivo</value>
+  </data>
+  <data name="DAppPermissions" xml:space="preserve">
+    <value>Permissões</value>
+  </data>
+  <data name="DAppPermissionsSummary" xml:space="preserve">
+    <value>Este dApp pode solicitar conexão da carteira, assinaturas de mensagens e assinatura de transações. O OneGate pede confirmação antes de compartilhar dados da carteira ou assinar.</value>
+  </data>
+  <data name="DAppRecentActivity" xml:space="preserve">
+    <value>Atividade recente</value>
+  </data>
+  <data name="DAppRecentlyOpened" xml:space="preserve">
+    <value>Aberto recentemente neste dispositivo</value>
+  </data>
+  <data name="DAppTags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
   <data name="Introduction" xml:space="preserve">
     <value>Descrição</value>
   </data>
@@ -275,6 +293,9 @@
   </data>
   <data name="ScanFromPhotoLibrary" xml:space="preserve">
     <value>Escanear código QR da galeria</value>
+  </data>
+  <data name="ToggleFlashlight" xml:space="preserve">
+    <value>Alternar lanterna</value>
   </data>
   <data name="ErrorMessageUnableReadQRCode" xml:space="preserve">
     <value>Não foi possível reconhecer o código QR</value>
@@ -917,23 +938,32 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="CopiedToClipboard" xml:space="preserve">
     <value>Copiado para a área de transferência</value>
   </data>
+  <data name="CopyAddress" xml:space="preserve">
+    <value>Copiar endereço</value>
+  </data>
   <data name="InsufficientBalanceForAmountAndFees" xml:space="preserve">
     <value>Saldo insuficiente para cobrir o valor e as taxas. O valor máximo que você pode enviar é {0} GAS.</value>
   </data>
   <data name="DeveloperTools" xml:space="preserve">
     <value>Central do desenvolvedor</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Modo de desenvolvedor</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>Painel de depuração de DApp</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>Teste de DApp</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Ferramentas de depuração</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Inicialização rápida</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Abra qualquer URL de DApp no OneGate para testar.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>Envio de DApp</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>Envio de DApp: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Nome do projeto</value>
@@ -947,8 +977,14 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="ContactInformation" xml:space="preserve">
     <value>Informações de contato</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>Enviar por e-mail</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Solicitar inclusão</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Envie os detalhes do projeto para análise da OneGate.</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Recarregar</value>
   </data>
   <data name="Report" xml:space="preserve">
     <value>Denunciar</value>
@@ -1136,4 +1172,96 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="TransactionStillPending" xml:space="preserve">
     <value>Ainda aguardando confirmação</value>
   </data>
+  <data name="DecodedMessage" xml:space="preserve">
+    <value>Mensagem decodificada</value>
+  </data>
+  <data name="SignMessageRiskWarning" xml:space="preserve">
+    <value>Assine apenas mensagens de sites em que você confia. Uma assinatura pode provar sua identidade ou autorizar ações; nunca assine uma solicitação inesperada ou ilegível.</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Atividade</value>
+  </data>
+  <data name="ActivityHistory" xml:space="preserve">
+    <value>Histórico de atividades</value>
+  </data>
+  <data name="ActivityHistoryEmptyText" xml:space="preserve">
+    <value>Abra um dApp, entre com Neo, assine uma solicitação ou envie uma transação para que a atividade correspondente apareça aqui.</value>
+  </data>
+  <data name="ActivityHistoryEmptyTitle" xml:space="preserve">
+    <value>Nenhuma atividade registrada</value>
+  </data>
+  <data name="ActivityHistorySummaryText" xml:space="preserve">
+    <value>Revise as visitas a dApps, os logins com Neo, as assinaturas e as transações registradas neste dispositivo.</value>
+  </data>
+  <data name="ActivityHistorySummaryTitle" xml:space="preserve">
+    <value>Histórico de atividades neste dispositivo</value>
+  </data>
+  <data name="ActivityDAppOpenedTitle" xml:space="preserve">
+    <value>Abertura de {0}</value>
+  </data>
+  <data name="ActivityRecordCount" xml:space="preserve">
+    <value>{0} registros</value>
+  </data>
+  <data name="ActivitySignatureTitle" xml:space="preserve">
+    <value>Assinatura concluída para {0}</value>
+  </data>
+  <data name="ActivitySourceDescription" xml:space="preserve">
+    <value>Origem: {0}</value>
+  </data>
+  <data name="ActivityTransactionDescription" xml:space="preserve">
+    <value>Transação: {0} · Origem: {1}</value>
+  </data>
+  <data name="ActivityTransactionTitle" xml:space="preserve">
+    <value>Transação enviada para {0}</value>
+  </data>
+  <data name="ActivityNeoSignInTitle" xml:space="preserve">
+    <value>Login em {0} realizado com Neo</value>
+  </data>
+  <data name="DAppVisit" xml:space="preserve">
+    <value>Visita a dApp</value>
+  </data>
+  <data name="VisitsAndSignIns" xml:space="preserve">
+    <value>Visitas e logins</value>
+  </data>
+  <data name="LastActivityAt" xml:space="preserve">
+    <value>Última atividade: {0}</value>
+  </data>
+  <data name="NoActivityRecords" xml:space="preserve">
+    <value>Nenhum registro de atividade</value>
+  </data>
+  <data name="RecentActivity" xml:space="preserve">
+    <value>Atividade recente</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Assinatura</value>
+  </data>
+  <data name="Signatures" xml:space="preserve">
+    <value>Assinaturas</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transação</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transações</value>
+  </data>
+  <data name="UnknownDApp" xml:space="preserve">
+    <value>dApp desconhecido</value>
+  </data>
+  <data name="UnknownSource" xml:space="preserve">
+    <value>Origem desconhecida</value>
+  </data>
+  <data name="NeoSignIn" xml:space="preserve">
+    <value>Login com Neo</value>
+  </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Depuração remota</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Permita que depuradores remotos confiáveis na rede local depurem janelas DApp reais.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Parear depurador remoto</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Depuradores remotos confiáveis</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Nenhum depurador remoto confiável</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Esquecer</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Esquecer este depurador remoto e exigir novo pareamento?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Conectado: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Aguardando um depurador remoto confiável</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Parear depurador remoto</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>O depurador remoto “{0}” está solicitando acesso. Impressão digital: {1}. Autorize apenas se confiar neste depurador remoto.</value></data>
 </root>

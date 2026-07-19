@@ -12,6 +12,8 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     public bool IsActive { get; set; }
+    public bool IsHiddenFromCatalog { get; set; }
+    public bool IsInDevelopment { get; set; }
     public required string Name { get; set; }
     [Url]
     public required string Url { get; set; }
