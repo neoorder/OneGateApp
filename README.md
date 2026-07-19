@@ -4,6 +4,8 @@ A cross-platform **Neo N3 wallet** built with **.NET MAUI 10**.
 
 **Platforms:** Android · iOS · MacCatalyst · Windows
 
+[Changelog](OneGateApp/CHANGELOG.md)
+
 ---
 
 ## Overview
@@ -19,6 +21,7 @@ Built with **C#**, **XAML**, and **.NET MAUI 10**, OneGate is designed to share 
 - Manage **NEO / GAS** and other **NEP-17** assets
 - View and transfer **NEP-11 NFTs**
 - Built-in **dApp launcher** and wallet authorization flow
+- Opt-in encrypted **DApp remote debugging interface** for trusted remote debuggers on the same LAN, with QR pairing, persistent trust, explicit approval and optional method-specific results for requests selected by OneGate policy, logs, traces, JavaScript evaluation, and visible-WebView screenshots
 - Support for **NEP-20**, **NEP-21**, and related dAPI workflows
 - Support for `neo:` and `neoauth:` deep-link flows
 - QR code scanning for wallet and dApp actions
@@ -27,6 +30,8 @@ Built with **C#**, **XAML**, and **.NET MAUI 10**, OneGate is designed to share 
 - Screen-security handling for private-key and password related flows
 - Multi-language UI support
 - Light / dark theme support
+
+Remote debugging is hidden behind Developer Tools and is off by default. Its app-side pairing and session protocol is not tied to a specific debugger: the OneGate Codex plugin provides the first compatible remote debugger implementation, while other debugging tools can implement the same interface in the future. Real-app sessions accept HTTPS DApp URLs only. In a remotely started DApp session, explicit approval from the trusted remote debugger replaces the ordinary in-app confirmation on every network. Disabling Developer Tools disconnects remote debuggers and closes remote sessions without silently deleting the user’s trust list.
 
 ## Protocol support
 

@@ -811,11 +811,29 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 DApp Testing 的本地化字符串。
+        ///   查找类似 Debug tools 的本地化字符串。
         /// </summary>
-        internal static string DAppTesting {
+        internal static string DebugTools {
             get {
-                return ResourceManager.GetString("DAppTesting", resourceCulture);
+                return ResourceManager.GetString("DebugTools", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Quick launch 的本地化字符串。
+        /// </summary>
+        internal static string QuickLaunch {
+            get {
+                return ResourceManager.GetString("QuickLaunch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Open any DApp URL in OneGate for testing. 的本地化字符串。
+        /// </summary>
+        internal static string QuickLaunchDescription {
+            get {
+                return ResourceManager.GetString("QuickLaunchDescription", resourceCulture);
             }
         }
 
@@ -825,15 +843,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string DAppSubmission {
             get {
                 return ResourceManager.GetString("DAppSubmission", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 DApp submission: {0} 的本地化字符串。
-        /// </summary>
-        internal static string DAppSubmissionEmailSubject {
-            get {
-                return ResourceManager.GetString("DAppSubmissionEmailSubject", resourceCulture);
             }
         }
 
@@ -874,11 +883,20 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Submit by email 的本地化字符串。
+        ///   查找类似 Request listing 的本地化字符串。
         /// </summary>
-        internal static string SubmitByEmail {
+        internal static string RequestListing {
             get {
-                return ResourceManager.GetString("SubmitByEmail", resourceCulture);
+                return ResourceManager.GetString("RequestListing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Submit project details for review by OneGate. 的本地化字符串。
+        /// </summary>
+        internal static string DAppSubmissionDescription {
+            get {
+                return ResourceManager.GetString("DAppSubmissionDescription", resourceCulture);
             }
         }
 
@@ -1178,6 +1196,15 @@ namespace NeoOrder.OneGate.Properties {
         internal static string DeveloperTools {
             get {
                 return ResourceManager.GetString("DeveloperTools", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Developer Mode 的本地化字符串。
+        /// </summary>
+        internal static string DeveloperMode {
+            get {
+                return ResourceManager.GetString("DeveloperMode", resourceCulture);
             }
         }
 
@@ -3390,6 +3417,50 @@ namespace NeoOrder.OneGate.Properties {
             get {
                 return ResourceManager.GetString("NeoSignIn", resourceCulture);
             }
+        }
+
+        internal static string RemoteDebug {
+            get { return ResourceManager.GetString("RemoteDebug", resourceCulture); }
+        }
+
+        internal static string RemoteDebugDescription {
+            get { return ResourceManager.GetString("RemoteDebugDescription", resourceCulture); }
+        }
+
+        internal static string RemoteDebugPairDebugger {
+            get { return ResourceManager.GetString("RemoteDebugPairDebugger", resourceCulture); }
+        }
+
+        internal static string RemoteDebugTrustedDebuggers {
+            get { return ResourceManager.GetString("RemoteDebugTrustedDebuggers", resourceCulture); }
+        }
+
+        internal static string RemoteDebugNoTrustedDebuggers {
+            get { return ResourceManager.GetString("RemoteDebugNoTrustedDebuggers", resourceCulture); }
+        }
+
+        internal static string RemoteDebugForgetDebugger {
+            get { return ResourceManager.GetString("RemoteDebugForgetDebugger", resourceCulture); }
+        }
+
+        internal static string RemoteDebugForgetPrompt {
+            get { return ResourceManager.GetString("RemoteDebugForgetPrompt", resourceCulture); }
+        }
+
+        internal static string RemoteDebugConnected {
+            get { return ResourceManager.GetString("RemoteDebugConnected", resourceCulture); }
+        }
+
+        internal static string RemoteDebugWaiting {
+            get { return ResourceManager.GetString("RemoteDebugWaiting", resourceCulture); }
+        }
+
+        internal static string RemoteDebugPairingTitle {
+            get { return ResourceManager.GetString("RemoteDebugPairingTitle", resourceCulture); }
+        }
+
+        internal static string RemoteDebugPairingPrompt {
+            get { return ResourceManager.GetString("RemoteDebugPairingPrompt", resourceCulture); }
         }
 
     }

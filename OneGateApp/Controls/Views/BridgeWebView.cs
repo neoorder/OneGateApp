@@ -19,6 +19,7 @@ public partial class BridgeWebView : WebView
     readonly ConcurrentDictionary<string, Func<JsonArray?, JsonNode?>> syncSystemCallHandlers = new(StringComparer.Ordinal);
 
     public event EventHandler<BridgeWebView, JsonObject>? InvokedFromJavaScript;
+    public event EventHandler<JsonObject>? RemoteConsoleMessageReceived;
 
     public string? DocumentStartScript { get => (string?)GetValue(DocumentStartScriptProperty); set => SetValue(DocumentStartScriptProperty, value); }
 
@@ -26,6 +27,7 @@ public partial class BridgeWebView : WebView
     {
         RegisterSystemCallHandler("screen.orientation.lock", LockScreenOrientationSystemAsync);
         RegisterSystemCallHandler("screen.orientation.unlock", UnlockScreenOrientationSystem);
+        RegisterSystemCallHandler("remoteDebug.console", ReceiveRemoteConsoleMessage);
 #if IOS
         RegisterSystemCallHandler("fullscreen.enter", EnterFullscreenSystemAsync);
         RegisterSystemCallHandler("fullscreen.exit", ExitFullscreenSystemAsync);
@@ -37,6 +39,20 @@ public partial class BridgeWebView : WebView
                 RestoreHostState();
         };
     }
+
+    JsonNode? ReceiveRemoteConsoleMessage(JsonArray? args)
+    {
+        if (args is not { Count: 2 } || args[0]?.GetValueKind() != JsonValueKind.String || args[1] is not JsonArray values)
+            throw new InvalidOperationException("Invalid remote console message");
+        RemoteConsoleMessageReceived?.Invoke(this, new JsonObject
+        {
+            ["level"] = args[0]!.GetValue<string>(),
+            ["values"] = values.DeepClone()
+        });
+        return null;
+    }
+
+    public partial Task<byte[]> CaptureViewportAsync();
 
     internal static string CreateRpcScript()
     {

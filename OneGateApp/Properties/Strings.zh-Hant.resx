@@ -935,17 +935,23 @@
   <data name="DeveloperTools" xml:space="preserve">
     <value>開發者中心</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>開發者模式</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp 偵錯面板</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp測試</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>偵錯工具</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>快速啟動</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>輸入 DApp URL，在 OneGate 中開啟測試</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 提交</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp 提交：{0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>專案名稱</value>
@@ -959,8 +965,11 @@
   <data name="ContactInformation" xml:space="preserve">
     <value>聯絡方式</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>透過電子郵件提交</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>申請收錄</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>提交專案資訊，供 OneGate 審核</value>
   </data>
   <data name="SavedAddressTitle" xml:space="preserve">
     <value>已儲存地址</value>
@@ -1244,4 +1253,15 @@
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo 登入</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>遠端偵錯</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>允許同一區域網路中已信任的遠端偵錯器偵錯真實 DApp 視窗。</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>配對遠端偵錯器</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>尚無已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>忘記</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>忘記此遠端偵錯器並要求重新配對嗎？</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>已連線：{0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>正在等待已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>配對遠端偵錯器</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>遠端偵錯器「{0}」正在要求存取。指紋：{1}。僅在你信任此遠端偵錯器時授權。</value></data>
 </root>
