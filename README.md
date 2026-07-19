@@ -4,6 +4,8 @@ A cross-platform **Neo N3 wallet** built with **.NET MAUI 10**.
 
 **Platforms:** Android · iOS · MacCatalyst · Windows
 
+[Changelog](OneGateApp/CHANGELOG.md)
+
 ---
 
 ## Overview
