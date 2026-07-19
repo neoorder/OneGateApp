@@ -11,10 +11,11 @@ Add-Type -AssemblyName System.IO.Compression
 
 $projectDirectory = Split-Path -Parent $PSScriptRoot
 $pluginDirectory = Join-Path $projectDirectory "onegate"
-$skillDirectory = Join-Path $pluginDirectory "skills/onegate-dapp-debug"
+$debugSkillDirectory = Join-Path $pluginDirectory "skills/onegate-dapp-debug"
+$submissionSkillDirectory = Join-Path $pluginDirectory "skills/onegate-submit-dapp"
 $manifestPath = Join-Path $pluginDirectory ".codex-plugin/plugin.json"
 
-foreach ($requiredPath in @($pluginDirectory, $skillDirectory, $manifestPath)) {
+foreach ($requiredPath in @($pluginDirectory, $debugSkillDirectory, $submissionSkillDirectory, $manifestPath)) {
     if (-not (Test-Path -LiteralPath $requiredPath)) {
         throw "Required packaging input was not found: $requiredPath"
     }
@@ -47,6 +48,8 @@ $archivePlans = @(
             "onegate/assets/logo-dark.svg"
             "onegate/skills/onegate-dapp-debug/SKILL.md"
             "onegate/skills/onegate-dapp-debug/assets/reviewer-fixture/index.html"
+            "onegate/skills/onegate-submit-dapp/SKILL.md"
+            "onegate/skills/onegate-submit-dapp/references/submission-fields.md"
         )
     }
 )

@@ -8,12 +8,14 @@ import {
   sendDaemonCommand,
 } from "./runtime/daemon-client.mjs";
 import { runtimeStateDirectory } from "./runtime/daemon-protocol.mjs";
+import { renderQrPng } from "./runtime/qr-png.mjs";
 
 const BOOLEAN_OPTIONS = new Set([
   "confirm",
   "force",
   "headless",
   "ignore-cache",
+  "defer",
 ]);
 
 function requireCompatibleNode() {
@@ -85,22 +87,40 @@ function parseInteger(value, name) {
   return Number.parseInt(value, 10);
 }
 
+function parseJson(value, name) {
+  if (value === undefined) return { provided: false };
+  try {
+    return { provided: true, value: JSON.parse(value) };
+  } catch {
+    throw commandError("INVALID_ARGUMENT", `--${name} must be valid JSON.`);
+  }
+}
+
 function usage() {
   return {
-    version: "1.0.1",
+    version: "1.0.2",
     commands: [
       "doctor",
       "targets discover",
+      "debug-target pair start --output <png> [--name <debugger-name>]",
+      "debug-target pair status --id <pairing-id>",
+      "debug-target pair cancel --id <pairing-id>",
+      "debug-target list",
+      "debug-target forget --id <debug-target-id> --confirm",
       "identity [show]",
       "identity regenerate --confirm",
       "review start [--browser-executable <path>] [--headless]",
-      "debug start --url <url> [--target browser] [--browser-executable <path>] [--profile <path>] [--headless]",
+      "debug start --url <url> [--target browser|onegate] [--debug-target <debug-target-id>] [--browser-executable <path>] [--profile <path>] [--headless]",
       "session list",
       "session status --id <session-id>",
       "session logs --id <session-id> [--after-sequence <n>]",
       "session trace --id <session-id>",
       "session screenshot --id <session-id> --output <png-path>",
-      "session evaluate --id <session-id> --expression <javascript>",
+      "session requests --id <session-id>",
+      "session approve --id <session-id> --request-id <request-id> [--result <json>]",
+      "session reject --id <session-id> --request-id <request-id> [--reason <text>]",
+      "session evaluate --id <session-id> --expression <javascript> [--defer]",
+      "session operation --id <session-id> --operation-id <operation-id>",
       "session reload --id <session-id> [--ignore-cache]",
       "session stop --id <session-id>",
       "daemon status",
@@ -119,6 +139,17 @@ function resolveCommand(tokens) {
   }
   if (group === "targets" && action === "discover") {
     return { display: "targets discover", runtime: "targets.discover", options: parseOptions(rest) };
+  }
+  if (group === "debug-target" && action === "pair" && ["start", "status", "cancel"].includes(rest[0])) {
+    const [pairAction, ...pairRest] = rest;
+    return {
+      display: `debug-target pair ${pairAction}`,
+      runtime: `debug-target.pair.${pairAction}`,
+      options: parseOptions(pairRest),
+    };
+  }
+  if (group === "debug-target" && ["list", "forget"].includes(action)) {
+    return { display: `debug-target ${action}`, runtime: `debug-target.${action}`, options: parseOptions(rest) };
   }
   if (group === "identity" && (action === undefined || action === "show")) {
     return {
@@ -143,6 +174,10 @@ function resolveCommand(tokens) {
     "trace",
     "screenshot",
     "evaluate",
+    "requests",
+    "approve",
+    "reject",
+    "operation",
     "reload",
     "stop",
   ].includes(action)) {
@@ -164,6 +199,27 @@ function runtimeArguments(command) {
       allowOnly(options, []);
       return {};
     }
+    case "debug-target.pair.start": {
+      allowOnly(options, ["output", "name"]);
+      requireOption(options, "output");
+      return { name: options.name };
+    }
+    case "debug-target.pair.status":
+    case "debug-target.pair.cancel": {
+      allowOnly(options, ["id"]);
+      return { pairingId: requireOption(options, "id") };
+    }
+    case "debug-target.list": {
+      allowOnly(options, []);
+      return {};
+    }
+    case "debug-target.forget": {
+      allowOnly(options, ["id", "confirm"]);
+      if (options.confirm !== true) {
+        throw commandError("CONFIRMATION_REQUIRED", "--confirm is required to forget a trusted debug target.");
+      }
+      return { debugTargetId: requireOption(options, "id") };
+    }
     case "identity.regenerate": {
       allowOnly(options, ["confirm"]);
       return { confirm: options.confirm === true };
@@ -176,13 +232,14 @@ function runtimeArguments(command) {
       };
     }
     case "debug.start": {
-      allowOnly(options, ["target", "url", "browser-executable", "profile", "headless"]);
+      allowOnly(options, ["target", "debug-target", "url", "browser-executable", "profile", "headless"]);
       return {
         target: options.target ?? "browser",
         url: requireOption(options, "url"),
         browserExecutable: options["browser-executable"],
         profilePath: options.profile,
         headless: options.headless === true,
+        debugTargetId: options["debug-target"],
       };
     }
     case "session.status":
@@ -204,10 +261,39 @@ function runtimeArguments(command) {
       };
     }
     case "session.evaluate": {
-      allowOnly(options, ["id", "expression"]);
+      allowOnly(options, ["id", "expression", "defer"]);
       return {
         sessionId: requireOption(options, "id"),
         expression: requireOption(options, "expression"),
+        defer: options.defer === true,
+      };
+    }
+    case "session.requests": {
+      allowOnly(options, ["id"]);
+      return { sessionId: requireOption(options, "id") };
+    }
+    case "session.approve": {
+      allowOnly(options, ["id", "request-id", "result"]);
+      const result = parseJson(options.result, "result");
+      return {
+        sessionId: requireOption(options, "id"),
+        requestId: requireOption(options, "request-id"),
+        ...(result.provided ? { result: result.value } : {}),
+      };
+    }
+    case "session.reject": {
+      allowOnly(options, ["id", "request-id", "reason"]);
+      return {
+        sessionId: requireOption(options, "id"),
+        requestId: requireOption(options, "request-id"),
+        reason: options.reason,
+      };
+    }
+    case "session.operation": {
+      allowOnly(options, ["id", "operation-id"]);
+      return {
+        sessionId: requireOption(options, "id"),
+        operationId: requireOption(options, "operation-id"),
       };
     }
     case "session.reload": {
@@ -238,6 +324,14 @@ async function execute(command) {
 
   const args = runtimeArguments(command);
   const result = await sendDaemonCommand(command.runtime, args);
+  if (command.runtime === "debug-target.pair.start") {
+    const output = path.resolve(requireOption(command.options, "output"));
+    await mkdir(path.dirname(output), { recursive: true });
+    const data = renderQrPng(result.invitation);
+    await writeFile(output, data);
+    const { invitation, ...publicResult } = result;
+    return { ...publicResult, output, bytes: data.length, mimeType: "image/png" };
+  }
   if (command.runtime !== "session.screenshot") return result;
 
   const output = path.resolve(requireOption(command.options, "output"));

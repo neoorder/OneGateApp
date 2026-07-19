@@ -1,7 +1,7 @@
 {
   "name": "onegate",
-  "version": "1.0.1",
-  "description": "Debug OneGate DApps through a Skills-only local runtime with a persistent development identity and a document-start NEP-21 Browser Mock.",
+  "version": "1.0.2",
+  "description": "Control OneGate DApp debug sessions or use its Browser Mock, and prepare public catalog requests.",
   "author": {
     "name": "NEO GLOBAL RESOURCES",
     "url": "https://onegate.space"
@@ -14,7 +14,7 @@
   "interface": {
     "displayName": "OneGate",
     "shortDescription": "OneGate Codex Plugin",
-    "longDescription": "Use the bundled Skill and local JSON CLI to open a DApp at its original URL, inject a OneGate-compatible NEP-21 provider before page scripts, reuse one persistent development account for real signatures, and inspect browser state, console output, screenshots, and dAPI traces. Browser Mock is the currently implemented debugging target.",
+    "longDescription": "Open a DApp at its original URL with a document-start OneGate-compatible NEP-21 Browser Mock, or act as one compatible remote debugger for an installed OneGate app's encrypted remote-debug interface. Inspect page state, console output, screenshots, approval requests, and dAPI traces. OneGate can also gather public project metadata, validate it against the official catalog form, prepare the exact listing request, and submit it to the public OneGateApp issue tracker only after user review and confirmation.",
     "developerName": "NEO GLOBAL RESOURCES",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Write"],
@@ -28,8 +28,8 @@
     "logoDark": "./assets/logo-dark.svg",
     "defaultPrompt": [
       "Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.",
-      "Test this DApp's OneGate signing flow with the persistent development account.",
-      "Run this DApp with a simulated OneGate transaction profile."
+      "Pair my OneGate app and debug this HTTPS DApp in a real wallet session.",
+      "Review this project, prepare a OneGate DApp listing request, and submit it only after my confirmation."
     ]
   }
 }
