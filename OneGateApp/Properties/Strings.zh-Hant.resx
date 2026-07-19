@@ -923,17 +923,23 @@
   <data name="DeveloperTools" xml:space="preserve">
     <value>開發者中心</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>開發者模式</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp 偵錯面板</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp測試</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>偵錯工具</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>快速啟動</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>輸入 DApp URL，在 OneGate 中開啟測試</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 提交</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp 提交：{0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>專案名稱</value>
@@ -947,8 +953,11 @@
   <data name="ContactInformation" xml:space="preserve">
     <value>聯絡方式</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>透過電子郵件提交</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>申請收錄</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>提交專案資訊，供 OneGate 審核</value>
   </data>
   <data name="SavedAddressTitle" xml:space="preserve">
     <value>已儲存地址</value>

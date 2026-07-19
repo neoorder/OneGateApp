@@ -14,6 +14,11 @@ date is the date of its final commit. Later changes are listed under Unreleased.
 
 - Added opt-in encrypted remote DApp debugging with trusted LAN pairing, explicit request approval, logs, traces, JavaScript evaluation, and visible-WebView screenshots.
 
+### Changed
+
+- Redesigned the Developer Center around a top-level developer-mode switch, grouped quick DApp launching and remote debugging, and hid debug tools while developer mode is disabled.
+- Replaced the in-app email DApp submission form with the canonical GitHub issue form.
+
 ## 2.1.0 - 2026-07-18
 
 ### Added

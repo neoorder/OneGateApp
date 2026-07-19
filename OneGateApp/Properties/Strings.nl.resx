@@ -947,17 +947,23 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="DeveloperTools" xml:space="preserve">
     <value>Ontwikkelaarscentrum</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Ontwikkelaarsmodus</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp-debugpaneel</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp-test</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Debughulpmiddelen</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Snel starten</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Open een DApp-URL in OneGate om deze te testen.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp-indiening</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp-indiening: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Projectnaam</value>
@@ -971,8 +977,11 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="ContactInformation" xml:space="preserve">
     <value>Contactgegevens</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>Per e-mail indienen</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Vermelding aanvragen</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Dien projectgegevens in voor beoordeling door OneGate.</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>Opnieuw laden</value>

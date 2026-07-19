@@ -947,17 +947,23 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="DeveloperTools" xml:space="preserve">
     <value>開発者センター</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>開発者モード</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp デバッグパネル</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DAppテスト</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>デバッグツール</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>クイック起動</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>任意の DApp URL を OneGate で開いてテストします。</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 提出</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp 提出: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>プロジェクト名</value>
@@ -971,8 +977,11 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="ContactInformation" xml:space="preserve">
     <value>連絡先</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>メールで送信</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>掲載を申請</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>プロジェクト情報を送信し、OneGate の審査を受けます。</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>再読み込み</value>

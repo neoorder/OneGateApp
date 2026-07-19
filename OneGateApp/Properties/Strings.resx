@@ -947,17 +947,23 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="DeveloperTools" xml:space="preserve">
     <value>Developer Center</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Developer Mode</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp Debug Panel</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp Testing</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Debug tools</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Quick launch</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Open any DApp URL in OneGate for testing.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp Submission</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp submission: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Project name</value>
@@ -971,8 +977,11 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="ContactInformation" xml:space="preserve">
     <value>Contact information</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>Submit by email</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Request listing</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Submit project details for review by OneGate.</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>Reload</value>

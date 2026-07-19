@@ -947,17 +947,23 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="DeveloperTools" xml:space="preserve">
     <value>Trung tâm nhà phát triển</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Chế độ nhà phát triển</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>Bảng gỡ lỗi DApp</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>Kiểm thử DApp</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Công cụ gỡ lỗi</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Khởi chạy nhanh</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Mở URL DApp bất kỳ trong OneGate để kiểm thử.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>Gửi DApp</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>Gửi DApp: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Tên dự án</value>
@@ -971,8 +977,11 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="ContactInformation" xml:space="preserve">
     <value>Thông tin liên hệ</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>Gửi qua email</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Yêu cầu thêm vào danh mục</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Gửi thông tin dự án để OneGate xem xét.</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>Tải lại</value>

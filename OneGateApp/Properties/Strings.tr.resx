@@ -947,17 +947,23 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="DeveloperTools" xml:space="preserve">
     <value>Geliştirici merkezi</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Geliştirici modu</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp hata ayıklama paneli</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp Testi</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Hata ayıklama araçları</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Hızlı başlatma</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Test etmek için herhangi bir DApp URL'sini OneGate'te açın.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp gönderimi</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp gönderimi: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Proje adı</value>
@@ -971,8 +977,11 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="ContactInformation" xml:space="preserve">
     <value>İletişim bilgileri</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>E-posta ile gönder</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Listeleme talep et</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Proje ayrıntılarını OneGate incelemesine gönderin.</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>Yeniden yükle</value>

@@ -947,17 +947,23 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="DeveloperTools" xml:space="preserve">
     <value>Centro de desarrolladores</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Modo de desarrollador</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>Panel de depuración de DApp</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>Prueba de DApp</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Herramientas de depuración</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Inicio rápido</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Abre cualquier URL de DApp en OneGate para probarla.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>Envío de DApp</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>Envío de DApp: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Nombre del proyecto</value>
@@ -971,8 +977,11 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="ContactInformation" xml:space="preserve">
     <value>Información de contacto</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>Enviar por correo electrónico</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Solicitar inclusión</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Envía los detalles del proyecto para que OneGate los revise.</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>Recargar</value>

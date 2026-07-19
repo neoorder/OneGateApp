@@ -94,7 +94,7 @@ public partial class DeveloperToolsPage : ContentPage
 
     async void OnDAppSubmissionClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//home/settings/developer/submission");
+        await Browser.OpenAsync(SharedOptions.DAppSubmissionUri, BrowserLaunchMode.SystemPreferred);
     }
 
     async void OnDAppTestingClicked(object sender, EventArgs e)
