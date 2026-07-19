@@ -1,7 +1,7 @@
 {
   "name": "onegate",
   "version": "1.0.2",
-  "description": "Debug OneGate DApps locally and prepare, validate, and submit public DApp catalog listing requests.",
+  "description": "Control OneGate DApp debug sessions or use its Browser Mock, and prepare public catalog requests.",
   "author": {
     "name": "NEO GLOBAL RESOURCES",
     "url": "https://onegate.space"
@@ -14,7 +14,7 @@
   "interface": {
     "displayName": "OneGate",
     "shortDescription": "OneGate Codex Plugin",
-    "longDescription": "Open a DApp at its original URL with a document-start OneGate-compatible NEP-21 Browser Mock, reuse a persistent development account for real signatures, and inspect browser state, console output, screenshots, and dAPI traces. OneGate can also gather public project metadata, validate it against the official catalog form, prepare the exact listing request, and submit it to the public OneGateApp issue tracker only after user review and confirmation.",
+    "longDescription": "Open a DApp at its original URL with a document-start OneGate-compatible NEP-21 Browser Mock, or act as one compatible remote debugger for an installed OneGate app's encrypted remote-debug interface. Inspect page state, console output, screenshots, approval requests, and dAPI traces. OneGate can also gather public project metadata, validate it against the official catalog form, prepare the exact listing request, and submit it to the public OneGateApp issue tracker only after user review and confirmation.",
     "developerName": "NEO GLOBAL RESOURCES",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Write"],
@@ -28,8 +28,8 @@
     "logoDark": "./assets/logo-dark.svg",
     "defaultPrompt": [
       "Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.",
-      "Review this project and prepare a OneGate DApp listing request.",
-      "Submit my DApp to the OneGate catalog after showing me the public request."
+      "Pair my OneGate app and debug this HTTPS DApp in a real wallet session.",
+      "Review this project, prepare a OneGate DApp listing request, and submit it only after my confirmation."
     ]
   }
 }

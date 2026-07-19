@@ -1232,4 +1232,15 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo-aanmelding</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Extern debuggen</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Sta vertrouwde externe debuggers op het lokale netwerk toe echte DApp-vensters te debuggen.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Externe debugger koppelen</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Vertrouwde externe debuggers</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Geen vertrouwde externe debuggers</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Vergeten</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Deze externe debugger vergeten en opnieuw koppelen vereisen?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Verbonden: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Wachten op een vertrouwde externe debugger</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Externe debugger koppelen</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Externe debugger ‘{0}’ vraagt toegang. Vingerafdruk: {1}. Autoriseer alleen als je deze externe debugger vertrouwt.</value></data>
 </root>

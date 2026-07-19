@@ -35,8 +35,31 @@
             <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}">
                 <Grid ColumnDefinitions="*,auto" ColumnSpacing="14" Padding="16,14">
                     <Label Text="{x:Static og:Strings.DAppDebugPanel}" FontAttributes="Bold" VerticalOptions="Center" />
-                    <Switch Grid.Column="1" IsToggled="{Binding IsDAppDebugPanelEnabled}" IsEnabled="{Binding IsSettingsLoaded}" VerticalOptions="Center" Toggled="OnDAppDebugPanelToggled" />
+                    <Switch Grid.Column="1" IsToggled="{Binding IsDeveloperModeEnabled}" IsEnabled="{Binding IsSettingsLoaded}" VerticalOptions="Center" Toggled="OnDeveloperModeToggled" />
                 </Grid>
+            </Border>
+
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.RemoteDebug}" />
+            <Border StrokeShape="RoundRectangle 10" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="16,14">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="{x:Static og:Strings.RemoteDebugDescription}" FontSize="12" StyleClass="Secondary" />
+                    <Label Text="{Binding RemoteDebugStatusText}" FontAttributes="Bold" />
+                    <Button Text="{x:Static og:Strings.RemoteDebugPairDebugger}" Clicked="OnPairRemoteDebugClicked" IsEnabled="{Binding IsDeveloperModeEnabled}" />
+                    <Label Text="{x:Static og:Strings.RemoteDebugTrustedDebuggers}" FontAttributes="Bold" />
+                    <CollectionView ItemsSource="{Binding TrustedDebuggers}" EmptyView="{x:Static og:Strings.RemoteDebugNoTrustedDebuggers}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*,auto" Padding="0,6" ColumnSpacing="12">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Name}" />
+                                        <Label Text="{Binding Id}" FontSize="11" StyleClass="Secondary" />
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="1" Text="{x:Static og:Strings.RemoteDebugForgetDebugger}" CommandParameter="{Binding Id}" Clicked="OnForgetRemoteDebugClicked" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
     </ScrollView>

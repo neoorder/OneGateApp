@@ -1232,4 +1232,15 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo sign-in</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Remote debugging</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Allow trusted remote debuggers on your local network to debug real DApp windows.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Pair remote debugger</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Trusted remote debuggers</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>No trusted remote debuggers</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Forget</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Forget this remote debugger and require pairing again?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Connected: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Waiting for a trusted remote debugger</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pair remote debugger</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Remote debugger “{0}” is requesting access. Fingerprint: {1}. Authorize only if you trust this remote debugger.</value></data>
 </root>

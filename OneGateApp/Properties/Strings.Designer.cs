@@ -3356,5 +3356,49 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
+        internal static string RemoteDebug {
+            get { return ResourceManager.GetString("RemoteDebug", resourceCulture); }
+        }
+
+        internal static string RemoteDebugDescription {
+            get { return ResourceManager.GetString("RemoteDebugDescription", resourceCulture); }
+        }
+
+        internal static string RemoteDebugPairDebugger {
+            get { return ResourceManager.GetString("RemoteDebugPairDebugger", resourceCulture); }
+        }
+
+        internal static string RemoteDebugTrustedDebuggers {
+            get { return ResourceManager.GetString("RemoteDebugTrustedDebuggers", resourceCulture); }
+        }
+
+        internal static string RemoteDebugNoTrustedDebuggers {
+            get { return ResourceManager.GetString("RemoteDebugNoTrustedDebuggers", resourceCulture); }
+        }
+
+        internal static string RemoteDebugForgetDebugger {
+            get { return ResourceManager.GetString("RemoteDebugForgetDebugger", resourceCulture); }
+        }
+
+        internal static string RemoteDebugForgetPrompt {
+            get { return ResourceManager.GetString("RemoteDebugForgetPrompt", resourceCulture); }
+        }
+
+        internal static string RemoteDebugConnected {
+            get { return ResourceManager.GetString("RemoteDebugConnected", resourceCulture); }
+        }
+
+        internal static string RemoteDebugWaiting {
+            get { return ResourceManager.GetString("RemoteDebugWaiting", resourceCulture); }
+        }
+
+        internal static string RemoteDebugPairingTitle {
+            get { return ResourceManager.GetString("RemoteDebugPairingTitle", resourceCulture); }
+        }
+
+        internal static string RemoteDebugPairingPrompt {
+            get { return ResourceManager.GetString("RemoteDebugPairingPrompt", resourceCulture); }
+        }
+
     }
 }

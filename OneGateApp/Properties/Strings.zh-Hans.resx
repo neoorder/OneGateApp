@@ -1232,4 +1232,15 @@
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo 登录</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>远程调试</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>允许同一局域网中已信任的远程调试器调试真实 DApp 窗口。</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>配对远程调试器</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>已信任的远程调试器</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>尚无已信任的远程调试器</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>忘记</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>忘记此远程调试器并要求重新配对吗？</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>已连接：{0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>正在等待已信任的远程调试器</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>配对远程调试器</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>远程调试器“{0}”正在请求访问。指纹：{1}。仅在你信任此远程调试器时授权。</value></data>
 </root>

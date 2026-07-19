@@ -1232,4 +1232,15 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="NeoSignIn" xml:space="preserve">
     <value>Inicio de sesión con Neo</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Depuración remota</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Permite que depuradores remotos de confianza de tu red local depuren ventanas DApp reales.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Emparejar depurador remoto</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Depuradores remotos de confianza</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>No hay depuradores remotos de confianza</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Olvidar</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>¿Olvidar este depurador remoto y exigir un nuevo emparejamiento?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Conectado: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Esperando un depurador remoto de confianza</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Emparejar depurador remoto</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>El depurador remoto «{0}» solicita acceso. Huella: {1}. Autoriza solo si confías en este depurador remoto.</value></data>
 </root>

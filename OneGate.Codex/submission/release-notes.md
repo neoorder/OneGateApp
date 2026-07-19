@@ -1,5 +1,16 @@
 # Release notes
 
+## Unreleased
+
+Real-app DApp debugging workflow.
+
+- Adds a remote-debug interface that is not tied to a specific debugger, with this plugin providing the first compatible remote debugger through encrypted QR pairing and persistent mutual trust on the local network.
+- Adds Bonjour/mDNS discovery, real DApp windows, visible-WebView screenshots, console capture, dAPI traces, reload, stop, and JavaScript evaluation.
+- Adds explicit approve/reject commands for any real-wallet dAPI request OneGate exposes as pending, keeps other calls visible in the trace, and fails closed on disconnect or timeout.
+- Allows an approval to carry an optional JSON result that OneGate validates according to the target RPC method.
+- Uses trusted remote-debugger approval instead of ordinary in-app confirmation for remotely started DApp sessions on every network.
+- Retains Browser Mock as the default target.
+
 ## OneGate 1.0.2
 
 DApp catalog submission workflow.

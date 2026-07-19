@@ -1232,4 +1232,15 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="NeoSignIn" xml:space="preserve">
     <value>Masuk dengan Neo</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Debug jarak jauh</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Izinkan debugger jarak jauh tepercaya di jaringan lokal men-debug jendela DApp nyata.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Debugger jarak jauh tepercaya</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Tidak ada debugger jarak jauh tepercaya</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Lupakan</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Lupakan debugger jarak jauh ini dan wajibkan pemasangan ulang?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Terhubung: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Menunggu debugger jarak jauh tepercaya</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Debugger jarak jauh “{0}” meminta akses. Sidik jari: {1}. Izinkan hanya jika Anda memercayai debugger jarak jauh ini.</value></data>
 </root>

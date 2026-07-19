@@ -1232,4 +1232,15 @@
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo 登入</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>遠端偵錯</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>允許同一區域網路中已信任的遠端偵錯器偵錯真實 DApp 視窗。</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>配對遠端偵錯器</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>尚無已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>忘記</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>忘記此遠端偵錯器並要求重新配對嗎？</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>已連線：{0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>正在等待已信任的遠端偵錯器</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>配對遠端偵錯器</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>遠端偵錯器「{0}」正在要求存取。指紋：{1}。僅在你信任此遠端偵錯器時授權。</value></data>
 </root>

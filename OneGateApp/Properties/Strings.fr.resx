@@ -1232,4 +1232,15 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="NeoSignIn" xml:space="preserve">
     <value>Connexion avec Neo</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Débogage à distance</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Autoriser les débogueurs distants approuvés du réseau local à déboguer de vraies fenêtres DApp.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Associer un débogueur distant</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Débogueurs distants approuvés</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Aucun débogueur distant approuvé</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Oublier</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Oublier ce débogueur distant et exiger une nouvelle association ?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Connecté : {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>En attente d’un débogueur distant approuvé</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Associer le débogueur distant</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Le débogueur distant « {0} » demande l’accès. Empreinte : {1}. Autorisez uniquement si vous faites confiance à ce débogueur distant.</value></data>
 </root>

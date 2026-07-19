@@ -1232,4 +1232,15 @@
   <data name="NeoSignIn" xml:space="preserve">
     <value>Вход с помощью Neo</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Удалённая отладка</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Разрешить доверенным удалённым отладчикам в локальной сети отлаживать реальные окна DApp.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Сопрячь удалённый отладчик</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Доверенные удалённые отладчики</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Нет доверенных удалённых отладчиков</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Забыть</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Забыть этот удалённый отладчик и потребовать повторное сопряжение?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Подключено: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Ожидание доверенного удалённого отладчика</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Сопряжение удалённого отладчика</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Удалённый отладчик «{0}» запрашивает доступ. Отпечаток: {1}. Разрешайте только если доверяете этому удалённому отладчику.</value></data>
 </root>

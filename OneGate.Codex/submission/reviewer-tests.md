@@ -7,7 +7,7 @@ Use the platform launcher from the installed `onegate-dapp-debug` skill director
 
 The bundled reviewer fixture requires no account, credentials, wallet balance, RPC endpoint, public deployment, or private network. Stop every returned session after each case.
 
-## Positive test cases (5)
+## Positive test cases (9)
 
 ### 1. Run the self-contained DApp check
 
@@ -57,6 +57,20 @@ The bundled reviewer fixture requires no account, credentials, wallet balance, R
 - Expected behavior: The skill preserves the reviewed title and body, returns the canonical issue-form URL, and explains that the user must complete the GitHub submission. It does not claim the issue exists.
 - Expected result shape: The unchanged draft plus `https://github.com/neoorder/OneGateApp/issues/new?template=dapp_submission.yml`; no fabricated issue number or URL.
 - Fixture data: A complete reviewed draft supplied by the reviewer and an environment without GitHub authentication.
+
+### 8. Pair a real OneGate app without exposing the pairing secret
+
+- User prompt: "Create a pairing QR for my OneGate app, save it to a temporary PNG, and wait for me to scan it."
+- Expected behavior: The skill runs `debug-target pair start --output <temporary-path>`, reports the pairing id and expiry, asks the user to enable Developer Tools and scan the PNG, and polls `debug-target pair status`. It does not print or decode the QR payload into the task.
+- Expected result shape: A valid PNG file, a `waiting` status before scanning, then a `paired` status containing only the debug-target id, name, and platform. `debug-target list` shows the same target as online.
+- Fixture data: An installed OneGate app and the remote debugger on the same local network; no OneGate server or cloud relay is used.
+
+### 9. Require explicit remote approval with optional results
+
+- User prompt: "Open https://example.com in my paired OneGate app and inspect its pending dAPI request. Do not approve anything until I ask."
+- Expected behavior: The skill starts target `onegate`, lets other dAPI calls continue into `session trace`, polls `session requests` for a call that OneGate presents as pending, shows its exact method and parameters, and waits. It does not infer approval policy from the method name. After explicit user instruction it approves only the named request id and, when requested, transmits the user's exact JSON result without interpreting it. It treats remote approval as authoritative for that remotely started DApp session on every network.
+- Expected result shape: One real-app session id, a pending request with a unique request id, an approve/reject result for that id only, an optional JSON result preserved exactly, and a trace containing `pending`, `approved` or `rejected`, then `resolve` or `reject`. There is no approve-all action.
+- Fixture data: A paired OneGate app with Developer Tools enabled and an HTTPS test DApp.
 
 ## Negative test cases (5)
 

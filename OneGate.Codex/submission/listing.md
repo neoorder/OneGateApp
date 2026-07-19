@@ -17,13 +17,13 @@ OneGate Codex Plugin
 
 ## Long description
 
-OneGate helps Codex debug Neo N3 DApps and submit projects for review in the OneGate catalog. Its local Browser Mock injects a OneGate-compatible NEP-21 provider before page scripts run, preserves the DApp URL and Origin, reuses a persistent development account for real P-256 signing, and exposes browser diagnostics and dAPI traces without broadcasting. Its listing workflow gathers public project metadata, validates it against the official form, screens drafts for secrets, and creates a public OneGateApp issue only after the user reviews and confirms the exact request.
+OneGate helps Codex debug Neo N3 DApps and submit projects for review in the OneGate catalog. Its local Browser Mock injects a OneGate-compatible NEP-21 provider before page scripts run, preserves the DApp URL and Origin, reuses a persistent development account for real P-256 signing, and exposes browser diagnostics without broadcasting. For installed-app testing, the plugin acts as one remote debugger for OneGate's encrypted same-LAN debugging interface; the app protocol is not tied to Codex and can support other compatible remote debuggers. This remote debugger provides platform-WebView, wallet approval, screenshot, console, and complete dAPI-trace testing with explicit authorization for any request OneGate exposes as pending, plus optional JSON approval results that OneGate interprets per RPC method. The listing workflow gathers public project metadata, validates it against the official form, screens drafts for secrets, and creates a public OneGateApp issue only after the user reviews and confirms the exact request.
 
 ## Starter prompts
 
-1. Review this project and prepare a OneGate DApp listing request.
-2. Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.
-3. Run the bundled OneGate reviewer DApp and summarize its account, signing, and expected offline-error results.
+1. Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.
+2. Pair my installed OneGate app and debug this HTTPS DApp in a real wallet session.
+3. Review this project, prepare a OneGate DApp listing request, and submit it only after my confirmation.
 
 ## Availability
 

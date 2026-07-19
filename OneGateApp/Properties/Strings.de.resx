@@ -1232,4 +1232,15 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo-Anmeldung</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Remote-Debugging</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Vertrauenswürdigen Remote-Debuggern im lokalen Netzwerk das Debuggen echter DApp-Fenster erlauben.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Remote-Debugger koppeln</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Vertrauenswürdige Remote-Debugger</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Keine vertrauenswürdigen Remote-Debugger</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Vergessen</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Diesen Remote-Debugger vergessen und eine erneute Kopplung verlangen?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Verbunden: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Warten auf einen vertrauenswürdigen Remote-Debugger</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Remote-Debugger koppeln</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Remote-Debugger „{0}“ fordert Zugriff an. Fingerabdruck: {1}. Nur autorisieren, wenn du diesem Remote-Debugger vertraust.</value></data>
 </root>

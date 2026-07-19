@@ -26,6 +26,15 @@ function delay(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
+function removeSessionDirectory(sessionRoot) {
+  return rm(sessionRoot, {
+    recursive: true,
+    force: true,
+    maxRetries: 8,
+    retryDelay: 100,
+  });
+}
+
 function requireHttpUrl(value) {
   if (typeof value !== "string" || value.trim().length === 0) {
     throw new Error("url must be a non-empty HTTP(S) URL.");
@@ -382,11 +391,6 @@ async function waitForDevToolsPort(userDataDir, childProcess, getStderr) {
   const portFile = path.join(userDataDir, "DevToolsActivePort");
   const deadline = Date.now() + START_TIMEOUT_MS;
   while (Date.now() < deadline) {
-    if (childProcess.exitCode !== null) {
-      throw new Error(
-        `Chromium exited before DevTools was ready.${getStderr() ? ` ${getStderr()}` : ""}`,
-      );
-    }
     try {
       const [portLine] = (await readFile(portFile, "utf8")).split(/\r?\n/u);
       const port = Number.parseInt(portLine, 10);
@@ -395,6 +399,11 @@ async function waitForDevToolsPort(userDataDir, childProcess, getStderr) {
       }
     } catch {
       // The file appears only after Chromium has opened its DevTools endpoint.
+    }
+    if (childProcess.exitCode !== null && childProcess.exitCode !== 0) {
+      throw new Error(
+        `Chromium exited before DevTools was ready.${getStderr() ? ` ${getStderr()}` : ""}`,
+      );
     }
     await delay(50);
   }
@@ -504,7 +513,10 @@ export class BrowserMockSession {
     const sessionRoot = await mkdtemp(path.join(os.tmpdir(), "onegate-browser-mock-"));
     const userDataDir = path.join(sessionRoot, "profile");
     const headless = options?.headless === true;
+    const preventEdgeCompatibilityRelaunch = process.platform === "win32"
+      && path.basename(browserExecutable).toLowerCase() === "msedge.exe";
     const args = [
+      ...(preventEdgeCompatibilityRelaunch ? ["--edge-skip-compat-layer-relaunch"] : []),
       "--remote-debugging-address=127.0.0.1",
       "--remote-debugging-port=0",
       `--user-data-dir=${userDataDir}`,
@@ -563,7 +575,7 @@ export class BrowserMockSession {
         .join("; ");
       cdp?.close();
       killProcessTree(childProcess);
-      await rm(sessionRoot, { recursive: true, force: true });
+      await removeSessionDirectory(sessionRoot);
       throw new Error(
         `${error instanceof Error ? error.message : String(error)}${diagnostic ? ` (${diagnostic})` : ""}`,
         { cause: error },
@@ -857,6 +869,6 @@ export class BrowserMockSession {
       await delay(50);
     }
     killProcessTree(this.childProcess);
-    await rm(this.sessionRoot, { recursive: true, force: true });
+    await removeSessionDirectory(this.sessionRoot);
   }
 }

@@ -1232,4 +1232,15 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="NeoSignIn" xml:space="preserve">
     <value>Đăng nhập bằng Neo</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Gỡ lỗi từ xa</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Cho phép các trình gỡ lỗi từ xa đáng tin cậy trên mạng cục bộ gỡ lỗi cửa sổ DApp thực.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Ghép nối trình gỡ lỗi từ xa</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Trình gỡ lỗi từ xa đáng tin cậy</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Không có trình gỡ lỗi từ xa đáng tin cậy</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Quên</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Quên trình gỡ lỗi từ xa này và yêu cầu ghép nối lại?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Đã kết nối: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Đang chờ trình gỡ lỗi từ xa đáng tin cậy</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Ghép nối trình gỡ lỗi từ xa</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Trình gỡ lỗi từ xa “{0}” đang yêu cầu quyền truy cập. Dấu vân tay: {1}. Chỉ cho phép nếu bạn tin cậy trình gỡ lỗi từ xa này.</value></data>
 </root>

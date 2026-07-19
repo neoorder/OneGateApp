@@ -1232,4 +1232,15 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo ログイン</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>リモートデバッグ</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>ローカルネットワーク上の信頼済みリモートデバッガーに実際の DApp ウィンドウのデバッグを許可します。</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>リモートデバッガーをペアリング</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>信頼済みリモートデバッガー</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>信頼済みリモートデバッガーはありません</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>削除</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>このリモートデバッガーを削除し、再ペアリングを必須にしますか？</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>接続済み: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>信頼済みリモートデバッガーを待機中</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>リモートデバッガーをペアリング</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>リモートデバッガー「{0}」がアクセスを要求しています。フィンガープリント: {1}。このリモートデバッガーを信頼する場合のみ許可してください。</value></data>
 </root>
