@@ -759,7 +759,7 @@ Do you want to continue?</value>
     <value>Preparing DApp</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>Games with large assets may take a moment.</value>
+    <value>This dApp may need more time to finish loading.</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>

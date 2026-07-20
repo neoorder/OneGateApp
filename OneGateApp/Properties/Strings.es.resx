@@ -759,7 +759,7 @@ Después de desactivarla, deberá introducir manualmente la contraseña de la bi
     <value>Preparando la DApp</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>Los juegos con recursos grandes pueden tardar un momento.</value>
+    <value>Esta dApp puede necesitar más tiempo para terminar de cargar.</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Compartir</value>

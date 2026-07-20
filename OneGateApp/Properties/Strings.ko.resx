@@ -759,7 +759,7 @@
     <value>DApp 준비 중</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>용량이 큰 게임은 시간이 조금 걸릴 수 있습니다.</value>
+    <value>이 dApp은 로딩이 완료되는 데 시간이 더 걸릴 수 있습니다.</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>공유</value>

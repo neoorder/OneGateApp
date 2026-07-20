@@ -735,7 +735,7 @@
     <value>正在準備 DApp</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>大型遊戲資源較多，可能還需要一點時間。</value>
+    <value>此 dApp 可能需要更多時間才能完成載入。</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>分享</value>

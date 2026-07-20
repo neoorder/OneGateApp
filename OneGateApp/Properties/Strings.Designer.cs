@@ -793,7 +793,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Games with large assets may take a moment. 的本地化字符串。
+        ///   查找类似 This dApp may need more time to finish loading. 的本地化字符串。
         /// </summary>
         internal static string DAppPreparingText {
             get {

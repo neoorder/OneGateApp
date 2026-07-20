@@ -759,7 +759,7 @@ Wilt u doorgaan?</value>
     <value>DApp voorbereiden</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>Games met grote assets kunnen even duren.</value>
+    <value>Deze dApp heeft mogelijk meer tijd nodig om te laden.</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Delen</value>

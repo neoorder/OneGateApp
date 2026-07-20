@@ -759,7 +759,7 @@ Bạn có muốn tiếp tục không?</value>
     <value>Đang chuẩn bị DApp</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>Trò chơi có tài nguyên lớn có thể mất thêm một chút thời gian.</value>
+    <value>dApp này có thể cần thêm thời gian để tải xong.</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Chia sẻ</value>

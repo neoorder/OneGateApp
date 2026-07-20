@@ -759,7 +759,7 @@ Deseja continuar?</value>
     <value>Preparando a DApp</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>Jogos com recursos grandes podem levar alguns instantes.</value>
+    <value>Este dApp pode precisar de mais tempo para concluir o carregamento.</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Compartilhar</value>

@@ -759,7 +759,7 @@
     <value>Подготовка DApp</value>
   </data>
   <data name="DAppPreparingText" xml:space="preserve">
-    <value>Игры с крупными ресурсами могут загружаться немного дольше.</value>
+    <value>Этому dApp может потребоваться больше времени для завершения загрузки.</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Поделиться</value>
