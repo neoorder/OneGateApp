@@ -80,7 +80,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <og:TabBar Tabs="{Binding DAppCategories}" Spacing="4" SelectedTabChanged="OnCategoryChanged" />
+            <og:TabBar x:Name="tabbarCategory" Tabs="{Binding DAppCategories}" Spacing="4" SelectedTabChanged="OnCategoryChanged" />
             <CollectionView ItemsSource="{Binding DAppsFiltered}" MinimumHeightRequest="20">
                 <CollectionView.EmptyView>
                     <Border StyleClass="Card">
