@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { createHash } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import net from "node:net";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 
@@ -18,6 +19,21 @@ import {
   ONEGATE_NETWORK,
   verifyP256Signature,
 } from "../onegate/skills/onegate-dapp-debug/scripts/runtime/identity.mjs";
+import {
+  base64UrlDecode,
+  base64UrlEncode,
+  createDebugIdentity,
+  createEphemeralKey,
+  createPairingInvitation,
+  FramedSocket,
+  keyId,
+  parsePairingInvitation,
+  SecureChannel,
+  verifyIdentitySignature,
+} from "../onegate/skills/onegate-dapp-debug/scripts/runtime/remote-protocol.mjs";
+import { renderQrPng } from "../onegate/skills/onegate-dapp-debug/scripts/runtime/qr-png.mjs";
+import { DebugTargetGateway } from "../onegate/skills/onegate-dapp-debug/scripts/runtime/debug-target-gateway.mjs";
+import { OneGateCommandService } from "../onegate/skills/onegate-dapp-debug/scripts/runtime/command-service.mjs";
 
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const skillDirectory = path.resolve(
@@ -55,6 +71,219 @@ function varString(value) {
 
 function delay(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+test("remote-debug identity and pairing invitations round-trip", () => {
+  const identity = createDebugIdentity();
+  const payload = Buffer.from("OneGate remote-debug identity", "utf8");
+  const signature = identity.sign(payload);
+  assert.equal(verifyIdentitySignature(identity.publicDer, payload, signature), true);
+  payload[0] ^= 1;
+  assert.equal(verifyIdentitySignature(identity.publicDer, payload, signature), false);
+
+  const expiresAt = new Date(Date.now() + 120_000);
+  const invitation = createPairingInvitation({
+    pairingId: "5bb2ff82-f194-46bd-8b0e-45173bcb694f",
+    expiresAt,
+    debuggerName: "Erik's PC",
+    debuggerPublicKey: identity.publicRaw,
+    pairingSecret: Buffer.from(Array.from({ length: 32 }, (_, index) => index)),
+    endpoints: ["tcp://192.168.1.10:42310", "tcp://[fd00::10]:42310"],
+  });
+  const parsed = parsePairingInvitation(invitation, new Date());
+  assert.equal(parsed.pairingId, "5bb2ff82-f194-46bd-8b0e-45173bcb694f");
+  assert.equal(parsed.debuggerName, "Erik's PC");
+  assert.deepEqual(parsed.debuggerPublicKey, identity.publicRaw);
+  assert.deepEqual(parsed.endpoints, ["tcp://192.168.1.10:42310", "tcp://[fd00::10]:42310"]);
+});
+
+test("remote-debug secure channels encrypt, authenticate, and reject replay", () => {
+  const debuggerKey = createEphemeralKey();
+  const debugTargetKey = createEphemeralKey();
+  const pairingSecret = Buffer.alloc(32, 0x42);
+  const transcript = sha256(Buffer.from("remote-debug transcript", "utf8"));
+  const remoteDebugger = new SecureChannel(
+    "remote-debugger",
+    debuggerKey.derive(debugTargetKey.publicDer),
+    pairingSecret,
+    transcript,
+  );
+  const debugTarget = new SecureChannel(
+    "debug-target",
+    debugTargetKey.derive(debuggerKey.publicDer),
+    pairingSecret,
+    transcript,
+  );
+  const command = remoteDebugger.encrypt(Buffer.from("start", "utf8"));
+  assert.equal(debugTarget.decrypt(command).toString("utf8"), "start");
+  assert.throws(() => debugTarget.decrypt(command), { code: "INVALID_SEQUENCE" });
+
+  const response = debugTarget.encrypt(Buffer.from("ready", "utf8"));
+  response[response.length - 1] ^= 0x80;
+  assert.throws(() => remoteDebugger.decrypt(response));
+  remoteDebugger.dispose();
+  debugTarget.dispose();
+});
+
+test("remote-debug secure channel matches the .NET protocol vector", () => {
+  const sharedSecret = Buffer.from(Array.from({ length: 32 }, (_, index) => index));
+  const pairingSecret = Buffer.from(Array.from({ length: 32 }, (_, index) => index + 32));
+  const transcript = sha256(Buffer.from("onegate-vector", "utf8"));
+  const remoteDebugger = new SecureChannel("remote-debugger", sharedSecret, pairingSecret, transcript);
+  assert.equal(
+    remoteDebugger.encrypt(Buffer.from("hello OneGate", "utf8")).toString("hex"),
+    "0000000000000001fbc9ed9a2bbcd21c1d8c728014d471a6efd46ae636ba398492b72ddfd8",
+  );
+  remoteDebugger.dispose();
+});
+
+test("pairing invitation renderer emits a bounded grayscale PNG", () => {
+  const png = renderQrPng("onegate-debug://pair?v=1&id=test&expires=2000000000&debuggerKey=test&secret=test&endpoint=tcp%3A%2F%2F192.168.1.10%3A42310");
+  assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+  assert.equal(png.readUInt32BE(16), 438);
+  assert.equal(png.readUInt32BE(20), 438);
+  assert.equal(png[25], 0);
+});
+
+test("debug-target gateway pairs a signed target and exchanges encrypted commands", async () => {
+  const stateDirectory = await mkdtemp(path.join(os.tmpdir(), "onegate-debug-target-gateway-"));
+  const gateway = new DebugTargetGateway({ stateDirectory, debuggerName: "Test remote debugger" });
+  let mock;
+  try {
+    await gateway.start();
+    const pairing = await gateway.createPairing();
+    const invitation = parsePairingInvitation(pairing.invitation);
+    mock = await connectMockDebugTarget(gateway, invitation);
+    const deadline = Date.now() + 2_000;
+    while (!gateway.listDebugTargets().debugTargets.some((debugTarget) => debugTarget.id === mock.debugTargetId && debugTarget.online)) {
+      if (Date.now() >= deadline) assert.fail("Mock debug target did not become online.");
+      await delay(10);
+    }
+    const response = await gateway.request(mock.debugTargetId, "test.echo", { value: "hello" });
+    assert.deepEqual(response, { method: "test.echo", params: { value: "hello" } });
+    assert.equal(gateway.pairingStatus(pairing.pairingId).status, "paired");
+
+    const service = new OneGateCommandService({ stateDirectory, debugTargetGateway: gateway });
+    await service.initialize();
+    const started = await service.execute("debug.start", {
+      target: "onegate",
+      debugTargetId: mock.debugTargetId,
+      url: "https://example.com/debug",
+    });
+    assert.equal(started.sessionId, "mock-session");
+    assert.equal(started.target, "onegate");
+    const status = await service.execute("session.status", { sessionId: "mock-session" });
+    assert.equal(status.href, "https://example.com/debug");
+    const approved = await service.execute("session.approve", {
+      sessionId: "mock-session",
+      requestId: "request-with-result",
+      result: "NZNos2WqTbu5oCgyfss9kUJgBXJqhuYAaj",
+    });
+    assert.deepEqual(approved.params, {
+      sessionId: "mock-session",
+      requestId: "request-with-result",
+      result: "NZNos2WqTbu5oCgyfss9kUJgBXJqhuYAaj",
+    });
+    const approvedWithoutResult = await service.execute("session.approve", {
+      sessionId: "mock-session",
+      requestId: "request-without-result",
+    });
+    assert.equal(Object.hasOwn(approvedWithoutResult.params, "result"), false);
+    const approvedWithNull = await service.execute("session.approve", {
+      sessionId: "mock-session",
+      requestId: "request-with-null",
+      result: null,
+    });
+    assert.equal(Object.hasOwn(approvedWithNull.params, "result"), true);
+    assert.equal(approvedWithNull.params.result, null);
+    const stopped = await service.execute("session.stop", { sessionId: "mock-session" });
+    assert.equal(stopped.stopped, true);
+  } finally {
+    mock?.close();
+    await gateway.stop();
+    await rm(stateDirectory, { recursive: true, force: true });
+  }
+});
+
+async function connectMockDebugTarget(gateway, invitation) {
+  const identity = createDebugIdentity();
+  const ephemeral = createEphemeralKey();
+  const socket = net.createConnection({ host: "127.0.0.1", port: gateway.summary().port });
+  await new Promise((resolve, reject) => {
+    socket.once("connect", resolve);
+    socket.once("error", reject);
+  });
+  const framed = new FramedSocket(socket);
+  const clientHello = {
+    version: 1,
+    mode: "pair",
+    pairingId: invitation.pairingId,
+    debugTargetId: identity.id,
+    debugTargetName: "Mock OneGate",
+    platform: "test",
+    identityKey: base64UrlEncode(identity.publicDer),
+    ephemeralKey: base64UrlEncode(ephemeral.publicDer),
+    nonce: base64UrlEncode(randomBytes(16)),
+  };
+  const clientPayload = Buffer.from(JSON.stringify(clientHello), "utf8");
+  framed.writeJson({
+    type: "clientHello",
+    payload: base64UrlEncode(clientPayload),
+    signature: base64UrlEncode(identity.sign(clientPayload)),
+  });
+  const envelope = await framed.readJson();
+  assert.equal(envelope.type, "serverHello");
+  const serverPayload = base64UrlDecode(envelope.payload);
+  const serverHello = JSON.parse(serverPayload.toString("utf8"));
+  const debuggerPublicKey = base64UrlDecode(serverHello.identityKey);
+  assert.equal(serverHello.debuggerId, keyId(debuggerPublicKey));
+  const transcript = sha256(Buffer.concat([clientPayload, serverPayload]));
+  assert.equal(
+    verifyIdentitySignature(debuggerPublicKey, transcript, base64UrlDecode(envelope.signature)),
+    true,
+  );
+  const channel = new SecureChannel(
+    "debug-target",
+    ephemeral.derive(base64UrlDecode(serverHello.ephemeralKey)),
+    invitation.pairingSecret,
+    transcript,
+  );
+  const complete = JSON.parse(channel.decrypt(await framed.read()).toString("utf8"));
+  assert.equal(complete.kind, "pair.complete");
+  framed.write(channel.encrypt(Buffer.from(JSON.stringify({ kind: "pair.ack" }), "utf8")));
+  const loop = (async () => {
+    while (!socket.destroyed) {
+      const message = JSON.parse(channel.decrypt(await framed.read(60_000)).toString("utf8"));
+      if (message.kind !== "request") continue;
+      let result;
+      switch (message.method) {
+        case "session.start":
+          result = { sessionId: "mock-session", target: "onegate", href: message.params.url };
+          break;
+        case "session.status":
+          result = { sessionId: "mock-session", target: "onegate", href: "https://example.com/debug" };
+          break;
+        case "session.stop":
+          result = { sessionId: "mock-session", stopped: true };
+          break;
+        default:
+          result = { method: message.method, params: message.params };
+          break;
+      }
+      framed.write(channel.encrypt(Buffer.from(JSON.stringify({
+        kind: "response",
+        id: message.id,
+        result,
+      }), "utf8")));
+    }
+  })().catch(() => undefined);
+  return {
+    debugTargetId: identity.id,
+    close() {
+      socket.destroy();
+      void loop;
+    },
+  };
 }
 
 function runCli(args, stateDirectory, timeoutMs = 45_000) {
@@ -134,7 +363,28 @@ test("platform launcher accepts an explicit compatible Node runtime", async () =
   assert.equal(result.exitCode, 0, result.stderr);
   const envelope = JSON.parse(result.stdout.trim());
   assert.equal(envelope.ok, true);
-  assert.equal(envelope.result.version, "1.0.1");
+  assert.equal(envelope.result.version, "1.0.2");
+});
+
+test("session approve requires a valid JSON result", async () => {
+  const stateDirectory = await mkdtemp(path.join(os.tmpdir(), "onegate-approval-result-test-"));
+  try {
+    const result = await runCli([
+      "session",
+      "approve",
+      "--id",
+      "test-session",
+      "--request-id",
+      "test-request",
+      "--result",
+      "{invalid",
+    ], stateDirectory);
+    assert.equal(result.exitCode, 1);
+    assert.equal(result.payload.error.code, "INVALID_ARGUMENT");
+    assert.match(result.payload.error.message, /valid JSON/u);
+  } finally {
+    await rm(stateDirectory, { recursive: true, force: true });
+  }
 });
 
 test("document-start source is top-level-only and carries public configuration", () => {
@@ -368,7 +618,7 @@ test("JSON CLI keeps identity and sessions in an authenticated local daemon", as
     const help = await runCli(["help"], stateDirectory);
     assert.equal(help.exitCode, 0);
     assert.equal(help.payload.ok, true);
-    assert.equal(help.payload.result.version, "1.0.1");
+    assert.equal(help.payload.result.version, "1.0.2");
 
     const first = await runCli(["identity"], stateDirectory);
     const second = await runCli(["identity", "show"], stateDirectory);
@@ -376,6 +626,23 @@ test("JSON CLI keeps identity and sessions in an authenticated local daemon", as
     assert.match(first.payload.result.address, /^N/u);
     assert.equal(second.payload.result.address, first.payload.result.address);
     assert.equal(JSON.stringify(first.payload).includes("privateKey"), false);
+
+    const targets = await runCli(["targets", "discover"], stateDirectory);
+    assert.equal(targets.payload.result.targets.find((target) => target.id === "onegate")?.implemented, true);
+
+    const pairingOutput = path.join(stateDirectory, "pairing.png");
+    const pairing = await runCli([
+      "debug-target", "pair", "start", "--output", pairingOutput, "--name", "OneGate test remote debugger",
+    ], stateDirectory);
+    assert.equal(pairing.exitCode, 0, JSON.stringify(pairing.payload));
+    assert.equal(pairing.payload.result.output, pairingOutput);
+    assert.equal(JSON.stringify(pairing.payload).includes("secret="), false);
+    const pairingPng = await readFile(pairingOutput);
+    assert.deepEqual([...pairingPng.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+    const pairingStatus = await runCli([
+      "debug-target", "pair", "status", "--id", pairing.payload.result.pairingId,
+    ], stateDirectory);
+    assert.equal(pairingStatus.payload.result.status, "waiting");
 
     const status = await runCli(["daemon", "status"], stateDirectory);
     assert.equal(status.payload.result.running, true);

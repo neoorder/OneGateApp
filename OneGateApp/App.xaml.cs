@@ -3,6 +3,7 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Pages;
 using NeoOrder.OneGate.Services;
+using NeoOrder.OneGate.Services.RemoteDebug;
 using System.Globalization;
 
 namespace NeoOrder.OneGate;
@@ -14,7 +15,7 @@ public partial class App : Application
 
     AppLinkAction? appLinkAction;
 
-    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient)
+    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient, RemoteDebugService remoteDebugService)
     {
         this.serviceProvider = serviceProvider;
         this.walletProvider = walletProvider;
@@ -38,6 +39,19 @@ public partial class App : Application
         }
         httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
         httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.CurrentUICulture.Name);
+        _ = InitializeRemoteDebugAsync(remoteDebugService, dbContext.Settings.Get<bool>(DAppCatalogPolicy.DeveloperModeKey));
+    }
+
+    static async Task InitializeRemoteDebugAsync(RemoteDebugService service, bool developerModeEnabled)
+    {
+        try
+        {
+            await service.SetDeveloperModeAsync(developerModeEnabled);
+        }
+        catch
+        {
+            // Developer diagnostics must not prevent the wallet from starting.
+        }
     }
 
     internal bool ProcessAppLinkUri(Uri uri)

@@ -6,6 +6,8 @@ using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
+using NeoOrder.OneGate.Services.RemoteDebug;
+using NeoOrder.OneGate.DebugProtocol;
 using SkiaSharp;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -17,11 +19,13 @@ namespace NeoOrder.OneGate.Pages;
 public partial class ScanPage : ContentPage, IQueryAttributable
 {
     readonly ProtocolSettings protocolSettings;
+    readonly RemoteDebugService remoteDebugService;
     string? action;
 
-    public ScanPage(ProtocolSettings protocolSettings)
+    public ScanPage(ProtocolSettings protocolSettings, RemoteDebugService remoteDebugService)
     {
         this.protocolSettings = protocolSettings;
+        this.remoteDebugService = remoteDebugService;
         InitializeComponent();
         cameraView.Options = cameraView.Options with
         {
@@ -125,8 +129,24 @@ public partial class ScanPage : ContentPage, IQueryAttributable
         {
             "neo" => await ProcessNeoSchemeAsync(uri),
             "https" => await ProcessHttpsSchemeAsync(uri),
+            PairingInvitation.Scheme => await ProcessRemoteDebugPairingAsync(uri),
             _ => false,
         };
+    }
+
+    async Task<bool> ProcessRemoteDebugPairingAsync(Uri uri)
+    {
+        if (action != "PairRemoteDebug") return false;
+        PairingInvitation invitation = PairingInvitation.Parse(uri.AbsoluteUri);
+        bool confirmed = await DisplayAlertAsync(
+            Strings.RemoteDebugPairingTitle,
+            string.Format(Strings.RemoteDebugPairingPrompt, invitation.DebuggerName ?? "Remote debugger", Convert.ToHexString(invitation.DebuggerPublicKey)[..16]),
+            Strings.Authorize,
+            Strings.Cancel);
+        if (!confirmed) return false;
+        await remoteDebugService.PairAsync(invitation);
+        await Shell.Current.GoToAsync("..");
+        return true;
     }
 
     async Task<bool> ProcessNeoSchemeAsync(Uri uri)

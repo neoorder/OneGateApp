@@ -947,17 +947,23 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="DeveloperTools" xml:space="preserve">
     <value>Pusat pengembang</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Mode Pengembang</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>Panel debug DApp</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>Pengujian DApp</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Alat debug</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Peluncuran cepat</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Buka URL DApp apa pun di OneGate untuk pengujian.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>Pengajuan DApp</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>Pengajuan DApp: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Nama proyek</value>
@@ -971,8 +977,11 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="ContactInformation" xml:space="preserve">
     <value>Informasi kontak</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>Kirim melalui email</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Ajukan pencantuman</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Kirim detail proyek untuk ditinjau oleh OneGate.</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>Muat ulang</value>
@@ -1232,4 +1241,15 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="NeoSignIn" xml:space="preserve">
     <value>Masuk dengan Neo</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Debug jarak jauh</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Izinkan debugger jarak jauh tepercaya di jaringan lokal men-debug jendela DApp nyata.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Debugger jarak jauh tepercaya</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Tidak ada debugger jarak jauh tepercaya</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Lupakan</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Lupakan debugger jarak jauh ini dan wajibkan pemasangan ulang?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Terhubung: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Menunggu debugger jarak jauh tepercaya</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Debugger jarak jauh “{0}” meminta akses. Sidik jari: {1}. Izinkan hanya jika Anda memercayai debugger jarak jauh ini.</value></data>
 </root>
