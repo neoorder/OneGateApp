@@ -749,6 +749,18 @@
   <data name="OpenDAppFailedText" xml:space="preserve">
     <value>DAppに戻れませんでした</value>
   </data>
+  <data name="DAppLoadFailed" xml:space="preserve">
+    <value>DApp を読み込めませんでした</value>
+  </data>
+  <data name="DAppLoadFailedText" xml:space="preserve">
+    <value>{0} を読み込めませんでした。接続を確認してからもう一度お試しください。</value>
+  </data>
+  <data name="DAppPreparing" xml:space="preserve">
+    <value>DApp を準備中</value>
+  </data>
+  <data name="DAppPreparingText" xml:space="preserve">
+    <value>このdAppは読み込みが完了するまでに時間がかかる場合があります。</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>共有</value>
   </data>

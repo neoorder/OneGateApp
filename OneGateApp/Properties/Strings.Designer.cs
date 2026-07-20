@@ -766,6 +766,42 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 DApp did not load 的本地化字符串。
+        /// </summary>
+        internal static string DAppLoadFailed {
+            get {
+                return ResourceManager.GetString("DAppLoadFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 {0} could not be loaded. Check your connection and try again. Status: {1} 的本地化字符串。
+        /// </summary>
+        internal static string DAppLoadFailedText {
+            get {
+                return ResourceManager.GetString("DAppLoadFailedText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Preparing DApp 的本地化字符串。
+        /// </summary>
+        internal static string DAppPreparing {
+            get {
+                return ResourceManager.GetString("DAppPreparing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 This dApp may need more time to finish loading. 的本地化字符串。
+        /// </summary>
+        internal static string DAppPreparingText {
+            get {
+                return ResourceManager.GetString("DAppPreparingText", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 DApp Debug Panel 的本地化字符串。
         /// </summary>
         internal static string DAppDebugPanel {
