@@ -947,17 +947,23 @@
   <data name="DeveloperTools" xml:space="preserve">
     <value>开发者中心</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>开发者模式</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp 调试面板</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp测试</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>调试工具</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>快速启动</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>输入 DApp URL，在 OneGate 中打开测试</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 提交</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp 提交：{0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>项目名称</value>
@@ -971,8 +977,11 @@
   <data name="ContactInformation" xml:space="preserve">
     <value>联系方式</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>通过电子邮件提交</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>申请收录</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>提交项目信息，供 OneGate 审核</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>重新载入</value>
@@ -1232,4 +1241,15 @@
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo 登录</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>远程调试</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>允许同一局域网中已信任的远程调试器调试真实 DApp 窗口。</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>配对远程调试器</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>已信任的远程调试器</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>尚无已信任的远程调试器</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>忘记</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>忘记此远程调试器并要求重新配对吗？</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>已连接：{0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>正在等待已信任的远程调试器</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>配对远程调试器</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>远程调试器“{0}”正在请求访问。指纹：{1}。仅在你信任此远程调试器时授权。</value></data>
 </root>
