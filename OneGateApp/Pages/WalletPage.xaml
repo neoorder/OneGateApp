@@ -56,29 +56,35 @@
                     </Grid>
                 </Border>
                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="4,0">
-                    <VerticalStackLayout Grid.Column="0" Spacing="7" HorizontalOptions="Center">
-                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                    <VerticalStackLayout Grid.Column="0" Spacing="7" HorizontalOptions="Center"
+                                         AutomationProperties.IsInAccessibleTree="True"
+                                         SemanticProperties.Description="{x:Static og:Strings.Receive}">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54" AutomationProperties.IsInAccessibleTree="False">
                             <Label StyleClass="Icon" Text="&#xe7dd;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Border>
-                        <Label Text="{x:Static og:Strings.Receive}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <Label Text="{x:Static og:Strings.Receive}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{x:Static og:Commands.GotoPage}" CommandParameter="//wallet/receive" />
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
-                    <VerticalStackLayout Grid.Column="1" Spacing="7" HorizontalOptions="Center">
-                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                    <VerticalStackLayout Grid.Column="1" Spacing="7" HorizontalOptions="Center"
+                                         AutomationProperties.IsInAccessibleTree="True"
+                                         SemanticProperties.Description="{x:Static og:Strings.Send}">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54" AutomationProperties.IsInAccessibleTree="False">
                             <Label StyleClass="Icon" Text="&#xe705;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Border>
-                        <Label Text="{x:Static og:Strings.Send}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <Label Text="{x:Static og:Strings.Send}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnSendClicked" />
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
-                    <VerticalStackLayout Grid.Column="2" Spacing="7" HorizontalOptions="Center">
-                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54">
+                    <VerticalStackLayout Grid.Column="2" Spacing="7" HorizontalOptions="Center"
+                                         AutomationProperties.IsInAccessibleTree="True"
+                                         SemanticProperties.Description="{x:Static og:Strings.Records}">
+                        <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" StrokeThickness="1" WidthRequest="54" HeightRequest="54" AutomationProperties.IsInAccessibleTree="False">
                             <Label StyleClass="Icon" Text="&#xe901;" FontSize="22" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Border>
-                        <Label Text="{x:Static og:Strings.Records}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" />
+                        <Label Text="{x:Static og:Strings.Records}" FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="{Binding ScriptHash, StringFormat='https://explorer.onegate.space/accountprofile/{0}'}" />
                         </VerticalStackLayout.GestureRecognizers>
