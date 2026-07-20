@@ -52,10 +52,16 @@
 	</array>
 	<key>NSBiometricUsageDescription</key>
 	<string>Use Touch ID to unlock OneGate and approve wallet actions.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_onegate-debug._tcp</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>This app allows dApps to use the camera for QR code scanning.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID to unlock OneGate and approve wallet actions.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Developer mode uses the local network to pair with and discover trusted remote DApp debuggers.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>This app allows web games to use motion sensors for controls.</string>
 	<key>UIApplicationSceneManifest</key>

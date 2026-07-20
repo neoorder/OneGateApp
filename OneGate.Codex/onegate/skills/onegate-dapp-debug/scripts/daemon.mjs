@@ -60,6 +60,7 @@ async function readJsonBody(request) {
 const stateDirectory = readStateDirectory(process.argv.slice(2));
 process.env.ONEGATE_PLUGIN_STATE_DIR = stateDirectory;
 const service = new OneGateCommandService({ stateDirectory });
+await service.initialize();
 const authToken = randomBytes(32).toString("hex");
 const startedAt = new Date().toISOString();
 let shuttingDown = false;

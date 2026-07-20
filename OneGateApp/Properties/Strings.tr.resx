@@ -947,17 +947,23 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="DeveloperTools" xml:space="preserve">
     <value>Geliştirici merkezi</value>
   </data>
+  <data name="DeveloperMode" xml:space="preserve">
+    <value>Geliştirici modu</value>
+  </data>
   <data name="DAppDebugPanel" xml:space="preserve">
     <value>DApp hata ayıklama paneli</value>
   </data>
-  <data name="DAppTesting" xml:space="preserve">
-    <value>DApp Testi</value>
+  <data name="DebugTools" xml:space="preserve">
+    <value>Hata ayıklama araçları</value>
+  </data>
+  <data name="QuickLaunch" xml:space="preserve">
+    <value>Hızlı başlatma</value>
+  </data>
+  <data name="QuickLaunchDescription" xml:space="preserve">
+    <value>Test etmek için herhangi bir DApp URL'sini OneGate'te açın.</value>
   </data>
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp gönderimi</value>
-  </data>
-  <data name="DAppSubmissionEmailSubject" xml:space="preserve">
-    <value>DApp gönderimi: {0}</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Proje adı</value>
@@ -971,8 +977,11 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="ContactInformation" xml:space="preserve">
     <value>İletişim bilgileri</value>
   </data>
-  <data name="SubmitByEmail" xml:space="preserve">
-    <value>E-posta ile gönder</value>
+  <data name="RequestListing" xml:space="preserve">
+    <value>Listeleme talep et</value>
+  </data>
+  <data name="DAppSubmissionDescription" xml:space="preserve">
+    <value>Proje ayrıntılarını OneGate incelemesine gönderin.</value>
   </data>
   <data name="Reload" xml:space="preserve">
     <value>Yeniden yükle</value>
@@ -1232,4 +1241,15 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="NeoSignIn" xml:space="preserve">
     <value>Neo ile oturum açma</value>
   </data>
+  <data name="RemoteDebug" xml:space="preserve"><value>Uzaktan hata ayıklama</value></data>
+  <data name="RemoteDebugDescription" xml:space="preserve"><value>Yerel ağdaki güvenilir uzaktan hata ayıklayıcıların gerçek DApp pencerelerinde hata ayıklamasına izin verin.</value></data>
+  <data name="RemoteDebugPairDebugger" xml:space="preserve"><value>Uzaktan hata ayıklayıcıyı eşleştir</value></data>
+  <data name="RemoteDebugTrustedDebuggers" xml:space="preserve"><value>Güvenilir uzaktan hata ayıklayıcılar</value></data>
+  <data name="RemoteDebugNoTrustedDebuggers" xml:space="preserve"><value>Güvenilir uzaktan hata ayıklayıcı yok</value></data>
+  <data name="RemoteDebugForgetDebugger" xml:space="preserve"><value>Unut</value></data>
+  <data name="RemoteDebugForgetPrompt" xml:space="preserve"><value>Bu uzaktan hata ayıklayıcı unutulsun ve yeniden eşleştirme gereksin mi?</value></data>
+  <data name="RemoteDebugConnected" xml:space="preserve"><value>Bağlandı: {0}</value></data>
+  <data name="RemoteDebugWaiting" xml:space="preserve"><value>Güvenilir bir uzaktan hata ayıklayıcı bekleniyor</value></data>
+  <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Uzaktan hata ayıklayıcıyı eşleştir</value></data>
+  <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>“{0}” uzaktan hata ayıklayıcısı erişim istiyor. Parmak izi: {1}. Yalnızca bu uzaktan hata ayıklayıcıya güveniyorsanız izin verin.</value></data>
 </root>
