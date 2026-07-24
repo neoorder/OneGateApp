@@ -54,6 +54,7 @@ public partial class SpinnerButton : ContentView
 
     private void Button_Clicked(object sender, EventArgs e)
     {
+        if (IsBusy) return;
         Clicked?.Invoke(this, EventArgs.Empty);
     }
 }
