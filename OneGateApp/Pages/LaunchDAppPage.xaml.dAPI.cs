@@ -377,7 +377,6 @@ partial class LaunchDAppPage
         DateTime deadline = DateTime.UtcNow + timeout;
         while (DateTime.UtcNow < deadline)
         {
-            await Task.Delay(TimeSpan.FromSeconds(3));
             JsonObject tx;
             try
             {
@@ -385,21 +384,28 @@ partial class LaunchDAppPage
             }
             catch (RpcException)
             {
-                continue;
+                tx = [];
             }
             ulong? blockTime = tx["blocktime"]?.GetValue<ulong>();
-            if (!blockTime.HasValue) continue;
-            bool? succeeded = await QueryPaymentExecutionSucceededAsync(hash);
-            if (!succeeded.HasValue) continue;
-            if (!succeeded.Value)
-                throw new DapiException(10004, "Payment transaction failed");
-            return new DAppPaymentResult
+            if (blockTime.HasValue)
             {
-                TransactionHash = hash,
-                BlockTime = blockTime,
-                Succeeded = true,
-                Confirmed = true
-            };
+                bool? succeeded = await QueryPaymentExecutionSucceededAsync(hash);
+                if (succeeded.HasValue)
+                {
+                    if (!succeeded.Value)
+                        throw new DapiException(10004, "Payment transaction failed");
+                    return new DAppPaymentResult
+                    {
+                        TransactionHash = hash,
+                        BlockTime = blockTime,
+                        Succeeded = true,
+                        Confirmed = true
+                    };
+                }
+            }
+            TimeSpan remaining = deadline - DateTime.UtcNow;
+            if (remaining <= TimeSpan.Zero) break;
+            await Task.Delay(remaining < TimeSpan.FromSeconds(3) ? remaining : TimeSpan.FromSeconds(3));
         }
         throw new DapiException(10000, "Payment confirmation timed out");
     }
