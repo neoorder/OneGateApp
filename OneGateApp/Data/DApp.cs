@@ -1,14 +1,20 @@
 ﻿using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace NeoOrder.OneGate.Data;
 
-public class DApp : IComparable<DApp>, IShareable, IVersioned
+public class DApp : IComparable<DApp>, IShareable, IVersioned, INotifyPropertyChanged
 {
+    GameDownloadStatus downloadStatus;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     public bool IsActive { get; set; }
@@ -31,6 +37,35 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
     public string? Description { get; set; }
     public ContentWarnings Warnings { get; set; }
     public int Version { get; set; }
+
+    [NotMapped]
+    public GameDownloadStatus DownloadStatus
+    {
+        get => downloadStatus;
+        set
+        {
+            if (downloadStatus == value) return;
+            downloadStatus = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsGameDownloading));
+            OnPropertyChanged(nameof(IsGameDownloaded));
+            OnPropertyChanged(nameof(GameDownloadStatusText));
+        }
+    }
+
+    [NotMapped]
+    public bool IsGameDownloading => DownloadStatus == GameDownloadStatus.Downloading;
+
+    [NotMapped]
+    public bool IsGameDownloaded => DownloadStatus == GameDownloadStatus.Downloaded;
+
+    [NotMapped]
+    public string GameDownloadStatusText => DownloadStatus switch
+    {
+        GameDownloadStatus.Downloading => Strings.GameDownloading,
+        GameDownloadStatus.Downloaded => Strings.GameDownloaded,
+        _ => Strings.GameDownloadRequired
+    };
 
     public bool IsGamingApp => !string.IsNullOrWhiteSpace(GameType);
     public bool IsRegularApp => !IsGamingApp;
@@ -57,4 +92,16 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
         if (string.IsNullOrWhiteSpace(gameType)) return null;
         return Strings.ResourceManager.GetString($"GameType{gameType}") ?? gameType;
     }
+
+    void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new(propertyName));
+    }
+}
+
+public enum GameDownloadStatus
+{
+    Required,
+    Downloading,
+    Downloaded
 }

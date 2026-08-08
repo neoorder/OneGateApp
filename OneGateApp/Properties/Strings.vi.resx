@@ -846,6 +846,15 @@ Khi tiếp tục, bạn xác nhận rằng bạn đã hiểu đầy đủ và ch
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Đã chơi gần đây</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>Cần tải xuống</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>Đang tải xuống</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>Đã tải xuống</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Thể loại trò chơi</value>
   </data>

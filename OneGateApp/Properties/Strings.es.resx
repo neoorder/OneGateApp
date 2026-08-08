@@ -846,6 +846,15 @@ Al continuar, usted reconoce que comprende plenamente y acepta todos los riesgos
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Jugados recientemente</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>Descarga necesaria</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>Descargando</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>Descargado</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Tipo de juego</value>
   </data>

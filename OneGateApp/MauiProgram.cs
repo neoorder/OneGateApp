@@ -116,6 +116,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AddressBookService>();
         builder.Services.AddSingleton<TokenManager>();
         builder.Services.AddSingleton<ActivityLogService>();
+        builder.Services.AddSingleton<GameDownloadStatusService>();
         builder.Services.AddSingleton<RpcClient>();
         builder.Services.AddSingleton<UpdateService>();
         builder.Services.AddSingleton<RemoteDebugService>();

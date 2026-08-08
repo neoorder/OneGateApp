@@ -846,6 +846,15 @@ Dengan melanjutkan, Anda menyatakan bahwa Anda sepenuhnya memahami dan menerima 
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Baru dimainkan</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>Perlu diunduh</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>Mengunduh</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>Sudah diunduh</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Jenis game</value>
   </data>

@@ -846,6 +846,15 @@
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>최근 플레이</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>다운로드 필요</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>다운로드 중</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>다운로드됨</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>게임 유형</value>
   </data>

@@ -846,6 +846,15 @@ Door door te gaan bevestigt u dat u alle bijbehorende risico's volledig begrijpt
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Recent gespeeld</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>Download vereist</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>Downloaden</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>Gedownload</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Speltype</value>
   </data>

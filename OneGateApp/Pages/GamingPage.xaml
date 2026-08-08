@@ -17,12 +17,18 @@
         <og:DAppSearchHandler SearchBoxVisibility="Collapsible" ShowsResults="True" DApps="{Binding Games}">
             <og:DAppSearchHandler.ItemTemplate>
                 <DataTemplate x:DataType="og:DApp">
-                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="5" Margin="{OnPlatform iOS='20,0', MacCatalyst='20,0', Default='5'}">
-                        <Image WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
-                            <Image.Source>
-                                <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
-                            </Image.Source>
-                        </Image>
+                    <Grid ColumnDefinitions="auto,*" ColumnSpacing="5" Margin="{OnPlatform iOS='20,0', MacCatalyst='20,0', Default='5'}" SemanticProperties.Hint="{Binding GameDownloadStatusText}">
+                        <Grid WidthRequest="22" HeightRequest="22" VerticalOptions="Center">
+                            <Image WidthRequest="20" HeightRequest="20" VerticalOptions="Center">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                </Image.Source>
+                            </Image>
+                            <ActivityIndicator IsRunning="{Binding IsGameDownloading}" IsVisible="{Binding IsGameDownloading}" Color="{toolkit:AppThemeResource Success}" WidthRequest="12" HeightRequest="12" HorizontalOptions="End" VerticalOptions="End" InputTransparent="True" />
+                            <Border IsVisible="{Binding IsGameDownloaded}" BackgroundColor="{toolkit:AppThemeResource Success}" StrokeThickness="0" StrokeShape="RoundRectangle 6" WidthRequest="12" HeightRequest="12" Padding="0" HorizontalOptions="End" VerticalOptions="End" InputTransparent="True">
+                                <Label Text="&#xe9b0;" FontFamily="Icons" FontSize="7" TextColor="{toolkit:AppThemeResource Accent}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                        </Grid>
                         <Label Grid.Column="1" Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" VerticalOptions="Center" />
                     </Grid>
                 </DataTemplate>
@@ -44,13 +50,19 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="og:DApp">
-                                    <Border StyleClass="Card" WidthRequest="96" HeightRequest="96" Padding="8,10">
+                                    <Border StyleClass="Card" WidthRequest="96" HeightRequest="96" Padding="8,10" SemanticProperties.Hint="{Binding GameDownloadStatusText}">
                                         <Grid RowDefinitions="48,*" RowSpacing="4">
-                                            <Image WidthRequest="44" HeightRequest="44" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
-                                                <Image.Source>
-                                                    <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
-                                                </Image.Source>
-                                            </Image>
+                                            <Grid WidthRequest="48" HeightRequest="48" HorizontalOptions="Center" VerticalOptions="Center">
+                                                <Image WidthRequest="44" HeightRequest="44" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
+                                                    <Image.Source>
+                                                        <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                                    </Image.Source>
+                                                </Image>
+                                                <ActivityIndicator IsRunning="{Binding IsGameDownloading}" IsVisible="{Binding IsGameDownloading}" Color="{toolkit:AppThemeResource Success}" WidthRequest="16" HeightRequest="16" HorizontalOptions="End" VerticalOptions="End" InputTransparent="True" />
+                                                <Border IsVisible="{Binding IsGameDownloaded}" BackgroundColor="{toolkit:AppThemeResource Success}" StrokeThickness="0" StrokeShape="RoundRectangle 8" WidthRequest="16" HeightRequest="16" Padding="0" HorizontalOptions="End" VerticalOptions="End" InputTransparent="True">
+                                                    <Label Text="&#xe9b0;" FontFamily="Icons" FontSize="9" TextColor="{toolkit:AppThemeResource Accent}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                                </Border>
+                                            </Grid>
                                             <Label Grid.Row="1" Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="12" MaxLines="1" LineBreakMode="TailTruncation" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                                         </Grid>
                                         <Border.GestureRecognizers>
@@ -87,13 +99,19 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="og:DApp">
-                    <Grid RowDefinitions="*,1" HeightRequest="96">
+                    <Grid RowDefinitions="*,1" HeightRequest="96" SemanticProperties.Hint="{Binding GameDownloadStatusText}">
                         <Grid ColumnDefinitions="60,*,40" ColumnSpacing="12" Padding="0,8" MinimumHeightRequest="88">
-                            <Image WidthRequest="56" HeightRequest="56" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
-                                <Image.Source>
-                                    <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
-                                </Image.Source>
-                            </Image>
+                            <Grid WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image WidthRequest="56" HeightRequest="56" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                    </Image.Source>
+                                </Image>
+                                <ActivityIndicator IsRunning="{Binding IsGameDownloading}" IsVisible="{Binding IsGameDownloading}" Color="{toolkit:AppThemeResource Success}" WidthRequest="18" HeightRequest="18" HorizontalOptions="End" VerticalOptions="End" InputTransparent="True" />
+                                <Border IsVisible="{Binding IsGameDownloaded}" BackgroundColor="{toolkit:AppThemeResource Success}" StrokeThickness="0" StrokeShape="RoundRectangle 9" WidthRequest="18" HeightRequest="18" Padding="0" HorizontalOptions="End" VerticalOptions="End" InputTransparent="True">
+                                    <Label Text="&#xe9b0;" FontFamily="Icons" FontSize="10" TextColor="{toolkit:AppThemeResource Accent}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                </Border>
+                            </Grid>
                             <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
                                 <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation" MaxLines="1" />
                                 <HorizontalStackLayout Spacing="6">

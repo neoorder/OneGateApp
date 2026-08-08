@@ -23,6 +23,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
     readonly ProtocolSettings protocolSettings;
     readonly IWalletProvider walletProvider;
     readonly WalletAuthorizationService walletAuthorizationService;
+    readonly GameDownloadStatusService gameDownloadStatusService;
     readonly ApplicationDbContext dbContext;
     readonly ActivityLogService activityLogService;
     readonly HttpClient httpClient;
@@ -37,12 +38,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
     bool IsRemoteDebugSession => remoteDebugSessionId is not null;
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, ActivityLogService activityLogService, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, GameDownloadStatusService gameDownloadStatusService, ApplicationDbContext dbContext, ActivityLogService activityLogService, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.walletProvider = walletProvider;
         this.walletAuthorizationService = walletAuthorizationService;
+        this.gameDownloadStatusService = gameDownloadStatusService;
         this.dbContext = dbContext;
         this.activityLogService = activityLogService;
         this.httpClient = httpClient;
@@ -69,6 +71,8 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
+        if (DApp is { IsGamingApp: true })
+            gameDownloadStatusService.ResetDownloading(DApp);
         if (remoteDebugSessionId is not null && remoteDebugService is not null)
             remoteDebugService.NotifySessionHostClosed(remoteDebugSessionId, this);
     }
@@ -210,6 +214,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
             if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
             if (DApp.IsGamingApp) GlobalStates.Invalidate<GamingPage>();
         }
+        await gameDownloadStatusService.MarkDownloadingAsync(DApp);
         await activityLogService.RecordDAppConnectionAsync(DApp);
     }
 
@@ -255,6 +260,21 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
             e.Cancel = true;
             await Toast.Show(Strings.RedirectionBlockedText);
         }
+    }
+
+    async void OnNavigated(object sender, WebNavigatedEventArgs e)
+    {
+        if (DApp is not { IsGamingApp: true } || !Uri.TryCreate(e.Url, UriKind.Absolute, out var uri))
+            return;
+
+        Uri gameUri = new(DApp.Url);
+        if (uri.Scheme == "about" || IsCrossDomain(gameUri, uri))
+            return;
+
+        if (e.Result == WebNavigationResult.Success)
+            await gameDownloadStatusService.MarkDownloadedAsync(DApp);
+        else
+            gameDownloadStatusService.ResetDownloading(DApp);
     }
 
     string CreateDocumentStartScript()

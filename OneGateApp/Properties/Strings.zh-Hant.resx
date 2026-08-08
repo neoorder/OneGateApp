@@ -822,6 +822,15 @@
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>最近玩過</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>需要下載</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>下載中</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>已下載</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>遊戲類型</value>
   </data>

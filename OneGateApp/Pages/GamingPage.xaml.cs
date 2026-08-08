@@ -14,6 +14,7 @@ public partial class GamingPage : ContentPage
     const int MaxGameColumns = 3;
 
     readonly ApplicationDbContext dbContext;
+    readonly GameDownloadStatusService gameDownloadStatusService;
     bool allowRestrictedContent;
     bool developerModeEnabled;
 
@@ -27,10 +28,11 @@ public partial class GamingPage : ContentPage
     public string[] GameTypes { get; private set { field = value; OnPropertyChanged(); } } = [Strings.All];
     public bool HasGameTypeFilters { get; private set { field = value; OnPropertyChanged(); } }
 
-    public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
+    public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, GameDownloadStatusService gameDownloadStatusService)
     {
         this.LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
         this.dbContext = dbContext;
+        this.gameDownloadStatusService = gameDownloadStatusService;
         this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
         InitializeComponent();
 #if WINDOWS
@@ -41,9 +43,10 @@ public partial class GamingPage : ContentPage
         LoadingService.BeginLoad();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await gameDownloadStatusService.ApplyStatusesAsync(Games);
         if (this.ShouldRefresh())
             LoadingService.BeginLoad();
         else
@@ -82,12 +85,13 @@ public partial class GamingPage : ContentPage
             GamesItemsLayout.Span = span;
     }
 
-    void OnDataLoaded(object? sender, EventArgs e)
+    async void OnDataLoaded(object? sender, EventArgs e)
     {
         Games = DApps
             .Where(p => p.IsGamingApp
                 && DAppCatalogPolicy.IsVisible(p, allowRestrictedContent, developerModeEnabled))
             .ToArray();
+        await gameDownloadStatusService.ApplyStatusesAsync(Games);
         GameTypes = Games
             .Select(p => p.GameType)
             .Where(p => !string.IsNullOrWhiteSpace(p))

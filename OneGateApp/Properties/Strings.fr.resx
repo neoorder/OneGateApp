@@ -846,6 +846,15 @@ En continuant, vous reconnaissez comprendre pleinement et accepter tous les risq
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Joués récemment</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>Téléchargement requis</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>Téléchargement en cours</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>Téléchargé</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Type de jeu</value>
   </data>

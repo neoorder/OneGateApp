@@ -26,5 +26,5 @@
         <ToolbarItem x:Name="developerToolsButton" Order="Secondary" Text="{x:Static og:Strings.DAppDebugPanel}" Clicked="OnDeveloperToolsClicked" />
         <ToolbarItem x:Name="reportButton" Order="Secondary" Text="{x:Static og:Strings.Report}" Clicked="OnReportClicked" />
     </ContentPage.ToolbarItems>
-    <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />
+    <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" Navigated="OnNavigated" InvokedFromJavaScript="OnInvokedFromJavaScript" />
 </ContentPage>

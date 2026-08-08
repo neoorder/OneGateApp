@@ -1391,6 +1391,33 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Downloaded 的本地化字符串。
+        /// </summary>
+        internal static string GameDownloaded {
+            get {
+                return ResourceManager.GetString("GameDownloaded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Download required 的本地化字符串。
+        /// </summary>
+        internal static string GameDownloadRequired {
+            get {
+                return ResourceManager.GetString("GameDownloadRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Downloading 的本地化字符串。
+        /// </summary>
+        internal static string GameDownloading {
+            get {
+                return ResourceManager.GetString("GameDownloading", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Game type 的本地化字符串。
         /// </summary>
         internal static string GameType {

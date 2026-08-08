@@ -846,6 +846,15 @@
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Недавно сыгранные</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>Требуется загрузка</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>Загрузка</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>Загружено</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Тип игры</value>
   </data>

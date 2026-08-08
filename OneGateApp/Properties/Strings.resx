@@ -846,6 +846,15 @@ By continuing, you acknowledge that you fully understand and accept all associat
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Recently played</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>Download required</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>Downloaded</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Game type</value>
   </data>

@@ -846,6 +846,15 @@ Devam ederek, ilgili tüm riskleri tamamen anladığınızı ve kabul ettiğiniz
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Son oynananlar</value>
   </data>
+  <data name="GameDownloadRequired" xml:space="preserve">
+    <value>İndirme gerekli</value>
+  </data>
+  <data name="GameDownloading" xml:space="preserve">
+    <value>İndiriliyor</value>
+  </data>
+  <data name="GameDownloaded" xml:space="preserve">
+    <value>İndirildi</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Oyun türü</value>
   </data>
