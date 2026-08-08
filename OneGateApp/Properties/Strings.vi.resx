@@ -270,6 +270,9 @@
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>Đã mở gần đây trên thiết bị này</value>
   </data>
+  <data name="DAppUnavailableOnCurrentPlatform" xml:space="preserve">
+    <value>DApp này không khả dụng trên nền tảng hiện tại.</value>
+  </data>
   <data name="DAppTags" xml:space="preserve">
     <value>Thẻ</value>
   </data>

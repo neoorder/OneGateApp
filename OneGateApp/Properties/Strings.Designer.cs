@@ -259,6 +259,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 This DApp is not available on the current platform. 的本地化字符串。
+        /// </summary>
+        internal static string DAppUnavailableOnCurrentPlatform {
+            get {
+                return ResourceManager.GetString("DAppUnavailableOnCurrentPlatform", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Tags 的本地化字符串。
         /// </summary>
         internal static string DAppTags {

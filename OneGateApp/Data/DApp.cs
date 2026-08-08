@@ -36,6 +36,7 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned, INotifyPropertyCh
     public string[]? Previews { get; set; }
     public string? Description { get; set; }
     public ContentWarnings Warnings { get; set; }
+    public DAppPlatforms SupportedPlatforms { get; set; } = DAppPlatforms.All;
     public int Version { get; set; }
 
     [NotMapped]

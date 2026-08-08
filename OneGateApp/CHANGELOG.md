@@ -13,6 +13,7 @@ date is the date of its final commit. Later changes are listed under Unreleased.
 ### Added
 
 - Added opt-in encrypted remote DApp debugging with trusted LAN pairing, explicit request approval, logs, traces, JavaScript evaluation, and visible-WebView screenshots.
+- Added per-platform DApp availability for Android, iOS, Mac Catalyst, and Windows.
 
 ### Changed
 

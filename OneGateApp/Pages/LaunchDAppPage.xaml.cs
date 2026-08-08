@@ -167,7 +167,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
         {
             DApp = (DApp)value;
             Url = DApp.Url;
-            UpdateReportButton();
         }
         else
         {
@@ -185,7 +184,6 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
                     Url = DApp.Url;
                 else
                     Url = DApp.Url + uri.Query;
-                UpdateReportButton();
             }
             else
             {
@@ -198,9 +196,15 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
                     Languages = ["en"]
                 };
                 Url = uri.AbsoluteUri;
-                UpdateReportButton();
             }
         }
+        if (DApp.Id > 0 && !DAppCatalogPolicy.IsSupportedOnCurrentPlatform(DApp))
+        {
+            await Toast.Show(Strings.DAppUnavailableOnCurrentPlatform);
+            await this.GoBackOrCloseAsync();
+            return;
+        }
+        UpdateReportButton();
         if (DApp.Id > 0)
         {
             List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
