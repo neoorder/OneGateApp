@@ -34,6 +34,7 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
 
     public bool IsGamingApp => !string.IsNullOrWhiteSpace(GameType);
     public bool IsRegularApp => !IsGamingApp;
+    public string? PreviewUrl => Previews?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p)) ?? IconUrl;
     public string? GameTypeDisplayName => LocalizeGameType(GameType);
     public Dictionary<string, string> NameLocalizer => field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Name)!;
     public Dictionary<string, string>? DescriptionLocalizer => Description is null ? null : field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Description);

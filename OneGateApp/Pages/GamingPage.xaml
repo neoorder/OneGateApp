@@ -9,6 +9,7 @@
     <ContentPage.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         <og:LocalizerConverter x:Key="LocalizerConverter" />
+        <og:StringSelectConverter x:Key="StringSelectConverter" />
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe69a;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.ScanQRCode}" />
@@ -30,42 +31,291 @@
         </og:DAppSearchHandler>
     </Shell.SearchHandler>
     <RefreshView Margin="20,0" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
-        <CollectionView ItemsSource="{Binding GamesFiltered}" MinimumHeightRequest="20">
-            <CollectionView.Header>
-                <VerticalStackLayout Spacing="16">
-                    <Border StrokeShape="RoundRectangle 10" StrokeThickness="0" HeightRequest="132">
-                        <Image Source="gaming_banner.webp" Aspect="AspectFill" />
-                    </Border>
-                    <VerticalStackLayout Spacing="8" IsVisible="{Binding HasRecentGames}">
-                        <Label Text="{x:Static og:Strings.GamingRecentPlayed}" FontAttributes="Bold" />
-                        <CollectionView ItemsSource="{Binding GamesRecent}" HeightRequest="104">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="og:DApp">
-                                    <Border StyleClass="Card" WidthRequest="96" HeightRequest="96" Padding="8,10">
-                                        <Grid RowDefinitions="48,*" RowSpacing="4">
-                                            <Image WidthRequest="44" HeightRequest="44" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
-                                                <Image.Source>
-                                                    <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
-                                                </Image.Source>
-                                            </Image>
-                                            <Label Grid.Row="1" Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="12" MaxLines="1" LineBreakMode="TailTruncation" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+        <Grid RowDefinitions="auto,*" RowSpacing="12">
+            <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
+                <og:TabBar x:Name="gameTypeTabBar"
+                           Tabs="{Binding GameTypes}"
+                           IsVisible="{Binding HasGameTypeFilters}"
+                           Spacing="12"
+                           FontSize="12"
+                           HorizontalOptions="Fill"
+                           SelectedTabChanged="OnGameTypeChanged" />
+                <Button Grid.Column="1"
+                        StyleClass="Icon"
+                        Text="{Binding IsGalleryLayout, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe792;&#xe7f4;}"
+                        FontSize="22"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        CornerRadius="10"
+                        BackgroundColor="{toolkit:AppThemeResource TextBox}"
+                        HorizontalOptions="End"
+                        SemanticProperties.Description="{Binding LayoutToggleDescription}"
+                        Clicked="OnLayoutToggleClicked" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <CollectionView ItemsSource="{Binding GamesFiltered}"
+                                IsVisible="{Binding ShowGalleryLayout}"
+                                MinimumHeightRequest="20">
+                    <CollectionView.Header>
+                        <VerticalStackLayout Spacing="18" Padding="0,0,0,14">
+                            <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" HeightRequest="132">
+                                <Image Source="gaming_banner.webp" Aspect="AspectFill" />
+                            </Border>
+
+                            <VerticalStackLayout Spacing="8" IsVisible="{Binding HasRecentGames}">
+                                <Label Text="{x:Static og:Strings.GamingRecentPlayed}" FontAttributes="Bold" FontSize="18" />
+                                <CollectionView ItemsSource="{Binding GamesRecent}" HeightRequest="126">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="og:DApp">
+                                            <Border StyleClass="Card" WidthRequest="112" HeightRequest="120" Padding="0">
+                                                <Grid RowDefinitions="76,44">
+                                                    <Image Margin="14" Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Image Aspect="AspectFill">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding PreviewUrl}" CacheValidity="30:00:00:00" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="1"
+                                                           Margin="8,0"
+                                                           Text="{Binding Name, Converter={StaticResource LocalizerConverter}}"
+                                                           FontAttributes="Bold"
+                                                           FontSize="12"
+                                                           MaxLines="1"
+                                                           LineBreakMode="TailTruncation"
+                                                           HorizontalTextAlignment="Center"
+                                                           VerticalTextAlignment="Center" />
+                                                </Grid>
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+                                                </Border.GestureRecognizers>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Spacing="8" IsVisible="{Binding HasSpotlightGame}">
+                                <Label Text="{x:Static og:Strings.GamingSpotlight}" FontAttributes="Bold" FontSize="18" />
+                                <Border StyleClass="Card" HeightRequest="208" Padding="0">
+                                    <Grid>
+                                        <Image Source="gaming_banner.webp" Aspect="AspectFill" />
+                                        <Image Margin="52" Aspect="AspectFit">
+                                            <Image.Source>
+                                                <UriImageSource Uri="{Binding SpotlightGame.IconUrl}" CacheValidity="30:00:00:00" />
+                                            </Image.Source>
+                                        </Image>
+                                        <Image Aspect="AspectFill">
+                                            <Image.Source>
+                                                <UriImageSource Uri="{Binding SpotlightGame.PreviewUrl}" CacheValidity="30:00:00:00" />
+                                            </Image.Source>
+                                        </Image>
+                                        <Grid Padding="16"
+                                              ColumnDefinitions="*,auto"
+                                              ColumnSpacing="12"
+                                              BackgroundColor="#99000000"
+                                              VerticalOptions="End">
+                                            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                                                <Label Text="{Binding SpotlightGame.Name, Converter={StaticResource LocalizerConverter}}"
+                                                       TextColor="White"
+                                                       FontAttributes="Bold"
+                                                       FontSize="20"
+                                                       MaxLines="1"
+                                                       LineBreakMode="TailTruncation" />
+                                                <Label Text="{Binding SpotlightGame.GameTypeDisplayName}"
+                                                       TextColor="#DDE4EE"
+                                                       FontSize="12"
+                                                       MaxLines="1"
+                                                       LineBreakMode="TailTruncation" />
+                                            </VerticalStackLayout>
+                                            <Button Grid.Column="1"
+                                                    Text="{x:Static og:Strings.Open}"
+                                                    TextColor="White"
+                                                    Command="{x:Static og:Commands.LaunchDApp}"
+                                                    CommandParameter="{Binding SpotlightGame}"
+                                                    Padding="18,10"
+                                                    MinimumHeightRequest="44"
+                                                    VerticalOptions="Center" />
                                         </Grid>
-                                        <Border.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
-                                        </Border.GestureRecognizers>
-                                    </Border>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </VerticalStackLayout>
-                    <og:TabBar x:Name="gameTypeTabBar" Tabs="{Binding GameTypes}" IsVisible="{Binding HasGameTypeFilters}" Spacing="18" Margin="0,10" SelectedTabChanged="OnGameTypeChanged" />
-                </VerticalStackLayout>
-            </CollectionView.Header>
-            <CollectionView.EmptyView>
-                <Border StyleClass="Card" HeightRequest="120">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding SpotlightGame}" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Spacing="8" IsVisible="{Binding HasQuickPicks}">
+                                <Label Text="{x:Static og:Strings.GamingQuickPicks}" FontAttributes="Bold" FontSize="18" />
+                                <CollectionView ItemsSource="{Binding GamesQuickPicks}" HeightRequest="138">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="og:DApp">
+                                            <Border StyleClass="Card" WidthRequest="154" HeightRequest="132" Padding="0">
+                                                <Grid RowDefinitions="88,44">
+                                                    <Image Margin="16" Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Image Aspect="AspectFill">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding PreviewUrl}" CacheValidity="30:00:00:00" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="1"
+                                                           Margin="10,0"
+                                                           Text="{Binding Name, Converter={StaticResource LocalizerConverter}}"
+                                                           FontAttributes="Bold"
+                                                           FontSize="12"
+                                                           MaxLines="1"
+                                                           LineBreakMode="TailTruncation"
+                                                           VerticalTextAlignment="Center" />
+                                                </Grid>
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+                                                </Border.GestureRecognizers>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+
+                            <Label Text="{x:Static og:Strings.GamingAllGames}" FontAttributes="Bold" FontSize="18" />
+                        </VerticalStackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout x:Name="GalleryItemsLayout" Orientation="Vertical" Span="3" HorizontalItemSpacing="10" VerticalItemSpacing="14" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="og:DApp">
+                            <Border StyleClass="Card" HeightRequest="164" Padding="0">
+                                <Grid RowDefinitions="112,52">
+                                    <Grid>
+                                        <Image Margin="18" Aspect="AspectFit">
+                                            <Image.Source>
+                                                <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                            </Image.Source>
+                                        </Image>
+                                        <Image Aspect="AspectFill">
+                                            <Image.Source>
+                                                <UriImageSource Uri="{Binding PreviewUrl}" CacheValidity="30:00:00:00" />
+                                            </Image.Source>
+                                        </Image>
+                                        <Button StyleClass="Icon"
+                                                Text="&#xe605;"
+                                                FontSize="16"
+                                                WidthRequest="32"
+                                                HeightRequest="32"
+                                                CornerRadius="16"
+                                                Margin="6"
+                                                Padding="0"
+                                                BackgroundColor="{toolkit:AppThemeResource Panel}"
+                                                HorizontalOptions="End"
+                                                VerticalOptions="Start"
+                                                Clicked="OnDetailsClicked"
+                                                CommandParameter="{Binding .}" />
+                                    </Grid>
+                                    <VerticalStackLayout Grid.Row="1" Margin="9,6" Spacing="1">
+                                        <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}"
+                                               FontAttributes="Bold"
+                                               FontSize="12"
+                                               MaxLines="1"
+                                               LineBreakMode="TailTruncation" />
+                                        <Label StyleClass="Secondary"
+                                               Text="{Binding GameTypeDisplayName}"
+                                               FontSize="10"
+                                               MaxLines="1"
+                                               LineBreakMode="TailTruncation" />
+                                    </VerticalStackLayout>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView ItemsSource="{Binding GamesFiltered}"
+                                IsVisible="{Binding ShowListLayout}"
+                                MinimumHeightRequest="20">
+                    <CollectionView.Header>
+                        <VerticalStackLayout Spacing="16" Padding="0,0,0,8">
+                            <Border StrokeShape="RoundRectangle 8" StrokeThickness="0" HeightRequest="132">
+                                <Image Source="gaming_banner.webp" Aspect="AspectFill" />
+                            </Border>
+                            <VerticalStackLayout Spacing="8" IsVisible="{Binding HasRecentGames}">
+                                <Label Text="{x:Static og:Strings.GamingRecentPlayed}" FontAttributes="Bold" />
+                                <CollectionView ItemsSource="{Binding GamesRecent}" HeightRequest="104">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="og:DApp">
+                                            <Border StyleClass="Card" WidthRequest="96" HeightRequest="96" Padding="8,10">
+                                                <Grid RowDefinitions="48,*" RowSpacing="4">
+                                                    <Image WidthRequest="44" HeightRequest="44" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="1" Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="12" MaxLines="1" LineBreakMode="TailTruncation" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                                </Grid>
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+                                                </Border.GestureRecognizers>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout x:Name="GamesItemsLayout" Orientation="Vertical" Span="1" HorizontalItemSpacing="28" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="og:DApp">
+                            <Grid RowDefinitions="*,1" HeightRequest="96">
+                                <Grid ColumnDefinitions="60,*,40" ColumnSpacing="12" Padding="0,8" MinimumHeightRequest="88">
+                                    <Image WidthRequest="56" HeightRequest="56" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
+                                        </Image.Source>
+                                    </Image>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                                        <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation" MaxLines="1" />
+                                        <HorizontalStackLayout Spacing="6">
+                                            <Label StyleClass="Link" Text="{Binding Developer}" FontSize="11" LineBreakMode="TailTruncation" MaxLines="1" />
+                                            <Label StyleClass="Secondary" Text="·" FontSize="11" />
+                                            <Label StyleClass="Secondary" Text="{Binding GameTypeDisplayName}" FontSize="11" LineBreakMode="TailTruncation" MaxLines="1" />
+                                        </HorizontalStackLayout>
+                                        <Label StyleClass="Secondary" Text="{Binding Description, Converter={StaticResource LocalizerConverter}}" FontSize="11" MaxLines="2" LineBreakMode="TailTruncation" />
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe605;" FontSize="18" Margin="-12" Padding="12" VerticalOptions="Center" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />
+                                </Grid>
+                                <BoxView Grid.Row="1" Margin="72,0,0,0" HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Border StyleClass="Card"
+                        IsVisible="{Binding ShowEmptyState}"
+                        HeightRequest="120"
+                        VerticalOptions="Start">
                     <Grid>
                         <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label.FormattedText>
@@ -75,43 +325,16 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <VerticalStackLayout Spacing="4" IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <VerticalStackLayout Spacing="4"
+                                             IsVisible="{Binding LoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center">
                             <Label Text="{x:Static og:Strings.DefaultEmptyViewMessage}" HorizontalTextAlignment="Center" />
                             <Label StyleClass="Secondary" Text="{x:Static og:Strings.GamingEmptyState}" FontSize="12" HorizontalTextAlignment="Center" />
                         </VerticalStackLayout>
                     </Grid>
                 </Border>
-            </CollectionView.EmptyView>
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout x:Name="GamesItemsLayout" Orientation="Vertical" Span="1" HorizontalItemSpacing="28" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="og:DApp">
-                    <Grid RowDefinitions="*,1" HeightRequest="96">
-                        <Grid ColumnDefinitions="60,*,40" ColumnSpacing="12" Padding="0,8" MinimumHeightRequest="88">
-                            <Image WidthRequest="56" HeightRequest="56" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
-                                <Image.Source>
-                                    <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
-                                </Image.Source>
-                            </Image>
-                            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                                <Label Text="{Binding Name, Converter={StaticResource LocalizerConverter}}" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation" MaxLines="1" />
-                                <HorizontalStackLayout Spacing="6">
-                                    <Label StyleClass="Link" Text="{Binding Developer}" FontSize="11" LineBreakMode="TailTruncation" MaxLines="1" />
-                                    <Label StyleClass="Secondary" Text="·" FontSize="11" />
-                                    <Label StyleClass="Secondary" Text="{Binding GameTypeDisplayName}" FontSize="11" LineBreakMode="TailTruncation" MaxLines="1" />
-                                </HorizontalStackLayout>
-                                <Label StyleClass="Secondary" Text="{Binding Description, Converter={StaticResource LocalizerConverter}}" FontSize="11" MaxLines="2" LineBreakMode="TailTruncation" />
-                            </VerticalStackLayout>
-                            <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe605;" FontSize="18" Margin="-12" Padding="12" VerticalOptions="Center" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />
-                        </Grid>
-                        <BoxView Grid.Row="1" Margin="72,0,0,0" HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{x:Static og:Commands.LaunchDApp}" CommandParameter="{Binding .}" />
-                        </Grid.GestureRecognizers>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </Grid>
+        </Grid>
     </RefreshView>
 </ContentPage>

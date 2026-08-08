@@ -846,6 +846,21 @@
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>最近玩过</value>
   </data>
+  <data name="GamingGallery" xml:space="preserve">
+    <value>画廊</value>
+  </data>
+  <data name="GamingList" xml:space="preserve">
+    <value>列表</value>
+  </data>
+  <data name="GamingQuickPicks" xml:space="preserve">
+    <value>精选速览</value>
+  </data>
+  <data name="GamingAllGames" xml:space="preserve">
+    <value>全部游戏</value>
+  </data>
+  <data name="GamingSpotlight" xml:space="preserve">
+    <value>游戏推荐</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>游戏类型</value>
   </data>

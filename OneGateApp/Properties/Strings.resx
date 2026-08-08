@@ -846,6 +846,21 @@ By continuing, you acknowledge that you fully understand and accept all associat
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Recently played</value>
   </data>
+  <data name="GamingGallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="GamingList" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="GamingQuickPicks" xml:space="preserve">
+    <value>Quick picks</value>
+  </data>
+  <data name="GamingAllGames" xml:space="preserve">
+    <value>All games</value>
+  </data>
+  <data name="GamingSpotlight" xml:space="preserve">
+    <value>Game spotlight</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Game type</value>
   </data>
