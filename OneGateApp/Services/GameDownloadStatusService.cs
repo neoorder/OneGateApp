@@ -1,8 +1,9 @@
+using Microsoft.Extensions.Logging;
 using NeoOrder.OneGate.Data;
 
 namespace NeoOrder.OneGate.Services;
 
-public sealed class GameDownloadStatusService(ApplicationDbContext dbContext)
+public sealed class GameDownloadStatusService(ApplicationDbContext dbContext, ILogger<GameDownloadStatusService> logger)
 {
     const string SettingsKey = "games/download-receipts";
 
@@ -42,7 +43,16 @@ public sealed class GameDownloadStatusService(ApplicationDbContext dbContext)
         downloadingGameIds.Remove(game.Id);
         game.DownloadStatus = GameDownloadStatus.Downloaded;
         if (receiptChanged)
-            await dbContext.Settings.PutAsync(SettingsKey, receipts);
+        {
+            try
+            {
+                await dbContext.Settings.PutAsync(SettingsKey, receipts);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Unable to persist game download receipts");
+            }
+        }
     }
 
     public void ResetDownloading(DApp game)
@@ -58,7 +68,15 @@ public sealed class GameDownloadStatusService(ApplicationDbContext dbContext)
         await initializationLock.WaitAsync();
         try
         {
-            receipts ??= await dbContext.Settings.GetAsync<Dictionary<int, GameDownloadReceipt>>(SettingsKey) ?? [];
+            try
+            {
+                receipts ??= await dbContext.Settings.GetAsync<Dictionary<int, GameDownloadReceipt>>(SettingsKey) ?? [];
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Unable to load game download receipts");
+                receipts ??= [];
+            }
         }
         finally
         {

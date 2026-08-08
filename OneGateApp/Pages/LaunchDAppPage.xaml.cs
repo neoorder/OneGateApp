@@ -268,17 +268,26 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
 
     async void OnNavigated(object sender, WebNavigatedEventArgs e)
     {
-        if (DApp is not { IsGamingApp: true } || !Uri.TryCreate(e.Url, UriKind.Absolute, out var uri))
-            return;
+        if (DApp is not { IsGamingApp: true }) return;
 
-        Uri gameUri = new(DApp.Url);
-        if (uri.Scheme == "about" || IsCrossDomain(gameUri, uri))
-            return;
+        try
+        {
+            if (!Uri.TryCreate(e.Url, UriKind.Absolute, out var uri))
+                return;
 
-        if (e.Result == WebNavigationResult.Success)
-            await gameDownloadStatusService.MarkDownloadedAsync(DApp);
-        else
+            Uri gameUri = new(DApp.Url);
+            if (uri.Scheme == "about" || IsCrossDomain(gameUri, uri))
+                return;
+
+            if (e.Result == WebNavigationResult.Success)
+                await gameDownloadStatusService.MarkDownloadedAsync(DApp);
+            else
+                gameDownloadStatusService.ResetDownloading(DApp);
+        }
+        catch
+        {
             gameDownloadStatusService.ResetDownloading(DApp);
+        }
     }
 
     string CreateDocumentStartScript()
