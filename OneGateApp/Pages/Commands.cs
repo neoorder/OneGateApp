@@ -99,7 +99,11 @@ static class Commands
             {
                 LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
                 page.ApplyQueryAttributes(parameters);
-                Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
+#if MACCATALYST
+                Application.Current.OpenWindow(Platforms.MacCatalyst.DAppWindow.Create(page));
+#else
+                Application.Current.OpenWindow(new Window(new NavigationPage(page)));
+#endif
             }
             else
             {
