@@ -71,6 +71,11 @@ static class Commands
         DApp? dapp = parameter as DApp;
         Uri? uri = parameter as Uri;
         if (dapp is null && uri is null) throw new ArgumentException("Invalid parameter type.");
+        if (dapp is not null && !DAppCatalogPolicy.IsSupportedOnCurrentPlatform(dapp))
+        {
+            await Toast.Show(Strings.DAppUnavailableOnCurrentPlatform);
+            return;
+        }
         uri ??= new($"https://{SharedOptions.OneGateDomain}/app/{dapp!.Id}");
 #if ANDROID
         var activity = Platform.CurrentActivity!;
@@ -99,7 +104,11 @@ static class Commands
             {
                 LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
                 page.ApplyQueryAttributes(parameters);
-                Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
+#if MACCATALYST
+                Application.Current.OpenWindow(Platforms.MacCatalyst.DAppWindow.Create(page));
+#else
+                Application.Current.OpenWindow(new Window(new NavigationPage(page)));
+#endif
             }
             else
             {

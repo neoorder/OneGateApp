@@ -31,6 +31,10 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+#if MACCATALYST
+        Platforms.MacCatalyst.DAppWindow.ConfigureHandler();
+#endif
+
         var builder = MauiApp.CreateBuilder()
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit(ConfigureMauiCommunityToolkit)

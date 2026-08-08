@@ -270,6 +270,9 @@
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>Bu cihazda yakın zamanda açıldı</value>
   </data>
+  <data name="DAppUnavailableOnCurrentPlatform" xml:space="preserve">
+    <value>Bu DApp mevcut platformda kullanılamıyor.</value>
+  </data>
   <data name="DAppTags" xml:space="preserve">
     <value>Etiketler</value>
   </data>

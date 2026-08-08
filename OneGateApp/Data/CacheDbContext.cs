@@ -14,6 +14,7 @@ public partial class CacheDbContext(DbContextOptions<CacheDbContext> options) : 
     {
         await Migration_AddProperty_DApps_Warnings_20260622();
         await Migration_AddProperties_DApps_VisibilityModes_20260717();
+        await Migration_AddProperty_DApps_SupportedPlatforms_20260808();
     }
 
     async Task Migration_AddProperty_DApps_Warnings_20260622()
@@ -48,6 +49,22 @@ public partial class CacheDbContext(DbContextOptions<CacheDbContext> options) : 
             await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [IsHiddenFromCatalog] INTEGER NOT NULL DEFAULT 0");
         if (!actualColumns.Contains(nameof(DApp.IsInDevelopment)))
             await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [IsInDevelopment] INTEGER NOT NULL DEFAULT 0");
+    }
+
+    async Task Migration_AddProperty_DApps_SupportedPlatforms_20260808()
+    {
+        HashSet<string> actualColumns = new(StringComparer.OrdinalIgnoreCase);
+        await Database.OpenConnectionAsync();
+        await using (var command = Database.GetDbConnection().CreateCommand())
+        {
+            command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+                actualColumns.Add(reader.GetString(0));
+        }
+
+        if (!actualColumns.Contains(nameof(DApp.SupportedPlatforms)))
+            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [SupportedPlatforms] INTEGER NOT NULL DEFAULT 15");
     }
 }
 
