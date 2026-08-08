@@ -1255,4 +1255,6 @@ Recomenda-se armazenar a chave NEP-2 e a senha separadamente e fazer backups seg
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Aguardando um depurador remoto confiável</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Parear depurador remoto</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>O depurador remoto “{0}” está solicitando acesso. Impressão digital: {1}. Autorize apenas se confiar neste depurador remoto.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Mudar para o layout de galeria</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Mudar para o layout de lista</value></data>
 </root>

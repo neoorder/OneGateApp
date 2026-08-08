@@ -1255,4 +1255,6 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Wachten op een vertrouwde externe debugger</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Externe debugger koppelen</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Externe debugger ‘{0}’ vraagt toegang. Vingerafdruk: {1}. Autoriseer alleen als je deze externe debugger vertrouwt.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Overschakelen naar galerijweergave</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Overschakelen naar lijstweergave</value></data>
 </root>

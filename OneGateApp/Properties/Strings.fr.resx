@@ -1255,4 +1255,6 @@ Il est recommandé de conserver séparément la clé NEP-2 et le mot de passe, e
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>En attente d’un débogueur distant approuvé</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Associer le débogueur distant</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Le débogueur distant « {0} » demande l’accès. Empreinte : {1}. Autorisez uniquement si vous faites confiance à ce débogueur distant.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Passer à l’affichage en galerie</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Passer à l’affichage en liste</value></data>
 </root>

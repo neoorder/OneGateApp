@@ -73,7 +73,7 @@
                                         <DataTemplate x:DataType="og:DApp">
                                             <Border StyleClass="Card" WidthRequest="112" HeightRequest="120" Padding="0">
                                                 <Grid RowDefinitions="76,44">
-                                                    <Image Margin="14" Aspect="AspectFit">
+                                                    <Image Margin="14" Aspect="AspectFit" ZIndex="1">
                                                         <Image.Source>
                                                             <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
                                                         </Image.Source>
@@ -107,7 +107,7 @@
                                 <Border StyleClass="Card" HeightRequest="208" Padding="0">
                                     <Grid>
                                         <Image Source="gaming_banner.webp" Aspect="AspectFill" />
-                                        <Image Margin="52" Aspect="AspectFit">
+                                        <Image Margin="52" Aspect="AspectFit" ZIndex="1">
                                             <Image.Source>
                                                 <UriImageSource Uri="{Binding SpotlightGame.IconUrl}" CacheValidity="30:00:00:00" />
                                             </Image.Source>
@@ -161,7 +161,7 @@
                                         <DataTemplate x:DataType="og:DApp">
                                             <Border StyleClass="Card" WidthRequest="154" HeightRequest="132" Padding="0">
                                                 <Grid RowDefinitions="88,44">
-                                                    <Image Margin="16" Aspect="AspectFit">
+                                                    <Image Margin="16" Aspect="AspectFit" ZIndex="1">
                                                         <Image.Source>
                                                             <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
                                                         </Image.Source>
@@ -200,7 +200,7 @@
                             <Border StyleClass="Card" HeightRequest="164" Padding="0">
                                 <Grid RowDefinitions="112,52">
                                     <Grid>
-                                        <Image Margin="18" Aspect="AspectFit">
+                                        <Image Margin="18" Aspect="AspectFit" ZIndex="1">
                                             <Image.Source>
                                                 <UriImageSource Uri="{Binding IconUrl}" CacheValidity="30:00:00:00" />
                                             </Image.Source>

@@ -62,7 +62,9 @@ public partial class GamingPage : ContentPage
         }
     } = true;
     public bool IsListLayout => !IsGalleryLayout;
-    public string LayoutToggleDescription => IsGalleryLayout ? Strings.GamingList : Strings.GamingGallery;
+    public string LayoutToggleDescription => IsGalleryLayout
+        ? Strings.GamingSwitchToListLayout
+        : Strings.GamingSwitchToGalleryLayout;
     public bool ShowGalleryLayout => IsGalleryLayout && GamesFiltered.Length > 0;
     public bool ShowListLayout => IsListLayout && GamesFiltered.Length > 0;
     public bool ShowEmptyState => GamesFiltered.Length == 0;

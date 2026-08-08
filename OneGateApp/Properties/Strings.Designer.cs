@@ -1490,6 +1490,24 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Switch to gallery layout 的本地化字符串。
+        /// </summary>
+        internal static string GamingSwitchToGalleryLayout {
+            get {
+                return ResourceManager.GetString("GamingSwitchToGalleryLayout", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Switch to list layout 的本地化字符串。
+        /// </summary>
+        internal static string GamingSwitchToListLayout {
+            get {
+                return ResourceManager.GetString("GamingSwitchToListLayout", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Quick picks 的本地化字符串。
         /// </summary>
         internal static string GamingQuickPicks {
