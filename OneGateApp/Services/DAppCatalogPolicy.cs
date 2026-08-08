@@ -26,8 +26,29 @@ static class DAppCatalogPolicy
 
     public static bool IsDiscoverable(DApp dapp, bool developerModeEnabled)
     {
-        return !dapp.IsHiddenFromCatalog
+        return IsSupportedOnCurrentPlatform(dapp)
+            && !dapp.IsHiddenFromCatalog
             && (!dapp.IsInDevelopment || developerModeEnabled);
+    }
+
+    public static bool IsSupportedOnCurrentPlatform(DApp dapp)
+    {
+        return (dapp.SupportedPlatforms & GetCurrentPlatform()) != 0;
+    }
+
+    static DAppPlatforms GetCurrentPlatform()
+    {
+#if ANDROID
+        return DAppPlatforms.Android;
+#elif IOS
+        return DAppPlatforms.iOS;
+#elif MACCATALYST
+        return DAppPlatforms.MacCatalyst;
+#elif WINDOWS
+        return DAppPlatforms.Windows;
+#else
+        throw new PlatformNotSupportedException();
+#endif
     }
 
     public static bool IsContentAllowed(DApp dapp, bool allowRestrictedContent)

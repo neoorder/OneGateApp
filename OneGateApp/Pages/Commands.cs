@@ -71,6 +71,11 @@ static class Commands
         DApp? dapp = parameter as DApp;
         Uri? uri = parameter as Uri;
         if (dapp is null && uri is null) throw new ArgumentException("Invalid parameter type.");
+        if (dapp is not null && !DAppCatalogPolicy.IsSupportedOnCurrentPlatform(dapp))
+        {
+            await Toast.Show(Strings.DAppUnavailableOnCurrentPlatform);
+            return;
+        }
         uri ??= new($"https://{SharedOptions.OneGateDomain}/app/{dapp!.Id}");
 #if ANDROID
         var activity = Platform.CurrentActivity!;
