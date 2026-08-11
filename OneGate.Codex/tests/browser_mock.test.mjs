@@ -17,6 +17,7 @@ import {
   createDevelopmentIdentity,
   IdentityStore,
   ONEGATE_NETWORK,
+  ONEGATE_RUNTIME_VERSION,
   verifyP256Signature,
 } from "../onegate/skills/onegate-dapp-debug/scripts/runtime/identity.mjs";
 import {
@@ -363,7 +364,7 @@ test("platform launcher accepts an explicit compatible Node runtime", async () =
   assert.equal(result.exitCode, 0, result.stderr);
   const envelope = JSON.parse(result.stdout.trim());
   assert.equal(envelope.ok, true);
-  assert.equal(envelope.result.version, "1.0.2");
+  assert.equal(envelope.result.version, ONEGATE_RUNTIME_VERSION);
 });
 
 test("session approve requires a valid JSON result", async () => {
@@ -618,7 +619,7 @@ test("JSON CLI keeps identity and sessions in an authenticated local daemon", as
     const help = await runCli(["help"], stateDirectory);
     assert.equal(help.exitCode, 0);
     assert.equal(help.payload.ok, true);
-    assert.equal(help.payload.result.version, "1.0.2");
+    assert.equal(help.payload.result.version, ONEGATE_RUNTIME_VERSION);
 
     const first = await runCli(["identity"], stateDirectory);
     const second = await runCli(["identity", "show"], stateDirectory);
@@ -693,6 +694,7 @@ test("bundled reviewer DApp starts through the CLI and signs at document start",
     assert.equal(status.mock, true);
     assert.equal(status.provider.extra.mock, true);
     assert.equal(status.provider.name, "OneGate Codex Plugin");
+    assert.equal(status.provider.version, ONEGATE_RUNTIME_VERSION);
     assert.equal(status.identity.address, identity.payload.result.address);
     assert.equal(status.transactionMode, "offline");
     assert.equal(typeof status.injectionIdentifier, "string");

@@ -1,6 +1,6 @@
 # OneGate Codex Plugin
 
-The installable plugin bundle is in [`onegate`](onegate). Version 1.0.2 is a Skills-only plugin for the official Plugins Directory. It includes a Browser Mock and one remote debugger implementation for OneGate's encrypted DApp debugging interface, plus a guided workflow for submitting public DApp catalog listing requests.
+The installable plugin bundle is in [`onegate`](onegate). It is a Skills-only plugin for the official Plugins Directory and includes a Browser Mock, one remote debugger implementation for OneGate's encrypted DApp debugging interface, and a guided workflow for submitting public DApp catalog listing requests.
 
 The debugging skill invokes a stable JSON CLI through `scripts/onegate.cmd` on Windows or `scripts/onegate.sh` on macOS/Linux. These launchers find Node on `PATH`, through `ONEGATE_NODE`, or in Codex's bundled-runtime cache, so Codex does not depend on a globally configured `node` command. The CLI automatically starts an authenticated loopback-only command daemon that owns browser sessions, debug-target connections, and local identities across separate Codex calls. There is no public MCP endpoint, cloud relay, or fixed remote service.
 
