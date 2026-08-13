@@ -9,27 +9,18 @@ namespace NeoOrder.OneGate.Pages;
 public partial class DisableBiometricPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
-    readonly WalletAuthorizationService authorizationService;
+    readonly WalletAuthorizationService walletAuthorizationService;
 
-    public DisableBiometricPage(ApplicationDbContext dbContext, WalletAuthorizationService authorizationService)
+    public DisableBiometricPage(ApplicationDbContext dbContext, WalletAuthorizationService walletAuthorizationService)
     {
         this.dbContext = dbContext;
-        this.authorizationService = authorizationService;
+        this.walletAuthorizationService = walletAuthorizationService;
         InitializeComponent();
     }
 
     async void OnDisableClicked(object sender, EventArgs e)
     {
-        bool authorized;
-        try
-        {
-            authorized = await authorizationService.RequestAuthorizationAsync(this, Strings.DisableBiometric, Strings.DisableBiometricText);
-        }
-        catch (OperationCanceledException)
-        {
-            return;
-        }
-        if (!authorized) return;
+        if (!await walletAuthorizationService.RequestAuthorizationAsync(this, Strings.DisableBiometric, Strings.DisableBiometricText)) return;
 
         await dbContext.Settings.DeleteAsync("biometric/credential");
         GlobalStates.Invalidate<SettingsPage>();
