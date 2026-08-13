@@ -270,6 +270,9 @@
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>Baru dibuka di perangkat ini</value>
   </data>
+  <data name="DAppUnavailableOnCurrentPlatform" xml:space="preserve">
+    <value>DApp ini tidak tersedia di platform saat ini.</value>
+  </data>
   <data name="DAppTags" xml:space="preserve">
     <value>Tag</value>
   </data>

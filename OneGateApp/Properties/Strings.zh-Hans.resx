@@ -270,6 +270,9 @@
   <data name="DAppRecentlyOpened" xml:space="preserve">
     <value>最近在这台设备上打开过</value>
   </data>
+  <data name="DAppUnavailableOnCurrentPlatform" xml:space="preserve">
+    <value>此 DApp 在当前平台上不可用。</value>
+  </data>
   <data name="DAppTags" xml:space="preserve">
     <value>标签</value>
   </data>

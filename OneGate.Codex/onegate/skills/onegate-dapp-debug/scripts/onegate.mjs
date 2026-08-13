@@ -8,6 +8,7 @@ import {
   sendDaemonCommand,
 } from "./runtime/daemon-client.mjs";
 import { runtimeStateDirectory } from "./runtime/daemon-protocol.mjs";
+import { ONEGATE_RUNTIME_VERSION } from "./runtime/identity.mjs";
 import { renderQrPng } from "./runtime/qr-png.mjs";
 
 const BOOLEAN_OPTIONS = new Set([
@@ -98,7 +99,7 @@ function parseJson(value, name) {
 
 function usage() {
   return {
-    version: "1.0.2",
+    version: ONEGATE_RUNTIME_VERSION,
     commands: [
       "doctor",
       "targets discover",

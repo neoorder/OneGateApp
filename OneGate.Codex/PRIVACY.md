@@ -2,13 +2,13 @@
 
 Effective date: July 18, 2026
 
-This policy applies to version 1.0.2 of the OneGate Codex Plugin published by NEO GLOBAL RESOURCES. It supplements the general OneGate privacy policy for the plugin's local DApp debugging and public listing-request features.
+This policy applies to the OneGate Codex Plugin published by NEO GLOBAL RESOURCES. It supplements the general OneGate privacy policy for the plugin's local DApp debugging and public listing-request features.
 
 The installed OneGate app exposes a remote-debug interface that is not tied to a specific debugger. This policy covers only the remote debugger implementation bundled with the OneGate Codex Plugin; another compatible remote debugger is governed by its own privacy terms.
 
 ## Local operation
 
-The plugin is a Skills-only development tool. Its Browser Mock runtime, development identity, signing operations, browser control, reviewer fixture, debug-target gateway, and diagnostic state run on the user's computer. Version 1.0.2 does not use a OneGate-hosted submission API, analytics service, telemetry endpoint, advertising service, cloud relay, or remote wallet service.
+The plugin is a Skills-only development tool. Its Browser Mock runtime, development identity, signing operations, browser control, reviewer fixture, debug-target gateway, and diagnostic state run on the user's computer. It does not use a OneGate-hosted submission API, analytics service, telemetry endpoint, advertising service, cloud relay, or remote wallet service.
 
 When the user pairs an installed OneGate app through this plugin, the plugin's remote debugger daemon and the OneGate debug target communicate directly over the same local network. Pairing is initiated by a short-lived QR code and the user’s confirmation in OneGate Developer Tools. Later connections use Bonjour/mDNS discovery only to locate a previously trusted remote debugger. The encrypted debug protocol authenticates both peers and does not send traffic through NEO GLOBAL RESOURCES or OneGate servers.
 

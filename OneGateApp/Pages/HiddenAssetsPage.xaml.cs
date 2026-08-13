@@ -25,17 +25,10 @@ public partial class HiddenAssetsPage : ContentPage
         HiddenAssets = new ObservableCollection<ITokenInfo>(hiddens);
     }
 
-    void OnMenuClicked(object sender, EventArgs e)
-    {
-        Button button = (Button)sender;
-        SwipeView swipeView = (SwipeView)button.CommandParameter;
-        swipeView.Open(OpenSwipeItem.RightItems);
-    }
-
     async void OnUnhideClicked(object sender, EventArgs e)
     {
-        SwipeItem swipeItem = (SwipeItem)sender;
-        ITokenInfo token = (ITokenInfo)swipeItem.CommandParameter;
+        Button button = (Button)sender;
+        ITokenInfo token = (ITokenInfo)button.CommandParameter;
         HiddenAssets!.Remove(token);
         await tokenManager.UnhideTokenAsync(token.Hash);
         GlobalStates.Invalidate<SettingsPage>();

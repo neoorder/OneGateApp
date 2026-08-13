@@ -114,6 +114,20 @@ body:
       required: true
 
   - type: dropdown
+    id: supported-platforms
+    attributes:
+      label: Supported OneGate platforms
+      description: Select every OneGate platform where this DApp has been verified and should be listed.
+      multiple: true
+      options:
+        - Android
+        - iOS
+        - macOS (Mac Catalyst)
+        - Windows
+    validations:
+      required: true
+
+  - type: dropdown
     id: supported-networks
     attributes:
       label: Supported networks
