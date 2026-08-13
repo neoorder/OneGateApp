@@ -1,6 +1,10 @@
 import { createHash, randomBytes } from "node:crypto";
 
-import { ONEGATE_NETWORK, verifyP256Signature } from "./identity.mjs";
+import {
+  ONEGATE_NETWORK,
+  ONEGATE_RUNTIME_VERSION,
+  verifyP256Signature,
+} from "./identity.mjs";
 
 export const DapiErrorCode = Object.freeze({
   UNKNOWN: 10000,
@@ -158,7 +162,10 @@ export class DapiEngine {
       profile: {
         id: String(this.profile.id || "default"),
         transactionMode: this.transactionMode,
-        provider: clone(this.profile.provider ?? {}),
+        provider: {
+          ...clone(this.profile.provider ?? {}),
+          version: ONEGATE_RUNTIME_VERSION,
+        },
       },
     };
   }
