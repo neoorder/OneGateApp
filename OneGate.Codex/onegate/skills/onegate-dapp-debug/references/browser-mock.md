@@ -47,6 +47,7 @@ An invalid or corrupt identity file causes a visible error; the plugin does not 
 ## Profile format
 
 Profiles contain public behavior only. Accounts are not configured in a profile because the persistent identity supplies the account.
+The Browser Mock always supplies `provider.version` from the plugin manifest, so profiles do not declare it.
 
 ```json
 {
@@ -54,7 +55,6 @@ Profiles contain public behavior only. Accounts are not configured in a profile 
   "transactionMode": "simulate",
   "provider": {
     "name": "OneGate Codex Plugin",
-    "version": "1.0.2",
     "dapiVersion": "1.0",
     "network": 860833102,
     "supportedNetworks": [860833102]

@@ -30,6 +30,7 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
     public string[]? Previews { get; set; }
     public string? Description { get; set; }
     public ContentWarnings Warnings { get; set; }
+    public DAppPlatforms SupportedPlatforms { get; set; } = DAppPlatforms.All;
     public int Version { get; set; }
 
     public bool IsGamingApp => !string.IsNullOrWhiteSpace(GameType);

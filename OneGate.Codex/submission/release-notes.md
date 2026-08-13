@@ -1,6 +1,6 @@
 # Release notes
 
-## Unreleased
+## OneGate 1.1.0
 
 Real-app DApp debugging workflow.
 
