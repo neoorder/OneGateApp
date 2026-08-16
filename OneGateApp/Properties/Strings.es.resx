@@ -1255,4 +1255,6 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Esperando un depurador remoto de confianza</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Emparejar depurador remoto</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>El depurador remoto «{0}» solicita acceso. Huella: {1}. Autoriza solo si confías en este depurador remoto.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Cambiar al diseño de galería</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Cambiar al diseño de lista</value></data>
 </root>

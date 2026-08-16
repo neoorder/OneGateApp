@@ -1255,4 +1255,6 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Menunggu debugger jarak jauh tepercaya</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Debugger jarak jauh “{0}” meminta akses. Sidik jari: {1}. Izinkan hanya jika Anda memercayai debugger jarak jauh ini.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Beralih ke tata letak galeri</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Beralih ke tata letak daftar</value></data>
 </root>

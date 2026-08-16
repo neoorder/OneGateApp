@@ -849,6 +849,21 @@ By continuing, you acknowledge that you fully understand and accept all associat
   <data name="GamingRecentPlayed" xml:space="preserve">
     <value>Recently played</value>
   </data>
+  <data name="GamingGallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="GamingList" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="GamingQuickPicks" xml:space="preserve">
+    <value>Quick picks</value>
+  </data>
+  <data name="GamingAllGames" xml:space="preserve">
+    <value>All games</value>
+  </data>
+  <data name="GamingSpotlight" xml:space="preserve">
+    <value>Game spotlight</value>
+  </data>
   <data name="GameType" xml:space="preserve">
     <value>Game type</value>
   </data>
@@ -1255,4 +1270,6 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Waiting for a trusted remote debugger</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pair remote debugger</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Remote debugger “{0}” is requesting access. Fingerprint: {1}. Authorize only if you trust this remote debugger.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Switch to gallery layout</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Switch to list layout</value></data>
 </root>

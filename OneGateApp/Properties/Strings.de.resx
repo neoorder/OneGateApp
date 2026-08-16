@@ -1255,4 +1255,6 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Warten auf einen vertrauenswürdigen Remote-Debugger</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Remote-Debugger koppeln</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Remote-Debugger „{0}“ fordert Zugriff an. Fingerabdruck: {1}. Nur autorisieren, wenn du diesem Remote-Debugger vertraust.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Zum Galerie-Layout wechseln</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Zum Listen-Layout wechseln</value></data>
 </root>

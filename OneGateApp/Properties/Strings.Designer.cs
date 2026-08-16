@@ -1472,6 +1472,69 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Gallery 的本地化字符串。
+        /// </summary>
+        internal static string GamingGallery {
+            get {
+                return ResourceManager.GetString("GamingGallery", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 List 的本地化字符串。
+        /// </summary>
+        internal static string GamingList {
+            get {
+                return ResourceManager.GetString("GamingList", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Switch to gallery layout 的本地化字符串。
+        /// </summary>
+        internal static string GamingSwitchToGalleryLayout {
+            get {
+                return ResourceManager.GetString("GamingSwitchToGalleryLayout", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Switch to list layout 的本地化字符串。
+        /// </summary>
+        internal static string GamingSwitchToListLayout {
+            get {
+                return ResourceManager.GetString("GamingSwitchToListLayout", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Quick picks 的本地化字符串。
+        /// </summary>
+        internal static string GamingQuickPicks {
+            get {
+                return ResourceManager.GetString("GamingQuickPicks", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 All games 的本地化字符串。
+        /// </summary>
+        internal static string GamingAllGames {
+            get {
+                return ResourceManager.GetString("GamingAllGames", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Game spotlight 的本地化字符串。
+        /// </summary>
+        internal static string GamingSpotlight {
+            get {
+                return ResourceManager.GetString("GamingSpotlight", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 General 的本地化字符串。
         /// </summary>
         internal static string General {

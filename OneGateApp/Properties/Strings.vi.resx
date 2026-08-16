@@ -1255,4 +1255,6 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Đang chờ trình gỡ lỗi từ xa đáng tin cậy</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Ghép nối trình gỡ lỗi từ xa</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Trình gỡ lỗi từ xa “{0}” đang yêu cầu quyền truy cập. Dấu vân tay: {1}. Chỉ cho phép nếu bạn tin cậy trình gỡ lỗi từ xa này.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Chuyển sang bố cục thư viện</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Chuyển sang bố cục danh sách</value></data>
 </root>

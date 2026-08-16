@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Alerts;
+using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
@@ -9,9 +11,14 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class GamingPage : ContentPage
 {
+    const string LayoutPreferenceKey = "gaming/layout";
+    const string GalleryLayout = "gallery";
+    const string ListLayout = "list";
     const double GameItemMinWidth = 520;
+    const double GalleryItemMinWidth = 112;
     const double HorizontalPageMargin = 40;
     const int MaxGameColumns = 3;
+    const int MaxGalleryColumns = 4;
 
     readonly ApplicationDbContext dbContext;
     bool allowRestrictedContent;
@@ -23,9 +30,46 @@ public partial class GamingPage : ContentPage
     public ObservableCollection<DApp> GamesRecent { get; private set { field = value; OnPropertyChanged(); } } = [];
     public bool HasRecentGames { get; private set { field = value; OnPropertyChanged(); } }
     public DApp[] Games { get; private set { field = value; OnPropertyChanged(); } } = [];
-    public DApp[] GamesFiltered { get; private set { field = value; OnPropertyChanged(); } } = [];
+    public DApp[] GamesFiltered
+    {
+        get;
+        private set
+        {
+            field = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(ShowGalleryLayout));
+            OnPropertyChanged(nameof(ShowListLayout));
+            OnPropertyChanged(nameof(ShowEmptyState));
+        }
+    } = [];
+    public DApp[] GamesQuickPicks { get; private set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasQuickPicks)); } } = [];
+    public bool HasQuickPicks => GamesQuickPicks.Length > 0;
+    public DApp? SpotlightGame { get; private set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasSpotlightGame)); } }
+    public bool HasSpotlightGame => SpotlightGame is not null;
     public string[] GameTypes { get; private set { field = value; OnPropertyChanged(); } } = [Strings.All];
     public bool HasGameTypeFilters { get; private set { field = value; OnPropertyChanged(); } }
+    public bool IsGalleryLayout
+    {
+        get;
+        private set
+        {
+            field = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsListLayout));
+            OnPropertyChanged(nameof(LayoutToggleDescription));
+            OnPropertyChanged(nameof(ShowGalleryLayout));
+            OnPropertyChanged(nameof(ShowListLayout));
+        }
+    } = true;
+    public bool IsListLayout => !IsGalleryLayout;
+    public string LayoutToggleDescription => IsGalleryLayout
+        ? Strings.GamingSwitchToListLayout
+        : Strings.GamingSwitchToGalleryLayout;
+    public bool ShowGalleryLayout => IsGalleryLayout && GamesFiltered.Length > 0;
+    public bool ShowListLayout => IsListLayout && GamesFiltered.Length > 0;
+    public bool ShowEmptyState => GamesFiltered.Length == 0;
+
+    bool layoutPreferenceLoaded;
 
     public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
     {
@@ -54,6 +98,7 @@ public partial class GamingPage : ContentPage
     {
         base.OnSizeAllocated(width, height);
         UpdateGamesItemsLayout(width);
+        UpdateGalleryItemsLayout(width);
     }
 
     async Task LoadSettingsAsync()
@@ -61,6 +106,8 @@ public partial class GamingPage : ContentPage
         allowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
         developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
         GamesIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+        IsGalleryLayout = !string.Equals(await dbContext.Settings.GetAsync(LayoutPreferenceKey), ListLayout, StringComparison.OrdinalIgnoreCase);
+        layoutPreferenceLoaded = true;
     }
 
     async Task LoadDAppsAsync()
@@ -80,6 +127,15 @@ public partial class GamingPage : ContentPage
         var span = Math.Clamp((int)(contentWidth / GameItemMinWidth), 1, MaxGameColumns);
         if (GamesItemsLayout.Span != span)
             GamesItemsLayout.Span = span;
+    }
+
+    void UpdateGalleryItemsLayout(double pageWidth)
+    {
+        if (pageWidth <= 0) return;
+        var contentWidth = Math.Max(0, pageWidth - HorizontalPageMargin);
+        var span = Math.Clamp((int)(contentWidth / GalleryItemMinWidth), 2, MaxGalleryColumns);
+        if (GalleryItemsLayout.Span != span)
+            GalleryItemsLayout.Span = span;
     }
 
     void OnDataLoaded(object? sender, EventArgs e)
@@ -110,11 +166,23 @@ public partial class GamingPage : ContentPage
         HasRecentGames = GamesRecent.Count > 0;
     }
 
+    void UpdateGallerySections()
+    {
+        SpotlightGame = GamesFiltered
+            .FirstOrDefault(p => p.Previews?.Any(url => !string.IsNullOrWhiteSpace(url)) == true)
+            ?? GamesFiltered.FirstOrDefault();
+        GamesQuickPicks = GamesFiltered
+            .Where(p => !ReferenceEquals(p, SpotlightGame))
+            .Take(6)
+            .ToArray();
+    }
+
     void ApplyGameTypeFilter(TabBar tabBar)
     {
         if (tabBar.Tabs is not { Count: > 0 } tabs)
         {
             GamesFiltered = Games;
+            UpdateGallerySections();
             return;
         }
 
@@ -127,12 +195,32 @@ public partial class GamingPage : ContentPage
         if (tabBar.SelectedTab == tabs[0])
         {
             GamesFiltered = Games;
+            UpdateGallerySections();
             return;
         }
 
         GamesFiltered = Games
             .Where(p => string.Equals(p.GameTypeDisplayName, tabBar.SelectedTab, StringComparison.CurrentCulture))
             .ToArray();
+        UpdateGallerySections();
+    }
+
+    async void OnLayoutToggleClicked(object sender, EventArgs e)
+    {
+        if (!layoutPreferenceLoaded)
+            return;
+
+        bool previousLayout = IsGalleryLayout;
+        IsGalleryLayout = !previousLayout;
+        try
+        {
+            await dbContext.Settings.PutAsync(LayoutPreferenceKey, IsGalleryLayout ? GalleryLayout : ListLayout);
+        }
+        catch (Exception ex)
+        {
+            IsGalleryLayout = previousLayout;
+            await Toast.Show(ex.Message);
+        }
     }
 
     async void OnDetailsClicked(object sender, EventArgs e)
