@@ -24,6 +24,7 @@
         <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe68b;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" IsEnabled="{Binding DApp.IsActive}" Command="{x:Static og:Commands.Share}" CommandParameter="{Binding DApp}" />
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.Reload}" Clicked="OnReloadClicked" />
         <ToolbarItem x:Name="developerToolsButton" Order="Secondary" Text="{x:Static og:Strings.DAppDebugPanel}" Clicked="OnDeveloperToolsClicked" />
+        <ToolbarItem x:Name="feedbackButton" Order="Secondary" Text="{x:Static og:Strings.Feedback}" Clicked="OnFeedbackClicked" />
         <ToolbarItem x:Name="reportButton" Order="Secondary" Text="{x:Static og:Strings.Report}" Clicked="OnReportClicked" />
     </ContentPage.ToolbarItems>
     <og:BridgeWebView x:Name="webView" Source="{Binding Url}" Navigating="OnNavigating" InvokedFromJavaScript="OnInvokedFromJavaScript" />

@@ -1034,6 +1034,39 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="ReportReasonOther" xml:space="preserve">
     <value>기타</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>피드백</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>이 DApp에 대한 제안이나 문제를 알려 주세요. 답변을 원하는 경우에만 이메일 주소를 입력하세요.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>피드백 유형</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>피드백 내용</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>이메일(선택 사항)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>피드백을 제출했습니다</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>현재 피드백을 제출할 수 없습니다. 나중에 다시 시도하세요.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>피드백을 제출할 수 없습니다. 다시 시도하세요.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>제안</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>문제</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>기타</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>사용 가능</value>
   </data>

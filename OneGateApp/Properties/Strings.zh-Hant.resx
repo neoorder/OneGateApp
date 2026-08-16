@@ -1034,6 +1034,39 @@
   <data name="ReportReasonOther" xml:space="preserve">
     <value>其他</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>回饋</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>請分享您對這個 DApp 的建議，或說明遇到的問題。僅在希望我們後續聯絡時填寫電子郵件。</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>回饋類型</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>回饋內容</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>電子郵件（選填）</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>回饋已提交</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>暫時無法提交回饋，請稍後再試。</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>無法提交回饋，請稍後再試。</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>建議</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>問題</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>其他</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>可用</value>
   </data>

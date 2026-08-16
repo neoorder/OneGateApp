@@ -1034,6 +1034,39 @@
   <data name="ReportReasonOther" xml:space="preserve">
     <value>Другое</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Обратная связь</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>Поделитесь предложением или опишите проблему с этим DApp. Укажите адрес электронной почты, только если хотите получить ответ.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>Тип обратной связи</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>Подробности</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>Электронная почта (необязательно)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>Отзыв отправлен</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>Сейчас отправить отзыв невозможно. Повторите попытку позже.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>Не удалось отправить отзыв. Повторите попытку.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>Предложение</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>Проблема</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>Другое</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Доступно</value>
   </data>

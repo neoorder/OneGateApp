@@ -1034,6 +1034,39 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="ReportReasonOther" xml:space="preserve">
     <value>Lainnya</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Masukan</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>Bagikan saran atau jelaskan masalah pada DApp ini. Tambahkan email hanya jika Anda ingin kami menghubungi Anda.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>Jenis masukan</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>Detail masukan</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>Email (opsional)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>Masukan terkirim</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>Masukan tidak dapat dikirim saat ini. Silakan coba lagi nanti.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>Tidak dapat mengirim masukan. Silakan coba lagi.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>Saran</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>Masalah</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>Lainnya</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Tersedia</value>
   </data>

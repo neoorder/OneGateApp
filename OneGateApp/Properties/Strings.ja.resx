@@ -1034,6 +1034,39 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="ReportReasonOther" xml:space="preserve">
     <value>その他</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>フィードバック</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>この DApp への提案や問題点をお知らせください。返信を希望する場合のみメールアドレスを入力してください。</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>フィードバックの種類</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>フィードバックの詳細</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>メールアドレス（任意）</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>フィードバックを送信しました</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>現在フィードバックを送信できません。しばらくしてからもう一度お試しください。</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>フィードバックを送信できません。もう一度お試しください。</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>提案</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>問題</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>その他</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>利用可能</value>
   </data>

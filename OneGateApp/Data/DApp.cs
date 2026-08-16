@@ -38,6 +38,7 @@ public class DApp : IComparable<DApp>, IShareable, IVersioned
     public string? GameTypeDisplayName => LocalizeGameType(GameType);
     public Dictionary<string, string> NameLocalizer => field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Name)!;
     public Dictionary<string, string>? DescriptionLocalizer => Description is null ? null : field ??= JsonSerializer.Deserialize<Dictionary<string, string>>(Description);
+    public bool CanFeedback => IsActive && Id > 0;
     public bool CanReport => IsActive && Id > 0;
     string IShareable.Text => string.Format(Strings.ShareAppText, NameLocalizer.Localize());
     string IShareable.Uri => $"https://{SharedOptions.OneGateDomain}/app/{Id}";

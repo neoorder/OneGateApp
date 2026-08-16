@@ -1034,6 +1034,39 @@ Es wird empfohlen, den NEP-2-Schlüssel und das Passwort getrennt aufzubewahren 
   <data name="ReportReasonOther" xml:space="preserve">
     <value>Sonstiges</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>Teilen Sie Vorschläge mit oder beschreiben Sie ein Problem mit dieser DApp. Geben Sie Ihre E-Mail-Adresse nur an, wenn wir Sie kontaktieren dürfen.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>Feedbacktyp</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>Feedbackdetails</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>E-Mail (optional)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>Feedback gesendet</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>Feedback kann derzeit nicht gesendet werden. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>Feedback konnte nicht gesendet werden. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>Vorschlag</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>Problem</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Verfügbar</value>
   </data>

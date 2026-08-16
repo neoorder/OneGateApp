@@ -1034,6 +1034,39 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="ReportReasonOther" xml:space="preserve">
     <value>Khác</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Phản hồi</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>Chia sẻ đề xuất hoặc mô tả vấn đề với DApp này. Chỉ thêm email nếu bạn muốn chúng tôi liên hệ lại.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>Loại phản hồi</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>Chi tiết phản hồi</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>Email (không bắt buộc)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>Đã gửi phản hồi</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>Hiện không thể gửi phản hồi. Vui lòng thử lại sau.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>Không thể gửi phản hồi. Vui lòng thử lại.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>Đề xuất</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>Vấn đề</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>Khác</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Khả dụng</value>
   </data>

@@ -43,6 +43,7 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
             .Distinct(StringComparer.CurrentCultureIgnoreCase));
         HasTags = !string.IsNullOrWhiteSpace(TagsDisplay);
 
+        if (!dapp.CanFeedback) ToolbarItems.Remove(feedbackButton);
         if (!dapp.CanReport) ToolbarItems.Remove(reportButton);
         List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
         IsFavorite = favorites?.Contains(dapp.Id) ?? false;
@@ -55,6 +56,15 @@ public partial class DAppDetailsPage : ContentPage, IQueryAttributable
     void OnFavoriteClicked(object sender, EventArgs e)
     {
         IsFavorite = !IsFavorite;
+    }
+
+    async void OnFeedbackClicked(object sender, EventArgs e)
+    {
+        DApp dapp = (DApp)BindingContext;
+        if (!dapp.CanFeedback) return;
+        var popup = serviceProvider.GetServiceOrCreateInstance<DAppFeedbackPopup>();
+        popup.DApp = dapp;
+        await this.ShowPopupAsync<bool>(popup);
     }
 
     async void OnReportClicked(object sender, EventArgs e)

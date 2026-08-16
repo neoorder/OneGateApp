@@ -1034,6 +1034,39 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="ReportReasonOther" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>Share suggestions or describe a problem with this DApp. Add your email only if you would like us to follow up.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>Feedback type</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>Feedback details</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>Email (optional)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>Feedback submitted</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>Feedback cannot be submitted right now. Please try again later.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>Unable to submit feedback. Please try again.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>Suggestion</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>Problem</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Available</value>
   </data>

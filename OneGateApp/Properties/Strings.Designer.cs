@@ -1018,6 +1018,105 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   查找类似 Feedback 的本地化字符串。
+        /// </summary>
+        internal static string Feedback {
+            get {
+                return ResourceManager.GetString("Feedback", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Share suggestions or describe a problem with this DApp. Add your email only if you would like us to follow up. 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackDAppText {
+            get {
+                return ResourceManager.GetString("FeedbackDAppText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Feedback type 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackType {
+            get {
+                return ResourceManager.GetString("FeedbackType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Feedback details 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackMessage {
+            get {
+                return ResourceManager.GetString("FeedbackMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Email (optional) 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackEmail {
+            get {
+                return ResourceManager.GetString("FeedbackEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Feedback submitted 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackSubmitted {
+            get {
+                return ResourceManager.GetString("FeedbackSubmitted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Feedback cannot be submitted right now. Please try again later. 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackRetryLater {
+            get {
+                return ResourceManager.GetString("FeedbackRetryLater", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Unable to submit feedback. Please try again. 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackFailed {
+            get {
+                return ResourceManager.GetString("FeedbackFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Suggestion 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackTypeSuggestion {
+            get {
+                return ResourceManager.GetString("FeedbackTypeSuggestion", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Problem 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackTypeProblem {
+            get {
+                return ResourceManager.GetString("FeedbackTypeProblem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Other 的本地化字符串。
+        /// </summary>
+        internal static string FeedbackTypeOther {
+            get {
+                return ResourceManager.GetString("FeedbackTypeOther", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 {0} do not match 的本地化字符串。
         /// </summary>
         internal static string DefaultCompareErrorMessage {

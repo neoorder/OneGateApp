@@ -1034,6 +1034,39 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="ReportReasonOther" xml:space="preserve">
     <value>Diğer</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Geri bildirim</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>Bu DApp hakkındaki önerilerinizi paylaşın veya bir sorunu açıklayın. Yalnızca size geri dönmemizi istiyorsanız e-posta adresinizi ekleyin.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>Geri bildirim türü</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>Geri bildirim ayrıntıları</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>E-posta (isteğe bağlı)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>Geri bildirim gönderildi</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>Geri bildirim şu anda gönderilemiyor. Lütfen daha sonra tekrar deneyin.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>Geri bildirim gönderilemedi. Lütfen tekrar deneyin.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>Öneri</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>Sorun</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>Diğer</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Kullanılabilir</value>
   </data>

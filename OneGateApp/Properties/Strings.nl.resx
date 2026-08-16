@@ -1034,6 +1034,39 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="ReportReasonOther" xml:space="preserve">
     <value>Overig</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="FeedbackDAppText" xml:space="preserve">
+    <value>Deel suggesties of beschrijf een probleem met deze DApp. Voeg alleen je e-mailadres toe als je wilt dat we contact opnemen.</value>
+  </data>
+  <data name="FeedbackType" xml:space="preserve">
+    <value>Type feedback</value>
+  </data>
+  <data name="FeedbackMessage" xml:space="preserve">
+    <value>Details van feedback</value>
+  </data>
+  <data name="FeedbackEmail" xml:space="preserve">
+    <value>E-mail (optioneel)</value>
+  </data>
+  <data name="FeedbackSubmitted" xml:space="preserve">
+    <value>Feedback verzonden</value>
+  </data>
+  <data name="FeedbackRetryLater" xml:space="preserve">
+    <value>Feedback kan momenteel niet worden verzonden. Probeer het later opnieuw.</value>
+  </data>
+  <data name="FeedbackFailed" xml:space="preserve">
+    <value>Kan feedback niet verzenden. Probeer het opnieuw.</value>
+  </data>
+  <data name="FeedbackTypeSuggestion" xml:space="preserve">
+    <value>Suggestie</value>
+  </data>
+  <data name="FeedbackTypeProblem" xml:space="preserve">
+    <value>Probleem</value>
+  </data>
+  <data name="FeedbackTypeOther" xml:space="preserve">
+    <value>Overig</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Beschikbaar</value>
   </data>
