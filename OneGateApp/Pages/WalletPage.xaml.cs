@@ -13,6 +13,7 @@ public partial class WalletPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
     readonly TokenManager tokenManager;
+    readonly TransactionHistoryDataSource transactionHistoryDataSource;
 
     public LoadingService LoadingService { get; set { field = value; OnPropertyChanged(); } }
     public Wallet Wallet { get; set { field = value; OnPropertyChanged(); } }
@@ -23,11 +24,12 @@ public partial class WalletPage : ContentPage
     public IReadOnlyList<NFT>? NFTs { get; set { field = value; OnPropertyChanged(); } }
     public string TotalValuation { get; set { field = value; OnPropertyChanged(); } } = "N/A";
 
-    public WalletPage(ApplicationDbContext dbContext, IWalletProvider walletProvider, TokenManager tokenManager)
+    public WalletPage(ApplicationDbContext dbContext, IWalletProvider walletProvider, TokenManager tokenManager, TransactionHistoryDataSource transactionHistoryDataSource)
     {
         this.LoadingService = new(RefreshWallet, LoadAssetsAsync, LoadNFTsAsync);
         this.dbContext = dbContext;
         this.tokenManager = tokenManager;
+        this.transactionHistoryDataSource = transactionHistoryDataSource;
         Wallet = walletProvider.GetWallet()!;
         ShowBalance = dbContext.Settings.Get<bool>("wallet/showBalance");
         InitializeComponent();
@@ -37,6 +39,7 @@ public partial class WalletPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        transactionHistoryDataSource.PrefetchTransfers(ScriptHash.ToString(), DefaultAccount.Address);
         if (this.ShouldRefresh())
             LoadingService.BeginLoad();
     }
