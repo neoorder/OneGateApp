@@ -79,7 +79,7 @@ public partial class HomePage : ContentPage
 
     async Task LoadBannersAsync()
     {
-        await Banners.LoadAsync("/api/banners", TimeSpan.FromDays(1));
+        await Banners.LoadAsync("/api/banners", TimeSpan.FromDays(1), forceRefresh: LoadingService.IsReloading);
     }
 
     async Task LoadNewsAsync()
@@ -88,6 +88,6 @@ public partial class HomePage : ContentPage
         string[]? excluded = await dbContext.Settings.GetAsync<string[]>("news/categories/excluded");
         if (excluded?.Length > 0)
             url += "?" + string.Join('&', excluded.Select(p => "x=" + WebUtility.UrlEncode(p)));
-        await News.LoadAsync(url, TimeSpan.FromMinutes(15));
+        await News.LoadAsync(url, TimeSpan.FromMinutes(15), forceRefresh: LoadingService.IsReloading);
     }
 }

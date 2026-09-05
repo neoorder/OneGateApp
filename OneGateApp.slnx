@@ -6,4 +6,6 @@
   <Project Path="OneGate.DebugProtocol/OneGate.DebugProtocol.csproj" />
   <Project Path="OneGate.DebugProtocol.Tests/OneGate.DebugProtocol.Tests.csproj" />
   <Project Path="OneGate.Tools/OneGate.Tools.csproj" />
+  <Project Path="tests/p2-08/RefreshIntent.Tests.csproj" />
+  <Project Path="tests/p2-08-cache/ForcedRefresh.Tests.csproj" />
 </Solution>

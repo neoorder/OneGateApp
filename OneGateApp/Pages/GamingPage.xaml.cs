@@ -65,7 +65,7 @@ public partial class GamingPage : ContentPage
 
     async Task LoadDAppsAsync()
     {
-        await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
+        await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1), forceRefresh: LoadingService.IsReloading);
     }
 
     void OnGameTypeChanged(object sender, EventArgs e)

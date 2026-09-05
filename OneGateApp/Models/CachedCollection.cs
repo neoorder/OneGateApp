@@ -46,7 +46,7 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
         return ~low;
     }
 
-    public async Task LoadAsync(string url, TimeSpan duration)
+    public async Task LoadAsync(string url, TimeSpan duration, bool forceRefresh = false)
     {
         await sync_lock.WaitAsync();
         try
@@ -65,7 +65,7 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
                     && Count > 0
                     && !await dbContext.Set<T>().AnyAsync();
                 var last_update = await dbContext.Settings.GetAsync<DateTimeOffset>(settings_key);
-                if (last_update > DateTimeOffset.UtcNow - duration) return;
+                if (!forceRefresh && last_update > DateTimeOffset.UtcNow - duration) return;
                 var items_new = (await httpClient.GetFromJsonAsync<T[]>(url))!;
                 for (int i = Count - 1; i >= 0; i--)
                 {
