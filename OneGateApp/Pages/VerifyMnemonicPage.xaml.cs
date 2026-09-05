@@ -7,6 +7,7 @@ public partial class VerifyMnemonicPage : ContentPage
 {
     readonly IServiceProvider serviceProvider;
     readonly IScreenSecurity screenSecurity;
+    readonly List<Button> selectedWords = [];
 
     public bool ShowSkip { get; set { field = value; OnPropertyChanged(); } }
 
@@ -34,20 +35,16 @@ public partial class VerifyMnemonicPage : ContentPage
     void Word_Clicked(object sender, EventArgs e)
     {
         Button button = (Button)sender;
-        if (button.Opacity < 0.5)
+        if (selectedWords.Remove(button))
         {
-            int index = editorMnemonic.Text.LastIndexOf(button.Text);
-            editorMnemonic.Text = editorMnemonic.Text.Remove(index, 1).Replace("  ", " ").Trim();
             button.Opacity = 1.0;
         }
         else
         {
-            if (string.IsNullOrWhiteSpace(editorMnemonic.Text))
-                editorMnemonic.Text = button.Text;
-            else
-                editorMnemonic.Text += " " + button.Text;
+            selectedWords.Add(button);
             button.Opacity = 0.1;
         }
+        editorMnemonic.Text = string.Join(" ", selectedWords.Select(word => word.Text));
     }
 
     void OnKonamiCodeEntered(object sender, EventArgs e)
