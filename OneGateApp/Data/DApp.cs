@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace NeoOrder.OneGate.Data;
 
-public class DApp : IComparable<DApp>, IShareable, IVersioned
+public class DApp : IComparable<DApp>, IShareable, IVersioned, ICachedEntity
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }

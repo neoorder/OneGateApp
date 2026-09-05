@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NeoOrder.OneGate.Data;
 
-public class News : IComparable<News>, IShareable
+public class News : IComparable<News>, IShareable, ICachedEntity
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
@@ -51,6 +51,7 @@ public class News : IComparable<News>, IShareable
     int IComparable<News>.CompareTo(News? other)
     {
         if (other is null) return 1;
-        return -PublishDate.CompareTo(other.PublishDate);
+        int comparison = -PublishDate.CompareTo(other.PublishDate);
+        return comparison != 0 ? comparison : Id.CompareTo(other.Id);
     }
 }

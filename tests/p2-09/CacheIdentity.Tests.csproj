@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <IsTestProject>true</IsTestProject><IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.3" />
+    <Compile Include="../../OneGateApp/Models/CachedCollection.cs" Link="CachedCollection.cs" />
+    <Compile Include="../../OneGateApp/Models/ICachedEntity.cs" Link="ICachedEntity.cs" />
+    <Compile Include="../../OneGateApp/Models/IVersioned.cs" Link="IVersioned.cs" />
+    <Compile Include="../../OneGateApp/Models/IShareable.cs" Link="IShareable.cs" />
+    <Compile Include="../../OneGateApp/Data/News.cs" Link="News.cs" />
+    <Compile Include="../../OneGateApp/Data/Banner.cs" Link="Banner.cs" />
+    <Compile Include="../../OneGateApp/Data/Setting.cs" Link="Setting.cs" />
+    <Compile Include="../../OneGateApp/Data/SettingsExtensions.cs" Link="SettingsExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- App relationship only; linked-source tests run without MAUI workloads. -->
+    <ProjectReference Include="../../OneGateApp/OneGateApp.csproj"
+                      ReferenceOutputAssembly="false" BuildReference="false"
+                      SkipGetTargetFrameworkProperties="true" />
+  </ItemGroup>
+</Project>

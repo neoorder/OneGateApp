@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NeoOrder.OneGate.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NeoOrder.OneGate.Data;
 
-public class Banner : IComparable<Banner>
+public class Banner : IComparable<Banner>, ICachedEntity
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }

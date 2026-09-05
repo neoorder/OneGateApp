@@ -5,7 +5,7 @@ using System.Net.Http.Json;
 
 namespace NeoOrder.OneGate.Models;
 
-public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFactory, HttpClient httpClient) : ObservableCollection<T> where T : class, IComparable<T>
+public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFactory, HttpClient httpClient) : ObservableCollection<T> where T : class, IComparable<T>, ICachedEntity
 {
     public event EventHandler? CollectionLoaded;
 
@@ -15,11 +15,19 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
 
     public new void Add(T item)
     {
+        for (int i = 0; i < Count; i++)
+        {
+            if (base[i].Id != item.Id) continue;
+            if (base[i].CompareTo(item) == 0)
+            {
+                base.SetItem(i, item);
+                return;
+            }
+            base.RemoveItem(i);
+            break;
+        }
         int index = BinarySearch(item);
-        if (index < 0)
-            base.InsertItem(~index, item);
-        else
-            base.SetItem(index, item);
+        base.InsertItem(index < 0 ? ~index : index, item);
     }
 
     public void AddRange(IEnumerable<T> items)
@@ -67,28 +75,29 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
                 var last_update = await dbContext.Settings.GetAsync<DateTimeOffset>(settings_key);
                 if (last_update > DateTimeOffset.UtcNow - duration) return;
                 var items_new = (await httpClient.GetFromJsonAsync<T[]>(url))!;
+                var incomingById = items_new.ToDictionary(p => p.Id);
+                var currentById = this.ToDictionary(p => p.Id);
                 for (int i = Count - 1; i >= 0; i--)
                 {
                     T item = base[i];
-                    if (items_new.Any(p => p.CompareTo(item) == 0)) continue;
+                    if (incomingById.ContainsKey(item.Id)) continue;
                     base.RemoveItem(i);
                     if (!cacheNeedsSeeding)
                         dbContext.Entry(item).State = EntityState.Deleted;
                 }
                 foreach (T item in items_new)
                 {
-                    int index = BinarySearch(item);
-                    if (index >= 0)
+                    if (currentById.TryGetValue(item.Id, out T? current))
                     {
-                        if (cacheNeedsSeeding || ShouldReplace(base[index], item))
+                        if (cacheNeedsSeeding || ShouldReplace(current, item))
                         {
-                            base.SetItem(index, item);
+                            Add(item);
                             dbContext.Entry(item).State = cacheNeedsSeeding ? EntityState.Added : EntityState.Modified;
                         }
                     }
                     else
                     {
-                        base.InsertItem(~index, item);
+                        Add(item);
                         dbContext.Entry(item).State = EntityState.Added;
                     }
                 }
@@ -106,8 +115,8 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
 
     static bool ShouldReplace(T current, T incoming)
     {
-        return current is IVersioned currentVersioned
-            && incoming is IVersioned incomingVersioned
-            && currentVersioned.Version != incomingVersioned.Version;
+        return current is not IVersioned currentVersioned
+            || incoming is not IVersioned incomingVersioned
+            || currentVersioned.Version != incomingVersioned.Version;
     }
 }
