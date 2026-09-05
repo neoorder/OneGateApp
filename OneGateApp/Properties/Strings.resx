@@ -1288,4 +1288,19 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Waiting for a trusted remote debugger</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pair remote debugger</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Remote debugger “{0}” is requesting access. Fingerprint: {1}. Authorize only if you trust this remote debugger.</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>WebView update required</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>Your device’s WebView is missing a feature needed to connect this dApp to OneGate. Update WebView or Chrome, then restart OneGate.</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>Update WebView</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>Close dApp</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Open Google Play or your device’s app store and update your WebView provider (Android System WebView or Chrome), then restart OneGate.</value>
+  </data>
 </root>

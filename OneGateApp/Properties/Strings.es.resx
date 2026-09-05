@@ -1288,4 +1288,19 @@ Se recomienda almacenar la clave NEP-2 y la contraseña por separado y realizar 
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Esperando un depurador remoto de confianza</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Emparejar depurador remoto</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>El depurador remoto «{0}» solicita acceso. Huella: {1}. Autoriza solo si confías en este depurador remoto.</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>Es necesario actualizar WebView</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>El WebView de tu dispositivo no tiene una función necesaria para conectar esta dApp a OneGate. Actualiza WebView o Chrome y reinicia OneGate.</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>Actualizar WebView</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>Cerrar dApp</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Abre Google Play o la tienda de aplicaciones de tu dispositivo, actualiza el proveedor de WebView (Android System WebView o Chrome) y reinicia OneGate.</value>
+  </data>
 </root>

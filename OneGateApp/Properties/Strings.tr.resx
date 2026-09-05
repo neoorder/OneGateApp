@@ -1288,4 +1288,19 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Güvenilir bir uzaktan hata ayıklayıcı bekleniyor</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Uzaktan hata ayıklayıcıyı eşleştir</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>“{0}” uzaktan hata ayıklayıcısı erişim istiyor. Parmak izi: {1}. Yalnızca bu uzaktan hata ayıklayıcıya güveniyorsanız izin verin.</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>WebView güncellemesi gerekli</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>Cihazınızın WebView bileşeninde bu dApp'i OneGate'e bağlamak için gereken bir özellik eksik. WebView veya Chrome'u güncelleyin, ardından OneGate'i yeniden başlatın.</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>WebView'i güncelle</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>dApp'i kapat</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Google Play'i veya cihazınızın uygulama mağazasını açın, WebView sağlayıcısını (Android System WebView veya Chrome) güncelleyin, ardından OneGate'i yeniden başlatın.</value>
+  </data>
 </root>

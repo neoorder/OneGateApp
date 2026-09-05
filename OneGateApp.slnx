@@ -6,4 +6,5 @@
   <Project Path="OneGate.DebugProtocol/OneGate.DebugProtocol.csproj" />
   <Project Path="OneGate.DebugProtocol.Tests/OneGate.DebugProtocol.Tests.csproj" />
   <Project Path="OneGate.Tools/OneGate.Tools.csproj" />
+  <Project Path="tests/p2-16/OneGate.WebViewSupport.Tests.csproj" />
 </Solution>

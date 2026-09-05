@@ -50,6 +50,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
         this.rpcClient = rpcClient;
         IsDeveloperToolsEnabled = dbContext.Settings.Get<bool>(DAppCatalogPolicy.DeveloperModeKey);
         InitializeComponent();
+#if ANDROID
+        if (ShowWebViewUpdatePageIfRequired()) return;
+#endif
         webView.DocumentStartScript = CreateDocumentStartScript();
         if (!homeShortcutService.IsSupported)
             ToolbarItems.Remove(addToHomeScreenButton);
@@ -159,6 +162,9 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+#if ANDROID
+        if (androidWebViewLaunchSupport?.CanLaunchDApp == false) return;
+#endif
         if (query.TryGetValue("dapp", out var value))
         {
             DApp = (DApp)value;

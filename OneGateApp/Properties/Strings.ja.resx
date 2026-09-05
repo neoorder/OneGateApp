@@ -1288,4 +1288,19 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>信頼済みリモートデバッガーを待機中</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>リモートデバッガーをペアリング</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>リモートデバッガー「{0}」がアクセスを要求しています。フィンガープリント: {1}。このリモートデバッガーを信頼する場合のみ許可してください。</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>WebView の更新が必要です</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>この端末の WebView には、この dApp を OneGate に接続するための機能がありません。WebView または Chrome を更新してから、OneGate を再起動してください。</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>WebView を更新</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>dApp を閉じる</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Google Play または端末のアプリストアを開き、WebView プロバイダ（Android System WebView または Chrome）を更新してから、OneGate を再起動してください。</value>
+  </data>
 </root>

@@ -1288,4 +1288,19 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>In attesa di un debugger remoto attendibile</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Associa debugger remoto</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Il debugger remoto “{0}” richiede l’accesso. Impronta: {1}. Autorizza solo se ritieni attendibile questo debugger remoto.</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>Aggiornamento WebView necessario</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>Il WebView del dispositivo non dispone di una funzione necessaria per collegare questa dApp a OneGate. Aggiorna WebView o Chrome, quindi riavvia OneGate.</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>Aggiorna WebView</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>Chiudi dApp</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Apri Google Play o lo store del dispositivo, aggiorna il provider WebView (Android System WebView o Chrome), quindi riavvia OneGate.</value>
+  </data>
 </root>

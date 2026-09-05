@@ -1288,4 +1288,19 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Wachten op een vertrouwde externe debugger</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Externe debugger koppelen</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Externe debugger ‘{0}’ vraagt toegang. Vingerafdruk: {1}. Autoriseer alleen als je deze externe debugger vertrouwt.</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>WebView-update vereist</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>De WebView op je apparaat mist een functie die nodig is om deze dApp met OneGate te verbinden. Werk WebView of Chrome bij en start OneGate opnieuw.</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>WebView bijwerken</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>dApp sluiten</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Open Google Play of de appwinkel van je apparaat, werk de WebView-provider (Android System WebView of Chrome) bij en start OneGate opnieuw.</value>
+  </data>
 </root>

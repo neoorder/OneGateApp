@@ -1288,4 +1288,19 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Menunggu debugger jarak jauh tepercaya</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Debugger jarak jauh “{0}” meminta akses. Sidik jari: {1}. Izinkan hanya jika Anda memercayai debugger jarak jauh ini.</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>WebView perlu diperbarui</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>WebView perangkat Anda belum memiliki fitur yang diperlukan untuk menghubungkan dApp ini ke OneGate. Perbarui WebView atau Chrome, lalu mulai ulang OneGate.</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>Perbarui WebView</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>Tutup dApp</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Buka Google Play atau toko aplikasi perangkat Anda, perbarui penyedia WebView (Android System WebView atau Chrome), lalu mulai ulang OneGate.</value>
+  </data>
 </root>

@@ -259,6 +259,51 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to WebView update required.
+        /// </summary>
+        internal static string WebViewUpdateRequired {
+            get {
+                return ResourceManager.GetString("WebViewUpdateRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up localized guidance for updating the device's WebView.
+        /// </summary>
+        internal static string WebViewUpdateRequiredText {
+            get {
+                return ResourceManager.GetString("WebViewUpdateRequiredText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Update WebView.
+        /// </summary>
+        internal static string UpdateWebView {
+            get {
+                return ResourceManager.GetString("UpdateWebView", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Close dApp.
+        /// </summary>
+        internal static string CloseDApp {
+            get {
+                return ResourceManager.GetString("CloseDApp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up localized guidance for manually opening the app store.
+        /// </summary>
+        internal static string WebViewUpdateOpenFailed {
+            get {
+                return ResourceManager.GetString("WebViewUpdateOpenFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 This DApp is not available on the current platform. 的本地化字符串。
         /// </summary>
         internal static string DAppUnavailableOnCurrentPlatform {

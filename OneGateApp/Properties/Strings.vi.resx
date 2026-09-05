@@ -1288,4 +1288,19 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Đang chờ trình gỡ lỗi từ xa đáng tin cậy</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Ghép nối trình gỡ lỗi từ xa</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Trình gỡ lỗi từ xa “{0}” đang yêu cầu quyền truy cập. Dấu vân tay: {1}. Chỉ cho phép nếu bạn tin cậy trình gỡ lỗi từ xa này.</value></data>
+  <data name="WebViewUpdateRequired" xml:space="preserve">
+    <value>Cần cập nhật WebView</value>
+  </data>
+  <data name="WebViewUpdateRequiredText" xml:space="preserve">
+    <value>WebView trên thiết bị của bạn thiếu tính năng cần thiết để kết nối dApp này với OneGate. Hãy cập nhật WebView hoặc Chrome, rồi khởi động lại OneGate.</value>
+  </data>
+  <data name="UpdateWebView" xml:space="preserve">
+    <value>Cập nhật WebView</value>
+  </data>
+  <data name="CloseDApp" xml:space="preserve">
+    <value>Đóng dApp</value>
+  </data>
+  <data name="WebViewUpdateOpenFailed" xml:space="preserve">
+    <value>Mở Google Play hoặc cửa hàng ứng dụng trên thiết bị, cập nhật trình cung cấp WebView (Android System WebView hoặc Chrome), rồi khởi động lại OneGate.</value>
+  </data>
 </root>
