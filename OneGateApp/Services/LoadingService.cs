@@ -14,6 +14,7 @@ public partial class LoadingService(params Func<Task>[] loadActions) : ICommand,
 
     public bool IsLoading { get; private set { field = value; OnPropertyChanged(); } }
     public bool IsReloading { get; private set { field = value; OnPropertyChanged(); } }
+    public bool HasError { get; private set { field = value; OnPropertyChanged(); } }
 
     void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
@@ -23,6 +24,7 @@ public partial class LoadingService(params Func<Task>[] loadActions) : ICommand,
     public async void BeginLoad(bool reload = false)
     {
         if (IsLoading) return;
+        HasError = false;
         IsLoading = true;
         if (reload) IsReloading = true;
         CanExecuteChanged?.Invoke(this, EventArgs.Empty);
@@ -33,6 +35,7 @@ public partial class LoadingService(params Func<Task>[] loadActions) : ICommand,
         }
         catch (Exception ex)
         {
+            HasError = true;
             await Toast.Show(ex.Message);
         }
         IsLoading = false;

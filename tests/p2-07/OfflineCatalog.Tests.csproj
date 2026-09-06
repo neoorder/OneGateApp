@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <IsTestProject>true</IsTestProject><IsPackable>false</IsPackable>
+    <DefineConstants>$(DefineConstants);IOS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" PrivateAssets="all" />
+    <Compile Include="../../OneGateApp/Services/LoadingService.cs" Link="LoadingService.cs" />
+    <Compile Include="../../OneGateApp/Pages/GamingPage.xaml.cs" Link="GamingPage.cs" />
+    <Compile Include="../../OneGateApp/Pages/DAppsPage.xaml.cs" Link="DAppsPage.cs" />
+    <Compile Include="../../OneGateApp/Services/DAppCatalogPolicy.cs" Link="DAppCatalogPolicy.cs" />
+    <Compile Include="../../OneGateApp/Data/ContentWarnings.cs" Link="ContentWarnings.cs" />
+    <Compile Include="../../OneGateApp/Data/DAppPlatforms.cs" Link="DAppPlatforms.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- App relationship only; linked-source tests run without MAUI workloads. -->
+    <ProjectReference Include="../../OneGateApp/OneGateApp.csproj"
+                      ReferenceOutputAssembly="false" BuildReference="false"
+                      SkipGetTargetFrameworkProperties="true" />
+  </ItemGroup>
+</Project>

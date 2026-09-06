@@ -81,9 +81,15 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <og:TabBar x:Name="tabbarCategory" Tabs="{Binding DAppCategories}" Spacing="4" SelectedTabChanged="OnCategoryChanged" />
+            <Border StyleClass="Card" IsVisible="{Binding LoadingService.HasError}">
+                <VerticalStackLayout Spacing="8">
+                    <Label StyleClass="Secondary" Text="{x:Static og:Strings.ConnectionIssue}" />
+                    <Button Text="{x:Static og:Strings.Retry}" Command="{Binding LoadingService}" />
+                </VerticalStackLayout>
+            </Border>
             <CollectionView ItemsSource="{Binding DAppsFiltered}" MinimumHeightRequest="20">
                 <CollectionView.EmptyView>
-                    <Border StyleClass="Card">
+                    <Border StyleClass="Card" IsVisible="{Binding LoadingService.HasError, Converter={StaticResource InvertedBoolConverter}}">
                         <Grid>
                             <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center">
                                 <Label.FormattedText>

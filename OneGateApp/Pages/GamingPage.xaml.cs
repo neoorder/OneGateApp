@@ -3,6 +3,7 @@ using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using System.Collections.ObjectModel;
+using System.Runtime.ExceptionServices;
 using TabBar = NeoOrder.OneGate.Controls.Views.TabBar;
 
 namespace NeoOrder.OneGate.Pages;
@@ -29,7 +30,7 @@ public partial class GamingPage : ContentPage
 
     public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
     {
-        this.LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
+        this.LoadingService = new(LoadCatalogAsync);
         this.dbContext = dbContext;
         this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
         InitializeComponent();
@@ -38,6 +39,7 @@ public partial class GamingPage : ContentPage
         Shell.SetSearchHandler(this, null);
 #endif
         LoadingService.Loaded += OnDataLoaded;
+        DApps.CollectionLoaded += OnDataLoaded;
         LoadingService.BeginLoad();
     }
 
@@ -56,11 +58,35 @@ public partial class GamingPage : ContentPage
         UpdateGamesItemsLayout(width);
     }
 
+    async Task LoadCatalogAsync()
+    {
+        // Do not leave a previous permissive policy visible while settings are
+        // loading. A failed read remains restricted rather than reusing old flags.
+        allowRestrictedContent = false;
+        developerModeEnabled = false;
+        OnDataLoaded(this, EventArgs.Empty);
+        Exception? settingsFailure = null;
+        try { await LoadSettingsAsync(); }
+        catch (Exception ex) { settingsFailure = ex; }
+        finally
+        {
+            // An already loaded/shared collection will not send another disk-load
+            // event, and an offline refresh will not send a success event either.
+            OnDataLoaded(this, EventArgs.Empty);
+        }
+        await LoadDAppsAsync();
+        if (settingsFailure is not null)
+            ExceptionDispatchInfo.Capture(settingsFailure).Throw();
+    }
+
     async Task LoadSettingsAsync()
     {
-        allowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
-        developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
-        GamesIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+        bool allowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
+        bool developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
+        List<int> recent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+        this.allowRestrictedContent = allowRestrictedContent;
+        this.developerModeEnabled = developerModeEnabled;
+        GamesIdRecent = recent;
     }
 
     async Task LoadDAppsAsync()

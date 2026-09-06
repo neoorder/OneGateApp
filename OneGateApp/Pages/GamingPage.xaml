@@ -33,6 +33,12 @@
         <CollectionView ItemsSource="{Binding GamesFiltered}" MinimumHeightRequest="20">
             <CollectionView.Header>
                 <VerticalStackLayout Spacing="16">
+                    <Border StyleClass="Card" IsVisible="{Binding LoadingService.HasError}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label StyleClass="Secondary" Text="{x:Static og:Strings.ConnectionIssue}" />
+                            <Button Text="{x:Static og:Strings.Retry}" Command="{Binding LoadingService}" />
+                        </VerticalStackLayout>
+                    </Border>
                     <Border StrokeShape="RoundRectangle 10" StrokeThickness="0" HeightRequest="132">
                         <Image Source="gaming_banner.webp" Aspect="AspectFill" />
                     </Border>
@@ -65,7 +71,7 @@
                 </VerticalStackLayout>
             </CollectionView.Header>
             <CollectionView.EmptyView>
-                <Border StyleClass="Card" HeightRequest="120">
+                <Border StyleClass="Card" HeightRequest="120" IsVisible="{Binding LoadingService.HasError, Converter={StaticResource InvertedBoolConverter}}">
                     <Grid>
                         <Label IsVisible="{Binding LoadingService.IsLoading}" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label.FormattedText>
