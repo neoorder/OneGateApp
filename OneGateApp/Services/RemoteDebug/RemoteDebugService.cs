@@ -17,7 +17,7 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     readonly SemaphoreSlim stateLock = new(1, 1);
     readonly SemaphoreSlim connectLock = new(1, 1);
     readonly ConcurrentDictionary<string, RemoteDebugSession> sessions = new(StringComparer.Ordinal);
-    readonly ConcurrentDictionary<string, Task<JsonNode?>> operations = new(StringComparer.Ordinal);
+    readonly RemoteDebugOperationStore<JsonNode?> operations = new();
     DebugIdentity? debugTargetIdentity;
     List<TrustedRemoteDebugger> debuggers = [];
     MdnsRemoteDebuggerDiscovery? discovery;
@@ -113,6 +113,7 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
         if (!sessions.TryGetValue(sessionId, out RemoteDebugSession? session) || !ReferenceEquals(session.Host, host))
             return;
         sessions.TryRemove(sessionId, out _);
+        operations.RemoveSession(sessionId);
         session.RejectAll();
         _ = connection?.SendEventAsync("session.closed", new JsonObject { ["sessionId"] = sessionId });
     }
@@ -408,11 +409,13 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     {
         string expression = parameters["expression"]?.GetValue<string>()
             ?? throw new RemoteDebugCommandException("INVALID_ARGUMENT", "expression is required.");
-        Task<JsonNode?> task = RequireHost(parameters).EvaluateRemoteAsync(expression);
+        RemoteDebugSession session = GetSession(parameters);
+        IRemoteDebugSessionHost host = RequireHost(parameters);
         if (parameters["defer"]?.GetValue<bool>() != true)
-            return new JsonObject { ["value"] = await task };
-        string operationId = Guid.NewGuid().ToString("N");
-        operations[operationId] = task;
+            return new JsonObject { ["value"] = await host.EvaluateRemoteAsync(expression) };
+        string operationId = operations.Start(session.Id, _ => host.EvaluateRemoteAsync(expression));
+        // A disconnect can remove the session while the UI starts evaluation.
+        if (!sessions.ContainsKey(session.Id)) operations.RemoveSession(session.Id);
         return new JsonObject { ["deferred"] = true, ["operationId"] = operationId };
     }
 
@@ -426,6 +429,7 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     {
         RemoteDebugSession session = GetSession(parameters);
         sessions.TryRemove(session.Id, out _);
+        operations.RemoveSession(session.Id);
         session.RejectAll();
         if (session.Host is not null) await session.Host.StopRemoteAsync();
         return new JsonObject { ["sessionId"] = session.Id, ["stopped"] = true };
@@ -458,11 +462,10 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     {
         string operationId = parameters["operationId"]?.GetValue<string>()
             ?? throw new RemoteDebugCommandException("INVALID_ARGUMENT", "operationId is required.");
-        if (!operations.TryGetValue(operationId, out Task<JsonNode?>? operation))
+        if (!operations.TryGet(GetSession(parameters).Id, operationId, out Task<JsonNode?>? operation))
             throw new RemoteDebugCommandException("OPERATION_NOT_FOUND", $"Deferred operation was not found: {operationId}");
-        if (!operation.IsCompleted)
+        if (!operation!.IsCompleted)
             return new JsonObject { ["operationId"] = operationId, ["state"] = "pending" };
-        operations.TryRemove(operationId, out _);
         return new JsonObject { ["operationId"] = operationId, ["state"] = "completed", ["value"] = await operation };
     }
 
@@ -482,6 +485,7 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     {
         RemoteDebugSession[] active = sessions.Values.ToArray();
         sessions.Clear();
+        operations.Clear();
         foreach (RemoteDebugSession session in active) session.RejectAll();
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
@@ -497,6 +501,7 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
         debugTargetIdentity?.Dispose();
         stateLock.Dispose();
         connectLock.Dispose();
+        operations.Dispose();
     }
 }
 
