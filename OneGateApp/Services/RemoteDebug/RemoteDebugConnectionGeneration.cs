@@ -5,6 +5,7 @@ namespace NeoOrder.OneGate.Services.RemoteDebug;
 sealed class RemoteDebugConnectionGeneration : IDisposable
 {
     CancellationTokenSource cancellation = new();
+    readonly List<CancellationTokenSource> retiredCancellations = [];
     long version;
 
     public readonly record struct Attempt(long Version, CancellationToken Token);
@@ -17,7 +18,10 @@ sealed class RemoteDebugConnectionGeneration : IDisposable
         cancellation = new();
         version++;
         previous.Cancel();
-        previous.Dispose();
+        // An in-flight attempt may still create a linked token source from the
+        // canceled token while it unwinds or retries another endpoint. Defer
+        // disposal until the service has drained those attempts.
+        retiredCancellations.Add(previous);
     }
 
     public void ThrowIfStale(Attempt attempt)
@@ -30,5 +34,8 @@ sealed class RemoteDebugConnectionGeneration : IDisposable
     {
         cancellation.Cancel();
         cancellation.Dispose();
+        foreach (CancellationTokenSource retired in retiredCancellations)
+            retired.Dispose();
+        retiredCancellations.Clear();
     }
 }

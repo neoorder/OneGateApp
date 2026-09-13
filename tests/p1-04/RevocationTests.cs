@@ -34,4 +34,15 @@ public class RevocationTests
         Assert.Throws<OperationCanceledException>(() => generation.ThrowIfStale(old));
         generation.ThrowIfStale(generation.Capture());
     }
+
+    [Fact]
+    public void InvalidatedAttemptCanStillCreateLinkedCancellationWhileUnwinding()
+    {
+        using var generation = new RemoteDebugConnectionGeneration();
+        var attempt = generation.Capture();
+        generation.Invalidate();
+
+        using var linked = CancellationTokenSource.CreateLinkedTokenSource(attempt.Token);
+        Assert.True(linked.IsCancellationRequested);
+    }
 }
