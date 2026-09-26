@@ -112,6 +112,8 @@ public partial class GlobalSearchPage : ContentPage
 
     async void OnSearchButtonPressed(object sender, EventArgs e)
     {
+        searchVersion++;
+        UpdateResults();
         if (Results.Length == 1)
             await OpenResultAsync(Results[0]);
     }
