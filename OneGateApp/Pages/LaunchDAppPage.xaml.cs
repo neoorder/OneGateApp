@@ -30,6 +30,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
     readonly RpcClient rpcClient;
     RemoteDebugService? remoteDebugService;
     string? remoteDebugSessionId;
+    bool hasLaunchParameters;
 
     public required DApp DApp { get; set { field = value; OnPropertyChanged(); } }
     public required string Url { get; set { field = value; OnPropertyChanged(); } }
@@ -159,6 +160,14 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        if (hasLaunchParameters || (!query.ContainsKey("dapp") && !query.ContainsKey("uri")))
+            return;
+
+        // Shell reapplies launch parameters when a popup closes. Reassigning Url
+        // reloads the WebView and loses the pending wallet authorization request.
+        // Claim the parameters before awaiting so initialization cannot reenter.
+        hasLaunchParameters = true;
+
         if (query.TryGetValue("dapp", out var value))
         {
             DApp = (DApp)value;
