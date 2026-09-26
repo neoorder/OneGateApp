@@ -18,6 +18,12 @@
             <ActivityIndicator IsRunning="{Binding LoadingService.IsLoading}"
                                IsVisible="{Binding LoadingService.IsLoading}"
                                HorizontalOptions="Center" />
+            <Border StyleClass="Card" IsVisible="{Binding HasSearchErrors}">
+                <VerticalStackLayout Spacing="8">
+                    <Label StyleClass="Secondary" Text="{Binding SearchErrorText}" />
+                    <Button Text="{x:Static og:Strings.Retry}" Command="{Binding LoadingService}" />
+                </VerticalStackLayout>
+            </Border>
             <Border StyleClass="Card" IsVisible="{Binding IsEmpty}">
                 <Label StyleClass="Secondary"
                        Text="{x:Static og:Strings.DefaultEmptyViewMessage}"

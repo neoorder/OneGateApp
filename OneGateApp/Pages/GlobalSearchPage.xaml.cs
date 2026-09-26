@@ -13,6 +13,7 @@ public partial class GlobalSearchPage : ContentPage
 
     readonly ApplicationDbContext dbContext;
     readonly TokenManager tokenManager;
+    readonly object searchErrorLock = new();
 
     bool hasLoaded;
     int searchVersion;
@@ -36,7 +37,19 @@ public partial class GlobalSearchPage : ContentPage
     } = [];
     public bool HasResults => Results.Length > 0;
     public bool HasQuery => !string.IsNullOrWhiteSpace(query);
-    public bool IsEmpty => HasQuery && !LoadingService.IsLoading && Results.Length == 0;
+    public bool IsEmpty => HasQuery && !LoadingService.IsLoading && !HasSearchErrors && Results.Length == 0;
+    public bool HasSearchErrors => !string.IsNullOrEmpty(SearchErrorText);
+    public string SearchErrorText
+    {
+        get;
+        private set
+        {
+            field = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(HasSearchErrors));
+            OnPropertyChanged(nameof(IsEmpty));
+        }
+    } = "";
 
     public GlobalSearchPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, TokenManager tokenManager)
     {
@@ -63,26 +76,91 @@ public partial class GlobalSearchPage : ContentPage
 
     async Task LoadSearchDataAsync()
     {
+        SearchErrorText = "";
+        // Settings are part of the discovery boundary. A prior developer-mode
+        // index cannot remain usable while settings are unavailable or pending.
+        dappIndex = [];
+        UpdateResults();
+        await LoadSearchGroupAsync(async () =>
+        {
+            contactIndex = (await dbContext.Contacts.AsNoTracking().ToArrayAsync())
+                .Select(p => new GlobalSearchIndex<Contact>(p, p.Label, p.Address))
+                .ToArray();
+        }, Strings.AddressBook);
+
+        // Read settings before starting network work: TokenManager also uses the
+        // application DbContext, which must not run concurrent database queries.
+        List<int> recentDAppIds = [];
+        bool developerModeEnabled = false;
+        bool catalogSettingsLoaded = false;
+        await LoadSearchGroupAsync(async () =>
+        {
+            recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+            developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
+            catalogSettingsLoaded = true;
+        }, Strings.Apps);
+
+        await Task.WhenAll(
+            LoadSearchGroupAsync(LoadSearchAssetsAsync, Strings.Asset),
+            catalogSettingsLoaded
+                ? LoadSearchGroupAsync(() => LoadSearchDAppsAsync(recentDAppIds, developerModeEnabled), Strings.Apps)
+                : Task.CompletedTask);
+    }
+
+    async Task LoadSearchGroupAsync(Func<Task> load, string group)
+    {
+        try
+        {
+            await load();
+        }
+        catch (Exception)
+        {
+            lock (searchErrorLock)
+            {
+                string message = $"{group}: {Strings.Unavailable}";
+                SearchErrorText = string.IsNullOrEmpty(SearchErrorText)
+                    ? message
+                    : $"{SearchErrorText}{Environment.NewLine}{message}";
+            }
+        }
+        finally
+        {
+            UpdateResults();
+        }
+    }
+
+    async Task LoadSearchAssetsAsync()
+    {
         IReadOnlyList<AssetInfo> assets = await tokenManager.LoadAssetsAsync();
         assetIndex = assets
             .Select(p => new GlobalSearchIndex<AssetInfo>(p, p.Token.Symbol, p.Token.Name, p.Token.Hash.ToString()))
             .ToArray();
-        contactIndex = (await dbContext.Contacts.AsNoTracking().ToArrayAsync())
-            .Select(p => new GlobalSearchIndex<Contact>(p, p.Label, p.Address))
-            .ToArray();
-        List<int> recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
-        bool developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
-        await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
-        dappIndex = DApps
-            .Where(p => p.IsRegularApp && DAppCatalogPolicy.IsDiscoverable(p, developerModeEnabled))
-            .Select(p => new GlobalSearchIndex<DApp>(
+    }
+
+    async Task LoadSearchDAppsAsync(List<int> recentDAppIds, bool developerModeEnabled)
+    {
+        Dictionary<int, int> recentDAppRanks = [];
+        for (int i = 0; i < recentDAppIds.Count; i++)
+            recentDAppRanks.TryAdd(recentDAppIds[i], i);
+        try
+        {
+            await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
+        }
+        finally
+        {
+            // CachedCollection has already loaded disk data even when refreshing
+            // the network fails. Keep those usable results alongside the error.
+            dappIndex = DApps
+                .Where(p => p.IsRegularApp && DAppCatalogPolicy.IsDiscoverable(p, developerModeEnabled))
+                .Select(p => new GlobalSearchIndex<DApp>(
                 p,
-                recentDAppIds.IndexOf(p.Id),
-                p.NameLocalizer.Localize(),
-                p.DescriptionLocalizer?.Localize(),
-                p.Url,
-                p.Tags is null ? null : string.Join(' ', p.Tags.Select(DApp.LocalizeTag))))
-            .ToArray();
+                    recentDAppRanks.GetValueOrDefault(p.Id, -1),
+                    p.NameLocalizer.Localize(),
+                    p.DescriptionLocalizer?.Localize(),
+                    p.Url,
+                    p.Tags is null ? null : string.Join(' ', p.Tags.Select(DApp.LocalizeTag))))
+                .ToArray();
+        }
     }
 
     void OnLoaded(object? sender, EventArgs e)
@@ -173,6 +251,7 @@ public partial class GlobalSearchPage : ContentPage
                 });
                 break;
             case GlobalSearchResultType.DApp:
+                if (!dappIndex.Any(p => ReferenceEquals(p.Item, result.DApp))) return;
                 await Commands.LaunchDApp.ExecuteAsync(result.DApp!);
                 break;
         }
