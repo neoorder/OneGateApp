@@ -84,6 +84,7 @@ public partial class ContentSettingsPage : ContentPage
         GlobalStates.Invalidate<SettingsPage>();
         GlobalStates.Invalidate<DAppsPage>();
         GlobalStates.Invalidate<GamingPage>();
+        GlobalStates.Invalidate<GlobalSearchPage>();
     }
 
     void SetSwitchWithoutSaving(bool value)

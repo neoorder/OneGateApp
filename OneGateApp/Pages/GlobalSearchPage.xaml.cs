@@ -15,6 +15,8 @@ public partial class GlobalSearchPage : ContentPage
     readonly TokenManager tokenManager;
 
     bool hasLoaded;
+    bool allowRestrictedContent;
+    bool developerModeEnabled;
     int searchVersion;
     string query = "";
     IReadOnlyList<GlobalSearchIndex<AssetInfo>> assetIndex = [];
@@ -63,18 +65,43 @@ public partial class GlobalSearchPage : ContentPage
 
     async Task LoadSearchDataAsync()
     {
-        IReadOnlyList<AssetInfo> assets = await tokenManager.LoadAssetsAsync();
-        assetIndex = assets
-            .Select(p => new GlobalSearchIndex<AssetInfo>(p, p.Token.Symbol, p.Token.Name, p.Token.Hash.ToString()))
-            .ToArray();
-        contactIndex = (await dbContext.Contacts.AsNoTracking().ToArrayAsync())
-            .Select(p => new GlobalSearchIndex<Contact>(p, p.Label, p.Address))
-            .ToArray();
-        List<int> recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
-        bool developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
-        await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
+        hasLoaded = false;
+        // Previously permitted results must not stay actionable while preferences
+        // are being re-read, or if a later balance/catalog request fails.
+        allowRestrictedContent = false;
+        developerModeEnabled = false;
+        dappIndex = dappIndex.Where(p => DAppCatalogPolicy.IsVisible(p.Item, false, false)).ToArray();
+        UpdateResults();
+        List<int> recentDAppIds = [];
+        try
+        {
+            bool allow = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
+            bool developer = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
+            allowRestrictedContent = allow;
+            developerModeEnabled = developer;
+            RebuildDAppIndex(recentDAppIds);
+            UpdateResults();
+            IReadOnlyList<AssetInfo> assets = await tokenManager.LoadAssetsAsync();
+            assetIndex = assets
+                .Select(p => new GlobalSearchIndex<AssetInfo>(p, p.Token.Symbol, p.Token.Name, p.Token.Hash.ToString()))
+                .ToArray();
+            contactIndex = (await dbContext.Contacts.AsNoTracking().ToArrayAsync())
+                .Select(p => new GlobalSearchIndex<Contact>(p, p.Label, p.Address))
+                .ToArray();
+            recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+            await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
+        }
+        finally
+        {
+            RebuildDAppIndex(recentDAppIds);
+            UpdateResults();
+        }
+    }
+
+    void RebuildDAppIndex(List<int> recentDAppIds)
+    {
         dappIndex = DApps
-            .Where(p => p.IsRegularApp && DAppCatalogPolicy.IsDiscoverable(p, developerModeEnabled))
+            .Where(p => p.IsRegularApp && DAppCatalogPolicy.IsVisible(p, allowRestrictedContent, developerModeEnabled))
             .Select(p => new GlobalSearchIndex<DApp>(
                 p,
                 recentDAppIds.IndexOf(p.Id),
@@ -173,6 +200,8 @@ public partial class GlobalSearchPage : ContentPage
                 });
                 break;
             case GlobalSearchResultType.DApp:
+                if (!DAppCatalogPolicy.IsVisible(result.DApp!, allowRestrictedContent, developerModeEnabled)
+                    || !dappIndex.Any(p => ReferenceEquals(p.Item, result.DApp))) return;
                 await Commands.LaunchDApp.ExecuteAsync(result.DApp!);
                 break;
         }
