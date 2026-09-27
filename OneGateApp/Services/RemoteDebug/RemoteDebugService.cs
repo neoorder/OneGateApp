@@ -16,6 +16,8 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     static readonly TimeSpan ApprovalTimeout = TimeSpan.FromMinutes(2);
     readonly SemaphoreSlim stateLock = new(1, 1);
     readonly SemaphoreSlim connectLock = new(1, 1);
+    readonly object disposeLock = new();
+    readonly RemoteDebugConnectionGeneration connectionGeneration = new();
     readonly ConcurrentDictionary<string, RemoteDebugSession> sessions = new(StringComparer.Ordinal);
     readonly ConcurrentDictionary<string, Task<JsonNode?>> operations = new(StringComparer.Ordinal);
     DebugIdentity? debugTargetIdentity;
@@ -24,6 +26,8 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     RemoteDebugConnection? connection;
     bool initialized;
     bool developerModeEnabled;
+    bool closing;
+    Task? disposeTask;
 
     public event EventHandler? StateChanged;
     public bool IsDeveloperModeEnabled => developerModeEnabled;
@@ -33,16 +37,23 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     public async Task SetDeveloperModeAsync(bool enabled)
     {
         await EnsureInitializedAsync();
-        developerModeEnabled = enabled;
-        if (enabled)
+        ConnectionCleanup? cleanup = null;
+        await stateLock.WaitAsync();
+        try
         {
-            await StartDiscoveryAsync();
+            ThrowIfClosing();
+            if (developerModeEnabled != enabled)
+                connectionGeneration.Invalidate();
+            developerModeEnabled = enabled;
+            if (enabled) await StartDiscoveryAsync();
+            else
+            {
+                await StopDiscoveryAsync();
+                cleanup = DetachConnectionAndSessions();
+            }
         }
-        else
-        {
-            await StopConnectionAndSessionsAsync();
-            await StopDiscoveryAsync();
-        }
+        finally { stateLock.Release(); }
+        await StopDetachedConnectionAndSessionsAsync(cleanup);
         StateChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -52,6 +63,7 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
         await stateLock.WaitAsync();
         try
         {
+            ThrowIfClosing();
             return debuggers.Select(p => p with { }).ToArray();
         }
         finally
@@ -80,18 +92,22 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
     public async Task ForgetDebuggerAsync(string debuggerId)
     {
         await EnsureInitializedAsync();
-        if (connection?.Debugger.Id == debuggerId)
-            await StopConnectionAndSessionsAsync();
+        ConnectionCleanup? cleanup = null;
         await stateLock.WaitAsync();
         try
         {
+            ThrowIfClosing();
+            connectionGeneration.Invalidate();
             debuggers.RemoveAll(p => p.Id == debuggerId);
             await SaveStateAsync();
+            if (connection?.Debugger.Id == debuggerId)
+                cleanup = DetachConnectionAndSessions();
         }
         finally
         {
             stateLock.Release();
         }
+        await StopDetachedConnectionAndSessionsAsync(cleanup);
         StateChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -151,10 +167,10 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
 
     async Task EnsureInitializedAsync()
     {
-        if (initialized) return;
         await stateLock.WaitAsync();
         try
         {
+            ThrowIfClosing();
             if (initialized) return;
             string? value = await SecureStorage.Default.GetAsync(SecureStorageKey);
             if (string.IsNullOrEmpty(value))
@@ -239,39 +255,63 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
         await connectLock.WaitAsync();
         try
         {
-            if (!developerModeEnabled) return;
-            if (connection is not null)
+            RemoteDebugConnectionGeneration.Attempt attempt;
+            ConnectionCleanup? cleanup = null;
+            await stateLock.WaitAsync();
+            try
             {
-                if (trusted?.Debugger.Id == connection.Debugger.Id) return;
-                await StopConnectionAndSessionsAsync();
+                ThrowIfClosing();
+                if (!developerModeEnabled) return;
+                if (trusted is not null && !debuggers.Any(p => p.Id == trusted.Value.Debugger.Id)) return;
+                if (connection is not null)
+                {
+                    if (trusted?.Debugger.Id == connection.Debugger.Id) return;
+                    cleanup = DetachConnectionAndSessions();
+                }
+                attempt = connectionGeneration.Capture();
             }
+            finally { stateLock.Release(); }
+            await StopDetachedConnectionAndSessionsAsync(cleanup);
             List<(string Host, int Port)> endpoints = invitation is not null
                 ? invitation.Endpoints.Select(p => (p.Host, p.Port)).ToList()
                 : [(trusted!.Value.Host, trusted.Value.Port)];
             Exception? lastError = null;
             foreach (var endpoint in endpoints)
             {
+                TcpClient? client = null;
+                RemoteDebugConnection? candidate = null;
                 try
                 {
-                    using CancellationTokenSource timeout = new(ConnectionTimeout);
-                    TcpClient client = new();
+                    using CancellationTokenSource timeout = CancellationTokenSource.CreateLinkedTokenSource(attempt.Token);
+                    timeout.CancelAfter(ConnectionTimeout);
+                    client = new();
                     await client.ConnectAsync(endpoint.Host, endpoint.Port, timeout.Token);
-                    RemoteDebugConnection candidate = await RemoteDebugConnection.ConnectAsync(
+                    candidate = await RemoteDebugConnection.ConnectAsync(
                         client,
                         debugTargetIdentity!,
                         invitation,
                         trusted?.Debugger,
-                        PersistDebuggerAsync,
-                        HandleRequestAsync,
+                        debugger => PersistDebuggerAsync(debugger, attempt),
+                        (method, parameters) => HandleAuthorizedRequestAsync(candidate!, method, parameters),
                         timeout.Token);
-                    candidate.Disconnected += OnConnectionDisconnected;
-                    connection = candidate;
-                    candidate.Start();
+                    await stateLock.WaitAsync(attempt.Token);
+                    try
+                    {
+                        connectionGeneration.ThrowIfStale(attempt);
+                        if (!developerModeEnabled) throw new OperationCanceledException(attempt.Token);
+                        candidate.Disconnected += OnConnectionDisconnected;
+                        connection = candidate;
+                        candidate.Start();
+                    }
+                    finally { stateLock.Release(); }
                     StateChanged?.Invoke(this, EventArgs.Empty);
                     return;
                 }
                 catch (Exception ex)
                 {
+                    if (candidate is not null) await candidate.DisposeAsync();
+                    else client?.Dispose();
+                    if (attempt.Token.IsCancellationRequested) throw;
                     lastError = ex;
                 }
             }
@@ -283,11 +323,14 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
         }
     }
 
-    async Task PersistDebuggerAsync(TrustedRemoteDebugger debugger)
+    async Task PersistDebuggerAsync(TrustedRemoteDebugger debugger, RemoteDebugConnectionGeneration.Attempt attempt)
     {
         await stateLock.WaitAsync();
         try
         {
+            ThrowIfClosing();
+            connectionGeneration.ThrowIfStale(attempt);
+            if (!developerModeEnabled) throw new OperationCanceledException(attempt.Token);
             debuggers.RemoveAll(p => p.Id == debugger.Id);
             debuggers.Add(debugger);
             await SaveStateAsync();
@@ -300,18 +343,38 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
 
     void OnConnectionDisconnected(RemoteDebugConnection sender)
     {
-        if (!ReferenceEquals(connection, sender)) return;
-        sender.Disconnected -= OnConnectionDisconnected;
-        connection = null;
-        _ = StopAllSessionsAsync();
+        _ = HandleConnectionDisconnectedAsync(sender);
+    }
+
+    async Task HandleConnectionDisconnectedAsync(RemoteDebugConnection sender)
+    {
+        ConnectionCleanup cleanup;
+        await stateLock.WaitAsync();
+        try
+        {
+            if (!ReferenceEquals(connection, sender)) return;
+            cleanup = DetachConnectionAndSessions();
+        }
+        finally { stateLock.Release(); }
+        await StopDetachedConnectionAndSessionsAsync(cleanup);
         StateChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    async Task<JsonNode?> HandleRequestAsync(string method, JsonObject parameters)
+    void RequireAuthorizedConnection(RemoteDebugConnection source)
     {
+        if (closing || !developerModeEnabled || !ReferenceEquals(connection, source)
+            || !debuggers.Any(p => p.Id == source.Debugger.Id))
+            throw new RemoteDebugCommandException("CONNECTION_REVOKED", "Remote debugging is disabled or this debugger is no longer trusted.");
+    }
+
+    async Task<JsonNode?> HandleAuthorizedRequestAsync(RemoteDebugConnection source, string method, JsonObject parameters)
+    {
+        await stateLock.WaitAsync();
+        try { RequireAuthorizedConnection(source); }
+        finally { stateLock.Release(); }
         return method switch
         {
-            "session.start" => await StartSessionAsync(parameters),
+            "session.start" => await StartSessionAsync(source, parameters),
             "session.status" => await RequireHost(parameters).GetRemoteStatusAsync(),
             "session.logs" => Logs(parameters),
             "session.trace" => Trace(parameters),
@@ -327,7 +390,7 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
         };
     }
 
-    async Task<JsonNode?> StartSessionAsync(JsonObject parameters)
+    async Task<JsonNode?> StartSessionAsync(RemoteDebugConnection source, JsonObject parameters)
     {
         string value = parameters["url"]?.GetValue<string>()
             ?? throw new RemoteDebugCommandException("INVALID_ARGUMENT", "url is required.");
@@ -335,19 +398,24 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
             throw new RemoteDebugCommandException("HTTPS_REQUIRED", "OneGate remote sessions require an HTTPS DApp URL.");
         string sessionId = Guid.NewGuid().ToString("N");
         RemoteDebugSession session = new(sessionId, url);
-        if (!sessions.TryAdd(sessionId, session)) throw new InvalidOperationException();
         try
         {
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                LaunchDAppPage page = serviceProvider.GetServiceOrCreateInstance<LaunchDAppPage>();
-                page.ConfigureRemoteDebug(sessionId, this);
-                page.ApplyQueryAttributes(new Dictionary<string, object>
+                await stateLock.WaitAsync();
+                try
                 {
-                    ["uri"] = url
-                });
-                Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
-                await Task.CompletedTask;
+                    RequireAuthorizedConnection(source);
+                    if (!sessions.TryAdd(sessionId, session)) throw new InvalidOperationException();
+                    LaunchDAppPage page = serviceProvider.GetServiceOrCreateInstance<LaunchDAppPage>();
+                    page.ConfigureRemoteDebug(sessionId, this);
+                    page.ApplyQueryAttributes(new Dictionary<string, object>
+                    {
+                        ["uri"] = url
+                    });
+                    Application.Current!.OpenWindow(new Window(new NavigationPage(page)));
+                }
+                finally { stateLock.Release(); }
             });
             return new JsonObject
             {
@@ -466,37 +534,70 @@ public sealed class RemoteDebugService(IServiceProvider serviceProvider) : IAsyn
         return new JsonObject { ["operationId"] = operationId, ["state"] = "completed", ["value"] = await operation };
     }
 
-    async Task StopConnectionAndSessionsAsync()
+    sealed record ConnectionCleanup(RemoteDebugConnection? Connection, RemoteDebugSession[] Sessions);
+
+    // All callers hold stateLock: detach the connection and its session batch in
+    // the same transition as admission/publication. Never sweep future sessions.
+    ConnectionCleanup DetachConnectionAndSessions()
     {
         RemoteDebugConnection? current = connection;
         connection = null;
         if (current is not null)
-        {
             current.Disconnected -= OnConnectionDisconnected;
-            await current.DisposeAsync();
-        }
-        await StopAllSessionsAsync();
-    }
-
-    async Task StopAllSessionsAsync()
-    {
         RemoteDebugSession[] active = sessions.Values.ToArray();
         sessions.Clear();
         foreach (RemoteDebugSession session in active) session.RejectAll();
+        return new(current, active);
+    }
+
+    static async Task StopDetachedConnectionAndSessionsAsync(ConnectionCleanup? cleanup)
+    {
+        if (cleanup is null) return;
+        if (cleanup.Connection is not null)
+            await cleanup.Connection.DisposeAsync();
+        // Do not hold stateLock while dispatching to or awaiting the UI thread.
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            foreach (IRemoteDebugSessionHost host in active.Select(p => p.Host).OfType<IRemoteDebugSessionHost>())
+            foreach (IRemoteDebugSessionHost host in cleanup.Sessions.Select(p => p.Host).OfType<IRemoteDebugSessionHost>())
                 await host.StopRemoteAsync();
         });
     }
 
-    public async ValueTask DisposeAsync()
+    void ThrowIfClosing() => ObjectDisposedException.ThrowIf(closing, this);
+
+    public ValueTask DisposeAsync()
     {
-        await StopConnectionAndSessionsAsync();
-        await StopDiscoveryAsync();
-        debugTargetIdentity?.Dispose();
-        stateLock.Dispose();
-        connectLock.Dispose();
+        lock (disposeLock)
+            return new(disposeTask ??= DisposeCoreAsync());
+    }
+
+    async Task DisposeCoreAsync()
+    {
+        ConnectionCleanup cleanup;
+        await stateLock.WaitAsync();
+        try
+        {
+            closing = true;
+            developerModeEnabled = false;
+            connectionGeneration.Invalidate();
+            await StopDiscoveryAsync();
+            cleanup = DetachConnectionAndSessions();
+        }
+        finally { stateLock.Release(); }
+
+        // Cancellation requests shutdown; it does not mean a handshake has
+        // finished unwinding or using the identity/persistence callback yet.
+        await connectLock.WaitAsync();
+        try
+        {
+            await StopDetachedConnectionAndSessionsAsync(cleanup);
+            debugTargetIdentity?.Dispose();
+            connectionGeneration.Dispose();
+        }
+        finally { connectLock.Release(); }
+        // Keep the managed gates valid for callers already queued before
+        // closing. They acquire the gate, reject, and release normally. Neither
+        // gate allocates a wait handle (AvailableWaitHandle is never requested).
     }
 }
 
