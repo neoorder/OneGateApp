@@ -7,6 +7,7 @@ using NeoOrder.OneGate.Resources;
 using NeoOrder.OneGate.Services.RPC;
 using System.Net.Http.Json;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace NeoOrder.OneGate.Services;
 
@@ -71,15 +72,16 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
         return tokens;
     }
 
-    public async Task<IReadOnlyList<NFT>> LoadNFTsAsync(bool includeHiddens = false)
+    public async IAsyncEnumerable<NFT[]> LoadNFTPagesAsync(bool includeHiddens = false, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         Wallet wallet = walletProvider.GetWallet()!;
         WalletAccount account = wallet.GetDefaultAccount()!;
         var tokens = await LoadNep11TokensAsync(includeHiddens);
-        NFT[] nfts = await rpcClient.GetNFTs(account.ScriptHash, tokens.Select(p => p.Hash).ToArray());
-        foreach (NFT nft in nfts)
-            nft.TokenInfo = tokens.First(p => p.Hash == nft.CollectionId);
-        return nfts;
+        await foreach (NFT[] nfts in rpcClient.GetNFTPages(account.ScriptHash, tokens.Select(p => p.Hash).ToArray(), cancellationToken))
+        {
+            foreach (NFT nft in nfts) nft.TokenInfo = tokens.First(p => p.Hash == nft.CollectionId);
+            yield return nfts;
+        }
     }
 
     public async Task<IReadOnlyList<ITokenInfo>> LoadHiddenTokens()

@@ -1288,4 +1288,10 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Güvenilir bir uzaktan hata ayıklayıcı bekleniyor</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Uzaktan hata ayıklayıcıyı eşleştir</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>“{0}” uzaktan hata ayıklayıcısı erişim istiyor. Parmak izi: {1}. Yalnızca bu uzaktan hata ayıklayıcıya güveniyorsanız izin verin.</value></data>
+  <data name="LoadMoreNFTs" xml:space="preserve">
+    <value>Daha fazla NFT yükle</value>
+  </data>
+  <data name="NFTLoadFailed" xml:space="preserve">
+    <value>Bazı NFT'ler yüklenemedi. Tekrar denemek için aşağı çekin.</value>
+  </data>
 </root>

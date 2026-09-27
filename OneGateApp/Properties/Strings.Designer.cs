@@ -3531,6 +3531,14 @@ namespace NeoOrder.OneGate.Properties {
             get { return ResourceManager.GetString("RemoteDebugPairingTitle", resourceCulture); }
         }
 
+        internal static string LoadMoreNFTs {
+            get { return ResourceManager.GetString("LoadMoreNFTs", resourceCulture); }
+        }
+
+        internal static string NFTLoadFailed {
+            get { return ResourceManager.GetString("NFTLoadFailed", resourceCulture); }
+        }
+
         internal static string RemoteDebugPairingPrompt {
             get { return ResourceManager.GetString("RemoteDebugPairingPrompt", resourceCulture); }
         }

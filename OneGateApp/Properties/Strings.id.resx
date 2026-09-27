@@ -1288,4 +1288,10 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Menunggu debugger jarak jauh tepercaya</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Debugger jarak jauh “{0}” meminta akses. Sidik jari: {1}. Izinkan hanya jika Anda memercayai debugger jarak jauh ini.</value></data>
+  <data name="LoadMoreNFTs" xml:space="preserve">
+    <value>Muat lebih banyak NFT</value>
+  </data>
+  <data name="NFTLoadFailed" xml:space="preserve">
+    <value>Beberapa NFT tidak dapat dimuat. Tarik ke bawah untuk mencoba lagi.</value>
+  </data>
 </root>

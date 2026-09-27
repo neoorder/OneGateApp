@@ -1288,4 +1288,10 @@
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>正在等待已信任的远程调试器</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>配对远程调试器</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>远程调试器“{0}”正在请求访问。指纹：{1}。仅在你信任此远程调试器时授权。</value></data>
+  <data name="LoadMoreNFTs" xml:space="preserve">
+    <value>加载更多 NFT</value>
+  </data>
+  <data name="NFTLoadFailed" xml:space="preserve">
+    <value>部分 NFT 未能加载，请下拉重试。</value>
+  </data>
 </root>

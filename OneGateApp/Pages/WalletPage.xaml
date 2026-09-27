@@ -157,6 +157,13 @@
                 </Border>
                 <Border StyleClass="Card" Padding="0" IsVisible="{Binding SelectedIndex, Source={x:Reference tabBarAssetType}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
                     <CollectionView ItemsSource="{Binding NFTs}" MinimumHeightRequest="150">
+                    <CollectionView.Footer>
+                        <VerticalStackLayout Padding="12" Spacing="8">
+                            <Label Text="{x:Static og:Strings.NFTLoadFailed}" IsVisible="{Binding NftLoadFailed}" HorizontalTextAlignment="Center" />
+                            <ActivityIndicator IsRunning="{Binding IsLoadingNFTs}" IsVisible="{Binding IsLoadingNFTs}" />
+                            <Button Text="{x:Static og:Strings.LoadMoreNFTs}" IsVisible="{Binding HasMoreNFTs}" IsEnabled="{Binding IsLoadingNFTs, Converter={StaticResource InvertedBoolConverter}}" Clicked="OnLoadMoreNFTs" />
+                        </VerticalStackLayout>
+                    </CollectionView.Footer>
                     <CollectionView.EmptyView>
                         <Grid>
                             <Label IsVisible="{Binding LoadingService.IsLoading}">
@@ -171,7 +178,7 @@
                                 <Border StrokeShape="Ellipse" BackgroundColor="{toolkit:AppThemeResource TextBox}" WidthRequest="100" HeightRequest="100">
                                     <Image Source="empty.png" WidthRequest="32" HeightRequest="32" />
                                 </Border>
-                                <Label StyleClass="Secondary" Text="{x:Static og:Strings.NoNftText}" HorizontalOptions="Center" />
+                                <Label StyleClass="Secondary" Text="{x:Static og:Strings.NoNftText}" IsVisible="{Binding ShowNftEmptyState}" HorizontalOptions="Center" />
                             </VerticalStackLayout>
                         </Grid>
                     </CollectionView.EmptyView>

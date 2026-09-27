@@ -1288,4 +1288,10 @@ It is recommended to store the NEP-2 key and password separately and back them u
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Waiting for a trusted remote debugger</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pair remote debugger</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Remote debugger “{0}” is requesting access. Fingerprint: {1}. Authorize only if you trust this remote debugger.</value></data>
+  <data name="LoadMoreNFTs" xml:space="preserve">
+    <value>Load more NFTs</value>
+  </data>
+  <data name="NFTLoadFailed" xml:space="preserve">
+    <value>Some NFTs could not be loaded. Pull down to retry.</value>
+  </data>
 </root>

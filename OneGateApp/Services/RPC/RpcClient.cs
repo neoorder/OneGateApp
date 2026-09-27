@@ -22,6 +22,9 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
     readonly HttpClient http = new();
 
     public async Task<T> RpcSendAsync<T>(string method, params object?[] args) where T : notnull
+        => await RpcSendAsync<T>(method, CancellationToken.None, args);
+
+    public async Task<T> RpcSendAsync<T>(string method, CancellationToken cancellationToken, params object?[] args) where T : notnull
     {
         var request = new JsonObject
         {
@@ -30,13 +33,13 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
             ["method"] = method,
             ["params"] = new JsonArray(args.Select(p => JsonSerializer.SerializeToNode(p, SharedOptions.JsonSerializerOptions)).ToArray())
         };
-        var requestMsg = new HttpRequestMessage(HttpMethod.Post, SharedOptions.RpcServerUri)
+        using var requestMsg = new HttpRequestMessage(HttpMethod.Post, SharedOptions.RpcServerUri)
         {
             Content = new StringContent(request.ToJsonString(), Utility.StrictUTF8, "application/json")
         };
-        var responseMsg = await http.SendAsync(requestMsg);
+        using var responseMsg = await http.SendAsync(requestMsg, cancellationToken);
         responseMsg.EnsureSuccessStatusCode();
-        JsonObject response = (await responseMsg.Content.ReadFromJsonAsync<JsonObject>(SharedOptions.JsonSerializerOptions))!;
+        JsonObject response = (await responseMsg.Content.ReadFromJsonAsync<JsonObject>(SharedOptions.JsonSerializerOptions, cancellationToken))!;
         if (response["error"] is JsonObject error)
         {
             int code = error["code"]!.GetValue<int>();
@@ -163,48 +166,61 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
         };
     }
 
-    public async Task<NFT[]> GetNFTs(UInt160 account, UInt160[] assets, int limit = 100)
+    public IAsyncEnumerable<NFT[]> GetNFTPages(UInt160 account, UInt160[] assets, CancellationToken cancellationToken = default)
     {
-        byte[] script;
-        using (var builder = new ScriptBuilder())
-        {
-            foreach (var asset in assets)
-                builder.EmitDynamicCall(asset, "tokensOf", account);
-            script = builder.ToArray();
-        }
-        JsonObject iterators = await RpcSendAsync<JsonObject>("invokescript", script);
-        Guid sessionId = iterators["session"]!.GetValue<Guid>();
-        var tokens = assets.Zip(iterators["stack"]!.AsArray(), (x, y) => new
-        {
-            Hash = x,
-            Iterator = y!["id"]!.GetValue<Guid>(),
-            NFTs = new List<NFT>()
-        }).ToArray();
-        foreach (var token in tokens)
-        {
-            StackItem[] items = await RpcSendAsync<StackItem[]>("traverseiterator", sessionId, token.Iterator, limit);
-            limit -= items.Length;
-            if (items.Length == 0) continue;
-            using (var builder = new ScriptBuilder())
+        return NftPager.ReadAsync(async token =>
             {
-                foreach (var tokenId in items)
-                    builder.EmitDynamicCall(token.Hash, "properties", tokenId.ToParameter());
-                script = builder.ToArray();
-            }
-            InvocationResult result = await Invoke(script);
-            var nfts = items.Zip(result.Stack.Cast<Map>(), (id, map) => new NFT
+                if (assets.Length == 0) return new NftIteratorSession(Guid.Empty, []);
+                using var builder = new ScriptBuilder();
+                foreach (var asset in assets) builder.EmitDynamicCall(asset, "tokensOf", account);
+                JsonObject response = await RpcSendAsync<JsonObject>("invokescript", token, builder.ToArray());
+                Guid sessionId = response["session"]!.GetValue<Guid>();
+                try
+                {
+                    if (response["state"]?.GetValue<string>() != nameof(VMState.HALT))
+                        throw new DapiException(10004, "NFT enumeration failed");
+                    Guid[] iterators = response["stack"]!.AsArray().Select(p => p!["id"]!.GetValue<Guid>()).ToArray();
+                    if (iterators.Length != assets.Length) throw new InvalidDataException("NFT iterator response is incomplete.");
+                    return new NftIteratorSession(sessionId, iterators);
+                }
+                catch
+                {
+                    await CloseNftSessionAsync(sessionId);
+                    throw;
+                }
+            },
+            async (session, iterator, count, token) =>
             {
-                CollectionId = token.Hash,
-                TokenId = id.GetSpan().ToArray(),
-                Name = map["name"].GetString()!,
-                Description = map.TryGetString("description"),
-                Image = map.TryGetString("image"),
-                TokenURI = map.TryGetString("tokenURI")
-            });
-            token.NFTs.AddRange(nfts);
-            if (limit <= 0) break;
+                StackItem[] items = await RpcSendAsync<StackItem[]>("traverseiterator", token, session, iterator, count);
+                return items.Select(p => p.GetSpan().ToArray()).ToArray();
+            },
+            async (collection, ids, token) =>
+            {
+                using var builder = new ScriptBuilder();
+                foreach (var id in ids) builder.EmitDynamicCall(assets[collection], "properties", id);
+                InvocationResult result = await RpcSendAsync<InvocationResult>("invokescript", token, builder.ToArray());
+                result.EnsureSuccess();
+                if (result.Stack.Length != ids.Length) throw new InvalidDataException("NFT metadata response is incomplete.");
+                return ids.Zip(result.Stack.Cast<Map>(), (id, map) => new NFT
+                {
+                    CollectionId = assets[collection], TokenId = id, Name = map["name"].GetString()!,
+                    Description = map.TryGetString("description"), Image = map.TryGetString("image"), TokenURI = map.TryGetString("tokenURI")
+                }).ToArray();
+            }, CloseNftSessionAsync, cancellationToken);
+    }
+
+    async Task CloseNftSessionAsync(Guid sessionId)
+    {
+        if (sessionId == Guid.Empty) return;
+        try
+        {
+            using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            await RpcSendAsync<bool>("terminatesession", timeout.Token, sessionId);
         }
-        return tokens.SelectMany(p => p.NFTs).ToArray();
+        catch (Exception ex) when (ex is RpcException or HttpRequestException or JsonException or OperationCanceledException)
+        {
+            System.Diagnostics.Debug.WriteLine($"Unable to release NFT iterator session: {ex.Message}");
+        }
     }
 
     public async Task<uint> GetBlockCount()

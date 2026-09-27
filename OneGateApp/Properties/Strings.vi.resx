@@ -1288,4 +1288,10 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Đang chờ trình gỡ lỗi từ xa đáng tin cậy</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Ghép nối trình gỡ lỗi từ xa</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Trình gỡ lỗi từ xa “{0}” đang yêu cầu quyền truy cập. Dấu vân tay: {1}. Chỉ cho phép nếu bạn tin cậy trình gỡ lỗi từ xa này.</value></data>
+  <data name="LoadMoreNFTs" xml:space="preserve">
+    <value>Tải thêm NFT</value>
+  </data>
+  <data name="NFTLoadFailed" xml:space="preserve">
+    <value>Không thể tải một số NFT. Kéo xuống để thử lại.</value>
+  </data>
 </root>
