@@ -100,6 +100,12 @@ public partial class SendPage : ContentPage, IQueryAttributable
         if (Assets is null && query.TryGetValue("assets", out var obj_assets))
         {
             Assets = (AssetInfo[])obj_assets;
+            if (Assets.Count == 0)
+            {
+                await Toast.Show(Strings.NoAssetText);
+                await Shell.Current.GoToAsync("..");
+                return;
+            }
             SelectedAsset = Assets.FirstOrDefault(p => p.Token.Hash == NativeContract.NEO.Hash) ?? Assets[0];
         }
         else if (SelectedAsset is null && query.TryGetValue("asset", out var obj_asset))
@@ -142,6 +148,12 @@ public partial class SendPage : ContentPage, IQueryAttributable
             catch (Exception ex)
             {
                 await Toast.Show(ex.Message);
+                return;
+            }
+            if (Assets.Count == 0)
+            {
+                await Toast.Show(Strings.NoAssetText);
+                await Shell.Current.GoToAsync("..");
                 return;
             }
             SelectedAsset = Assets.FirstOrDefault(p => p.Token.Hash == NativeContract.NEO.Hash) ?? Assets[0];

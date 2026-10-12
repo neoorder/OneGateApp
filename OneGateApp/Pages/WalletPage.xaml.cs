@@ -75,6 +75,11 @@ public partial class WalletPage : ContentPage
             await Toast.Show(Strings.LoadingWalletData + "…");
             return;
         }
+        if (Assets.Count == 0)
+        {
+            await Toast.Show(Strings.NoAssetText);
+            return;
+        }
         await Shell.Current.GoToAsync("//wallet/send", new Dictionary<string, object>
         {
             ["assets"] = Assets
