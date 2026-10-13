@@ -1,0 +1,13 @@
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <IncludeTestAssembly>true</IncludeTestAssembly>
+          <Include>[OneGate.DapiQuery.Tests]NeoOrder.OneGate.Services.RPC.DapiQueryResponseMapper</Include>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

@@ -258,7 +258,8 @@ partial class LaunchDAppPage
     [RpcMethod]
     async Task<JsonObject> GetBlock(JsonValue hashOrIndex)
     {
-        return await rpcClient.RpcSendAsync<JsonObject>("getblock", hashOrIndex, true);
+        JsonObject block = await rpcClient.RpcSendAsync<JsonObject>("getblock", hashOrIndex, true);
+        return DapiQueryResponseMapper.MapBlock(block, protocolSettings.AddressVersion);
     }
 
     [RpcMethod]
@@ -270,7 +271,8 @@ partial class LaunchDAppPage
     [RpcMethod]
     async Task<JsonObject> GetTransaction(UInt256 txid)
     {
-        return await rpcClient.RpcSendAsync<JsonObject>("getrawtransaction", txid, true);
+        JsonObject transaction = await rpcClient.RpcSendAsync<JsonObject>("getrawtransaction", txid, true);
+        return DapiQueryResponseMapper.MapTransaction(transaction, protocolSettings.AddressVersion);
     }
 
     [RpcMethod]
