@@ -843,6 +843,9 @@ Continuando, confermi di aver compreso pienamente e accettato tutti i rischi ass
   <data name="Gaming" xml:space="preserve">
     <value>Giochi</value>
   </data>
+  <data name="GamingRandomPlay" xml:space="preserve">
+    <value>Gioca a un gioco casuale</value>
+  </data>
   <data name="GamingEmptyState" xml:space="preserve">
     <value>Trascina verso il basso per aggiornare il catalogo dei giochi.</value>
   </data>
@@ -1288,4 +1291,6 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>In attesa di un debugger remoto attendibile</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Associa debugger remoto</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Il debugger remoto “{0}” richiede l’accesso. Impronta: {1}. Autorizza solo se ritieni attendibile questo debugger remoto.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Passa al layout galleria</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Passa al layout elenco</value></data>
 </root>

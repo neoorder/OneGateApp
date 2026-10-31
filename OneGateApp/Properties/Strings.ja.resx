@@ -843,6 +843,9 @@
   <data name="Gaming" xml:space="preserve">
     <value>ゲーム</value>
   </data>
+  <data name="GamingRandomPlay" xml:space="preserve">
+    <value>ランダムなゲームをプレイ</value>
+  </data>
   <data name="GamingEmptyState" xml:space="preserve">
     <value>下に引いてゲームカタログを更新します。</value>
   </data>
@@ -1288,4 +1291,6 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>信頼済みリモートデバッガーを待機中</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>リモートデバッガーをペアリング</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>リモートデバッガー「{0}」がアクセスを要求しています。フィンガープリント: {1}。このリモートデバッガーを信頼する場合のみ許可してください。</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>ギャラリーレイアウトに切り替え</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>リストレイアウトに切り替え</value></data>
 </root>

@@ -843,6 +843,9 @@
   <data name="Gaming" xml:space="preserve">
     <value>Игры</value>
   </data>
+  <data name="GamingRandomPlay" xml:space="preserve">
+    <value>Сыграть в случайную игру</value>
+  </data>
   <data name="GamingEmptyState" xml:space="preserve">
     <value>Потяните вниз, чтобы обновить каталог игр.</value>
   </data>
@@ -1288,4 +1291,6 @@
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Ожидание доверенного удалённого отладчика</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Сопряжение удалённого отладчика</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Удалённый отладчик «{0}» запрашивает доступ. Отпечаток: {1}. Разрешайте только если доверяете этому удалённому отладчику.</value></data>
+  <data name="GamingSwitchToGalleryLayout" xml:space="preserve"><value>Переключиться на вид галереи</value></data>
+  <data name="GamingSwitchToListLayout" xml:space="preserve"><value>Переключиться на вид списка</value></data>
 </root>
