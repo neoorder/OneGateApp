@@ -10,6 +10,20 @@ public class WalletAuthorizationService(IServiceProvider serviceProvider, Applic
 {
     public async Task<bool> RequestAuthorizationAsync(Page page, string title, string? message = null, string? domain = null)
     {
+        try
+        {
+            return await RequestAuthorizationCoreAsync(page, title, message, domain);
+        }
+        catch (OperationCanceledException)
+        {
+            // Cancelling an authorization is a rejected request in every path,
+            // including when the in-memory wallet has already been unlocked.
+            return false;
+        }
+    }
+
+    async Task<bool> RequestAuthorizationCoreAsync(Page page, string title, string? message, string? domain)
+    {
         byte[]? credential = await dbContext.Settings.GetAsync<byte[]>("biometric/credential");
         if (credential is null)
         {
@@ -35,19 +49,11 @@ public class WalletAuthorizationService(IServiceProvider serviceProvider, Applic
             }
             else
             {
-                string password;
                 using var progressOverlay = new ProgressWindowOverlay(page.GetParentWindow(), title, Strings.UnlockingWallet);
-                try
-                {
-                    password = await DataProtectionService.UnprotectAsync(credential, title, message);
-                    if (!await Task.Run(() => wallet.VerifyPassword(password)))
-                        throw new InvalidOperationException("Stored credential is invalid.");
-                    return true;
-                }
-                catch (OperationCanceledException)
-                {
-                    return false;
-                }
+                string password = await DataProtectionService.UnprotectAsync(credential, title, message);
+                if (!await Task.Run(() => wallet.VerifyPassword(password)))
+                    throw new InvalidOperationException("Stored credential is invalid.");
+                return true;
             }
         }
     }

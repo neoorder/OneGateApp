@@ -129,7 +129,7 @@ partial class DataProtectionService
         var builder = new BiometricPrompt.Builder(activity)
             .SetTitle(title ?? Strings.BiometricAuthentication)
             .SetSubtitle(message ?? Strings.VerifyBiometricText);
-        builder = builder.SetNegativeButton(Strings.Cancel, executor, new NegativeClickListener(() => tcs.TrySetCanceled()));
+        builder = builder.SetNegativeButton(Strings.Cancel, executor, new NegativeClickListener(() => tcs.TrySetResult(false)));
         var prompt = builder.Build();
         if (cipher is null)
         {
