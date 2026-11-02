@@ -21,6 +21,7 @@ partial class PhotoLibraryService
             SuggestedStartLocation = PickerLocationId.PicturesLibrary
         };
         var result = await savePicker.PickSaveFileAsync();
+        if (result is null) return;
         using var fileStream = File.Open(result.Path, FileMode.Create, FileAccess.Write, FileShare.None);
         await screenshot.CopyToAsync(fileStream);
     }
