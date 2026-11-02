@@ -37,6 +37,8 @@ public static class Border
                 handler.PlatformView.BorderStyle = UIKit.UITextViewBorderStyle.None;
 #elif WINDOWS
                 handler.PlatformView.BorderThickness = new(0);
+                // WinUI overrides the template border thickness when the input gains focus.
+                handler.PlatformView.Resources["TextControlBorderThemeThicknessFocused"] = new Microsoft.UI.Xaml.Thickness(0);
 #endif
             }
         });
@@ -50,6 +52,8 @@ public static class Border
             handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
 #elif WINDOWS
             handler.PlatformView.BorderThickness = new(0);
+            // WinUI overrides the template border thickness when the input gains focus.
+            handler.PlatformView.Resources["TextControlBorderThemeThicknessFocused"] = new Microsoft.UI.Xaml.Thickness(0);
 #endif
         });
     }
