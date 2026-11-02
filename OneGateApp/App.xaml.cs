@@ -4,6 +4,7 @@ using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Pages;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.Messaging;
+using NeoOrder.OneGate.Services.Notifications;
 using NeoOrder.OneGate.Services.RemoteDebug;
 using System.ComponentModel;
 using System.Globalization;
@@ -15,15 +16,26 @@ public partial class App : Application
     readonly IServiceProvider serviceProvider;
     readonly IWalletProvider walletProvider;
     readonly MessagingService messagingService;
+    readonly PushRegistrationService pushRegistrationService;
+    readonly PushGatewayService pushGatewayService;
+    readonly PushNavigationService pushNavigationService;
     readonly HashSet<Window> visibleMainWindows = [];
 
+    Task pushCleanup = Task.CompletedTask;
     AppLinkAction? appLinkAction;
 
-    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient, RemoteDebugService remoteDebugService, MessagingService messagingService)
+    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient, RemoteDebugService remoteDebugService, MessagingService messagingService, PushRegistrationService pushRegistrationService, PushGatewayService pushGatewayService, PushNavigationService pushNavigationService)
     {
         this.serviceProvider = serviceProvider;
         this.walletProvider = walletProvider;
         this.messagingService = messagingService;
+        this.pushRegistrationService = pushRegistrationService;
+        this.pushGatewayService = pushGatewayService;
+        this.pushNavigationService = pushNavigationService;
+        pushRegistrationService.Changed += OnPlatformPushChanged;
+        NotificationPreferences.Changed += OnNotificationPreferencesChanged;
+        Connectivity.Current.ConnectivityChanged += OnPushConnectivityChanged;
+        messagingService.Changed += OnMessagingChangedForPush;
         walletProvider.WalletChanged += OnWalletChanged;
         InitializeComponent();
         dbContext.Database.EnsureCreated();
@@ -142,12 +154,22 @@ public partial class App : Application
     async Task UpdateMessagingVisibilityAsync()
     {
         bool visible = visibleMainWindows.Any(window => window.Page is AppShell);
+#if WINDOWS || MACCATALYST
+        PushRegistrationService.IsAppForeground = visible;
+#endif
+        pushGatewayService.SetForeground(visible);
+        pushNavigationService.SetForeground(visible);
+        if (!visible) await pushCleanup;
         try { await messagingService.SetForegroundAsync(visible); }
         catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Session lifecycle failed: {ex}"); }
+        UpdatePushRegistration();
+        pushNavigationService.TryOpen();
     }
 
     async void OnWalletChanged(object? sender, Wallet? wallet)
     {
+        // Root-page replacement can race this event; keep the device session until cleanup finishes.
+        if (wallet is null) await (pushCleanup = pushGatewayService.UnregisterAsync());
         try { await messagingService.WalletChangedAsync(wallet); }
         catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Wallet session update failed: {ex}"); }
     }

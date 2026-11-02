@@ -1,4 +1,5 @@
 using Meshline;
+using NeoOrder.OneGate.Services.Notifications;
 using Meshline.Interactions;
 using Meshline.Models.Client;
 using Meshline.Models.Protocol;
@@ -14,7 +15,7 @@ using System.Text.Json;
 namespace NeoOrder.OneGate.Services.Messaging;
 
 public sealed partial class MessagingService(IWalletProvider walletProvider, IRelayRegistry registry,
-    WalletAuthorizationService walletAuthorizationService, IServiceScopeFactory scopeFactory, NeoOrder.OneGate.Services.Files.FileUploadClient fileUploads) : IAsyncDisposable
+    WalletAuthorizationService walletAuthorizationService, IServiceScopeFactory scopeFactory, PushGatewayOptions pushOptions, NeoOrder.OneGate.Services.Files.FileUploadClient fileUploads) : IAsyncDisposable
 {
     readonly SemaphoreSlim lifecycleLock = new(1, 1);
     MeshlineClient? client;
@@ -120,7 +121,8 @@ public sealed partial class MessagingService(IWalletProvider walletProvider, IRe
                     // must preserve the account's existing profile and discovery setting.
                     var options = new AccountEstablishmentOptions
                     {
-                        InitialProfile = new AccountInitialProfile { PublicDiscovery = discovery }
+                        InitialProfile = new AccountInitialProfile { PublicDiscovery = discovery },
+                        PushGateway = SupportsPushGateway ? pushOptions.CallbackUrl : null
                     };
                     while (true)
                     {
@@ -264,6 +266,12 @@ public sealed partial class MessagingService(IWalletProvider walletProvider, IRe
             newClient.MessageManager.TimelineChanged += OnMessagingChanged;
             newClient.MessageManager.SendStatusChanged += OnMessageSendStatusChanged;
             newClient.MessageManager.SyncStatusChanged += OnSynchronizationChanged;
+#if WINDOWS || MACCATALYST
+            newClient.MessageManager.MessageReceived += OnIncomingDirectMessages;
+            newClient.MessageManager.SyncStatusChanged += OnNotificationSyncStatusChanged;
+            newClient.GroupManager.TimelineChanged += OnIncomingGroupMessages;
+            newClient.GroupManager.SyncStatusChanged += OnNotificationSyncStatusChanged;
+#endif
             if (!forActivation) StartRuntime();
         }
         catch
@@ -339,6 +347,12 @@ public sealed partial class MessagingService(IWalletProvider walletProvider, IRe
         Interlocked.Increment(ref requestCountRevision);
         runtimeCancellation?.Cancel();
         await runtimeTask;
+#if WINDOWS || MACCATALYST
+        notificationQueue?.Writer.TryComplete();
+        await notificationTask;
+        notificationQueue = null;
+        ResetNotificationSync();
+#endif
         runtimeCancellation?.Dispose();
         runtimeCancellation = null;
         if (oldClient is not null)
@@ -349,6 +363,12 @@ public sealed partial class MessagingService(IWalletProvider walletProvider, IRe
             oldClient.MessageManager.TimelineChanged -= OnMessagingChanged;
             oldClient.MessageManager.SendStatusChanged -= OnMessageSendStatusChanged;
             oldClient.MessageManager.SyncStatusChanged -= OnSynchronizationChanged;
+#if WINDOWS || MACCATALYST
+            oldClient.MessageManager.MessageReceived -= OnIncomingDirectMessages;
+            oldClient.MessageManager.SyncStatusChanged -= OnNotificationSyncStatusChanged;
+            oldClient.GroupManager.TimelineChanged -= OnIncomingGroupMessages;
+            oldClient.GroupManager.SyncStatusChanged -= OnNotificationSyncStatusChanged;
+#endif
         }
         relayPool = null;
         sessionWallet = null;

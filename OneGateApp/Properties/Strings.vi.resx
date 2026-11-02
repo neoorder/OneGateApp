@@ -1415,6 +1415,42 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="ChatSaveBio" xml:space="preserve"><value>Lưu</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Xóa bạn trò chuyện</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Xóa “{0}” khỏi danh sách bạn trò chuyện? Lịch sử trò chuyện và các địa chỉ đã lưu sẽ được giữ lại. Tin nhắn đã gửi sẽ không bị thu hồi.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Bật thông báo tin nhắn</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>Để bật thông báo trò chuyện, bạn cần cấp quyền qua ví. Tiếp tục?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>Chưa hoàn tất thiết lập thông báo. Hãy thử lại trong cài đặt thông báo.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>Thông báo này dành cho tài khoản khác. Hãy chuyển sang tài khoản ví tương ứng để xem.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>Bạn có tin nhắn mới</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Tin nhắn nhóm</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} đã gửi một tin nhắn</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Cài đặt thông báo</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>Thông báo hệ thống</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>Quản lý quyền hiển thị thông báo của OneGate trong cài đặt hệ thống.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Chưa cho phép thông báo</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Mở cài đặt hệ thống</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Cho phép thông báo</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Tin nhắn trò chuyện</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Hoàn tất thiết lập để nhận thông báo tin nhắn.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Thông báo khi có tin nhắn mới.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Đang thiết lập thông báo tin nhắn…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Cho phép thông báo hệ thống để nhận thông báo tin nhắn.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Hiện chưa thể nhận thông báo tin nhắn.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Không thể thiết lập thông báo. Hãy kiểm tra kết nối rồi thử lại.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>Nhận thông báo tin nhắn khi OneGate đang chạy.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>Không thể cập nhật cài đặt thông báo. Vui lòng thử lại.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Nhận thông báo</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Nhận thông báo trên thiết bị này.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Thông báo đã tắt</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>Bạn đang ngoại tuyến. Tùy chọn thông báo sẽ được đồng bộ khi có kết nối trở lại. Hãy thử thiết lập lần đầu khi trực tuyến.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Hoàn tất thiết lập</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>Việc cấp quyền thông báo chưa hoàn tất. Vui lòng thử lại.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Ảnh đại diện</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Đổi ảnh đại diện</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Chọn ảnh</value></data>

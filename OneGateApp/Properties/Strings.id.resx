@@ -1415,6 +1415,42 @@ Alamat: {0}</value></data>
   <data name="ChatSaveBio" xml:space="preserve"><value>Simpan</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Hapus teman chat</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Hapus “{0}” sebagai teman chat? Riwayat chat dan alamat yang tersimpan akan tetap disimpan. Pesan yang sudah dikirim tidak akan ditarik kembali.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Aktifkan notifikasi pesan</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>Mengaktifkan notifikasi chat memerlukan otorisasi wallet. Lanjutkan?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>Pengaturan notifikasi belum selesai. Coba lagi di pengaturan notifikasi.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>Notifikasi ini ditujukan untuk akun lain. Beralihlah ke akun wallet yang sesuai untuk melihatnya.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>Anda memiliki pesan baru</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Pesan grup</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} mengirim pesan</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Pengaturan notifikasi</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>Notifikasi sistem</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>Atur apakah OneGate boleh menampilkan notifikasi di pengaturan sistem.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Notifikasi belum diizinkan</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Buka pengaturan sistem</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Izinkan notifikasi</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Pesan obrolan</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Selesaikan pengaturan untuk menerima pemberitahuan pesan.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Beri tahu saya saat ada pesan baru.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Menyiapkan notifikasi pesan…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Izinkan notifikasi sistem untuk menerima pemberitahuan pesan.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Pemberitahuan pesan belum tersedia saat ini.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Tidak dapat menyiapkan notifikasi. Periksa koneksi Anda lalu coba lagi.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>Terima pemberitahuan pesan saat OneGate berjalan.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>Tidak dapat memperbarui pengaturan notifikasi. Coba lagi.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Terima notifikasi</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Terima notifikasi di perangkat ini.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Notifikasi dinonaktifkan</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>Anda sedang offline. Preferensi notifikasi akan disinkronkan saat terhubung kembali. Coba lagi pengaturan awal setelah online.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Selesaikan pengaturan</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>Otorisasi notifikasi belum selesai. Silakan coba lagi.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Foto profil</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Ganti foto profil</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Pilih foto</value></data>

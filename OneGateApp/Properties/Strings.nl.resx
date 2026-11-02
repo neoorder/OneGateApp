@@ -1415,6 +1415,42 @@ Adres: {0}</value></data>
   <data name="ChatSaveBio" xml:space="preserve"><value>Opslaan</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Chatvriend verwijderen</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>‘{0}’ verwijderen als chatvriend? De chatgeschiedenis en opgeslagen adressen blijven behouden. Al verzonden berichten worden niet ingetrokken.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Berichtmeldingen inschakelen</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>Voor het inschakelen van chatmeldingen is toestemming via je wallet nodig. Doorgaan?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>Het instellen is nog niet voltooid. Probeer het opnieuw in de meldingsinstellingen.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>Deze melding hoort bij een ander account. Schakel over naar het bijbehorende walletaccount om de melding te bekijken.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>Je hebt een nieuw bericht</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Groepsbericht</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} heeft een bericht gestuurd</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Meldingsinstellingen</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>Systeemmeldingen</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>Beheer in de systeeminstellingen of OneGate meldingen mag tonen.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Meldingen zijn nog niet toegestaan</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Systeeminstellingen openen</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Meldingen toestaan</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Chatberichten</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Rond de instellingen af om berichtmeldingen te ontvangen.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Mij waarschuwen bij een nieuw bericht.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Berichtmeldingen instellen…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Sta systeemmeldingen toe om berichtmeldingen te ontvangen.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Berichtmeldingen zijn momenteel niet beschikbaar.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Meldingen konden niet worden ingesteld. Controleer je verbinding en probeer het opnieuw.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>Berichtmeldingen ontvangen terwijl OneGate actief is.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>De meldingsinstellingen konden niet worden bijgewerkt. Probeer het opnieuw.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Meldingen ontvangen</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Meldingen ontvangen op dit apparaat.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Meldingen zijn uitgeschakeld</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>Je bent offline. Meldingsvoorkeuren worden gesynchroniseerd zodra je weer online bent. Probeer dan de eerste configuratie opnieuw.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Instellingen afronden</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>De toestemming voor meldingen is nog niet afgerond. Probeer het opnieuw.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Profielfoto</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Profielfoto wijzigen</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Foto kiezen</value></data>

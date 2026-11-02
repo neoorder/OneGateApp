@@ -78,6 +78,7 @@ public partial class HomePage
             IsChatBusy = false;
             NotifyChatState();
             if (chatReloadPending && isPageVisible && SelectedHomeSection == 0) LoadChatState();
+            else if (isPageVisible && SelectedHomeSection == 0 && IsChatEnabled) await messagingService.PromptPushGatewayAsync(this);
         }
     }
 

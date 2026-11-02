@@ -15,6 +15,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
     readonly IWalletProvider walletProvider;
     CancellationTokenSource? operation;
     string? localAccountId;
+    (string Account, string Device, string Network)? pushNavigationIdentity;
     bool isVisible;
     bool hasNavigatedTo;
     bool openingDetails;
@@ -120,6 +121,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        pushNavigationIdentity = query.TryGetValue("pushIdentity", out var expected) && expected is ValueTuple<string, string, string> identity ? identity : null;
         if (query.TryGetValue("address", out var address))
         {
             string value = ((string)address).Trim();
@@ -274,7 +276,10 @@ public partial class ChatPage : ContentPage, IQueryAttributable
                 await ReadConversationListAsync(cancellation.Token);
                 return;
             }
+            if (!await ValidatePushNavigationAsync(cancellation.Token)) return;
             var details = await messagingService.GetChatContactAsync(Address, resolveProfile: false, cancellation.Token);
+            if (!await ValidatePushNavigationAsync(cancellation.Token, details.LocalAccountId)) return;
+            pushNavigationIdentity = null;
             cancellation.Token.ThrowIfCancellationRequested();
             if (localAccountId is not null && localAccountId != details.LocalAccountId)
                 throw new InvalidOperationException(Strings.ChatAccountChanged);
@@ -421,6 +426,19 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         receiveError = notice;
         OnPropertyChanged(nameof(ChatConnectionNotice));
         OnPropertyChanged(nameof(ErrorNotice));
+    }
+
+    async Task<bool> ValidatePushNavigationAsync(CancellationToken cancellationToken, string? loadedAccount = null)
+    {
+        if (pushNavigationIdentity is not { } expected) return true;
+        var actual = await messagingService.GetPushNavigationIdentityAsync();
+        cancellationToken.ThrowIfCancellationRequested();
+        if (actual == expected && (loadedAccount is null || loadedAccount == expected.Account)) return true;
+        var shell = Shell.Current;
+        await shell.GoToAsync("//home");
+        if (actual is { } current && (current.Account != expected.Account || current.Network != expected.Network))
+            await shell.DisplayAlertAsync(Strings.ChatEnableNotifications, Strings.ChatPushOtherAccount, Strings.OK);
+        return false;
     }
 
     void ClearHistory(bool keepConversationList = false)

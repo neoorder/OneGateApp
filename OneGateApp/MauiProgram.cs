@@ -10,6 +10,7 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Resources;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.Messaging;
+using NeoOrder.OneGate.Services.Notifications;
 using NeoOrder.OneGate.Services.RemoteDebug;
 using NeoOrder.OneGate.Services.RPC;
 using Plugin.Maui.ScreenSecurity;
@@ -131,6 +132,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<MessagingService>();
         builder.Services.AddSingleton<ChatAvatarService>();
         builder.Services.AddSingleton<Services.Files.FileUploadClient>();
+        builder.Services.AddSingleton<PushRegistrationService>();
+        builder.Services.AddSingleton<IPushGatewayStore, SecurePushGatewayStore>();
+        builder.Services.AddSingleton(_ => PushGatewayConfiguration.Load());
+        builder.Services.AddSingleton(sp => new PushGatewayClient(
+            new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromSeconds(15) },
+            sp.GetRequiredService<PushGatewayOptions>(), sp.GetRequiredService<IPushGatewayStore>(), System.TimeProvider.System));
+        builder.Services.AddSingleton<PushGatewayService>();
+        builder.Services.AddSingleton<PushNavigationService>();
         builder.Services.AddSingleton<TokenManager>();
         builder.Services.AddSingleton<ActivityLogService>();
         builder.Services.AddSingleton<RpcClient>();

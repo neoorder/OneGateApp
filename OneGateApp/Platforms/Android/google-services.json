@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "706516913344",
+    "project_id": "onegate-5d287",
+    "storage_bucket": "onegate-5d287.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706516913344:android:b8764bff8507ac01937125",
+        "android_client_info": {
+          "package_name": "org.neoorder.onegate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3hgzi4chBi8WzFts5HrQX3lR423SYrCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

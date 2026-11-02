@@ -1417,6 +1417,42 @@
   <data name="ChatSaveBio" xml:space="preserve"><value>儲存</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>刪除聊天好友</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>確定刪除聊天好友「{0}」嗎？聊天記錄和已儲存的地址會保留，已傳送的訊息不會撤回。</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>啟用訊息通知</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>啟用聊天訊息通知需要錢包授權，是否繼續？</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>訊息通知尚未設定完成，可在通知設定中重試。</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>這則通知屬於其他帳戶，請切換到對應的錢包帳戶查看。</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>你有一則新訊息</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>群組訊息</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} 傳來一則訊息</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>通知設定</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>系統通知</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>在系統設定中管理是否允許 OneGate 顯示通知。</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>尚未允許通知</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>開啟系統設定</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>允許通知</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>聊天訊息</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>完成設定後，即可接收訊息提醒。</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>收到新訊息時提醒我。</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>正在設定訊息通知…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>請允許系統通知，以接收訊息提醒。</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>暫時無法接收訊息提醒。</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>通知設定未完成，請檢查網路後重試。</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>OneGate 執行時提醒新訊息。</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>無法更新通知設定，請重試。</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>接收通知</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>在這台裝置上接收通知。</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>已關閉通知</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>目前沒有網路，通知偏好將在連線後自動同步。首次設定請連線後重試。</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>完成設定</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>通知授權尚未完成，請重試。</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>頭像</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>更換頭像</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>選擇照片</value></data>

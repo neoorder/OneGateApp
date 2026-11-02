@@ -1,15 +1,28 @@
 ﻿using Foundation;
 using UIKit;
+using UserNotifications;
+using NeoOrder.OneGate.Services.Notifications;
 
 namespace NeoOrder.OneGate.Platforms.MacCatalyst;
 
 [Register(nameof(AppDelegate))]
 public class AppDelegate : MauiUIApplicationDelegate
 {
+    readonly PushNotificationDelegate pushDelegate = new();
+
+    [Export("application:didRegisterForRemoteNotificationsWithDeviceToken:")]
+    public void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken) =>
+        IPlatformApplication.Current!.Services.GetRequiredService<PushRegistrationService>().OnApnsRegistered(deviceToken);
+
+    [Export("application:didFailToRegisterForRemoteNotificationsWithError:")]
+    public void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error) =>
+        IPlatformApplication.Current!.Services.GetRequiredService<PushRegistrationService>().OnApnsRegistrationFailed(error);
+
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 
     public override bool FinishedLaunching(UIApplication application, NSDictionary? launchOptions)
     {
+        UNUserNotificationCenter.Current.Delegate = pushDelegate;
         if (application.UserActivity is not null)
             HandleAppLink(application.UserActivity);
         return base.FinishedLaunching(application, launchOptions);

@@ -48,6 +48,11 @@ public partial class SettingsPage : ContentPage
             Command = Commands.GotoPage,
             CommandParameter = "//home/settings/language"
         });
+        yield return (Strings.General, new SettingEntry(Strings.NotificationSettings)
+        {
+            Command = Commands.GotoPage,
+            CommandParameter = "//home/settings/notifications"
+        });
         yield return (Strings.General, new SettingEntry(Strings.ChatSettings)
         {
             Command = Commands.GotoPage,

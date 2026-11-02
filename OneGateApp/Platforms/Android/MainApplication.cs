@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Runtime;
+using Android.Text.Method;
 using Microsoft.Maui.Handlers;
 
 namespace NeoOrder.OneGate.Platforms.Android;
@@ -9,18 +10,17 @@ public class MainApplication(IntPtr handle, JniHandleOwnership ownership) : Maui
 {
     protected override MauiApp CreateMauiApp()
     {
-        EditorHandler.Mapper.AppendToMapping("ReadOnlyCopyable", (handler, view) =>
+        EditorHandler.Mapper.AppendToMapping(nameof(IEditor.IsReadOnly), (handler, view) =>
         {
-            if (view.IsReadOnly)
-            {
-                var editText = handler.PlatformView;
-                editText.SetTextIsSelectable(true);
-                editText.ShowSoftInputOnFocus = false;
-                editText.Focusable = true;
-                editText.FocusableInTouchMode = true;
-                editText.Clickable = true;
-                editText.LongClickable = true;
-            }
+            var editText = handler.PlatformView;
+            editText.SetTextIsSelectable(view.IsReadOnly);
+            // Turning off text selection clears Android's cursor movement method.
+            if (!view.IsReadOnly) editText.MovementMethod = ArrowKeyMovementMethod.Instance;
+            editText.ShowSoftInputOnFocus = !view.IsReadOnly;
+            editText.Focusable = true;
+            editText.FocusableInTouchMode = true;
+            editText.Clickable = true;
+            editText.LongClickable = true;
         });
         return MauiProgram.CreateMauiApp();
     }

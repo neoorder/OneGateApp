@@ -1415,6 +1415,42 @@ Adres: {0}</value></data>
   <data name="ChatSaveBio" xml:space="preserve"><value>Kaydet</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Sohbet arkadaşını sil</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>“{0}” sohbet arkadaşlarından silinsin mi? Sohbet geçmişi ve kayıtlı adresler korunur. Gönderilmiş mesajlar geri çekilmez.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Mesaj bildirimlerini aç</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>Sohbet bildirimlerini etkinleştirmek için cüzdan yetkilendirmesi gerekiyor. Devam edilsin mi?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>Bildirim kurulumu tamamlanmadı. Bildirim ayarlarından tekrar deneyin.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>Bu bildirim başka bir hesaba ait. Görüntülemek için ilgili cüzdan hesabına geçin.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>Yeni bir mesajınız var</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Grup mesajı</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} bir mesaj gönderdi</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Bildirim ayarları</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>Sistem bildirimleri</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>OneGate’in bildirim gösterip gösteremeyeceğini sistem ayarlarından yönetin.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Bildirimlere henüz izin verilmedi</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Sistem ayarlarını aç</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Bildirimlere izin ver</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Sohbet mesajları</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Mesaj uyarıları almak için kurulumu tamamlayın.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Yeni bir mesaj geldiğinde bana bildir.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Mesaj bildirimleri ayarlanıyor…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Mesaj uyarıları almak için sistem bildirimlerine izin verin.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Mesaj uyarıları şu anda kullanılamıyor.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Bildirimler ayarlanamadı. Bağlantınızı kontrol edip tekrar deneyin.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>OneGate çalışırken mesaj uyarıları al.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>Bildirim ayarları güncellenemedi. Lütfen tekrar deneyin.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Bildirim al</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Bu cihazda bildirim al.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Bildirimler kapalı</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>Çevrimdışısınız. Yeniden bağlandığınızda bildirim tercihleri eşitlenir. İlk kurulumu çevrimiçi olduğunuzda yeniden deneyin.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Kurulumu tamamla</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>Bildirim yetkilendirmesi henüz tamamlanmadı. Lütfen tekrar deneyin.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Profil fotoğrafı</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Profil fotoğrafını değiştir</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Fotoğraf seç</value></data>

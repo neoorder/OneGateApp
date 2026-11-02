@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.NotificationSettingsPage"
+             Title="{x:Static og:Strings.NotificationSettings}"
+             SafeAreaEdges="All"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20,24" Spacing="20" MaximumWidthRequest="520" HorizontalOptions="Fill">
+            <Border StyleClass="Card">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16" MinimumHeightRequest="44">
+                        <Label Text="{x:Static og:Strings.NotificationReceive}" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Switch x:Name="notificationsEnabled" Grid.Column="1" VerticalOptions="Center"
+                                IsEnabled="{Binding CanToggle}" Toggled="OnNotificationsToggled"
+                                SemanticProperties.Description="{x:Static og:Strings.NotificationReceive}" />
+                    </Grid>
+                    <Label Text="{Binding PreferenceText}" StyleClass="Secondary" />
+                </VerticalStackLayout>
+            </Border>
+            <Border StyleClass="Card">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16" MinimumHeightRequest="44">
+                        <Label Text="{x:Static og:Strings.NotificationChat}" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Switch x:Name="chatEnabled" Grid.Column="1" VerticalOptions="Center"
+                                IsEnabled="{Binding CanToggleChat}" Toggled="OnChatToggled"
+                                SemanticProperties.Description="{x:Static og:Strings.NotificationChat}" />
+                    </Grid>
+                    <Label Text="{Binding ChatStatusText}" StyleClass="Secondary" />
+                    <Button Text="{x:Static og:Strings.NotificationCompleteSetup}" IsVisible="{Binding NeedsAuthorization}"
+                            IsEnabled="{Binding CanEdit}" Clicked="OnCompleteSetupClicked" />
+                    <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" IsVisible="{Binding CanRetry}"
+                            IsEnabled="{Binding CanEdit}" Clicked="OnRetryClicked" />
+                </VerticalStackLayout>
+            </Border>
+            <Border StyleClass="Card" IsVisible="{Binding ShowPermissionWarning}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="{x:Static og:Strings.NotificationPermission}" FontAttributes="Bold" />
+                    <Label Text="{Binding PermissionText}" />
+                    <Label Text="{x:Static og:Strings.NotificationAllowHint}" StyleClass="Secondary" />
+                    <Button Text="{x:Static og:Strings.NotificationAllow}" IsVisible="{Binding CanRequestPermission}"
+                            IsEnabled="{Binding CanEdit}" Clicked="OnAllowClicked" />
+                    <Button Text="{x:Static og:Strings.NotificationOpenSettings}" StyleClass="Secondary"
+                            IsEnabled="{Binding CanEdit}" Clicked="OnOpenSettingsClicked" />
+                </VerticalStackLayout>
+            </Border>
+            <Label Text="{x:Static og:Strings.NotificationOfflineHint}" StyleClass="Secondary" IsVisible="{Binding IsOffline}" />
+            <ActivityIndicator IsRunning="{Binding IsWorking}" IsVisible="{Binding IsWorking}" HeightRequest="24" />
+            <Label Text="{Binding ErrorText}" StyleClass="Danger" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

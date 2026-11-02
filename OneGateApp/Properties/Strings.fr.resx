@@ -1415,6 +1415,42 @@ Adresse : {0}</value></data>
   <data name="ChatSaveBio" xml:space="preserve"><value>Enregistrer</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Retirer des amis de chat</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Retirer « {0} » de vos amis de chat ? L’historique de discussion et les adresses enregistrées seront conservés. Les messages déjà envoyés ne seront pas rappelés.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Activer les notifications de messages</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>L’activation des notifications de chat nécessite une autorisation du portefeuille. Continuer ?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>La configuration est incomplète. Réessayez dans les paramètres de notification.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>Cette notification concerne un autre compte. Passez au compte de portefeuille correspondant pour la consulter.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>Vous avez un nouveau message</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Message de groupe</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} a envoyé un message</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Paramètres de notification</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>Notifications système</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>Autorisez ou non OneGate à afficher des notifications dans les paramètres système.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Les notifications ne sont pas encore autorisées</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Ouvrir les paramètres système</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Autoriser les notifications</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Messages de discussion</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Terminez la configuration pour recevoir les alertes de messages.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Me prévenir à la réception d’un nouveau message.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Configuration des notifications de messages…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Autorisez les notifications système pour recevoir des alertes de messages.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Les alertes de messages sont indisponibles pour le moment.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Impossible de configurer les notifications. Vérifiez votre connexion et réessayez.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>Recevoir les alertes de messages lorsque OneGate est en cours d’exécution.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>Impossible de mettre à jour les paramètres de notification. Réessayez.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Recevoir des notifications</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Recevoir des notifications sur cet appareil.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Les notifications sont désactivées</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>Vous êtes hors ligne. Les préférences de notification seront synchronisées à la reconnexion. Réessayez la configuration initiale une fois en ligne.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Terminer la configuration</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>L’autorisation des notifications n’est pas terminée. Veuillez réessayer.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Photo de profil</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Changer la photo de profil</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Choisir une photo</value></data>

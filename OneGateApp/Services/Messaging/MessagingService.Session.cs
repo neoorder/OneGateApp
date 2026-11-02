@@ -84,6 +84,9 @@ public sealed partial class MessagingService
         MeshlineClient current = client!;
         SetRuntimeConnectionState(current, RelayConnectionState.Connecting);
         CancellationToken token = runtimeCancellation.Token;
+#if WINDOWS || MACCATALYST
+        StartDesktopNotifications(current, token);
+#endif
         // Starting the SDK resolves relays over the network; never hold the service lock for it.
         runtimeTask = Task.Run(() => RunRuntimeAsync(current, token));
     }
@@ -99,6 +102,9 @@ public sealed partial class MessagingService
                     SetRuntimeConnectionState(current, RelayConnectionState.Connecting);
                     await current.ProfileManager.StartAsync(cancellationToken);
                     await current.MessageManager.StartAsync(cancellationToken);
+#if WINDOWS || MACCATALYST
+                    await current.GroupManager.StartAsync(cancellationToken);
+#endif
                     SetRuntimeConnectionState(current, RelayConnectionState.Connected);
                     await Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken);
                 }
@@ -114,6 +120,10 @@ public sealed partial class MessagingService
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { }
         finally
         {
+#if WINDOWS || MACCATALYST
+            try { await current.GroupManager.StopAsync(); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Group session stop failed: {ex.GetType().Name}."); }
+#endif
             try { await current.MessageManager.StopAsync(); }
             catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Session stop failed: {ex}"); }
             try { await current.ProfileManager.StopAsync(); }
@@ -197,6 +207,11 @@ public sealed partial class MessagingService
     void OnRelayConnectionChanged(object? sender, RelayClient relay)
     {
         if (!ReferenceEquals(sender, relayPool)) return;
+#if WINDOWS || MACCATALYST
+        if ((relay.RelayId == client?.Route?.RelayId || relay.SessionMode == SessionMode.Device)
+            && (relay.ConnectionState != RelayConnectionState.Connected || relay.AuthenticationState != RelayAuthenticationState.Device))
+            ResetNotificationSync();
+#endif
         NotifyConnectionChanged();
     }
 
@@ -213,6 +228,9 @@ public sealed partial class MessagingService
 
     void OnNetworkConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
     {
+#if WINDOWS || MACCATALYST
+        if (e.NetworkAccess != NetworkAccess.Internet) ResetNotificationSync();
+#endif
         NotifyConnectionChanged();
     }
 

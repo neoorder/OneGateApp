@@ -37,9 +37,13 @@ namespace NeoOrder.OneGate.Properties {
         internal static string ChatAvatarSaveFailed => ResourceManager.GetString("ChatAvatarSaveFailed", resourceCulture);
 
 
+        internal static string ChatEnableNotifications => ResourceManager.GetString("ChatEnableNotifications", resourceCulture);
 
+        internal static string ChatPushSetupPrompt => ResourceManager.GetString("ChatPushSetupPrompt", resourceCulture);
 
+        internal static string ChatPushSetupFailed => ResourceManager.GetString("ChatPushSetupFailed", resourceCulture);
 
+        internal static string ChatPushOtherAccount => ResourceManager.GetString("ChatPushOtherAccount", resourceCulture);
 
         private static global::System.Resources.ResourceManager resourceMan;
 
@@ -4070,30 +4074,102 @@ namespace NeoOrder.OneGate.Properties {
             get { return ResourceManager.GetString("ChatRemoveContactPrompt", resourceCulture); }
         }
 
+        internal static string ChatNotificationNewMessage {
+            get { return ResourceManager.GetString("ChatNotificationNewMessage", resourceCulture); }
+        }
+
+        internal static string ChatNotificationGroup {
+            get { return ResourceManager.GetString("ChatNotificationGroup", resourceCulture); }
+        }
+
+        internal static string ChatNotificationSenderMessage {
+            get { return ResourceManager.GetString("ChatNotificationSenderMessage", resourceCulture); }
+        }
 
 
+        internal static string NotificationSettings {
+            get { return ResourceManager.GetString("NotificationSettings", resourceCulture); }
+        }
 
+        internal static string NotificationPermission {
+            get { return ResourceManager.GetString("NotificationPermission", resourceCulture); }
+        }
 
+        internal static string NotificationPermissionHint {
+            get { return ResourceManager.GetString("NotificationPermissionHint", resourceCulture); }
+        }
 
+        internal static string NotificationPermissionPending {
+            get { return ResourceManager.GetString("NotificationPermissionPending", resourceCulture); }
+        }
 
+        internal static string NotificationOpenSettings {
+            get { return ResourceManager.GetString("NotificationOpenSettings", resourceCulture); }
+        }
 
+        internal static string NotificationAllow {
+            get { return ResourceManager.GetString("NotificationAllow", resourceCulture); }
+        }
 
+        internal static string NotificationChat {
+            get { return ResourceManager.GetString("NotificationChat", resourceCulture); }
+        }
 
+        internal static string NotificationSetupNeeded {
+            get { return ResourceManager.GetString("NotificationSetupNeeded", resourceCulture); }
+        }
 
+        internal static string NotificationChatReady {
+            get { return ResourceManager.GetString("NotificationChatReady", resourceCulture); }
+        }
 
+        internal static string NotificationConnecting {
+            get { return ResourceManager.GetString("NotificationConnecting", resourceCulture); }
+        }
 
+        internal static string NotificationAllowHint {
+            get { return ResourceManager.GetString("NotificationAllowHint", resourceCulture); }
+        }
 
+        internal static string NotificationUnavailable {
+            get { return ResourceManager.GetString("NotificationUnavailable", resourceCulture); }
+        }
 
+        internal static string NotificationRetryHint {
+            get { return ResourceManager.GetString("NotificationRetryHint", resourceCulture); }
+        }
 
+        internal static string NotificationLocalOnly {
+            get { return ResourceManager.GetString("NotificationLocalOnly", resourceCulture); }
+        }
 
+        internal static string NotificationSettingsFailed {
+            get { return ResourceManager.GetString("NotificationSettingsFailed", resourceCulture); }
+        }
 
+        internal static string NotificationReceive {
+            get { return ResourceManager.GetString("NotificationReceive", resourceCulture); }
+        }
 
+        internal static string NotificationOnDevice {
+            get { return ResourceManager.GetString("NotificationOnDevice", resourceCulture); }
+        }
 
+        internal static string NotificationPaused {
+            get { return ResourceManager.GetString("NotificationPaused", resourceCulture); }
+        }
 
+        internal static string NotificationOfflineHint {
+            get { return ResourceManager.GetString("NotificationOfflineHint", resourceCulture); }
+        }
 
+        internal static string NotificationCompleteSetup {
+            get { return ResourceManager.GetString("NotificationCompleteSetup", resourceCulture); }
+        }
 
-
-
+        internal static string NotificationUpdatePending {
+            get { return ResourceManager.GetString("NotificationUpdatePending", resourceCulture); }
+        }
 
         internal static string ChatNicknameTooLong {
             get { return ResourceManager.GetString("ChatNicknameTooLong", resourceCulture); }

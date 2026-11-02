@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Services;
+using Notifications = NeoOrder.OneGate.Services.Notifications;
 
 namespace NeoOrder.OneGate.Platforms.Android;
 
@@ -16,12 +17,25 @@ public class MainActivity : OneGateActivity
         base.OnCreate(savedInstanceState);
         NotifyMainActivityCreated();
         HandlePaymentIntent(Intent);
+        HandlePushIntent(Intent);
     }
 
     protected override void OnNewIntent(Intent? intent)
     {
         base.OnNewIntent(intent);
         HandlePaymentIntent(intent);
+        HandlePushIntent(intent);
+    }
+
+    static void HandlePushIntent(Intent? intent)
+    {
+        if (intent?.GetStringExtra("og_v") is null) return;
+        var values = new Dictionary<string, string>();
+        foreach (var key in Notifications.PushNavigationService.Keys)
+            if (intent.GetStringExtra(key) is { } value) values[key] = value;
+        IPlatformApplication.Current!.Services.GetRequiredService<Notifications.PushNavigationService>().Receive(values);
+        // Activity recreation must not replay the same click.
+        foreach (var key in Notifications.PushNavigationService.Keys) intent.RemoveExtra(key);
     }
 
     void NotifyMainActivityCreated()

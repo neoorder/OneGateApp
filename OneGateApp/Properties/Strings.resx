@@ -1417,6 +1417,42 @@ Address: {0}</value></data>
   <data name="ChatSaveBio" xml:space="preserve"><value>Save</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Remove chat friend</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Remove “{0}” as a chat friend? Chat history and saved addresses will be kept. Messages already sent will not be recalled.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Enable message notifications</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>Enabling chat notifications requires wallet authorization. Continue?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>Notification setup is incomplete. Retry in Notification settings.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>This notification is for another account. Switch to that wallet account to view it.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>You have a new message</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Group message</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} sent a message</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Notification settings</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>System notifications</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>Manage whether OneGate can show notifications in system settings.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Notifications are not allowed yet</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Open system settings</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Allow notifications</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Chat messages</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Finish setup to receive message alerts.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Notify me when a new message arrives.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Setting up message notifications…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Allow system notifications to receive message alerts.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Message alerts are currently unavailable.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Could not set up notifications. Check your connection and try again.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>Receive message alerts while OneGate is running.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>Could not update notification settings. Please try again.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Receive notifications</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Receive notifications on this device.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Notifications are off</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>You are offline. Notification preferences will sync when you reconnect. Retry initial setup once you are online.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Finish setup</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>Notification authorization is incomplete. Please try again.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Avatar</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Change avatar</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Choose a photo</value></data>

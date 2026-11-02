@@ -1415,6 +1415,42 @@ Adresse: {0}</value></data>
   <data name="ChatSaveBio" xml:space="preserve"><value>Speichern</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Chatfreund entfernen</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>„{0}“ als Chatfreund entfernen? Der Chatverlauf und gespeicherte Adressen bleiben erhalten. Bereits gesendete Nachrichten werden nicht zurückgerufen.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Nachrichtenbenachrichtigungen aktivieren</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>Zum Aktivieren von Chatbenachrichtigungen ist eine Wallet-Autorisierung erforderlich. Fortfahren?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>Die Einrichtung ist unvollständig. Versuche es in den Benachrichtigungseinstellungen erneut.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>Diese Benachrichtigung gehört zu einem anderen Konto. Wechsle zum entsprechenden Wallet-Konto, um sie anzusehen.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>Du hast eine neue Nachricht</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Gruppennachricht</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} hat eine Nachricht gesendet</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Benachrichtigungseinstellungen</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>Systembenachrichtigungen</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>Lege in den Systemeinstellungen fest, ob OneGate Benachrichtigungen anzeigen darf.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Benachrichtigungen sind noch nicht erlaubt</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Systemeinstellungen öffnen</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Benachrichtigungen erlauben</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Chatnachrichten</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Schließe die Einrichtung ab, um Nachrichtenhinweise zu erhalten.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Benachrichtige mich bei neuen Nachrichten.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Nachrichtenbenachrichtigungen werden eingerichtet…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Erlaube Systembenachrichtigungen, um Nachrichtenhinweise zu erhalten.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Nachrichtenhinweise sind derzeit nicht verfügbar.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Benachrichtigungen konnten nicht eingerichtet werden. Prüfe deine Verbindung und versuche es erneut.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>Nachrichtenhinweise empfangen, während OneGate läuft.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>Die Benachrichtigungseinstellungen konnten nicht aktualisiert werden. Bitte versuche es erneut.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Benachrichtigungen empfangen</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Benachrichtigungen auf diesem Gerät empfangen.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Benachrichtigungen sind aus</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>Du bist offline. Die Benachrichtigungseinstellungen werden synchronisiert, sobald du wieder online bist. Versuche dann die Ersteinrichtung erneut.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Einrichtung abschließen</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>Die Autorisierung für Benachrichtigungen ist noch nicht abgeschlossen. Bitte versuche es erneut.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Profilbild</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Profilbild ändern</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Foto auswählen</value></data>

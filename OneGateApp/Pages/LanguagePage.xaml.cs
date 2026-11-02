@@ -63,6 +63,7 @@ public partial class LanguagePage : ContentPage
         CultureInfo.DefaultThreadCurrentUICulture = culture;
         httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
         httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(culture.Name);
+        serviceProvider.GetRequiredService<NeoOrder.OneGate.Services.Notifications.PushGatewayService>().RequestSync(force: true);
         await Toast.Show(Strings.LanguageChanged);
 #if ANDROID
         Platform.CurrentActivity!.Recreate();

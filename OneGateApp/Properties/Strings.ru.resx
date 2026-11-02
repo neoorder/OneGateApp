@@ -1415,6 +1415,42 @@
   <data name="ChatSaveBio" xml:space="preserve"><value>Сохранить</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Удалить из друзей чата</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Удалить «{0}» из друзей чата? История чата и сохранённые адреса останутся. Уже отправленные сообщения не будут отозваны.</value></data>
+  <data name="ChatEnableNotifications" xml:space="preserve">
+    <value>Включить уведомления о сообщениях</value>
+  </data>
+  <data name="ChatPushSetupPrompt" xml:space="preserve">
+    <value>Для включения уведомлений чата нужно подтверждение в кошельке. Продолжить?</value>
+  </data>
+  <data name="ChatPushSetupFailed" xml:space="preserve">
+    <value>Настройка уведомлений не завершена. Повторите попытку в настройках уведомлений.</value>
+  </data>
+  <data name="ChatPushOtherAccount" xml:space="preserve">
+    <value>Это уведомление для другого аккаунта. Переключитесь на соответствующий аккаунт кошелька, чтобы просмотреть его.</value>
+  </data>
+  <data name="ChatNotificationNewMessage" xml:space="preserve"><value>У вас новое сообщение</value></data>
+  <data name="ChatNotificationGroup" xml:space="preserve"><value>Сообщение в группе</value></data>
+  <data name="ChatNotificationSenderMessage" xml:space="preserve"><value>{0} отправил(а) сообщение</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Настройки уведомлений</value></data>
+  <data name="NotificationPermission" xml:space="preserve"><value>Системные уведомления</value></data>
+  <data name="NotificationPermissionHint" xml:space="preserve"><value>Разрешите или запретите OneGate показывать уведомления в настройках системы.</value></data>
+  <data name="NotificationPermissionPending" xml:space="preserve"><value>Уведомления ещё не разрешены</value></data>
+  <data name="NotificationOpenSettings" xml:space="preserve"><value>Открыть настройки системы</value></data>
+  <data name="NotificationAllow" xml:space="preserve"><value>Разрешить уведомления</value></data>
+  <data name="NotificationChat" xml:space="preserve"><value>Сообщения чата</value></data>
+  <data name="NotificationSetupNeeded" xml:space="preserve"><value>Завершите настройку, чтобы получать оповещения о сообщениях.</value></data>
+  <data name="NotificationChatReady" xml:space="preserve"><value>Оповещать о новых сообщениях.</value></data>
+  <data name="NotificationConnecting" xml:space="preserve"><value>Настройка уведомлений о сообщениях…</value></data>
+  <data name="NotificationAllowHint" xml:space="preserve"><value>Разрешите системные уведомления, чтобы получать оповещения о сообщениях.</value></data>
+  <data name="NotificationUnavailable" xml:space="preserve"><value>Оповещения о сообщениях пока недоступны.</value></data>
+  <data name="NotificationRetryHint" xml:space="preserve"><value>Не удалось настроить уведомления. Проверьте подключение и повторите попытку.</value></data>
+  <data name="NotificationLocalOnly" xml:space="preserve"><value>Получать оповещения о сообщениях, пока OneGate работает.</value></data>
+  <data name="NotificationSettingsFailed" xml:space="preserve"><value>Не удалось обновить настройки уведомлений. Повторите попытку.</value></data>
+  <data name="NotificationReceive" xml:space="preserve"><value>Получать уведомления</value></data>
+  <data name="NotificationOnDevice" xml:space="preserve"><value>Получать уведомления на этом устройстве.</value></data>
+  <data name="NotificationPaused" xml:space="preserve"><value>Уведомления отключены</value></data>
+  <data name="NotificationOfflineHint" xml:space="preserve"><value>Нет подключения к сети. Настройки уведомлений синхронизируются после подключения. Повторите первоначальную настройку, когда появится интернет.</value></data>
+  <data name="NotificationCompleteSetup" xml:space="preserve"><value>Завершить настройку</value></data>
+  <data name="NotificationUpdatePending" xml:space="preserve"><value>Авторизация уведомлений ещё не завершена. Попробуйте снова.</value></data>
   <data name="ChatAvatar" xml:space="preserve"><value>Аватар</value></data>
   <data name="ChatAvatarChange" xml:space="preserve"><value>Изменить аватар</value></data>
   <data name="ChatAvatarChoose" xml:space="preserve"><value>Выбрать фото</value></data>
