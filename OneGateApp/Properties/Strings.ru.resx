@@ -1415,5 +1415,16 @@
   <data name="ChatSaveBio" xml:space="preserve"><value>Сохранить</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Удалить из друзей чата</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Удалить «{0}» из друзей чата? История чата и сохранённые адреса останутся. Уже отправленные сообщения не будут отозваны.</value></data>
+  <data name="ChatAvatar" xml:space="preserve"><value>Аватар</value></data>
+  <data name="ChatAvatarChange" xml:space="preserve"><value>Изменить аватар</value></data>
+  <data name="ChatAvatarChoose" xml:space="preserve"><value>Выбрать фото</value></data>
+  <data name="ChatAvatarRemove" xml:space="preserve"><value>Удалить аватар</value></data>
+  <data name="ChatAvatarCrop" xml:space="preserve"><value>Обрезать аватар</value></data>
+  <data name="ChatAvatarCropHint" xml:space="preserve"><value>Перетащите фото, чтобы изменить его положение. Меняйте масштаб двумя пальцами или с помощью ползунка.</value></data>
+  <data name="ChatAvatarZoom" xml:space="preserve"><value>Масштаб фото</value></data>
+  <data name="ChatAvatarSave" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="ChatAvatarInvalidImage" xml:space="preserve"><value>Это фото нельзя использовать. Выберите изображение без анимации размером менее 20 МБ.</value></data>
+  <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Сохранение аватара не завершено. Попробуйте снова.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Не удалось загрузить настройки чата. Попробуйте снова.</value></data>
+  <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Этот аватар больше нельзя сохранить. Выберите фото заново.</value></data>
 </root>

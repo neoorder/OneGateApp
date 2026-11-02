@@ -14,6 +14,23 @@
     </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout Padding="20,24" Spacing="16" MaximumWidthRequest="520" HorizontalOptions="Fill">
+            <Grid WidthRequest="100" HeightRequest="100" HorizontalOptions="Center"
+                  IsVisible="{Binding HasSettings}" IsEnabled="{Binding CanEditAvatar}">
+                <og:ChatAvatarView IsSelf="True" DisplayName="{Binding Nickname}" WidthRequest="88" HeightRequest="88" StrokeShape="RoundRectangle 24"
+                                   HorizontalOptions="Start" VerticalOptions="Start">
+                    <og:ChatAvatarView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnEditAvatarClicked" />
+                    </og:ChatAvatarView.GestureRecognizers>
+                </og:ChatAvatarView>
+                <Grid WidthRequest="44" HeightRequest="44" HorizontalOptions="End" VerticalOptions="End">
+                    <Border WidthRequest="32" HeightRequest="32" StrokeShape="RoundRectangle 16" StrokeThickness="2"
+                            HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"
+                            BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource PageBackground}" />
+                    <Button Text="&#xe63d;" StyleClass="Icon, Link" FontSize="16" WidthRequest="44" HeightRequest="44"
+                            SemanticProperties.Description="{x:Static og:Strings.ChatAvatarChange}"
+                            ToolTipProperties.Text="{x:Static og:Strings.ChatAvatarChange}" Clicked="OnEditAvatarClicked" />
+                </Grid>
+            </Grid>
             <Grid ColumnDefinitions="*,44" ColumnSpacing="8" IsVisible="{Binding Address, Converter={StaticResource HasText}}">
                 <Label Text="{Binding Address}" StyleClass="Secondary" LineBreakMode="CharacterWrap" VerticalTextAlignment="Center" />
                 <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18"

@@ -9,5 +9,6 @@
         <Image x:Name="DefaultIcon" StyleClass="DefaultAvatar" InputTransparent="True" />
         <Label x:Name="Initial" FontSize="18" FontAttributes="Bold" TextColor="{toolkit:AppThemeResource Brand}"
                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" InputTransparent="True" />
+        <Image x:Name="AvatarImage" Aspect="AspectFill" IsVisible="False" InputTransparent="True" />
     </Grid>
 </Border>

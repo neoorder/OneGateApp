@@ -24,6 +24,17 @@ namespace NeoOrder.OneGate.Properties {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
         internal static string ChatSettingsLoadFailed => ResourceManager.GetString("ChatSettingsLoadFailed", resourceCulture);
+        internal static string ChatAvatar => ResourceManager.GetString("ChatAvatar", resourceCulture);
+        internal static string ChatAvatarChange => ResourceManager.GetString("ChatAvatarChange", resourceCulture);
+        internal static string ChatAvatarChoose => ResourceManager.GetString("ChatAvatarChoose", resourceCulture);
+        internal static string ChatAvatarRemove => ResourceManager.GetString("ChatAvatarRemove", resourceCulture);
+        internal static string ChatAvatarCrop => ResourceManager.GetString("ChatAvatarCrop", resourceCulture);
+        internal static string ChatAvatarCropHint => ResourceManager.GetString("ChatAvatarCropHint", resourceCulture);
+        internal static string ChatAvatarZoom => ResourceManager.GetString("ChatAvatarZoom", resourceCulture);
+        internal static string ChatAvatarSave => ResourceManager.GetString("ChatAvatarSave", resourceCulture);
+        internal static string ChatAvatarInvalidImage => ResourceManager.GetString("ChatAvatarInvalidImage", resourceCulture);
+        internal static string ChatAvatarUploadExpired => ResourceManager.GetString("ChatAvatarUploadExpired", resourceCulture);
+        internal static string ChatAvatarSaveFailed => ResourceManager.GetString("ChatAvatarSaveFailed", resourceCulture);
 
 
 

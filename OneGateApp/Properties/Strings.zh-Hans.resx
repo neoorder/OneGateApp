@@ -1417,5 +1417,16 @@
   <data name="ChatSaveBio" xml:space="preserve"><value>保存</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>删除聊天好友</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>确定删除聊天好友“{0}”吗？聊天记录和已保存的地址会保留，已发出的消息不会撤回。</value></data>
+  <data name="ChatAvatar" xml:space="preserve"><value>头像</value></data>
+  <data name="ChatAvatarChange" xml:space="preserve"><value>更换头像</value></data>
+  <data name="ChatAvatarChoose" xml:space="preserve"><value>选择照片</value></data>
+  <data name="ChatAvatarRemove" xml:space="preserve"><value>移除头像</value></data>
+  <data name="ChatAvatarCrop" xml:space="preserve"><value>裁剪头像</value></data>
+  <data name="ChatAvatarCropHint" xml:space="preserve"><value>拖动照片调整位置，双指缩放或使用滑块调整大小。</value></data>
+  <data name="ChatAvatarZoom" xml:space="preserve"><value>照片缩放</value></data>
+  <data name="ChatAvatarSave" xml:space="preserve"><value>保存</value></data>
+  <data name="ChatAvatarInvalidImage" xml:space="preserve"><value>无法使用这张照片，请选择小于 20 MB 的静态图片。</value></data>
+  <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>头像保存未完成，请重试。</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>无法加载聊天设置，请重试。</value></data>
+  <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>无法继续保存这张头像，请重新选择照片。</value></data>
 </root>

@@ -166,6 +166,10 @@ public sealed partial class MessagingService
         {
             // ProfileChanged exposes verified/confirmed values, never the SDK's pending patch.
             await ReconcilePendingChatProfileAsync(profile);
+            await CompletePendingChatAvatarAsync(profile.Account, new ProfileUpdate
+            {
+                Avatar = profile.Avatar is { } avatar ? avatar : Meshline.Models.FieldUpdate<ContentReference>.Delete
+            }, profile.UpdatedAt);
         }
         catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Profile completion storage failed: {ex.Message}"); }
         if (ReferenceEquals(current, client)) NotifyChanged();
@@ -196,6 +200,7 @@ public sealed partial class MessagingService
 
     public string? ChatNickname => client?.Profile?.Nickname;
     public string? ChatBio => client?.Profile?.Bio;
+    public ContentReference? ChatAvatar => client?.Profile?.Avatar;
 
     readonly SemaphoreSlim profileStorageLock = new(1, 1);
     string PendingProfileKey(string accountId) => $"chat/profile-pending/{registry.Context.Registry}/{accountId}";
@@ -336,9 +341,11 @@ public sealed partial class MessagingService
                 // Publishing may wait for the relay; local chat operations must remain available.
                 // A retry must reach the SDK even if local state already matches after an interrupted response.
                 var publication = await StorePendingChatProfileAsync(localAccountId, update, operation.Token);
+                await StorePendingChatAvatarAsync(localAccountId, update);
                 operation.Token.ThrowIfCancellationRequested();
                 var profile = await current.ProfileManager.UpdateProfileAsync(update, operation.Token);
                 await ReconcilePendingChatProfileAsync(profile, publication, update);
+                await CompletePendingChatAvatarAsync(localAccountId, update);
                 operation.Token.ThrowIfCancellationRequested();
                 EnsureCurrentAccount(wallet, account);
                 if (!ReferenceEquals(current, client) || AccountId != localAccountId || !IsEnabled)

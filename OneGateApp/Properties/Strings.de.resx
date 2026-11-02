@@ -1415,5 +1415,16 @@ Adresse: {0}</value></data>
   <data name="ChatSaveBio" xml:space="preserve"><value>Speichern</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>Chatfreund entfernen</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>„{0}“ als Chatfreund entfernen? Der Chatverlauf und gespeicherte Adressen bleiben erhalten. Bereits gesendete Nachrichten werden nicht zurückgerufen.</value></data>
+  <data name="ChatAvatar" xml:space="preserve"><value>Profilbild</value></data>
+  <data name="ChatAvatarChange" xml:space="preserve"><value>Profilbild ändern</value></data>
+  <data name="ChatAvatarChoose" xml:space="preserve"><value>Foto auswählen</value></data>
+  <data name="ChatAvatarRemove" xml:space="preserve"><value>Profilbild entfernen</value></data>
+  <data name="ChatAvatarCrop" xml:space="preserve"><value>Profilbild zuschneiden</value></data>
+  <data name="ChatAvatarCropHint" xml:space="preserve"><value>Verschiebe das Foto an die gewünschte Position. Ändere die Größe mit zwei Fingern oder dem Schieberegler.</value></data>
+  <data name="ChatAvatarZoom" xml:space="preserve"><value>Foto vergrößern oder verkleinern</value></data>
+  <data name="ChatAvatarSave" xml:space="preserve"><value>Speichern</value></data>
+  <data name="ChatAvatarInvalidImage" xml:space="preserve"><value>Dieses Foto kann nicht verwendet werden. Wähle ein nicht animiertes Bild unter 20 MB.</value></data>
+  <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Das Speichern des Profilbilds wurde nicht abgeschlossen. Bitte versuche es erneut.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Die Chateinstellungen konnten nicht geladen werden. Bitte versuche es erneut.</value></data>
+  <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Dieses Profilbild kann nicht mehr gespeichert werden. Bitte wähle erneut ein Foto aus.</value></data>
 </root>

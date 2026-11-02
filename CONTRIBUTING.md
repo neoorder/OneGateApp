@@ -47,7 +47,18 @@ Remote debugging is off by default and accepts HTTPS DApp URLs only. For remotel
 approval from the trusted debugger replaces in-app confirmation on every network. Disabling Developer Tools
 disconnects debuggers and closes remote sessions while preserving the trust list.
 
-## Chat profiles
+## User files and chat avatars
+
+Avatars belong to the Meshline account and are shared across its devices; contact remarks change only the
+local display name. Chat settings offers photo selection, drag/zoom crop, preview and removal. The app
+corrects orientation, fills transparency white and removes source metadata, producing a static 512 × 512
+JPEG up to 128 KiB. The selected basename is kept with a `.jpg` extension.
+
+The app uploads before publishing `AccountProfile.Avatar`. Upload failure leaves the profile unchanged.
+Each accepted crop starts a new operation; retry keeps its `uploadId` for up to 24 hours and refreshes the
+request timestamp and signature. After that window the user must select and upload again. Successful
+upload followed by failed or unconfirmed publication preserves the reference per account, including after
+reopening settings. Nickname, bio and discovery edits do not discard that pending avatar.
 
 The SDK retries unfinished profile publications while the chat session is running. Submitted edits cannot
 be discarded: wait for confirmation, retry, or publish a replacement. The discovery switch shows the last
@@ -55,6 +66,30 @@ submitted choice and can be reversed while unconfirmed. Pending nickname, bio an
 stored per account and restored when settings or the app reopens. Reopening the bio editor restores the
 submitted bio; cancelling the draft keeps its pending publication and retry available. Input is validated
 before replacing pending edits (nickname: 256 UTF-8 bytes; bio: 2048), so rejected text remains only a draft.
+Cancelling selection or cropping keeps the previous pending publication; a new crop replaces it only after upload and submission to the
+SDK. Leaving settings or switching accounts cancels the current call, not a saved publication. Removing
+uses `FieldUpdate<ContentReference>.Delete` and leaves other profile fields unchanged. The app reconciles
+its retry state when the SDK confirms the corresponding avatar.
+
+Each intentional upload creates a new record and URL, even for identical content; retries return the same
+record. The server retains the latest three avatar uploads per account, independently of publication.
+Older records enter a seven-day grace period and are deleted by a later maintenance run. Re-uploading old
+content does not restore its old URL or extend its deadline. A published avatar can therefore expire after
+three later uploads, and an SDK retry can still publish that expired URL. Select and upload another image
+to replace it. Profile removal does not delete stored versions or previously downloaded copies.
+The [server file guide](https://github.com/neoorder/OneGateServer/blob/master/docs/files.md) defines upload
+signing, idempotency, limits, storage and deployment; deploy that service and its migration before clients.
+Uploads do not depend on notification settings or a push declaration.
+
+All chat surfaces use the same fixed-size avatar presentation. Until a verified image is available, show
+an initial from the contact remark or nickname, otherwise the default person icon; addresses never supply
+initials. Visible profiles refresh on page entry, foreground return, manual refresh and every five minutes.
+A confirmed removal restores the fallback immediately; loading must not block messages or move their layout.
+
+Downloads accept only unencrypted static JPEG, PNG or WebP up to 1 MiB and 4096 × 4096 pixels. Public HTTPS
+is required for the original URL and redirects, without cookies or account credentials. Size, SHA-256 and
+decoding are verified before display; valid cached content is reused by hash, including offline. Asynchronous
+results remain tied to the current account and view so navigation and list reuse cannot display another avatar.
 
 ## Validation
 

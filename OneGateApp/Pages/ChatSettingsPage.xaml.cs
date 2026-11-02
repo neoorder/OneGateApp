@@ -31,7 +31,7 @@ public partial class ChatSettingsPage : ContentPage
         && localAccountId == messagingService.AccountId;
     public bool HasSettings => initialized && !accountChanged && IsCurrentAccount && messagingService.IsEnabled;
     public bool CanEdit => isVisible && HasSettings && !IsWorking;
-    public bool CanRetry => isVisible && !IsWorking && !accountChanged && (!initialized || retryUpdate is not null && HasSettings);
+    public bool CanRetry => isVisible && !IsWorking && !accountChanged && (!initialized || (retryUpdate is not null || HasAvatarEdits) && HasSettings);
     public string? Address => !accountChanged ? settingsAccount?.Address : null;
     public string? Nickname => HasSettings ? messagingService.ChatNickname : null;
     public string? Bio => HasSettings ? messagingService.ChatBio : null;
@@ -73,11 +73,13 @@ public partial class ChatSettingsPage : ContentPage
     {
         base.OnAppearing();
         isVisible = true;
+        if (choosingAvatar) { NotifyState(); return; }
         appearanceGeneration++;
         initialized = false;
         accountChanged = false;
         retryUpdate = null;
         nicknameDraft = null;
+        ClearAvatarDraft();
         CloseBioEditor();
         settingsWallet = walletProvider.GetWallet();
         settingsAccount = settingsWallet?.GetDefaultAccount();
@@ -89,6 +91,7 @@ public partial class ChatSettingsPage : ContentPage
     protected override void OnDisappearing()
     {
         isVisible = false;
+        if (choosingAvatar) { base.OnDisappearing(); return; }
         walletProvider.WalletChanged -= OnWalletChanged;
         messagingService.Changed -= OnMessagingChanged;
         operation?.Cancel();
@@ -97,6 +100,7 @@ public partial class ChatSettingsPage : ContentPage
         initialized = false;
         retryUpdate = null;
         nicknameDraft = null;
+        ClearAvatarDraft();
         CloseBioEditor();
         NotifyState();
         base.OnDisappearing();
@@ -104,7 +108,7 @@ public partial class ChatSettingsPage : ContentPage
 
     void OnWalletChanged(object? sender, Wallet? wallet) => MainThread.BeginInvokeOnMainThread(() =>
     {
-        if (isVisible && (!ReferenceEquals(settingsWallet, wallet)
+        if ((isVisible || choosingAvatar) && (!ReferenceEquals(settingsWallet, wallet)
             || !ReferenceEquals(settingsAccount, settingsWallet?.GetDefaultAccount()))) InvalidateAccount();
     });
 
@@ -137,8 +141,31 @@ public partial class ChatSettingsPage : ContentPage
             return;
         }
         RefreshDiscoverySwitch();
-        if (ErrorText == Strings.ChatSettingsSaveFailed)
-            ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : null;
+        if (avatarRetry is not null)
+        {
+            int generation = appearanceGeneration;
+            var retry = avatarRetry;
+            try
+            {
+                var pending = await messagingService.GetPendingChatAvatarAsync(localAccountId, CancellationToken.None);
+                if (!isVisible || !IsCurrentAccount || IsWorking || generation != appearanceGeneration
+                    || !ReferenceEquals(retry, avatarRetry)) return;
+                var profile = messagingService.GetChatDisplayProfile(localAccountId, settingsAccount!.Address);
+                if (pending is null && profile is not null && profile.UpdatedAt > avatarRetryRevision
+                    && (retry.Avatar.IsDeleted ? profile.Avatar is null : retry.Avatar.Value?.ToJson() == profile.Avatar?.ToJson()))
+                {
+                    avatarRetry = null;
+                    if (uploadedAvatar is not null && uploadedAvatar.ToJson() == profile.Avatar?.ToJson())
+                    {
+                        avatarDraft = null;
+                        uploadedAvatar = null;
+                    }
+                }
+            }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Avatar retry state unavailable: {ex.Message}"); }
+        }
+        if (ErrorText == Strings.ChatSettingsSaveFailed || ErrorText == Strings.ChatAvatarSaveFailed)
+            ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : HasAvatarEdits ? Strings.ChatAvatarSaveFailed : null;
     }
 
     void InvalidateAccount()
@@ -147,6 +174,7 @@ public partial class ChatSettingsPage : ContentPage
         operation?.Cancel();
         retryUpdate = null;
         nicknameDraft = null;
+        ClearAvatarDraft();
         CloseBioEditor();
         ErrorText = Strings.ChatAccountChanged;
         NotifyState();
@@ -175,7 +203,9 @@ public partial class ChatSettingsPage : ContentPage
                 if (!IsCurrentAccount) { InvalidateAccount(); return; }
                 ApplyPendingProfile(pending);
                 RefreshDiscoverySwitch();
-                ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : null;
+                avatarRetry = await messagingService.GetPendingChatAvatarAsync(localAccountId!, cancellation.Token);
+                if (avatarRetry is not null) retryAvatarFirst = true;
+                ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : avatarRetry is not null ? Strings.ChatAvatarSaveFailed : null;
             }
             initialized = true;
         }
@@ -243,7 +273,7 @@ public partial class ChatSettingsPage : ContentPage
         if (!CanEdit || !IsEditingBio) return;
         CloseBioEditor();
         if (ErrorText == Strings.ChatBioTooLong || ErrorText == Strings.ChatProfileInvalid)
-            ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : null;
+            ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : HasAvatarEdits ? Strings.ChatAvatarSaveFailed : null;
         NotifyState();
     }
 
@@ -258,9 +288,14 @@ public partial class ChatSettingsPage : ContentPage
     async Task RetryAsync()
     {
         if (!CanRetry) return;
-        if (retryUpdate is { } update) await SaveAsync(update);
+        if (retryAvatarFirst && HasAvatarEdits) await RetryAvatarAsync();
+        else if (retryUpdate is { } update) await SaveAsync(update);
+        else if (HasAvatarEdits) await RetryAvatarAsync();
         else await LoadAsync();
     }
+
+    Task RetryAvatarAsync() => avatarDraft is not null ? UploadAvatarDraftAsync()
+        : avatarRetry is { } avatar ? SaveAsync(avatar) : Task.CompletedTask;
 
     async Task SaveAsync(ProfileUpdate update)
     {
@@ -278,7 +313,10 @@ public partial class ChatSettingsPage : ContentPage
         using var cancellation = new CancellationTokenSource();
         operation = cancellation;
         BusyText = Strings.ChatSettingsSaving;
+        bool editsAvatar = update.Avatar.IsSpecified || update.Avatar.IsDeleted;
+        long profileRevision = messagingService.GetChatDisplayProfile(localAccountId, settingsAccount!.Address)?.UpdatedAt ?? -1;
         ErrorText = null;
+        if (editsAvatar) { avatarRetry = update; avatarRetryRevision = profileRevision; }
         if (update.PublicDiscovery.IsSpecified) SetSwitch(update.PublicDiscovery.Value);
         NotifyState();
         try
@@ -288,6 +326,7 @@ public partial class ChatSettingsPage : ContentPage
             if (!IsCurrentAccount) { InvalidateAccount(); return; }
             if (update.Nickname.IsSpecified || update.Nickname.IsDeleted) nicknameDraft = null;
             if ((update.Bio.IsSpecified || update.Bio.IsDeleted) && BioDraft.Trim() == (saved.Bio ?? "")) CloseBioEditor();
+            if (editsAvatar) ClearAvatarDraft();
         }
         catch (Exception) when (cancellation.IsCancellationRequested) { }
         catch (Exception)
@@ -295,13 +334,15 @@ public partial class ChatSettingsPage : ContentPage
             if (!IsCurrentAccount) InvalidateAccount();
             else
             {
-                ErrorText = Strings.ChatSettingsSaveFailed;
+                retryAvatarFirst = editsAvatar;
+                if (editsAvatar) avatarRetry = update;
+                ErrorText = editsAvatar ? Strings.ChatAvatarSaveFailed : Strings.ChatSettingsSaveFailed;
             }
         }
         finally
         {
             if (ErrorText is null)
-                ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : null;
+                ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : HasAvatarEdits ? Strings.ChatAvatarSaveFailed : null;
             if (!cancellation.IsCancellationRequested && IsCurrentAccount)
                 RefreshDiscoverySwitch();
             await FinishOperationAsync(cancellation);
@@ -352,6 +393,7 @@ public partial class ChatSettingsPage : ContentPage
         OnPropertyChanged(nameof(ShowLoading));
         OnPropertyChanged(nameof(HasSettings));
         OnPropertyChanged(nameof(CanEdit));
+        OnPropertyChanged(nameof(CanEditAvatar));
         OnPropertyChanged(nameof(CanRetry));
         OnPropertyChanged(nameof(Address));
         OnPropertyChanged(nameof(Nickname));

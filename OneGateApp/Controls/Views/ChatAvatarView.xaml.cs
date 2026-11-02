@@ -13,9 +13,12 @@ public partial class ChatAvatarView : Border
     public string? DisplayName { get => (string?)GetValue(DisplayNameProperty); set => SetValue(DisplayNameProperty, value); }
     public bool IsSelf { get => (bool)GetValue(IsSelfProperty); set => SetValue(IsSelfProperty, value); }
     MessagingService? messaging;
+    ChatAvatarService? images;
     Page? page;
     IDispatcherTimer? timer;
+    CancellationTokenSource? imageLoad;
     string? identity;
+    string? imageKey;
     bool loaded;
     readonly List<VisualElement> visibilityParents = [];
     readonly List<ScrollView> scrollParents = [];
@@ -40,6 +43,7 @@ public partial class ChatAvatarView : Border
         if (loaded) return;
         loaded = true;
         messaging = Handler?.MauiContext?.Services.GetService<MessagingService>();
+        images = Handler?.MauiContext?.Services.GetService<ChatAvatarService>();
         if (messaging is not null)
         {
             messaging.ChatProfilesChanged += OnProfilesChanged;
@@ -132,15 +136,50 @@ public partial class ChatAvatarView : Border
         var profile = account is not null && address is not null ? messaging?.GetChatDisplayProfile(account, address) : null;
         name = string.IsNullOrWhiteSpace(name) ? profile?.Nickname : name;
         Initial.Text = string.IsNullOrWhiteSpace(name) ? null : StringInfo.GetNextTextElement(name).ToUpperInvariant();
-        DefaultIcon.IsVisible = Initial.Text is null;
-        Initial.IsVisible = Initial.Text is not null;
+        DefaultIcon.IsVisible = !AvatarImage.IsVisible && Initial.Text is null;
+        Initial.IsVisible = !AvatarImage.IsVisible;
         if (!IsShown() || messaging?.IsEnabled != true || account is null || string.IsNullOrEmpty(address)) return;
         _ = messaging.RefreshChatDisplayProfileAsync(account, address, force);
+        var reference = profile?.Avatar;
+        string? next = reference?.ToJson();
+        if (next == imageKey) return;
+        ResetImage();
+        imageKey = next;
+        if (reference is null || images is null) return;
+        var cancellation = new CancellationTokenSource();
+        imageLoad = cancellation;
+        _ = LoadImageAsync(reference, key, cancellation);
+    }
+
+    async Task LoadImageAsync(Meshline.Models.Protocol.ContentReference reference, string key, CancellationTokenSource cancellation)
+    {
+        try
+        {
+            string? path = await images!.GetImageAsync(reference, cancellation.Token);
+            if (cancellation.IsCancellationRequested || identity != key || !ReferenceEquals(imageLoad, cancellation) || !IsShown()) return;
+            AvatarImage.Source = path;
+            AvatarImage.IsVisible = path is not null;
+            Initial.IsVisible = path is null;
+            DefaultIcon.IsVisible = path is null && Initial.Text is null;
+            if (path is null) imageKey = null; // Retry on later demand, subject to the shared cooldown.
+        }
+        catch (OperationCanceledException) { }
+        finally
+        {
+            if (ReferenceEquals(imageLoad, cancellation)) imageLoad = null;
+            cancellation.Dispose();
+        }
     }
 
     void ResetImage()
     {
-        Initial.IsVisible = Initial.Text is not null;
-        DefaultIcon.IsVisible = Initial.Text is null;
+        imageLoad?.Cancel();
+        imageLoad = null;
+        imageKey = null;
+        if (AvatarImage is not null)
+        {
+            AvatarImage.Source = null; AvatarImage.IsVisible = false;
+            Initial.IsVisible = true; DefaultIcon.IsVisible = Initial.Text is null;
+        }
     }
 }

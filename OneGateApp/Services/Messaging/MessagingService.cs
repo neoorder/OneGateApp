@@ -14,7 +14,7 @@ using System.Text.Json;
 namespace NeoOrder.OneGate.Services.Messaging;
 
 public sealed partial class MessagingService(IWalletProvider walletProvider, IRelayRegistry registry,
-    WalletAuthorizationService walletAuthorizationService, IServiceScopeFactory scopeFactory) : IAsyncDisposable
+    WalletAuthorizationService walletAuthorizationService, IServiceScopeFactory scopeFactory, NeoOrder.OneGate.Services.Files.FileUploadClient fileUploads) : IAsyncDisposable
 {
     readonly SemaphoreSlim lifecycleLock = new(1, 1);
     MeshlineClient? client;

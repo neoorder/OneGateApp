@@ -1415,5 +1415,16 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="ChatSaveBio" xml:space="preserve"><value>저장</value></data>
   <data name="ChatRemoveContact" xml:space="preserve"><value>채팅 친구 삭제</value></data>
   <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>“{0}”님을 채팅 친구에서 삭제할까요? 채팅 기록과 저장된 주소는 유지되며, 이미 보낸 메시지는 회수되지 않습니다.</value></data>
+  <data name="ChatAvatar" xml:space="preserve"><value>프로필 사진</value></data>
+  <data name="ChatAvatarChange" xml:space="preserve"><value>프로필 사진 변경</value></data>
+  <data name="ChatAvatarChoose" xml:space="preserve"><value>사진 선택</value></data>
+  <data name="ChatAvatarRemove" xml:space="preserve"><value>프로필 사진 삭제</value></data>
+  <data name="ChatAvatarCrop" xml:space="preserve"><value>프로필 사진 자르기</value></data>
+  <data name="ChatAvatarCropHint" xml:space="preserve"><value>사진을 드래그하여 위치를 조정하세요. 두 손가락이나 슬라이더로 확대·축소할 수 있습니다.</value></data>
+  <data name="ChatAvatarZoom" xml:space="preserve"><value>사진 확대·축소</value></data>
+  <data name="ChatAvatarSave" xml:space="preserve"><value>저장</value></data>
+  <data name="ChatAvatarInvalidImage" xml:space="preserve"><value>이 사진은 사용할 수 없습니다. 20 MB 미만의 움직이지 않는 이미지를 선택해 주세요.</value></data>
+  <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>프로필 사진 저장이 완료되지 않았습니다. 다시 시도해 주세요.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>채팅 설정을 불러올 수 없습니다. 다시 시도해 주세요.</value></data>
+  <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>이 프로필 사진은 더 이상 저장할 수 없습니다. 사진을 다시 선택해 주세요.</value></data>
 </root>
