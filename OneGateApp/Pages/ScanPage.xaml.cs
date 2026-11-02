@@ -163,7 +163,7 @@ public partial class ScanPage : ContentPage, IQueryAttributable
             else if (result.StartsWith('{'))
             {
                 JsonObject? json = JsonSerializer.Deserialize<JsonObject>(result, SharedOptions.JsonSerializerOptions);
-                if (json is not null && await ProcessJsonAsync(json)) return;
+                if (json is not null && await ProcessJsonAsync(json, result)) return;
             }
             else
             {
@@ -225,6 +225,9 @@ public partial class ScanPage : ContentPage, IQueryAttributable
             query += $"&amount={payment.Amount}";
         switch (action)
         {
+            case "AddContact":
+                await Shell.Current.GoToAsync("..", new ShellNavigationQueryParameters { ["input"] = payment.Recipient });
+                return true;
             case "RecognizeAddress":
                 await Shell.Current.GoToAsync($".." + query);
                 return true;
@@ -279,8 +282,20 @@ public partial class ScanPage : ContentPage, IQueryAttributable
         return false;
     }
 
-    async Task<bool> ProcessJsonAsync(JsonObject json)
+    async Task<bool> ProcessJsonAsync(JsonObject json, string raw)
     {
+        if ((action is null or "AddContact") && json["$type"]?.GetValue<string>() == "meshline.contact.invite")
+        {
+            var parameters = new ShellNavigationQueryParameters { ["input"] = raw };
+            if (action == "AddContact")
+                await Shell.Current.GoToAsync("..", parameters);
+            else
+            {
+                await Shell.Current.GoToAsync("..");
+                await Shell.Current.GoToAsync("//home/add-contact", parameters);
+            }
+            return true;
+        }
         if (json["action"]?.GetValue<string>() == "Authentication")
         {
             var challenge = json.Deserialize<AuthenticationChallengePayload>(SharedOptions.JsonSerializerOptions)!;

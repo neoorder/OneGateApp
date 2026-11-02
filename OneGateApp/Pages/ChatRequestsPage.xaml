@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.ChatRequestsPage"
+             x:Name="Root"
+             Title="{x:Static og:Strings.ChatRequests}"
+             SafeAreaEdges="All"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+    </ContentPage.Resources>
+    <Grid RowDefinitions="auto,auto,auto,*" RowSpacing="12" Margin="20,8,20,0" MaximumWidthRequest="720" HorizontalOptions="Fill">
+        <og:TabBar x:Name="requestDirectionTabs" Spacing="4" IsVisible="{Binding IsChatEnabled}">
+            <og:TabBar.Tabs>
+                <x:Array Type="{x:Type x:String}">
+                    <x:Static Member="og:Strings.ChatRequestsIncoming" />
+                    <x:Static Member="og:Strings.ChatRequestsOutgoing" />
+                </x:Array>
+            </og:TabBar.Tabs>
+        </og:TabBar>
+        <VerticalStackLayout Grid.Row="1" Spacing="8" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}">
+            <Label Text="{Binding ErrorText}" StyleClass="Danger" />
+            <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" HorizontalOptions="Start" MinimumHeightRequest="44"
+                    IsEnabled="{Binding CanRetry}" Clicked="OnRetryClicked" />
+        </VerticalStackLayout>
+        <HorizontalStackLayout Grid.Row="2" Spacing="10" HorizontalOptions="Center" IsVisible="{Binding ShowLoading}">
+            <ActivityIndicator WidthRequest="20" HeightRequest="20" IsRunning="{Binding ShowLoading}" />
+            <Label Text="{Binding BusyText}" StyleClass="Secondary" VerticalTextAlignment="Center" />
+        </HorizontalStackLayout>
+        <CollectionView Grid.Row="3" ItemsSource="{Binding Requests}" IsVisible="{Binding IsChatEnabled}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label BindingContext="{x:Reference Root}" Text="{x:Static og:Strings.ChatRequestsEmpty}" IsVisible="{Binding ShowEmpty}"
+                       StyleClass="Secondary" HorizontalTextAlignment="Center" VerticalOptions="Center" Margin="20" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="og:ChatRequestViewModel">
+                    <Grid ColumnDefinitions="44,*,44" RowDefinitions="auto,auto,1" ColumnSpacing="12" RowSpacing="6" Padding="0,12,0,0">
+                        <Grid Grid.ColumnSpan="3" ColumnDefinitions="44,*,44" RowDefinitions="auto,auto,auto,auto" ColumnSpacing="12" RowSpacing="6">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Buttons="Primary" Tapped="OnRequestTapped" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                            <og:ChatAvatarView Grid.RowSpan="2" StrokeShape="RoundRectangle 12" WidthRequest="44" HeightRequest="44" BackgroundColor="{toolkit:AppThemeResource BrandMuted}" VerticalOptions="Start" Address="{Binding Address}" DisplayName="{Binding DisplayName}" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label Text="{Binding DisplayName, TargetNullValue={x:Static og:Strings.ChatNoNickname}}" FontSize="16" FontAttributes="Bold" LineBreakMode="CharacterWrap" />
+                                <Label Text="{Binding CreatedAt}" StyleClass="Secondary" FontSize="12" />
+                            </VerticalStackLayout>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Address}" StyleClass="Secondary" FontSize="12" LineBreakMode="CharacterWrap" />
+                            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Note}" IsVisible="{Binding Note, Converter={StaticResource HasText}}" LineBreakMode="WordWrap" />
+                            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Status}" StyleClass="Secondary" FontSize="12" Margin="0,0,0,12" />
+                        </Grid>
+                        <Button Grid.Column="2" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" WidthRequest="44" HeightRequest="44" VerticalOptions="Start"
+                                SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,0,0,12"
+                              IsVisible="{Binding CanRespond}" IsEnabled="{Binding CanUseRequests, Source={x:Reference Root}}">
+                            <Button Text="{x:Static og:Strings.ChatIgnoreRequest}" StyleClass="Secondary" MinimumHeightRequest="44" Padding="8,0"
+                                    Clicked="OnIgnoreClicked" CommandParameter="{Binding .}" />
+                            <Button Grid.Column="1" Text="{x:Static og:Strings.ChatAcceptRequest}" MinimumHeightRequest="44" Padding="8,0"
+                                    Clicked="OnAcceptClicked" CommandParameter="{Binding .}" />
+                        </Grid>
+                        <BoxView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HeightRequest="1" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

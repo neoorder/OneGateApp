@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="NeoOrder.OneGate.Pages.ChatInvitationPage"
+             Title="{x:Static og:Strings.ChatMyInvitation}"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.SaveToPhotoLibrary}"
+                     IsEnabled="{Binding CanShareInvitation}" Clicked="OnSaveInvitationClicked" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16" MaximumWidthRequest="420" HorizontalOptions="Fill">
+            <Label Text="{x:Static og:Strings.ChatInvitationDescription}" StyleClass="Secondary" />
+            <Border x:Name="invitationCard" Padding="16" StrokeShape="RoundRectangle 12" BackgroundColor="White" IsVisible="{Binding HasInvitation}">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="{Binding Nickname}" TextColor="#111827" FontSize="22" FontAttributes="Bold" HorizontalTextAlignment="Center"
+                           LineBreakMode="CharacterWrap" IsVisible="{Binding Nickname, Converter={StaticResource HasText}}" />
+                    <Grid Padding="12" HorizontalOptions="Center" IsVisible="{Binding CanCopyInvitation}">
+                        <zxing:BarcodeGeneratorView Format="QrCode" Value="{Binding InvitationValue}" WidthRequest="228" HeightRequest="228"
+                                                   ForegroundColor="Black" BackgroundColor="White" />
+                    </Grid>
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="*,44" ColumnSpacing="8">
+                            <Label Text="{Binding Address}" TextColor="#111827" LineBreakMode="CharacterWrap" VerticalTextAlignment="Center" />
+                            <Button Grid.Column="1" Text="&#xe664;" StyleClass="Icon, IconSecondary" FontSize="20" Padding="10"
+                                    TextColor="#4B5563" BackgroundColor="Transparent"
+                                    SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" Clicked="OnCopyAddressClicked" />
+                        </Grid>
+                        <Label Text="{Binding ExpiryText}" TextColor="#4B5563" FontSize="12" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+            <Label Text="{x:Static og:Strings.ChatInvitationExpired}" StyleClass="Danger" IsVisible="{Binding IsExpired}" />
+            <Label Text="{x:Static og:Strings.OperationFailed}" StyleClass="Danger" IsVisible="{Binding IsUnavailable}" />
+            <Label Text="{Binding ErrorText}" StyleClass="Danger" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+            <ActivityIndicator IsVisible="{Binding IsGenerating}" IsRunning="{Binding IsGenerating}" HeightRequest="24" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button Text="{x:Static og:Strings.ChatCopyInvitation}" LineBreakMode="WordWrap" IsEnabled="{Binding CanCopyInvitation}" Clicked="OnCopyInvitationClicked" />
+                <Button Grid.Column="1" Text="{x:Static og:Strings.Share}" StyleClass="Secondary" LineBreakMode="WordWrap"
+                        IsEnabled="{Binding CanShareInvitation}" Clicked="OnShareInvitationClicked" />
+            </Grid>
+            <Button Text="{x:Static og:Strings.ChatRefreshInvitation}" StyleClass="Secondary" IsEnabled="{Binding CanGenerate}" Clicked="OnRefreshInvitationClicked" />
+            <Label Text="{x:Static og:Strings.ChatInvitationRefreshHint}" StyleClass="Secondary" FontSize="12" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

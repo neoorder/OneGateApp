@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>Impostazioni</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>Impossibile accedere alla fotocamera</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>Contenuto del codice QR non supportato: {0}</value>
   </data>
@@ -362,6 +359,7 @@ Puoi disattivare l'autenticazione biometrica in qualsiasi momento.</value>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operazione annullata</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve"><value>Impossibile completare l’operazione al momento.</value></data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>L'autenticazione biometrica è temporaneamente non disponibile</value>
   </data>
@@ -508,9 +506,6 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Scansiona il codice QR per inviarmi un trasferimento</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>Questo indirizzo può ricevere tutti gli asset sulla piattaforma Neo.</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Salva nella galleria</value>
   </data>
@@ -541,9 +536,6 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
   <data name="ReceivingAddress" xml:space="preserve">
     <value>Indirizzo di destinazione</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>Rubrica</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>Nessun indirizzo</value>
   </data>
@@ -551,7 +543,7 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
     <value>La tua rubrica è vuota</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>Aggiungi indirizzo</value>
+    <value>Aggiungi contatto</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>Screenshot non riuscito</value>
@@ -566,11 +558,12 @@ Dopo la disattivazione, dovrai inserire manualmente la password del wallet per a
     <value>L'indirizzo esiste già</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>Modifica indirizzo</value>
+    <value>Modifica contatto</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Elimina</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>Il contatto è salvato su questo dispositivo. Non è ancora possibile confermare se il nome è stato sincronizzato.</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>Contatto aggiornato con successo</value>
   </data>
@@ -742,9 +735,6 @@ Vuoi continuare?</value>
   </data>
   <data name="AuthenticationInProgress" xml:space="preserve">
     <value>Autorizzazione della richiesta di accesso…</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>Accesso in corso</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>Nome di dominio</value>
@@ -968,17 +958,8 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="DAppSubmission" xml:space="preserve">
     <value>Invio DApp</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Nome del progetto</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>Sito web ufficiale</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>Informazioni di contatto</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>Richiedi inserimento</value>
@@ -1288,4 +1269,151 @@ Si consiglia di conservare separatamente la chiave NEP-2 e la password e di eseg
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>In attesa di un debugger remoto attendibile</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Associa debugger remoto</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Il debugger remoto “{0}” richiede l’accesso. Impronta: {1}. Autorizza solo se ritieni attendibile questo debugger remoto.</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>Messaggi</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>Contatti</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>Notizie</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>Chatta con il tuo indirizzo Neo</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>Solo indirizzo salvato</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>Nessun contatto corrispondente</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>Prova un altro nome, indirizzo o nota.</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>Dettagli del contatto</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>Attiva chat</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>Attivazione della chat…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>Attiva la chat per aggiungere amici e inviare e ricevere messaggi.</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>Consenti richieste di amicizia tramite il mio indirizzo Neo</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>Gli altri possono inviarti richieste di amicizia tramite il tuo indirizzo Neo.</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>Gli altri hanno bisogno del tuo invito alla chat per inviarti una richiesta di amicizia.</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>L’attivazione della chat non è stata completata. Riprova. Le impostazioni che hai scelto verranno mantenute.</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>Autorizza questo dispositivo a inviare e ricevere messaggi con il tuo indirizzo Neo.
+Indirizzo: {0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>Sostituisci dispositivo di chat</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>Ogni account può avere fino a {0} dispositivi di chat e hai già raggiunto questo limite. Per attivare la chat su questo dispositivo, scegli un dispositivo da sostituire. Il dispositivo sostituito non potrà più inviare o ricevere messaggi.</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>Sostituisci questo dispositivo</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>Scadenza autorizzazione: {0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>Scaduta</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>La sostituzione di questo dispositivo potrebbe influire sui collegamenti con gli amici già aggiunti. Scegli un altro dispositivo.</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>Richiedi chat</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>Invia richiesta di amicizia</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>Messaggio della richiesta</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>L’altra persona vedrà questo messaggio insieme alla richiesta.</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>Invio della richiesta di amicizia…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>Amico di chat</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>In attesa che l’altra persona accetti</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>Impossibile confermare se siete amici</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>Attiva prima la chat in Home &gt; Messaggi.</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>L’account del wallet è cambiato. Riapri questa pagina.</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>Non puoi aggiungere questa persona tramite l’indirizzo. Chiedile un invito alla chat.</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>Inserisci un indirizzo Neo N3 valido.</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>Non puoi inviare una richiesta di amicizia al tuo indirizzo.</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>Il messaggio della richiesta è troppo lungo. Accorcialo prima di inviarlo.</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>Richieste di amicizia</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>Richieste ricevute</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>Richieste inviate</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>Nessuna richiesta di amicizia</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>In attesa della tua risposta</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>Visualizza richiesta</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>Accetta</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>Ignora</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>Accettazione della richiesta di amicizia…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>La richiesta di amicizia viene ignorata…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>Aggiunto come amico</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>Richiesta ignorata</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>Questa richiesta di amicizia è cambiata. Controlla l’elenco delle richieste.</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>Apri chat</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>Chat privata</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>Potrai inviare messaggi una volta che sarete amici.</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>Il caricamento della cronologia della chat non è completo. Alcuni messaggi potrebbero non essere ancora visualizzati.</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>Impossibile verificare l’identità di chat di questo dispositivo.</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>Impossibile leggere o salvare la cronologia della chat.</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>Verifica dei messaggi non riuscita. Alcuni messaggi non possono essere visualizzati al momento.</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>Carica messaggi precedenti</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>Nessuna cronologia della chat</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>Invia il primo messaggio per iniziare a chattare.</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[Messaggio non testuale]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>La visualizzazione degli allegati non è ancora supportata</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>Scrivi un messaggio…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>Inserisci un messaggio prima di inviarlo.</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>Invia</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>In attesa di invio</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>Invio in corso</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Invio non ancora confermato</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>Inviato</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>Invio non riuscito</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Impossibile confermare se il messaggio è stato inviato</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[Bozza]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>Torna ai messaggi più recenti ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>Nuovi messaggi: {0} ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>Copia</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>Problema di connessione. L’invio e la ricezione dei messaggi potrebbero subire ritardi.</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>Segna come letto</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>Modifica di nuovo</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>Sostituisci bozza</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>Sostituire la bozza attuale con questo messaggio?</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>Il mio codice QR</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>Condividi il tuo invito per permettere agli altri di inviarti richieste di amicizia.</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>Valido fino al {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>Questo invito è scaduto. Generane uno nuovo.</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>Copia invito</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>Genera nuovo invito</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>Gli inviti sono validi per un massimo di 24 ore. Dopo aver generato un nuovo invito, quelli precedenti restano utilizzabili fino alla loro scadenza.</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>L’account del wallet è cambiato. Riapri «Il mio codice QR».</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>Questo invito alla chat non è valido. Chiedine uno nuovo all’altra persona.</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>Questo invito è scaduto. Chiedine uno nuovo all’altra persona.</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>Questo invito non può essere utilizzato sulla rete Meshline attuale.</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Indirizzo Neo o invito alla chat</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>Inserisci un indirizzo Neo o incolla un invito alla chat</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>Incolla</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>Non puoi aggiungere questa persona tramite l’indirizzo. Puoi salvare l’indirizzo per i trasferimenti o chiederle un invito alla chat.</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>La chat non è attiva, ma puoi comunque salvare contatti per i trasferimenti.</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>Salva solo l’indirizzo</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>Impostazioni chat</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>Salvataggio delle impostazioni chat…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>Impossibile confermare se le modifiche sono state salvate. Riprova.</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>Nessuna conversazione corrispondente</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>Nickname della chat</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>Nessun nickname impostato</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>Il tuo soprannome è troppo lungo. Accorcialo e riprova.</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>La tua biografia è troppo lunga. Accorciala e riprova.</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>Alcune informazioni del profilo non sono valide. Modificale e riprova.</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>Il tuo nickname è visibile agli altri. Svuota il campo e conferma per rimuoverlo.</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>Impossibile aprire il link.</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>Non letti</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>Nessuna conversazione non letta</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>Mostra tutte le conversazioni</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>Fissa conversazione</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>Non fissare più</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>Fissata</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>Messaggio citato</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>Citazione · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>Impossibile visualizzare il messaggio originale</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>Tu</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>Rispondi</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>Annulla risposta</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>Visualizza messaggio originale</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>Ricerca del messaggio originale…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>Torna alla posizione precedente</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>Visualizza testo completo</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>Cerca nella chat</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>Cerca messaggi precedenti</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>Cerca nella cronologia della chat su questo dispositivo per parola chiave, mittente o periodo.</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>Nessun messaggio corrispondente.</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>Torna ai risultati di ricerca</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>Mittente</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>L’altra persona</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>Mostra nella conversazione</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>Inoltra</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>Aggiungi un amico di chat per poter inoltrare messaggi.</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>Filtra conversazioni</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>Filtri</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>Periodo</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>Ultimi 7 giorni</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>Ultimi 30 giorni</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>Rimuovi filtri</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>Contiene link</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>Biografia</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>La tua biografia è visibile agli altri. Svuota il campo e salva per rimuoverla.</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>Salva</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>Rimuovi amico di chat</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Rimuovere «{0}» dagli amici di chat? La cronologia della chat e gli indirizzi salvati verranno mantenuti. I messaggi già inviati non verranno ritirati.</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Impossibile caricare le impostazioni della chat. Riprova.</value></data>
 </root>

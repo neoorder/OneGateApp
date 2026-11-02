@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.ChatRequestPage"
+             Title="{x:Static og:Strings.ChatRequest}"
+             SafeAreaEdges="All"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+        <toolkit:InvertedBoolConverter x:Key="Not" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20,24" Spacing="20" MaximumWidthRequest="520" HorizontalOptions="Fill">
+            <og:ChatAvatarView Address="{Binding Address}" DisplayName="{Binding DisplayName}" WidthRequest="72" HeightRequest="72" StrokeShape="RoundRectangle 20" />
+            <Label Text="{Binding DisplayName, TargetNullValue={x:Static og:Strings.ChatNoNickname}}" FontSize="24" FontAttributes="Bold" LineBreakMode="CharacterWrap" />
+            <Grid ColumnDefinitions="*,44" ColumnSpacing="8" IsVisible="{Binding Address, Converter={StaticResource HasText}}">
+                <Label Text="{Binding Address}" StyleClass="Secondary" LineBreakMode="CharacterWrap" VerticalTextAlignment="Center" />
+                <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18"
+                        WidthRequest="44" HeightRequest="44" VerticalOptions="Center"
+                        SemanticProperties.Description="{x:Static og:Strings.CopyAddress}"
+                        ToolTipProperties.Text="{x:Static og:Strings.CopyAddress}"
+                        Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+            </Grid>
+            <Label Text="{Binding InvitationExpiry}" IsVisible="{Binding InvitationExpiry, Converter={StaticResource HasText}}" StyleClass="Secondary" FontSize="12" />
+            <Label Text="{Binding Nickname}" IsVisible="{Binding Nickname, Converter={StaticResource HasText}}" LineBreakMode="CharacterWrap" />
+            <Label Text="{Binding Bio}" IsVisible="{Binding Bio, Converter={StaticResource HasText}}" StyleClass="Secondary" LineBreakMode="CharacterWrap" />
+            <Label Text="{Binding Status}" FontAttributes="Bold" />
+            <VerticalStackLayout Spacing="8" IsVisible="{Binding IncomingNote, Converter={StaticResource HasText}}">
+                <Label Text="{x:Static og:Strings.ChatRequestNote}" StyleClass="Secondary" />
+                <Label Text="{Binding IncomingNote}" LineBreakMode="CharacterWrap" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="8" IsVisible="{Binding ShowRequestNote}">
+                <Label Text="{x:Static og:Strings.ChatRequestNote}" StyleClass="Secondary" />
+                <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="10,5">
+                    <Editor Text="{Binding Note}" AutoSize="TextChanges" MinimumHeightRequest="80" MaxLength="1024"
+                            IsReadOnly="{Binding CanEditNote, Converter={StaticResource Not}}" og:Border.IsVisible="False"
+                            SemanticProperties.Description="{x:Static og:Strings.ChatRequestNote}" />
+                </Border>
+                <Label Text="{x:Static og:Strings.ChatRequestNoteHint}" FontSize="12" StyleClass="Secondary" />
+            </VerticalStackLayout>
+            <Label Text="{Binding ErrorText}" StyleClass="Danger" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+            <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" HorizontalOptions="Start" MinimumHeightRequest="44"
+                    IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" IsEnabled="{Binding CanRetry}" Clicked="OnRetryClicked" />
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" IsVisible="{Binding ShowLoading}">
+                <ActivityIndicator WidthRequest="20" HeightRequest="20" IsRunning="{Binding ShowLoading}" />
+                <Label Text="{Binding BusyText}" StyleClass="Secondary" VerticalTextAlignment="Center" />
+            </HorizontalStackLayout>
+            <Button Text="{Binding SendText}" IsVisible="{Binding ShowSend}" IsEnabled="{Binding CanSend}" Clicked="OnSendClicked" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsVisible="{Binding HasIncomingRequest}" IsEnabled="{Binding CanRespond}">
+                <Button Text="{x:Static og:Strings.ChatIgnoreRequest}" StyleClass="Secondary" MinimumHeightRequest="44" Clicked="OnIgnoreClicked" />
+                <Button Grid.Column="1" Text="{x:Static og:Strings.ChatAcceptRequest}" MinimumHeightRequest="44" Clicked="OnAcceptClicked" />
+            </Grid>
+            <Button Text="{x:Static og:Strings.ChatOpen}" IsVisible="{Binding CanOpenChat}" IsEnabled="{Binding CanUseDetails}"
+                    Clicked="OnOpenChatClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

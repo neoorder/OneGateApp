@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>Ayarlar</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>Kameraya erişilemiyor</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>Desteklenmeyen QR kod içeriği: {0}</value>
   </data>
@@ -362,6 +359,7 @@ Biyometrik kimlik doğrulamayı istediğiniz zaman devre dışı bırakabilirsin
   <data name="OperationCancelled" xml:space="preserve">
     <value>İşlem iptal edildi</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve"><value>İşlem şu anda tamamlanamıyor.</value></data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>Biyometrik kimlik doğrulama geçici olarak kullanılamıyor</value>
   </data>
@@ -508,9 +506,6 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Bana transfer göndermek için lütfen QR kodu tarayın</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>Bu adres, Neo platformundaki tüm varlıkları alabilir.</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Galeriye kaydet</value>
   </data>
@@ -541,9 +536,6 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
   <data name="ReceivingAddress" xml:space="preserve">
     <value>Alıcı adresi</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>Adres Defteri</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>Adres yok</value>
   </data>
@@ -551,7 +543,7 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
     <value>Adres defteriniz boş</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>Adres ekle</value>
+    <value>Kişi ekle</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>Ekran görüntüsü alınamadı</value>
@@ -566,11 +558,12 @@ Devre dışı bıraktıktan sonra erişimi yetkilendirmek için cüzdan şifreni
     <value>Adres zaten mevcut</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>Adresi düzenle</value>
+    <value>Kişiyi düzenle</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Sil</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>Kişi bu cihaza kaydedildi. Adın eşitlenip eşitlenmediği henüz doğrulanamıyor.</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>Adres başarıyla güncellendi</value>
   </data>
@@ -742,9 +735,6 @@ Devam etmek istiyor musunuz?</value>
   </data>
   <data name="AuthenticationInProgress" xml:space="preserve">
     <value>Oturum açma isteği yetkilendiriliyor…</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>Oturum açılıyor</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>Alan adı</value>
@@ -968,17 +958,8 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp gönderimi</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Proje adı</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>Resmi web sitesi</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>İletişim bilgileri</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>Listeleme talep et</value>
@@ -1288,4 +1269,151 @@ NEP-2 anahtarı ile şifreyi ayrı ayrı saklamanız ve güvenli şekilde yedekl
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Güvenilir bir uzaktan hata ayıklayıcı bekleniyor</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Uzaktan hata ayıklayıcıyı eşleştir</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>“{0}” uzaktan hata ayıklayıcısı erişim istiyor. Parmak izi: {1}. Yalnızca bu uzaktan hata ayıklayıcıya güveniyorsanız izin verin.</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>Mesajlar</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>Kişiler</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>Haberler</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>Neo adresinizle sohbet edin</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>Yalnızca adres kayıtlı</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>Eşleşen kişi bulunamadı</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>Başka bir ad, adres veya not deneyin.</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>Kişi ayrıntıları</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>Sohbeti etkinleştir</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>Sohbet etkinleştiriliyor…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>Arkadaş eklemek, mesaj göndermek ve almak için sohbeti etkinleştirin.</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>Neo adresim üzerinden arkadaşlık isteği gönderilmesine izin ver</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>Başkaları Neo adresiniz üzerinden size arkadaşlık isteği gönderebilir.</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>Başkalarının size arkadaşlık isteği gönderebilmesi için sohbet davetiniz gerekir.</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>Sohbet henüz etkinleştirilemedi. Tekrar deneyin. Daha önce seçtiğiniz ayarlar korunacaktır.</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>Bu cihazı, Neo adresinizle mesaj göndermek ve almak için yetkilendirin.
+Adres: {0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>Sohbet cihazını değiştir</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>Her hesaba en fazla {0} sohbet cihazı eklenebilir. Şu anda bu sınıra ulaştın. Bu cihazda sohbeti etkinleştirmek için değiştirilecek bir cihaz seç. Değiştirilen cihaz artık mesaj gönderip alamayacak.</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>Bu cihazı değiştir</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>Yetki bitişi: {0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>Süresi doldu</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>Bu cihazı değiştirmek mevcut arkadaşlarınla olan bağlantılarını etkileyebilir. Başka bir cihaz seç.</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>Sohbet isteği gönder</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>Arkadaşlık isteği gönder</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>İstek mesajı</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>Karşı taraf bu mesajı isteğinizle birlikte görecek.</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>Arkadaşlık isteği gönderiliyor…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>Sohbet arkadaşı</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>Karşı tarafın kabul etmesi bekleniyor</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>Arkadaşlık durumu şu anda doğrulanamıyor</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>Önce Ana Sayfa &gt; Mesajlar bölümünden sohbeti etkinleştirin.</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>Cüzdan hesabınız değişti. Bu sayfayı yeniden açın.</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>Bu kişiyi adresiyle ekleyemezsiniz. Kendisinden bir sohbet daveti isteyin.</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>Geçerli bir Neo N3 adresi girin.</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>Kendi adresinize arkadaşlık isteği gönderemezsiniz.</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>İstek mesajı çok uzun. Göndermeden önce kısaltın.</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>Arkadaşlık istekleri</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>Alınan istekler</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>Gönderilen istekler</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>Arkadaşlık isteği yok</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>Yanıtınız bekleniyor</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>İsteği görüntüle</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>Kabul et</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>Yok say</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>Arkadaşlık isteği kabul ediliyor…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>Arkadaşlık isteği yok sayılıyor…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>Arkadaş olarak eklendi</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>İstek yok sayıldı</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>Bu arkadaşlık isteği değişti. İstek listesine dönüp kontrol edin.</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>Sohbeti aç</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>Özel sohbet</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>Arkadaş olduktan sonra mesaj gönderebilirsiniz.</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>Sohbet geçmişi tamamen yüklenemedi. Bazı mesajlar henüz görünmüyor olabilir.</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>Bu cihazın sohbet kimliği doğrulanamıyor.</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>Sohbet geçmişi okunamıyor veya kaydedilemiyor.</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>Mesaj doğrulaması başarısız oldu. Bazı mesajlar şu anda görüntülenemiyor.</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>Daha eski mesajları yükle</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>Henüz sohbet geçmişi yok</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>Sohbete başlamak için ilk mesajı gönderin.</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[Metin dışı mesaj]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>Ekleri görüntüleme henüz desteklenmiyor</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>Mesaj yazın…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>Göndermeden önce bir mesaj yazın.</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>Gönder</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>Gönderilmeyi bekliyor</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>Gönderiliyor</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Gönderim henüz doğrulanmadı</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>Gönderildi</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>Gönderilemedi</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Gönderim sonucu şu anda doğrulanamıyor</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[Taslak]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>Son mesajlara dön ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>Yeni mesaj sayısı: {0} ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>Kopyala</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>Bağlantı sorunu var. Mesaj gönderme ve alma gecikebilir.</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>Okundu olarak işaretle</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>Yeniden düzenle</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>Taslağı değiştir</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>Mevcut taslak bu mesajla değiştirilsin mi?</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>QR kodum</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>Başkalarının size arkadaşlık isteği gönderebilmesi için davetinizi paylaşın.</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>Son geçerlilik tarihi: {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>Bu davetin süresi doldu. Yeni bir davet oluşturun.</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>Daveti kopyala</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>Yeni davet oluştur</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>Davetler en fazla 24 saat geçerlidir. Yeni bir davet oluşturulduğunda, önceki davetler süreleri dolana kadar kullanılabilir.</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>Cüzdan hesabı değişti. “QR kodum” sayfasını yeniden açın.</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>Bu sohbet daveti geçersiz. Karşı taraftan yeni bir davet isteyin.</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>Bu davetin süresi doldu. Karşı taraftan yeni bir davet isteyin.</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>Bu davet mevcut Meshline ağında kullanılamaz.</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Neo adresi veya sohbet daveti</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>Bir Neo adresi girin veya sohbet daveti yapıştırın</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>Yapıştır</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>Bu kişiyi adresiyle ekleyemezsiniz. Adresi transferler için kaydedebilir veya kendisinden bir sohbet daveti isteyebilirsiniz.</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>Sohbet etkin değil, ancak transferler için kişi kaydetmeye devam edebilirsiniz.</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>Yalnızca adresi kaydet</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>Sohbet ayarları</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>Sohbet ayarları kaydediliyor…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>Değişikliklerin kaydedilip kaydedilmediği doğrulanamıyor. Tekrar deneyin.</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>Eşleşen sohbet yok</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>Sohbet takma adı</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>Takma ad ayarlanmamış</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>Takma adınız çok uzun. Kısaltıp tekrar deneyin.</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>Hakkımda metniniz çok uzun. Kısaltıp tekrar deneyin.</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>Bazı profil bilgileri geçersiz. Düzenleyip tekrar deneyin.</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>Takma adınız başkalarına görünür. Silmek için alanı boşaltıp onaylayın.</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>Bağlantı açılamadı.</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>Okunmamış</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>Okunmamış sohbet yok</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>Tüm sohbetleri göster</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>Sohbeti sabitle</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>Sabitlemeyi kaldır</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>Sabitlendi</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>Alıntılanan mesaj</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>Alıntı · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>Orijinal mesaj görüntülenemiyor</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>Siz</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>Yanıtla</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>Yanıtı iptal et</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>Orijinal mesajı görüntüle</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>Orijinal mesaj aranıyor…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>Önceki konuma dön</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>Tam metni görüntüle</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>Sohbet geçmişinde ara</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>Daha eski mesajlarda ara</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>Bu cihazdaki sohbet geçmişinde anahtar kelimeye, gönderene veya zaman aralığına göre arama yapabilirsiniz.</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>Eşleşen mesaj bulunamadı.</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>Arama sonuçlarına dön</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>Gönderen</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>Karşı taraf</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>Sohbette göster</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>İlet</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>Mesaj iletmek için bir sohbet arkadaşı ekleyin.</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>Sohbetleri filtrele</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>Filtreler</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>Zaman aralığı</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>Son 7 gün</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>Son 30 gün</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>Filtreleri temizle</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>Bağlantı içerir</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>Hakkımda</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>Hakkımda metniniz başkalarına görünür. Silmek için alanı boşaltıp kaydedin.</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>Kaydet</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>Sohbet arkadaşını sil</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>“{0}” sohbet arkadaşlarından silinsin mi? Sohbet geçmişi ve kayıtlı adresler korunur. Gönderilmiş mesajlar geri çekilmez.</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Sohbet ayarları yüklenemedi. Lütfen tekrar deneyin.</value></data>
 </root>

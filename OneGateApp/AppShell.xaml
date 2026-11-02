@@ -16,6 +16,39 @@
         <FontImageSource x:Key="WalletIconChecked" FontFamily="Icons" Glyph="&#xe852;" Color="{toolkit:AppThemeResource Primary}" />
         <FontImageSource x:Key="WalletIconUnchecked" FontFamily="Icons" Glyph="&#xe798;" Color="{toolkit:AppThemeResource Secondary}" />
     </Shell.Resources>
+    <Shell.ItemTemplate>
+        <DataTemplate x:DataType="BaseShellItem">
+            <Grid HeightRequest="{OnPlatform Default=44, Android=50}" ColumnSpacing="0" RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{OnPlatform Default=50, Android=54, WinUI=40}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={OnPlatform Default=#1A000000, WinUI=Transparent}, Dark={OnPlatform Default=#1AFFFFFF, WinUI=Transparent}}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Image Source="{Binding FlyoutIcon}" HorizontalOptions="Center" VerticalOptions="Center"
+                       HeightRequest="{OnPlatform Default=22, Android=24, WinUI=16}"
+                       WidthRequest="{OnPlatform Default=22, Android=24, WinUI=16}" />
+                <og:Badge Count="{x:Static og:Badge.AttachedCountBinding}" Margin="0,2,0,0" />
+                <Label Grid.Column="1" Text="{Binding Title}" VerticalTextAlignment="Center"
+                       Margin="{OnPlatform Default=0, Android='20,0,0,0'}"
+                       FontFamily="{OnPlatform Default=OpenSansRegular, Android=sans-serif-medium}"
+                       FontAttributes="{OnPlatform Default=None, iOS=Bold, MacCatalyst=Bold}"
+                       TextColor="{toolkit:AppThemeResource Primary}" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
     <Shell.Behaviors>
         <og:AdaptiveStateBehavior>
             <og:AdaptiveStateBehavior.CompactSetters>
@@ -36,7 +69,7 @@
         </Grid>
     </Shell.FlyoutHeader>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <Tab Title="{x:Static og:Strings.Home}">
+        <Tab x:Name="homeTab" Title="{x:Static og:Strings.Home}">
             <Tab.Icon>
                 <Binding Path="IsChecked" Source="{RelativeSource Self}">
                     <Binding.Converter>

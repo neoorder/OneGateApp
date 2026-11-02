@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>无法访问摄像头</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>不支持的二维码内容：{0}</value>
   </data>
@@ -361,6 +358,9 @@
   </data>
   <data name="OperationCancelled" xml:space="preserve">
     <value>操作已取消</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>暂时无法完成操作。</value>
   </data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>暂时无法使用生物识别</value>
@@ -505,9 +505,6 @@
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>请扫描二维码向我转账</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>该地址可接收 Neo 平台上的所有资产。</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>保存到相册</value>
   </data>
@@ -538,9 +535,6 @@
   <data name="ReceivingAddress" xml:space="preserve">
     <value>收款地址</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>地址簿</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>暂无地址</value>
   </data>
@@ -548,13 +542,13 @@
     <value>您的地址簿为空</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>添加地址</value>
+    <value>添加联系人</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>截图失败</value>
   </data>
   <data name="Label" xml:space="preserve">
-    <value>备注</value>
+    <value>名称</value>
   </data>
   <data name="ContactAddedSuccessfully" xml:space="preserve">
     <value>地址已添加</value>
@@ -566,11 +560,12 @@
     <value>名称已存在</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>编辑地址</value>
+    <value>编辑联系人</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>删除</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>联系人已保存在本机，暂时无法确认名称是否已同步。</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>地址已更新</value>
   </data>
@@ -727,9 +722,6 @@
   </data>
   <data name="LoginRequestReviewText" xml:space="preserve">
     <value>请先确认请求来源，再授权钱包登录。</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>正在登录</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>域名</value>
@@ -968,17 +960,8 @@
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 提交</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>项目名称</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>官网</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>联系方式</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>申请收录</value>
@@ -1288,4 +1271,151 @@
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>正在等待已信任的远程调试器</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>配对远程调试器</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>远程调试器“{0}”正在请求访问。指纹：{1}。仅在你信任此远程调试器时授权。</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>消息</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>联系人</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>资讯</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>用你的 Neo 地址开始聊天</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>仅保存地址</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>没有找到匹配的联系人</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>试试其他名称、地址或备注。</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>联系人详情</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>启用聊天</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>正在启用聊天…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>启用后，即可添加好友、收发消息。</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>允许通过 Neo 地址向我发送好友申请</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>别人可以通过你的 Neo 地址向你发送好友申请。</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>别人需要你的聊天邀请，才能向你发送好友申请。</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>聊天启用尚未完成，请重试。你之前选择的设置会保留。</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>授权此设备使用你的 Neo 地址收发消息。
+地址：{0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>替换聊天设备</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>每个账号最多可添加 {0} 台聊天设备，目前已达到上限。要在本机启用聊天，请选择一台设备进行替换。被替换的设备将无法继续收发消息。</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>替换该设备</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>授权到期：{0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>已过期</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>替换这台设备可能影响现有好友关系，请选择其他设备。</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>申请聊天</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>发送好友申请</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>申请说明</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>对方会看到这条申请说明。</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>正在发送好友申请…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>聊天好友</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>等待对方接受</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>暂时无法确认好友状态</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>请先在首页“消息”中启用聊天。</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>钱包账户已切换，请重新打开当前页面。</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>无法通过此地址添加好友，请向对方索取聊天邀请。</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>请输入有效的 Neo N3 地址。</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>不能向自己的地址发送好友申请。</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>申请说明太长，请缩短后再发送。</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>好友申请</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>收到的申请</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>已发送的申请</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>暂无好友申请</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>等待你处理</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>查看申请</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>接受</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>忽略</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>正在接受好友申请…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>正在忽略好友申请…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>已添加为好友</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>已忽略申请</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>好友申请已发生变化，请返回申请列表查看。</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>打开聊天</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>私聊</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>成为好友后即可发送消息</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>聊天记录加载未完成，部分消息可能尚未显示。</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>无法验证此设备的聊天身份。</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>无法读取或保存聊天记录。</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>消息验证失败，部分消息暂时无法显示。</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>加载更早消息</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>暂无聊天记录</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>发送第一条消息，开始聊天。</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[非文字消息]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>暂不支持查看附件</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>输入消息…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>请输入消息后再发送。</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>发送</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>等待发送</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>发送中</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>发送结果待确认</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>已发送</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>发送失败</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>暂时无法确认发送结果</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[草稿]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>回到最新消息 ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>{0} 条新消息 ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>复制</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>连接异常，消息收发可能延迟。</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>标为已读</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>重新编辑</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>替换草稿</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>要用这条消息替换当前草稿吗？</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>我的二维码</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>分享邀请，让对方向你发送好友申请。</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>有效期至 {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>邀请已过期，请生成新邀请。</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>复制邀请</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>生成新邀请</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>邀请最长有效 24 小时。生成新邀请后，旧邀请在到期前仍可使用。</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>钱包账户已切换，请重新打开“我的二维码”。</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>聊天邀请无效，请向对方索取新邀请。</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>邀请已过期，请向对方索取新邀请。</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>此邀请不适用于当前 Meshline 网络。</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Neo 地址或聊天邀请</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>输入 Neo 地址，或粘贴聊天邀请</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>粘贴</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>无法通过此地址添加好友。你可以保存地址用于转账，或向对方索取聊天邀请。</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>尚未启用聊天，你仍可保存联系人用于转账。</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>仅保存地址</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>聊天设置</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>正在保存聊天设置…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>暂时无法确认是否保存成功，请重试。</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>没有匹配的会话</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>聊天昵称</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>未设置昵称</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>昵称过长，请缩短后重试。</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>简介过长，请缩短后重试。</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>资料内容不符合要求，请修改后重试。</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>昵称对他人可见，清空后确认即可删除。</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>无法打开链接。</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>未读</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>没有未读会话</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>显示全部会话</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>置顶会话</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>取消置顶</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>置顶</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>引用消息</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>引用 · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>无法查看原消息</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>我</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>回复</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>取消回复</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>查看原消息</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>正在查找原消息…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>返回原位置</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>查看全文</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>查找聊天记录</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>继续查找更早记录</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>可按关键词、发送人或时间查找此设备上的聊天记录。</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>未找到匹配消息。</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>返回搜索结果</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>发送人</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>对方</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>在会话中查看</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>转发</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>添加聊天好友后即可转发消息。</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>筛选会话</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>筛选</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>时间范围</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>最近7天</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>最近30天</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>清除筛选</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>包含链接</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>简介</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>简介对他人可见，清空后保存即可删除。</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>保存</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>删除聊天好友</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>确定删除聊天好友“{0}”吗？聊天记录和已保存的地址会保留，已发出的消息不会撤回。</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>无法加载聊天设置，请重试。</value></data>
 </root>

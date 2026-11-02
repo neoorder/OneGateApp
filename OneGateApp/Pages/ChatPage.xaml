@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.ChatPage"
+             x:DataType="og:ChatPage"
+             x:Name="Root"
+             Title="{Binding DisplayName}"
+             SafeAreaEdges="All"
+             BindingContext="{Binding Source={RelativeSource Self}}"
+             Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+        <og:TransparentColorConverter x:Key="TransparentColor" />
+        <toolkit:InvertedBoolConverter x:Key="Not" />
+        <toolkit:VariableMultiValueConverter x:Key="AllTrue" ConditionType="All" />
+    </ContentPage.Resources>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding Source={x:Reference Root}, Path=BackCommand, x:DataType=og:ChatPage}" />
+    </Shell.BackButtonBehavior>
+    <Shell.TitleView>
+        <OnPlatform x:TypeArguments="View">
+            <OnPlatform.Default>
+                <Grid ColumnDefinitions="auto,*" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="44"
+                      BindingContext="{x:Reference Root}" x:DataType="og:ChatPage" Loaded="OnNavigationTitleLoaded">
+                    <Grid IsVisible="{Binding ShowOtherUnread}" MinimumWidthRequest="44" Padding="0,0,12,0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Grid.GestureRecognizers>
+                        <og:Badge Count="{Binding OtherUnreadCount}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    </Grid>
+                    <Grid Grid.Column="1" ColumnDefinitions="auto,*" ColumnSpacing="8">
+                        <og:ChatAvatarView Address="{Binding Address}" DisplayName="{Binding ChatContact.DisplayName}" WidthRequest="32" HeightRequest="32" StrokeShape="RoundRectangle 9" VerticalOptions="Center">
+                            <og:ChatAvatarView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnContactDetailsClicked" />
+                            </og:ChatAvatarView.GestureRecognizers>
+                        </og:ChatAvatarView>
+                        <Label Grid.Column="1" Text="{Binding DisplayName}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" />
+                    </Grid>
+                </Grid>
+            </OnPlatform.Default>
+            <!-- Windows uses the window title bar beside its native Back button. -->
+            <On Platform="WinUI" Value="{x:Null}" />
+        </OnPlatform>
+    </Shell.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static og:Strings.ContactDetails}" Order="Secondary" IsEnabled="{Binding CanOpenContactDetails}" Clicked="OnContactDetailsClicked" />
+        <ToolbarItem Text="{x:Static og:Strings.ChatSearchMessages}" Order="Secondary"
+                     IsEnabled="{Binding CanOpenMessageSearch}" Clicked="OnOpenMessageSearchClicked" />
+    </ContentPage.ToolbarItems>
+    <Grid x:Name="chatLayout" SizeChanged="OnChatLayoutSizeChanged" MaximumWidthRequest="1200" HorizontalOptions="Fill"
+          HandlerChanged="OnChatLayoutHandlerChanged" HandlerChanging="OnChatLayoutHandlerChanging">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="conversationListColumn" Width="0" />
+            <ColumnDefinition x:Name="conversationDividerColumn" Width="0" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ContentView x:Name="conversationPane" IsVisible="{Binding UseConversationPane}">
+            <ContentView.Resources>
+                <DataTemplate x:Key="DeferredContent" x:DataType="og:ChatPage">
+                    <Grid RowDefinitions="auto,auto,auto,*" RowSpacing="12" Padding="20,8,16,12"
+                          IsEnabled="{Binding ShowForwardRecipientPicker, Converter={StaticResource Not}}"
+                          AutomationProperties.ExcludedWithChildren="{Binding ShowForwardRecipientPicker}">
+                        <Label Text="{x:Static og:Strings.HomeMessages}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,8" />
+                        <Grid Grid.Row="1" ColumnDefinitions="*,auto" ColumnSpacing="8">
+                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="12,0">
+                                <Entry Text="{Binding ConversationSearchText, Mode=TwoWay}" Placeholder="{x:Static og:Strings.Search}"
+                                       ClearButtonVisibility="WhileEditing" HeightRequest="44" og:Border.IsVisible="False"
+                                       HandlerChanged="OnChatEntryHandlerChanged" HandlerChanging="OnChatEntryHandlerChanging" />
+                            </Border>
+                            <Button Grid.Column="1" Text="{Binding ConversationFilterText}" StyleClass="Secondary" FontSize="13" Padding="10,0"
+                                    HeightRequest="44" MinimumHeightRequest="44" IsEnabled="{Binding IsChatEnabled}" Clicked="OnConversationFilterClicked"
+                                    SemanticProperties.Hint="{x:Static og:Strings.ChatConversationFilter}" ToolTipProperties.Text="{x:Static og:Strings.ChatConversationFilter}">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding HasConversationTypeFilter}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource BrandMuted}" />
+                                        <Setter Property="TextColor" Value="{toolkit:AppThemeResource Brand}" />
+                                        <Setter Property="BorderColor" Value="{toolkit:AppThemeResource Brand}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+                        <VerticalStackLayout Grid.Row="2" Spacing="8" IsVisible="{Binding ConversationsError, Converter={StaticResource HasText}}">
+                            <Label Text="{Binding ConversationsError}" StyleClass="Danger" LineBreakMode="WordWrap" />
+                            <Button Text="{x:Static og:Strings.Retry}" StyleClass="Link" HorizontalOptions="Start"
+                                    IsEnabled="{Binding IsLoading, Converter={StaticResource Not}}" Clicked="OnConversationListRetryClicked" />
+                        </VerticalStackLayout>
+                        <CollectionView Grid.Row="3" ItemsSource="{Binding Conversations}" SelectionMode="Single" IsEnabled="{Binding IsChatEnabled}"
+                                        SelectedItem="{Binding CurrentConversation, Mode=OneWay}"
+                                        ItemsUpdatingScrollMode="KeepScrollOffset">
+                            <CollectionView.EmptyView>
+                                <VerticalStackLayout BindingContext="{x:Reference Root}" IsVisible="{Binding HasLoadedConversations}" Spacing="12" Margin="0,24">
+                                    <Label Text="{Binding ConversationsEmptyTitle}" StyleClass="Secondary" HorizontalTextAlignment="Center" />
+                                    <Button Text="{x:Static og:Strings.ChatShowAllConversations}" IsVisible="{Binding HasConversationFilter}" StyleClass="Link"
+                                            HorizontalOptions="Center" Clicked="OnClearConversationFilterClicked" />
+                                </VerticalStackLayout>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="og:ChatConversationViewModel">
+                                    <Grid x:Name="ConversationRow"
+                                          SemanticProperties.Description="{Binding Title}" SemanticProperties.Hint="{Binding Preview}">
+                                        <FlyoutBase.ContextFlyout>
+                                            <MenuFlyout BindingContext="{Binding Source={x:Reference ConversationRow}, Path=BindingContext, x:DataType=Grid}">
+                                                <MenuFlyoutItem Text="{Binding PinActionText}" CommandParameter="{Binding .}" Clicked="OnPinConversationClicked" />
+                                                <MenuFlyoutItem Text="{x:Static og:Strings.ChatMarkAsRead}" IsEnabled="{Binding HasUnread}"
+                                                                CommandParameter="{Binding .}" Clicked="OnMarkConversationReadClicked" />
+                                            </MenuFlyout>
+                                        </FlyoutBase.ContextFlyout>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="Transparent" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource BrandMuted}" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <!-- Keep touch feedback separate from the row's selected background. -->
+                                        <Grid ColumnDefinitions="52,*,auto" RowDefinitions="auto,auto,1" ColumnSpacing="8" RowSpacing="6" Padding="8,12,0,0">
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Buttons="Primary" CommandParameter="{Binding .}"
+                                                                      Command="{OnPlatform Default={Binding Source={x:Reference Root}, Path=OpenConversationCommand, x:DataType=og:ChatPage}, Android={x:Null}, iOS={x:Null}}" />
+                                            </Grid.GestureRecognizers>
+                                            <Grid.Behaviors>
+                                                <og:PressBehavior BindingContext="{Binding Source={x:Reference ConversationRow}, Path=BindingContext, x:DataType=Grid}"
+                                                                       IsEnabled="{OnPlatform Default=True, WinUI=False, MacCatalyst=False}"
+                                                                       LongPressDuration="600" DisallowTouchThreshold="10"
+                                                                       Command="{Binding Source={x:Reference Root}, Path=OpenConversationCommand, x:DataType=og:ChatPage}" CommandParameter="{Binding .}"
+                                                                       LongPressCommand="{Binding Source={x:Reference Root}, Path=ConversationActionsCommand, x:DataType=og:ChatPage}" LongPressCommandParameter="{Binding .}" />
+                                            </Grid.Behaviors>
+                                            <Grid Grid.RowSpan="2" WidthRequest="52" HeightRequest="52" VerticalOptions="Center">
+                                                <og:ChatAvatarView StrokeShape="RoundRectangle 12" WidthRequest="44" HeightRequest="44"
+                                                        BackgroundColor="{toolkit:AppThemeResource BrandMuted}" HorizontalOptions="Start" VerticalOptions="End" Address="{Binding Address}" DisplayName="{Binding DisplayName}" />
+                                                <og:Badge Count="{Binding UnreadCount}" />
+                                            </Grid>
+                                            <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                            <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                                <Label Text="{x:Static og:Strings.ChatPinned}" IsVisible="{Binding IsPinned}" StyleClass="Secondary" FontSize="10" VerticalTextAlignment="Center" />
+                                                <Label Text="{Binding TimeText}" StyleClass="Secondary" FontSize="11" VerticalTextAlignment="Center" />
+                                            </HorizontalStackLayout>
+                                            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Preview}" StyleClass="Secondary" FontSize="13" LineBreakMode="TailTruncation">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding ShowSendError}" Value="True">
+                                                        <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                            <BoxView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HeightRequest="1" Margin="0,6,0,0" />
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <ActivityIndicator Grid.Row="3" IsRunning="{Binding ShowConversationLoading}" IsVisible="{Binding ShowConversationLoading}"
+                                           HorizontalOptions="Center" VerticalOptions="Start" Margin="0,12" InputTransparent="True" />
+                    </Grid>
+                </DataTemplate>
+            </ContentView.Resources>
+        </ContentView>
+        <BoxView Grid.Column="1" WidthRequest="1" IsVisible="{Binding UseConversationPane}" />
+        <Grid Grid.Column="2" RowDefinitions="auto,auto,*,auto" RowSpacing="12" Padding="20,8,20,12" MaximumWidthRequest="800" HorizontalOptions="Fill"
+              IsEnabled="{Binding IsChatContentCovered, Converter={StaticResource Not}}" InputTransparent="{Binding IsChatContentCovered}"
+              AutomationProperties.ExcludedWithChildren="{Binding IsChatContentCovered}">
+            <VerticalStackLayout Spacing="8">
+                <Grid IsVisible="{OnPlatform WinUI=True, Default=False}" ColumnDefinitions="auto,*" ColumnSpacing="10">
+                    <og:ChatAvatarView Address="{Binding Address}" DisplayName="{Binding ChatContact.DisplayName}" WidthRequest="36" HeightRequest="36" StrokeShape="RoundRectangle 10">
+                        <og:ChatAvatarView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnContactDetailsClicked" />
+                        </og:ChatAvatarView.GestureRecognizers>
+                    </og:ChatAvatarView>
+                    <Label Grid.Column="1" Text="{Binding DisplayName}" FontSize="18" FontAttributes="Bold" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" />
+                </Grid>
+                <Label Text="{Binding ChatConnectionNotice}" StyleClass="Secondary" FontSize="12" LineBreakMode="WordWrap"
+                       IsVisible="{Binding ChatConnectionNotice, Converter={StaticResource HasText}}" />
+                <Label Text="{Binding ErrorNotice}" StyleClass="Danger" IsVisible="{Binding ErrorNotice, Converter={StaticResource HasText}}" />
+                <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" IsVisible="{Binding ShowRetry}" Clicked="OnRetryHistoryClicked" />
+            </VerticalStackLayout>
+            <Grid Grid.Row="1" ColumnDefinitions="20,*,auto" ColumnSpacing="8" IsVisible="{Binding ShowLoading}">
+                <ActivityIndicator IsRunning="{Binding ShowLoading}" WidthRequest="20" HeightRequest="20" />
+                <Label Grid.Column="1" Text="{Binding BusyText}" StyleClass="Secondary" VerticalTextAlignment="Center" LineBreakMode="WordWrap" />
+                <Button Grid.Column="2" Text="{x:Static og:Strings.Cancel}" StyleClass="Link" MinimumHeightRequest="44"
+                        IsVisible="{Binding CanCancelQuoteNavigation}" Clicked="OnCancelQuoteNavigationClicked" />
+            </Grid>
+            <CollectionView x:Name="messageList" Grid.Row="2" ItemsSource="{Binding Messages}" SelectionMode="None"
+                            ItemsUpdatingScrollMode="{OnPlatform Default=KeepScrollOffset, Android=KeepItemsInView}" Scrolled="OnMessagesScrolled"
+                            Loaded="OnMessagesLayoutChanged" SizeChanged="OnMessagesLayoutChanged"
+                            InputTransparent="{Binding IsMessageListPresented, Converter={StaticResource Not}}"
+                            AutomationProperties.ExcludedWithChildren="{Binding IsMessageListPresented, Converter={StaticResource Not}}">
+                <CollectionView.Triggers>
+                    <DataTrigger TargetType="CollectionView" Binding="{Binding IsMessageListPresented}" Value="False">
+                        <Setter Property="Opacity" Value="0" />
+                    </DataTrigger>
+                </CollectionView.Triggers>
+                <CollectionView.Header>
+                    <VerticalStackLayout Spacing="4" IsVisible="{Binding HasMore}">
+                        <Label Text="{Binding EarlierMessagesError}" StyleClass="Danger" FontSize="12"
+                               LineBreakMode="WordWrap" HorizontalTextAlignment="Center"
+                               IsVisible="{Binding EarlierMessagesError, Converter={StaticResource HasText}}" />
+                        <Button Text="{Binding EarlierMessagesButtonText}" StyleClass="Link" MinimumHeightRequest="44"
+                                IsEnabled="{Binding CanLoadEarlier}" Clicked="OnLoadEarlierClicked" />
+                    </VerticalStackLayout>
+                </CollectionView.Header>
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="0,32" Spacing="8" IsVisible="{Binding HasLoaded}">
+                        <Label Text="{x:Static og:Strings.ChatHistoryEmpty}" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        <Label Text="{x:Static og:Strings.ChatHistoryEmptyHint}" StyleClass="Secondary" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="og:ChatMessageViewModel">
+                        <Grid RowDefinitions="auto,auto" Padding="0,6,0,10" SizeChanged="OnMessagesLayoutChanged">
+                            <Label Text="{Binding DateText}" IsVisible="{Binding ShowDateSeparator}" StyleClass="Secondary" FontSize="12"
+                                   HorizontalTextAlignment="Center" Margin="0,6,0,12" />
+                            <Grid Grid.Row="1" ColumnDefinitions="36,*,36" ColumnSpacing="8">
+                                <og:ChatAvatarView Address="{Binding SenderAccountId}" WidthRequest="36" HeightRequest="36" StrokeShape="RoundRectangle 10" VerticalOptions="Start">
+                                    <og:ChatAvatarView.Triggers>
+                                        <DataTrigger TargetType="og:ChatAvatarView" Binding="{Binding IsOutgoing}" Value="False">
+                                            <Setter Property="DisplayName" Value="{Binding Source={x:Reference Root}, Path=ChatContact.DisplayName, x:DataType=og:ChatPage}" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="og:ChatAvatarView" Binding="{Binding IsOutgoing}" Value="True">
+                                            <Setter Property="Grid.Column" Value="2" />
+                                        </DataTrigger>
+                                    </og:ChatAvatarView.Triggers>
+                                    <og:ChatAvatarView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnMessageAvatarTapped" />
+                                    </og:ChatAvatarView.GestureRecognizers>
+                                </og:ChatAvatarView>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="Start" MaximumWidthRequest="640">
+                                <VerticalStackLayout.Triggers>
+                                    <DataTrigger TargetType="VerticalStackLayout" Binding="{Binding IsOutgoing}" Value="True">
+                                        <Setter Property="HorizontalOptions" Value="End" />
+                                        <Setter Property="Margin" Value="0" />
+                                    </DataTrigger>
+                                </VerticalStackLayout.Triggers>
+                                <Border x:Name="MessageBubble" StrokeShape="RoundRectangle 14" Padding="0" BackgroundColor="{toolkit:AppThemeResource Panel}"
+                                        Stroke="Transparent" StrokeThickness="1" Loaded="OnMessageBubbleLoaded">
+                                    <Border.Resources>
+                                        <DataTemplate x:Key="MessageContextMenu" x:DataType="og:ChatMessageViewModel">
+                                            <MenuFlyout BindingContext="{Binding Source={x:Reference MessageBubble}, Path=BindingContext, x:DataType=Border}">
+                                                <MenuFlyoutItem Text="{x:Static og:Strings.ChatReply}" CommandParameter="{Binding .}" Clicked="OnReplyMessageClicked">
+                                                    <MenuFlyoutItem.IsEnabled>
+                                                        <MultiBinding Converter="{StaticResource AllTrue}">
+                                                            <Binding Path="CanReply" />
+                                                            <Binding Path="CanCompose" Source="{x:Reference Root}" />
+                                                        </MultiBinding>
+                                                    </MenuFlyoutItem.IsEnabled>
+                                                </MenuFlyoutItem>
+                                                <MenuFlyoutItem Text="{x:Static og:Strings.ChatForwardText}" CommandParameter="{Binding .}" Clicked="OnForwardMessageClicked">
+                                                    <MenuFlyoutItem.IsEnabled>
+                                                        <MultiBinding Converter="{StaticResource AllTrue}">
+                                                            <Binding Path="CanForwardText" />
+                                                            <Binding Path="HasLoaded" Source="{x:Reference Root}" />
+                                                            <Binding Path="IsChatEnabled" Source="{x:Reference Root}" />
+                                                        </MultiBinding>
+                                                    </MenuFlyoutItem.IsEnabled>
+                                                </MenuFlyoutItem>
+                                                <MenuFlyoutItem Text="{x:Static og:Strings.ChatCopyText}" IsEnabled="{Binding CanCopyText}"
+                                                                CommandParameter="{Binding .}" Clicked="OnCopyMessageClicked" />
+                                                <MenuFlyoutItem Text="{x:Static og:Strings.Share}" IsEnabled="{Binding CanCopyText}"
+                                                                CommandParameter="{Binding .}" Clicked="OnShareMessageClicked" />
+                                                <MenuFlyoutItem Text="{x:Static og:Strings.ChatViewFullText}" IsEnabled="{Binding CanCopyText}"
+                                                                CommandParameter="{Binding .}" Clicked="OnReadMessageClicked" />
+                                            </MenuFlyout>
+                                        </DataTemplate>
+                                    </Border.Resources>
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding IsQuoteHighlighted}" Value="True">
+                                            <Setter Property="Stroke" Value="{toolkit:AppThemeResource Brand}" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Border" Binding="{Binding IsOutgoing}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource BrandMuted}" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <!-- Keep gesture feedback separate from the themed bubble. -->
+                                    <VerticalStackLayout Spacing="8" Padding="12,10" BackgroundColor="Transparent">
+                                        <VerticalStackLayout.Behaviors>
+                                            <og:PressBehavior BindingContext="{Binding Source={x:Reference MessageBubble}, Path=BindingContext, x:DataType=Border}"
+                                                                   IsEnabled="{OnPlatform Default={Binding CanShowActions}, WinUI=False, MacCatalyst=False}" LongPressDuration="600" DisallowTouchThreshold="10"
+                                                                   ShouldMakeChildrenInputTransparent="False"
+                                                                   LongPressCommand="{Binding Source={x:Reference Root}, Path=MessageActionsCommand, x:DataType=og:ChatPage}"
+                                                                   LongPressCommandParameter="{Binding .}" />
+                                        </VerticalStackLayout.Behaviors>
+                                        <og:DeferredContentView IsVisible="{Binding HasReply}">
+                                            <og:DeferredContentView.ContentTemplate>
+                                                <DataTemplate x:DataType="og:ChatMessageViewModel">
+                                                    <Grid ColumnDefinitions="3,*" ColumnSpacing="8" MinimumHeightRequest="44"
+                                                          SemanticProperties.Hint="{x:Static og:Strings.ChatViewQuotedMessage}" ToolTipProperties.Text="{x:Static og:Strings.ChatViewQuotedMessage}">
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="OnQuotedMessageTapped" CommandParameter="{Binding .}" />
+                                                        </Grid.GestureRecognizers>
+                                                        <BoxView WidthRequest="3" BackgroundColor="{toolkit:AppThemeResource Brand}" />
+                                                        <VerticalStackLayout Grid.Column="1" Spacing="3">
+                                                            <Label Text="{Binding ReplyTitle}" TextType="Text" FontSize="11" StyleClass="Secondary" LineBreakMode="TailTruncation" />
+                                                            <Label Text="{Binding ReplyPreview}" TextType="Text" FontSize="12" StyleClass="Secondary"
+                                                                   MaxLines="2" LineBreakMode="TailTruncation" />
+                                                        </VerticalStackLayout>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </og:DeferredContentView.ContentTemplate>
+                                        </og:DeferredContentView>
+                                        <Grid>
+                                            <Label TextType="Text" LineBreakMode="CharacterWrap"
+                                                   BindingContextChanged="OnMessageTextBindingContextChanged">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding HasTruncatedText}" Value="True">
+                                                        <Setter Property="MaxLines" Value="30" />
+                                                        <Setter Property="LineBreakMode" Value="TailTruncation" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                            <og:DeferredContentView IsVisible="{Binding HasTruncatedText}" HeightRequest="64" VerticalOptions="End">
+                                                <og:DeferredContentView.ContentTemplate>
+                                                    <DataTemplate x:DataType="og:ChatMessageViewModel">
+                                                        <Grid>
+                                                            <Border HeightRequest="64" VerticalOptions="End" StrokeThickness="0"
+                                                                    InputTransparent="True"
+                                                                    AutomationProperties.IsInAccessibleTree="False">
+                                                                <Border.Background>
+                                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                                        <GradientStop Color="{Binding Source={x:Reference MessageBubble}, Path=BackgroundColor, x:DataType=Border, Converter={StaticResource TransparentColor}}" Offset="0" />
+                                                                        <GradientStop Color="{Binding Source={x:Reference MessageBubble}, Path=BackgroundColor, x:DataType=Border}" Offset="0.5" />
+                                                                    </LinearGradientBrush>
+                                                                </Border.Background>
+                                                            </Border>
+                                                            <Button Text="{x:Static og:Strings.ChatViewFullText}"
+                                                                    StyleClass="Link" HorizontalOptions="Start" VerticalOptions="End"
+                                                                    Padding="0,16,0,0" MinimumHeightRequest="44"
+                                                                    CommandParameter="{Binding .}" Clicked="OnReadMessageClicked" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </og:DeferredContentView.ContentTemplate>
+                                            </og:DeferredContentView>
+                                        </Grid>
+                                        <Label Text="{x:Static og:Strings.ChatAttachmentsNotShown}" FontSize="12" StyleClass="Secondary" IsVisible="{Binding HasAttachments}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                                <Label Text="{Binding CreatedAt}" FontSize="11" StyleClass="Secondary">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsOutgoing}" Value="True">
+                                            <Setter Property="HorizontalTextAlignment" Value="End" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label Text="{Binding SendStatusText}" FontSize="11" StyleClass="Secondary"
+                                       IsVisible="{Binding IsOutgoing}" HorizontalTextAlignment="End">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding HasSendError}" Value="True">
+                                            <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <og:DeferredContentView IsVisible="{Binding HasSendError}">
+                                    <og:DeferredContentView.ContentTemplate>
+                                        <DataTemplate x:DataType="og:ChatMessageViewModel">
+                                            <VerticalStackLayout Spacing="4">
+                                                <Label Text="{Binding ErrorText}" FontSize="11" StyleClass="Danger" LineBreakMode="CharacterWrap"
+                                                       IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+                                                <HorizontalStackLayout Spacing="8" HorizontalOptions="End">
+                                                    <HorizontalStackLayout.Triggers>
+                                                        <DataTrigger TargetType="HorizontalStackLayout" Binding="{Binding CanCompose, Source={x:Reference Root}}" Value="False">
+                                                            <Setter Property="IsVisible" Value="False" />
+                                                        </DataTrigger>
+                                                    </HorizontalStackLayout.Triggers>
+                                                    <Button Text="{x:Static og:Strings.Retry}" StyleClass="Link" MinimumHeightRequest="44"
+                                                            IsVisible="{Binding CanRetry}" CommandParameter="{Binding}" Clicked="OnRetrySendClicked" />
+                                                    <Button Text="{x:Static og:Strings.ChatEditFailedMessage}" StyleClass="Link" MinimumHeightRequest="44"
+                                                            IsVisible="{Binding CanEditForResend}" CommandParameter="{Binding}" Clicked="OnEditFailedMessageClicked" />
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </og:DeferredContentView.ContentTemplate>
+                                </og:DeferredContentView>
+                            </VerticalStackLayout>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <VerticalStackLayout Grid.Row="2" HorizontalOptions="End" VerticalOptions="End" Margin="0,0,0,8" Spacing="6">
+                <Button Text="{Binding QuoteReturnText}" IsVisible="{Binding ShowQuoteReturn}"
+                        Clicked="OnQuoteReturnClicked" HorizontalOptions="End" MinimumHeightRequest="44"
+                        Padding="14,8" FontSize="13" CornerRadius="22" />
+                <Button Text="{Binding LatestMessagesText}" IsVisible="{Binding ShowLatestMessages}"
+                        Clicked="OnLatestMessagesClicked" HorizontalOptions="End" MinimumHeightRequest="44"
+                        Padding="14,8" FontSize="13" CornerRadius="22" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="3" Spacing="8" IsVisible="{Binding ShowContactRequired}">
+                <Label Text="{x:Static og:Strings.ChatContactRequired}" StyleClass="Secondary" />
+                <Button Text="{Binding ChatContact.ChatRequestText}" Clicked="OnRequestChatClicked" MinimumHeightRequest="44" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="3" Spacing="6" IsVisible="{Binding ShowContactRequired, Converter={StaticResource Not}}">
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="10"
+                      IsVisible="{Binding DraftStorageNotice, Converter={StaticResource HasText}}">
+                    <Label Text="{Binding DraftStorageNotice}" StyleClass="Danger" FontSize="12" VerticalTextAlignment="Center" />
+                    <Button Grid.Column="1" Text="{x:Static og:Strings.Retry}" StyleClass="Link" MinimumHeightRequest="44"
+                            IsEnabled="{Binding CanRetryDraftStorage}" Clicked="OnRetryDraftStorageClicked" />
+                </Grid>
+                <Label Text="{Binding SendErrorText}" StyleClass="Danger" IsVisible="{Binding SendErrorText, Converter={StaticResource HasText}}" />
+                <Grid ColumnDefinitions="3,*,44" ColumnSpacing="8" IsVisible="{Binding HasReplyDraft}">
+                    <BoxView WidthRequest="3" BackgroundColor="{toolkit:AppThemeResource Brand}" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center" MinimumHeightRequest="44"
+                                         SemanticProperties.Hint="{x:Static og:Strings.ChatViewQuotedMessage}" ToolTipProperties.Text="{x:Static og:Strings.ChatViewQuotedMessage}">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDraftQuoteTapped" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="{Binding ReplyDraftTitle}" TextType="Text" FontSize="11" StyleClass="Secondary" LineBreakMode="TailTruncation" />
+                        <Label Text="{Binding ReplyDraftPreview}" TextType="Text" FontSize="12" StyleClass="Secondary" MaxLines="2" LineBreakMode="TailTruncation" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="2" Text="&#xe6b5;" StyleClass="Icon, IconSecondary" FontSize="18" Padding="0"
+                            MinimumHeightRequest="44" IsEnabled="{Binding CanCompose}" Clicked="OnCancelReplyClicked"
+                            SemanticProperties.Description="{x:Static og:Strings.ChatCancelReply}" ToolTipProperties.Text="{x:Static og:Strings.ChatCancelReply}" />
+                </Grid>
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
+                    <Border StrokeShape="RoundRectangle 12" Padding="10,0" VerticalOptions="End" BackgroundColor="{toolkit:AppThemeResource TextBox}">
+                        <Editor x:Name="messageEditor" Text="{Binding Draft, Mode=TwoWay}" Placeholder="{x:Static og:Strings.ChatMessagePlaceholder}"
+                                AutoSize="TextChanges" MinimumHeightRequest="48" MaximumHeightRequest="120" VerticalTextAlignment="Center"
+                                HandlerChanged="OnMessageEditorHandlerChanged" HandlerChanging="OnMessageEditorHandlerChanging"
+                                IsReadOnly="{Binding CanCompose, Converter={StaticResource Not}}" og:Border.IsVisible="False"
+                                SemanticProperties.Description="{x:Static og:Strings.ChatMessagePlaceholder}" />
+                    </Border>
+                    <Button Grid.Column="1" Text="{x:Static og:Strings.ChatSend}" IsEnabled="{Binding CanSend}"
+                            Clicked="OnSendClicked" HeightRequest="48" Padding="16,0" VerticalOptions="End" />
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+        <ContentView x:Name="messageReaderView" Grid.Column="2" IsVisible="{Binding ShowMessageReader}">
+            <ContentView.Resources>
+                <DataTemplate x:Key="DeferredContent" x:DataType="og:ChatPage">
+                    <Grid Padding="20,8,20,12" MaximumWidthRequest="800"
+                          HorizontalOptions="Fill" BackgroundColor="{toolkit:AppThemeResource PageBackground}">
+                        <Border StrokeShape="RoundRectangle 12" Padding="12" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                            <!-- Re-measure the viewport: Disabled can retain an oversized Editor measurement on Windows. -->
+                            <Editor x:Name="messageReaderEditor" Text="{Binding MessageReaderText, Mode=OneWay}" IsReadOnly="True" AutoSize="TextChanges"
+                                    VerticalOptions="Fill" HorizontalOptions="Fill" og:Border.IsVisible="False"
+                                    SemanticProperties.Description="{x:Static og:Strings.ChatViewFullText}" />
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ContentView.Resources>
+        </ContentView>
+        <ContentView x:Name="messageSearchView" Grid.Column="2" IsVisible="{Binding ShowMessageSearch}">
+            <ContentView.Resources>
+                <DataTemplate x:Key="DeferredContent" x:DataType="og:ChatPage">
+                    <Grid RowDefinitions="auto,auto,auto,*,auto" RowSpacing="12" Padding="20,8,20,12"
+                          BackgroundColor="{toolkit:AppThemeResource PageBackground}">
+                        <Grid ColumnDefinitions="*,auto,44" ColumnSpacing="8">
+                            <Label Text="{x:Static og:Strings.ChatSearchMessages}" FontSize="16" FontAttributes="Bold" VerticalTextAlignment="Center"
+                                   LineBreakMode="WordWrap" />
+                            <Button Grid.Column="1" Text="{Binding MessageSearchFilterText}" StyleClass="Link" Padding="8,0" MinimumHeightRequest="44"
+                                    Clicked="OnMessageSearchFilterClicked" SemanticProperties.Description="{x:Static og:Strings.ChatSearchFilters}" />
+                            <Button Grid.Column="2" Text="&#xe6b5;" StyleClass="Icon, IconSecondary" FontSize="20" Padding="0"
+                                    MinimumHeightRequest="44" Clicked="OnCloseMessageSearchClicked"
+                                    SemanticProperties.Description="{x:Static og:Strings.Hide}"
+                                    ToolTipProperties.Text="{x:Static og:Strings.Hide}" />
+                        </Grid>
+                        <Grid Grid.Row="1" ColumnDefinitions="*,auto" ColumnSpacing="8">
+                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="12,0">
+                                <Entry x:Name="messageSearchEntry" Text="{Binding MessageSearchText, Mode=TwoWay}"
+                                       Placeholder="{x:Static og:Strings.Search}" ReturnType="Search" Completed="OnSearchMessagesClicked"
+                                       HandlerChanged="OnChatEntryHandlerChanged" HandlerChanging="OnChatEntryHandlerChanging"
+                                       ClearButtonVisibility="WhileEditing" HeightRequest="44" og:Border.IsVisible="False" />
+                            </Border>
+                            <Button Grid.Column="1" Text="{Binding MessageSearchButtonText}" IsEnabled="{Binding CanUseMessageSearchButton}"
+                                    MinimumHeightRequest="44" Clicked="OnMessageSearchButtonClicked" />
+                        </Grid>
+                        <VerticalStackLayout Grid.Row="2" Spacing="8">
+                            <ActivityIndicator IsRunning="{Binding IsSearchingMessages}" IsVisible="{Binding IsSearchingMessages}" />
+                            <Label Text="{Binding MessageSearchError}" StyleClass="Danger" IsVisible="{Binding MessageSearchError, Converter={StaticResource HasText}}" />
+                            <Label Text="{Binding SearchResultActionError}" StyleClass="Danger" LineBreakMode="CharacterWrap"
+                                   IsVisible="{Binding SearchResultActionError, Converter={StaticResource HasText}}" />
+                            <Label Text="{Binding MessageSearchNotice}" StyleClass="Secondary" IsVisible="{Binding MessageSearchNotice, Converter={StaticResource HasText}}" />
+                            <Button Text="{x:Static og:Strings.ChatClearSearchFilters}" StyleClass="Link" HorizontalOptions="Start"
+                                    MinimumHeightRequest="44" IsVisible="{Binding ShowClearMessageSearchFilters}"
+                                    Clicked="OnClearMessageSearchFiltersClicked" />
+                        </VerticalStackLayout>
+                        <CollectionView x:Name="messageSearchResultsList" Grid.Row="3" ItemsSource="{Binding MessageSearchResults}" SelectionMode="None"
+                                        Loaded="OnMessageSearchResultsLayoutChanged" SizeChanged="OnMessageSearchResultsLayoutChanged"
+                                        ItemsUpdatingScrollMode="KeepScrollOffset">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="og:ChatSearchResult">
+                                    <Grid RowDefinitions="auto,auto,1" ColumnDefinitions="*,auto" RowSpacing="8" ColumnSpacing="8" Padding="0,12,0,0"
+                                          SemanticProperties.Description="{Binding Preview}" SemanticProperties.Hint="{x:Static og:Strings.ChatViewInConversation}">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Buttons="Primary" CommandParameter="{Binding .}"
+                                                                  Command="{Binding Source={x:Reference Root}, Path=OpenSearchResultCommand, x:DataType=og:ChatPage}" />
+                                        </Grid.GestureRecognizers>
+                                        <Label Text="{Binding Sender}" TextType="Text" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                        <Label Grid.Column="1" Text="{Binding CreatedAt}" FontSize="11" StyleClass="Secondary" VerticalTextAlignment="Center" />
+                                        <Label Grid.Row="1" Grid.ColumnSpan="2" FormattedText="{Binding FormattedPreview}" MaxLines="3" LineBreakMode="TailTruncation" />
+                                        <BoxView Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Button Grid.Row="4" Text="{Binding SearchContinuationText}" StyleClass="Secondary"
+                                IsVisible="{Binding ShowSearchContinuation}" IsEnabled="{Binding CanSearchMessages}"
+                                MinimumHeightRequest="44" Clicked="OnSearchEarlierMessagesClicked" />
+                    </Grid>
+                </DataTemplate>
+            </ContentView.Resources>
+        </ContentView>
+        <ContentView x:Name="forwardRecipientView" Grid.ColumnSpan="3" IsVisible="{Binding ShowForwardRecipientPicker}">
+            <ContentView.Resources>
+                <DataTemplate x:Key="DeferredContent" x:DataType="og:ChatPage">
+                    <Grid BackgroundColor="#66000000" Padding="20">
+                        <Border StrokeShape="RoundRectangle 16" BackgroundColor="{toolkit:AppThemeResource PageBackground}"
+                                MaximumWidthRequest="520" MaximumHeightRequest="560" Padding="20"
+                                HorizontalOptions="Fill" VerticalOptions="Fill">
+                            <Grid RowDefinitions="auto,auto,*" RowSpacing="12">
+                                <Grid ColumnDefinitions="*,auto" ColumnSpacing="12">
+                                    <Label Text="{x:Static og:Strings.ChatForwardText}" FontSize="16" FontAttributes="Bold" VerticalTextAlignment="Center" />
+                                    <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" Margin="-10" Padding="10"
+                                            Clicked="OnCancelForwardRecipientClicked" SemanticProperties.Description="{x:Static og:Strings.Cancel}"
+                                            ToolTipProperties.Text="{x:Static og:Strings.Cancel}" />
+                                </Grid>
+                                <Border Grid.Row="1" StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="12,0"
+                                        IsVisible="{Binding ShowForwardRecipientPreview, Converter={StaticResource Not}}">
+                                    <Entry x:Name="forwardRecipientSearchEntry" Text="{Binding ForwardRecipientSearchText, Mode=TwoWay}"
+                                           Placeholder="{x:Static og:Strings.Search}" ClearButtonVisibility="WhileEditing" MinimumHeightRequest="44"
+                                           og:Border.IsVisible="False" HandlerChanged="OnChatEntryHandlerChanged" HandlerChanging="OnChatEntryHandlerChanging" />
+                                </Border>
+                                <CollectionView Grid.Row="2" ItemsSource="{Binding ForwardRecipients}" SelectionMode="Single"
+                                                IsVisible="{Binding ShowForwardRecipientPreview, Converter={StaticResource Not}}"
+                                                SelectionChanged="OnForwardRecipientSelected" SemanticProperties.Description="{x:Static og:Strings.SelectContact}">
+                                    <CollectionView.EmptyView>
+                                        <Label Text="{x:Static og:Strings.HomeNoMatchingContacts}" StyleClass="Secondary" Margin="0,24" HorizontalTextAlignment="Center" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="og:ChatForwardRecipient">
+                                            <Grid ColumnDefinitions="44,*" RowDefinitions="auto,auto,1" ColumnSpacing="12" RowSpacing="6" Padding="0,12,0,0">
+                                                <og:ChatAvatarView Grid.RowSpan="2" StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource BrandMuted}" WidthRequest="44" HeightRequest="44" Address="{Binding Address}" DisplayName="{Binding DisplayName}" />
+                                                <Label Text="{Binding DisplayName, TargetNullValue={x:Static og:Strings.ChatNoNickname}}" Grid.Column="1" FontSize="15" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Address}" FontSize="12" StyleClass="Secondary" LineBreakMode="CharacterWrap" />
+                                                <BoxView Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1" Margin="0,6,0,0" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Grid Grid.Row="1" Grid.RowSpan="2" RowDefinitions="auto,*,auto" RowSpacing="12" IsVisible="{Binding ShowForwardRecipientPreview}">
+                                    <VerticalStackLayout Spacing="6">
+                                        <Label Text="{Binding ForwardRecipientPreview.DisplayName, TargetNullValue={x:Static og:Strings.ChatNoNickname}}" FontSize="16" FontAttributes="Bold" LineBreakMode="WordWrap" />
+                                        <Label Text="{Binding ForwardRecipientPreview.Address}" FontSize="12" StyleClass="Secondary" LineBreakMode="CharacterWrap" />
+                                    </VerticalStackLayout>
+                                    <Border Grid.Row="1" StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource Panel}" Padding="12">
+                                        <Editor x:Name="forwardMessageEditor" Text="{Binding ForwardTextPreview, Mode=OneWay}" IsReadOnly="True" AutoSize="TextChanges"
+                                                VerticalOptions="Fill" HorizontalOptions="Fill" og:Border.IsVisible="False"
+                                                SemanticProperties.Description="{x:Static og:Strings.ChatForwardText}" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Row="2" Spacing="8">
+                                        <Label Text="{Binding ForwardRecipientError}" StyleClass="Danger" LineBreakMode="WordWrap"
+                                               IsVisible="{Binding ForwardRecipientError, Converter={StaticResource HasText}}" />
+                                        <Button Text="{x:Static og:Strings.ChatSend}" Margin="4" MinimumHeightRequest="44" HorizontalOptions="End"
+                                                Clicked="OnSendForwardMessageClicked" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ContentView.Resources>
+        </ContentView>
+    </Grid>
+</ContentPage>

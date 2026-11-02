@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using Meshline.Interactions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Neo;
@@ -8,8 +9,9 @@ using NeoOrder.OneGate.Controls.Views;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Resources;
 using NeoOrder.OneGate.Services;
-using NeoOrder.OneGate.Services.RPC;
+using NeoOrder.OneGate.Services.Messaging;
 using NeoOrder.OneGate.Services.RemoteDebug;
+using NeoOrder.OneGate.Services.RPC;
 using Plugin.Maui.ScreenSecurity;
 using ZXing.Net.Maui.Controls;
 
@@ -45,6 +47,9 @@ public static class MauiProgram
             {
                 Controls.Handlers.Border.ConfigureHandlers();
                 handlers.AddHandler<BridgeWebView, BridgeWebViewHandler>();
+#if ANDROID || IOS || MACCATALYST
+                handlers.AddHandler<AppShell, OneGateShellRenderer>();
+#endif
 #if ANDROID
                 handlers.AddHandler<DatePicker, OneGateDatePickerHandler>();
 #endif
@@ -111,9 +116,19 @@ public static class MauiProgram
             using var stream = EmbeddedResource.Open("protocol.json");
             return ProtocolSettings.Load(stream);
         });
+        builder.Services.AddSingleton<IRelayRegistry>(sp => new CachedRelayRegistry(new RpcRelayRegistry(sp.GetRequiredService<HttpClient>(), new RpcRelayRegistryOptions
+        {
+            Context = new()
+            {
+                Reference = sp.GetRequiredService<ProtocolSettings>().Network,
+                Registry = SharedOptions.MeshlineRegistryHash
+            },
+            RpcUrl = SharedOptions.RpcServerUri
+        })));
         builder.Services.AddSingleton<IWalletProvider, WalletProvider>();
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddTransient<AddressBookService>();
+        builder.Services.AddSingleton<MessagingService>();
         builder.Services.AddSingleton<TokenManager>();
         builder.Services.AddSingleton<ActivityLogService>();
         builder.Services.AddSingleton<RpcClient>();

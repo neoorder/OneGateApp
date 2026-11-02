@@ -3,7 +3,9 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models.AppLinks;
 using NeoOrder.OneGate.Pages;
 using NeoOrder.OneGate.Services;
+using NeoOrder.OneGate.Services.Messaging;
 using NeoOrder.OneGate.Services.RemoteDebug;
+using System.ComponentModel;
 using System.Globalization;
 
 namespace NeoOrder.OneGate;
@@ -12,13 +14,17 @@ public partial class App : Application
 {
     readonly IServiceProvider serviceProvider;
     readonly IWalletProvider walletProvider;
+    readonly MessagingService messagingService;
+    readonly HashSet<Window> visibleMainWindows = [];
 
     AppLinkAction? appLinkAction;
 
-    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient, RemoteDebugService remoteDebugService)
+    public App(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient, RemoteDebugService remoteDebugService, MessagingService messagingService)
     {
         this.serviceProvider = serviceProvider;
         this.walletProvider = walletProvider;
+        this.messagingService = messagingService;
+        walletProvider.WalletChanged += OnWalletChanged;
         InitializeComponent();
         dbContext.Database.EnsureCreated();
         dbContext.EnsureMigrations();
@@ -72,18 +78,21 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState? activationState)
     {
         Page page;
+        bool isMainWindow;
         if (walletProvider.GetWallet() is null)
         {
             page = serviceProvider.GetServiceOrCreateInstance<WelcomePage>();
             page = new NavigationPage(page);
+            isMainWindow = true;
         }
         else
         {
             page = appLinkAction?.GetPage(serviceProvider)
                 ?? serviceProvider.GetServiceOrCreateInstance<AppShell>();
+            isMainWindow = page is AppShell;
             appLinkAction = null;
         }
-        return new Window(page)
+        var window = new Window(page)
         {
             Title = "OneGate",
 #if WINDOWS
@@ -94,5 +103,52 @@ public partial class App : Application
             }
 #endif
         };
+        // Independent DApp, news, payment and authentication windows do not own chat.
+        if (isMainWindow)
+        {
+#if WINDOWS || MACCATALYST
+            window.Activated += OnMainWindowVisible;
+            window.Deactivated += OnMainWindowHidden;
+#else
+            window.Created += OnMainWindowVisible;
+            window.Resumed += OnMainWindowVisible;
+#endif
+            window.Stopped += OnMainWindowHidden;
+            window.Destroying += OnMainWindowHidden;
+            window.PropertyChanged += OnMainWindowPropertyChanged;
+        }
+        return window;
+    }
+
+    async void OnMainWindowVisible(object? sender, EventArgs e)
+    {
+        if (sender is Window window && visibleMainWindows.Add(window))
+            await UpdateMessagingVisibilityAsync();
+    }
+
+    async void OnMainWindowHidden(object? sender, EventArgs e)
+    {
+        if (sender is Window window && visibleMainWindows.Remove(window))
+            await UpdateMessagingVisibilityAsync();
+    }
+
+    async void OnMainWindowPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        // Creating/importing/deleting a wallet replaces the root page in the same window.
+        if (e.PropertyName == nameof(Window.Page) && sender is Window window && visibleMainWindows.Contains(window))
+            await UpdateMessagingVisibilityAsync();
+    }
+
+    async Task UpdateMessagingVisibilityAsync()
+    {
+        bool visible = visibleMainWindows.Any(window => window.Page is AppShell);
+        try { await messagingService.SetForegroundAsync(visible); }
+        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Session lifecycle failed: {ex}"); }
+    }
+
+    async void OnWalletChanged(object? sender, Wallet? wallet)
+    {
+        try { await messagingService.WalletChangedAsync(wallet); }
+        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Wallet session update failed: {ex}"); }
     }
 }

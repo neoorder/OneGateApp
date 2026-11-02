@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>Pengaturan</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>Tidak dapat mengakses kamera</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>Konten kode QR tidak didukung: {0}</value>
   </data>
@@ -362,6 +359,7 @@ Anda dapat menonaktifkan autentikasi biometrik kapan saja.</value>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Operasi dibatalkan</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve"><value>Operasi tidak dapat diselesaikan saat ini.</value></data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>Autentikasi biometrik sementara tidak tersedia</value>
   </data>
@@ -508,9 +506,6 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Silakan pindai kode QR untuk mengirim transfer kepada saya</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>Alamat ini dapat menerima semua aset di platform Neo.</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Simpan ke galeri</value>
   </data>
@@ -541,9 +536,6 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
   <data name="ReceivingAddress" xml:space="preserve">
     <value>Alamat penerima</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>Buku alamat</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>Tidak ada alamat</value>
   </data>
@@ -551,7 +543,7 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
     <value>Buku alamat Anda kosong</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>Tambah alamat</value>
+    <value>Tambah kontak</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>Gagal mengambil tangkapan layar</value>
@@ -566,11 +558,12 @@ Setelah dinonaktifkan, Anda harus memasukkan kata sandi wallet secara manual unt
     <value>Alamat sudah ada</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>Edit alamat</value>
+    <value>Edit kontak</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Hapus</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>Kontak tersimpan di perangkat ini. Belum dapat dipastikan apakah nama sudah disinkronkan.</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>Alamat berhasil diperbarui</value>
   </data>
@@ -742,9 +735,6 @@ Apakah Anda ingin melanjutkan?</value>
   </data>
   <data name="AuthenticationInProgress" xml:space="preserve">
     <value>Mengizinkan permintaan masuk…</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>Sedang masuk</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>Nama domain</value>
@@ -968,17 +958,8 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="DAppSubmission" xml:space="preserve">
     <value>Pengajuan DApp</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Nama proyek</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>Situs web resmi</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>Informasi kontak</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>Ajukan pencantuman</value>
@@ -1288,4 +1269,151 @@ Disarankan untuk menyimpan kunci NEP-2 dan kata sandinya secara terpisah serta m
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Menunggu debugger jarak jauh tepercaya</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Pasangkan debugger jarak jauh</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Debugger jarak jauh “{0}” meminta akses. Sidik jari: {1}. Izinkan hanya jika Anda memercayai debugger jarak jauh ini.</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>Pesan</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>Kontak</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>Berita</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>Mulai chat dengan alamat Neo Anda</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>Hanya alamat yang disimpan</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>Tidak ada kontak yang cocok</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>Coba nama, alamat, atau catatan lain.</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>Detail kontak</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>Aktifkan chat</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>Mengaktifkan chat…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>Aktifkan chat untuk menambahkan teman serta mengirim dan menerima pesan.</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>Izinkan permintaan pertemanan melalui alamat Neo saya</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>Orang lain dapat mengirim permintaan pertemanan melalui alamat Neo Anda.</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>Orang lain memerlukan undangan chat Anda untuk mengirim permintaan pertemanan.</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>Aktivasi chat belum selesai. Coba lagi. Pengaturan yang Anda pilih sebelumnya akan tetap disimpan.</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>Izinkan perangkat ini mengirim dan menerima pesan menggunakan alamat Neo Anda.
+Alamat: {0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>Ganti perangkat chat</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>Setiap akun dapat memiliki hingga {0} perangkat chat, dan batas ini sudah tercapai. Untuk mengaktifkan chat di perangkat ini, pilih perangkat yang akan diganti. Perangkat yang diganti tidak akan bisa mengirim atau menerima pesan lagi.</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>Ganti perangkat ini</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>Otorisasi berakhir: {0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>Kedaluwarsa</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>Mengganti perangkat ini dapat memengaruhi koneksi dengan teman yang sudah ada. Pilih perangkat lain.</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>Ajukan permintaan chat</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>Kirim permintaan pertemanan</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>Pesan permintaan</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>Orang tersebut akan melihat pesan ini bersama permintaan Anda.</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>Mengirim permintaan pertemanan…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>Teman chat</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>Menunggu persetujuan orang tersebut</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>Status pertemanan belum dapat dipastikan saat ini</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>Aktifkan chat terlebih dahulu di Beranda &gt; Pesan.</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>Akun wallet Anda telah berubah. Buka kembali halaman ini.</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>Anda tidak dapat menambahkan orang ini melalui alamatnya. Mintalah undangan chat kepadanya.</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>Masukkan alamat Neo N3 yang valid.</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>Anda tidak dapat mengirim permintaan pertemanan ke alamat Anda sendiri.</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>Pesan permintaan terlalu panjang. Persingkat sebelum mengirimnya.</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>Permintaan pertemanan</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>Permintaan masuk</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>Permintaan dikirim</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>Tidak ada permintaan pertemanan</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>Menunggu tanggapan Anda</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>Lihat permintaan</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>Terima</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>Abaikan</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>Menerima permintaan pertemanan…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>Mengabaikan permintaan pertemanan…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>Ditambahkan sebagai teman</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>Permintaan diabaikan</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>Permintaan pertemanan ini telah berubah. Kembali ke daftar permintaan untuk memeriksanya.</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>Buka chat</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>Chat pribadi</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>Anda dapat mengirim pesan setelah menjadi teman.</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>Riwayat chat belum selesai dimuat. Beberapa pesan mungkin belum ditampilkan.</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>Identitas chat perangkat ini tidak dapat diverifikasi.</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>Riwayat chat tidak dapat dibaca atau disimpan.</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>Verifikasi pesan gagal. Beberapa pesan tidak dapat ditampilkan saat ini.</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>Muat pesan sebelumnya</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>Belum ada riwayat chat</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>Kirim pesan pertama untuk memulai chat.</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[Pesan nonteks]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>Melihat lampiran belum didukung</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>Ketik pesan…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>Masukkan pesan sebelum mengirimnya.</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>Kirim</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>Menunggu pengiriman</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>Mengirim</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Pengiriman belum dikonfirmasi</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>Terkirim</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>Gagal mengirim</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Hasil pengiriman belum dapat dipastikan saat ini</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[Draf]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>Kembali ke pesan terbaru ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>Pesan baru: {0} ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>Salin</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>Koneksi bermasalah. Pengiriman dan penerimaan pesan mungkin tertunda.</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>Tandai sudah dibaca</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>Edit ulang</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>Ganti draf</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>Ganti draf saat ini dengan pesan ini?</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>Kode QR saya</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>Bagikan undangan agar orang lain dapat mengirim permintaan pertemanan kepada Anda.</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>Berlaku hingga {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>Undangan ini telah kedaluwarsa. Buat undangan baru.</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>Salin undangan</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>Buat undangan baru</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>Undangan berlaku maksimal 24 jam. Setelah Anda membuat undangan baru, undangan sebelumnya tetap dapat digunakan hingga kedaluwarsa.</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>Akun wallet telah berubah. Buka kembali “Kode QR saya”.</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>Undangan chat ini tidak valid. Mintalah undangan baru kepada orang tersebut.</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>Undangan ini telah kedaluwarsa. Mintalah undangan baru kepada orang tersebut.</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>Undangan ini tidak dapat digunakan di jaringan Meshline saat ini.</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Alamat Neo atau undangan chat</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>Masukkan alamat Neo atau tempel undangan chat</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>Tempel</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>Anda tidak dapat menambahkan orang ini melalui alamatnya. Anda dapat menyimpan alamat untuk transfer atau meminta undangan chat kepadanya.</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>Chat belum diaktifkan, tetapi Anda tetap dapat menyimpan kontak untuk transfer.</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>Simpan alamat saja</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>Pengaturan chat</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>Menyimpan pengaturan chat…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>Belum dapat dipastikan apakah perubahan telah disimpan. Coba lagi.</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>Tidak ada percakapan yang cocok</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>Nama panggilan chat</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>Nama panggilan belum diatur</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>Nama panggilan Anda terlalu panjang. Persingkat lalu coba lagi.</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>Bio Anda terlalu panjang. Persingkat lalu coba lagi.</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>Beberapa informasi profil tidak valid. Ubah lalu coba lagi.</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>Nama panggilan Anda terlihat oleh orang lain. Kosongkan kolom lalu konfirmasi untuk menghapusnya.</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>Tidak dapat membuka tautan.</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>Belum dibaca</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>Tidak ada percakapan yang belum dibaca</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>Tampilkan semua percakapan</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>Sematkan percakapan</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>Lepas sematan percakapan</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>Disematkan</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>Pesan yang dikutip</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>Kutipan · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>Tidak dapat melihat pesan asli</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>Anda</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>Balas</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>Batalkan balasan</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>Lihat pesan asli</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>Mencari pesan asli…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>Kembali ke posisi sebelumnya</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>Lihat teks lengkap</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>Cari riwayat chat</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>Cari pesan yang lebih lama</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>Cari riwayat chat di perangkat ini berdasarkan kata kunci, pengirim, atau rentang waktu.</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>Tidak ditemukan pesan yang cocok.</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>Kembali ke hasil pencarian</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>Pengirim</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>Lawan bicara</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>Lihat dalam percakapan</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>Teruskan</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>Tambahkan teman chat agar dapat meneruskan pesan.</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>Filter percakapan</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>Filter</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>Rentang waktu</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>7 hari terakhir</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>30 hari terakhir</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>Hapus filter</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>Berisi tautan</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>Bio</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>Bio Anda terlihat oleh orang lain. Kosongkan kolom lalu simpan untuk menghapusnya.</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>Simpan</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>Hapus teman chat</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Hapus “{0}” sebagai teman chat? Riwayat chat dan alamat yang tersimpan akan tetap disimpan. Pesan yang sudah dikirim tidak akan ditarik kembali.</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Pengaturan chat tidak dapat dimuat. Silakan coba lagi.</value></data>
 </root>

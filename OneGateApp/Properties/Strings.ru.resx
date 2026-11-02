@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>Не удалось получить доступ к камере</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>Неподдерживаемое содержимое QR-кода: {0}</value>
   </data>
@@ -362,6 +359,7 @@
   <data name="OperationCancelled" xml:space="preserve">
     <value>Операция отменена</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve"><value>Сейчас не удалось завершить операцию.</value></data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>Биометрическая аутентификация временно недоступна</value>
   </data>
@@ -508,9 +506,6 @@
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Пожалуйста, отсканируйте QR-код, чтобы отправить мне перевод</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>Этот адрес может получать все активы на платформе Neo.</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Сохранить в галерею</value>
   </data>
@@ -541,9 +536,6 @@
   <data name="ReceivingAddress" xml:space="preserve">
     <value>Адрес получения</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>Адресная книга</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>Нет адресов</value>
   </data>
@@ -551,7 +543,7 @@
     <value>Ваша адресная книга пуста</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>Добавить адрес</value>
+    <value>Добавить контакт</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>Не удалось сделать скриншот</value>
@@ -566,11 +558,12 @@
     <value>Адрес уже существует</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>Редактировать адрес</value>
+    <value>Редактировать контакт</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Удалить</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>Контакт сохранён на этом устройстве. Пока не удаётся подтвердить, синхронизировано ли имя.</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>Адрес обновлён</value>
   </data>
@@ -742,9 +735,6 @@
   </data>
   <data name="AuthenticationInProgress" xml:space="preserve">
     <value>Авторизация запроса на вход…</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>Вход в систему</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>Доменное имя</value>
@@ -968,17 +958,8 @@
   <data name="DAppSubmission" xml:space="preserve">
     <value>Отправка DApp</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Название проекта</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>Официальный сайт</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>Контактная информация</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>Запросить добавление</value>
@@ -1288,4 +1269,151 @@
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Ожидание доверенного удалённого отладчика</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Сопряжение удалённого отладчика</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Удалённый отладчик «{0}» запрашивает доступ. Отпечаток: {1}. Разрешайте только если доверяете этому удалённому отладчику.</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>Сообщения</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>Контакты</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>Новости</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>Общайтесь с помощью своего адреса Neo</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>Сохранён только адрес</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>Подходящие контакты не найдены</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>Попробуйте другое имя, адрес или примечание.</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>Сведения о контакте</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>Включить чат</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>Включение чата…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>Включите чат, чтобы добавлять друзей, отправлять и получать сообщения.</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>Разрешить заявки в друзья по моему адресу Neo</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>Другие пользователи могут отправлять вам заявки в друзья по вашему адресу Neo.</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>Чтобы отправить вам заявку в друзья, другим пользователям нужно ваше приглашение в чат.</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>Включение чата не завершено. Попробуйте ещё раз. Выбранные настройки сохранятся.</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>Разрешите этому устройству отправлять и получать сообщения с вашим адресом Neo.
+Адрес: {0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>Заменить устройство чата</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>К каждому аккаунту можно добавить до {0} устройств для чата. Сейчас этот лимит достигнут. Чтобы включить чат на этом устройстве, выберите устройство для замены. Заменённое устройство больше не сможет отправлять и получать сообщения.</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>Заменить это устройство</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>Разрешение истекает: {0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>Истекло</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>Замена этого устройства может повлиять на связи с уже добавленными друзьями. Выберите другое устройство.</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>Запросить общение</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>Отправить заявку в друзья</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>Сообщение к заявке</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>Другой человек увидит это сообщение вместе с вашей заявкой.</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>Отправка заявки в друзья…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>Друг по чату</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>Ожидание принятия заявки собеседником</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>Сейчас не удаётся проверить, есть ли этот контакт в друзьях</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>Сначала включите чат в разделе «Главная» &gt; «Сообщения».</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>Аккаунт кошелька изменился. Откройте эту страницу заново.</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>Добавить этого человека по адресу нельзя. Попросите у него приглашение в чат.</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>Введите корректный адрес Neo N3.</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>Нельзя отправить заявку в друзья на свой адрес.</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>Сообщение к заявке слишком длинное. Сократите его перед отправкой.</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>Заявки в друзья</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>Полученные заявки</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>Отправленные заявки</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>Нет заявок в друзья</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>Ожидание вашего ответа</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>Посмотреть заявку</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>Принять</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>Игнорировать</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>Принятие заявки в друзья…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>Игнорирование заявки в друзья…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>Добавлен в друзья</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>Заявка проигнорирована</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>Заявка в друзья изменилась. Вернитесь к списку заявок и проверьте её.</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>Открыть чат</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>Личный чат</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>Вы сможете отправлять сообщения, когда станете друзьями.</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>История чата загружена не полностью. Некоторые сообщения могут пока не отображаться.</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>Не удалось проверить идентификационные данные этого устройства для чата.</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>Не удалось прочитать или сохранить историю чата.</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>Не удалось проверить сообщения. Некоторые сообщения сейчас невозможно отобразить.</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>Загрузить более ранние сообщения</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>Истории чата пока нет</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>Отправьте первое сообщение, чтобы начать общение.</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[Нетекстовое сообщение]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>Просмотр вложений пока не поддерживается</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>Введите сообщение…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>Введите сообщение перед отправкой.</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>Отправить</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>Ожидание отправки</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>Отправляется</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Отправка ещё не подтверждена</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>Отправлено</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>Не удалось отправить</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Сейчас не удаётся подтвердить результат отправки</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[Черновик]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>К последним сообщениям ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>Новых сообщений: {0} ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>Копировать</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>Проблема с подключением. Отправка и получение сообщений могут задерживаться.</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>Отметить как прочитанное</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>Редактировать заново</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>Заменить черновик</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>Заменить текущий черновик этим сообщением?</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>Мой QR-код</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>Поделитесь приглашением, чтобы другие пользователи могли отправить вам заявку в друзья.</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>Действует до {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>Срок действия приглашения истёк. Создайте новое приглашение.</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>Скопировать приглашение</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>Создать новое приглашение</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>Приглашения действуют не более 24 часов. После создания нового приглашения прежние остаются действительными до истечения их срока.</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>Аккаунт кошелька изменился. Заново откройте «Мой QR-код».</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>Это приглашение в чат недействительно. Попросите собеседника прислать новое.</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>Срок действия приглашения истёк. Попросите собеседника прислать новое.</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>Это приглашение нельзя использовать в текущей сети Meshline.</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Адрес Neo или приглашение в чат</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>Введите адрес Neo или вставьте приглашение в чат</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>Вставить</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>Добавить этого человека по адресу нельзя. Можно сохранить адрес для переводов или попросить у него приглашение в чат.</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>Чат не включён, но вы по-прежнему можете сохранять контакты для переводов.</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>Сохранить только адрес</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>Настройки чата</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>Сохранение настроек чата…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>Не удалось подтвердить, сохранены ли изменения. Попробуйте ещё раз.</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>Нет подходящих чатов</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>Псевдоним в чате</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>Псевдоним не задан</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>Псевдоним слишком длинный. Сократите его и попробуйте снова.</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>Описание профиля слишком длинное. Сократите его и попробуйте снова.</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>Некоторые данные профиля недопустимы. Измените их и попробуйте снова.</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>Ваш псевдоним виден другим. Чтобы удалить его, очистите поле и подтвердите изменение.</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>Не удалось открыть ссылку.</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>Непрочитанные</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>Нет непрочитанных чатов</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>Показать все чаты</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>Закрепить чат</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>Открепить чат</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>Закреплён</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>Цитируемое сообщение</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>Цитата · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>Не удалось просмотреть исходное сообщение</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>Вы</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>Ответить</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>Отменить ответ</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>Посмотреть исходное сообщение</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>Поиск исходного сообщения…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>Вернуться к прежнему месту</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>Посмотреть полный текст</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>Поиск в истории чата</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>Искать в более ранних сообщениях</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>Ищите в истории чата на этом устройстве по ключевому слову, отправителю или периоду.</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>Совпадающие сообщения не найдены.</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>Вернуться к результатам поиска</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>Отправитель</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>Собеседник</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>Показать в переписке</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>Переслать</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>Добавьте друга по чату, чтобы пересылать сообщения.</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>Фильтр чатов</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>Фильтры</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>Период</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>Последние 7 дней</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>Последние 30 дней</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>Сбросить фильтры</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>Содержит ссылки</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>О себе</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>Информация о себе видна другим. Чтобы удалить её, очистите поле и сохраните изменение.</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>Удалить из друзей чата</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Удалить «{0}» из друзей чата? История чата и сохранённые адреса останутся. Уже отправленные сообщения не будут отозваны.</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Не удалось загрузить настройки чата. Попробуйте снова.</value></data>
 </root>

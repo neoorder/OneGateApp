@@ -8,6 +8,9 @@
              Title="{x:Static og:Strings.GlobalSearch}"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="14">
             <SearchBar x:Name="searchBar"
@@ -15,9 +18,15 @@
                        Placeholder="{x:Static og:Strings.Search}"
                        TextChanged="OnSearchTextChanged"
                        SearchButtonPressed="OnSearchButtonPressed" />
-            <ActivityIndicator IsRunning="{Binding LoadingService.IsLoading}"
-                               IsVisible="{Binding LoadingService.IsLoading}"
+            <ActivityIndicator IsRunning="{Binding ShowLoading}"
+                               IsVisible="{Binding ShowLoading}"
                                HorizontalOptions="Center" />
+            <Label Text="{Binding ErrorText}" StyleClass="Danger" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+            <VerticalStackLayout Spacing="6" IsVisible="{Binding ChatContactSearchError, Converter={StaticResource HasText}}">
+                <Label Text="{Binding ChatContactSearchError}" StyleClass="Danger" LineBreakMode="WordWrap" />
+                <Button Text="{x:Static og:Strings.Retry}" StyleClass="Link" HorizontalOptions="Start" MinimumHeightRequest="44"
+                        IsEnabled="{Binding CanRetryChatContactSearch}" Clicked="OnRetryChatContactSearchClicked" />
+            </VerticalStackLayout>
             <Border StyleClass="Card" IsVisible="{Binding IsEmpty}">
                 <Label StyleClass="Secondary"
                        Text="{x:Static og:Strings.DefaultEmptyViewMessage}"
@@ -30,7 +39,8 @@
                     <DataTemplate x:DataType="og:GlobalSearchResult">
                         <Border StyleClass="Card" Padding="12">
                             <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="12">
-                                <Border StrokeShape="RoundRectangle 12"
+                                <og:ChatAvatarView Address="{Binding AvatarAddress}" DisplayName="{Binding Title}" IsVisible="{Binding IsContact}" WidthRequest="48" HeightRequest="48" />
+                                <Border IsVisible="{Binding IsNotContact}" StrokeShape="RoundRectangle 12"
                                         Padding="8"
                                         WidthRequest="48"
                                         HeightRequest="48"
@@ -52,7 +62,7 @@
                                     </Grid>
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                                    <Label Text="{Binding Title}"
+                                    <Label Text="{Binding Title, TargetNullValue={x:Static og:Strings.ChatNoNickname}}"
                                            FontAttributes="Bold"
                                            FontSize="16"
                                            LineBreakMode="TailTruncation" />

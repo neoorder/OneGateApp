@@ -1,37 +1,36 @@
 # OneGate
 
-A cross-platform **Neo N3 wallet** built with **.NET MAUI 10**.
+OneGate is a cross-platform wallet for the **Neo N3** ecosystem, built with **C#**, **XAML**, and **.NET MAUI 10**.
+Create and import wallets, manage tokens and NFTs, use dApps, and chat through Meshline.
 
-**Platforms:** Android · iOS · MacCatalyst · Windows
+**Platforms:** Android · iOS · macOS (Mac Catalyst) · Windows
 
-[Changelog](OneGateApp/CHANGELOG.md)
-
----
-
-## Overview
-
-OneGate is a modern wallet for the Neo N3 ecosystem. It focuses on providing a smooth cross-platform experience for wallet creation and import, asset management, NFT viewing, dApp interaction, and authentication workflows.
-
-Built with **C#**, **XAML**, and **.NET MAUI 10**, OneGate is designed to share a single codebase across multiple platforms while still keeping a native app experience.
+[Changelog](OneGateApp/CHANGELOG.md) · [Development guide](CONTRIBUTING.md) · [DApp tools](OneGate.Tools/README.md) · [Codex plugin](OneGate.Codex/README.md)
 
 ## Features
 
-- Create a new wallet locally
-- Import wallets via **mnemonic**, **WIF / raw private key**, or **NEP-2**
-- Manage **NEO / GAS** and other **NEP-17** assets
-- View and transfer **NEP-11 NFTs**
-- Built-in **dApp launcher** and wallet authorization flow
-- Opt-in encrypted **DApp remote debugging interface** for trusted remote debuggers on the same LAN, with QR pairing, persistent trust, explicit approval and optional method-specific results for requests selected by OneGate policy, logs, traces, JavaScript evaluation, and visible-WebView screenshots
-- Support for **NEP-20**, **NEP-21**, and related dAPI workflows
-- Support for `neo:` and `neoauth:` deep-link flows
-- QR code scanning for wallet and dApp actions
-- Address book / contacts support
-- Biometric protection for sensitive operations
-- Screen-security handling for private-key and password related flows
-- Multi-language UI support
-- Light / dark theme support
+- Create wallets locally or import a mnemonic, WIF, raw private key, or NEP-2 encrypted key.
+- Manage NEO, GAS, and other NEP-17 assets; view and transfer NEP-11 NFTs.
+- Launch dApps with wallet authorization and Neo N3 dAPI support.
+- Handle payment and authentication requests through QR codes and `neo:` / `neoauth:` links.
+- Keep an address book and use encrypted chat through Meshline, with contacts and account profiles.
+- Protect sensitive operations with biometrics and screen-security handling.
+- Use opt-in developer tools for encrypted remote DApp debugging.
+- Choose from 15 interface languages and light or dark themes.
 
-Remote debugging is hidden behind Developer Tools and is off by default. Its app-side pairing and session protocol is not tied to a specific debugger: the OneGate Codex plugin provides the first compatible remote debugger implementation, while other debugging tools can implement the same interface in the future. Real-app sessions accept HTTPS DApp URLs only. In a remotely started DApp session, explicit approval from the trusted remote debugger replaces the ordinary in-app confirmation on every network. Disabling Developer Tools disconnects remote debuggers and closes remote sessions without silently deleting the user’s trust list.
+## Build from source
+
+Install the .NET 10 SDK, .NET MAUI workloads, and the platform tools for your target.
+Open [OneGateApp.slnx](OneGateApp.slnx), select `OneGateApp` as the startup project, and choose a device or emulator.
+iOS and macOS development require a Mac with a compatible Xcode installation.
+
+For example, to build Android from the repository root:
+
+```sh
+dotnet build OneGateApp/OneGateApp.csproj -f net10.0-android
+```
+
+See the [development guide](CONTRIBUTING.md) for platform setup, signing, dependencies, and validation.
 
 ## Protocol support
 
@@ -46,46 +45,17 @@ OneGate is built for the Neo N3 ecosystem and includes support or integration po
 - **NEP-21** — dAPI for Neo N3 dApps
 - **NEP-33** — DApp authentication URI flow
 
-## Supported languages
+## Languages
 
-OneGate currently includes UI resources for:
-
-- English
-- 简体中文
-- 繁體中文
-- Deutsch
-- Español
-- Français
-- Bahasa Indonesia
-- Italiano
-- 日本語
-- 한국어
-- Nederlands
-- Português (Brasil)
-- Русский
-- Türkçe
-- Tiếng Việt
+English · 简体中文 · 繁體中文 · Deutsch · Español · Français · Bahasa Indonesia · Italiano · 日本語 · 한국어 · Nederlands · Português (Brasil) · Русский · Türkçe · Tiếng Việt
 
 ## Contributing
 
-Issues and pull requests are welcome.
+Issues and pull requests are welcome. Contributions to platform support, UI, translations, wallet interoperability,
+dApp integration, tests, and documentation are appreciated. For larger changes, open an issue first.
 
-Good contribution areas include:
-
-- cross-platform compatibility improvements
-- UI / UX polish
-- localization updates
-- wallet interoperability
-- dApp integration improvements
-- testing and CI/CD
-- documentation improvements
-
-For larger changes, opening an issue first is recommended.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and validation guidance.
 
 ## License
 
-MIT License
-
----
-
-OneGate aims to provide a clean, modern, and developer-friendly wallet experience for the Neo ecosystem across all major client platforms.
+[MIT](LICENSE.txt)

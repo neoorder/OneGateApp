@@ -1,12 +1,14 @@
+using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Neo;
 using Neo.Wallets;
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Properties;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Services;
 
-public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolSettings protocolSettings)
+public sealed partial class AddressBookService(ApplicationDbContext dbContext, ProtocolSettings protocolSettings)
 {
     const string NoCaseCollation = "NOCASE";
     const string LikeEscape = "\\";
@@ -25,6 +27,18 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         {
             return false;
         }
+    }
+
+    [GeneratedRegex("[A-Za-z0-9_]+", RegexOptions.CultureInvariant | RegexOptions.NonBacktracking)]
+    private static partial Regex AddressTokenPattern();
+
+    public IEnumerable<(int Start, int Length, string Address)> FindAddressOccurrences(string? text)
+    {
+        if (string.IsNullOrEmpty(text)) yield break;
+        // Match whole tokens so an address embedded in a longer identifier is not actionable.
+        foreach (Match match in AddressTokenPattern().Matches(text))
+            if (match.Length == 34 && TryNormalizeAddress(match.Value, out string address))
+                yield return (match.Index, match.Length, address);
     }
 
     public string? ResolveAddress(string? value)
@@ -56,19 +70,19 @@ public sealed class AddressBookService(ApplicationDbContext dbContext, ProtocolS
         return !matches.Any();
     }
 
-    public async Task<Contact?> FindByAddressAsync(string address)
+    public async Task<Contact?> FindByAddressAsync(string address, CancellationToken cancellationToken = default)
     {
         return await dbContext.Contacts
             .AsNoTracking()
-            .FirstOrDefaultAsync(p => p.Address == address);
+            .FirstOrDefaultAsync(p => p.Address == address, cancellationToken);
     }
 
-    public async Task<Contact[]> GetEntriesAsync()
+    public async Task<Contact[]> GetEntriesAsync(CancellationToken cancellationToken = default)
     {
         return await dbContext.Contacts
             .AsNoTracking()
             .OrderBy(p => p.Label == "" ? p.Address : p.Label)
-            .ToArrayAsync();
+            .ToArrayAsync(cancellationToken);
     }
 
     public async Task<Contact[]> GetSuggestionsAsync(string? query, int limit = 8)

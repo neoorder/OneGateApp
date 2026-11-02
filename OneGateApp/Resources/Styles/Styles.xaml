@@ -20,6 +20,18 @@
         <Setter Property="StrokeThickness" Value="0"/>
     </Style>
 
+    <Style TargetType="og:Badge">
+        <Setter Property="BackgroundColor" Value="{StaticResource BadgeBackground}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="MinimumWidthRequest" Value="20" />
+        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="InputTransparent" Value="True" />
+    </Style>
+
     <Style TargetType="Border" Class="Card">
         <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource Panel}" />
         <Setter Property="Stroke" Value="{toolkit:AppThemeResource Stroke}" />
@@ -300,6 +312,23 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Label" Class="Badge">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontAutoScalingEnabled" Value="False" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
     <Style TargetType="Label" Class="Secondary">
         <Setter Property="TextColor" Value="{toolkit:AppThemeResource Secondary}" />
     </Style>
@@ -310,6 +339,22 @@
 
     <Style TargetType="Label" Class="Danger">
         <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
+    </Style>
+
+    <toolkit:IsNullConverter x:Key="IsNullConverter" />
+
+    <Style TargetType="Image" Class="DefaultAvatar">
+        <Setter Property="Source">
+            <Setter.Value>
+                <FontImageSource FontFamily="Icons" Glyph="&#xe606;" Size="64" Color="{toolkit:AppThemeResource Brand}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Aspect" Value="AspectFit" />
+        <Setter Property="WidthRequest" Value="24" />
+        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="AutomationProperties.IsInAccessibleTree" Value="False" />
     </Style>
 
     <Style TargetType="Label" Class="Icon">

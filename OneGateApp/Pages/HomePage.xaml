@@ -4,58 +4,266 @@
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.HomePage"
+             x:Name="Root"
              Title="{x:Static og:Strings.Home}"
              BindingContext="{Binding Source={RelativeSource Self}}">
     <ContentPage.Resources>
         <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
+        <toolkit:IsEqualConverter x:Key="IsEqualConverter" />
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="IsStringNotNullOrWhiteSpaceConverter" />
+        <ControlTemplate x:Key="HomeSectionTemplate">
+            <Grid RowDefinitions="*,3" Padding="6,0" BackgroundColor="Transparent">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CheckedStates">
+                        <VisualState x:Name="Checked">
+                            <VisualState.Setters>
+                                <Setter TargetName="sectionLabel" Property="Label.TextColor" Value="{toolkit:AppThemeResource Brand}" />
+                                <Setter TargetName="selectionIndicator" Property="Opacity" Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked">
+                            <VisualState.Setters>
+                                <Setter TargetName="sectionLabel" Property="Label.TextColor" Value="{toolkit:AppThemeResource Secondary}" />
+                                <Setter TargetName="selectionIndicator" Property="Opacity" Value="0" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Label x:Name="sectionLabel" Text="{TemplateBinding Content}" FontSize="14" FontAttributes="Bold" FontFamily="{TemplateBinding FontFamily}" TextColor="{toolkit:AppThemeResource Secondary}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" LineBreakMode="NoWrap" AutomationProperties.IsInAccessibleTree="False" />
+                <BoxView x:Name="selectionIndicator" Grid.Row="1" WidthRequest="24" HeightRequest="3" HorizontalOptions="Center" BackgroundColor="{toolkit:AppThemeResource Brand}" Opacity="0" InputTransparent="True" />
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="HomeSectionStyle" TargetType="RadioButton">
+            <Setter Property="ControlTemplate" Value="{StaticResource HomeSectionTemplate}" />
+            <Setter Property="MinimumWidthRequest" Value="44" />
+            <Setter Property="HeightRequest" Value="44" />
+        </Style>
     </ContentPage.Resources>
+    <Shell.TitleView>
+        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="44">
+            <HorizontalStackLayout Spacing="4" RadioButtonGroup.GroupName="HomeSections" RadioButtonGroup.SelectedValue="{Binding SelectedHomeSection, Source={x:Reference Root}, Mode=TwoWay}">
+                <RadioButton Style="{StaticResource HomeSectionStyle}" Content="{x:Static og:Strings.HomeMessages}" Value="{x:Int32 0}" />
+                <RadioButton Style="{StaticResource HomeSectionStyle}" Content="{Binding ContactsSectionTitle, Source={x:Reference Root}}" Value="{x:Int32 1}" />
+                <RadioButton Style="{StaticResource HomeSectionStyle}" Content="{x:Static og:Strings.HomeNews}" Value="{x:Int32 2}" />
+            </HorizontalStackLayout>
+        </ScrollView>
+    </Shell.TitleView>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary" IconImageSource="{FontImageSource &#xe751;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="//home/search" />
+        <ToolbarItem Order="Primary" Text="{x:Static og:Strings.Search}" IconImageSource="{FontImageSource &#xe751;, FontFamily=Icons, Color={toolkit:AppThemeResource Primary}}" Clicked="OnSearchClicked" />
+        <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.AddNewAddress}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="add-contact" />
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.ScanQRCode}" Command="{x:Static og:Commands.ScanQRCode}" />
-        <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.AddressBook}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="contacts" />
+        <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.ChatMyInvitation}" IsEnabled="{Binding IsChatEnabled}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="chat-invitation" />
         <ToolbarItem Order="Secondary" Text="{x:Static og:Strings.Settings}" Command="{x:Static og:Commands.GotoPage}" CommandParameter="settings" />
     </ContentPage.ToolbarItems>
-    <RefreshView Margin="20,0" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
-        <CollectionView ItemsSource="{Binding News}" EmptyView="{x:Static og:Strings.DefaultEmptyViewMessage}" MinimumHeightRequest="20" SelectionMode="Single">
-            <CollectionView.Header>
-                <VerticalStackLayout Spacing="20" Padding="{OnPlatform iOS='0,0,0,20', Default='0'}">
-                    <!-- There are some issues with CarouselView on WinUI, so we disable looping on that platform to prevent potential crashes. -->
-                    <CarouselView x:Name="carouselView" Loop="{OnPlatform WinUI=False, Default=True}" ItemsSource="{Binding Banners}" IndicatorView="indicatorView" HeightRequest="{Binding Width, Source={RelativeSource AncestorType={x:Type RefreshView}}, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x / 2'}" MaximumHeightRequest="300">
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate x:DataType="og:Banner">
-                                <Image Aspect="AspectFit" SemanticProperties.Description="{Binding AltText}">
-                                    <Image.Source>
-                                        <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="30:00:00:00" />
-                                    </Image.Source>
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnBannerTapped" CommandParameter="{Binding TargetUrl}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
-                    <IndicatorView x:Name="indicatorView" HorizontalOptions="Center" />
+    <Grid Margin="20,0">
+        <Grid IsVisible="{Binding SelectedHomeSection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 0}}">
+            <ScrollView IsVisible="{Binding IsChatEnabled, Converter={StaticResource InvertedBoolConverter}}">
+                <VerticalStackLayout Spacing="16" Padding="0,32" MaximumWidthRequest="400" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="{x:Static og:Strings.HomeMessagesTitle}" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    <Label Text="{x:Static og:Strings.ChatSetupDescription}" StyleClass="Secondary" HorizontalTextAlignment="Center" />
+                    <Border StyleClass="Card" IsVisible="{Binding ChatAddress, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}">
+                        <Grid ColumnDefinitions="*,44" ColumnSpacing="8">
+                            <VerticalStackLayout Spacing="6">
+                                <Label Text="{x:Static og:Strings.Address}" StyleClass="Secondary" FontSize="12" />
+                                <Label Text="{Binding ChatAddress}" FontSize="13" LineBreakMode="CharacterWrap" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" WidthRequest="44" HeightRequest="44"
+                                    Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding ChatAddress}" SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" />
+                        </Grid>
+                    </Border>
+                    <VerticalStackLayout Spacing="8" IsVisible="{Binding HasChatState}">
+                        <Grid ColumnDefinitions="*,auto" ColumnSpacing="12">
+                            <Label Text="{x:Static og:Strings.ChatAllowAddressDiscovery}" VerticalTextAlignment="Center" LineBreakMode="WordWrap" />
+                            <Switch Grid.Column="1" IsToggled="{Binding AllowChatDiscovery, Mode=TwoWay}" IsEnabled="{Binding CanEditChatDiscovery}"
+                                    SemanticProperties.Description="{x:Static og:Strings.ChatAllowAddressDiscovery}" />
+                        </Grid>
+                        <Label Text="{Binding ChatDiscoveryHint}" StyleClass="Secondary" FontSize="12" />
+                        <Label Text="{x:Static og:Strings.ChatSetupPending}" StyleClass="Secondary" FontSize="12" IsVisible="{Binding HasPendingChatActivation}" />
+                    </VerticalStackLayout>
+                    <Label Text="{Binding ChatError}" StyleClass="Danger" LineBreakMode="WordWrap"
+                           IsVisible="{Binding ChatError, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}" />
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" IsVisible="{Binding IsChatBusy}">
+                        <ActivityIndicator IsRunning="{Binding IsChatBusy}" WidthRequest="20" HeightRequest="20" />
+                        <Label Text="{Binding ChatBusyText}" StyleClass="Secondary" VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                    <Button Text="{Binding ChatActionText}" IsEnabled="{Binding CanEnableChat}"
+                            IsVisible="{Binding IsChatEnabled, Converter={StaticResource InvertedBoolConverter}}" Clicked="OnEnableChatClicked" />
+                    <Button Text="{x:Static og:Strings.Cancel}" StyleClass="Secondary" IsVisible="{Binding IsEnablingChat}" Clicked="OnCancelChatActivationClicked" />
                 </VerticalStackLayout>
-            </CollectionView.Header>
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="{Binding Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x / 400'}" HorizontalItemSpacing="20" VerticalItemSpacing="20" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="og:News">
-                    <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto" ColumnSpacing="10">
-                        <Image Grid.RowSpan="2" Aspect="AspectFill" WidthRequest="112" HeightRequest="63">
-                            <Image.Source>
-                                <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="90:00:00:00" />
-                            </Image.Source>
-                        </Image>
-                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" FontAttributes="Bold" MaxLines="2" LineBreakMode="TailTruncation" />
-                        <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding Subtitle}" FontSize="10" FontAttributes="Italic" LineBreakMode="NoWrap" VerticalOptions="End" />
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnNewsTapped" CommandParameter="{Binding .}" />
-                        </Grid.GestureRecognizers>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+            </ScrollView>
+            <Grid RowDefinitions="auto,auto,*" IsVisible="{Binding IsChatEnabled}">
+                <Grid ColumnDefinitions="*,auto" ColumnSpacing="8" IsVisible="{Binding IsConversationSearchVisible}" Margin="0,0,0,12">
+                    <Border StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="12,0">
+                        <Entry x:Name="conversationSearch" Text="{Binding ConversationSearchText}" Placeholder="{x:Static og:Strings.Search}" ClearButtonVisibility="WhileEditing" HeightRequest="44" og:Border.IsVisible="False" />
+                    </Border>
+                    <Button Grid.Column="1" Text="{Binding ConversationFilterText}" StyleClass="Secondary" FontSize="13" Padding="10,0"
+                            HeightRequest="44" MinimumHeightRequest="44" IsEnabled="{Binding IsChatEnabled}" Clicked="OnConversationFilterClicked"
+                            SemanticProperties.Hint="{x:Static og:Strings.ChatConversationFilter}" ToolTipProperties.Text="{x:Static og:Strings.ChatConversationFilter}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding HasConversationTypeFilter}" Value="True">
+                                <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource BrandMuted}" />
+                                <Setter Property="TextColor" Value="{toolkit:AppThemeResource Brand}" />
+                                <Setter Property="BorderColor" Value="{toolkit:AppThemeResource Brand}" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
+                <VerticalStackLayout Grid.Row="1" Spacing="0">
+                    <Label Text="{Binding ChatConnectionNotice}" StyleClass="Secondary" FontSize="12" LineBreakMode="WordWrap" Margin="0,0,0,12"
+                           IsVisible="{Binding ChatConnectionNotice, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}" />
+                    <VerticalStackLayout Spacing="8" Margin="0,0,0,12" IsVisible="{Binding ConversationsError, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}">
+                        <Label Text="{Binding ConversationsError}" StyleClass="Danger" LineBreakMode="WordWrap" />
+                        <Button Text="{x:Static og:Strings.Retry}" StyleClass="Link" HorizontalOptions="Start" IsEnabled="{Binding IsChatBusy, Converter={StaticResource InvertedBoolConverter}}" Clicked="OnConversationsRetryClicked" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+                <CollectionView Grid.Row="2" ItemsSource="{Binding Conversations}" HandlerChanged="OnConversationListHandlerChanged" SelectionMode="None" ItemsUpdatingScrollMode="KeepScrollOffset">
+                    <CollectionView.EmptyView>
+                        <Grid BindingContext="{x:Reference Root}" IsVisible="{Binding HasLoadedConversations}" Padding="20">
+                            <VerticalStackLayout Spacing="16" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="{Binding ConversationsEmptyTitle}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                <Button Text="{x:Static og:Strings.ChatShowAllConversations}" IsVisible="{Binding HasConversationFilter}" StyleClass="Link"
+                                        HorizontalOptions="Center" Clicked="OnClearConversationFilterClicked" />
+                                <Button Text="{x:Static og:Strings.HomeContacts}" IsVisible="{Binding HasConversationFilter, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" Clicked="OnChatContactsClicked" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="og:ChatConversationViewModel">
+                            <Grid x:Name="ConversationRow" ColumnDefinitions="52,*,auto" RowDefinitions="auto,auto,1" ColumnSpacing="12" RowSpacing="6" Padding="0,12,0,0"
+                                  AutomationProperties.IsInAccessibleTree="True" SemanticProperties.Description="{Binding Title}" SemanticProperties.Hint="{Binding Preview}">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Buttons="Primary" CommandParameter="{Binding .}"
+                                                          Command="{OnPlatform Default={Binding Source={x:Reference Root}, Path=OpenConversationCommand, x:DataType=og:HomePage}, Android={x:Null}, iOS={x:Null}}" />
+                                </Grid.GestureRecognizers>
+                                <Grid.Behaviors>
+                                    <og:PressBehavior BindingContext="{Binding Source={x:Reference ConversationRow}, Path=BindingContext, x:DataType=Grid}"
+                                                           IsEnabled="{OnPlatform Default=True, WinUI=False, MacCatalyst=False}"
+                                                           LongPressDuration="600" DisallowTouchThreshold="10"
+                                                           Command="{Binding Source={x:Reference Root}, Path=OpenConversationCommand, x:DataType=og:HomePage}" CommandParameter="{Binding .}"
+                                                           LongPressCommand="{Binding Source={x:Reference Root}, Path=ConversationActionsCommand, x:DataType=og:HomePage}" LongPressCommandParameter="{Binding .}" />
+                                </Grid.Behaviors>
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout BindingContext="{Binding Source={x:Reference ConversationRow}, Path=BindingContext, x:DataType=Grid}">
+                                        <MenuFlyoutItem Text="{Binding PinActionText}" CommandParameter="{Binding .}" Clicked="OnPinConversationClicked" />
+                                        <MenuFlyoutItem Text="{x:Static og:Strings.ChatMarkAsRead}" IsEnabled="{Binding HasUnread}"
+                                                        CommandParameter="{Binding .}" Clicked="OnMarkConversationReadClicked" />
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                <Grid Grid.RowSpan="2" WidthRequest="52" HeightRequest="52" VerticalOptions="Center">
+                                    <og:ChatAvatarView StrokeShape="RoundRectangle 12" WidthRequest="44" HeightRequest="44" BackgroundColor="{toolkit:AppThemeResource BrandMuted}" HorizontalOptions="Start" VerticalOptions="Center" Address="{Binding Address}" DisplayName="{Binding DisplayName}" />
+                                    <og:Badge Count="{Binding UnreadCount}" />
+                                </Grid>
+                                <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" FontAttributes="Bold" LineBreakMode="TailTruncation" AutomationProperties.IsInAccessibleTree="False" />
+                                <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                    <Label Text="{x:Static og:Strings.ChatPinned}" IsVisible="{Binding IsPinned}" StyleClass="Secondary" FontSize="10" VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding TimeText}" StyleClass="Secondary" FontSize="11" VerticalTextAlignment="Center" AutomationProperties.IsInAccessibleTree="False" />
+                                </HorizontalStackLayout>
+                                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Preview}" StyleClass="Secondary" FontSize="13" LineBreakMode="TailTruncation" AutomationProperties.IsInAccessibleTree="False">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding ShowSendError}" Value="True">
+                                            <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <BoxView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HeightRequest="1" Margin="0,6,0,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator Grid.Row="2" IsRunning="{Binding ShowConversationLoading}" IsVisible="{Binding ShowConversationLoading}" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,12" InputTransparent="True" />
+            </Grid>
+        </Grid>
+        <Grid RowDefinitions="auto,auto,auto,*" IsVisible="{Binding SelectedHomeSection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
+            <Border IsVisible="{Binding IsContactSearchVisible}" StrokeShape="RoundRectangle 12" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="12,0" Margin="0,0,0,12">
+                <Entry x:Name="contactSearch" Text="{Binding ContactSearchText}" Placeholder="{x:Static og:Strings.SearchAddressBook}" ClearButtonVisibility="WhileEditing" HeightRequest="44" og:Border.IsVisible="False" />
+            </Border>
+            <Button Grid.Row="1" Text="{Binding ContactRequestsTitle}" IsVisible="{Binding IsChatEnabled}" StyleClass="Link" HeightRequest="44" HorizontalOptions="Start" Margin="0,0,0,8"
+                    Command="{x:Static og:Commands.GotoPage}" CommandParameter="chat-requests" />
+            <VerticalStackLayout Grid.Row="2" Spacing="8" Margin="0,0,0,12" IsVisible="{Binding ContactsError, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}">
+                <Label Text="{Binding ContactsError}" StyleClass="Danger" LineBreakMode="WordWrap" />
+                <Button Text="{x:Static og:Strings.Retry}" StyleClass="Link" HorizontalOptions="Start"
+                        IsEnabled="{Binding ContactsLoadingService.IsLoading, Converter={StaticResource InvertedBoolConverter}}" Clicked="OnContactsRetryClicked" />
+            </VerticalStackLayout>
+            <RefreshView Grid.Row="3" IsRefreshing="{Binding ContactsLoadingService.IsReloading}" Command="{Binding ContactsLoadingService}">
+                <CollectionView ItemsSource="{Binding Contacts}" SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <Grid BindingContext="{x:Reference Root}" IsVisible="{Binding HasLoadedContacts}" Padding="20">
+                            <VerticalStackLayout Spacing="16" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="{Binding ContactsEmptyTitle}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding ContactsEmptyDescription}" StyleClass="Secondary" HorizontalTextAlignment="Center" />
+                                <Button Text="{x:Static og:Strings.AddNewAddress}" IsVisible="{Binding HasContactSearch, Converter={StaticResource InvertedBoolConverter}}" HorizontalOptions="Center" Command="{x:Static og:Commands.GotoPage}" CommandParameter="add-contact" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="og:ContactViewModel">
+                            <Grid ColumnDefinitions="*,44" RowDefinitions="auto,1" ColumnSpacing="8" Padding="0,12,0,0">
+                                <Grid ColumnDefinitions="44,*" ColumnSpacing="12" Padding="0,0,0,12" AutomationProperties.IsInAccessibleTree="True" SemanticProperties.Description="{Binding DisplayName, TargetNullValue={x:Static og:Strings.ChatNoNickname}}" SemanticProperties.Hint="{Binding Address}">
+                                    <og:ChatAvatarView StrokeShape="RoundRectangle 12" WidthRequest="44" HeightRequest="44" BackgroundColor="{toolkit:AppThemeResource BrandMuted}" VerticalOptions="Center" Address="{Binding Address}" DisplayName="{Binding DisplayName}" />
+                                    <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                        <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
+                                            <Label Text="{Binding DisplayName, TargetNullValue={x:Static og:Strings.ChatNoNickname}}" FontSize="15" FontAttributes="Bold" LineBreakMode="TailTruncation" AutomationProperties.IsInAccessibleTree="False" />
+                                            <Label Grid.Column="1" Text="{Binding ChatStatus}" IsVisible="{Binding IsContactChatEnabled, Source={x:Reference Root}}" StyleClass="Secondary" FontSize="11" VerticalTextAlignment="Center" />
+                                        </Grid>
+                                        <Label Text="{Binding Address}" StyleClass="Secondary" FontSize="12" LineBreakMode="MiddleTruncation" AutomationProperties.IsInAccessibleTree="False" />
+                                        <Label Text="{Binding Note}" StyleClass="Secondary" FontSize="12" LineBreakMode="TailTruncation" IsVisible="{Binding Note, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}" />
+                                    </VerticalStackLayout>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnContactTapped" CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18" WidthRequest="44" HeightRequest="44" VerticalOptions="Center" Margin="0,0,0,12" SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                                <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1" Margin="56,0,0,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <ActivityIndicator Grid.Row="3" IsRunning="{Binding ShowContactsLoading}" IsVisible="{Binding ShowContactsLoading}" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,12" InputTransparent="True" />
+        </Grid>
+        <RefreshView IsVisible="{Binding SelectedHomeSection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 2}}" IsRefreshing="{Binding LoadingService.IsReloading}" Command="{Binding LoadingService}">
+            <CollectionView ItemsSource="{Binding News}" EmptyView="{x:Static og:Strings.DefaultEmptyViewMessage}" MinimumHeightRequest="20" SelectionMode="Single" SizeChanged="OnNewsSizeChanged">
+                <CollectionView.Header>
+                    <VerticalStackLayout Spacing="20" Padding="{OnPlatform iOS='0,0,0,20', Default='0'}">
+                        <!-- There are some issues with CarouselView on WinUI, so we disable looping on that platform to prevent potential crashes. -->
+                        <CarouselView x:Name="carouselView" Loop="{OnPlatform WinUI=False, Default=True}" ItemsSource="{Binding Banners}" IndicatorView="indicatorView" HeightRequest="{Binding Width, Source={RelativeSource AncestorType={x:Type RefreshView}}, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x / 2'}" MaximumHeightRequest="300">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate x:DataType="og:Banner">
+                                    <Image Aspect="AspectFit" SemanticProperties.Description="{Binding AltText}">
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="30:00:00:00" />
+                                        </Image.Source>
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnBannerTapped" CommandParameter="{Binding TargetUrl}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView x:Name="indicatorView" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout x:Name="newsItemsLayout" Orientation="Vertical" Span="1" HorizontalItemSpacing="20" VerticalItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="og:News">
+                        <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto" ColumnSpacing="10">
+                            <Image Grid.RowSpan="2" Aspect="AspectFill" WidthRequest="112" HeightRequest="63">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="90:00:00:00" />
+                                </Image.Source>
+                            </Image>
+                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}" FontAttributes="Bold" MaxLines="2" LineBreakMode="TailTruncation" />
+                            <Label Grid.Column="1" Grid.Row="1" StyleClass="Secondary" Text="{Binding Subtitle}" FontSize="10" FontAttributes="Italic" LineBreakMode="NoWrap" VerticalOptions="End" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNewsTapped" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
 </ContentPage>

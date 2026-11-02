@@ -23,6 +23,12 @@ namespace NeoOrder.OneGate.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
+        internal static string ChatSettingsLoadFailed => ResourceManager.GetString("ChatSettingsLoadFailed", resourceCulture);
+
+
+
+
+
 
         private static global::System.Resources.ResourceManager resourceMan;
 
@@ -79,7 +85,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Add Address 的本地化字符串。
+        ///   查找类似 Add Contact 的本地化字符串。
         /// </summary>
         internal static string AddNewAddress {
             get {
@@ -111,15 +117,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string LabelAlreadyExists {
             get {
                 return ResourceManager.GetString("LabelAlreadyExists", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Address Book 的本地化字符串。
-        /// </summary>
-        internal static string AddressBook {
-            get {
-                return ResourceManager.GetString("AddressBook", resourceCulture);
             }
         }
 
@@ -613,6 +610,15 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
+        ///   Contact saved locally, but the name could not be synced.
+        /// </summary>
+        internal static string ContactNameSyncFailed {
+            get {
+                return ResourceManager.GetString("ContactNameSyncFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Contact updated successfully 的本地化字符串。
         /// </summary>
         internal static string ContactUpdatedSuccessfully {
@@ -820,38 +826,11 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Project name 的本地化字符串。
-        /// </summary>
-        internal static string ProjectName {
-            get {
-                return ResourceManager.GetString("ProjectName", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   查找类似 URL 的本地化字符串。
         /// </summary>
         internal static string DAppUrl {
             get {
                 return ResourceManager.GetString("DAppUrl", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Official website 的本地化字符串。
-        /// </summary>
-        internal static string OfficialWebsite {
-            get {
-                return ResourceManager.GetString("OfficialWebsite", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Contact information 的本地化字符串。
-        /// </summary>
-        internal static string ContactInformation {
-            get {
-                return ResourceManager.GetString("ContactInformation", resourceCulture);
             }
         }
 
@@ -1319,7 +1298,7 @@ namespace NeoOrder.OneGate.Properties {
         }
 
         /// <summary>
-        ///   查找类似 Edit address 的本地化字符串。
+        ///   查找类似 Edit Contact 的本地化字符串。
         /// </summary>
         internal static string EditContact {
             get {
@@ -1351,15 +1330,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string EnterMnemonicPrompt {
             get {
                 return ResourceManager.GetString("EnterMnemonicPrompt", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Unable to access the camera 的本地化字符串。
-        /// </summary>
-        internal static string ErrorMessageCameraFailure {
-            get {
-                return ResourceManager.GetString("ErrorMessageCameraFailure", resourceCulture);
             }
         }
 
@@ -2078,6 +2048,10 @@ namespace NeoOrder.OneGate.Properties {
             }
         }
 
+        internal static string OperationFailed {
+            get { return ResourceManager.GetString("OperationFailed", resourceCulture); }
+        }
+
         /// <summary>
         ///   查找类似 Other 的本地化字符串。
         /// </summary>
@@ -2304,15 +2278,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string Receive {
             get {
                 return ResourceManager.GetString("Receive", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 This address can receive all assets on the Neo platform. 的本地化字符串。
-        /// </summary>
-        internal static string ReceiveQRCodeText {
-            get {
-                return ResourceManager.GetString("ReceiveQRCodeText", resourceCulture);
             }
         }
 
@@ -2736,15 +2701,6 @@ namespace NeoOrder.OneGate.Properties {
         internal static string SigningAccount {
             get {
                 return ResourceManager.GetString("SigningAccount", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查找类似 Signing in 的本地化字符串。
-        /// </summary>
-        internal static string SigningIn {
-            get {
-                return ResourceManager.GetString("SigningIn", resourceCulture);
             }
         }
 
@@ -3533,6 +3489,611 @@ namespace NeoOrder.OneGate.Properties {
 
         internal static string RemoteDebugPairingPrompt {
             get { return ResourceManager.GetString("RemoteDebugPairingPrompt", resourceCulture); }
+        }
+
+        internal static string HomeMessages {
+            get { return ResourceManager.GetString("HomeMessages", resourceCulture); }
+        }
+
+        internal static string HomeContacts {
+            get { return ResourceManager.GetString("HomeContacts", resourceCulture); }
+        }
+
+        internal static string HomeNews {
+            get { return ResourceManager.GetString("HomeNews", resourceCulture); }
+        }
+
+        internal static string HomeMessagesTitle {
+            get { return ResourceManager.GetString("HomeMessagesTitle", resourceCulture); }
+        }
+
+        internal static string HomeAddressOnly {
+            get { return ResourceManager.GetString("HomeAddressOnly", resourceCulture); }
+        }
+
+        internal static string HomeNoMatchingContacts {
+            get { return ResourceManager.GetString("HomeNoMatchingContacts", resourceCulture); }
+        }
+
+        internal static string HomeNoMatchingContactsHint {
+            get { return ResourceManager.GetString("HomeNoMatchingContactsHint", resourceCulture); }
+        }
+
+        internal static string ContactDetails {
+            get { return ResourceManager.GetString("ContactDetails", resourceCulture); }
+        }
+
+        internal static string ChatEnable {
+            get { return ResourceManager.GetString("ChatEnable", resourceCulture); }
+        }
+
+        internal static string ChatEnabling {
+            get { return ResourceManager.GetString("ChatEnabling", resourceCulture); }
+        }
+
+        internal static string ChatSetupDescription {
+            get { return ResourceManager.GetString("ChatSetupDescription", resourceCulture); }
+        }
+
+        internal static string ChatAllowAddressDiscovery {
+            get { return ResourceManager.GetString("ChatAllowAddressDiscovery", resourceCulture); }
+        }
+
+        internal static string ChatDiscoveryAllowedHint {
+            get { return ResourceManager.GetString("ChatDiscoveryAllowedHint", resourceCulture); }
+        }
+
+        internal static string ChatInvitationOnlyHint {
+            get { return ResourceManager.GetString("ChatInvitationOnlyHint", resourceCulture); }
+        }
+
+        internal static string ChatSetupPending {
+            get { return ResourceManager.GetString("ChatSetupPending", resourceCulture); }
+        }
+
+        internal static string ChatAuthorizationMessage {
+            get { return ResourceManager.GetString("ChatAuthorizationMessage", resourceCulture); }
+        }
+
+        internal static string ChatReplaceDeviceTitle {
+            get { return ResourceManager.GetString("ChatReplaceDeviceTitle", resourceCulture); }
+        }
+
+        internal static string ChatDeviceLimitHint {
+            get { return ResourceManager.GetString("ChatDeviceLimitHint", resourceCulture); }
+        }
+
+        internal static string ChatReplaceDevice {
+            get { return ResourceManager.GetString("ChatReplaceDevice", resourceCulture); }
+        }
+
+        internal static string ChatDeviceValidUntil {
+            get { return ResourceManager.GetString("ChatDeviceValidUntil", resourceCulture); }
+        }
+
+        internal static string ChatDeviceExpired {
+            get { return ResourceManager.GetString("ChatDeviceExpired", resourceCulture); }
+        }
+
+        internal static string ChatDeviceReplacementUnavailable {
+            get { return ResourceManager.GetString("ChatDeviceReplacementUnavailable", resourceCulture); }
+        }
+
+        internal static string ChatRequest {
+            get { return ResourceManager.GetString("ChatRequest", resourceCulture); }
+        }
+
+        internal static string ChatSendRequest {
+            get { return ResourceManager.GetString("ChatSendRequest", resourceCulture); }
+        }
+
+        internal static string ChatRequestNote {
+            get { return ResourceManager.GetString("ChatRequestNote", resourceCulture); }
+        }
+
+        internal static string ChatRequestNoteHint {
+            get { return ResourceManager.GetString("ChatRequestNoteHint", resourceCulture); }
+        }
+
+        internal static string ChatRequestSending {
+            get { return ResourceManager.GetString("ChatRequestSending", resourceCulture); }
+        }
+
+        internal static string ChatContactConnected {
+            get { return ResourceManager.GetString("ChatContactConnected", resourceCulture); }
+        }
+
+        internal static string ChatRequestWaiting {
+            get { return ResourceManager.GetString("ChatRequestWaiting", resourceCulture); }
+        }
+
+        internal static string ChatStatusUnavailable {
+            get { return ResourceManager.GetString("ChatStatusUnavailable", resourceCulture); }
+        }
+
+        internal static string ChatEnableFirst {
+            get { return ResourceManager.GetString("ChatEnableFirst", resourceCulture); }
+        }
+
+        internal static string ChatAccountChanged {
+            get { return ResourceManager.GetString("ChatAccountChanged", resourceCulture); }
+        }
+
+        internal static string ChatAddressNotDiscoverable {
+            get { return ResourceManager.GetString("ChatAddressNotDiscoverable", resourceCulture); }
+        }
+
+        internal static string ChatInvalidAddress {
+            get { return ResourceManager.GetString("ChatInvalidAddress", resourceCulture); }
+        }
+
+        internal static string ChatCannotAddSelf {
+            get { return ResourceManager.GetString("ChatCannotAddSelf", resourceCulture); }
+        }
+
+        internal static string ChatRequestNoteTooLong {
+            get { return ResourceManager.GetString("ChatRequestNoteTooLong", resourceCulture); }
+        }
+
+        internal static string ChatRequests {
+            get { return ResourceManager.GetString("ChatRequests", resourceCulture); }
+        }
+
+        internal static string ChatRequestsIncoming {
+            get { return ResourceManager.GetString("ChatRequestsIncoming", resourceCulture); }
+        }
+
+        internal static string ChatRequestsOutgoing {
+            get { return ResourceManager.GetString("ChatRequestsOutgoing", resourceCulture); }
+        }
+
+        internal static string ChatRequestsEmpty {
+            get { return ResourceManager.GetString("ChatRequestsEmpty", resourceCulture); }
+        }
+
+        internal static string ChatRequestReceived {
+            get { return ResourceManager.GetString("ChatRequestReceived", resourceCulture); }
+        }
+
+        internal static string ChatViewRequest {
+            get { return ResourceManager.GetString("ChatViewRequest", resourceCulture); }
+        }
+
+        internal static string ChatAcceptRequest {
+            get { return ResourceManager.GetString("ChatAcceptRequest", resourceCulture); }
+        }
+
+        internal static string ChatIgnoreRequest {
+            get { return ResourceManager.GetString("ChatIgnoreRequest", resourceCulture); }
+        }
+
+        internal static string ChatRequestAccepting {
+            get { return ResourceManager.GetString("ChatRequestAccepting", resourceCulture); }
+        }
+
+        internal static string ChatRequestIgnoring {
+            get { return ResourceManager.GetString("ChatRequestIgnoring", resourceCulture); }
+        }
+
+        internal static string ChatRequestAccepted {
+            get { return ResourceManager.GetString("ChatRequestAccepted", resourceCulture); }
+        }
+
+        internal static string ChatRequestIgnored {
+            get { return ResourceManager.GetString("ChatRequestIgnored", resourceCulture); }
+        }
+
+        internal static string ChatRequestChanged {
+            get { return ResourceManager.GetString("ChatRequestChanged", resourceCulture); }
+        }
+
+        internal static string ChatOpen {
+            get { return ResourceManager.GetString("ChatOpen", resourceCulture); }
+        }
+
+        internal static string ChatConversation {
+            get { return ResourceManager.GetString("ChatConversation", resourceCulture); }
+        }
+
+        internal static string ChatContactRequired {
+            get { return ResourceManager.GetString("ChatContactRequired", resourceCulture); }
+        }
+
+        internal static string ChatHistorySyncIncomplete {
+            get { return ResourceManager.GetString("ChatHistorySyncIncomplete", resourceCulture); }
+        }
+
+        internal static string ChatDeviceAuthenticationFailed {
+            get { return ResourceManager.GetString("ChatDeviceAuthenticationFailed", resourceCulture); }
+        }
+
+        internal static string ChatHistoryStorageFailed {
+            get { return ResourceManager.GetString("ChatHistoryStorageFailed", resourceCulture); }
+        }
+
+        internal static string ChatMessageVerificationFailed {
+            get { return ResourceManager.GetString("ChatMessageVerificationFailed", resourceCulture); }
+        }
+
+        internal static string ChatLoadEarlier {
+            get { return ResourceManager.GetString("ChatLoadEarlier", resourceCulture); }
+        }
+
+        internal static string ChatHistoryEmpty {
+            get { return ResourceManager.GetString("ChatHistoryEmpty", resourceCulture); }
+        }
+
+        internal static string ChatHistoryEmptyHint {
+            get { return ResourceManager.GetString("ChatHistoryEmptyHint", resourceCulture); }
+        }
+
+        internal static string ChatNonTextMessage {
+            get { return ResourceManager.GetString("ChatNonTextMessage", resourceCulture); }
+        }
+
+        internal static string ChatAttachmentsNotShown {
+            get { return ResourceManager.GetString("ChatAttachmentsNotShown", resourceCulture); }
+        }
+
+        internal static string ChatMessagePlaceholder {
+            get { return ResourceManager.GetString("ChatMessagePlaceholder", resourceCulture); }
+        }
+
+        internal static string ChatMessageEmpty {
+            get { return ResourceManager.GetString("ChatMessageEmpty", resourceCulture); }
+        }
+
+        internal static string ChatSend {
+            get { return ResourceManager.GetString("ChatSend", resourceCulture); }
+        }
+
+        internal static string ChatMessageQueued {
+            get { return ResourceManager.GetString("ChatMessageQueued", resourceCulture); }
+        }
+
+        internal static string ChatMessageSending {
+            get { return ResourceManager.GetString("ChatMessageSending", resourceCulture); }
+        }
+
+        internal static string ChatMessageUnconfirmed {
+            get { return ResourceManager.GetString("ChatMessageUnconfirmed", resourceCulture); }
+        }
+
+        internal static string ChatMessageSent {
+            get { return ResourceManager.GetString("ChatMessageSent", resourceCulture); }
+        }
+
+        internal static string ChatMessageFailed {
+            get { return ResourceManager.GetString("ChatMessageFailed", resourceCulture); }
+        }
+
+        internal static string ChatMessageStatusUnavailable {
+            get { return ResourceManager.GetString("ChatMessageStatusUnavailable", resourceCulture); }
+        }
+
+        internal static string ChatNoMatchingConversations {
+            get { return ResourceManager.GetString("ChatNoMatchingConversations", resourceCulture); }
+        }
+
+        internal static string ChatDraft {
+            get { return ResourceManager.GetString("ChatDraft", resourceCulture); }
+        }
+
+        internal static string ChatBackToLatest {
+            get { return ResourceManager.GetString("ChatBackToLatest", resourceCulture); }
+        }
+
+        internal static string ChatNewMessages {
+            get { return ResourceManager.GetString("ChatNewMessages", resourceCulture); }
+        }
+
+        internal static string ChatCopyText {
+            get { return ResourceManager.GetString("ChatCopyText", resourceCulture); }
+        }
+
+        internal static string ChatConnectionUnavailable {
+            get { return ResourceManager.GetString("ChatConnectionUnavailable", resourceCulture); }
+        }
+
+        internal static string ChatMarkAsRead {
+            get { return ResourceManager.GetString("ChatMarkAsRead", resourceCulture); }
+        }
+
+        internal static string ChatEditFailedMessage {
+            get { return ResourceManager.GetString("ChatEditFailedMessage", resourceCulture); }
+        }
+
+        internal static string ChatReplaceDraft {
+            get { return ResourceManager.GetString("ChatReplaceDraft", resourceCulture); }
+        }
+
+        internal static string ChatReplaceDraftPrompt {
+            get { return ResourceManager.GetString("ChatReplaceDraftPrompt", resourceCulture); }
+        }
+
+        internal static string ChatMyInvitation {
+            get { return ResourceManager.GetString("ChatMyInvitation", resourceCulture); }
+        }
+
+        internal static string ChatInvitationDescription {
+            get { return ResourceManager.GetString("ChatInvitationDescription", resourceCulture); }
+        }
+
+        internal static string ChatInvitationExpiry {
+            get { return ResourceManager.GetString("ChatInvitationExpiry", resourceCulture); }
+        }
+
+        internal static string ChatInvitationExpired {
+            get { return ResourceManager.GetString("ChatInvitationExpired", resourceCulture); }
+        }
+
+        internal static string ChatCopyInvitation {
+            get { return ResourceManager.GetString("ChatCopyInvitation", resourceCulture); }
+        }
+
+        internal static string ChatRefreshInvitation {
+            get { return ResourceManager.GetString("ChatRefreshInvitation", resourceCulture); }
+        }
+
+        internal static string ChatInvitationRefreshHint {
+            get { return ResourceManager.GetString("ChatInvitationRefreshHint", resourceCulture); }
+        }
+
+        internal static string ChatInvitationAccountChanged {
+            get { return ResourceManager.GetString("ChatInvitationAccountChanged", resourceCulture); }
+        }
+
+        internal static string ChatInvalidInvitation {
+            get { return ResourceManager.GetString("ChatInvalidInvitation", resourceCulture); }
+        }
+
+        internal static string ChatReceivedInvitationExpired {
+            get { return ResourceManager.GetString("ChatReceivedInvitationExpired", resourceCulture); }
+        }
+
+        internal static string ChatInvitationNetworkMismatch {
+            get { return ResourceManager.GetString("ChatInvitationNetworkMismatch", resourceCulture); }
+        }
+
+        internal static string ContactAddressOrInvitation {
+            get { return ResourceManager.GetString("ContactAddressOrInvitation", resourceCulture); }
+        }
+
+        internal static string ContactInputHint {
+            get { return ResourceManager.GetString("ContactInputHint", resourceCulture); }
+        }
+
+        internal static string ContactPaste {
+            get { return ResourceManager.GetString("ContactPaste", resourceCulture); }
+        }
+
+        internal static string ContactAddressOnlyHint {
+            get { return ResourceManager.GetString("ContactAddressOnlyHint", resourceCulture); }
+        }
+
+        internal static string ContactChatDisabledHint {
+            get { return ResourceManager.GetString("ContactChatDisabledHint", resourceCulture); }
+        }
+
+        internal static string ContactSaveAddressOnly {
+            get { return ResourceManager.GetString("ContactSaveAddressOnly", resourceCulture); }
+        }
+
+        internal static string ChatSettings {
+            get { return ResourceManager.GetString("ChatSettings", resourceCulture); }
+        }
+
+        internal static string ChatNickname {
+            get { return ResourceManager.GetString("ChatNickname", resourceCulture); }
+        }
+
+        internal static string ChatNoNickname {
+            get { return ResourceManager.GetString("ChatNoNickname", resourceCulture); }
+        }
+
+        internal static string ChatNicknameHint {
+            get { return ResourceManager.GetString("ChatNicknameHint", resourceCulture); }
+        }
+
+        internal static string ChatSettingsSaving {
+            get { return ResourceManager.GetString("ChatSettingsSaving", resourceCulture); }
+        }
+
+        internal static string ChatOpenLinkFailed {
+            get { return ResourceManager.GetString("ChatOpenLinkFailed", resourceCulture); }
+        }
+
+        internal static string ChatUnreadOnly {
+            get { return ResourceManager.GetString("ChatUnreadOnly", resourceCulture); }
+        }
+
+        internal static string ChatNoUnreadConversations {
+            get { return ResourceManager.GetString("ChatNoUnreadConversations", resourceCulture); }
+        }
+
+        internal static string ChatShowAllConversations {
+            get { return ResourceManager.GetString("ChatShowAllConversations", resourceCulture); }
+        }
+
+        internal static string ChatPinConversation {
+            get { return ResourceManager.GetString("ChatPinConversation", resourceCulture); }
+        }
+
+        internal static string ChatUnpinConversation {
+            get { return ResourceManager.GetString("ChatUnpinConversation", resourceCulture); }
+        }
+
+        internal static string ChatPinned {
+            get { return ResourceManager.GetString("ChatPinned", resourceCulture); }
+        }
+
+        internal static string ChatQuotedMessage {
+            get { return ResourceManager.GetString("ChatQuotedMessage", resourceCulture); }
+        }
+
+        internal static string ChatQuotedMessageFrom {
+            get { return ResourceManager.GetString("ChatQuotedMessageFrom", resourceCulture); }
+        }
+
+        internal static string ChatQuotedMessageUnavailable {
+            get { return ResourceManager.GetString("ChatQuotedMessageUnavailable", resourceCulture); }
+        }
+
+        internal static string ChatYou {
+            get { return ResourceManager.GetString("ChatYou", resourceCulture); }
+        }
+
+        internal static string ChatReply {
+            get { return ResourceManager.GetString("ChatReply", resourceCulture); }
+        }
+
+        internal static string ChatCancelReply {
+            get { return ResourceManager.GetString("ChatCancelReply", resourceCulture); }
+        }
+
+        internal static string ChatViewQuotedMessage {
+            get { return ResourceManager.GetString("ChatViewQuotedMessage", resourceCulture); }
+        }
+
+        internal static string ChatFindingQuotedMessage {
+            get { return ResourceManager.GetString("ChatFindingQuotedMessage", resourceCulture); }
+        }
+
+        internal static string ChatReturnToPosition {
+            get { return ResourceManager.GetString("ChatReturnToPosition", resourceCulture); }
+        }
+
+        internal static string ChatViewFullText {
+            get { return ResourceManager.GetString("ChatViewFullText", resourceCulture); }
+        }
+
+        internal static string ChatSettingsSaveFailed {
+            get { return ResourceManager.GetString("ChatSettingsSaveFailed", resourceCulture); }
+        }
+
+        internal static string ChatSearchMessages {
+            get { return ResourceManager.GetString("ChatSearchMessages", resourceCulture); }
+        }
+
+        internal static string ChatSearchEarlier {
+            get { return ResourceManager.GetString("ChatSearchEarlier", resourceCulture); }
+        }
+
+        internal static string ChatSearchLocalHint {
+            get { return ResourceManager.GetString("ChatSearchLocalHint", resourceCulture); }
+        }
+
+        internal static string ChatSearchEmpty {
+            get { return ResourceManager.GetString("ChatSearchEmpty", resourceCulture); }
+        }
+
+        internal static string ChatReturnToSearchResults {
+            get { return ResourceManager.GetString("ChatReturnToSearchResults", resourceCulture); }
+        }
+
+        internal static string ChatSearchSender {
+            get { return ResourceManager.GetString("ChatSearchSender", resourceCulture); }
+        }
+
+        internal static string ChatOtherParticipant {
+            get { return ResourceManager.GetString("ChatOtherParticipant", resourceCulture); }
+        }
+
+        internal static string ChatViewInConversation {
+            get { return ResourceManager.GetString("ChatViewInConversation", resourceCulture); }
+        }
+
+        internal static string ChatForwardText {
+            get { return ResourceManager.GetString("ChatForwardText", resourceCulture); }
+        }
+
+        internal static string ChatForwardNoContacts {
+            get { return ResourceManager.GetString("ChatForwardNoContacts", resourceCulture); }
+        }
+
+        internal static string ChatConversationFilter {
+            get { return ResourceManager.GetString("ChatConversationFilter", resourceCulture); }
+        }
+
+        internal static string ChatSearchFilters {
+            get { return ResourceManager.GetString("ChatSearchFilters", resourceCulture); }
+        }
+
+        internal static string ChatSearchPeriod {
+            get { return ResourceManager.GetString("ChatSearchPeriod", resourceCulture); }
+        }
+
+        internal static string ChatLast7Days {
+            get { return ResourceManager.GetString("ChatLast7Days", resourceCulture); }
+        }
+
+        internal static string ChatLast30Days {
+            get { return ResourceManager.GetString("ChatLast30Days", resourceCulture); }
+        }
+
+        internal static string ChatClearSearchFilters {
+            get { return ResourceManager.GetString("ChatClearSearchFilters", resourceCulture); }
+        }
+
+        internal static string ChatLinksOnly {
+            get { return ResourceManager.GetString("ChatLinksOnly", resourceCulture); }
+        }
+
+        internal static string ChatBio {
+            get { return ResourceManager.GetString("ChatBio", resourceCulture); }
+        }
+
+        internal static string ChatBioHint {
+            get { return ResourceManager.GetString("ChatBioHint", resourceCulture); }
+        }
+
+        internal static string ChatSaveBio {
+            get { return ResourceManager.GetString("ChatSaveBio", resourceCulture); }
+        }
+
+        internal static string ChatRemoveContact {
+            get { return ResourceManager.GetString("ChatRemoveContact", resourceCulture); }
+        }
+
+        internal static string ChatRemoveContactPrompt {
+            get { return ResourceManager.GetString("ChatRemoveContactPrompt", resourceCulture); }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        internal static string ChatNicknameTooLong {
+            get { return ResourceManager.GetString("ChatNicknameTooLong", resourceCulture); }
+        }
+
+        internal static string ChatBioTooLong {
+            get { return ResourceManager.GetString("ChatBioTooLong", resourceCulture); }
+        }
+
+        internal static string ChatProfileInvalid {
+            get { return ResourceManager.GetString("ChatProfileInvalid", resourceCulture); }
         }
 
     }

@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>Cài đặt</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>Không thể truy cập camera</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>Nội dung mã QR không được hỗ trợ: {0}</value>
   </data>
@@ -362,6 +359,7 @@ Bạn có thể tắt xác thực sinh trắc học bất cứ lúc nào.</value
   <data name="OperationCancelled" xml:space="preserve">
     <value>Thao tác đã bị hủy</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve"><value>Hiện không thể hoàn tất thao tác.</value></data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>Xác thực sinh trắc học tạm thời không khả dụng</value>
   </data>
@@ -508,9 +506,6 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Vui lòng quét mã QR để chuyển tiền cho tôi</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>Địa chỉ này có thể nhận tất cả tài sản trên nền tảng Neo.</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Lưu vào thư viện ảnh</value>
   </data>
@@ -541,9 +536,6 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
   <data name="ReceivingAddress" xml:space="preserve">
     <value>Địa chỉ nhận</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>Danh bạ</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>Không có địa chỉ</value>
   </data>
@@ -551,7 +543,7 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
     <value>Danh bạ của bạn đang trống</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>Thêm địa chỉ</value>
+    <value>Thêm liên hệ</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>Chụp màn hình thất bại</value>
@@ -566,11 +558,12 @@ Sau khi tắt, bạn sẽ cần nhập mật khẩu ví thủ công để cấp 
     <value>Địa chỉ đã tồn tại</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>Chỉnh sửa địa chỉ</value>
+    <value>Chỉnh sửa liên hệ</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Xóa</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>Liên hệ đã được lưu trên thiết bị này. Hiện chưa thể xác nhận tên đã được đồng bộ hay chưa.</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>Địa chỉ đã được cập nhật</value>
   </data>
@@ -742,9 +735,6 @@ Bạn có muốn tiếp tục không?</value>
   </data>
   <data name="AuthenticationInProgress" xml:space="preserve">
     <value>Đang cho phép yêu cầu đăng nhập…</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>Đang đăng nhập</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>Tên miền</value>
@@ -968,17 +958,8 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="DAppSubmission" xml:space="preserve">
     <value>Gửi DApp</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Tên dự án</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>Trang web chính thức</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>Thông tin liên hệ</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>Yêu cầu thêm vào danh mục</value>
@@ -1288,4 +1269,151 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Đang chờ trình gỡ lỗi từ xa đáng tin cậy</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Ghép nối trình gỡ lỗi từ xa</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Trình gỡ lỗi từ xa “{0}” đang yêu cầu quyền truy cập. Dấu vân tay: {1}. Chỉ cho phép nếu bạn tin cậy trình gỡ lỗi từ xa này.</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>Tin nhắn</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>Danh bạ</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>Tin tức</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>Bắt đầu trò chuyện bằng địa chỉ Neo của bạn</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>Chỉ lưu địa chỉ</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>Không tìm thấy liên hệ phù hợp</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>Hãy thử tên, địa chỉ hoặc ghi chú khác.</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>Chi tiết liên hệ</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>Bật trò chuyện</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>Đang bật trò chuyện…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>Bật trò chuyện để thêm bạn bè, gửi và nhận tin nhắn.</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>Cho phép gửi lời mời kết bạn qua địa chỉ Neo của tôi</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>Người khác có thể gửi lời mời kết bạn qua địa chỉ Neo của bạn.</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>Người khác cần lời mời trò chuyện của bạn để gửi lời mời kết bạn.</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>Chưa hoàn tất việc bật trò chuyện. Hãy thử lại. Các cài đặt bạn đã chọn sẽ được giữ lại.</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>Cho phép thiết bị này gửi và nhận tin nhắn bằng địa chỉ Neo của bạn.
+Địa chỉ: {0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>Thay thiết bị trò chuyện</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>Mỗi tài khoản có thể thêm tối đa {0} thiết bị trò chuyện và hiện đã đạt giới hạn này. Để bật trò chuyện trên thiết bị này, hãy chọn một thiết bị để thay thế. Thiết bị bị thay thế sẽ không thể gửi hoặc nhận tin nhắn nữa.</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>Thay thế thiết bị này</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>Quyền truy cập hết hạn: {0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>Đã hết hạn</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>Thay thế thiết bị này có thể ảnh hưởng đến kết nối với những người bạn đã thêm. Vui lòng chọn thiết bị khác.</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>Yêu cầu trò chuyện</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>Gửi lời mời kết bạn</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>Lời nhắn kèm lời mời kết bạn</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>Đối phương sẽ thấy lời nhắn này cùng với lời mời kết bạn của bạn.</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>Đang gửi lời mời kết bạn…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>Bạn trò chuyện</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>Đang chờ đối phương chấp nhận</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>Hiện chưa thể xác nhận trạng thái kết bạn</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>Trước tiên, hãy bật trò chuyện trong Trang chủ &gt; Tin nhắn.</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>Tài khoản ví đã thay đổi. Hãy mở lại trang này.</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>Không thể thêm người này bằng địa chỉ. Hãy xin họ lời mời trò chuyện.</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>Vui lòng nhập địa chỉ Neo N3 hợp lệ.</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>Bạn không thể gửi lời mời kết bạn đến địa chỉ của chính mình.</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>Lời nhắn kèm lời mời kết bạn quá dài. Hãy rút ngắn trước khi gửi.</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>Lời mời kết bạn</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>Lời mời đã nhận</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>Lời mời đã gửi</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>Chưa có lời mời kết bạn</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>Đang chờ bạn phản hồi</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>Xem lời mời</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>Chấp nhận</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>Bỏ qua</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>Đang chấp nhận lời mời kết bạn…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>Đang bỏ qua lời mời kết bạn…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>Đã kết bạn</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>Đã bỏ qua lời mời</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>Lời mời kết bạn đã thay đổi. Vui lòng quay lại danh sách lời mời để kiểm tra.</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>Mở trò chuyện</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>Trò chuyện riêng</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>Bạn có thể gửi tin nhắn sau khi trở thành bạn bè.</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>Lịch sử trò chuyện chưa được tải đầy đủ. Một số tin nhắn có thể chưa hiển thị.</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>Không thể xác minh danh tính trò chuyện của thiết bị này.</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>Không thể đọc hoặc lưu lịch sử trò chuyện.</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>Xác minh tin nhắn thất bại. Hiện không thể hiển thị một số tin nhắn.</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>Tải tin nhắn cũ hơn</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>Chưa có lịch sử trò chuyện</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>Gửi tin nhắn đầu tiên để bắt đầu trò chuyện.</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[Tin nhắn không phải văn bản]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>Chưa hỗ trợ xem tệp đính kèm</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>Nhập tin nhắn…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>Vui lòng nhập tin nhắn trước khi gửi.</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>Gửi</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>Đang chờ gửi</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>Đang gửi</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Kết quả gửi chưa được xác nhận</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>Đã gửi</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>Gửi thất bại</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Hiện chưa thể xác nhận kết quả gửi</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[Bản nháp]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>Về tin nhắn mới nhất ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>{0} tin nhắn mới ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>Sao chép</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>Kết nối gặp sự cố. Việc gửi và nhận tin nhắn có thể bị chậm.</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>Đánh dấu đã đọc</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>Chỉnh sửa lại</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>Thay bản nháp</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>Thay bản nháp hiện tại bằng tin nhắn này?</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>Mã QR của tôi</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>Chia sẻ lời mời để người khác có thể gửi lời mời kết bạn cho bạn.</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>Có hiệu lực đến {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>Lời mời đã hết hạn. Vui lòng tạo lời mời mới.</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>Sao chép lời mời</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>Tạo lời mời mới</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>Lời mời có hiệu lực tối đa 24 giờ. Sau khi tạo lời mời mới, các lời mời cũ vẫn dùng được cho đến khi hết hạn.</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>Tài khoản ví đã thay đổi. Hãy mở lại “Mã QR của tôi”.</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>Lời mời trò chuyện này không hợp lệ. Hãy xin đối phương lời mời mới.</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>Lời mời đã hết hạn. Hãy xin đối phương lời mời mới.</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>Không thể dùng lời mời này trên mạng Meshline hiện tại.</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Địa chỉ Neo hoặc lời mời trò chuyện</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>Nhập địa chỉ Neo hoặc dán lời mời trò chuyện</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>Dán</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>Không thể thêm người này bằng địa chỉ. Bạn có thể lưu địa chỉ để chuyển tiền hoặc xin họ lời mời trò chuyện.</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>Trò chuyện chưa được bật, nhưng bạn vẫn có thể lưu liên hệ để chuyển tiền.</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>Chỉ lưu địa chỉ</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>Cài đặt trò chuyện</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>Đang lưu cài đặt trò chuyện…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>Chưa thể xác nhận các thay đổi đã được lưu hay chưa. Hãy thử lại.</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>Không có cuộc trò chuyện phù hợp</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>Biệt danh trò chuyện</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>Chưa đặt biệt danh</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>Biệt danh quá dài. Hãy rút ngắn rồi thử lại.</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>Phần giới thiệu quá dài. Hãy rút ngắn rồi thử lại.</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>Một số thông tin hồ sơ không hợp lệ. Hãy chỉnh sửa rồi thử lại.</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>Người khác có thể thấy biệt danh của bạn. Để xóa, hãy để trống rồi xác nhận.</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>Không thể mở liên kết.</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>Chưa đọc</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>Không có cuộc trò chuyện chưa đọc</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>Hiện tất cả cuộc trò chuyện</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>Ghim cuộc trò chuyện</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>Bỏ ghim cuộc trò chuyện</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>Đã ghim</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>Tin nhắn được trích dẫn</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>Trích dẫn · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>Không thể xem tin nhắn gốc</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>Bạn</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>Trả lời</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>Hủy trả lời</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>Xem tin nhắn gốc</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>Đang tìm tin nhắn gốc…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>Quay lại vị trí trước</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>Xem toàn bộ văn bản</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>Tìm trong lịch sử trò chuyện</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>Tìm tiếp tin nhắn cũ hơn</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>Tìm trong lịch sử trò chuyện trên thiết bị này theo từ khóa, người gửi hoặc khoảng thời gian.</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>Không tìm thấy tin nhắn phù hợp.</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>Quay lại kết quả tìm kiếm</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>Người gửi</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>Đối phương</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>Xem trong cuộc trò chuyện</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>Chuyển tiếp</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>Thêm bạn trò chuyện để chuyển tiếp tin nhắn.</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>Lọc cuộc trò chuyện</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>Bộ lọc</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>Khoảng thời gian</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>7 ngày qua</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>30 ngày qua</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>Xóa bộ lọc</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>Có chứa liên kết</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>Giới thiệu</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>Người khác có thể thấy phần giới thiệu của bạn. Để xóa, hãy để trống rồi lưu.</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>Lưu</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>Xóa bạn trò chuyện</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>Xóa “{0}” khỏi danh sách bạn trò chuyện? Lịch sử trò chuyện và các địa chỉ đã lưu sẽ được giữ lại. Tin nhắn đã gửi sẽ không bị thu hồi.</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Không thể tải cài đặt trò chuyện. Vui lòng thử lại.</value></data>
 </root>

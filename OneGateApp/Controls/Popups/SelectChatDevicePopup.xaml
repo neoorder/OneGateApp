@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<og:MyPopup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:og="http://schemas.neoorder.org/onegate/controls"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            x:Class="NeoOrder.OneGate.Controls.Popups.SelectChatDevicePopup"
+            x:TypeArguments="x:String"
+            x:DataType="og:SelectChatDevicePopup"
+            CanBeDismissedByTappingOutsideOfPopup="True">
+    <og:MyPopup.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+    </og:MyPopup.Resources>
+    <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="12">
+        <Grid ColumnDefinitions="*,44" ColumnSpacing="8">
+            <Label Text="{x:Static og:Strings.ChatReplaceDeviceTitle}" FontAttributes="Bold" VerticalTextAlignment="Center" LineBreakMode="WordWrap" />
+            <Button Grid.Column="1" StyleClass="Icon" Text="&#xe6b5;" FontSize="24" WidthRequest="44" HeightRequest="44"
+                    SemanticProperties.Description="{x:Static og:Strings.Cancel}" Clicked="OnCancel" />
+        </Grid>
+        <VerticalStackLayout Grid.Row="1" Spacing="12">
+            <Label Text="{Binding Description}" StyleClass="Secondary" LineBreakMode="WordWrap" />
+            <Label Text="{Binding ErrorMessage}" StyleClass="Danger" LineBreakMode="WordWrap"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource HasText}}" />
+        </VerticalStackLayout>
+        <CollectionView x:Name="deviceList" Grid.Row="2" ItemsSource="{Binding Devices}" SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="og:ChatDeviceChoice">
+                    <Grid Padding="12" RowDefinitions="Auto,Auto,Auto" RowSpacing="6" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource BrandMuted}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Label Text="{Binding DeviceId}" FontSize="13" LineBreakMode="CharacterWrap" />
+                        <Label Grid.Row="1" Text="{Binding ValidUntil}" StyleClass="Secondary" FontSize="12" LineBreakMode="WordWrap" />
+                        <Label Grid.Row="2" Text="{x:Static og:Strings.ChatDeviceExpired}" IsVisible="{Binding IsExpired}" StyleClass="Danger" FontSize="12" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button x:Name="replaceButton" Grid.Row="3" Text="{x:Static og:Strings.ChatReplaceDevice}" IsEnabled="False" Clicked="OnReplace" />
+    </Grid>
+</og:MyPopup>

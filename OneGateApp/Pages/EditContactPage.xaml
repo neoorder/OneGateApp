@@ -8,8 +8,12 @@
              SafeAreaEdges="All"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
-    <Grid RowDefinitions="*,auto" Margin="20">
-        <ScrollView>
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="Not" />
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*,auto,auto" Margin="20" RowSpacing="12">
+        <ScrollView IsEnabled="{Binding CanEdit}">
             <VerticalStackLayout Spacing="20">
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.Address}" />
             <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
@@ -24,7 +28,6 @@
                 </ContentView>
             </Border>
             <og:ValidationMessage Title="{x:Static og:Strings.Label}" Margin="0,-16,0,0" Target="{x:Reference entryLabel}">
-                <og:Required />
                 <og:Custom Validate="OnValidateLabelDuplicity" />
             </og:ValidationMessage>
             <Label StyleClass="Secondary" Text="{x:Static og:Strings.Note}" />
@@ -35,9 +38,21 @@
             </Border>
             </VerticalStackLayout>
         </ScrollView>
-        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="20">
-            <Button StyleClass="Danger" Text="{x:Static og:Strings.Delete}" Clicked="OnDelete" />
-            <og:Submit Grid.Column="1" Text="{x:Static og:Strings.OK}" Submitted="OnSubmitted" />
+        <VerticalStackLayout Grid.Row="1" Spacing="8">
+            <ActivityIndicator IsRunning="{Binding IsWorking}" IsVisible="{Binding IsWorking}" HeightRequest="24" />
+            <Label Text="{Binding ErrorText}" StyleClass="Danger" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+        </VerticalStackLayout>
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" IsEnabled="{Binding CanEdit}">
+            <Button StyleClass="Danger" Text="{x:Static og:Strings.Delete}" Clicked="OnDelete"
+                    IsVisible="{Binding IsNewContact, Converter={StaticResource Not}}" />
+            <og:Submit Grid.Column="1" Text="{x:Static og:Strings.OK}" Submitted="OnSubmitted">
+                <og:Submit.Triggers>
+                    <DataTrigger TargetType="og:Submit" Binding="{Binding IsNewContact}" Value="True">
+                        <Setter Property="Grid.Column" Value="0" />
+                        <Setter Property="Grid.ColumnSpan" Value="2" />
+                    </DataTrigger>
+                </og:Submit.Triggers>
+            </og:Submit>
         </Grid>
     </Grid>
 </ContentPage>

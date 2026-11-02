@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>설정</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>카메라에 접근할 수 없습니다</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>지원되지 않는 QR 코드 내용: {0}</value>
   </data>
@@ -362,6 +359,7 @@
   <data name="OperationCancelled" xml:space="preserve">
     <value>작업이 취소되었습니다</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve"><value>현재 작업을 완료할 수 없습니다.</value></data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>생체 인증을 일시적으로 사용할 수 없습니다</value>
   </data>
@@ -508,9 +506,6 @@
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>QR 코드를 스캔하여 송금해 주세요</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>이 주소는 Neo 플랫폼의 모든 자산을 받을 수 있습니다.</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>갤러리에 저장</value>
   </data>
@@ -541,9 +536,6 @@
   <data name="ReceivingAddress" xml:space="preserve">
     <value>수신 주소</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>주소록</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>주소가 없습니다</value>
   </data>
@@ -551,7 +543,7 @@
     <value>주소록이 비어 있습니다</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>주소 추가</value>
+    <value>연락처 추가</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>스크린샷 실패</value>
@@ -566,11 +558,12 @@
     <value>이미 존재하는 주소입니다</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>주소 편집</value>
+    <value>연락처 편집</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>삭제</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>연락처는 이 기기에 저장되었습니다. 이름이 동기화되었는지는 아직 확인할 수 없습니다.</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>주소가 업데이트되었습니다</value>
   </data>
@@ -742,9 +735,6 @@
   </data>
   <data name="AuthenticationInProgress" xml:space="preserve">
     <value>로그인 요청 승인 중…</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>로그인 중</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>도메인 이름</value>
@@ -968,17 +958,8 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp 제출</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>프로젝트 이름</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>공식 웹사이트</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>연락처</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>등록 요청</value>
@@ -1288,4 +1269,151 @@ NEP-2와 비밀번호는 별도로 보관하고 각각 안전하게 백업하는
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>신뢰할 수 있는 원격 디버거 대기 중</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>원격 디버거 페어링</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>원격 디버거 “{0}”이(가) 액세스를 요청합니다. 지문: {1}. 이 원격 디버거를 신뢰하는 경우에만 허용하세요.</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>메시지</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>연락처</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>소식</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>Neo 주소로 채팅을 시작하세요</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>주소만 저장됨</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>일치하는 연락처가 없습니다</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>다른 이름, 주소 또는 메모로 검색해 보세요.</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>연락처 상세 정보</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>채팅 활성화</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>채팅 활성화 중…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>채팅을 활성화하면 친구를 추가하고 메시지를 주고받을 수 있습니다.</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>내 Neo 주소로 친구 요청을 보낼 수 있도록 허용</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>다른 사람이 내 Neo 주소로 친구 요청을 보낼 수 있습니다.</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>다른 사람이 친구 요청을 보내려면 내 채팅 초대가 필요합니다.</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>채팅 활성화가 완료되지 않았습니다. 다시 시도하세요. 이전에 선택한 설정은 유지됩니다.</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>이 기기가 내 Neo 주소로 메시지를 주고받도록 승인합니다.
+주소: {0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>채팅 기기 교체</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>계정당 최대 {0}대의 채팅 기기를 추가할 수 있으며, 현재 이 한도에 도달했습니다. 이 기기에서 채팅을 활성화하려면 교체할 기기를 선택하세요. 교체된 기기에서는 더 이상 메시지를 주고받을 수 없습니다.</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>이 기기 교체</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>인증 만료: {0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>만료됨</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>이 기기를 교체하면 기존 친구 관계에 영향을 줄 수 있습니다. 다른 기기를 선택하세요.</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>채팅 신청</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>친구 요청 보내기</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>요청 메시지</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>상대방에게 이 요청 메시지가 표시됩니다.</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>친구 요청 보내는 중…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>채팅 친구</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>상대방의 수락 대기 중</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>현재 친구 관계를 확인할 수 없습니다</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>먼저 홈의 ‘메시지’에서 채팅을 활성화하세요.</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>지갑 계정이 변경되었습니다. 이 페이지를 다시 여세요.</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>이 주소로는 친구를 추가할 수 없습니다. 상대방에게 채팅 초대를 요청하세요.</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>유효한 Neo N3 주소를 입력하세요.</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>자신의 주소로 친구 요청을 보낼 수 없습니다.</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>요청 메시지가 너무 깁니다. 내용을 줄인 후 보내세요.</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>친구 요청</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>받은 요청</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>보낸 요청</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>친구 요청이 없습니다</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>내 응답 대기 중</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>요청 보기</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>수락</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>무시</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>친구 요청 수락 중…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>친구 요청 무시 중…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>친구로 추가했습니다</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>요청을 무시했습니다</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>친구 요청이 변경되었습니다. 요청 목록으로 돌아가 확인해 주세요.</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>채팅 열기</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>개인 채팅</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>친구가 되면 메시지를 보낼 수 있습니다.</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>채팅 기록을 모두 불러오지 못했습니다. 일부 메시지가 아직 표시되지 않았을 수 있습니다.</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>이 기기의 채팅 인증 정보를 확인할 수 없습니다.</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>채팅 기록을 읽거나 저장할 수 없습니다.</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>메시지 검증에 실패했습니다. 현재 일부 메시지를 표시할 수 없습니다.</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>이전 메시지 불러오기</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>채팅 기록이 없습니다</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>첫 메시지를 보내 채팅을 시작하세요.</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[텍스트가 아닌 메시지]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>아직 첨부 파일 보기를 지원하지 않습니다</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>메시지 입력…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>메시지를 입력한 후 보내세요.</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>보내기</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>전송 대기 중</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>전송 중</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>전송 결과 확인 대기 중</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>전송됨</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>전송 실패</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>현재 전송 결과를 확인할 수 없습니다</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[초안]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>최신 메시지로 돌아가기 ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>새 메시지 {0}개 ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>복사</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>연결에 문제가 있습니다. 메시지 송수신이 지연될 수 있습니다.</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>읽음으로 표시</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>다시 편집</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>초안 바꾸기</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>현재 초안을 이 메시지로 바꿀까요?</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>내 QR 코드</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>초대를 공유하면 상대방이 나에게 친구 요청을 보낼 수 있습니다.</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>유효 기한: {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>이 초대는 만료되었습니다. 새 초대를 생성하세요.</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>초대 복사</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>새 초대 생성</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>초대는 최대 24시간 동안 유효합니다. 새 초대를 생성해도 이전 초대는 만료 전까지 사용할 수 있습니다.</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>지갑 계정이 변경되었습니다. ‘내 QR 코드’를 다시 여세요.</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>이 채팅 초대는 유효하지 않습니다. 상대방에게 새 초대를 요청하세요.</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>이 초대는 만료되었습니다. 상대방에게 새 초대를 요청하세요.</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>이 초대는 현재 Meshline 네트워크에서 사용할 수 없습니다.</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Neo 주소 또는 채팅 초대</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>Neo 주소를 입력하거나 채팅 초대를 붙여넣으세요</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>붙여넣기</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>이 주소로는 친구를 추가할 수 없습니다. 송금용으로 주소를 저장하거나 상대방에게 채팅 초대를 요청할 수 있습니다.</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>채팅이 활성화되지 않았지만 송금용 연락처는 저장할 수 있습니다.</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>주소만 저장</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>채팅 설정</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>채팅 설정 저장 중…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>저장되었는지 확인할 수 없습니다. 다시 시도하세요.</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>일치하는 대화가 없습니다</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>채팅 닉네임</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>닉네임 미설정</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>닉네임이 너무 깁니다. 짧게 줄인 후 다시 시도하세요.</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>소개가 너무 깁니다. 짧게 줄인 후 다시 시도하세요.</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>프로필에 올바르지 않은 내용이 있습니다. 수정한 후 다시 시도하세요.</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>닉네임은 다른 사람에게도 표시됩니다. 입력란을 비운 뒤 확인하면 삭제됩니다.</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>링크를 열 수 없습니다.</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>읽지 않음</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>읽지 않은 대화가 없습니다</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>모든 대화 표시</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>대화 고정</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>대화 고정 해제</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>고정됨</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>인용 메시지</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>인용 · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>원본 메시지를 볼 수 없습니다</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>나</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>답장</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>답장 취소</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>원본 메시지 보기</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>원본 메시지 찾는 중…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>이전 위치로 돌아가기</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>전체 텍스트 보기</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>채팅 기록 검색</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>이전 메시지 계속 검색</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>키워드, 보낸 사람 또는 기간으로 이 기기의 채팅 기록을 검색할 수 있습니다.</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>일치하는 메시지를 찾을 수 없습니다.</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>검색 결과로 돌아가기</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>보낸 사람</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>상대방</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>대화에서 보기</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>전달</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>채팅 친구를 추가하면 메시지를 전달할 수 있습니다.</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>대화 필터</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>필터</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>기간</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>최근 7일</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>최근 30일</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>필터 지우기</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>링크 포함</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>소개</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>소개는 다른 사람에게도 표시됩니다. 입력란을 비운 뒤 저장하면 삭제됩니다.</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>저장</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>채팅 친구 삭제</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>“{0}”님을 채팅 친구에서 삭제할까요? 채팅 기록과 저장된 주소는 유지되며, 이미 보낸 메시지는 회수되지 않습니다.</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>채팅 설정을 불러올 수 없습니다. 다시 시도해 주세요.</value></data>
 </root>

@@ -1,12 +1,18 @@
-﻿using NeoOrder.OneGate.Pages;
+﻿using Neo.Wallets;
+using NeoOrder.OneGate.Pages;
+using NeoOrder.OneGate.Services.Messaging;
 
 namespace NeoOrder.OneGate;
 
 public partial class AppShell : Shell
 {
-    public AppShell()
+    public AppShell(MessagingService messagingService, IWalletProvider walletProvider)
     {
+        this.messagingService = messagingService;
+        this.walletProvider = walletProvider;
         InitializeComponent();
+        Loaded += OnUnreadLoaded;
+        Unloaded += OnUnreadUnloaded;
     }
 
     static AppShell()
@@ -14,12 +20,17 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("authenticate", typeof(AuthenticatePage));
         Routing.RegisterRoute("full", typeof(FullScreenImagePage));
         Routing.RegisterRoute("scan", typeof(ScanPage));
-        Routing.RegisterRoute("home/contacts", typeof(ContactsPage));
-        Routing.RegisterRoute("home/contacts/edit", typeof(EditContactPage));
-        Routing.RegisterRoute("home/contacts/new", typeof(NewContactPage));
+        Routing.RegisterRoute("home/add-contact", typeof(NewContactPage));
+        Routing.RegisterRoute("home/edit-contact", typeof(EditContactPage));
+        Routing.RegisterRoute("home/contact-details", typeof(ContactDetailsPage));
+        Routing.RegisterRoute("home/chat-request", typeof(ChatRequestPage));
+        Routing.RegisterRoute("home/chat-requests", typeof(ChatRequestsPage));
+        Routing.RegisterRoute("home/chat", typeof(ChatPage));
+        Routing.RegisterRoute("home/chat-invitation", typeof(ChatInvitationPage));
         Routing.RegisterRoute("home/search", typeof(GlobalSearchPage));
         Routing.RegisterRoute("home/news/details", typeof(NewsDetailsPage));
         Routing.RegisterRoute("home/settings", typeof(SettingsPage));
+        Routing.RegisterRoute("home/settings/chat-settings", typeof(ChatSettingsPage));
         Routing.RegisterRoute("home/settings/about", typeof(AboutPage));
         Routing.RegisterRoute("home/settings/activity", typeof(ActivityCenterPage));
         Routing.RegisterRoute("home/settings/assets/hidden", typeof(HiddenAssetsPage));

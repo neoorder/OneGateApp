@@ -8,37 +8,47 @@
              SafeAreaEdges="All"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
-    <Grid RowDefinitions="*,auto" Margin="20">
-        <VerticalStackLayout Spacing="20">
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Address}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <Grid ColumnDefinitions="*,auto" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Entry x:Name="entryAddress" Text="{Binding Address}" ClearButtonVisibility="Never" og:Border.IsVisible="False" SemanticProperties.Description="{x:Static og:Strings.Address}" />
-                    <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe69a;" FontSize="28" Margin="0,-10" Padding="10" VerticalOptions="Center" SemanticProperties.Description="{x:Static og:Strings.ScanQRCode}" Command="{x:Static og:Commands.ScanQRCode}" CommandParameter="?action=RecognizeAddress" />
-                </Grid>
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+        <toolkit:InvertedBoolConverter x:Key="Not" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20,24" MaximumWidthRequest="520" HorizontalOptions="Fill">
+            <Label StyleClass="Secondary" Text="{x:Static og:Strings.ContactAddressOrInvitation}" />
+            <Border StrokeShape="RoundRectangle 5" Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
+                <Editor Text="{Binding Input}" Placeholder="{x:Static og:Strings.ContactInputHint}" HeightRequest="96" MaxLength="16384"
+                        IsEnabled="{Binding IsSaving, Converter={StaticResource Not}}" og:Border.IsVisible="False"
+                        SemanticProperties.Description="{x:Static og:Strings.ContactAddressOrInvitation}" />
             </Border>
-            <og:ValidationMessage Title="{x:Static og:Strings.Address}" Margin="0,-16,0,0" Target="{x:Reference entryAddress}">
-                <og:Required />
-                <og:Custom Validate="OnValidateAddress" />
-                <og:Custom ErrorMessage="{x:Static og:Strings.AddressAlreadyExists}" Validate="OnValidateAddressDuplicity" />
-            </og:ValidationMessage>
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Label}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <ContentView Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Entry x:Name="entryLabel" Text="{Binding Label}" og:Border.IsVisible="False" SemanticProperties.Description="{x:Static og:Strings.Label}" />
-                </ContentView>
-            </Border>
-            <og:ValidationMessage Title="{x:Static og:Strings.Label}" Margin="0,-16,0,0" Target="{x:Reference entryLabel}">
-                <og:Required />
-                <og:Custom Validate="OnValidateLabelDuplicity" />
-            </og:ValidationMessage>
-            <Label StyleClass="Secondary" Text="{x:Static og:Strings.Note}" />
-            <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
-                <ContentView Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
-                    <Editor Text="{Binding Note}" AutoSize="TextChanges" HeightRequest="80" og:Border.IsVisible="False" />
-                </ContentView>
-            </Border>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsEnabled="{Binding IsWorking, Converter={StaticResource Not}}">
+                <Button Text="{x:Static og:Strings.ContactPaste}" StyleClass="Secondary" Clicked="OnPasteClicked" />
+                <Button Grid.Column="1" Text="{x:Static og:Strings.ScanQRCode}" StyleClass="Secondary"
+                        Clicked="OnScanClicked" />
+            </Grid>
+            <Button Text="{x:Static og:Strings.Search}" IsEnabled="{Binding CanSearch}" Clicked="OnSearchClicked" />
+            <ActivityIndicator IsRunning="{Binding IsWorking}" IsVisible="{Binding IsWorking}" HeightRequest="24" />
+            <Label Text="{Binding ErrorText}" StyleClass="Danger" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+            <VerticalStackLayout Spacing="20" IsVisible="{Binding CanSaveAddress}" IsEnabled="{Binding IsWorking, Converter={StaticResource Not}}">
+                <Label Text="{Binding AddressOnlyHint}" StyleClass="Secondary" />
+                <Label Text="{Binding ResolvedAddress}" LineBreakMode="CharacterWrap" />
+                <Label StyleClass="Secondary" Text="{x:Static og:Strings.Label}" />
+                <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
+                    <ContentView Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
+                        <Entry x:Name="entryLabel" Text="{Binding Label}" og:Border.IsVisible="False" SemanticProperties.Description="{x:Static og:Strings.Label}" />
+                    </ContentView>
+                </Border>
+                <og:ValidationMessage Title="{x:Static og:Strings.Label}" Margin="0,-16,0,0" Target="{x:Reference entryLabel}">
+                    <og:Required />
+                    <og:Custom Validate="OnValidateLabelDuplicity" />
+                </og:ValidationMessage>
+                <Label StyleClass="Secondary" Text="{x:Static og:Strings.Note}" />
+                <Border StrokeShape="RoundRectangle 5" Margin="0,-16,0,0">
+                    <ContentView Padding="10,5" BackgroundColor="{toolkit:AppThemeResource TextBox}">
+                        <Editor Text="{Binding Note}" AutoSize="TextChanges" MinimumHeightRequest="80" og:Border.IsVisible="False" />
+                    </ContentView>
+                </Border>
+                <og:Submit Text="{x:Static og:Strings.ContactSaveAddressOnly}" Submitted="OnSubmitted" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
-        <og:Submit Grid.Row="1" Text="{x:Static og:Strings.OK}" Submitted="OnSubmitted" />
-    </Grid>
+    </ScrollView>
 </ContentPage>

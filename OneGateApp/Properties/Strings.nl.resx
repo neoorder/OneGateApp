@@ -285,9 +285,6 @@
   <data name="Settings" xml:space="preserve">
     <value>Instellingen</value>
   </data>
-  <data name="ErrorMessageCameraFailure" xml:space="preserve">
-    <value>Geen toegang tot de camera</value>
-  </data>
   <data name="ErrorMessageUnsupportedQRCode" xml:space="preserve">
     <value>Niet-ondersteunde QR-code-inhoud: {0}</value>
   </data>
@@ -362,6 +359,7 @@ U kunt biometrische verificatie op elk moment uitschakelen.</value>
   <data name="OperationCancelled" xml:space="preserve">
     <value>Handeling geannuleerd</value>
   </data>
+  <data name="OperationFailed" xml:space="preserve"><value>De bewerking kan momenteel niet worden voltooid.</value></data>
   <data name="BiometricUnavailableText" xml:space="preserve">
     <value>Biometrische verificatie is tijdelijk niet beschikbaar</value>
   </data>
@@ -508,9 +506,6 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   <data name="ReceiveQRCodeTitle" xml:space="preserve">
     <value>Scan de QR-code om mij een overboeking te sturen</value>
   </data>
-  <data name="ReceiveQRCodeText" xml:space="preserve">
-    <value>Dit adres kan alle assets op het Neo-platform ontvangen.</value>
-  </data>
   <data name="SaveToPhotoLibrary" xml:space="preserve">
     <value>Opslaan in galerij</value>
   </data>
@@ -541,9 +536,6 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
   <data name="ReceivingAddress" xml:space="preserve">
     <value>Ontvangstadres</value>
   </data>
-  <data name="AddressBook" xml:space="preserve">
-    <value>Adresboek</value>
-  </data>
   <data name="NoAddress" xml:space="preserve">
     <value>Geen adressen</value>
   </data>
@@ -551,7 +543,7 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
     <value>Uw adresboek is leeg</value>
   </data>
   <data name="AddNewAddress" xml:space="preserve">
-    <value>Adres toevoegen</value>
+    <value>Contact toevoegen</value>
   </data>
   <data name="ScreenshotFailed" xml:space="preserve">
     <value>Screenshot mislukt</value>
@@ -566,11 +558,12 @@ Na het uitschakelen moet u handmatig uw walletwachtwoord invoeren om toegang te 
     <value>Adres bestaat al</value>
   </data>
   <data name="EditContact" xml:space="preserve">
-    <value>Adres bewerken</value>
+    <value>Contact bewerken</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Verwijderen</value>
   </data>
+  <data name="ContactNameSyncFailed" xml:space="preserve"><value>Het contact is op dit apparaat opgeslagen. Het is nog niet bevestigd of de naam is gesynchroniseerd.</value></data>
   <data name="ContactUpdatedSuccessfully" xml:space="preserve">
     <value>Adres succesvol bijgewerkt</value>
   </data>
@@ -742,9 +735,6 @@ Wilt u doorgaan?</value>
   </data>
   <data name="AuthenticationInProgress" xml:space="preserve">
     <value>Aanmeldverzoek autoriseren…</value>
-  </data>
-  <data name="SigningIn" xml:space="preserve">
-    <value>Bezig met inloggen</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>Domeinnaam</value>
@@ -968,17 +958,8 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="DAppSubmission" xml:space="preserve">
     <value>DApp-indiening</value>
   </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Projectnaam</value>
-  </data>
   <data name="DAppUrl" xml:space="preserve">
     <value>URL</value>
-  </data>
-  <data name="OfficialWebsite" xml:space="preserve">
-    <value>Officiële website</value>
-  </data>
-  <data name="ContactInformation" xml:space="preserve">
-    <value>Contactgegevens</value>
   </data>
   <data name="RequestListing" xml:space="preserve">
     <value>Vermelding aanvragen</value>
@@ -1288,4 +1269,151 @@ Het wordt aanbevolen om de NEP-2-sleutel en het wachtwoord apart op te slaan en 
   <data name="RemoteDebugWaiting" xml:space="preserve"><value>Wachten op een vertrouwde externe debugger</value></data>
   <data name="RemoteDebugPairingTitle" xml:space="preserve"><value>Externe debugger koppelen</value></data>
   <data name="RemoteDebugPairingPrompt" xml:space="preserve"><value>Externe debugger ‘{0}’ vraagt toegang. Vingerafdruk: {1}. Autoriseer alleen als je deze externe debugger vertrouwt.</value></data>
+  <data name="HomeMessages" xml:space="preserve"><value>Berichten</value></data>
+  <data name="HomeContacts" xml:space="preserve"><value>Contacten</value></data>
+  <data name="HomeNews" xml:space="preserve"><value>Nieuws</value></data>
+  <data name="HomeMessagesTitle" xml:space="preserve"><value>Chat met je Neo-adres</value></data>
+  <data name="HomeAddressOnly" xml:space="preserve"><value>Alleen adres opgeslagen</value></data>
+  <data name="HomeNoMatchingContacts" xml:space="preserve"><value>Geen overeenkomende contacten</value></data>
+  <data name="HomeNoMatchingContactsHint" xml:space="preserve"><value>Probeer een andere naam, een ander adres of een andere notitie.</value></data>
+  <data name="ContactDetails" xml:space="preserve"><value>Contactgegevens</value></data>
+  <data name="ChatEnable" xml:space="preserve"><value>Chat inschakelen</value></data>
+  <data name="ChatEnabling" xml:space="preserve"><value>Chat wordt ingeschakeld…</value></data>
+  <data name="ChatSetupDescription" xml:space="preserve"><value>Schakel chat in om vrienden toe te voegen en berichten te verzenden en ontvangen.</value></data>
+  <data name="ChatAllowAddressDiscovery" xml:space="preserve"><value>Vriendschapsverzoeken via mijn Neo-adres toestaan</value></data>
+  <data name="ChatDiscoveryAllowedHint" xml:space="preserve"><value>Anderen kunnen je via je Neo-adres vriendschapsverzoeken sturen.</value></data>
+  <data name="ChatInvitationOnlyHint" xml:space="preserve"><value>Anderen hebben je chatuitnodiging nodig om je een vriendschapsverzoek te sturen.</value></data>
+  <data name="ChatSetupPending" xml:space="preserve"><value>Chat is nog niet volledig ingeschakeld. Probeer het opnieuw. Je eerder gekozen instellingen blijven behouden.</value></data>
+  <data name="ChatAuthorizationMessage" xml:space="preserve"><value>Geef dit apparaat toestemming om berichten met je Neo-adres te verzenden en ontvangen.
+Adres: {0}</value></data>
+  <data name="ChatReplaceDeviceTitle" xml:space="preserve"><value>Chatapparaat vervangen</value></data>
+  <data name="ChatDeviceLimitHint" xml:space="preserve"><value>Elk account kan maximaal {0} chatapparaten hebben. Deze limiet is bereikt. Kies een apparaat om te vervangen zodat je chat op dit apparaat kunt inschakelen. Het vervangen apparaat kan daarna geen berichten meer verzenden of ontvangen.</value></data>
+  <data name="ChatReplaceDevice" xml:space="preserve"><value>Dit apparaat vervangen</value></data>
+  <data name="ChatDeviceValidUntil" xml:space="preserve"><value>Machtiging verloopt: {0}</value></data>
+  <data name="ChatDeviceExpired" xml:space="preserve"><value>Verlopen</value></data>
+  <data name="ChatDeviceReplacementUnavailable" xml:space="preserve"><value>Het vervangen van dit apparaat kan gevolgen hebben voor je verbindingen met bestaande vrienden. Kies een ander apparaat.</value></data>
+  <data name="ChatRequest" xml:space="preserve"><value>Chat aanvragen</value></data>
+  <data name="ChatSendRequest" xml:space="preserve"><value>Vriendschapsverzoek versturen</value></data>
+  <data name="ChatRequestNote" xml:space="preserve"><value>Bericht bij het verzoek</value></data>
+  <data name="ChatRequestNoteHint" xml:space="preserve"><value>De andere persoon ziet dit bericht bij je verzoek.</value></data>
+  <data name="ChatRequestSending" xml:space="preserve"><value>Vriendschapsverzoek wordt verstuurd…</value></data>
+  <data name="ChatContactConnected" xml:space="preserve"><value>Chatvriend</value></data>
+  <data name="ChatRequestWaiting" xml:space="preserve"><value>Wachten tot de ander accepteert</value></data>
+  <data name="ChatStatusUnavailable" xml:space="preserve"><value>Kan niet bevestigen of jullie vrienden zijn</value></data>
+  <data name="ChatEnableFirst" xml:space="preserve"><value>Schakel chat eerst in via Start &gt; Berichten.</value></data>
+  <data name="ChatAccountChanged" xml:space="preserve"><value>Je walletaccount is gewijzigd. Open deze pagina opnieuw.</value></data>
+  <data name="ChatAddressNotDiscoverable" xml:space="preserve"><value>Je kunt deze persoon niet via het adres toevoegen. Vraag om een chatuitnodiging.</value></data>
+  <data name="ChatInvalidAddress" xml:space="preserve"><value>Voer een geldig Neo N3-adres in.</value></data>
+  <data name="ChatCannotAddSelf" xml:space="preserve"><value>Je kunt geen vriendschapsverzoek naar je eigen adres sturen.</value></data>
+  <data name="ChatRequestNoteTooLong" xml:space="preserve"><value>Het bericht bij het verzoek is te lang. Kort het in voordat je het verstuurt.</value></data>
+  <data name="ChatRequests" xml:space="preserve"><value>Vriendschapsverzoeken</value></data>
+  <data name="ChatRequestsIncoming" xml:space="preserve"><value>Ontvangen verzoeken</value></data>
+  <data name="ChatRequestsOutgoing" xml:space="preserve"><value>Verstuurde verzoeken</value></data>
+  <data name="ChatRequestsEmpty" xml:space="preserve"><value>Geen vriendschapsverzoeken</value></data>
+  <data name="ChatRequestReceived" xml:space="preserve"><value>Wachten op je reactie</value></data>
+  <data name="ChatViewRequest" xml:space="preserve"><value>Verzoek bekijken</value></data>
+  <data name="ChatAcceptRequest" xml:space="preserve"><value>Accepteren</value></data>
+  <data name="ChatIgnoreRequest" xml:space="preserve"><value>Negeren</value></data>
+  <data name="ChatRequestAccepting" xml:space="preserve"><value>Vriendschapsverzoek wordt geaccepteerd…</value></data>
+  <data name="ChatRequestIgnoring" xml:space="preserve"><value>Vriendschapsverzoek wordt genegeerd…</value></data>
+  <data name="ChatRequestAccepted" xml:space="preserve"><value>Toegevoegd als vriend</value></data>
+  <data name="ChatRequestIgnored" xml:space="preserve"><value>Verzoek genegeerd</value></data>
+  <data name="ChatRequestChanged" xml:space="preserve"><value>Dit vriendschapsverzoek is gewijzigd. Bekijk de lijst met verzoeken.</value></data>
+  <data name="ChatOpen" xml:space="preserve"><value>Chat openen</value></data>
+  <data name="ChatConversation" xml:space="preserve"><value>Privéchat</value></data>
+  <data name="ChatContactRequired" xml:space="preserve"><value>Je kunt berichten sturen zodra jullie vrienden zijn.</value></data>
+  <data name="ChatHistorySyncIncomplete" xml:space="preserve"><value>De chatgeschiedenis is nog niet volledig geladen. Sommige berichten worden mogelijk nog niet weergegeven.</value></data>
+  <data name="ChatDeviceAuthenticationFailed" xml:space="preserve"><value>De chatidentiteit van dit apparaat kan niet worden geverifieerd.</value></data>
+  <data name="ChatHistoryStorageFailed" xml:space="preserve"><value>De chatgeschiedenis kan niet worden gelezen of opgeslagen.</value></data>
+  <data name="ChatMessageVerificationFailed" xml:space="preserve"><value>Berichtverificatie is mislukt. Sommige berichten kunnen momenteel niet worden weergegeven.</value></data>
+  <data name="ChatLoadEarlier" xml:space="preserve"><value>Eerdere berichten laden</value></data>
+  <data name="ChatHistoryEmpty" xml:space="preserve"><value>Nog geen chatgeschiedenis</value></data>
+  <data name="ChatHistoryEmptyHint" xml:space="preserve"><value>Stuur het eerste bericht om de chat te beginnen.</value></data>
+  <data name="ChatNonTextMessage" xml:space="preserve"><value>[Bericht zonder tekst]</value></data>
+  <data name="ChatAttachmentsNotShown" xml:space="preserve"><value>Bijlagen bekijken wordt nog niet ondersteund</value></data>
+  <data name="ChatMessagePlaceholder" xml:space="preserve"><value>Typ een bericht…</value></data>
+  <data name="ChatMessageEmpty" xml:space="preserve"><value>Voer een bericht in voordat je het verstuurt.</value></data>
+  <data name="ChatSend" xml:space="preserve"><value>Versturen</value></data>
+  <data name="ChatMessageQueued" xml:space="preserve"><value>Wachten op verzending</value></data>
+  <data name="ChatMessageSending" xml:space="preserve"><value>Wordt verstuurd</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Verzending nog niet bevestigd</value></data>
+  <data name="ChatMessageSent" xml:space="preserve"><value>Verstuurd</value></data>
+  <data name="ChatMessageFailed" xml:space="preserve"><value>Versturen mislukt</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Kan niet bevestigen of het bericht is verzonden</value></data>
+  <data name="ChatDraft" xml:space="preserve"><value>[Concept]</value></data>
+  <data name="ChatBackToLatest" xml:space="preserve"><value>Naar de nieuwste berichten ↓</value></data>
+  <data name="ChatNewMessages" xml:space="preserve"><value>Nieuwe berichten: {0} ↓</value></data>
+  <data name="ChatCopyText" xml:space="preserve"><value>Kopiëren</value></data>
+  <data name="ChatConnectionUnavailable" xml:space="preserve"><value>Verbindingsprobleem. Het versturen en ontvangen van berichten kan vertraging oplopen.</value></data>
+  <data name="ChatMarkAsRead" xml:space="preserve"><value>Als gelezen markeren</value></data>
+  <data name="ChatEditFailedMessage" xml:space="preserve"><value>Opnieuw bewerken</value></data>
+  <data name="ChatReplaceDraft" xml:space="preserve"><value>Concept vervangen</value></data>
+  <data name="ChatReplaceDraftPrompt" xml:space="preserve"><value>Het huidige concept vervangen door dit bericht?</value></data>
+  <data name="ChatMyInvitation" xml:space="preserve"><value>Mijn QR-code</value></data>
+  <data name="ChatInvitationDescription" xml:space="preserve"><value>Deel je uitnodiging zodat anderen je een vriendschapsverzoek kunnen sturen.</value></data>
+  <data name="ChatInvitationExpiry" xml:space="preserve"><value>Geldig tot {0}</value></data>
+  <data name="ChatInvitationExpired" xml:space="preserve"><value>Deze uitnodiging is verlopen. Maak een nieuwe uitnodiging.</value></data>
+  <data name="ChatCopyInvitation" xml:space="preserve"><value>Uitnodiging kopiëren</value></data>
+  <data name="ChatRefreshInvitation" xml:space="preserve"><value>Nieuwe uitnodiging maken</value></data>
+  <data name="ChatInvitationRefreshHint" xml:space="preserve"><value>Uitnodigingen zijn maximaal 24 uur geldig. Nadat je een nieuwe uitnodiging hebt gemaakt, blijven eerdere uitnodigingen bruikbaar totdat ze verlopen.</value></data>
+  <data name="ChatInvitationAccountChanged" xml:space="preserve"><value>Het walletaccount is gewijzigd. Open ‘Mijn QR-code’ opnieuw.</value></data>
+  <data name="ChatInvalidInvitation" xml:space="preserve"><value>Deze chatuitnodiging is ongeldig. Vraag de andere persoon om een nieuwe uitnodiging.</value></data>
+  <data name="ChatReceivedInvitationExpired" xml:space="preserve"><value>Deze uitnodiging is verlopen. Vraag de andere persoon om een nieuwe uitnodiging.</value></data>
+  <data name="ChatInvitationNetworkMismatch" xml:space="preserve"><value>Deze uitnodiging kan niet worden gebruikt op het huidige Meshline-netwerk.</value></data>
+  <data name="ContactAddressOrInvitation" xml:space="preserve"><value>Neo-adres of chatuitnodiging</value></data>
+  <data name="ContactInputHint" xml:space="preserve"><value>Voer een Neo-adres in of plak een chatuitnodiging</value></data>
+  <data name="ContactPaste" xml:space="preserve"><value>Plakken</value></data>
+  <data name="ContactAddressOnlyHint" xml:space="preserve"><value>Je kunt deze persoon niet via het adres toevoegen. Je kunt het adres opslaan voor overboekingen of de persoon om een chatuitnodiging vragen.</value></data>
+  <data name="ContactChatDisabledHint" xml:space="preserve"><value>Chat is niet ingeschakeld, maar je kunt nog steeds contacten opslaan voor overboekingen.</value></data>
+  <data name="ContactSaveAddressOnly" xml:space="preserve"><value>Alleen adres opslaan</value></data>
+  <data name="ChatSettings" xml:space="preserve"><value>Chatinstellingen</value></data>
+  <data name="ChatSettingsSaving" xml:space="preserve"><value>Chatinstellingen worden opgeslagen…</value></data>
+  <data name="ChatSettingsSaveFailed" xml:space="preserve"><value>Er kan momenteel niet worden bevestigd of je wijzigingen zijn opgeslagen. Probeer het opnieuw.</value></data>
+  <data name="ChatNoMatchingConversations" xml:space="preserve"><value>Geen overeenkomende gesprekken</value></data>
+  <data name="ChatNickname" xml:space="preserve"><value>Chatbijnaam</value></data>
+  <data name="ChatNoNickname" xml:space="preserve"><value>Geen bijnaam ingesteld</value></data>
+  <data name="ChatNicknameTooLong" xml:space="preserve"><value>Je bijnaam is te lang. Maak hem korter en probeer het opnieuw.</value></data>
+  <data name="ChatBioTooLong" xml:space="preserve"><value>Je profieltekst is te lang. Maak deze korter en probeer het opnieuw.</value></data>
+  <data name="ChatProfileInvalid" xml:space="preserve"><value>Sommige profielgegevens zijn ongeldig. Pas ze aan en probeer het opnieuw.</value></data>
+  <data name="ChatNicknameHint" xml:space="preserve"><value>Je bijnaam is zichtbaar voor anderen. Maak het veld leeg en bevestig om deze te verwijderen.</value></data>
+  <data name="ChatOpenLinkFailed" xml:space="preserve"><value>De link kon niet worden geopend.</value></data>
+  <data name="ChatUnreadOnly" xml:space="preserve"><value>Ongelezen</value></data>
+  <data name="ChatNoUnreadConversations" xml:space="preserve"><value>Geen ongelezen gesprekken</value></data>
+  <data name="ChatShowAllConversations" xml:space="preserve"><value>Alle gesprekken tonen</value></data>
+  <data name="ChatPinConversation" xml:space="preserve"><value>Gesprek vastmaken</value></data>
+  <data name="ChatUnpinConversation" xml:space="preserve"><value>Gesprek losmaken</value></data>
+  <data name="ChatPinned" xml:space="preserve"><value>Vastgemaakt</value></data>
+  <data name="ChatQuotedMessage" xml:space="preserve"><value>Geciteerd bericht</value></data>
+  <data name="ChatQuotedMessageFrom" xml:space="preserve"><value>Citaat · {0}</value></data>
+  <data name="ChatQuotedMessageUnavailable" xml:space="preserve"><value>Het oorspronkelijke bericht kan niet worden bekeken</value></data>
+  <data name="ChatYou" xml:space="preserve"><value>Jij</value></data>
+  <data name="ChatReply" xml:space="preserve"><value>Beantwoorden</value></data>
+  <data name="ChatCancelReply" xml:space="preserve"><value>Antwoord annuleren</value></data>
+  <data name="ChatViewQuotedMessage" xml:space="preserve"><value>Oorspronkelijk bericht bekijken</value></data>
+  <data name="ChatFindingQuotedMessage" xml:space="preserve"><value>Oorspronkelijk bericht zoeken…</value></data>
+  <data name="ChatReturnToPosition" xml:space="preserve"><value>Terug naar vorige positie</value></data>
+  <data name="ChatViewFullText" xml:space="preserve"><value>Volledige tekst bekijken</value></data>
+  <data name="ChatSearchMessages" xml:space="preserve"><value>Chatgeschiedenis doorzoeken</value></data>
+  <data name="ChatSearchEarlier" xml:space="preserve"><value>Oudere berichten doorzoeken</value></data>
+  <data name="ChatSearchLocalHint" xml:space="preserve"><value>Doorzoek de chatgeschiedenis op dit apparaat op zoekwoord, afzender of periode.</value></data>
+  <data name="ChatSearchEmpty" xml:space="preserve"><value>Geen overeenkomende berichten gevonden.</value></data>
+  <data name="ChatReturnToSearchResults" xml:space="preserve"><value>Terug naar zoekresultaten</value></data>
+  <data name="ChatSearchSender" xml:space="preserve"><value>Afzender</value></data>
+  <data name="ChatOtherParticipant" xml:space="preserve"><value>De andere persoon</value></data>
+  <data name="ChatViewInConversation" xml:space="preserve"><value>In gesprek bekijken</value></data>
+  <data name="ChatForwardText" xml:space="preserve"><value>Doorsturen</value></data>
+  <data name="ChatForwardNoContacts" xml:space="preserve"><value>Voeg een chatvriend toe om berichten door te sturen.</value></data>
+  <data name="ChatConversationFilter" xml:space="preserve"><value>Gesprekken filteren</value></data>
+  <data name="ChatSearchFilters" xml:space="preserve"><value>Filters</value></data>
+  <data name="ChatSearchPeriod" xml:space="preserve"><value>Periode</value></data>
+  <data name="ChatLast7Days" xml:space="preserve"><value>Afgelopen 7 dagen</value></data>
+  <data name="ChatLast30Days" xml:space="preserve"><value>Afgelopen 30 dagen</value></data>
+  <data name="ChatClearSearchFilters" xml:space="preserve"><value>Filters wissen</value></data>
+  <data name="ChatLinksOnly" xml:space="preserve"><value>Bevat links</value></data>
+  <data name="ChatBio" xml:space="preserve"><value>Over mij</value></data>
+  <data name="ChatBioHint" xml:space="preserve"><value>Je profieltekst is zichtbaar voor anderen. Maak het veld leeg en sla op om deze te verwijderen.</value></data>
+  <data name="ChatSaveBio" xml:space="preserve"><value>Opslaan</value></data>
+  <data name="ChatRemoveContact" xml:space="preserve"><value>Chatvriend verwijderen</value></data>
+  <data name="ChatRemoveContactPrompt" xml:space="preserve"><value>‘{0}’ verwijderen als chatvriend? De chatgeschiedenis en opgeslagen adressen blijven behouden. Al verzonden berichten worden niet ingetrokken.</value></data>
+  <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>De chatinstellingen konden niet worden geladen. Probeer het opnieuw.</value></data>
 </root>

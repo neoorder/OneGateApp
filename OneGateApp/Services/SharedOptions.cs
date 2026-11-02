@@ -8,6 +8,7 @@ static class SharedOptions
 {
     public const string OneGateDomain = "onegate.space";
     public const string ContactEmail = "contact@neoorder.org";
+    public const string MeshlineRegistryHash = "0x5979ba79431672a38a18a32cdc48fd7317818b70";
     public static readonly Uri DAppSubmissionUri = new("https://github.com/neoorder/OneGateApp/issues/new?template=dapp_submission.yml");
     public static readonly string DbPath = Path.Combine(FileSystem.AppDataDirectory, "settings.db3");
     public static readonly string CacheDbPath = Path.Combine(FileSystem.CacheDirectory, "cache.db3");

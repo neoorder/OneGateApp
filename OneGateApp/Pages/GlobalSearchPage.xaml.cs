@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Neo.Wallets;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
+using NeoOrder.OneGate.Services.Messaging;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
 namespace NeoOrder.OneGate.Pages;
@@ -15,14 +17,18 @@ public partial class GlobalSearchPage : ContentPage
     readonly TokenManager tokenManager;
 
     bool hasLoaded;
+    bool refreshAll = true;
+    bool reloadPending;
+    bool openingResult;
     int searchVersion;
     string query = "";
     IReadOnlyList<GlobalSearchIndex<AssetInfo>> assetIndex = [];
-    IReadOnlyList<GlobalSearchIndex<Contact>> contactIndex = [];
+    IReadOnlyList<GlobalSearchIndex<GlobalSearchResult>> contactIndex = [];
     IReadOnlyList<GlobalSearchIndex<DApp>> dappIndex = [];
 
     public LoadingService LoadingService { get; }
     public CachedCollection<DApp> DApps { get; }
+    public string? ErrorText { get; private set { field = value; OnPropertyChanged(); } }
     public GlobalSearchResult[] Results
     {
         get;
@@ -35,20 +41,25 @@ public partial class GlobalSearchPage : ContentPage
         }
     } = [];
     public bool HasResults => Results.Length > 0;
-    public bool HasQuery => !string.IsNullOrWhiteSpace(query);
-    public bool IsEmpty => HasQuery && !LoadingService.IsLoading && Results.Length == 0;
+    public bool ShowLoading => LoadingService.IsLoading && !hasLoaded;
+    public bool IsEmpty => !string.IsNullOrWhiteSpace(query) && !ShowLoading && Results.Length == 0;
 
-    public GlobalSearchPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, TokenManager tokenManager)
+    public GlobalSearchPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, TokenManager tokenManager,
+        MessagingService messagingService, IWalletProvider walletProvider)
     {
         this.dbContext = dbContext;
         this.tokenManager = tokenManager;
+        this.messagingService = messagingService;
+        this.walletProvider = walletProvider;
         DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
         LoadingService = new(LoadSearchDataAsync);
-        LoadingService.Loaded += OnLoaded;
         LoadingService.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(LoadingService.IsLoading))
+            {
+                OnPropertyChanged(nameof(ShowLoading));
                 OnPropertyChanged(nameof(IsEmpty));
+            }
         };
         InitializeComponent();
     }
@@ -56,45 +67,72 @@ public partial class GlobalSearchPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (!hasLoaded || this.ShouldRefresh())
-            LoadingService.BeginLoad();
-        Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(250), () => searchBar.Focus());
+        StartChatContactSearch();
+        refreshAll |= this.ShouldRefresh();
+        reloadPending = true;
+        LoadingService.BeginLoad();
+        Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(250), () =>
+        {
+            if (ReferenceEquals(Shell.Current.CurrentPage, this) && !openingResult) searchBar.Focus();
+        });
     }
 
     async Task LoadSearchDataAsync()
     {
-        IReadOnlyList<AssetInfo> assets = await tokenManager.LoadAssetsAsync();
-        assetIndex = assets
-            .Select(p => new GlobalSearchIndex<AssetInfo>(p, p.Token.Symbol, p.Token.Name, p.Token.Hash.ToString()))
-            .ToArray();
-        contactIndex = (await dbContext.Contacts.AsNoTracking().ToArrayAsync())
-            .Select(p => new GlobalSearchIndex<Contact>(p, p.Label, p.Address))
-            .ToArray();
-        List<int> recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
-        bool developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
-        await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
-        dappIndex = DApps
-            .Where(p => p.IsRegularApp && DAppCatalogPolicy.IsDiscoverable(p, developerModeEnabled))
-            .Select(p => new GlobalSearchIndex<DApp>(
-                p,
-                recentDAppIds.IndexOf(p.Id),
-                p.NameLocalizer.Localize(),
-                p.DescriptionLocalizer?.Localize(),
-                p.Url,
-                p.Tags is null ? null : string.Join(' ', p.Tags.Select(DApp.LocalizeTag))))
-            .ToArray();
+        do
+        {
+            reloadPending = false;
+            await ReadSearchDataAsync();
+            hasLoaded = true;
+            OnPropertyChanged(nameof(ShowLoading));
+            UpdateResults();
+        } while (reloadPending && ReferenceEquals(Shell.Current.CurrentPage, this));
     }
 
-    void OnLoaded(object? sender, EventArgs e)
+    async Task ReadSearchDataAsync()
     {
-        hasLoaded = true;
-        UpdateResults();
+        bool loadAll = refreshAll || !hasLoaded;
+        refreshAll = false;
+        try
+        {
+            if (loadAll)
+            {
+                IReadOnlyList<AssetInfo> assets = await tokenManager.LoadAssetsAsync();
+                assetIndex = assets
+                    .Select(p => new GlobalSearchIndex<AssetInfo>(p, p.Token.Symbol, p.Token.Name, p.Token.Hash.ToString()))
+                    .ToArray();
+            }
+            // Returning from contact details refreshes local names without blocking existing results.
+            savedSearchContacts = await dbContext.Contacts.AsNoTracking().ToArrayAsync();
+            RebuildContactSearchIndex();
+            if (!loadAll) return;
+            UpdateResults();
+
+            List<int> recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+            bool developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
+            await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
+            dappIndex = DApps
+                .Where(p => p.IsRegularApp && DAppCatalogPolicy.IsDiscoverable(p, developerModeEnabled))
+                .Select(p => new GlobalSearchIndex<DApp>(
+                    p,
+                    recentDAppIds.IndexOf(p.Id),
+                    p.NameLocalizer.Localize(),
+                    p.DescriptionLocalizer?.Localize(),
+                    p.Url,
+                    p.Tags is null ? null : string.Join(' ', p.Tags.Select(DApp.LocalizeTag))))
+                .ToArray();
+        }
+        catch
+        {
+            refreshAll |= loadAll;
+            throw;
+        }
     }
 
     void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {
         query = e.NewTextValue ?? "";
-        OnPropertyChanged(nameof(HasQuery));
+        ErrorText = null;
         OnPropertyChanged(nameof(IsEmpty));
         if (string.IsNullOrWhiteSpace(query))
         {
@@ -112,13 +150,15 @@ public partial class GlobalSearchPage : ContentPage
 
     async void OnSearchButtonPressed(object sender, EventArgs e)
     {
+        if (openingResult) return;
+        UpdateResults();
         if (Results.Length == 1)
             await OpenResultAsync(Results[0]);
     }
 
     async void OnResultTapped(object sender, TappedEventArgs e)
     {
-        await OpenResultAsync((GlobalSearchResult)e.Parameter!);
+        if (e.Parameter is GlobalSearchResult result) await OpenResultAsync(result);
     }
 
     void UpdateResults()
@@ -148,7 +188,7 @@ public partial class GlobalSearchPage : ContentPage
             ..contactIndex
                 .Where(p => p.Matches(filter))
                 .Take(MaxResultsPerGroup)
-                .Select(p => GlobalSearchResult.FromContact(p.Item)),
+                .Select(p => p.Item),
             ..matchingDApps
                 .Where(p => !p.IsRecent)
                 .Select(p => GlobalSearchResult.FromDApp(p.Item, p.IsRecent))
@@ -157,25 +197,49 @@ public partial class GlobalSearchPage : ContentPage
 
     async Task OpenResultAsync(GlobalSearchResult result)
     {
-        searchBar.Unfocus();
-        switch (result.Type)
+        if (openingResult || !ReferenceEquals(Shell.Current.CurrentPage, this) || !Results.Contains(result)) return;
+        openingResult = true;
+        int version = searchVersion;
+        ErrorText = null;
+        try
         {
-            case GlobalSearchResultType.Asset:
-                await Shell.Current.GoToAsync("//wallet/asset/details", new Dictionary<string, object>
-                {
-                    ["asset"] = result.Asset!
-                });
-                break;
-            case GlobalSearchResultType.Contact:
-                await Shell.Current.GoToAsync("//home/contacts/edit", new Dictionary<string, object>
-                {
-                    ["contact"] = result.Contact!
-                });
-                break;
-            case GlobalSearchResultType.DApp:
-                await Commands.LaunchDApp.ExecuteAsync(result.DApp!);
-                break;
+            searchBar.Unfocus();
+            switch (result.Type)
+            {
+                case GlobalSearchResultType.Asset:
+                    await Shell.Current.GoToAsync("//wallet/asset/details", new Dictionary<string, object>
+                    {
+                        ["asset"] = result.Asset!
+                    });
+                    break;
+                case GlobalSearchResultType.Contact when result.ChatAccountId is not null:
+                    if (!CanOpenChatSearchResult(result)) return;
+                    var status = chatSearchContacts[result.ChatAddress!];
+                    if (status.CanChat)
+                        await Shell.Current.GoToAsync("chat", new ShellNavigationQueryParameters { ["address"] = result.ChatAddress! });
+                    else
+                        await Shell.Current.GoToAsync("contact-details", new ShellNavigationQueryParameters
+                        {
+                            ["contact"] = ContactViewModel.FromChatRequest(result.ChatAddress!, status.Status, result.Title)
+                        });
+                    break;
+                case GlobalSearchResultType.Contact:
+                    await Shell.Current.GoToAsync("contact-details", new ShellNavigationQueryParameters
+                    {
+                        ["contact"] = new ContactViewModel(result.Contact!, Strings.ChatStatusUnavailable, displayName: result.Title)
+                    });
+                    break;
+                case GlobalSearchResultType.DApp:
+                    await Commands.LaunchDApp.ExecuteAsync(result.DApp!);
+                    break;
+            }
         }
+        catch (Exception ex)
+        {
+            if (ReferenceEquals(Shell.Current.CurrentPage, this) && version == searchVersion)
+                ErrorText = ex.Message;
+        }
+        finally { openingResult = false; }
     }
 
     internal static bool Contains(string? value, string filter)
@@ -219,20 +283,25 @@ public enum GlobalSearchResultType
 public sealed class GlobalSearchResult
 {
     public required GlobalSearchResultType Type { get; init; }
-    public required string Title { get; init; }
+    public required string? Title { get; init; }
     public required string Subtitle { get; init; }
     public required string IconGlyph { get; init; }
     public string? IconImageSource { get; init; }
     public bool HasIconImage => !string.IsNullOrWhiteSpace(IconImageSource);
     public bool HasIconGlyph => !HasIconImage;
+    public bool IsContact => Type == GlobalSearchResultType.Contact;
+    public bool IsNotContact => !IsContact;
+    public string? AvatarAddress => Contact?.Address ?? ChatAddress;
     public bool IsRecentDApp { get; init; }
     public AssetInfo? Asset { get; init; }
     public Contact? Contact { get; init; }
+    public string? ChatAccountId { get; init; }
+    public string? ChatAddress { get; init; }
     public DApp? DApp { get; init; }
     public string TypeText => Type switch
     {
         GlobalSearchResultType.Asset => Strings.Asset,
-        GlobalSearchResultType.Contact => Strings.AddressBook,
+        GlobalSearchResultType.Contact => Strings.HomeContacts,
         GlobalSearchResultType.DApp => Strings.Apps,
         _ => ""
     };
@@ -250,17 +319,27 @@ public sealed class GlobalSearchResult
         };
     }
 
-    public static GlobalSearchResult FromContact(Contact contact)
+    public static GlobalSearchResult FromContact(Contact contact, string? displayName = null)
     {
         return new()
         {
             Type = GlobalSearchResultType.Contact,
-            Title = contact.Label,
+            Title = displayName ?? MessagingService.ResolveChatDisplayName(contact.Label, null),
             Subtitle = contact.Address,
             IconGlyph = "\ue60d",
             Contact = contact
         };
     }
+
+    public static GlobalSearchResult FromChatContact(string accountId, string address, string? displayName = null) => new()
+    {
+        Type = GlobalSearchResultType.Contact,
+        Title = displayName,
+        Subtitle = address,
+        IconGlyph = "\ue60d",
+        ChatAccountId = accountId,
+        ChatAddress = address
+    };
 
     public static GlobalSearchResult FromDApp(DApp dapp, bool isRecent)
     {
