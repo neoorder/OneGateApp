@@ -53,13 +53,7 @@ sealed class MdnsRemoteDebuggerDiscovery : IAsyncDisposable
             while (!cancellationToken.IsCancellationRequested)
             {
                 UdpReceiveResult result = await client!.ReceiveAsync(cancellationToken);
-                try
-                {
-                    ParseResponse(result.Buffer, result.RemoteEndPoint.Address);
-                }
-                catch (InvalidDataException)
-                {
-                }
+                ParseResponse(result.Buffer, result.RemoteEndPoint.Address);
             }
         }
         catch (OperationCanceledException)
@@ -73,6 +67,9 @@ sealed class MdnsRemoteDebuggerDiscovery : IAsyncDisposable
     void ParseResponse(byte[] packet, IPAddress sourceAddress)
     {
         if (packet.Length < 12) return;
+        ushort flags = BinaryPrimitives.ReadUInt16BigEndian(packet.AsSpan(2));
+        // Only complete, successful standard responses can advertise a debugger.
+        if ((flags & 0xfa0f) != 0x8000) return;
         int questionCount = BinaryPrimitives.ReadUInt16BigEndian(packet.AsSpan(4));
         int recordCount = BinaryPrimitives.ReadUInt16BigEndian(packet.AsSpan(6))
             + BinaryPrimitives.ReadUInt16BigEndian(packet.AsSpan(8))
@@ -80,35 +77,39 @@ sealed class MdnsRemoteDebuggerDiscovery : IAsyncDisposable
         int offset = 12;
         for (int i = 0; i < questionCount; i++)
         {
-            _ = ReadName(packet, ref offset);
+            if (!TryReadName(packet, ref offset, packet.Length, out _) || offset + 4 > packet.Length) return;
             offset += 4;
         }
         Dictionary<string, (string Host, int Port)> services = new(StringComparer.OrdinalIgnoreCase);
         Dictionary<string, string> debuggerIds = new(StringComparer.OrdinalIgnoreCase);
         Dictionary<string, IPAddress> addresses = new(StringComparer.OrdinalIgnoreCase);
-        for (int i = 0; i < recordCount && offset < packet.Length; i++)
+        for (int i = 0; i < recordCount; i++)
         {
-            string name = ReadName(packet, ref offset);
+            if (!TryReadName(packet, ref offset, packet.Length, out string name)) return;
             if (offset + 10 > packet.Length) return;
             ushort type = BinaryPrimitives.ReadUInt16BigEndian(packet.AsSpan(offset));
             int dataLength = BinaryPrimitives.ReadUInt16BigEndian(packet.AsSpan(offset + 8));
             offset += 10;
             if (offset + dataLength > packet.Length) return;
             int dataOffset = offset;
-            if (type == 33 && dataLength >= 7)
+            bool debuggerRecord = name.EndsWith("." + ServiceName, StringComparison.OrdinalIgnoreCase);
+            if (type == 33 && debuggerRecord)
             {
+                if (dataLength < 7) return;
                 int port = BinaryPrimitives.ReadUInt16BigEndian(packet.AsSpan(dataOffset + 4));
                 int nameOffset = dataOffset + 6;
-                services[name] = (ReadName(packet, ref nameOffset), port);
+                if (!TryReadName(packet, ref nameOffset, dataOffset + dataLength, out string host)
+                    || nameOffset != dataOffset + dataLength) return;
+                if (port > 0 && host.Length > 0) services[name] = (host, port);
             }
-            else if (type == 16)
+            else if (type == 16 && debuggerRecord)
             {
                 int end = dataOffset + dataLength;
                 int cursor = dataOffset;
                 while (cursor < end)
                 {
                     int length = packet[cursor++];
-                    if (cursor + length > end) break;
+                    if (cursor + length > end) return;
                     string value = Encoding.UTF8.GetString(packet, cursor, length);
                     cursor += length;
                     if (value.StartsWith("debuggerId=", StringComparison.Ordinal))
@@ -123,40 +124,49 @@ sealed class MdnsRemoteDebuggerDiscovery : IAsyncDisposable
         }
         foreach (var (instance, service) in services)
         {
-            if (!debuggerIds.TryGetValue(instance, out string? debuggerId)) continue;
+            if (!debuggerIds.TryGetValue(instance, out string? debuggerId) || string.IsNullOrWhiteSpace(debuggerId)) continue;
             IPAddress address = addresses.GetValueOrDefault(service.Host) ?? sourceAddress;
             RemoteDebuggerDiscovered?.Invoke(debuggerId, address.ToString(), service.Port);
         }
     }
 
-    static string ReadName(byte[] packet, ref int offset)
+    // Malformed multicast traffic is expected input, not an exception in the receive loop.
+    static bool TryReadName(byte[] packet, ref int offset, int end, out string name)
     {
+        name = "";
         List<string> labels = [];
         int cursor = offset;
         bool jumped = false;
-        int jumps = 0;
-        while (cursor < packet.Length && jumps++ < 32)
+        int wireLength = 1; // Include the terminating root label in the 255-byte DNS name limit.
+        while (cursor < end)
         {
             byte length = packet[cursor++];
             if (length == 0)
             {
                 if (!jumped) offset = cursor;
-                return string.Join('.', labels);
+                name = string.Join('.', labels);
+                return true;
             }
             if ((length & 0xc0) == 0xc0)
             {
-                if (cursor >= packet.Length) throw new InvalidDataException();
+                if (cursor >= end) return false;
                 int pointer = ((length & 0x3f) << 8) | packet[cursor++];
+                // Compression refers to a prior name. Each jump tightens the read boundary,
+                // rejecting cycles without an arbitrary limit on the number of labels.
+                if (pointer < 12 || pointer >= cursor - 2) return false;
                 if (!jumped) offset = cursor;
+                end = cursor - 2;
                 cursor = pointer;
                 jumped = true;
                 continue;
             }
-            if (cursor + length > packet.Length) throw new InvalidDataException();
+            if ((length & 0xc0) != 0 || cursor + length > end) return false;
+            wireLength += length + 1;
+            if (wireLength > 255) return false;
             labels.Add(Encoding.UTF8.GetString(packet, cursor, length));
             cursor += length;
         }
-        throw new InvalidDataException("Invalid compressed DNS name.");
+        return false;
     }
 
     static byte[] EncodeName(string value)
