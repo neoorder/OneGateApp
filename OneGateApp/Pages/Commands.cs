@@ -4,7 +4,6 @@ using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
-using ZXing.Net.Maui;
 
 namespace NeoOrder.OneGate.Pages;
 
@@ -45,10 +44,7 @@ static class Commands
 
     public static AsyncCommand<string> ScanQRCode { get; } = new(static async query =>
     {
-        if (BarcodeScanning.IsSupported)
-            await Shell.Current.GoToAsync("scan" + query);
-        else
-            await Toast.Show(Strings.ErrorMessageCameraFailure);
+        await Shell.Current.GoToAsync("scan" + query);
     });
 
     public static AsyncCommand<DApp> AddToFavorites { get; } = new(static async dapp =>

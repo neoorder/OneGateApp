@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
-             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="NeoOrder.OneGate.Pages.ScanPage"
              Title="{x:Static og:Strings.ScanQRCode}"
              Shell.TabBarIsVisible="False">
@@ -10,22 +9,26 @@
         <og:StringSelectConverter x:Key="StringSelectConverter" />
     </ContentPage.Resources>
     <Grid>
-        <zxing:CameraBarcodeReaderView x:Name="cameraView" BarcodesDetected="OnBarcodesDetected" />
-        <Label Text="{x:Static og:Strings.RecognizeQRCode}" TextColor="White" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,120" />
-        <ImageButton Source="{FontImageSource &#xe607;, FontFamily=Icons}"
-                     HorizontalOptions="Start"
-                     VerticalOptions="End"
-                     Margin="60,0,0,60"
-                     SemanticProperties.Description="{x:Static og:Strings.ScanFromPhotoLibrary}"
-                     Clicked="OnPickPhotoClicked" />
-        <ImageButton HorizontalOptions="End"
-                     VerticalOptions="End"
-                     Margin="0,0,60,60"
-                     SemanticProperties.Description="{x:Static og:Strings.ToggleFlashlight}"
-                     Clicked="OnTorchClicked">
-            <ImageButton.Source>
-                <FontImageSource Glyph="{Binding IsTorchOn, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe623;&#xe621;, Source={x:Reference cameraView}}" FontFamily="Icons" />
-            </ImageButton.Source>
-        </ImageButton>
+        <ContentView x:Name="cameraHost" />
+        <Grid x:Name="cameraControls" IsVisible="False">
+            <Label Text="{x:Static og:Strings.RecognizeQRCode}" TextColor="White" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,120" />
+            <ImageButton Source="{FontImageSource &#xe607;, FontFamily=Icons}"
+                         HorizontalOptions="Start"
+                         VerticalOptions="End"
+                         Margin="60,0,0,60"
+                         SemanticProperties.Description="{x:Static og:Strings.ScanFromPhotoLibrary}"
+                         Clicked="OnPickPhotoClicked" />
+            <ImageButton HorizontalOptions="End"
+                         VerticalOptions="End"
+                         Margin="0,0,60,60"
+                         SemanticProperties.Description="{x:Static og:Strings.ToggleFlashlight}"
+                         Clicked="OnTorchClicked">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="{Binding IsTorchOn, Converter={StaticResource StringSelectConverter}, ConverterParameter=&#xe623;&#xe621;}" FontFamily="Icons" />
+                </ImageButton.Source>
+            </ImageButton>
+        </Grid>
+        <Button x:Name="photoOnlyButton" Text="{x:Static og:Strings.ScanFromPhotoLibrary}" IsVisible="False"
+                HorizontalOptions="Center" VerticalOptions="Center" Margin="20" Clicked="OnPickPhotoClicked" />
     </Grid>
 </ContentPage>

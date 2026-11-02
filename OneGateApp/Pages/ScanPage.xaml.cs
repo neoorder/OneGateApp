@@ -13,6 +13,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using ZXing.Common;
 using ZXing.Net.Maui;
+using ZXing.Net.Maui.Controls;
 
 namespace NeoOrder.OneGate.Pages;
 
@@ -20,17 +21,27 @@ public partial class ScanPage : ContentPage, IQueryAttributable
 {
     readonly ProtocolSettings protocolSettings;
     readonly RemoteDebugService remoteDebugService;
+    readonly CameraBarcodeReaderView? cameraView;
     string? action;
+    bool isPageVisible;
+    bool isProcessingScan;
 
     public ScanPage(ProtocolSettings protocolSettings, RemoteDebugService remoteDebugService)
     {
         this.protocolSettings = protocolSettings;
         this.remoteDebugService = remoteDebugService;
         InitializeComponent();
-        cameraView.Options = cameraView.Options with
+        // Photo recognition must remain available on platforms without a camera scanning handler.
+        if (BarcodeScanning.IsSupported)
         {
-            Formats = BarcodeFormat.QrCode
-        };
+            cameraView = new CameraBarcodeReaderView();
+            cameraView.Options = cameraView.Options with { Formats = BarcodeFormat.QrCode };
+            cameraView.BarcodesDetected += OnBarcodesDetected;
+            cameraHost.Content = cameraView;
+            cameraControls.BindingContext = cameraView;
+            cameraControls.IsVisible = true;
+        }
+        photoOnlyButton.IsVisible = cameraView is null;
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -39,41 +50,67 @@ public partial class ScanPage : ContentPage, IQueryAttributable
             this.action = (string)action;
     }
 
-    protected override void OnDisappearing()
+    protected override void OnAppearing()
     {
-        base.OnDisappearing();
-        cameraView.IsDetecting = false;
+        base.OnAppearing();
+        isPageVisible = true;
+        if (cameraView is not null) cameraView.IsDetecting = !isProcessingScan;
     }
 
-    async void OnBarcodesDetected(object sender, BarcodeDetectionEventArgs e)
+    protected override void OnDisappearing()
     {
-        cameraView.IsDetecting = false;
-        if (MainThread.IsMainThread)
+        isPageVisible = false;
+        if (cameraView is not null) cameraView.IsDetecting = false;
+        base.OnDisappearing();
+    }
+
+    bool IsCurrentScanPage => isPageVisible && ReferenceEquals(Shell.Current?.CurrentPage, this);
+
+    async void OnBarcodesDetected(object? sender, BarcodeDetectionEventArgs e)
+    {
+        string? value = e.Results.FirstOrDefault()?.Value;
+        if (string.IsNullOrWhiteSpace(value)) return;
+        // Camera callbacks can arrive on a worker thread or repeat while navigation is pending.
+        await MainThread.InvokeOnMainThreadAsync(() => ProcessScanAsync(() => Task.FromResult<string?>(value)));
+    }
+
+    async void OnPickPhotoClicked(object sender, EventArgs e) => await ProcessScanAsync(ReadPhotoCodeAsync);
+
+    async Task<string?> ReadPhotoCodeAsync()
+    {
+        FileResult? photo;
+        if (cameraView is null)
         {
-            await ProcessScanResultAsync(e.Results[0].Value);
+            photo = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = Strings.ScanFromPhotoLibrary,
+                FileTypes = FilePickerFileType.Images
+            });
         }
         else
         {
-            await MainThread.InvokeOnMainThreadAsync(() => ProcessScanResultAsync(e.Results[0].Value));
+            var results = await MediaPicker.PickPhotosAsync(new MediaPickerOptions { Title = Strings.ScanFromPhotoLibrary });
+            photo = results.FirstOrDefault();
         }
-    }
-
-    async void OnPickPhotoClicked(object sender, EventArgs e)
-    {
-        MediaPickerOptions options = new()
-        {
-            Title = Strings.ScanFromPhotoLibrary
-        };
-        List<FileResult> results = await MediaPicker.PickPhotosAsync(options);
-        if (results.Count == 0) return;
-        await using var stream = await results[0].OpenReadAsync();
-        using var managedStream = new SKManagedStream(stream);
-        using var bitmap = SKBitmap.Decode(managedStream);
-        if (bitmap == null)
+        if (photo is null || !IsCurrentScanPage) return null;
+        await using var stream = await photo.OpenReadAsync();
+        if (!IsCurrentScanPage) return null;
+        // Image decoding and QR recognition can be expensive; keep both off the UI thread.
+        string? result = await Task.Run(() => DecodePhotoCode(stream));
+        if (!IsCurrentScanPage) return null;
+        if (string.IsNullOrWhiteSpace(result))
         {
             await Toast.Show(Strings.ErrorMessageUnableReadQRCode);
-            return;
+            return null;
         }
+        return result;
+    }
+
+    static string? DecodePhotoCode(Stream stream)
+    {
+        using var managedStream = new SKManagedStream(stream);
+        using var bitmap = SKBitmap.Decode(managedStream);
+        if (bitmap is null) return null;
         var reader = new ZXing.SkiaSharp.BarcodeReader
         {
             Options = new DecodingOptions
@@ -83,22 +120,40 @@ public partial class ScanPage : ContentPage, IQueryAttributable
             },
             AutoRotate = true
         };
-        var result = reader.Decode(bitmap);
-        if (result == null || string.IsNullOrWhiteSpace(result.Text))
+        return reader.Decode(bitmap)?.Text;
+    }
+
+    async Task ProcessScanAsync(Func<Task<string?>> readCode)
+    {
+        if (isProcessingScan || !IsCurrentScanPage) return;
+        isProcessingScan = true;
+        if (cameraView is not null) cameraView.IsDetecting = false;
+        try
         {
-            await Toast.Show(Strings.ErrorMessageUnableReadQRCode);
-            return;
+            string? result = await readCode();
+            if (IsCurrentScanPage && !string.IsNullOrWhiteSpace(result))
+                await ProcessScanResultAsync(result);
         }
-        await ProcessScanResultAsync(result.Text);
+        catch (OperationCanceledException) { }
+        catch (Exception ex)
+        {
+            if (IsCurrentScanPage) await Toast.Show(ex.Message);
+        }
+        finally
+        {
+            isProcessingScan = false;
+            if (cameraView is not null) cameraView.IsDetecting = IsCurrentScanPage;
+        }
     }
 
     void OnTorchClicked(object sender, EventArgs e)
     {
-        cameraView.IsTorchOn = !cameraView.IsTorchOn;
+        if (cameraView is not null) cameraView.IsTorchOn = !cameraView.IsTorchOn;
     }
 
     async Task ProcessScanResultAsync(string result)
     {
+        result = result.Trim();
         try
         {
             if (Uri.TryCreate(result, UriKind.Absolute, out var uri))
@@ -118,9 +173,11 @@ public partial class ScanPage : ContentPage, IQueryAttributable
         catch
         {
         }
-        string errorMessage = string.Format(Strings.ErrorMessageUnsupportedQRCode, result);
-        await DisplayAlertAsync(null, errorMessage, Strings.OK);
-        cameraView.IsDetecting = true;
+        if (IsCurrentScanPage)
+        {
+            string errorMessage = string.Format(Strings.ErrorMessageUnsupportedQRCode, result);
+            await DisplayAlertAsync(null, errorMessage, Strings.OK);
+        }
     }
 
     async Task<bool> ProcessUriAsync(Uri uri)
