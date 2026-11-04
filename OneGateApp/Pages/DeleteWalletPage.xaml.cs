@@ -3,7 +3,6 @@ using CommunityToolkit.Maui.Extensions;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Popups;
-using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 
@@ -12,13 +11,13 @@ namespace NeoOrder.OneGate.Pages;
 public partial class DeleteWalletPage : ContentPage
 {
     readonly IServiceProvider serviceProvider;
-    readonly ApplicationDbContext dbContext;
+    readonly WalletAuthorizationService walletAuthorizationService;
     readonly WalletProvider walletProvider;
 
-    public DeleteWalletPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider)
+    public DeleteWalletPage(IServiceProvider serviceProvider, WalletAuthorizationService walletAuthorizationService, IWalletProvider walletProvider)
     {
         this.serviceProvider = serviceProvider;
-        this.dbContext = dbContext;
+        this.walletAuthorizationService = walletAuthorizationService;
         this.walletProvider = (WalletProvider)walletProvider;
         InitializeComponent();
     }
@@ -32,7 +31,7 @@ public partial class DeleteWalletPage : ContentPage
         popup.IsDanger = true;
         var result = await this.ShowPopupAsync<bool>(popup);
         if (!result.Result) return;
-        await dbContext.Settings.DeleteAsync("biometric/credential");
+        await walletAuthorizationService.ClearBiometricCredentialAsync();
         walletProvider.DeleteWallet();
         await Toast.Show(Strings.WalletDeleted);
         Window window = Window;

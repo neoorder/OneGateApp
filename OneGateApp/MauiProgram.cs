@@ -129,6 +129,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IWalletProvider, WalletProvider>();
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddTransient<AddressBookService>();
+        builder.Services.AddSingleton<DAppUsageService>();
         builder.Services.AddSingleton<MessagingService>();
         builder.Services.AddSingleton<ChatAvatarService>();
         builder.Services.AddSingleton<Services.Files.FileUploadClient>();

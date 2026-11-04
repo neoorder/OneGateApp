@@ -13,6 +13,7 @@ public partial class SecurityCenterPage : ContentPage
     const string ShowBalanceKey = "wallet/showBalance";
 
     readonly ApplicationDbContext dbContext;
+    readonly WalletAuthorizationService walletAuthorizationService;
     readonly RpcClient rpcClient;
     bool suppressToggleUpdates;
 
@@ -33,9 +34,10 @@ public partial class SecurityCenterPage : ContentPage
             : Strings.BiometricUnavailableSecurityText;
     public string BiometricActionText => IsBiometricEnabled ? Strings.DisableBiometric : Strings.CreateBiometricCredential;
 
-    public SecurityCenterPage(ApplicationDbContext dbContext, RpcClient rpcClient)
+    public SecurityCenterPage(ApplicationDbContext dbContext, WalletAuthorizationService walletAuthorizationService, RpcClient rpcClient)
     {
         this.dbContext = dbContext;
+        this.walletAuthorizationService = walletAuthorizationService;
         this.rpcClient = rpcClient;
         RefreshCommand = new Command(async () => await RefreshAsync());
         InitializeComponent();
@@ -54,7 +56,7 @@ public partial class SecurityCenterPage : ContentPage
         {
             IsPrivacyModeEnabled = !await dbContext.Settings.GetAsync<bool>(ShowBalanceKey);
             IsBiometricAvailable = await DataProtectionService.CheckAvailabilityAsync();
-            IsBiometricEnabled = await dbContext.Settings.ExistsAsync("biometric/credential");
+            IsBiometricEnabled = await walletAuthorizationService.IsBiometricEnabledAsync();
             await RefreshRpcStatusAsync();
         }
         finally

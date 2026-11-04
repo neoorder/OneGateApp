@@ -2,8 +2,8 @@ using CommunityToolkit.Maui.Alerts;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Views;
-using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
+using NeoOrder.OneGate.Services;
 using Plugin.Maui.ScreenSecurity;
 
 namespace NeoOrder.OneGate.Pages;
@@ -11,16 +11,16 @@ namespace NeoOrder.OneGate.Pages;
 public partial class ChangePasswordPage : ContentPage
 {
     readonly IScreenSecurity screenSecurity;
-    readonly ApplicationDbContext dbContext;
+    readonly WalletAuthorizationService walletAuthorizationService;
     readonly Wallet wallet;
 
     public required string CurrentPassword { get; set; }
     public required string Password { get; set { field = value; OnPropertyChanged(); } }
 
-    public ChangePasswordPage(IScreenSecurity screenSecurity, ApplicationDbContext dbContext, IWalletProvider walletProvider)
+    public ChangePasswordPage(IScreenSecurity screenSecurity, WalletAuthorizationService walletAuthorizationService, IWalletProvider walletProvider)
     {
         this.screenSecurity = screenSecurity;
-        this.dbContext = dbContext;
+        this.walletAuthorizationService = walletAuthorizationService;
         wallet = walletProvider.GetWallet()!;
         InitializeComponent();
     }
@@ -47,16 +47,10 @@ public partial class ChangePasswordPage : ContentPage
             bool success = await Task.Run(() => wallet.ChangePassword(CurrentPassword, Password));
             if (success)
             {
+                bool biometricWasEnabled = await walletAuthorizationService.ClearBiometricCredentialAsync();
+                GlobalStates.Invalidate<SettingsPage>();
                 await Shell.Current.GoToAsync("..");
-                if (await dbContext.Settings.ExistsAsync("biometric/credential"))
-                {
-                    await dbContext.Settings.DeleteAsync("biometric/credential");
-                    await Toast.Show(Strings.BiometricResetText);
-                }
-                else
-                {
-                    await Toast.Show(Strings.PasswordChanged);
-                }
+                await Toast.Show(biometricWasEnabled ? Strings.BiometricResetText : Strings.PasswordChanged);
             }
             else
             {

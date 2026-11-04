@@ -1,4 +1,5 @@
-﻿using Neo;
+﻿using Microsoft.EntityFrameworkCore;
+using Neo;
 using Neo.SmartContract.Native;
 using Neo.Wallets;
 using NeoOrder.OneGate.Data;
@@ -10,15 +11,15 @@ using System.Numerics;
 
 namespace NeoOrder.OneGate.Services;
 
-public class TokenManager(ApplicationDbContext dbContext, IWalletProvider walletProvider, HttpClient httpClient, RpcClient rpcClient)
+public class TokenManager(IServiceScopeFactory scopeFactory, IWalletProvider walletProvider, HttpClient httpClient, RpcClient rpcClient)
 {
     public async Task<IReadOnlyList<TokenInfo>> LoadTokensAsync(bool includeHiddens = false)
     {
         List<TokenInfo> tokens = EmbeddedResource.LoadJson<List<TokenInfo>>("tokens.json");
         if (!includeHiddens)
         {
-            UInt160[]? hiddens = await dbContext.Settings.GetAsync<UInt160[]>("tokens/hidden");
-            if (hiddens != null) tokens.RemoveAll(p => hiddens.Contains(p.Hash));
+            var hiddens = await GetHiddenTokenHashesAsync();
+            tokens.RemoveAll(p => hiddens.Contains(p.Hash.ToString()));
         }
         return tokens;
     }
@@ -65,8 +66,8 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
         List<Nep11TokenInfo> tokens = EmbeddedResource.LoadJson<List<Nep11TokenInfo>>("nft.json");
         if (!includeHiddens)
         {
-            UInt160[]? hiddens = await dbContext.Settings.GetAsync<UInt160[]>("tokens/hidden");
-            if (hiddens != null) tokens.RemoveAll(p => hiddens.Contains(p.Hash));
+            var hiddens = await GetHiddenTokenHashesAsync();
+            tokens.RemoveAll(p => hiddens.Contains(p.Hash.ToString()));
         }
         return tokens;
     }
@@ -84,35 +85,50 @@ public class TokenManager(ApplicationDbContext dbContext, IWalletProvider wallet
 
     public async Task<IReadOnlyList<ITokenInfo>> LoadHiddenTokens()
     {
-        UInt160[]? hiddens = await dbContext.Settings.GetAsync<UInt160[]>("tokens/hidden");
-        if (hiddens is null) return [];
+        var hiddens = await GetHiddenTokenHashesAsync();
+        if (hiddens.Count == 0) return [];
         var tokens = await LoadTokensAsync(true);
         var nep11tokens = await LoadNep11TokensAsync(true);
         return tokens
-            .Where(p => hiddens.Contains(p.Hash))
+            .Where(p => hiddens.Contains(p.Hash.ToString()))
             .Cast<ITokenInfo>()
-            .Concat(nep11tokens.Where(p => hiddens.Contains(p.Hash)))
+            .Concat(nep11tokens.Where(p => hiddens.Contains(p.Hash.ToString())))
             .ToArray();
     }
 
     public async Task<int> GetHiddenTokenCountAsync()
     {
-        UInt160[]? hiddens = await dbContext.Settings.GetAsync<UInt160[]>("tokens/hidden");
-        return hiddens?.Length ?? 0;
+        using var scope = scopeFactory.CreateScope();
+        var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        return await database.HiddenTokens.CountAsync();
     }
 
     public async Task HideTokenAsync(UInt160 hash)
     {
-        HashSet<UInt160> hiddens = await dbContext.Settings.GetAsync<HashSet<UInt160>>("tokens/hidden") ?? [];
-        if (hiddens.Add(hash))
-            await dbContext.Settings.PutAsync("tokens/hidden", hiddens);
+        ArgumentNullException.ThrowIfNull(hash);
+        string value = hash.ToString();
+        using var scope = scopeFactory.CreateScope();
+        var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await database.Database.ExecuteSqlAsync($"""
+            INSERT INTO [HiddenTokens]([Hash]) VALUES({value})
+            ON CONFLICT([Hash]) DO NOTHING
+            """);
     }
 
     public async Task UnhideTokenAsync(UInt160 hash)
     {
-        HashSet<UInt160>? hiddens = await dbContext.Settings.GetAsync<HashSet<UInt160>>("tokens/hidden");
-        if (hiddens is null) return;
-        if (hiddens.Remove(hash))
-            await dbContext.Settings.PutAsync("tokens/hidden", hiddens);
+        ArgumentNullException.ThrowIfNull(hash);
+        string value = hash.ToString();
+        using var scope = scopeFactory.CreateScope();
+        var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await database.HiddenTokens.Where(p => p.Hash == value).ExecuteDeleteAsync();
+    }
+
+    async Task<HashSet<string>> GetHiddenTokenHashesAsync()
+    {
+        using var scope = scopeFactory.CreateScope();
+        var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        string[] hashes = await database.HiddenTokens.Select(p => p.Hash).ToArrayAsync();
+        return hashes.ToHashSet(StringComparer.Ordinal);
     }
 }

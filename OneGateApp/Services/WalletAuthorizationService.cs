@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls.Popups;
 using NeoOrder.OneGate.Data;
@@ -8,9 +9,27 @@ namespace NeoOrder.OneGate.Services;
 
 public class WalletAuthorizationService(IServiceProvider serviceProvider, ApplicationDbContext dbContext, IWalletProvider walletProvider)
 {
+    const int BiometricCredentialId = 1;
+
+    public Task<bool> IsBiometricEnabledAsync() =>
+        dbContext.BiometricCredentials.AnyAsync(p => p.Id == BiometricCredentialId);
+
+    public async Task SetBiometricCredentialAsync(byte[] protectedData)
+    {
+        ArgumentNullException.ThrowIfNull(protectedData);
+        await dbContext.Database.ExecuteSqlAsync($"""
+            INSERT INTO [BiometricCredentials]([Id], [ProtectedData]) VALUES({BiometricCredentialId}, {protectedData})
+            ON CONFLICT([Id]) DO UPDATE SET [ProtectedData] = excluded.[ProtectedData]
+            """);
+    }
+
+    public async Task<bool> ClearBiometricCredentialAsync() =>
+        await dbContext.BiometricCredentials.Where(p => p.Id == BiometricCredentialId).ExecuteDeleteAsync() > 0;
+
     public async Task<bool> RequestAuthorizationAsync(Page page, string title, string? message = null, string? domain = null)
     {
-        byte[]? credential = await dbContext.Settings.GetAsync<byte[]>("biometric/credential");
+        byte[]? credential = await dbContext.BiometricCredentials.Where(p => p.Id == BiometricCredentialId)
+            .Select(p => p.ProtectedData).FirstOrDefaultAsync();
         if (credential is null)
         {
             var popup = serviceProvider.GetServiceOrCreateInstance<WalletAuthorizationPopup>();

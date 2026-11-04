@@ -2,7 +2,6 @@ using CommunityToolkit.Maui.Alerts;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Controls.Views;
-using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using Plugin.Maui.ScreenSecurity;
@@ -12,15 +11,15 @@ namespace NeoOrder.OneGate.Pages;
 public partial class CreateBiometricPage : ContentPage
 {
     readonly IScreenSecurity screenSecurity;
-    readonly ApplicationDbContext dbContext;
+    readonly WalletAuthorizationService walletAuthorizationService;
     readonly Wallet wallet;
 
     public required string Password { get; set; }
 
-    public CreateBiometricPage(IScreenSecurity screenSecurity, ApplicationDbContext dbContext, IWalletProvider walletProvider)
+    public CreateBiometricPage(IScreenSecurity screenSecurity, WalletAuthorizationService walletAuthorizationService, IWalletProvider walletProvider)
     {
         this.screenSecurity = screenSecurity;
-        this.dbContext = dbContext;
+        this.walletAuthorizationService = walletAuthorizationService;
         this.wallet = walletProvider.GetWallet()!;
         InitializeComponent();
     }
@@ -63,7 +62,7 @@ public partial class CreateBiometricPage : ContentPage
                 await Toast.Show(Strings.BiometricUnavailableText);
                 return;
             }
-            await dbContext.Settings.PutAsync("biometric/credential", encrypted);
+            await walletAuthorizationService.SetBiometricCredentialAsync(encrypted);
             GlobalStates.Invalidate<SettingsPage>();
             await this.GoBackAsync();
             await Toast.Show(Strings.BiometricCredentialCreatedText);

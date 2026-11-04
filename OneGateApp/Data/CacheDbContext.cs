@@ -5,7 +5,7 @@ namespace NeoOrder.OneGate.Data;
 
 public partial class CacheDbContext(DbContextOptions<CacheDbContext> options) : DbContext(options)
 {
-    public DbSet<Setting> Settings { get; set; }
+    public DbSet<CacheState> CacheStates { get; set; }
     public DbSet<Banner> Banners { get; set; }
     public DbSet<News> News { get; set; }
     public DbSet<DApp> DApps { get; set; }
@@ -39,12 +39,5 @@ static class CacheDbContextFactoryExtensions
             dbContext?.Dispose();
             throw;
         }
-    }
-
-    public static async Task DeleteSettingIfExistsAsync(this IDbContextFactory<CacheDbContext> dbContextFactory, string key)
-    {
-        if (!File.Exists(SharedOptions.CacheDbPath)) return;
-        using var dbContext = await dbContextFactory.CreateInitializedDbContextAsync();
-        await dbContext.Settings.DeleteAsync(key);
     }
 }

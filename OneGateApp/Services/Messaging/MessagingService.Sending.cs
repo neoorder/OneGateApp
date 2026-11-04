@@ -10,7 +10,7 @@ public sealed partial class MessagingService
     async Task SubmitTextMessageAsync(PendingChatMessage message, CancellationToken cancellationToken)
     {
         lock (pendingLock)
-            if (!pendingMessages.TryGetValue(message.Id, out var queued) || queued.IsCanceled) return;
+            if (!pendingMessages.ContainsKey(message.Id)) return;
         MeshlineClient current;
         Wallet wallet;
         WalletAccount account;
@@ -58,10 +58,10 @@ public sealed partial class MessagingService
                 operation.Token.ThrowIfCancellationRequested();
                 EnsureCurrentAccount(wallet, account);
                 if (!ReferenceEquals(current, client)) throw new OperationCanceledException(operation.Token);
-                // Local cancellation and handing the message to the SDK must have a single winner.
+                // Hand each local send attempt to the SDK only once.
                 lock (pendingLock)
                 {
-                    if (!pendingMessages.TryGetValue(message.Id, out var queued) || !queued.CanCancelSubmission) return;
+                    if (!pendingMessages.TryGetValue(message.Id, out var queued) || !queued.CanStartSubmission) return;
                     pendingMessages[message.Id] = queued with { HasSubmissionStarted = true };
                 }
                 NotifyChanged();

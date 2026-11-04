@@ -8,7 +8,6 @@ public sealed record PendingChatMessage(Guid Id, string LocalAccountId, string A
     public MessageSendStatus? SendStatus { get; init; }
     public string? ErrorMessage { get; init; }
     public bool HasSubmissionStarted { get; init; }
-    public bool IsCanceled { get; init; }
-    public bool IsSubmitting => SendStatus is null && ErrorMessage is null && !IsCanceled;
-    public bool CanCancelSubmission => IsSubmitting && !HasSubmissionStarted;
+    public bool IsSubmitting => SendStatus is null && ErrorMessage is null;
+    public bool CanStartSubmission => IsSubmitting && !HasSubmissionStarted;
 }

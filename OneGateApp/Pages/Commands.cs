@@ -49,10 +49,8 @@ static class Commands
 
     public static AsyncCommand<DApp> AddToFavorites { get; } = new(static async dapp =>
     {
-        var dbContext = Application.Current!.Handler.GetRequiredService<ApplicationDbContext>();
-        List<int> favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite") ?? [];
-        if (!favorites.Remove(dapp.Id)) favorites.Insert(0, dapp.Id);
-        await dbContext.Settings.PutAsync("dapps/favorite", favorites);
+        var dappUsage = Application.Current!.Handler.GetRequiredService<DAppUsageService>();
+        await dappUsage.ToggleFavoriteAsync(dapp.Id);
         if (dapp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
     });
 

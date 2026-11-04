@@ -15,6 +15,7 @@ public partial class GlobalSearchPage : ContentPage
 
     readonly ApplicationDbContext dbContext;
     readonly TokenManager tokenManager;
+    readonly DAppUsageService dappUsage;
 
     bool hasLoaded;
     bool refreshAll = true;
@@ -45,10 +46,11 @@ public partial class GlobalSearchPage : ContentPage
     public bool IsEmpty => !string.IsNullOrWhiteSpace(query) && !ShowLoading && Results.Length == 0;
 
     public GlobalSearchPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, TokenManager tokenManager,
-        MessagingService messagingService, IWalletProvider walletProvider)
+        MessagingService messagingService, IWalletProvider walletProvider, DAppUsageService dappUsage)
     {
         this.dbContext = dbContext;
         this.tokenManager = tokenManager;
+        this.dappUsage = dappUsage;
         this.messagingService = messagingService;
         this.walletProvider = walletProvider;
         DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
@@ -108,7 +110,7 @@ public partial class GlobalSearchPage : ContentPage
             if (!loadAll) return;
             UpdateResults();
 
-            List<int> recentDAppIds = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+            List<int> recentDAppIds = await dappUsage.GetRecentIdsAsync(isGame: false);
             bool developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
             await DApps.LoadAsync("/api/dapps", TimeSpan.FromDays(1));
             dappIndex = DApps

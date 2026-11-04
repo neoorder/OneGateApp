@@ -10,6 +10,7 @@ namespace NeoOrder.OneGate.Pages;
 public partial class DAppsPage : ContentPage
 {
     readonly ApplicationDbContext dbContext;
+    readonly DAppUsageService dappUsage;
     bool allowRestrictedContent;
     bool developerModeEnabled;
 
@@ -25,10 +26,11 @@ public partial class DAppsPage : ContentPage
     public ObservableCollection<DApp>? DAppsFavoriteOrRecent { get; set { field = value; OnPropertyChanged(); } }
     public bool HasFavoriteOrRecent { get; private set { field = value; OnPropertyChanged(); } }
 
-    public DAppsPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
+    public DAppsPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, DAppUsageService dappUsage)
     {
         this.LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
         this.dbContext = dbContext;
+        this.dappUsage = dappUsage;
         this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
         InitializeComponent();
 #if WINDOWS
@@ -93,8 +95,8 @@ public partial class DAppsPage : ContentPage
     {
         allowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
         developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
-        DAppsIdFavorite = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite") ?? [];
-        DAppsIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+        DAppsIdFavorite = await dappUsage.GetFavoriteIdsAsync();
+        DAppsIdRecent = await dappUsage.GetRecentIdsAsync(isGame: false);
     }
 
     async Task LoadDAppsAsync()

@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Alerts;
+using Microsoft.EntityFrameworkCore;
 using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Data;
@@ -428,8 +429,8 @@ public partial class HomePage : ContentPage
     async Task LoadNewsAsync()
     {
         string url = "/api/news";
-        string[]? excluded = await dbContext.Settings.GetAsync<string[]>("news/categories/excluded");
-        if (excluded?.Length > 0)
+        string[] excluded = await dbContext.ExcludedNewsCategories.Select(p => p.Category).ToArrayAsync();
+        if (excluded.Length > 0)
             url += "?" + string.Join('&', excluded.Select(p => "x=" + WebUtility.UrlEncode(p)));
         await News.LoadAsync(url, TimeSpan.FromMinutes(15));
     }

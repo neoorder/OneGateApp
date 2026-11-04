@@ -87,8 +87,7 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
     public bool CanRetry => pending is { ErrorMessage: not null, SendStatus: null };
     public bool CanEditForResend => HasSendError && CanCopyText && !HasAttachments
         && (pending is not null || message?.Body?.ContentType == "text/plain");
-    public string? SendStatusText => pending?.IsCanceled == true ? Strings.OperationCancelled
-        : pending?.IsSubmitting == true ? Strings.ChatMessageQueued
+    public string? SendStatusText => pending?.IsSubmitting == true ? Strings.ChatMessageQueued
         : CanRetry ? Strings.ChatMessageFailed : !IsOutgoing ? null : sendState switch
     {
         MessageSendState.Queued => Strings.ChatMessageQueued,
@@ -99,8 +98,7 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
         MessageSendState.Canceled => Strings.OperationCancelled,
         _ => Strings.ChatMessageStatusUnavailable
     };
-    public MessageSendState? SendErrorState => pending?.IsCanceled == true ? MessageSendState.Canceled
-        : CanRetry ? MessageSendState.Failed
+    public MessageSendState? SendErrorState => CanRetry ? MessageSendState.Failed
         : IsOutgoing && sendState is (MessageSendState.Failed or MessageSendState.Canceled) ? sendState : null;
     public bool HasSendError => SendErrorState is not null;
 
@@ -165,7 +163,7 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
     {
         bool pendingChanged = pending?.ErrorMessage != value.ErrorMessage
             || (pending?.SendStatus is null) != (value.SendStatus is null)
-            || pending?.IsCanceled != value.IsCanceled || pending?.HasSubmissionStarted != value.HasSubmissionStarted;
+            || pending?.HasSubmissionStarted != value.HasSubmissionStarted;
         pending = value;
         UpdateSendStatus(value.SendStatus, pendingChanged);
     }

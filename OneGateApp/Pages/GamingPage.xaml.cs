@@ -14,6 +14,7 @@ public partial class GamingPage : ContentPage
     const int MaxGameColumns = 3;
 
     readonly ApplicationDbContext dbContext;
+    readonly DAppUsageService dappUsage;
     bool allowRestrictedContent;
     bool developerModeEnabled;
 
@@ -27,10 +28,11 @@ public partial class GamingPage : ContentPage
     public string[] GameTypes { get; private set { field = value; OnPropertyChanged(); } } = [Strings.All];
     public bool HasGameTypeFilters { get; private set { field = value; OnPropertyChanged(); } }
 
-    public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
+    public GamingPage(IServiceProvider serviceProvider, ApplicationDbContext dbContext, DAppUsageService dappUsage)
     {
         this.LoadingService = new(LoadSettingsAsync, LoadDAppsAsync);
         this.dbContext = dbContext;
+        this.dappUsage = dappUsage;
         this.DApps = serviceProvider.GetServiceOrCreateInstance<CachedCollection<DApp>>();
         InitializeComponent();
 #if WINDOWS
@@ -60,7 +62,7 @@ public partial class GamingPage : ContentPage
     {
         allowRestrictedContent = await DAppCatalogPolicy.GetAllowRestrictedContentAsync(dbContext);
         developerModeEnabled = await DAppCatalogPolicy.GetDeveloperModeEnabledAsync(dbContext);
-        GamesIdRecent = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
+        GamesIdRecent = await dappUsage.GetRecentIdsAsync(isGame: true);
     }
 
     async Task LoadDAppsAsync()

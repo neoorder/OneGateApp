@@ -2,7 +2,7 @@ using Meshline.Models.Client;
 using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
-using System.Text.Json;
+using System.Diagnostics;
 
 namespace NeoOrder.OneGate.Services.Messaging;
 
@@ -29,7 +29,7 @@ public sealed partial class MessagingService
         string recipient = GetContactAccountId(address);
         if (replyTo is not null && replyTo.Sender != localAccountId && replyTo.Sender != recipient)
             throw new InvalidOperationException(Strings.ChatQuotedMessageUnavailable);
-        var message = new PendingChatMessage(Guid.NewGuid(), localAccountId, address.Trim(), text, DateTimeOffset.Now)
+        var message = new PendingChatMessage(Guid.NewGuid(), localAccountId, address.Trim(), text, DateTimeOffset.UtcNow)
         {
             ReplyTo = replyTo
         };
@@ -100,7 +100,7 @@ public sealed partial class MessagingService
                 {
                     Task? save = null;
                     lock (pendingLock)
-                        if (pendingMessages.TryGetValue(message.Id, out var current) && !current.IsCanceled)
+                        if (pendingMessages.TryGetValue(message.Id, out var current))
                         {
                             pendingMessages[message.Id] = current = current with
                             {
@@ -119,13 +119,8 @@ public sealed partial class MessagingService
         });
     }
 
-    sealed record StoredPendingMessage(Guid Id, string Address, string Text, DateTimeOffset CreatedAt,
-        MessageRef? ReplyTo, string? ErrorMessage, bool IsCanceled);
-
     readonly HashSet<string> loadedPendingAccounts = [];
     Task pendingStorageWrites = Task.CompletedTask;
-
-    string GetPendingStoragePrefix(string accountId) => $"chat/unsent/{registry.Context.Registry}/{accountId}/";
 
     // Called under lifecycleLock, before this account can queue or retry messages.
     async Task LoadPendingMessagesAsync(string accountId, CancellationToken cancellationToken)
@@ -133,40 +128,61 @@ public sealed partial class MessagingService
         if (loadedPendingAccounts.Contains(accountId)) return;
         using var scope = scopeFactory.CreateScope();
         var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        string prefix = GetPendingStoragePrefix(accountId);
-        var rows = await database.Settings.AsNoTracking().Where(row => row.Key.StartsWith(prefix)).ToArrayAsync(cancellationToken);
-        foreach (var row in rows)
+        var rows = await database.UnsentChatMessages.AsNoTracking().Where(p => p.LocalAccountId == accountId)
+            .ToArrayAsync(cancellationToken);
+        foreach (var stored in rows)
         {
-            var stored = JsonSerializer.Deserialize<StoredPendingMessage>(row.Value ?? "null");
-            if (stored is null || stored.Id == Guid.Empty || row.Key != prefix + stored.Id.ToString("N")
-                || string.IsNullOrWhiteSpace(stored.Address) || string.IsNullOrWhiteSpace(stored.Text)
-                || stored.ErrorMessage is null && !stored.IsCanceled) continue;
-            // Restore only completed local failures/cancellations. Never enqueue a recovered entry.
-            var message = new PendingChatMessage(stored.Id, accountId, stored.Address, stored.Text, stored.CreatedAt)
+            cancellationToken.ThrowIfCancellationRequested();
+            if (stored.Id == Guid.Empty || string.IsNullOrWhiteSpace(stored.PeerAddress)
+                || string.IsNullOrWhiteSpace(stored.Text) || stored.CreatedAt == default || stored.ErrorMessage is null
+                || (stored.ReplyToSenderAccountId is null) != (stored.ReplyToMessageId is null)) continue;
+            try
             {
-                ReplyTo = stored.ReplyTo, ErrorMessage = stored.ErrorMessage, IsCanceled = stored.IsCanceled
-            };
-            lock (pendingLock) pendingMessages.TryAdd(message.Id, message);
+                // SQLite does not preserve DateTime.Kind; stored message timestamps are always UTC.
+                var createdAt = new DateTimeOffset(DateTime.SpecifyKind(stored.CreatedAt, DateTimeKind.Utc));
+                MessageRef? replyTo = stored.ReplyToSenderAccountId is null ? null
+                    : new() { Sender = stored.ReplyToSenderAccountId, MessageId = stored.ReplyToMessageId! };
+                // Restore completed local failures for display and manual retry, without submitting them.
+                var message = new PendingChatMessage(stored.Id, accountId, stored.PeerAddress, stored.Text, createdAt)
+                {
+                    ReplyTo = replyTo, ErrorMessage = stored.ErrorMessage
+                };
+                lock (pendingLock) pendingMessages.TryAdd(message.Id, message);
+            }
+            catch (Exception ex) when (ex is ArgumentException or NotSupportedException)
+            {
+                Debug.WriteLine($"[Meshline] Unsent message could not be read: {ex}");
+            }
         }
         cancellationToken.ThrowIfCancellationRequested();
         loadedPendingAccounts.Add(accountId);
     }
 
-    // Called under pendingLock. Preserve ordering between failure, retry, cancellation and removal.
+    // Called under pendingLock. Preserve write ordering across failures and retries.
     Task QueuePendingMessageStorage(PendingChatMessage message, bool remove = false)
     {
         var previous = pendingStorageWrites;
-        string key = GetPendingStoragePrefix(message.LocalAccountId) + message.Id.ToString("N");
-        var stored = new StoredPendingMessage(message.Id, message.Address, message.Text, message.CreatedAt,
-            message.ReplyTo, message.ErrorMessage, message.IsCanceled);
         var write = Task.Run(async () =>
         {
             try { await previous; }
             catch { /* A previous failed write must not prevent later updates. */ }
             using var scope = scopeFactory.CreateScope();
             var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            if (remove) await database.Settings.DeleteAsync(key);
-            else await database.Settings.PutAsync(key, JsonSerializer.Serialize(stored));
+            if (remove)
+                await database.UnsentChatMessages.Where(p => p.Id == message.Id && p.LocalAccountId == message.LocalAccountId)
+                    .ExecuteDeleteAsync();
+            else
+                await database.Database.ExecuteSqlAsync($"""
+                    INSERT INTO [UnsentChatMessages]([Id], [LocalAccountId], [PeerAddress], [Text], [CreatedAt],
+                        [ReplyToSenderAccountId], [ReplyToMessageId], [ErrorMessage])
+                    VALUES({message.Id}, {message.LocalAccountId}, {message.Address}, {message.Text}, {message.CreatedAt.UtcDateTime},
+                        {message.ReplyTo?.Sender}, {message.ReplyTo?.MessageId}, {message.ErrorMessage})
+                    ON CONFLICT([Id]) DO UPDATE SET
+                        [LocalAccountId] = excluded.[LocalAccountId], [PeerAddress] = excluded.[PeerAddress],
+                        [Text] = excluded.[Text], [CreatedAt] = excluded.[CreatedAt],
+                        [ReplyToSenderAccountId] = excluded.[ReplyToSenderAccountId], [ReplyToMessageId] = excluded.[ReplyToMessageId],
+                        [ErrorMessage] = excluded.[ErrorMessage]
+                    """);
         });
         pendingStorageWrites = write;
         _ = ObservePendingStorageAsync(write);
@@ -176,7 +192,7 @@ public sealed partial class MessagingService
     static async Task ObservePendingStorageAsync(Task write)
     {
         try { await write; }
-        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Unsent message storage failed: {ex.Message}"); }
+        catch (Exception ex) { Debug.WriteLine($"[Meshline] Unsent message storage failed: {ex.Message}"); }
     }
 
     async Task FlushPendingMessageStorageAsync()

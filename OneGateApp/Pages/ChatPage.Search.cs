@@ -343,8 +343,8 @@ public partial class ChatPage
         if (messageSearchSender == ChatSearchSender.Peer) return;
         foreach (var pending in messagingService.GetPendingChatMessages(accountId, address).Reverse())
         {
-            // Only pre-SDK failures/cancellations have no searchable saved original.
-            if (pending.SendStatus is not null || pending.ErrorMessage is null && !pending.IsCanceled
+            // Only pre-SDK failures have no searchable saved original.
+            if (pending.SendStatus is not null || pending.ErrorMessage is null
                 || messageSearchSince is { } since && pending.CreatedAt < since
                 || string.IsNullOrWhiteSpace(pending.Text) || !pending.Text.Contains(term, StringComparison.OrdinalIgnoreCase)
                 || messageSearchLinks && !ChatMessageLinks.FindOccurrences(pending.Text).Any()

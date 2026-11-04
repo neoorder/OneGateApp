@@ -1,9 +1,7 @@
 using Meshline.Components;
 using Meshline.Identity;
 using Meshline.Models.Client;
-using Microsoft.EntityFrameworkCore;
 using Neo.Wallets;
-using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
 using System.Globalization;
 
@@ -66,8 +64,7 @@ public sealed partial class MessagingService
                     string peer = prefix + pending.Address;
                     if (!summaries.TryGetValue(peer, out var latest) || pending.CreatedAt >= latest.Timestamp)
                     {
-                        if (pending.IsCanceled) failedPreviews[peer] = MessageSendState.Canceled;
-                        else if (pending.ErrorMessage is not null) failedPreviews[peer] = MessageSendState.Failed;
+                        if (pending.ErrorMessage is not null) failedPreviews[peer] = MessageSendState.Failed;
                         else failedPreviews.Remove(peer);
                         summaries[peer] = new ConversationSummary
                         {
@@ -183,82 +180,6 @@ public sealed partial class MessagingService
                 EnsureCurrentAccount(wallet, account);
                 NotifyChanged(MessagingChangeKind.ReadState);
                 return true;
-            }
-            finally { walletProvider.WalletChanged -= OnWalletChanged; }
-        }
-        finally { lifecycleLock.Release(); }
-    }
-
-    // Accessed under lifecycleLock. These local settings only change through SetChatPinnedAsync.
-    readonly Dictionary<string, (HashSet<string> Addresses, DateTimeOffset? RetryAfter)> conversationPins = [];
-
-    string GetConversationPinPrefix(string accountId) => $"chat/pins/{registry.Context.Registry}/{accountId}/";
-
-    async Task<HashSet<string>> ReadConversationPinsAsync(string accountId, CancellationToken cancellationToken)
-    {
-        if (conversationPins.TryGetValue(accountId, out var cached)
-            && (cached.RetryAfter is null || DateTimeOffset.UtcNow < cached.RetryAfter)) return cached.Addresses;
-        try
-        {
-            using var scope = scopeFactory.CreateScope();
-            var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            string prefix = GetConversationPinPrefix(accountId);
-            var keys = await database.Settings.AsNoTracking().Where(p => p.Key.StartsWith(prefix) && p.Value == "1")
-                .Select(p => p.Key).ToArrayAsync(cancellationToken);
-            cancellationToken.ThrowIfCancellationRequested();
-            var addresses = keys.Select(key => key[prefix.Length..]).ToHashSet(StringComparer.Ordinal);
-            conversationPins[accountId] = (addresses, null);
-            return addresses;
-        }
-        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
-        catch (Exception)
-        {
-            // Keep the conversation list usable. Retry a failed local read on demand, without a timer.
-            var addresses = cached.Addresses ?? new HashSet<string>(StringComparer.Ordinal);
-            conversationPins[accountId] = (addresses, DateTimeOffset.UtcNow.AddMinutes(1));
-            return addresses;
-        }
-    }
-
-    public async Task SetChatPinnedAsync(string localAccountId, string address, bool pinned,
-        CancellationToken cancellationToken = default)
-    {
-        await lifecycleLock.WaitAsync(cancellationToken);
-        try
-        {
-            await InitializeCoreAsync(cancellationToken);
-            if (!IsEnabled) throw new InvalidOperationException(Strings.ChatEnableFirst);
-            if (AccountId != localAccountId) throw new InvalidOperationException(Strings.ChatAccountChanged);
-            GetContactAccountId(address);
-            address = address.Trim();
-            Wallet wallet = sessionWallet!;
-            WalletAccount account = sessionAccount!;
-            using var operation = CreateOperation(cancellationToken);
-            void OnWalletChanged(object? sender, Wallet? current)
-            {
-                if (!ReferenceEquals(current, wallet)) operation.Cancel();
-            }
-            walletProvider.WalletChanged += OnWalletChanged;
-            try
-            {
-                using var scope = scopeFactory.CreateScope();
-                var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                string key = GetConversationPinPrefix(localAccountId) + address;
-                operation.Token.ThrowIfCancellationRequested();
-                EnsureCurrentAccount(wallet, account);
-                if (pinned)
-                    await database.Database.ExecuteSqlAsync($"INSERT INTO [Settings]([Key], [Value]) VALUES({key}, '1') ON CONFLICT([Key]) DO UPDATE SET [Value] = '1'", operation.Token);
-                else
-                    await database.Settings.Where(p => p.Key == key).ExecuteDeleteAsync(operation.Token);
-                // Publish only after persistence succeeds; failed writes leave the displayed state intact.
-                if (conversationPins.TryGetValue(localAccountId, out var cached))
-                {
-                    var addresses = new HashSet<string>(cached.Addresses, StringComparer.Ordinal);
-                    if (pinned) addresses.Add(address); else addresses.Remove(address);
-                    conversationPins[localAccountId] = (addresses, cached.RetryAfter is null ? null : DateTimeOffset.MinValue);
-                }
-                EnsureCurrentAccount(wallet, account);
-                NotifyChanged();
             }
             finally { walletProvider.WalletChanged -= OnWalletChanged; }
         }

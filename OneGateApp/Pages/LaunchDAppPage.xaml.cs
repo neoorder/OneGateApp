@@ -23,7 +23,7 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
     readonly ProtocolSettings protocolSettings;
     readonly IWalletProvider walletProvider;
     readonly WalletAuthorizationService walletAuthorizationService;
-    readonly ApplicationDbContext dbContext;
+    readonly DAppUsageService dappUsage;
     readonly ActivityLogService activityLogService;
     readonly HttpClient httpClient;
     readonly RpcServer rpcServer;
@@ -38,13 +38,13 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
     public bool IsDeveloperToolsEnabled { get; set { field = value; OnPropertyChanged(); } }
     bool IsRemoteDebugSession => remoteDebugSessionId is not null;
 
-    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, ActivityLogService activityLogService, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
+    public LaunchDAppPage(IServiceProvider serviceProvider, ProtocolSettings protocolSettings, IWalletProvider walletProvider, WalletAuthorizationService walletAuthorizationService, ApplicationDbContext dbContext, DAppUsageService dappUsage, ActivityLogService activityLogService, HttpClient httpClient, RpcClient rpcClient, IHomeShortcutService homeShortcutService)
     {
         this.serviceProvider = serviceProvider;
         this.protocolSettings = protocolSettings;
         this.walletProvider = walletProvider;
         this.walletAuthorizationService = walletAuthorizationService;
-        this.dbContext = dbContext;
+        this.dappUsage = dappUsage;
         this.activityLogService = activityLogService;
         this.httpClient = httpClient;
         this.rpcServer = new(this);
@@ -212,16 +212,11 @@ public partial class LaunchDAppPage : ContentPage, IQueryAttributable, IRemoteDe
         UpdateFeedbackAndReportButtons();
         if (DApp.Id > 0)
         {
-            List<int>? favorites = await dbContext.Settings.GetAsync<List<int>>("dapps/favorite");
-            IsFavorite = favorites?.Contains(DApp.Id) ?? false;
-            List<int> recents = await dbContext.Settings.GetAsync<List<int>>("dapps/recent") ?? [];
-            recents.Remove(DApp.Id);
-            recents.Insert(0, DApp.Id);
-            while (recents.Count > 10)
-                recents.RemoveAt(recents.Count - 1);
-            await dbContext.Settings.PutAsync("dapps/recent", recents);
-            if (DApp.IsRegularApp) GlobalStates.Invalidate<DAppsPage>();
-            if (DApp.IsGamingApp) GlobalStates.Invalidate<GamingPage>();
+            IsFavorite = await dappUsage.IsFavoriteAsync(DApp.Id);
+            await dappUsage.RecordOpenedAsync(DApp.Id, DApp.IsGamingApp);
+            GlobalStates.Invalidate<DAppsPage>();
+            GlobalStates.Invalidate<GamingPage>();
+            GlobalStates.Invalidate<GlobalSearchPage>();
         }
         await activityLogService.RecordDAppConnectionAsync(DApp);
     }

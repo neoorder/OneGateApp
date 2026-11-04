@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Properties;
 using System.Diagnostics;
-using System.Text.Json;
 
 namespace NeoOrder.OneGate.Services.Messaging;
 
@@ -48,7 +47,7 @@ public sealed partial class MessagingService
             else
             {
                 if (chatDrafts.TryGetValue(key, out var draft) && draft.Text == text && draft.ReplyTo == replyTo) return;
-                var updated = new StoredChatDraft(text, DateTimeOffset.Now, replyTo);
+                var updated = new StoredChatDraft(text, DateTimeOffset.UtcNow, replyTo);
                 chatDrafts[key] = updated;
                 pendingDraftWrites[key] = updated;
             }
@@ -82,8 +81,6 @@ public sealed partial class MessagingService
         NotifyChanged();
     }
 
-    string GetDraftKeyPrefix(string accountId) => $"chat/drafts/{registry.Context.Registry}/{accountId}/";
-
     async Task LoadChatDraftsAsync(string accountId, CancellationToken cancellationToken, bool force = false)
     {
         lock (draftsLock)
@@ -95,25 +92,29 @@ public sealed partial class MessagingService
                 if (!force && loadedDraftAccounts.Contains(accountId)) return;
             using var scope = scopeFactory.CreateScope();
             var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            string prefix = GetDraftKeyPrefix(accountId);
-            var rows = await database.Settings.AsNoTracking().Where(p => p.Key.StartsWith(prefix)).ToArrayAsync(cancellationToken);
+            var rows = await database.ChatDrafts.AsNoTracking().Where(p => p.LocalAccountId == accountId)
+                .ToArrayAsync(cancellationToken);
             var drafts = new Dictionary<string, StoredChatDraft>(StringComparer.Ordinal);
             bool invalidDrafts = false;
             foreach (var row in rows)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                if (row.Text is null || row.UpdatedAt == default
+                    || (row.ReplyToSenderAccountId is null) != (row.ReplyToMessageId is null))
+                {
+                    Debug.WriteLine("[Meshline] Stored draft has missing or invalid fields.");
+                    invalidDrafts = true;
+                    continue;
+                }
                 try
                 {
-                    var draft = JsonSerializer.Deserialize<StoredChatDraft>(row.Value ?? "null");
-                    if (draft is { Text: not null } && draft.UpdatedAt != default)
-                        drafts[row.Key[prefix.Length..]] = draft;
-                    else
-                    {
-                        Debug.WriteLine("[Meshline] Stored draft has missing or invalid fields.");
-                        invalidDrafts = true;
-                    }
+                    // SQLite does not preserve DateTime.Kind; stored draft timestamps are always UTC.
+                    var updatedAt = new DateTimeOffset(DateTime.SpecifyKind(row.UpdatedAt, DateTimeKind.Utc));
+                    MessageRef? replyTo = row.ReplyToSenderAccountId is null ? null
+                        : new() { Sender = row.ReplyToSenderAccountId, MessageId = row.ReplyToMessageId! };
+                    drafts[row.PeerAddress] = new(row.Text, updatedAt, replyTo);
                 }
-                catch (Exception ex) when (ex is JsonException or ArgumentException or NotSupportedException)
+                catch (Exception ex) when (ex is ArgumentException or NotSupportedException)
                 {
                     Debug.WriteLine($"[Meshline] Stored draft could not be read: {ex}");
                     invalidDrafts = true;
@@ -185,9 +186,17 @@ public sealed partial class MessagingService
             await using var transaction = await database.Database.BeginTransactionAsync();
             foreach (var (key, draft) in snapshot)
             {
-                string storageKey = GetDraftKeyPrefix(key.AccountId) + key.Address;
-                if (draft is null) await database.Settings.DeleteAsync(storageKey);
-                else await database.Settings.PutAsync(storageKey, JsonSerializer.Serialize(draft));
+                if (draft is null)
+                    await database.ChatDrafts.Where(p => p.LocalAccountId == key.AccountId && p.PeerAddress == key.Address)
+                        .ExecuteDeleteAsync();
+                else
+                    await database.Database.ExecuteSqlAsync($"""
+                        INSERT INTO [ChatDrafts]([LocalAccountId], [PeerAddress], [Text], [UpdatedAt], [ReplyToSenderAccountId], [ReplyToMessageId])
+                        VALUES({key.AccountId}, {key.Address}, {draft.Text}, {draft.UpdatedAt.UtcDateTime}, {draft.ReplyTo?.Sender}, {draft.ReplyTo?.MessageId})
+                        ON CONFLICT([LocalAccountId], [PeerAddress]) DO UPDATE SET
+                            [Text] = excluded.[Text], [UpdatedAt] = excluded.[UpdatedAt],
+                            [ReplyToSenderAccountId] = excluded.[ReplyToSenderAccountId], [ReplyToMessageId] = excluded.[ReplyToMessageId]
+                        """);
             }
             await transaction.CommitAsync();
             lock (draftsLock)

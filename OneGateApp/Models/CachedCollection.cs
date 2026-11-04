@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NeoOrder.OneGate.Data;
+using NeoOrder.OneGate.Services;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 
@@ -9,7 +10,7 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
 {
     public event EventHandler? CollectionLoaded;
 
-    static readonly string settings_key = $"caching/last_update/{typeof(T).Name.ToLowerInvariant()}";
+    static readonly string cache_name = typeof(T).Name.ToLowerInvariant();
     static readonly SemaphoreSlim sync_lock = new(1, 1);
     bool loaded = false;
 
@@ -54,26 +55,47 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
             var dbContext = await dbContextFactory.CreateInitializedDbContextAsync();
             using (dbContext)
             {
-                bool wasLoaded = loaded;
+                T[]? cachedItems = null;
                 if (!loaded)
                 {
-                    AddRange(await dbContext.Set<T>().ToArrayAsync());
+                    cachedItems = await dbContext.Set<T>().AsNoTracking().ToArrayAsync();
+                    AddRange(cachedItems);
                     loaded = true;
                     CollectionLoaded?.Invoke(this, EventArgs.Empty);
                 }
-                bool cacheNeedsSeeding = wasLoaded
-                    && Count > 0
-                    && !await dbContext.Set<T>().AnyAsync();
-                var last_update = await dbContext.Settings.GetAsync<DateTimeOffset>(settings_key);
-                if (last_update > DateTimeOffset.UtcNow - duration) return;
+                var state = await dbContext.CacheStates.FindAsync(cache_name);
+                if (state is not null && DateTime.SpecifyKind(state.LastUpdatedAt, DateTimeKind.Utc) > DateTime.UtcNow - duration) return;
                 var items_new = (await httpClient.GetFromJsonAsync<T[]>(url))!;
+                cachedItems ??= await dbContext.Set<T>().AsNoTracking().ToArrayAsync();
+                foreach (T item in cachedItems)
+                {
+                    if (!items_new.Any(p => p.CompareTo(item) == 0))
+                        dbContext.Entry(item).State = EntityState.Deleted;
+                }
+                foreach (T item in items_new)
+                {
+                    T? cached = cachedItems.FirstOrDefault(p => p.CompareTo(item) == 0);
+                    if (cached is null)
+                        dbContext.Entry(item).State = EntityState.Added;
+                    else if (ShouldReplace(cached, item))
+                        dbContext.Entry(item).State = EntityState.Modified;
+                }
+                if (state is null)
+                {
+                    state = new CacheState { Name = cache_name };
+                    dbContext.CacheStates.Add(state);
+                }
+                state.LastUpdatedAt = DateTime.UtcNow;
+                // SaveChanges commits the cache rows and their freshness marker in one transaction.
+                await dbContext.SaveChangesAsync();
+
+                // Keep the displayed collection intact if downloading or saving fails.
+                bool cacheNeedsSeeding = cachedItems.Length == 0 && Count > 0;
                 for (int i = Count - 1; i >= 0; i--)
                 {
                     T item = base[i];
                     if (items_new.Any(p => p.CompareTo(item) == 0)) continue;
                     base.RemoveItem(i);
-                    if (!cacheNeedsSeeding)
-                        dbContext.Entry(item).State = EntityState.Deleted;
                 }
                 foreach (T item in items_new)
                 {
@@ -81,27 +103,32 @@ public class CachedCollection<T>(IDbContextFactory<CacheDbContext> dbContextFact
                     if (index >= 0)
                     {
                         if (cacheNeedsSeeding || ShouldReplace(base[index], item))
-                        {
                             base.SetItem(index, item);
-                            dbContext.Entry(item).State = cacheNeedsSeeding ? EntityState.Added : EntityState.Modified;
-                        }
                     }
                     else
                     {
                         base.InsertItem(~index, item);
-                        dbContext.Entry(item).State = EntityState.Added;
                     }
                 }
                 CollectionLoaded?.Invoke(this, EventArgs.Empty);
-                await dbContext.SaveChangesAsync();
-                dbContext.ChangeTracker.Clear();
-                await dbContext.Settings.PutAsync(settings_key, DateTimeOffset.UtcNow);
             }
         }
         finally
         {
             sync_lock.Release();
         }
+    }
+
+    public static async Task InvalidateAsync(IDbContextFactory<CacheDbContext> dbContextFactory)
+    {
+        await sync_lock.WaitAsync();
+        try
+        {
+            if (!File.Exists(SharedOptions.CacheDbPath)) return;
+            using var dbContext = await dbContextFactory.CreateInitializedDbContextAsync();
+            await dbContext.CacheStates.Where(p => p.Name == cache_name).ExecuteDeleteAsync();
+        }
+        finally { sync_lock.Release(); }
     }
 
     static bool ShouldReplace(T current, T incoming)

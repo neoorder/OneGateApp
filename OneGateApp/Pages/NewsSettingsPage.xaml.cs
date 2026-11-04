@@ -27,12 +27,12 @@ public partial class NewsSettingsPage : ContentPage
 
     async Task LoadCategroiesAsync()
     {
-        var excluded = await dbContext.Settings.GetAsync<string[]>("news/categories/excluded");
+        var excluded = await dbContext.ExcludedNewsCategories.Select(p => p.Category).ToArrayAsync();
         var categroies = (await httpClient.GetFromJsonAsync<string[]>($"/api/news/categories"))!;
         Categroies = categroies.Select(p => new CategroySetting
         {
             Categroy = p,
-            IsEnabled = excluded?.Contains(p) != true
+            IsEnabled = !excluded.Contains(p)
         }).ToArray();
     }
 
@@ -41,16 +41,15 @@ public partial class NewsSettingsPage : ContentPage
         Switch @switch = (Switch)sender;
         CategroySetting? setting = (CategroySetting?)@switch.BindingContext;
         if (setting is null) return;
-        var excluded = await dbContext.Settings.GetAsync<HashSet<string>>("news/categories/excluded") ?? [];
-        bool changed = e.Value switch
+        int changed = e.Value
+            ? await dbContext.ExcludedNewsCategories.Where(p => p.Category == setting.Categroy).ExecuteDeleteAsync()
+            : await dbContext.Database.ExecuteSqlAsync($"""
+                INSERT INTO [ExcludedNewsCategories]([Category]) VALUES({setting.Categroy})
+                ON CONFLICT([Category]) DO NOTHING
+                """);
+        if (changed > 0)
         {
-            false => excluded.Add(setting.Categroy),
-            true => excluded.Remove(setting.Categroy)
-        };
-        if (changed)
-        {
-            await dbContext.Settings.PutAsync("news/categories/excluded", excluded);
-            await cacheDbContextFactory.DeleteSettingIfExistsAsync("caching/last_update/news");
+            await CachedCollection<News>.InvalidateAsync(cacheDbContextFactory);
             GlobalStates.Invalidate<HomePage>();
         }
     }
