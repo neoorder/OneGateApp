@@ -120,11 +120,11 @@ static class Commands
         bool updateAvailable;
         try
         {
-            updateAvailable = await service.CheckForUpdatesAsync();
+            updateAvailable = await service.CheckForUpdatesAsync(automatic: silent);
         }
         catch
         {
-            if (!silent) await Toast.Show(Strings.NoUpdatesAvailable);
+            if (!silent) await Toast.Show(Strings.OperationFailed);
             return;
         }
         if (updateAvailable)

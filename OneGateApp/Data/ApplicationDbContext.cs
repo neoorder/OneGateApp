@@ -5,6 +5,7 @@ namespace NeoOrder.OneGate.Data;
 public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
     public DbSet<Setting> Settings { get; set; }
+    public DbSet<AppUpdateState> AppUpdateStates { get; set; }
     public DbSet<BiometricCredential> BiometricCredentials { get; set; }
     public DbSet<DAppFavorite> DAppFavorites { get; set; }
     public DbSet<DAppRecentVisit> DAppRecentVisits { get; set; }

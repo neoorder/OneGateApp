@@ -378,9 +378,6 @@ public partial class HomePage : ContentPage
 
     async void CheckForUpdates()
     {
-        var last_check = await dbContext.Settings.GetAsync<DateTimeOffset>("system/last_update_check");
-        if (last_check > DateTimeOffset.UtcNow - TimeSpan.FromDays(7)) return;
-        await dbContext.Settings.PutAsync("system/last_update_check", DateTimeOffset.UtcNow);
         await Commands.CheckForUpdates.ExecuteAsync(true);
     }
 

@@ -144,6 +144,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<TokenManager>();
         builder.Services.AddSingleton<ActivityLogService>();
         builder.Services.AddSingleton<RpcClient>();
+        builder.Services.AddSingleton(System.TimeProvider.System);
         builder.Services.AddSingleton<UpdateService>();
         builder.Services.AddSingleton<RemoteDebugService>();
         builder.Services.AddSingleton<IHomeShortcutService, HomeShortcutService>();

@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using NeoOrder.OneGate.Data;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
@@ -8,26 +7,24 @@ namespace NeoOrder.OneGate.Pages;
 
 public partial class AboutPage : ContentPage
 {
-    readonly ApplicationDbContext dbContext;
     readonly UpdateService updateService;
 
     public LoadingService LoadingService { get; set { field = value; OnPropertyChanged(); } }
     public IAppInfo AppInfo { get; } = Microsoft.Maui.ApplicationModel.AppInfo.Current;
     public SettingEntry[]? SettingEntries { get; set { field = value; OnPropertyChanged(); } }
 
-    public AboutPage(ApplicationDbContext dbContext, UpdateService updateService)
+    public AboutPage(UpdateService updateService)
     {
         this.LoadingService = new(LoadSettingsAsync);
-        this.dbContext = dbContext;
         this.updateService = updateService;
         InitializeComponent();
-        LoadingService.BeginLoad();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
         updateService.UpdateStatusChanged += OnUpdateStatusChanged;
+        LoadingService.BeginLoad();
     }
 
     protected override void OnDisappearing()
@@ -60,7 +57,7 @@ public partial class AboutPage : ContentPage
             Command = Commands.LaunchUrl,
             CommandParameter = "https://x.com/OneGateSpace"
         };
-        if (await dbContext.Settings.ExistsAsync("system/updates"))
+        if ((await updateService.GetStateAsync()).UpdateAvailable)
             yield return new SettingEntry(Strings.UpdateNow)
             {
                 CurrentValue = Strings.NewVersionAvailable,

@@ -39,12 +39,6 @@ public partial class App : Application
         walletProvider.WalletChanged += OnWalletChanged;
         InitializeComponent();
         dbContext.EnsureSchema();
-        Version? version = dbContext.Settings.Get<Version>("system/version");
-        if (version is null || version < AppInfo.Version)
-        {
-            dbContext.Settings.Put("system/version", AppInfo.Version);
-            dbContext.Settings.Delete("system/updates");
-        }
         string? lang = dbContext.Settings.Get("preference/language");
         if (!string.IsNullOrEmpty(lang))
         {
