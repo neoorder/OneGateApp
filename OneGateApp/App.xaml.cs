@@ -38,8 +38,7 @@ public partial class App : Application
         messagingService.Changed += OnMessagingChangedForPush;
         walletProvider.WalletChanged += OnWalletChanged;
         InitializeComponent();
-        dbContext.Database.EnsureCreated();
-        dbContext.EnsureMigrations();
+        dbContext.EnsureSchema();
         Version? version = dbContext.Settings.Get<Version>("system/version");
         if (version is null || version < AppInfo.Version)
         {

@@ -10,89 +10,34 @@ public partial class CacheDbContext(DbContextOptions<CacheDbContext> options) : 
     public DbSet<News> News { get; set; }
     public DbSet<DApp> DApps { get; set; }
 
-    internal async Task EnsureMigrationsAsync()
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        await Migration_AddProperty_DApps_Warnings_20260622();
-        await Migration_AddProperties_DApps_VisibilityModes_20260717();
-        await Migration_AddProperty_DApps_SupportedPlatforms_20260808();
-    }
-
-    async Task Migration_AddProperty_DApps_Warnings_20260622()
-    {
-        HashSet<string> actualColumns = new(StringComparer.OrdinalIgnoreCase);
-        await Database.OpenConnectionAsync();
-        await using (var command = Database.GetDbConnection().CreateCommand())
-        {
-            command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
-            await using var reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-                actualColumns.Add(reader.GetString(0));
-        }
-
-        if (!actualColumns.Contains(nameof(DApp.Warnings)))
-            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [Warnings] INTEGER NOT NULL DEFAULT 0");
-    }
-
-    async Task Migration_AddProperties_DApps_VisibilityModes_20260717()
-    {
-        HashSet<string> actualColumns = new(StringComparer.OrdinalIgnoreCase);
-        await Database.OpenConnectionAsync();
-        await using (var command = Database.GetDbConnection().CreateCommand())
-        {
-            command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
-            await using var reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-                actualColumns.Add(reader.GetString(0));
-        }
-
-        if (!actualColumns.Contains(nameof(DApp.IsHiddenFromCatalog)))
-            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [IsHiddenFromCatalog] INTEGER NOT NULL DEFAULT 0");
-        if (!actualColumns.Contains(nameof(DApp.IsInDevelopment)))
-            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [IsInDevelopment] INTEGER NOT NULL DEFAULT 0");
-    }
-
-    async Task Migration_AddProperty_DApps_SupportedPlatforms_20260808()
-    {
-        HashSet<string> actualColumns = new(StringComparer.OrdinalIgnoreCase);
-        await Database.OpenConnectionAsync();
-        await using (var command = Database.GetDbConnection().CreateCommand())
-        {
-            command.CommandText = "SELECT [name] FROM pragma_table_info('DApps')";
-            await using var reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-                actualColumns.Add(reader.GetString(0));
-        }
-
-        if (!actualColumns.Contains(nameof(DApp.SupportedPlatforms)))
-            await Database.ExecuteSqlRawAsync("ALTER TABLE [DApps] ADD COLUMN [SupportedPlatforms] INTEGER NOT NULL DEFAULT 15");
+        // Keep database defaults for old rows while always writing explicitly supplied CLR values.
+        var dApp = modelBuilder.Entity<DApp>();
+        dApp.Property(p => p.Warnings).HasDefaultValue(ContentWarnings.None).ValueGeneratedNever();
+        dApp.Property(p => p.IsHiddenFromCatalog).HasDefaultValue(false).ValueGeneratedNever();
+        dApp.Property(p => p.IsInDevelopment).HasDefaultValue(false).ValueGeneratedNever();
+        dApp.Property(p => p.SupportedPlatforms).HasDefaultValue(DAppPlatforms.All).ValueGeneratedNever();
     }
 }
 
 static class CacheDbContextFactoryExtensions
 {
-    static readonly SemaphoreSlim InitializationLock = new(1, 1);
-
     public static async Task<CacheDbContext> CreateInitializedDbContextAsync(this IDbContextFactory<CacheDbContext> dbContextFactory)
     {
-        await InitializationLock.WaitAsync();
         CacheDbContext? dbContext = null;
         try
         {
             string cacheDirectory = Path.GetDirectoryName(SharedOptions.CacheDbPath)!;
             Directory.CreateDirectory(cacheDirectory);
             dbContext = await dbContextFactory.CreateDbContextAsync();
-            await dbContext.Database.EnsureCreatedAsync();
-            await dbContext.EnsureMigrationsAsync();
+            await dbContext.EnsureSchemaAsync();
             return dbContext;
         }
         catch
         {
             dbContext?.Dispose();
             throw;
-        }
-        finally
-        {
-            InitializationLock.Release();
         }
     }
 
