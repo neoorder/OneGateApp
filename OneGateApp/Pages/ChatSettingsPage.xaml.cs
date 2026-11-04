@@ -19,19 +19,28 @@ public partial class ChatSettingsPage : ContentPage
     bool initialized;
     bool accountChanged;
     bool updatingSwitch;
-    ProfileUpdate? retryUpdate;
+    ProfileUpdateState? profileUpdateState;
+    ProfileUpdate profileDraft = new();
+    readonly SemaphoreSlim profileStateReads = new(1, 1);
+    bool profileStateUnavailable;
+    int profileEditGeneration;
+    string? submittedBio;
     string? nicknameDraft;
     bool editingNickname;
     int appearanceGeneration;
 
     public bool IsWorking => operation is not null;
-    public bool ShowLoading => IsWorking && BusyText is not null;
+    public bool ShowLoading => BusyText is not null;
     bool IsCurrentAccount => ReferenceEquals(settingsWallet, walletProvider.GetWallet())
         && ReferenceEquals(settingsAccount, settingsWallet?.GetDefaultAccount())
         && localAccountId == messagingService.AccountId;
     public bool HasSettings => initialized && !accountChanged && IsCurrentAccount && messagingService.IsEnabled;
-    public bool CanEdit => isVisible && HasSettings && !IsWorking;
-    public bool CanRetry => isVisible && !IsWorking && !accountChanged && (!initialized || (retryUpdate is not null || HasAvatarEdits) && HasSettings);
+    public bool CanEdit => isVisible && HasSettings && !IsWorking && !profileStateUnavailable;
+    bool HasProfileFailure => profileUpdateState?.Status is ProfileUpdateStatus.WaitingToRetry or ProfileUpdateStatus.Failed;
+    bool HasProfileDraft => HasChange(profileDraft.Nickname) || HasChange(profileDraft.Bio)
+        || HasChange(profileDraft.Avatar) || HasChange(profileDraft.PublicDiscovery);
+    public bool CanRetry => isVisible && !IsWorking && !accountChanged
+        && (!initialized || HasSettings && (profileStateUnavailable || HasProfileFailure || HasProfileDraft || HasAvatarEdits));
     public string? Address => !accountChanged ? settingsAccount?.Address : null;
     public string? Nickname => HasSettings ? messagingService.ChatNickname : null;
     public string? Bio => HasSettings ? messagingService.ChatBio : null;
@@ -51,7 +60,8 @@ public partial class ChatSettingsPage : ContentPage
     public string DiscoveryHint => AllowAddressDiscovery ? Strings.ChatDiscoveryAllowedHint : Strings.ChatInvitationOnlyHint;
     public string? BusyText
     {
-        get;
+        get => field ?? (HasSettings && profileUpdateState?.Status is ProfileUpdateStatus.Pending or ProfileUpdateStatus.Publishing
+            ? Strings.ChatSettingsSaving : null);
         private set
         {
             if (field == value) return;
@@ -60,7 +70,11 @@ public partial class ChatSettingsPage : ContentPage
             OnPropertyChanged(nameof(ShowLoading));
         }
     }
-    public string? ErrorText { get; private set; }
+    public string? ErrorText
+    {
+        get => field ?? (profileStateUnavailable ? Strings.ChatSettingsLoadFailed : HasProfileFailure ? Strings.ChatSettingsSaveFailed : null);
+        private set;
+    }
 
     public ChatSettingsPage(MessagingService messagingService, IWalletProvider walletProvider)
     {
@@ -77,7 +91,9 @@ public partial class ChatSettingsPage : ContentPage
         appearanceGeneration++;
         initialized = false;
         accountChanged = false;
-        retryUpdate = null;
+        profileUpdateState = null;
+        profileDraft = new();
+        profileStateUnavailable = false;
         nicknameDraft = null;
         ClearAvatarDraft();
         CloseBioEditor();
@@ -85,6 +101,7 @@ public partial class ChatSettingsPage : ContentPage
         settingsAccount = settingsWallet?.GetDefaultAccount();
         walletProvider.WalletChanged += OnWalletChanged;
         messagingService.Changed += OnMessagingChanged;
+        messagingService.ChatProfileUpdateStateChanged += OnMessagingChanged;
         await LoadAsync();
     }
 
@@ -94,11 +111,15 @@ public partial class ChatSettingsPage : ContentPage
         if (choosingAvatar) { base.OnDisappearing(); return; }
         walletProvider.WalletChanged -= OnWalletChanged;
         messagingService.Changed -= OnMessagingChanged;
+        messagingService.ChatProfileUpdateStateChanged -= OnMessagingChanged;
+        appearanceGeneration++;
         operation?.Cancel();
         operation = null;
         BusyText = null;
         initialized = false;
-        retryUpdate = null;
+        profileUpdateState = null;
+        profileDraft = new();
+        profileStateUnavailable = false;
         nicknameDraft = null;
         ClearAvatarDraft();
         CloseBioEditor();
@@ -114,65 +135,47 @@ public partial class ChatSettingsPage : ContentPage
 
     async void OnMessagingChanged(object? sender, EventArgs e)
     {
-        if (!isVisible || !initialized || IsWorking || accountChanged) return;
+        if (!isVisible || !initialized || accountChanged) return;
         if (!IsCurrentAccount) InvalidateAccount();
         else
         {
             if (!messagingService.IsEnabled) ErrorText = Strings.ChatEnableFirst;
-            else await RefreshConfirmedEditsAsync();
+            else await RefreshProfileStateAsync();
             NotifyState();
         }
     }
 
-    async Task RefreshConfirmedEditsAsync()
+    async Task RefreshProfileStateAsync(CancellationToken cancellationToken = default)
     {
-        if (!IsCurrentAccount || localAccountId is null || IsWorking) return;
-        int profileGeneration = appearanceGeneration;
+        int generation = appearanceGeneration;
+        string? accountId = localAccountId;
+        await profileStateReads.WaitAsync(cancellationToken);
         try
         {
-            var pending = await messagingService.GetPendingChatProfileAsync(localAccountId, CancellationToken.None);
-            if (!isVisible || !IsCurrentAccount || IsWorking || profileGeneration != appearanceGeneration) return;
-            ApplyPendingProfile(pending);
+            if (!isVisible || !IsCurrentAccount || accountId is null || generation != appearanceGeneration) return;
+            int edit = profileEditGeneration;
+            var state = await messagingService.GetChatProfileUpdateStateAsync(accountId, cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!isVisible || !IsCurrentAccount || accountId != localAccountId || generation != appearanceGeneration || edit != profileEditGeneration) return;
+            ApplyProfileState(state);
+            RefreshDiscoverySwitch();
         }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { }
         catch (Exception)
         {
-            if (isVisible && IsCurrentAccount && profileGeneration == appearanceGeneration)
-                ErrorText = Strings.ChatSettingsSaveFailed;
-            return;
+            if (isVisible && IsCurrentAccount && generation == appearanceGeneration) profileStateUnavailable = true;
         }
-        RefreshDiscoverySwitch();
-        if (avatarRetry is not null)
-        {
-            int generation = appearanceGeneration;
-            var retry = avatarRetry;
-            try
-            {
-                var pending = await messagingService.GetPendingChatAvatarAsync(localAccountId, CancellationToken.None);
-                if (!isVisible || !IsCurrentAccount || IsWorking || generation != appearanceGeneration
-                    || !ReferenceEquals(retry, avatarRetry)) return;
-                var profile = messagingService.GetChatDisplayProfile(localAccountId, settingsAccount!.Address);
-                if (pending is null && profile is not null && profile.UpdatedAt > avatarRetryRevision
-                    && (retry.Avatar.IsDeleted ? profile.Avatar is null : retry.Avatar.Value?.ToJson() == profile.Avatar?.ToJson()))
-                {
-                    avatarRetry = null;
-                    if (uploadedAvatar is not null && uploadedAvatar.ToJson() == profile.Avatar?.ToJson())
-                    {
-                        avatarDraft = null;
-                        uploadedAvatar = null;
-                    }
-                }
-            }
-            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Avatar retry state unavailable: {ex.Message}"); }
-        }
-        if (ErrorText == Strings.ChatSettingsSaveFailed || ErrorText == Strings.ChatAvatarSaveFailed)
-            ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : HasAvatarEdits ? Strings.ChatAvatarSaveFailed : null;
+        finally { profileStateReads.Release(); NotifyState(); }
     }
 
     void InvalidateAccount()
     {
         accountChanged = true;
         operation?.Cancel();
-        retryUpdate = null;
+        profileUpdateState = null;
+        profileDraft = new();
+        profileStateUnavailable = false;
+        profileEditGeneration++;
         nicknameDraft = null;
         ClearAvatarDraft();
         CloseBioEditor();
@@ -198,14 +201,9 @@ public partial class ChatSettingsPage : ContentPage
             if (!messagingService.IsEnabled) ErrorText = Strings.ChatEnableFirst;
             else
             {
-                var pending = await messagingService.GetPendingChatProfileAsync(localAccountId!, cancellation.Token);
+                await RefreshProfileStateAsync(cancellation.Token);
                 cancellation.Token.ThrowIfCancellationRequested();
                 if (!IsCurrentAccount) { InvalidateAccount(); return; }
-                ApplyPendingProfile(pending);
-                RefreshDiscoverySwitch();
-                avatarRetry = await messagingService.GetPendingChatAvatarAsync(localAccountId!, cancellation.Token);
-                if (avatarRetry is not null) retryAvatarFirst = true;
-                ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : avatarRetry is not null ? Strings.ChatAvatarSaveFailed : null;
             }
             initialized = true;
         }
@@ -228,22 +226,23 @@ public partial class ChatSettingsPage : ContentPage
         try
         {
             // Keep an unconfirmed edit available when the user opens the editor again.
-            string initial = nicknameDraft ?? Nickname ?? "";
+            var pending = profileUpdateState?.PendingUpdate?.Nickname ?? default;
+            string initial = nicknameDraft ?? (pending.IsDeleted ? "" : pending.IsSpecified ? pending.Value : Nickname) ?? "";
             string? value = await DisplayPromptAsync(Strings.ChatNickname, Strings.ChatNicknameHint,
                 Strings.OK, Strings.Cancel, initialValue: initial);
             if (value is null || !CanEdit || generation != appearanceGeneration) return;
             value = value.Trim();
-            if (nicknameDraft is null && value == (Nickname ?? "")) return;
+            if (nicknameDraft is null && value == initial) return;
             await SaveAsync(new ProfileUpdate
             {
                 Nickname = value.Length == 0 ? FieldUpdate<string>.Delete : value
             });
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             if (isVisible && generation == appearanceGeneration && IsCurrentAccount)
             {
-                ErrorText = ex.Message;
+                ErrorText = Strings.ChatSettingsSaveFailed;
                 NotifyState();
             }
         }
@@ -253,8 +252,8 @@ public partial class ChatSettingsPage : ContentPage
     void OnEditBioClicked(object sender, EventArgs e)
     {
         if (!CanEdit || IsEditingBio) return;
-        BioDraft = retryUpdate?.Bio is { IsSpecified: true } pending ? pending.Value ?? ""
-            : retryUpdate?.Bio.IsDeleted == true ? "" : Bio ?? "";
+        var pending = HasChange(profileDraft.Bio) ? profileDraft.Bio : profileUpdateState?.PendingUpdate?.Bio ?? default;
+        BioDraft = pending.IsSpecified ? pending.Value : pending.IsDeleted ? "" : Bio ?? "";
         IsEditingBio = true;
     }
 
@@ -273,7 +272,7 @@ public partial class ChatSettingsPage : ContentPage
         if (!CanEdit || !IsEditingBio) return;
         CloseBioEditor();
         if (ErrorText == Strings.ChatBioTooLong || ErrorText == Strings.ChatProfileInvalid)
-            ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : HasAvatarEdits ? Strings.ChatAvatarSaveFailed : null;
+            ErrorText = null;
         NotifyState();
     }
 
@@ -281,6 +280,7 @@ public partial class ChatSettingsPage : ContentPage
     {
         IsEditingBio = false;
         BioDraft = "";
+        submittedBio = null;
     }
 
     async void OnRetryClicked(object sender, EventArgs e) => await RetryAsync();
@@ -288,21 +288,17 @@ public partial class ChatSettingsPage : ContentPage
     async Task RetryAsync()
     {
         if (!CanRetry) return;
-        if (retryAvatarFirst && HasAvatarEdits) await RetryAvatarAsync();
-        else if (retryUpdate is { } update) await SaveAsync(update);
-        else if (HasAvatarEdits) await RetryAvatarAsync();
-        else await LoadAsync();
+        if (!initialized || profileStateUnavailable) await LoadAsync();
+        else if (avatarDraft is not null) await UploadAvatarDraftAsync();
+        else await SaveAsync(HasProfileDraft ? profileDraft : null);
     }
 
-    Task RetryAvatarAsync() => avatarDraft is not null ? UploadAvatarDraftAsync()
-        : avatarRetry is { } avatar ? SaveAsync(avatar) : Task.CompletedTask;
-
-    async Task SaveAsync(ProfileUpdate update)
+    async Task SaveAsync(ProfileUpdate? update)
     {
         if (!CanEdit || localAccountId is null) return;
-        if (update.Nickname.IsSpecified) nicknameDraft = update.Nickname.Value;
-        else if (update.Nickname.IsDeleted) nicknameDraft = "";
-        try { MessagingService.ValidateChatProfileUpdate(localAccountId, update); }
+        if (update?.Nickname.IsSpecified == true) nicknameDraft = update.Nickname.Value;
+        else if (update?.Nickname.IsDeleted == true) nicknameDraft = "";
+        try { if (update is not null) MessagingService.ValidateChatProfileUpdate(localAccountId, update); }
         catch (ArgumentException ex)
         {
             ErrorText = ex.ParamName == nameof(update.Nickname) ? Strings.ChatNicknameTooLong
@@ -310,22 +306,42 @@ public partial class ChatSettingsPage : ContentPage
             NotifyState();
             return;
         }
+        profileEditGeneration++;
+        if (update is not null)
+        {
+            profileDraft = new()
+            {
+                Nickname = HasChange(update.Nickname) ? update.Nickname : profileDraft.Nickname,
+                Bio = HasChange(update.Bio) ? update.Bio : profileDraft.Bio,
+                Avatar = HasChange(update.Avatar) ? update.Avatar : profileDraft.Avatar,
+                PublicDiscovery = HasChange(update.PublicDiscovery) ? update.PublicDiscovery : profileDraft.PublicDiscovery
+            };
+            if (HasChange(update.Bio)) submittedBio = update.Bio.IsDeleted ? "" : update.Bio.Value;
+        }
         using var cancellation = new CancellationTokenSource();
         operation = cancellation;
         BusyText = Strings.ChatSettingsSaving;
-        bool editsAvatar = update.Avatar.IsSpecified || update.Avatar.IsDeleted;
-        long profileRevision = messagingService.GetChatDisplayProfile(localAccountId, settingsAccount!.Address)?.UpdatedAt ?? -1;
+        bool editsAvatar = update is not null && HasChange(update.Avatar);
         ErrorText = null;
-        if (editsAvatar) { avatarRetry = update; avatarRetryRevision = profileRevision; }
-        if (update.PublicDiscovery.IsSpecified) SetSwitch(update.PublicDiscovery.Value);
+        if (update?.PublicDiscovery.IsSpecified == true) SetSwitch(update.PublicDiscovery.Value);
         NotifyState();
         try
         {
-            var saved = await messagingService.UpdateChatProfileAsync(localAccountId, update, cancellation.Token);
+            if (update is null) await messagingService.RetryChatProfileUpdateAsync(localAccountId, cancellation.Token);
+            else await messagingService.UpdateChatProfileAsync(localAccountId, update, cancellation.Token);
             cancellation.Token.ThrowIfCancellationRequested();
             if (!IsCurrentAccount) { InvalidateAccount(); return; }
-            if (update.Nickname.IsSpecified || update.Nickname.IsDeleted) nicknameDraft = null;
-            if ((update.Bio.IsSpecified || update.Bio.IsDeleted) && BioDraft.Trim() == (saved.Bio ?? "")) CloseBioEditor();
+            if (update is not null)
+            {
+                profileDraft = new()
+                {
+                    Nickname = HasChange(update.Nickname) ? default : profileDraft.Nickname,
+                    Bio = HasChange(update.Bio) ? default : profileDraft.Bio,
+                    Avatar = HasChange(update.Avatar) ? default : profileDraft.Avatar,
+                    PublicDiscovery = HasChange(update.PublicDiscovery) ? default : profileDraft.PublicDiscovery
+                };
+                if (HasChange(update.Nickname)) nicknameDraft = null;
+            }
             if (editsAvatar) ClearAvatarDraft();
         }
         catch (Exception) when (cancellation.IsCancellationRequested) { }
@@ -334,36 +350,54 @@ public partial class ChatSettingsPage : ContentPage
             if (!IsCurrentAccount) InvalidateAccount();
             else
             {
-                retryAvatarFirst = editsAvatar;
-                if (editsAvatar) avatarRetry = update;
                 ErrorText = editsAvatar ? Strings.ChatAvatarSaveFailed : Strings.ChatSettingsSaveFailed;
             }
         }
         finally
         {
-            if (ErrorText is null)
-                ErrorText = retryUpdate is not null ? Strings.ChatSettingsSaveFailed : HasAvatarEdits ? Strings.ChatAvatarSaveFailed : null;
-            if (!cancellation.IsCancellationRequested && IsCurrentAccount)
-                RefreshDiscoverySwitch();
             await FinishOperationAsync(cancellation);
         }
     }
 
-    void ApplyPendingProfile(ProfileUpdate? pending)
+    static bool HasChange<T>(FieldUpdate<T> field) where T : notnull => field.IsSpecified || field.IsDeleted;
+
+    static bool SameChange<T>(FieldUpdate<T> left, FieldUpdate<T> right) where T : notnull =>
+        left.IsDeleted && right.IsDeleted || left.IsSpecified && right.IsSpecified
+        && (left.Value is ContentReference a && right.Value is ContentReference b
+            ? a.ToJson() == b.ToJson() : EqualityComparer<T>.Default.Equals(left.Value, right.Value));
+
+    static FieldUpdate<T> Unsubmitted<T>(FieldUpdate<T> draft, FieldUpdate<T> pending, FieldUpdate<T> confirmed) where T : notnull
+        => SameChange(draft, HasChange(pending) ? pending : confirmed) ? default : draft;
+
+    void ApplyProfileState(ProfileUpdateState state)
     {
-        var previous = retryUpdate;
-        retryUpdate = pending;
-        if (pending is { } update && (update.Nickname.IsSpecified || update.Nickname.IsDeleted))
-            nicknameDraft ??= update.Nickname.IsDeleted ? "" : update.Nickname.Value;
-        else if (previous is { } old && (old.Nickname.IsSpecified || old.Nickname.IsDeleted)
-            && nicknameDraft == (old.Nickname.IsDeleted ? "" : old.Nickname.Value)) nicknameDraft = null;
-        if (previous is { } bio && (bio.Bio.IsSpecified || bio.Bio.IsDeleted)
-            && pending?.Bio.IsSpecified != true && pending?.Bio.IsDeleted != true
-            && BioDraft.Trim() == (Bio ?? "")) CloseBioEditor();
+        profileUpdateState = state;
+        profileStateUnavailable = false;
+        var pending = state.PendingUpdate;
+        var previous = profileDraft;
+        // Keep only edits not yet owned by the SDK; published intent lives exclusively there.
+        profileDraft = new()
+        {
+            Nickname = Unsubmitted(previous.Nickname, pending?.Nickname ?? default,
+                messagingService.ChatNickname is { } nickname ? nickname : FieldUpdate<string>.Delete),
+            Bio = Unsubmitted(previous.Bio, pending?.Bio ?? default,
+                messagingService.ChatBio is { } bio ? bio : FieldUpdate<string>.Delete),
+            Avatar = Unsubmitted(previous.Avatar, pending?.Avatar ?? default,
+                messagingService.ChatAvatar is { } avatar ? avatar : FieldUpdate<ContentReference>.Delete),
+            PublicDiscovery = Unsubmitted(previous.PublicDiscovery, pending?.PublicDiscovery ?? default, messagingService.AllowAddressDiscovery)
+        };
+        if (HasChange(previous.Nickname) && !HasChange(profileDraft.Nickname)
+            && nicknameDraft == (previous.Nickname.IsDeleted ? "" : previous.Nickname.Value)) nicknameDraft = null;
+        if (submittedBio is not null && !HasChange(profileDraft.Bio) && !HasChange(pending?.Bio ?? default)
+            && BioDraft.Trim() == submittedBio && (messagingService.ChatBio ?? "") == submittedBio) CloseBioEditor();
+        if (uploadedAvatar is { } uploaded && !HasChange(Unsubmitted<ContentReference>(uploaded, pending?.Avatar ?? default,
+            messagingService.ChatAvatar is { } confirmed ? confirmed : FieldUpdate<ContentReference>.Delete))) ClearAvatarDraft();
+        if (!HasProfileDraft && !HasAvatarEdits && (ErrorText == Strings.ChatSettingsSaveFailed || ErrorText == Strings.ChatAvatarSaveFailed))
+            ErrorText = null;
     }
 
-    void RefreshDiscoverySwitch() => SetSwitch(retryUpdate?.PublicDiscovery is { IsSpecified: true } pending
-        ? pending.Value : messagingService.AllowAddressDiscovery);
+    void RefreshDiscoverySwitch() => SetSwitch(profileDraft.PublicDiscovery.IsSpecified ? profileDraft.PublicDiscovery.Value
+        : profileUpdateState?.PendingUpdate?.PublicDiscovery is { IsSpecified: true } pending ? pending.Value : messagingService.AllowAddressDiscovery);
 
     void SetSwitch(bool value)
     {
@@ -383,7 +417,7 @@ public partial class ChatSettingsPage : ContentPage
         operation = null;
         BusyText = null;
         if (!cancellation.IsCancellationRequested && initialized && isVisible && IsCurrentAccount)
-            await RefreshConfirmedEditsAsync();
+            await RefreshProfileStateAsync();
         NotifyState();
     }
 

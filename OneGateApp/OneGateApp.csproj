@@ -82,7 +82,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="14.1.0" />
-		<PackageReference Include="Meshline.Sdk" Version="1.7.0" />
+		<PackageReference Include="Meshline.Sdk" Version="1.8.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.12" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.9" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.51" />

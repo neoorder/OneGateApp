@@ -1,9 +1,5 @@
-using Meshline.Models;
 using Meshline.Models.Client;
-using NeoOrder.OneGate.Data;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Meshline.Models.Protocol;
 using Meshline;
 using Neo.Wallets;
@@ -157,22 +153,26 @@ public sealed partial class MessagingService
     }
 
     void NotifyChatProfilesChanged() => MainThread.BeginInvokeOnMainThread(() => ChatProfilesChanged?.Invoke(this, EventArgs.Empty));
-    async void OnChatProfileChanged(object? sender, EventArgs e)
+    void OnChatProfileChanged(object? sender, EventArgs e)
     {
         var current = client;
         if (current is null || !ReferenceEquals(sender, current.ProfileManager) || current.Profile is not { } profile) return;
-        NotifyChatProfilesChanged();
-        try
+        CacheChatProfile(current, profile.Account, Address!, profile);
+        NotifyChanged();
+    }
+
+    /// <summary>The current account's SDK publication state changed. Delivered on the UI thread.</summary>
+    public event EventHandler? ChatProfileUpdateStateChanged;
+
+    void OnChatProfileUpdateStateChanged(object? sender, EventArgs e)
+    {
+        var current = client;
+        if (current is null || !ReferenceEquals(sender, current.ProfileManager)) return;
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            // ProfileChanged exposes verified/confirmed values, never the SDK's pending patch.
-            await ReconcilePendingChatProfileAsync(profile);
-            await CompletePendingChatAvatarAsync(profile.Account, new ProfileUpdate
-            {
-                Avatar = profile.Avatar is { } avatar ? avatar : Meshline.Models.FieldUpdate<ContentReference>.Delete
-            }, profile.UpdatedAt);
-        }
-        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Meshline] Profile completion storage failed: {ex.Message}"); }
-        if (ReferenceEquals(current, client)) NotifyChanged();
+            if (isForeground && !disposed && ReferenceEquals(current, client))
+                ChatProfileUpdateStateChanged?.Invoke(this, EventArgs.Empty);
+        });
     }
 
     public void RefreshVisibleChatProfiles()
@@ -202,9 +202,6 @@ public sealed partial class MessagingService
     public string? ChatBio => client?.Profile?.Bio;
     public ContentReference? ChatAvatar => client?.Profile?.Avatar;
 
-    readonly SemaphoreSlim profileStorageLock = new(1, 1);
-    string PendingProfileKey(string accountId) => $"chat/profile-pending/{registry.Context.Registry}/{accountId}";
-
     internal static void ValidateChatProfileUpdate(string accountId, ProfileUpdate update)
     {
         if (update.Nickname.IsSpecified && Encoding.UTF8.GetByteCount(update.Nickname.Value ?? "") > 256)
@@ -224,89 +221,48 @@ public sealed partial class MessagingService
             throw new ArgumentException("Invalid profile update.", nameof(update));
     }
 
-    public async Task<ProfileUpdate?> GetPendingChatProfileAsync(string localAccountId, CancellationToken token)
+    public async Task<ProfileUpdateState> GetChatProfileUpdateStateAsync(string localAccountId, CancellationToken cancellationToken = default)
     {
-        ValidatePendingAccount(localAccountId);
-        var pending = await ReconcilePendingChatProfileAsync(client!.Profile!, token: token);
-        token.ThrowIfCancellationRequested();
-        ValidatePendingAccount(localAccountId);
-        return pending;
-    }
-
-    async Task<Guid?> StorePendingChatProfileAsync(string accountId, ProfileUpdate update, CancellationToken token)
-    {
-        bool nickname = update.Nickname.IsSpecified || update.Nickname.IsDeleted;
-        bool bio = update.Bio.IsSpecified || update.Bio.IsDeleted;
-        if (!nickname && !bio && !update.PublicDiscovery.IsSpecified) return null;
-        await profileStorageLock.WaitAsync(token);
+        MeshlineClient current;
+        Wallet wallet;
+        WalletAccount account;
+        CancellationTokenSource operation;
+        await lifecycleLock.WaitAsync(cancellationToken);
         try
         {
-            ValidatePendingAccount(accountId);
-            using var scope = scopeFactory.CreateScope();
-            var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            var previous = await ReadPendingChatProfileAsync(database, accountId) ?? new();
-            token.ThrowIfCancellationRequested();
-            ValidatePendingAccount(accountId);
-            long revision = client!.Profile!.UpdatedAt;
-            var pending = previous with
-            {
-                OperationId = Guid.NewGuid(),
-                Nickname = nickname ? update.Nickname.IsDeleted ? null : update.Nickname.Value : previous.Nickname,
-                NicknameRevision = nickname ? revision : previous.NicknameRevision,
-                Bio = bio ? update.Bio.IsDeleted ? null : update.Bio.Value : previous.Bio,
-                BioRevision = bio ? revision : previous.BioRevision,
-                PublicDiscovery = update.PublicDiscovery.IsSpecified ? update.PublicDiscovery.Value : previous.PublicDiscovery,
-                DiscoveryRevision = update.PublicDiscovery.IsSpecified ? revision : previous.DiscoveryRevision
-            };
-            await database.Settings.PutAsync(PendingProfileKey(accountId), JsonSerializer.Serialize(pending, ChatProfileJsonContext.Default.PendingChatProfile));
-            return pending.OperationId;
+            ObjectDisposedException.ThrowIf(disposed, this);
+            ValidatePendingAccount(localAccountId);
+            current = client!;
+            wallet = sessionWallet!;
+            account = sessionAccount!;
+            operation = CreateOperation(cancellationToken);
         }
-        finally { profileStorageLock.Release(); }
-    }
+        finally { lifecycleLock.Release(); }
 
-    async Task<PendingChatProfile?> ReadPendingChatProfileAsync(ApplicationDbContext database, string accountId)
-    {
-        string? value = await database.Settings.GetAsync(PendingProfileKey(accountId));
-        return value is null ? null : JsonSerializer.Deserialize(value, ChatProfileJsonContext.Default.PendingChatProfile)
-            ?? throw new InvalidDataException("Invalid pending profile.");
-    }
-
-    async Task<ProfileUpdate?> ReconcilePendingChatProfileAsync(AccountProfile profile, Guid? operationId = null,
-        ProfileUpdate? acknowledged = null, CancellationToken token = default)
-    {
-        await profileStorageLock.WaitAsync(token);
-        try
+        using (operation)
         {
-            using var scope = scopeFactory.CreateScope();
-            var database = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            var previous = await ReadPendingChatProfileAsync(database, profile.Account);
-            if (previous is null) return null;
-            var pending = previous;
-            bool sameOperation = operationId == pending.OperationId;
-            // Revisions survive restart; explicit success may acknowledge an unchanged revision.
-            // A late response cannot acknowledge a newer operation, even with identical values.
-            if (pending.NicknameRevision is { } nicknameRevision && pending.Nickname == profile.Nickname
-                && (profile.UpdatedAt > nicknameRevision || sameOperation && (acknowledged?.Nickname.IsSpecified == true || acknowledged?.Nickname.IsDeleted == true)))
-                pending = pending with { Nickname = null, NicknameRevision = null };
-            if (pending.BioRevision is { } bioRevision && pending.Bio == profile.Bio
-                && (profile.UpdatedAt > bioRevision || sameOperation && (acknowledged?.Bio.IsSpecified == true || acknowledged?.Bio.IsDeleted == true)))
-                pending = pending with { Bio = null, BioRevision = null };
-            if (pending.DiscoveryRevision is { } discoveryRevision && pending.PublicDiscovery == profile.PublicDiscovery
-                && (profile.UpdatedAt > discoveryRevision || sameOperation && acknowledged?.PublicDiscovery.IsSpecified == true))
-                pending = pending with { PublicDiscovery = false, DiscoveryRevision = null };
-            var update = pending.ToUpdate();
-            if (update is null) await database.Settings.DeleteAsync(PendingProfileKey(profile.Account));
-            else if (pending != previous)
-                await database.Settings.PutAsync(PendingProfileKey(profile.Account), JsonSerializer.Serialize(pending, ChatProfileJsonContext.Default.PendingChatProfile));
-            return update;
+            var state = await current.ProfileManager.GetUpdateStateAsync(operation.Token);
+            operation.Token.ThrowIfCancellationRequested();
+            EnsureCurrentAccount(wallet, account);
+            if (!ReferenceEquals(current, client) || AccountId != localAccountId || !IsEnabled)
+                throw new OperationCanceledException(operation.Token);
+            return state;
         }
-        finally { profileStorageLock.Release(); }
     }
 
     public async Task<AccountProfile> UpdateChatProfileAsync(string localAccountId, ProfileUpdate update,
         CancellationToken cancellationToken = default)
     {
         ValidateChatProfileUpdate(localAccountId, update);
+        return (await PublishChatProfileAsync(localAccountId, update, cancellationToken))!;
+    }
+
+    // Retry the SDK's latest intent without resubmitting a page's older snapshot.
+    public Task<AccountProfile?> RetryChatProfileUpdateAsync(string localAccountId, CancellationToken cancellationToken = default)
+        => PublishChatProfileAsync(localAccountId, null, cancellationToken);
+
+    async Task<AccountProfile?> PublishChatProfileAsync(string localAccountId, ProfileUpdate? update, CancellationToken cancellationToken)
+    {
         MeshlineClient current;
         Wallet wallet;
         WalletAccount account;
@@ -329,7 +285,10 @@ public sealed partial class MessagingService
         {
             void OnWalletChanged(object? sender, Wallet? changedWallet)
             {
-                if (!ReferenceEquals(changedWallet, wallet)) operation.Cancel();
+                if (ReferenceEquals(changedWallet, wallet)) return;
+                // Another wallet-change subscriber may already have canceled and completed this call.
+                try { operation.Cancel(); }
+                catch (ObjectDisposedException) { }
             }
             walletProvider.WalletChanged += OnWalletChanged;
             try
@@ -338,14 +297,10 @@ public sealed partial class MessagingService
                 EnsureCurrentAccount(wallet, account);
                 if (!ReferenceEquals(current, client) || AccountId != localAccountId || !IsEnabled)
                     throw new OperationCanceledException(operation.Token);
-                // Publishing may wait for the relay; local chat operations must remain available.
-                // A retry must reach the SDK even if local state already matches after an interrupted response.
-                var publication = await StorePendingChatProfileAsync(localAccountId, update, operation.Token);
-                await StorePendingChatAvatarAsync(localAccountId, update);
-                operation.Token.ThrowIfCancellationRequested();
-                var profile = await current.ProfileManager.UpdateProfileAsync(update, operation.Token);
-                await ReconcilePendingChatProfileAsync(profile, publication, update);
-                await CompletePendingChatAvatarAsync(localAccountId, update);
+                // The SDK owns durable intent, merging, confirmation, and background retries.
+                var profile = update is null
+                    ? await current.ProfileManager.PublishProfileAsync(cancellationToken: operation.Token)
+                    : await current.ProfileManager.UpdateProfileAsync(update, operation.Token);
                 operation.Token.ThrowIfCancellationRequested();
                 EnsureCurrentAccount(wallet, account);
                 if (!ReferenceEquals(current, client) || AccountId != localAccountId || !IsEnabled)
@@ -357,24 +312,3 @@ public sealed partial class MessagingService
         }
     }
 }
-
-internal sealed record PendingChatProfile
-{
-    public Guid OperationId { get; init; }
-    public string? Nickname { get; init; }
-    public long? NicknameRevision { get; init; }
-    public string? Bio { get; init; }
-    public long? BioRevision { get; init; }
-    public bool PublicDiscovery { get; init; }
-    public long? DiscoveryRevision { get; init; }
-
-    public ProfileUpdate? ToUpdate() => NicknameRevision is null && BioRevision is null && DiscoveryRevision is null ? null : new()
-    {
-        Nickname = NicknameRevision is null ? FieldUpdate<string>.Unspecified : Nickname is null ? FieldUpdate<string>.Delete : Nickname,
-        Bio = BioRevision is null ? FieldUpdate<string>.Unspecified : Bio is null ? FieldUpdate<string>.Delete : Bio,
-        PublicDiscovery = DiscoveryRevision is null ? FieldUpdate<bool>.Unspecified : PublicDiscovery
-    };
-}
-
-[JsonSerializable(typeof(PendingChatProfile))]
-internal partial class ChatProfileJsonContext : JsonSerializerContext;

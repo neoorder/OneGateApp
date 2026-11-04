@@ -12,11 +12,8 @@ public partial class ChatSettingsPage
     bool choosingAvatar;
     (byte[] Bytes, string FileName, FileUploadOperation Operation)? avatarDraft;
     ContentReference? uploadedAvatar;
-    ProfileUpdate? avatarRetry;
-    long avatarRetryRevision = -1;
-    bool retryAvatarFirst;
     ChatAvatarCropPage? avatarCrop;
-    bool HasAvatarEdits => avatarDraft is not null || avatarRetry is not null;
+    bool HasAvatarEdits => avatarDraft is not null || HasChange(profileDraft.Avatar);
     public bool CanEditAvatar => CanEdit;
 
     async void OnEditAvatarClicked(object sender, EventArgs e) => await EditAvatarAsync();
@@ -34,7 +31,8 @@ public partial class ChatSettingsPage
         try
         {
             string choice = await DisplayActionSheetAsync(Strings.ChatAvatar, Strings.Cancel,
-                messagingService.ChatAvatar is not null || avatarRetry is not null || uploadedAvatar is not null
+                messagingService.ChatAvatar is not null || HasChange(profileUpdateState?.PendingUpdate?.Avatar ?? default)
+                    || HasChange(profileDraft.Avatar) || uploadedAvatar is not null
                     ? Strings.ChatAvatarRemove : null, Strings.ChatAvatarChoose);
             cancellation.Token.ThrowIfCancellationRequested();
             if (choice == Strings.ChatAvatarRemove)
@@ -106,7 +104,6 @@ public partial class ChatSettingsPage
         {
             avatarDraft = null;
             uploadedAvatar = null;
-            retryAvatarFirst = avatarRetry is not null;
             ErrorText = Strings.ChatAvatarUploadExpired;
             NotifyState();
             return;
@@ -123,7 +120,7 @@ public partial class ChatSettingsPage
             if (!IsCurrentAccount) { InvalidateAccount(); return; }
         }
         catch (Exception) when (cancellation.IsCancellationRequested) { }
-        catch (Exception) { if (!accountChanged) { retryAvatarFirst = true; ErrorText = Strings.ChatAvatarSaveFailed; } }
+        catch (Exception) { if (!accountChanged) ErrorText = Strings.ChatAvatarSaveFailed; }
         finally { await FinishOperationAsync(cancellation); }
         if (CanEdit && !cancellation.IsCancellationRequested && uploadedAvatar is not null)
             await SaveAsync(new ProfileUpdate { Avatar = uploadedAvatar });
@@ -133,8 +130,5 @@ public partial class ChatSettingsPage
     {
         avatarDraft = null;
         uploadedAvatar = null;
-        avatarRetry = null;
-        avatarRetryRevision = -1;
-        retryAvatarFirst = false;
     }
 }

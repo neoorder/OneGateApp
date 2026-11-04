@@ -254,6 +254,7 @@ public sealed partial class MessagingService(IWalletProvider walletProvider, IRe
             relayPool = newPool;
             client = newClient;
             newClient.ProfileManager.ProfileChanged += OnChatProfileChanged;
+            newClient.ProfileManager.UpdateStateChanged += OnChatProfileUpdateStateChanged;
             newPool.PoolChanged += OnConnectionSourceChanged;
             newPool.RelayChanged += OnRelayConnectionChanged;
             newClient.AccountManager.AccountChanged += OnConnectionSourceChanged;
@@ -324,7 +325,11 @@ public sealed partial class MessagingService(IWalletProvider walletProvider, IRe
         await FlushChatDraftsAsync();
         await FlushPendingMessageStorageAsync();
         MeshlineClient? oldClient = client;
-        if (oldClient is not null) oldClient.ProfileManager.ProfileChanged -= OnChatProfileChanged;
+        if (oldClient is not null)
+        {
+            oldClient.ProfileManager.ProfileChanged -= OnChatProfileChanged;
+            oldClient.ProfileManager.UpdateStateChanged -= OnChatProfileUpdateStateChanged;
+        }
         RelayClientPool? oldPool = relayPool;
         client = null;
         Volatile.Write(ref deviceAuthorization, null);
