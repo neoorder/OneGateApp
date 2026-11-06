@@ -1,20 +1,17 @@
 using Neo;
 using Neo.Network.P2P.Payloads;
 using Neo.SmartContract.Native;
-using Neo.VM;
 using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Services.RPC;
 using System.Numerics;
-using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace NeoOrder.OneGate.Pages;
 
 public partial class SendingPage : ContentPage, IQueryAttributable
 {
-    readonly CancellationTokenSource cancellation = new();
+    CancellationTokenSource? pollingCancellation;
     readonly RpcClient rpcClient;
-    bool isPolling;
 
     public required Transaction Transaction { get; set { field = value; OnPropertyChanged(null); } }
     public required TransactionIntent[] Intents { get; set { field = value; OnPropertyChanged(); } }
@@ -70,71 +67,47 @@ public partial class SendingPage : ContentPage, IQueryAttributable
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        QueryTransactionStatus();
+        _ = QueryTransactionStatusAsync();
     }
 
-    protected override async void OnDisappearing()
+    protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        await cancellation.CancelAsync();
-        cancellation.Dispose();
+        CancellationTokenSource? cancellation = pollingCancellation;
+        pollingCancellation = null;
+        cancellation?.Cancel();
     }
 
-    async void QueryTransactionStatus()
+    async Task QueryTransactionStatusAsync()
     {
-        if (isPolling) return;
+        if (pollingCancellation is not null || Succeeded.HasValue) return;
 
-        isPolling = true;
+        using var cancellation = new CancellationTokenSource();
+        pollingCancellation = cancellation;
         try
         {
             TimedOut = false;
-            for (int i = 0; i < 10; i++)
-            {
-                await Task.Delay(TimeSpan.FromSeconds(15), cancellation.Token);
-                JsonObject tx;
-                try
-                {
-                    tx = await rpcClient.RpcSendAsync<JsonObject>("getrawtransaction", Transaction.Hash, true);
-                }
-                catch (RpcException)
-                {
-                    continue;
-                }
-                ulong? blockTime = tx["blocktime"]?.GetValue<ulong>();
-                if (!blockTime.HasValue) continue;
-                BlockTime = blockTime;
-                Succeeded = await QueryExecutionSucceededAsync();
-                if (Succeeded.HasValue) break;
-            }
-            if (Succeeded is null) TimedOut = true;
+            var poller = new TransactionConfirmation((method, token) => method == "getrawtransaction"
+                ? rpcClient.RpcSendAsync<JsonObject>(method, token, Transaction.Hash, true)
+                : rpcClient.RpcSendAsync<JsonObject>(method, token, Transaction.Hash));
+            ConfirmationResult result = await poller.PollAsync(cancellation.Token);
+            cancellation.Token.ThrowIfCancellationRequested();
+            BlockTime = result.BlockTime;
+            Succeeded = result.Succeeded;
+            TimedOut = !Succeeded.HasValue;
         }
         catch (OperationCanceledException)
         {
         }
         finally
         {
-            isPolling = false;
+            if (ReferenceEquals(pollingCancellation, cancellation))
+                pollingCancellation = null;
         }
     }
 
     void OnRetry(object sender, EventArgs e)
     {
-        QueryTransactionStatus();
-    }
-
-    // Block inclusion is not success: a transaction can be included in a block yet revert
-    // (VMState.FAULT). Read the application log and require HALT before reporting success.
-    async Task<bool?> QueryExecutionSucceededAsync()
-    {
-        try
-        {
-            JsonObject log = await rpcClient.RpcSendAsync<JsonObject>("getapplicationlog", Transaction.Hash);
-            JsonNode? execution = log["executions"] is JsonArray executions && executions.Count > 0 ? executions[0] : null;
-            return execution?["vmstate"]?.GetValue<string>() == nameof(VMState.HALT);
-        }
-        catch (Exception ex) when (ex is RpcException or HttpRequestException or JsonException)
-        {
-            return null;
-        }
+        _ = QueryTransactionStatusAsync();
     }
 }

@@ -22,6 +22,9 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
     readonly HttpClient http = new();
 
     public async Task<T> RpcSendAsync<T>(string method, params object?[] args) where T : notnull
+        => await RpcSendAsync<T>(method, CancellationToken.None, args);
+
+    public async Task<T> RpcSendAsync<T>(string method, CancellationToken cancellationToken, params object?[] args) where T : notnull
     {
         var request = new JsonObject
         {
@@ -34,9 +37,9 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
         {
             Content = new StringContent(request.ToJsonString(), Utility.StrictUTF8, "application/json")
         };
-        var responseMsg = await http.SendAsync(requestMsg);
+        var responseMsg = await http.SendAsync(requestMsg, cancellationToken);
         responseMsg.EnsureSuccessStatusCode();
-        JsonObject response = (await responseMsg.Content.ReadFromJsonAsync<JsonObject>(SharedOptions.JsonSerializerOptions))!;
+        JsonObject response = (await responseMsg.Content.ReadFromJsonAsync<JsonObject>(SharedOptions.JsonSerializerOptions, cancellationToken))!;
         if (response["error"] is JsonObject error)
         {
             int code = error["code"]!.GetValue<int>();
