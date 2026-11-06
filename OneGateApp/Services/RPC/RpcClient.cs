@@ -252,14 +252,26 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
     {
         signers ??= [];
         attributes ??= [];
-        Wallet wallet = walletProvider.GetWallet()!;
+        Wallet wallet = walletProvider.GetWallet()
+            ?? throw new DapiException(10003, "No wallet is open");
         UInt160[] accounts = sender is null
             ? signers.Where(p => wallet.Contains(p.Account)).Select(p => p.Account).ToArray()
             : [sender];
-        if (accounts.Length == 0) accounts = wallet.GetAccounts().Select(p => p.ScriptHash).ToArray();
+        if (accounts.Length == 0)
+            accounts = wallet.GetAccounts().Where(p => p.Contract is not null).Select(p => p.ScriptHash).ToArray();
+        if (accounts.Length == 0)
+            throw new DapiException(10003, "No wallet account with a known verification script is available");
         foreach (var account in accounts)
         {
             Signer[] signersReorder = GetSigners(account, signers);
+            // A signer hash alone does not provide the verification script needed
+            // for fee estimation. Reject unsupported construction before simulation.
+            Witness[] witnesses = signersReorder.Select(p =>
+            {
+                Neo.SmartContract.Contract contract = wallet.GetAccount(p.Account)?.Contract
+                    ?? throw new DapiException(10001, "Transaction construction requires a known verification script for every signer");
+                return new Witness { InvocationScript = default, VerificationScript = contract.Script };
+            }).ToArray();
             var result = await InvokeScript(script, signersReorder);
             if (result.State == VMState.FAULT)
                 throw new DapiException(10004, "Script execution failed", result);
@@ -270,10 +282,7 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
                 Signers = signersReorder,
                 Attributes = attributes,
                 Script = script,
-                Witnesses = signersReorder
-                    .Select(p => wallet.GetAccount(p.Account)!)
-                    .Select(p => new Witness { InvocationScript = default, VerificationScript = p.Contract!.Script })
-                    .ToArray()
+                Witnesses = witnesses
             };
             if (options?.SuggestedSystemFee.HasValue == true)
                 tx.SystemFee = options.SuggestedSystemFee.Value;
