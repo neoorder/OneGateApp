@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../OneGateApp/Services/RPC/RpcServer.cs" Link="Production/RpcServer.cs" />
+    <Compile Include="../../OneGateApp/Services/RPC/RpcException.cs" Link="Production/RpcException.cs" />
+    <Compile Include="../../OneGateApp/Services/RPC/RpcMethodAttribute.cs" Link="Production/RpcMethodAttribute.cs" />
+    <Compile Include="../../OneGateApp/Models/DapiException.cs" Link="Production/DapiException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../OneGateApp/OneGateApp.csproj"
+                      ReferenceOutputAssembly="false" BuildReference="false"
+                      SkipGetTargetFrameworkProperties="true" />
+  </ItemGroup>
+</Project>

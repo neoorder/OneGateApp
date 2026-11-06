@@ -41,32 +41,60 @@ class RpcServer(object host)
         {
             response["result"] = await HandleRequestAsync(method, args);
         }
-        catch (OperationCanceledException)
+        catch (Exception ex)
         {
-            response["error"] = new JsonObject
-            {
-                ["code"] = 10006,
-                ["message"] = "Operation cancelled"
-            };
+            response["error"] = CreateError(ex);
         }
-        catch (DapiException ex)
+        return response;
+    }
+
+    static JsonObject CreateError(Exception exception)
+    {
+        // Synchronous handlers are wrapped by reflection; awaited handlers are not.
+        while (exception is TargetInvocationException { InnerException: not null } invocation)
+            exception = invocation.InnerException!;
+
+        return exception switch
         {
-            response["error"] = new JsonObject
+            DapiException ex => new JsonObject
             {
                 ["code"] = ex.Code,
                 ["message"] = ex.Message,
                 ["data"] = JsonSerializer.SerializeToNode(ex.Data, SharedOptions.JsonSerializerOptions)
-            };
-        }
-        catch (Exception ex)
-        {
-            response["error"] = new JsonObject
+            },
+            RpcException ex => new JsonObject
+            {
+                ["code"] = 10008,
+                ["message"] = ex.Message,
+                ["data"] = new JsonObject
+                {
+                    ["code"] = ex.Code,
+                    ["message"] = ex.Message,
+                    ["data"] = JsonSerializer.SerializeToNode(ex.Data, SharedOptions.JsonSerializerOptions)
+                }
+            },
+            // HttpClient identifies its own timeout with this inner exception.
+            TimeoutException or OperationCanceledException { InnerException: TimeoutException } => new JsonObject
+            {
+                ["code"] = 10005,
+                ["message"] = "Operation timed out"
+            },
+            OperationCanceledException => new JsonObject
+            {
+                ["code"] = 10006,
+                ["message"] = "Operation cancelled"
+            },
+            HttpRequestException ex => new JsonObject
+            {
+                ["code"] = 10008,
+                ["message"] = ex.Message
+            },
+            _ => new JsonObject
             {
                 ["code"] = 10000,
-                ["message"] = ex.Message
-            };
-        }
-        return response;
+                ["message"] = exception.Message
+            }
+        };
     }
 
     private async Task<JsonNode?> HandleRequestAsync(string method, JsonArray? args)
@@ -79,16 +107,40 @@ class RpcServer(object host)
             {
                 if (parameter.Position >= args.Count)
                 {
+                    if (parameter.ParameterType.IsValueType && Nullable.GetUnderlyingType(parameter.ParameterType) is null)
+                        throw new DapiException(10002, $"Invalid parameter: {parameter.Name}");
                     arguments.Add(null);
                 }
                 else
                 {
                     JsonNode? node = args[parameter.Position];
-                    object? argument = node?.Deserialize(parameter.ParameterType, SharedOptions.JsonSerializerOptions);
+                    if (node is null && parameter.ParameterType.IsValueType && Nullable.GetUnderlyingType(parameter.ParameterType) is null)
+                        throw new DapiException(10002, $"Invalid parameter: {parameter.Name}");
+                    object? argument;
+                    try
+                    {
+                        argument = node?.Deserialize(parameter.ParameterType, SharedOptions.JsonSerializerOptions);
+                    }
+                    catch (Exception ex) when (ex is JsonException or FormatException or ArgumentException or OverflowException or NotSupportedException)
+                    {
+                        throw new DapiException(10002, $"Invalid parameter: {parameter.Name}");
+                    }
                     arguments.Add(argument);
                 }
             }
-        object result = handler.Invoke(host, arguments.ToArray())!;
+        object result;
+        try
+        {
+            result = handler.Invoke(host, arguments.ToArray())!;
+        }
+        catch (TargetParameterCountException)
+        {
+            throw new DapiException(10002, "Invalid parameter count");
+        }
+        catch (ArgumentException)
+        {
+            throw new DapiException(10002, "Invalid parameter");
+        }
         if (result is Task task)
         {
             await task;
