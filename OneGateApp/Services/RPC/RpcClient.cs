@@ -228,9 +228,7 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
             Account = from,
             Scopes = WitnessScope.CalledByEntry
         };
-        byte[] script;
-        using (var sb = new ScriptBuilder())
-            script = sb.EmitDynamicCall(assetId, "transfer", from, to, amount, data).ToArray();
+        byte[] script = TransferScript.Nep17(assetId, from, to, amount, data);
         return await MakeTransactionAsync(script, from, [signer], []);
     }
 
@@ -242,9 +240,7 @@ public class RpcClient(IWalletProvider walletProvider, ProtocolSettings protocol
             Account = from,
             Scopes = WitnessScope.CalledByEntry
         };
-        byte[] script;
-        using (var sb = new ScriptBuilder())
-            script = sb.EmitDynamicCall(collectionId, "transfer", to, tokenId, data).ToArray();
+        byte[] script = TransferScript.Nep11(collectionId, tokenId, to, data);
         return await MakeTransactionAsync(script, from, [signer], []);
     }
 
