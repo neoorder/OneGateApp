@@ -221,8 +221,8 @@ public partial class ScanPage : ContentPage, IQueryAttributable
         string query = "?address=" + uri.LocalPath;
         if (payment.AssetId is not null)
             query += $"&asset={payment.AssetId}";
-        if (payment.Amount.HasValue)
-            query += $"&amount={payment.Amount}";
+        if (payment.Amount is not null)
+            query += $"&amount={Uri.EscapeDataString(payment.Amount)}";
         switch (action)
         {
             case "AddContact":

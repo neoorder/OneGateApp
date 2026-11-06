@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../OneGateApp/OneGateApp.csproj" ReferenceOutputAssembly="false" BuildReference="false" SkipGetTargetFrameworkProperties="true" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageReference Include="Neo" Version="3.10.0" />
+    <Compile Include="../../OneGateApp/Models/AppLinks/PaymentAction.cs" Link="PaymentAction.cs" />
+    <Compile Include="../../OneGateApp/Models/AppLinks/AppLinkAction.cs" Link="AppLinkAction.cs" />
+    <Compile Include="../../OneGateApp/Services/TokenAmount.cs" Link="TokenAmount.cs" Condition="Exists('../../OneGateApp/Services/TokenAmount.cs')" />
+  </ItemGroup>
+</Project>

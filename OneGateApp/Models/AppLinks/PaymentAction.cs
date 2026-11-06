@@ -2,6 +2,7 @@
 using Neo.SmartContract.Native;
 using NeoOrder.OneGate.Pages;
 using NeoOrder.OneGate.Services;
+using System.Globalization;
 using System.Web;
 
 namespace NeoOrder.OneGate.Models.AppLinks;
@@ -11,7 +12,7 @@ class PaymentAction : AppLinkAction
     protected override string Route => "//wallet/send";
     public string Recipient { get; }
     public UInt160? AssetId { get; }
-    public decimal? Amount { get; }
+    public string? Amount { get; }
 
     public PaymentAction(Uri uri)
     {
@@ -24,7 +25,13 @@ class PaymentAction : AppLinkAction
         if (nv["asset"] is string s_asset && !string.IsNullOrWhiteSpace(s_asset))
             AssetId = ParseAssetId(s_asset);
         if (nv["amount"] is string s_amount)
-            Amount = decimal.Parse(s_amount);
+        {
+            // A payment URI always uses an ungrouped dot-decimal amount. Keep
+            // the digits intact until the selected token's precision is known.
+            if (!TokenAmount.TryParse(s_amount, byte.MaxValue, out _, CultureInfo.InvariantCulture))
+                throw new FormatException("Invalid payment amount.");
+            Amount = s_amount.Trim();
+        }
     }
 
     protected override IDictionary<string, object> CreateQuery()
@@ -34,7 +41,7 @@ class PaymentAction : AppLinkAction
             ["address"] = Recipient
         };
         if (AssetId is not null) query["asset"] = AssetId;
-        if (Amount.HasValue) query["amount"] = Amount.Value;
+        if (Amount is not null) query["amount"] = Amount;
         return query;
     }
 

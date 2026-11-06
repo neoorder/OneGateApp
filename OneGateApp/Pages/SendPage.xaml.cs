@@ -16,6 +16,7 @@ using NeoOrder.OneGate.Models.Intents;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RPC;
+using System.Globalization;
 using System.Numerics;
 using Contact = NeoOrder.OneGate.Data.Contact;
 
@@ -45,7 +46,9 @@ public partial class SendPage : ContentPage, IQueryAttributable
             _ = RefreshAddressInsightsAsync();
         }
     }
-    public decimal Amount { get; set { field = value; OnPropertyChanged(); } }
+    public string? AmountText { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(Amount)); } } = "0";
+    // Fiat valuation is optional; chain amounts never pass through decimal.
+    public decimal? Amount => decimal.TryParse(AmountText, NumberStyles.AllowDecimalPoint, CultureInfo.CurrentCulture, out var amount) ? amount : null;
     public Contact? MatchedContact { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
     public bool IsOwnWalletAddress { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
     public bool IsUnknownValidAddress { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(HasAddressInsight)); OnPropertyChanged(nameof(AddressInsightTitle)); OnPropertyChanged(nameof(AddressInsightText)); } }
@@ -90,11 +93,11 @@ public partial class SendPage : ContentPage, IQueryAttributable
         }
         if (query.TryGetValue("amount", out var obj_amount))
         {
-            if (Amount == 0) Amount = obj_amount switch
+            if (string.IsNullOrEmpty(AmountText) || AmountText == "0") AmountText = obj_amount switch
             {
-                string s => decimal.Parse(s),
-                decimal d => d,
-                _ => 0
+                string s => s.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator),
+                decimal d => d.ToString(CultureInfo.CurrentCulture),
+                _ => "0"
             };
         }
         if (Assets is null && query.TryGetValue("assets", out var obj_assets))
@@ -227,13 +230,14 @@ public partial class SendPage : ContentPage, IQueryAttributable
 
     void OnSelectAllBalance(object sender, EventArgs e)
     {
-        Amount = decimal.Parse(SelectedAsset.DecimalBalance.ToString());
+        AmountText = TokenAmount.Format(SelectedAsset.Balance, SelectedAsset.Token.Decimals);
     }
 
     void OnValidateAmount(object sender, CustomValidationEventArgs e)
     {
-        string text = (string)e.Value!;
-        e.IsValid = BigDecimal.TryParse(text, SelectedAsset.Token.Decimals, out _);
+        e.IsValid = SelectedAsset is not null
+            && TokenAmount.TryParse(e.Value as string, SelectedAsset.Token.Decimals, out var amount)
+            && amount > 0 && amount <= SelectedAsset.Balance;
     }
 
     async void OnSubmitted(object sender, EventArgs e)
@@ -245,7 +249,8 @@ public partial class SendPage : ContentPage, IQueryAttributable
             UInt160 from = account.ScriptHash;
             if (!TryReadAddress(ToAddress, out string toAddress)) return;
             UInt160 to = toAddress.ToScriptHash(protocolSettings.AddressVersion);
-            BigInteger amount = BigDecimal.Parse(entryAmount.Text, SelectedAsset.Token.Decimals).Value;
+            if (!TokenAmount.TryParse(entryAmount.Text, SelectedAsset.Token.Decimals, out BigInteger amount)
+                || amount <= 0 || amount > SelectedAsset.Balance) return;
             TransactionIntent[] intents = [new TransferIntent
             {
                 Asset = SelectedAsset.Token,
@@ -265,7 +270,7 @@ public partial class SendPage : ContentPage, IQueryAttributable
             }
             if (SelectedAsset.Token.Hash == NativeContract.GAS.Hash && tx.NetworkFee + tx.SystemFee + amount > SelectedAsset.Balance)
             {
-                BigDecimal max = new(SelectedAsset.Balance - tx.NetworkFee - tx.SystemFee, SelectedAsset.Token.Decimals);
+                string max = TokenAmount.Format(SelectedAsset.Balance - tx.NetworkFee - tx.SystemFee, SelectedAsset.Token.Decimals);
                 validationAmount.SetError(string.Format(Strings.InsufficientBalanceForAmountAndFees, max));
                 return;
             }
