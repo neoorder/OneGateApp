@@ -3,6 +3,7 @@
     <File Path=".editorconfig" />
   </Folder>
   <Project Path="OneGateApp/OneGateApp.csproj" />
+  <Project Path="OneGateApp.Tests/OneGateApp.Tests.csproj" />
   <Project Path="OneGate.DebugProtocol/OneGate.DebugProtocol.csproj" />
   <Project Path="OneGate.DebugProtocol.Tests/OneGate.DebugProtocol.Tests.csproj" />
   <Project Path="OneGate.Tools/OneGate.Tools.csproj" />
