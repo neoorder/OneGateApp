@@ -19,6 +19,7 @@ public partial class ChatPage
         }
     }
     public bool ShowMessageReader => MessageReaderText is not null;
+    public bool MessageReaderGoogleAttribution { get; private set; }
 
     void OnReadMessageClicked(object sender, EventArgs e)
     {
@@ -26,7 +27,7 @@ public partial class ChatPage
             OpenMessageReader(message.CopyText);
     }
 
-    void OpenMessageReader(string? text)
+    void OpenMessageReader(string? text, bool googleAttribution = false)
     {
         var wallet = walletProvider.GetWallet();
         if (IsChatContentCovered || string.IsNullOrEmpty(text) || !HasLoaded || switchingConversation
@@ -39,6 +40,8 @@ public partial class ChatPage
         // Background refreshes must not replace the text or selection being read.
         messageReaderEditor ??= EnsureChatView(messageReaderView).FindByName<Editor>("messageReaderEditor");
         MessageReaderText = text;
+        MessageReaderGoogleAttribution = googleAttribution;
+        OnPropertyChanged(nameof(MessageReaderGoogleAttribution));
         messageEditor.Unfocus();
         // Run after text binding: native editors can move the caret to the end when assigning text.
         Dispatcher.Dispatch(() =>
@@ -91,6 +94,8 @@ public partial class ChatPage
     {
         messageReaderRevision++;
         MessageReaderText = null;
+        MessageReaderGoogleAttribution = false;
+        OnPropertyChanged(nameof(MessageReaderGoogleAttribution));
     }
 
     protected override bool OnBackButtonPressed()

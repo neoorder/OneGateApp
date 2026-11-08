@@ -1465,9 +1465,107 @@ Address: {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Could not finish saving your avatar. Please try again.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Could not load chat settings. Please try again.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>This avatar can no longer be saved. Please choose a photo again.</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>Chat translation</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>Translate</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>Translate with Google</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>Copy translation</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>Hide translation</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>Show translation</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>Translate into</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>Follow app language</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>Couldn’t load the available languages.</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>Choose the message language</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>Choose a supported target language</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>The selected target language or script is not supported. Choose another language.</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>Translation from {0} isn’t supported.</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>Translation from {0} to {1} isn’t supported.</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>Translation isn’t supported for this language pair.</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>Download the following language models? Each model is about 30 MB. Wi-Fi is recommended for downloading.</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>Download over Wi-Fi</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>Use mobile data this time</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>Delete the {0} language model? You’ll be prompted to download it again when it’s needed.</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>Couldn’t load the downloaded language models.</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>Couldn’t delete the language model.</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>No downloaded language models.</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>Apple manages language downloads. You can manage downloaded languages in system language and translation settings.</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>Once you've downloaded the required language packs, you can translate chat messages offline on your device without uploading them to a translation service.</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>This service may include translations provided by {0}. Google makes no express or implied warranties about these translations, including accuracy, reliability, merchantability, fitness for a particular purpose, or noninfringement. {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>Translation failed. Please try again.</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>The language model could not be downloaded. Check your connection and try again.</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>This download requires Wi-Fi. Connect to Wi-Fi and try again.</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>The download timed out. If it was started over Wi-Fi only, connect to Wi-Fi and try again.</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>This message has no text to translate.</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>This message is already in the target language.</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Privacy and contacts</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>Chat preferences</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Discard bio changes?</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Your bio changes have not been saved. Discard them and leave this page?</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>Discard changes</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>Language models</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>None</value></data>
 </root>

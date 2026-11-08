@@ -132,6 +132,22 @@
                 <Label Text="{Binding ErrorText}" StyleClass="Danger" LineBreakMode="WordWrap" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
                 <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" HorizontalOptions="Start" IsVisible="{Binding CanRetry}" Clicked="OnRetryClicked" />
             </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="8" IsVisible="{Binding IsTranslationAvailable}">
+                <Label Text="{x:Static og:Strings.ChatPreferences}" Style="{StaticResource ChatSettingsHeading}" />
+                <Border Style="{StaticResource ChatSettingsCard}">
+                    <Grid Style="{StaticResource ChatSettingsRow}" >
+                        <Button Style="{StaticResource ChatSettingsRowButton}" Clicked="OnTranslationClicked"
+                                SemanticProperties.Description="{x:Static og:Strings.ChatTranslation}" SemanticProperties.Hint="{Binding TranslationSummary}" />
+                        <Grid Padding="16,14" ColumnDefinitions="0.4*,0.6*,Auto" ColumnSpacing="12" InputTransparent="True">
+                            <Label Text="{x:Static og:Strings.ChatTranslation}" VerticalOptions="Center" LineBreakMode="WordWrap" AutomationProperties.IsInAccessibleTree="False" />
+                            <Label Grid.Column="1" Text="{Binding TranslationSummary, TargetNullValue='—'}" StyleClass="Secondary" HorizontalTextAlignment="End"
+                                   VerticalOptions="Center" LineBreakMode="WordWrap" AutomationProperties.IsInAccessibleTree="False" />
+                            <Label Grid.Column="2" Text="&#xe70a;" StyleClass="Icon, Secondary" FontSize="12" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

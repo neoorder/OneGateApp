@@ -131,6 +131,9 @@ public static class MauiProgram
         builder.Services.AddTransient<AddressBookService>();
         builder.Services.AddSingleton<DAppUsageService>();
         builder.Services.AddSingleton<MessagingService>();
+        builder.Services.AddSingleton<Services.Translation.IChatTranslationService, Services.Translation.ChatTranslationService>();
+        builder.Services.AddSingleton<Services.Translation.TranslationScheduler>();
+        builder.Services.AddSingleton<Services.Translation.TranslationPreferences>();
         builder.Services.AddSingleton<ChatAvatarService>();
         builder.Services.AddSingleton<Services.Files.FileUploadClient>();
         builder.Services.AddSingleton<PushRegistrationService>();

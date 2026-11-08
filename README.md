@@ -13,7 +13,8 @@ Create and import wallets, manage tokens and NFTs, use dApps, and chat through M
 - Manage NEO, GAS, and other NEP-17 assets; view and transfer NEP-11 NFTs.
 - Launch dApps with wallet authorization and Neo N3 dAPI support.
 - Handle payment and authentication requests through QR codes and `neo:` / `neoauth:` links.
-- Keep an address book and use encrypted chat through Meshline, with message notifications.
+- Keep an address book and use encrypted chat through Meshline, with notifications and on-device translation
+  on Android, iOS 18+, and macOS 26+.
 - Protect sensitive operations with biometrics and screen-security handling.
 - Use opt-in developer tools for encrypted remote DApp debugging.
 - Choose from 15 interface languages and light or dark themes.

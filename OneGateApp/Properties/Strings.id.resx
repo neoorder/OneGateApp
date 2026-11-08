@@ -1463,9 +1463,107 @@ Alamat: {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Penyimpanan foto profil belum selesai. Silakan coba lagi.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Pengaturan chat tidak dapat dimuat. Silakan coba lagi.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Foto profil ini tidak dapat disimpan lagi. Silakan pilih foto kembali.</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>Terjemahan chat</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>Terjemahkan</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>Terjemahkan dengan Google</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>Salin terjemahan</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>Sembunyikan terjemahan</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>Tampilkan terjemahan</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>Bahasa tujuan</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>Ikuti bahasa aplikasi</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>Daftar bahasa yang tersedia tidak dapat dimuat.</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>Pilih bahasa pesan</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>Pilih bahasa tujuan yang didukung</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>Bahasa atau aksara tujuan tidak didukung. Pilih bahasa lain.</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>Terjemahan dari {0} tidak didukung.</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>Terjemahan dari {0} ke {1} tidak didukung.</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>Terjemahan untuk pasangan bahasa ini tidak didukung.</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>Unduh model bahasa berikut? Setiap model berukuran sekitar 30 MB. Sebaiknya unduh melalui Wi-Fi.</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>Unduh melalui Wi-Fi</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>Gunakan data seluler kali ini</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>Hapus model bahasa untuk {0}? Anda akan diminta mengunduhnya lagi saat model ini diperlukan.</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>Model bahasa yang sudah diunduh tidak dapat dimuat.</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>Model bahasa tidak dapat dihapus.</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>Belum ada model bahasa yang diunduh.</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>Apple mengelola unduhan bahasa. Anda dapat mengelola bahasa yang diunduh di pengaturan bahasa dan terjemahan sistem.</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>Setelah paket bahasa yang diperlukan diunduh, Anda dapat menerjemahkan pesan obrolan secara offline di perangkat ini tanpa mengirimkannya ke layanan penerjemahan.</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>Layanan ini dapat memuat terjemahan dari {0}. Google tidak memberikan jaminan tersurat maupun tersirat atas terjemahan ini, termasuk terkait keakuratan, keandalan, kelayakan jual, kesesuaian untuk tujuan tertentu, atau ketiadaan pelanggaran hak. {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>Penafian</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>Terjemahan gagal. Silakan coba lagi.</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>Model bahasa tidak dapat diunduh. Periksa koneksi dan coba lagi.</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>Unduhan ini memerlukan Wi-Fi. Sambungkan ke Wi-Fi, lalu coba lagi.</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>Waktu tunggu unduhan habis. Jika unduhan dimulai dengan opsi hanya Wi-Fi, sambungkan ke Wi-Fi, lalu coba lagi.</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>Pesan ini tidak memiliki teks untuk diterjemahkan.</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>Pesan ini sudah dalam bahasa tujuan.</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Privasi dan kontak</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>Preferensi chat</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Buang perubahan bio?</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Perubahan bio belum disimpan. Buang perubahan dan tinggalkan halaman ini?</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>Buang perubahan</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>Model bahasa</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>Tidak ada</value></data>
 </root>

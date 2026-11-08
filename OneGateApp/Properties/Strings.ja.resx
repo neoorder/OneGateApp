@@ -1463,9 +1463,107 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>プロフィール画像の保存が完了していません。もう一度お試しください。</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>チャット設定を読み込めませんでした。もう一度お試しください。</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>このプロフィール画像は保存できなくなりました。写真を選び直してください。</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>チャット翻訳</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>翻訳</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>Google で翻訳</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>訳文をコピー</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>訳文を折りたたむ</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>訳文を展開</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>翻訳先の言語</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>アプリの言語に合わせる</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>利用可能な言語を読み込めませんでした。</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>メッセージの言語を選択</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>対応する翻訳先の言語を選択</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>選択した翻訳先の言語または文字体系には対応していません。別の言語を選択してください。</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>{0}からの翻訳には対応していません。</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>{0}から{1}への翻訳には対応していません。</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>この言語の組み合わせには対応していません。</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>以下の言語モデルをダウンロードしますか？各モデルは約30 MBです。Wi-Fiでのダウンロードをおすすめします。</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>Wi-Fiでダウンロード</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>今回はモバイルデータを使用</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>{0}の言語モデルを削除しますか？このモデルが再び必要になったときに、再ダウンロードの案内が表示されます。</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>ダウンロード済みの言語モデルを読み込めませんでした。</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>言語モデルを削除できませんでした。</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>言語モデルはまだダウンロードされていません。</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>言語のダウンロードはAppleが管理します。ダウンロード済みの言語はシステムの言語・翻訳設定で管理できます。</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>必要な言語パックをダウンロードすると、メッセージを翻訳サービスに送信せずに、このデバイス上でオフライン翻訳できます。</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>本サービスには {0} が提供する翻訳が含まれる場合があります。Google は、翻訳の正確性、信頼性、商品性、特定目的への適合性、権利の非侵害を含め、明示または黙示を問わず一切の保証を行いません。 {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>免責事項</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>翻訳に失敗しました。もう一度お試しください。</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>言語モデルをダウンロードできませんでした。接続を確認して再試行してください。</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>このダウンロードには Wi-Fi が必要です。Wi-Fi に接続して再試行してください。</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>ダウンロードがタイムアウトしました。Wi-Fi のみで開始した場合は、Wi-Fi に接続して再試行してください。</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>このメッセージには翻訳できるテキストがありません。</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>このメッセージはすでに翻訳先の言語です。</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>プライバシーと連絡先</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>チャットの環境設定</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>自己紹介の変更を破棄しますか？</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>自己紹介の変更は保存されていません。変更を破棄してこのページを離れますか？</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>変更を破棄</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>言語モデル</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>なし</value></data>
 </root>

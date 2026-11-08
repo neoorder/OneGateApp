@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="NeoOrder.OneGate.Pages.ChatTranslationSettingsPage"
+             x:DataType="og:ChatTranslationSettingsPage"
+             Title="{x:Static og:Strings.ChatTranslation}" SafeAreaEdges="All"
+             BindingContext="{Binding Source={RelativeSource Self}}" Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Styles/ChatSettings.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+            <og:FormattedStringConverter x:Key="FormattedStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView x:Name="settingsScroll">
+        <VerticalStackLayout Style="{StaticResource ChatSettingsLayout}"
+                             WidthRequest="{Binding Width, Source={x:Reference settingsScroll}, x:DataType=ScrollView}">
+            <VerticalStackLayout Spacing="8" IsVisible="{Binding IsAvailable}">
+                <Label Text="{x:Static og:Strings.TranslationTarget}" Style="{StaticResource ChatSettingsHeading}" />
+                <Border Style="{StaticResource ChatSettingsCard}">
+                    <VerticalStackLayout Padding="16,8" Spacing="8">
+                        <Picker x:Name="targetPicker" Title="{x:Static og:Strings.TranslationTarget}" MinimumHeightRequest="48"
+                                IsEnabled="{Binding CanEdit}" og:Border.IsVisible="False"
+                                SemanticProperties.Description="{x:Static og:Strings.TranslationTarget}" SelectedIndexChanged="OnTargetChanged" />
+                        <Grid ColumnDefinitions="24,*" ColumnSpacing="8" Padding="0,4,0,8" IsVisible="{Binding IsLoadingLanguages}">
+                            <ActivityIndicator IsRunning="{Binding IsLoadingLanguages}" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{x:Static og:Strings.Loading}" Style="{StaticResource ChatSettingsCaption}" VerticalOptions="Center" />
+                        </Grid>
+                        <Label Text="{Binding Notice}" Style="{StaticResource ChatSettingsCaption}" Margin="0,0,0,8"
+                               IsVisible="{Binding Notice, Converter={StaticResource HasText}}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding HasLanguageError}" Value="True">
+                                    <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" HorizontalOptions="Start" Margin="0,0,0,8"
+                                IsVisible="{Binding HasLanguageError}" IsEnabled="{Binding CanEdit}" Clicked="OnRetryClicked" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="8" IsVisible="{Binding IsAvailable}">
+                <Label Text="{x:Static og:Strings.TranslationLanguageModels}" Style="{StaticResource ChatSettingsHeading}" />
+                <Border Style="{StaticResource ChatSettingsCard}">
+                    <VerticalStackLayout Spacing="0">
+                        <Label Text="{x:Static og:Strings.TranslationAppleModels}" Style="{StaticResource ChatSettingsCaption}"
+                               Margin="16" IsVisible="{Binding ShowAppleModels}" />
+                        <Label Text="{x:Static og:Strings.TranslationNoModels}" Style="{StaticResource ChatSettingsCaption}"
+                               Margin="16" IsVisible="{Binding HasNoModels}" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Models}" Spacing="0" IsVisible="{Binding CanManageModels}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="og:TranslationModelRow">
+                                    <VerticalStackLayout Spacing="0">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" Padding="16,4" MinimumHeightRequest="56">
+                                            <Label Text="{Binding Name}" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                                            <Button Grid.Column="1" Text="{x:Static og:Strings.Delete}" StyleClass="Link"
+                                                    TextColor="{toolkit:AppThemeResource Danger}" MinimumHeightRequest="44" MinimumWidthRequest="44"
+                                                    IsEnabled="{Binding CanEdit, Source={RelativeSource AncestorType={x:Type og:ChatTranslationSettingsPage}}, x:DataType=og:ChatTranslationSettingsPage}"
+                                                    SemanticProperties.Description="{x:Static og:Strings.Delete}" SemanticProperties.Hint="{Binding Name}"
+                                                    CommandParameter="{Binding Language}" Clicked="OnDeleteModelClicked" />
+                                        </Grid>
+                                        <BoxView Style="{StaticResource ChatSettingsDivider}" IsVisible="{Binding HasDivider}" />
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                        <Grid ColumnDefinitions="24,*" ColumnSpacing="8" Padding="16" IsVisible="{Binding IsWorkingOnModels}">
+                            <ActivityIndicator IsRunning="{Binding IsWorkingOnModels}" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{x:Static og:Strings.Loading}" Style="{StaticResource ChatSettingsCaption}" VerticalOptions="Center" />
+                        </Grid>
+                        <VerticalStackLayout Padding="16" Spacing="12" IsVisible="{Binding HasModelError}">
+                            <Label Text="{x:Static og:Strings.TranslationModelDeleteFailed}" StyleClass="Danger" LineBreakMode="WordWrap"
+                                   IsVisible="{Binding HasModelDeleteError}" />
+                            <Label Text="{x:Static og:Strings.TranslationModelReadFailed}" StyleClass="Danger" LineBreakMode="WordWrap"
+                                   IsVisible="{Binding HasModelReadError}" />
+                            <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" HorizontalOptions="Start"
+                                    IsVisible="{Binding HasModelReadError}" IsEnabled="{Binding CanEdit}" Clicked="OnRetryClicked" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+                <Label Text="{x:Static og:Strings.TranslationDeviceOnly}" Style="{StaticResource ChatSettingsCaption}" Margin="8,4,8,0" />
+                <Label IsVisible="{OnPlatform Android=True, Default=False}" Style="{StaticResource ChatSettingsCaption}" Margin="8,4,8,0">
+                    <Label.FormattedText>
+                        <Binding Source="{x:Static og:Strings.TranslationGoogleDisclaimer}" Converter="{StaticResource FormattedStringConverter}">
+                            <Binding.ConverterParameter>
+                                <x:Array Type="{x:Type Span}">
+                                    <Span Text="Google" TextColor="{toolkit:AppThemeResource Primary}" TextDecorations="Underline">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="https://cloud.google.com/translate" />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                    <Span Text="{x:Static og:Strings.TranslationGoogleDisclaimerLink}" TextColor="{toolkit:AppThemeResource Primary}" TextDecorations="Underline">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{x:Static og:Commands.OpenUrl}" CommandParameter="https://docs.cloud.google.com/translate/attribution#disclaimer" />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </x:Array>
+                            </Binding.ConverterParameter>
+                        </Binding>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

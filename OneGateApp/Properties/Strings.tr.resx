@@ -1463,9 +1463,107 @@ Adres: {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Profil fotoğrafını kaydetme işlemi tamamlanmadı. Lütfen tekrar deneyin.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Sohbet ayarları yüklenemedi. Lütfen tekrar deneyin.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Bu profil fotoğrafı artık kaydedilemiyor. Lütfen yeniden fotoğraf seçin.</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>Sohbet çevirisi</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>Çevir</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>Google ile çevir</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>Çeviriyi kopyala</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>Çeviriyi gizle</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>Çeviriyi göster</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>Hedef dil</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>Uygulama dilini kullan</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>Kullanılabilir diller yüklenemedi.</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>Mesajın dilini seçin</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>Desteklenen bir hedef dil seçin</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>Seçilen hedef dil veya yazı sistemi desteklenmiyor. Başka bir dil seçin.</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>{0} dilinden çeviri desteklenmiyor.</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>{0} dilinden {1} diline çeviri desteklenmiyor.</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>Bu dil çifti için çeviri desteklenmiyor.</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>Aşağıdaki dil modelleri indirilsin mi? Her model yaklaşık 30 MB boyutundadır. Wi-Fi üzerinden indirmeniz önerilir.</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>Wi-Fi üzerinden indir</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>Bu kez mobil veri kullan</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>{0} dil modeli silinsin mi? Bu model tekrar gerektiğinde yeniden indirmeniz istenir.</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>İndirilen dil modelleri yüklenemedi.</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>Dil modeli silinemedi.</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>İndirilmiş dil modeli yok.</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>Dil indirmelerini Apple yönetir. İndirilen dilleri sistemin dil ve çeviri ayarlarından yönetebilirsiniz.</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>Gerekli dil paketlerini indirdikten sonra sohbet mesajlarını bir çeviri hizmetine göndermeden, cihazınızda çevrimdışı olarak çevirebilirsiniz.</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>Bu hizmet, {0} tarafından sağlanan çeviriler içerebilir. Google bu çeviriler için doğruluk, güvenilirlik, ticari elverişlilik, belirli bir amaca uygunluk veya hak ihlali bulunmaması dâhil hiçbir açık ya da zımni garanti vermez. {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>Sorumluluk reddi</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>Çeviri başarısız oldu. Lütfen yeniden deneyin.</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>Dil modeli indirilemedi. Bağlantınızı kontrol edip yeniden deneyin.</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>Bu indirme için Wi-Fi gerekiyor. Wi-Fi'ye bağlanıp tekrar deneyin.</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>İndirme zaman aşımına uğradı. Yalnızca Wi-Fi ile başlatıldıysa Wi-Fi’ye bağlanıp tekrar deneyin.</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>Bu mesajda çevrilecek metin yok.</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>Bu mesaj zaten hedef dilde.</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Gizlilik ve kişiler</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>Sohbet tercihleri</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Biyografi değişiklikleri silinsin mi?</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Biyografi değişiklikleriniz kaydedilmedi. Değişiklikleri silip bu sayfadan çıkmak ister misiniz?</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>Değişiklikleri sil</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>Dil modelleri</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>Yok</value></data>
 </root>

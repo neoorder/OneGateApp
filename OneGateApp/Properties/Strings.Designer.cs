@@ -25,9 +25,44 @@ namespace NeoOrder.OneGate.Properties {
     internal class Strings {
         internal static string ChatProfileEmpty => ResourceManager.GetString("ChatProfileEmpty", resourceCulture);
         internal static string ChatPrivacyAndContacts => ResourceManager.GetString("ChatPrivacyAndContacts", resourceCulture);
+        internal static string ChatPreferences => ResourceManager.GetString("ChatPreferences", resourceCulture);
         internal static string ChatDiscardBioTitle => ResourceManager.GetString("ChatDiscardBioTitle", resourceCulture);
         internal static string ChatDiscardBioMessage => ResourceManager.GetString("ChatDiscardBioMessage", resourceCulture);
         internal static string ChatDiscardBio => ResourceManager.GetString("ChatDiscardBio", resourceCulture);
+        internal static string TranslationLanguageModels => ResourceManager.GetString("TranslationLanguageModels", resourceCulture);
+
+        internal static string ChatTranslation => ResourceManager.GetString("ChatTranslation", resourceCulture);
+        internal static string TranslateMessage => ResourceManager.GetString("TranslateMessage", resourceCulture);
+        internal static string TranslateWithGoogle => ResourceManager.GetString("TranslateWithGoogle", resourceCulture);
+        internal static string TranslationCopy => ResourceManager.GetString("TranslationCopy", resourceCulture);
+        internal static string TranslationHide => ResourceManager.GetString("TranslationHide", resourceCulture);
+        internal static string TranslationShow => ResourceManager.GetString("TranslationShow", resourceCulture);
+        internal static string TranslationTarget => ResourceManager.GetString("TranslationTarget", resourceCulture);
+        internal static string TranslationFollowLanguage => ResourceManager.GetString("TranslationFollowLanguage", resourceCulture);
+        internal static string TranslationLanguagesLoadFailed => ResourceManager.GetString("TranslationLanguagesLoadFailed", resourceCulture);
+        internal static string TranslationChooseSource => ResourceManager.GetString("TranslationChooseSource", resourceCulture);
+        internal static string TranslationChooseTarget => ResourceManager.GetString("TranslationChooseTarget", resourceCulture);
+        internal static string TranslationLanguageUnsupported => ResourceManager.GetString("TranslationLanguageUnsupported", resourceCulture);
+        internal static string TranslationSourceLanguageUnsupported => ResourceManager.GetString("TranslationSourceLanguageUnsupported", resourceCulture);
+        internal static string TranslationLanguagePairUnsupported => ResourceManager.GetString("TranslationLanguagePairUnsupported", resourceCulture);
+        internal static string TranslationLanguagesUnsupported => ResourceManager.GetString("TranslationLanguagesUnsupported", resourceCulture);
+        internal static string TranslationDownloadPrompt => ResourceManager.GetString("TranslationDownloadPrompt", resourceCulture);
+        internal static string TranslationWifi => ResourceManager.GetString("TranslationWifi", resourceCulture);
+        internal static string TranslationAnyNetwork => ResourceManager.GetString("TranslationAnyNetwork", resourceCulture);
+        internal static string TranslationDeleteConfirm => ResourceManager.GetString("TranslationDeleteConfirm", resourceCulture);
+        internal static string TranslationModelReadFailed => ResourceManager.GetString("TranslationModelReadFailed", resourceCulture);
+        internal static string TranslationModelDeleteFailed => ResourceManager.GetString("TranslationModelDeleteFailed", resourceCulture);
+        internal static string TranslationNoModels => ResourceManager.GetString("TranslationNoModels", resourceCulture);
+        internal static string TranslationAppleModels => ResourceManager.GetString("TranslationAppleModels", resourceCulture);
+        internal static string TranslationDeviceOnly => ResourceManager.GetString("TranslationDeviceOnly", resourceCulture);
+        internal static string TranslationGoogleDisclaimer => ResourceManager.GetString("TranslationGoogleDisclaimer", resourceCulture);
+        internal static string TranslationGoogleDisclaimerLink => ResourceManager.GetString("TranslationGoogleDisclaimerLink", resourceCulture);
+        internal static string TranslationFailed => ResourceManager.GetString("TranslationFailed", resourceCulture);
+        internal static string TranslationDownloadFailed => ResourceManager.GetString("TranslationDownloadFailed", resourceCulture);
+        internal static string TranslationDownloadWifiRequired => ResourceManager.GetString("TranslationDownloadWifiRequired", resourceCulture);
+        internal static string TranslationDownloadWifiMayBeRequired => ResourceManager.GetString("TranslationDownloadWifiMayBeRequired", resourceCulture);
+        internal static string TranslationNoText => ResourceManager.GetString("TranslationNoText", resourceCulture);
+        internal static string TranslationSameLanguage => ResourceManager.GetString("TranslationSameLanguage", resourceCulture);
 
         internal static string ChatSettingsLoadFailed => ResourceManager.GetString("ChatSettingsLoadFailed", resourceCulture);
         internal static string ChatAvatar => ResourceManager.GetString("ChatAvatar", resourceCulture);

@@ -55,6 +55,12 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
     public string? SenderAccountId => message?.Key.Sender ?? pending?.LocalAccountId;
     public string? CopyText => pending?.Text ?? message?.Body?.Text;
     public bool CanCopyText => !string.IsNullOrEmpty(CopyText);
+    public bool CanTranslate => !string.IsNullOrWhiteSpace(CopyText);
+    public ChatTranslationViewModel? Translation
+    {
+        get;
+        set { field = value; PropertyChanged?.Invoke(this, new(nameof(Translation))); }
+    }
     public bool CanForwardText => CanCopyText && !HasAttachments
         && (pending is not null || message?.Body?.ContentType == "text/plain");
     public string Text => CanCopyText ? CopyText! : Strings.ChatNonTextMessage;
@@ -138,11 +144,8 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
         return text[..length] + "…";
     }
 
-    static int GetBubblePreviewLength(string text)
+    static int GetBubblePreviewLength(string text, int maxLength = 600, int maxLines = 30)
     {
-        // Roughly one phone screen at the default font: 20 CJK characters per line, 30 lines.
-        const int maxLength = 600;
-        const int maxLines = 30;
         int length = 0;
         int lines = 1;
         while (length < text.Length && length < maxLength)
@@ -158,6 +161,12 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
             length = next;
         }
         return length;
+    }
+
+    internal static string PreviewText(string text, int maxLength = 600, int maxLines = 30)
+    {
+        int length = GetBubblePreviewLength(text, maxLength, maxLines);
+        return length < text.Length ? text[..length] + "…" : text;
     }
 
     public void UpdatePending(PendingChatMessage value)

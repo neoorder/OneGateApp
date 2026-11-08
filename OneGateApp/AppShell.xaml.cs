@@ -31,6 +31,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("home/news/details", typeof(NewsDetailsPage));
         Routing.RegisterRoute("home/settings", typeof(SettingsPage));
         Routing.RegisterRoute("home/settings/chat-settings", typeof(ChatSettingsPage));
+        Routing.RegisterRoute("home/settings/chat-settings/chat-translation", typeof(ChatTranslationSettingsPage));
         Routing.RegisterRoute("home/settings/notifications", typeof(NotificationSettingsPage));
         Routing.RegisterRoute("home/settings/about", typeof(AboutPage));
         Routing.RegisterRoute("home/settings/activity", typeof(ActivityCenterPage));

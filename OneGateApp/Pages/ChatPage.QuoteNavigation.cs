@@ -166,7 +166,8 @@ public partial class ChatPage
     {
         // Nested quote jumps keep the initial reading position until explicitly returning.
         quoteReturnPosition ??= origin;
-        // An explicit jump supersedes initial positioning and queued refresh/resize scrolling.
+        // An explicit jump supersedes translation offsets and queued refresh/resize scrolling.
+        restoreTranslationOffset = null;
         scrollRevision++;
         latestScrollRevision = null;
         if (!IsMessageListPresented) initialScrollAnchor = target;

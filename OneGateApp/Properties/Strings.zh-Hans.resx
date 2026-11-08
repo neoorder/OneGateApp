@@ -1465,9 +1465,107 @@
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>头像保存未完成，请重试。</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>无法加载聊天设置，请重试。</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>无法继续保存这张头像，请重新选择照片。</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>聊天翻译</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>翻译</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>使用 Google 翻译</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>复制译文</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>收起译文</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>展开译文</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>翻译目标语言</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>跟随界面语言</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>无法加载可选语言。</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>选择消息的原文语言</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>选择支持的目标语言</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>不支持所选目标语言或文字形式，请选择其他语言。</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>暂不支持翻译{0}。</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>暂不支持从{0}翻译成{1}。</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>这组语言暂不支持翻译。</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>下载以下语言模型？每个模型约 30 MB，建议使用 Wi-Fi 下载。</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>通过 Wi-Fi 下载</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>本次允许移动网络</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>删除{0}语言模型？以后需要用到这个模型时，会提示重新下载。</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>无法读取已下载的语言模型。</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>无法删除语言模型。</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>尚未下载语言模型。</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>语言模型下载由 Apple 管理，可在系统的语言和翻译设置中管理已下载语言。</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>下载所需语言包后，聊天消息可直接在本机离线翻译，无需上传到翻译服务。</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>本服务可能包含由 {0} 提供的译文。Google 对这些译文不作任何明示或默示保证，包括对准确性、可靠性、适销性、特定用途适用性及不侵权的保证。 {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>免责声明</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>翻译失败，请重试。</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>语言模型下载失败，请检查网络后重试。</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>这次下载需要 Wi-Fi。请连接 Wi-Fi 后重试。</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>下载超时。若此前选择了仅通过 Wi-Fi 下载，请连接 Wi-Fi 后重试。</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>此消息没有可翻译的文字。</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>消息已是目标语言。</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>隐私与联系</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>聊天偏好</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>放弃简介修改？</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>简介修改尚未保存。是否放弃修改并离开此页面？</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>放弃修改</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>语言模型</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>无</value></data>
 </root>

@@ -246,6 +246,7 @@ public partial class ChatPage
         bool confirmedInPlace = false;
         foreach (var message in confirmed)
         {
+            RememberPendingTranslationIdentity(message);
             if (Messages.FirstOrDefault(row => row.IsPending && row.PendingId == message.Id) is not { } viewModel) continue;
             var status = message.SendStatus!;
             int index = Array.FindIndex(saved, row => row.IsOutgoing && row.MessageId == status.MessageId);
@@ -260,6 +261,7 @@ public partial class ChatPage
         {
             var viewModel = Messages.FirstOrDefault(row => row.IsPending && row.PendingId == message.Id) ?? new ChatMessageViewModel(message);
             viewModel.UpdatePending(message);
+            RememberPendingTranslationIdentity(message);
             return viewModel;
         }).ToArray();
         if (appendNewRows) return SetMessages([.. pending, .. saved], refreshExisting: confirmedInPlace, appendNewRows: true);
@@ -272,6 +274,7 @@ public partial class ChatPage
                 && (pendingIndex == pending.Length || saved[savedIndex].Timestamp <= pending[pendingIndex].Timestamp)
                 ? saved[savedIndex++] : pending[pendingIndex++];
         if (confirmedInPlace || !Messages.SequenceEqual(updated)) return SetMessages(updated, refreshExisting: confirmedInPlace);
+        RestoreTranslations();
         return false;
     }
 

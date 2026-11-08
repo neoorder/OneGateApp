@@ -1463,9 +1463,107 @@ Adresse: {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Das Speichern des Profilbilds wurde nicht abgeschlossen. Bitte versuche es erneut.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Die Chateinstellungen konnten nicht geladen werden. Bitte versuche es erneut.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Dieses Profilbild kann nicht mehr gespeichert werden. Bitte wähle erneut ein Foto aus.</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>Chatübersetzung</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>Übersetzen</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>Mit Google übersetzen</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>Übersetzung kopieren</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>Übersetzung ausblenden</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>Übersetzung anzeigen</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>Zielsprache</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>App-Sprache verwenden</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>Die verfügbaren Sprachen konnten nicht geladen werden.</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>Sprache der Nachricht auswählen</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>Unterstützte Zielsprache auswählen</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>Die gewählte Zielsprache oder Schrift wird nicht unterstützt. Wähle eine andere Sprache.</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>Übersetzungen aus {0} werden nicht unterstützt.</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>Übersetzungen von {0} nach {1} werden nicht unterstützt.</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>Übersetzungen für dieses Sprachpaar werden nicht unterstützt.</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>Die folgenden Sprachmodelle herunterladen? Jedes Modell ist etwa 30 MB groß. Der Download über WLAN wird empfohlen.</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>Über WLAN herunterladen</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>Diesmal mobile Daten verwenden</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>Sprachmodell für {0} löschen? Wenn das Modell wieder benötigt wird, werden Sie zum erneuten Download aufgefordert.</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>Die heruntergeladenen Sprachmodelle konnten nicht geladen werden.</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>Das Sprachmodell konnte nicht gelöscht werden.</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>Keine Sprachmodelle heruntergeladen.</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>Apple verwaltet die Sprachdownloads. Heruntergeladene Sprachen lassen sich in den Sprach- und Übersetzungseinstellungen des Systems verwalten.</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>Nach dem Herunterladen der benötigten Sprachpakete lassen sich Chatnachrichten direkt auf diesem Gerät offline übersetzen, ohne sie an einen Übersetzungsdienst zu senden.</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>Dieser Dienst kann Übersetzungen von {0} enthalten. Google übernimmt dafür keine ausdrücklichen oder stillschweigenden Gewährleistungen, auch nicht für Genauigkeit, Zuverlässigkeit, Marktgängigkeit, Eignung für einen bestimmten Zweck oder die Nichtverletzung von Rechten. {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>Haftungsausschluss</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>Übersetzung fehlgeschlagen. Bitte erneut versuchen.</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>Das Sprachmodell konnte nicht heruntergeladen werden. Prüfe die Verbindung und versuche es erneut.</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>Für diesen Download ist WLAN erforderlich. Stelle eine WLAN-Verbindung her und versuche es erneut.</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>Zeitüberschreitung beim Download. Wenn der Download nur per WLAN gestartet wurde, stelle eine WLAN-Verbindung her und versuche es erneut.</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>Diese Nachricht enthält keinen übersetzbaren Text.</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>Diese Nachricht ist bereits in der Zielsprache.</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Datenschutz und Kontakte</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>Chatpräferenzen</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Profiltextänderungen verwerfen?</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Die Änderungen an deinem Profiltext wurden nicht gespeichert. Verwerfen und diese Seite verlassen?</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>Änderungen verwerfen</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>Sprachmodelle</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>Keine Angabe</value></data>
 </root>

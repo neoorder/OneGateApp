@@ -289,6 +289,8 @@
                                                 </MenuFlyoutItem>
                                                 <MenuFlyoutItem Text="{x:Static og:Strings.ChatCopyText}" IsEnabled="{Binding CanCopyText}"
                                                                 CommandParameter="{Binding .}" Clicked="OnCopyMessageClicked" />
+                                                <MenuFlyoutItem StyleId="TranslateMessage" Text="{Binding TranslateActionText, Source={x:Reference Root}, x:DataType=og:ChatPage}"
+                                                                IsEnabled="{Binding CanTranslate}" CommandParameter="{Binding .}" Clicked="OnTranslateMessageClicked" />
                                                 <MenuFlyoutItem Text="{x:Static og:Strings.Share}" IsEnabled="{Binding CanCopyText}"
                                                                 CommandParameter="{Binding .}" Clicked="OnShareMessageClicked" />
                                                 <MenuFlyoutItem Text="{x:Static og:Strings.ChatViewFullText}" IsEnabled="{Binding CanCopyText}"
@@ -364,6 +366,78 @@
                                             </og:DeferredContentView>
                                         </Grid>
                                         <Label Text="{x:Static og:Strings.ChatAttachmentsNotShown}" FontSize="12" StyleClass="Secondary" IsVisible="{Binding HasAttachments}" />
+                                        <og:DeferredContentView IsVisible="{Binding Translation.IsVisible, TargetNullValue=False, FallbackValue=False}">
+                                            <og:DeferredContentView.ContentTemplate>
+                                                <DataTemplate x:DataType="og:ChatMessageViewModel">
+                                                    <Grid RowDefinitions="auto,auto,auto" RowSpacing="2">
+                                                        <Grid ColumnDefinitions="*,auto" ColumnSpacing="8" MinimumHeightRequest="24">
+                                                            <BoxView HeightRequest="1" VerticalOptions="Center" BackgroundColor="{toolkit:AppThemeResource Stroke}" />
+                                                            <ImageButton Grid.Column="1" Padding="0" WidthRequest="16" MinimumWidthRequest="16" HeightRequest="24" MinimumHeightRequest="24"
+                                                                         VerticalOptions="Center"
+                                                                         SemanticProperties.Description="{Binding Translation.ToggleDescription}"
+                                                                         IsEnabled="{Binding Translation.IsBusy, Converter={StaticResource Not}}"
+                                                                         CommandParameter="{Binding .}" Clicked="OnToggleTranslationClicked">
+                                                                <ImageButton.Source>
+                                                                    <FontImageSource FontFamily="Icons" Glyph="{Binding Translation.ToggleGlyph}" Size="16" Color="{toolkit:AppThemeResource Secondary}" />
+                                                                </ImageButton.Source>
+                                                            </ImageButton>
+                                                        </Grid>
+                                                        <Grid Grid.Row="1" ColumnDefinitions="*,auto" ColumnSpacing="8" MinimumHeightRequest="24">
+                                                            <Label Text="{Binding Translation.Label}" FontSize="12" StyleClass="Secondary" VerticalOptions="Center"
+                                                                   MaxLines="1" LineBreakMode="MiddleTruncation" ToolTipProperties.Text="{Binding Translation.Label}" />
+                                                            <ImageButton Grid.Column="1" Padding="0" WidthRequest="16" MinimumWidthRequest="16" HeightRequest="24" MinimumHeightRequest="24"
+                                                                         VerticalOptions="Center"
+                                                                         IsVisible="{Binding Translation.HasResult, FallbackValue=False}"
+                                                                         SemanticProperties.Description="{x:Static og:Strings.TranslationCopy}" ToolTipProperties.Text="{x:Static og:Strings.TranslationCopy}"
+                                                                         CommandParameter="{Binding .}" Clicked="OnCopyTranslationClicked">
+                                                                <ImageButton.Source>
+                                                                    <FontImageSource FontFamily="Icons" Glyph="&#xe664;" Size="16" Color="{toolkit:AppThemeResource Secondary}" />
+                                                                </ImageButton.Source>
+                                                            </ImageButton>
+                                                        </Grid>
+                                                        <VerticalStackLayout Grid.Row="2" Spacing="6" IsVisible="{Binding Translation.IsExpanded, FallbackValue=False}">
+                                                            <ActivityIndicator IsRunning="{Binding Translation.IsBusy, FallbackValue=False}" IsVisible="{Binding Translation.IsBusy, FallbackValue=False}"
+                                                                               HorizontalOptions="Start" HeightRequest="24" SemanticProperties.Description="{x:Static og:Strings.Loading}" />
+                                                            <Grid IsVisible="{Binding Translation.HasResult, FallbackValue=False}">
+                                                                <Label Text="{Binding Translation.Preview}" TextType="Text" LineBreakMode="CharacterWrap" />
+                                                                <og:DeferredContentView IsVisible="{Binding Translation.IsTruncated, FallbackValue=False}" Style="{StaticResource FullTextOverlay}">
+                                                                    <og:DeferredContentView.ContentTemplate>
+                                                                        <DataTemplate x:DataType="og:ChatMessageViewModel">
+                                                                            <Grid>
+                                                                                <Border Background="{StaticResource FullTextFade}" StrokeThickness="0"
+                                                                                        InputTransparent="True" AutomationProperties.IsInAccessibleTree="False" />
+                                                                                <Button StyleClass="Link, FullTextAction"
+                                                                                        SemanticProperties.Description="{x:Static og:Strings.ChatViewFullText}" ToolTipProperties.Text="{x:Static og:Strings.ChatViewFullText}"
+                                                                                        CommandParameter="{Binding .}" Clicked="OnReadTranslationClicked" />
+                                                                                <Grid ColumnDefinitions="auto,*" ColumnSpacing="8" MinimumHeightRequest="20" VerticalOptions="End" InputTransparent="True">
+                                                                                    <Image Source="{AppThemeBinding Light={OnPlatform Android=translated_by_google.png}, Dark={OnPlatform Android=translated_by_google_dark.png}}" HeightRequest="12" WidthRequest="132" Aspect="AspectFit"
+                                                                                           HorizontalOptions="Start" VerticalOptions="Center" IsVisible="{OnPlatform Android=True, Default=False}"
+                                                                                           SemanticProperties.Description="Google Translate" />
+                                                                                    <Label Grid.Column="1" Style="{StaticResource FullTextLabel}" StyleClass="Link" AutomationProperties.IsInAccessibleTree="False" />
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                        </DataTemplate>
+                                                                    </og:DeferredContentView.ContentTemplate>
+                                                                </og:DeferredContentView>
+                                                            </Grid>
+                                                            <Label Text="{Binding Translation.Notice}" TextType="Text" StyleClass="Secondary" IsVisible="{Binding Translation.HasNotice, FallbackValue=False}" />
+                                                            <Image Source="{AppThemeBinding Light={OnPlatform Android=translated_by_google.png}, Dark={OnPlatform Android=translated_by_google_dark.png}}" HeightRequest="12" WidthRequest="132" Aspect="AspectFit"
+                                                                   HorizontalOptions="Start" IsVisible="{OnPlatform Android={Binding Translation.HasResult, FallbackValue=False}, Default=False}"
+                                                                   SemanticProperties.Description="Google Translate">
+                                                                <Image.Triggers>
+                                                                    <DataTrigger TargetType="Image" Binding="{Binding Translation.IsTruncated, FallbackValue=False}" Value="True">
+                                                                        <Setter Property="IsVisible" Value="False" />
+                                                                    </DataTrigger>
+                                                                </Image.Triggers>
+                                                            </Image>
+                                                            <Button Text="{OnPlatform Android={x:Static og:Strings.TranslateWithGoogle}, Default={x:Static og:Strings.Retry}}"
+                                                                    StyleClass="Link" FontSize="12" MinimumHeightRequest="28" HorizontalOptions="Start"
+                                                                    IsVisible="{Binding Translation.CanRetry, FallbackValue=False}" CommandParameter="{Binding .}" Clicked="OnTranslateMessageClicked" />
+                                                        </VerticalStackLayout>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </og:DeferredContentView.ContentTemplate>
+                                        </og:DeferredContentView>
                                     </VerticalStackLayout>
                                 </Border>
                                 <Grid ColumnDefinitions="auto,*" ColumnSpacing="6" HorizontalOptions="Start">
@@ -461,9 +535,11 @@
         <ContentView x:Name="messageReaderView" Grid.Column="2" IsVisible="{Binding ShowMessageReader}">
             <ContentView.Resources>
                 <DataTemplate x:Key="DeferredContent" x:DataType="og:ChatPage">
-                    <Grid Padding="20,8,20,12" MaximumWidthRequest="800"
+                    <Grid Padding="20,8,20,12" MaximumWidthRequest="800" RowDefinitions="auto,*" RowSpacing="8"
                           HorizontalOptions="Fill" BackgroundColor="{toolkit:AppThemeResource PageBackground}">
-                        <Border StrokeShape="RoundRectangle 12" Padding="12" BackgroundColor="{toolkit:AppThemeResource Panel}">
+                        <Image Source="{AppThemeBinding Light={OnPlatform Android=translated_by_google.png}, Dark={OnPlatform Android=translated_by_google_dark.png}}" HeightRequest="12" WidthRequest="132" Aspect="AspectFit" HorizontalOptions="Start"
+                               IsVisible="{Binding MessageReaderGoogleAttribution}" SemanticProperties.Description="Google Translate" />
+                        <Border Grid.Row="1" StrokeShape="RoundRectangle 12" Padding="12" BackgroundColor="{toolkit:AppThemeResource Panel}">
                             <!-- Re-measure the viewport: Disabled can retain an oversized Editor measurement on Windows. -->
                             <Editor x:Name="messageReaderEditor" Text="{Binding MessageReaderText, Mode=OneWay}" IsReadOnly="True" AutoSize="TextChanges"
                                     VerticalOptions="Fill" HorizontalOptions="Fill" og:Border.IsVisible="False"

@@ -8,6 +8,7 @@ public partial class ChatPage
 
     async void MarkDisplayedMessagesRead(bool atLatest = false)
     {
+        if (translationLayoutPending) return;
         var wallet = walletProvider.GetWallet();
         string? accountId = localAccountId;
         string address = Address;

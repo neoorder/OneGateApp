@@ -12,7 +12,12 @@ public partial class ChatPage
     {
 #if WINDOWS || MACCATALYST
         if (sender is Microsoft.Maui.Controls.Border bubble && FlyoutBase.GetContextFlyout(bubble) is null)
-            FlyoutBase.SetContextFlyout(bubble, (MenuFlyout)((DataTemplate)bubble.Resources["MessageContextMenu"]).CreateContent());
+        {
+            var menu = (MenuFlyout)((DataTemplate)bubble.Resources["MessageContextMenu"]).CreateContent();
+            if (!translationService.IsAvailable && menu.OfType<MenuFlyoutItem>().FirstOrDefault(item => item.StyleId == "TranslateMessage") is { } translationItem)
+                menu.Remove(translationItem);
+            FlyoutBase.SetContextFlyout(bubble, menu);
+        }
 #endif
     }
 
@@ -25,6 +30,7 @@ public partial class ChatPage
     static ChatMessageViewModel? GetMessageActionParameter(object sender) => sender switch
     {
         Button button => button.CommandParameter as ChatMessageViewModel,
+        ImageButton button => button.CommandParameter as ChatMessageViewModel,
         MenuFlyoutItem item => item.CommandParameter as ChatMessageViewModel,
         _ => null
     };
@@ -48,6 +54,7 @@ public partial class ChatPage
             if (HasLoaded && message.CanForwardText) actions.Add(Strings.ChatForwardText);
             if (message.CanCopyText)
             {
+                if (translationService.IsAvailable && message.CanTranslate) actions.Add(TranslateActionText);
                 actions.Add(Strings.ChatCopyText);
                 actions.Add(Strings.Share);
                 actions.Add(Strings.ChatViewFullText);
@@ -55,6 +62,7 @@ public partial class ChatPage
             string action = await DisplayActionSheetAsync(null, Strings.Cancel, null, [.. actions]);
             if (!IsCurrentMessageContext(wallet, accountId, address) || !actions.Contains(action)) return;
             if (action == Strings.ChatReply) BeginReply(message);
+            else if (action == TranslateActionText) _ = TranslateMessageAsync(message);
             else if (action == Strings.ChatForwardText) await ForwardMessageAsync(message);
             else if (action == Strings.ChatCopyText) await Commands.Copy.ExecuteAsync(text);
             else if (action == Strings.Share) await ShareMessageTextAsync(text, wallet, accountId, address);

@@ -45,6 +45,16 @@ public partial class ChatPage
 
     void OnMessagesLayoutChanged(object? sender, EventArgs e)
     {
+        if (translationLayoutPending) { translationStableFrames = 0; return; }
+#if ANDROID
+        if (translationViewportSyncRequested && isVisible && HasLoaded && IsMessageListPresented && TryObserveAndroidTranslationLayout())
+        {
+            translationViewportSyncRequested = false;
+            translationLayoutPending = true;
+            translationStableFrames = 0;
+            return;
+        }
+#endif
         if (!IsMessageListPresented) EnsureInitialMessagePresentation();
         // Row remeasurement can move the bottom without resizing the outer list.
         else QueueLatestMessageScroll();
@@ -59,7 +69,7 @@ public partial class ChatPage
 
     void QueueLatestMessageScroll()
     {
-        if (explicitScrollRevision == scrollRevision) return;
+        if (translationLayoutPending || explicitScrollRevision == scrollRevision) return;
         if (!IsMessageListPresented || !isVisible || !HasLoaded || !followLatest || Messages.Count == 0
             || !messageList.IsLoaded || messageList.Width <= 0 || messageList.Height <= 0
             || latestScrollRevision == scrollRevision) return;
@@ -91,13 +101,15 @@ public partial class ChatPage
 #endif
     }
 
-    public bool ShowLatestMessages => IsMessageListPresented && isVisible && IsChatEnabled && HasLoaded && Messages.Count > 0 && !followLatest;
+    public bool ShowLatestMessages => IsMessageListPresented && isVisible && IsChatEnabled && HasLoaded && Messages.Count > 0
+        && !translationLayoutPending && !followLatest;
     public string LatestMessagesText => newMessageCount > 0
         ? string.Format(Strings.ChatNewMessages, newMessageCount > 99 ? "99+" : newMessageCount.ToString(CultureInfo.CurrentCulture))
         : Strings.ChatBackToLatest;
 
     async void OnMessagesScrolled(object sender, ItemsViewScrolledEventArgs e)
     {
+        if (translationLayoutPending) return;
         if (!IsMessageListPresented || !isVisible || !HasLoaded || Messages.Count == 0 || e.LastVisibleItemIndex < 0) return;
         bool atEnd = IsAtLatestMessage(e.LastVisibleItemIndex);
         bool layoutChanged = false;
@@ -177,6 +189,7 @@ public partial class ChatPage
 
     void RequestBottomScroll(ChatMessageViewModel target)
     {
+        restoreTranslationOffset = null;
         explicitBottomScrollRevision = ++scrollRevision;
         latestScrollRevision = null;
         DispatchMessageScroll(target, scrollToEnd: true, explicitScroll: true);
@@ -194,6 +207,7 @@ public partial class ChatPage
             {
                 // Resolve the latest bubble after any updates that arrived while the scroll was queued.
                 if (Messages.LastOrDefault() is not { } latest) return;
+                StopTranslationLayout();
                 ScrollMessageIntoView(latest, scrollToEnd: true);
             }
             else if (Messages.Contains(target)) ScrollMessageIntoView(target, scrollToEnd);
@@ -253,16 +267,11 @@ public partial class ChatPage
     }
 
 #if ANDROID
-    static bool IsSameMessage(ChatMessageViewModel message, ChatMessageViewModel anchor) =>
-        ReferenceEquals(message, anchor)
-        || (anchor.PendingId is { } pendingId && message.PendingId == pendingId)
-        || (anchor.MessageId is { } messageId && message.MessageId == messageId && message.SenderAccountId == anchor.SenderAccountId);
-
     void OnLatestMessageScrollPreDraw(object? sender, Android.Views.ViewTreeObserver.PreDrawEventArgs e)
     {
         e.Handled = true;
         var list = latestMessageScrollList;
-        if (list is null || latestMessageScrollRevision != scrollRevision
+        if (list is null || latestMessageScrollRevision != scrollRevision || translationLayoutPending
             || !isVisible || !HasLoaded || !IsMessageListPresented || IsChatContentCovered
             || !ReferenceEquals(messageList.Handler?.PlatformView, list))
         {

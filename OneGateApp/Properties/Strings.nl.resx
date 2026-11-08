@@ -1463,9 +1463,107 @@ Adres: {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Het opslaan van de profielfoto is niet voltooid. Probeer het opnieuw.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>De chatinstellingen konden niet worden geladen. Probeer het opnieuw.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Deze profielfoto kan niet meer worden opgeslagen. Kies opnieuw een foto.</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>Chatvertaling</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>Vertalen</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>Vertalen met Google</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>Vertaling kopiëren</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>Vertaling verbergen</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>Vertaling tonen</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>Doeltaal</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>App-taal volgen</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>De beschikbare talen konden niet worden geladen.</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>Kies de taal van het bericht</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>Kies een ondersteunde doeltaal</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>De gekozen doeltaal of het schrift wordt niet ondersteund. Kies een andere taal.</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>Vertalen vanuit {0} wordt niet ondersteund.</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>Vertalen vanuit {0} naar {1} wordt niet ondersteund.</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>Vertalen met deze taalcombinatie wordt niet ondersteund.</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>De volgende taalmodellen downloaden? Elk model is ongeveer 30 MB. Downloaden via wifi wordt aanbevolen.</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>Downloaden via wifi</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>Deze keer mobiele data gebruiken</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>Het taalmodel voor {0} verwijderen? Je krijgt een melding om het opnieuw te downloaden wanneer je het nodig hebt.</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>De gedownloade taalmodellen konden niet worden geladen.</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>Het taalmodel kon niet worden verwijderd.</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>Geen taalmodellen gedownload.</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>Apple beheert taaldownloads. Je kunt gedownloade talen beheren in de taal- en vertaalinstellingen van het systeem.</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>Nadat je de benodigde taalpakketten hebt gedownload, kun je chatberichten offline op je apparaat vertalen zonder ze naar een vertaaldienst te sturen.</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>Deze dienst kan door {0} geleverde vertalingen bevatten. Google geeft hiervoor geen uitdrukkelijke of stilzwijgende garanties, ook niet voor nauwkeurigheid, betrouwbaarheid, verkoopbaarheid, geschiktheid voor een bepaald doel of het ontbreken van inbreuk. {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>Vertalen mislukt. Probeer het opnieuw.</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>Het taalmodel kon niet worden gedownload. Controleer je verbinding en probeer het opnieuw.</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>Voor deze download is wifi nodig. Maak verbinding met wifi en probeer het opnieuw.</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>De wachttijd voor het downloaden is verstreken. Als je de download alleen via wifi hebt gestart, maak dan verbinding met wifi en probeer het opnieuw.</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>Dit bericht bevat geen tekst om te vertalen.</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>Dit bericht is al in de doeltaal.</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Privacy en contacten</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>Chatvoorkeuren</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Wijzigingen in je bio verwerpen?</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>De wijzigingen in je bio zijn niet opgeslagen. Wil je ze verwerpen en deze pagina verlaten?</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>Wijzigingen verwerpen</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>Taalmodellen</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>Geen</value></data>
 </root>

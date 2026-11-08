@@ -12,9 +12,9 @@ for the matching Android, Windows, or Apple toolchain.
 - **Android:** install the Android SDK and JDK required by the MAUI workload, then use a device or emulator.
   Firebase notification testing requires Google Play services.
 - **Windows:** use Windows with the Windows SDK and MSIX development tools. The app is packaged as MSIX.
-- **iOS and macOS:** use a Mac with a compatible Xcode version. Device and distribution builds need matching
-  signing identities and provisioning profiles. Set the signing options for your own developer account;
-  the checked-in project settings reference the project's distribution identities.
+- For **iOS and macOS**, use a Mac with Xcode that matches the installed
+  [.NET Apple workload](https://aka.ms/xcode-requirement). Use your own signing identities and matching
+  provisioning profiles for device and distribution builds.
 
 Open [OneGateApp.slnx](OneGateApp.slnx), restore NuGet packages, and select `OneGateApp` as the startup project.
 Choose a target framework and a device or emulator in your MAUI development environment. From the repository root,
@@ -34,6 +34,7 @@ service-account keys, APNs signing keys, and WNS client secrets belong on the se
 | [OneGateApp](OneGateApp) | MAUI wallet, chat, platform integrations, and UI resources |
 | [OneGate.DebugProtocol](OneGate.DebugProtocol) | Shared protocol for encrypted DApp remote debugging |
 | [OneGate.DebugProtocol.Tests](OneGate.DebugProtocol.Tests) | Remote-debugging protocol tests |
+| [OneGate.Translation.Apple](OneGate.Translation.Apple) | Swift translation bridge and .NET binding |
 | [OneGate.Tools](OneGate.Tools/README.md) | Payment and authentication QR/deep-link utilities |
 | [OneGate.Codex](OneGate.Codex/README.md) | Codex plugin, browser mock, and remote debugger |
 
@@ -62,6 +63,15 @@ graph, then validate Android Release builds and device behavior. When switching 
 use a clean Android intermediate directory to avoid stale resource IDs.
 
 ## Chat and notifications
+
+For chat translation changes, keep processing on the device and keep translation requests, results, and
+native error descriptions out of logs and persistent storage. Require approval before downloading language
+models and respect the selected network policy. Preserve requested writing systems, including Simplified
+and Traditional Chinese, and use the complete translation for copying and full-text reading.
+
+Keep Google's [attribution assets](https://cloud.google.com/translate/attribution) unmodified and visible beside
+Android translation results, including full-text reading. Credit Google Translate and link to Google Cloud
+Translation in the Android app description and user help.
 
 Settings > Notification settings has two switches, both enabled by default. The master switch applies
 to the entire installation; the chat switch belongs to the current chat device and is independent for
@@ -220,6 +230,11 @@ selection, crop cancellation and drag/zoom, upload and publication retry, accoun
 profile removal and list reuse. For notifications, cover permission, both switches, foreground/background,
 registration changes and notification clicks. Compilation, platform acceptance and actual delivery are
 separate results; builds do not establish device behavior or deployment readiness.
+
+For translation changes, verify language selection and support, model download approval and cancellation,
+model deletion and offline use, full-text reading and copying, and scroll position and read state. Test
+Android Debug and Release on target devices and networks. Build the Apple app on a Mac and verify system
+download prompts on real devices. Verify that translation controls appear only on supported systems.
 
 For changes to the shared remote-debugging protocol, run the existing test project:
 

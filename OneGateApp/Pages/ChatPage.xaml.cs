@@ -4,6 +4,7 @@ using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.Messaging;
+using NeoOrder.OneGate.Services.Translation;
 using System.Collections.ObjectModel;
 
 namespace NeoOrder.OneGate.Pages;
@@ -48,6 +49,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         bool changed = previousCount != Messages.Count || additions.Count > 0;
         if (!changed && !refreshExisting)
         {
+            RestoreTranslations();
             return false;
         }
 
@@ -64,6 +66,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
             if (insert) Messages.Insert(i, message);
         }
         UpdateReplyPreviews();
+        RestoreTranslations();
         NotifyScrollState();
         return changed;
     }
@@ -105,11 +108,15 @@ public partial class ChatPage : ContentPage, IQueryAttributable
     public bool CanRetryInitialHistory => !HasLoaded && !IsLoading && ErrorText is not null;
     public string BusyText { get; private set { field = value; OnPropertyChanged(); } } = Strings.Loading;
 
-    public ChatPage(MessagingService messagingService, AddressBookService addressBookService, IWalletProvider walletProvider)
+    public ChatPage(MessagingService messagingService, AddressBookService addressBookService, IWalletProvider walletProvider,
+        IChatTranslationService translationService, TranslationPreferences translationPreferences, TranslationScheduler translationScheduler)
     {
         this.messagingService = messagingService;
         this.addressBookService = addressBookService;
         this.walletProvider = walletProvider;
+        this.translationService = translationService;
+        this.translationPreferences = translationPreferences;
+        translationWorkflow = new(translationService, translationScheduler);
         BackCommand = new(async () =>
         {
             if (!OnBackButtonPressed()) await Shell.Current.GoToAsync("..");
@@ -119,6 +126,9 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         OpenConversationCommand = new(async conversation => await OpenConversationAsync(conversation));
         ConversationActionsCommand = new(async conversation => await ShowConversationActionsAsync(conversation));
         InitializeComponent();
+#if ANDROID
+        messageList.HandlerChanged += OnTranslationHandlerChanged;
+#endif
     }
 
     static View EnsureChatView(ContentView host)
@@ -153,6 +163,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
     {
         base.OnAppearing();
         isVisible = true;
+        translationPreferences.Changed += OnTranslationPreferenceChanged;
         walletProvider.WalletChanged += OnWalletChanged;
         messagingService.Changed += OnMessagingChanged;
         messagingService.ConnectionChanged += OnChatConnectionChanged;
@@ -186,6 +197,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
     {
         var history = contactDetailsHistory;
         isVisible = false;
+        translationPreferences.Changed -= OnTranslationPreferenceChanged;
         StopObservingUnreadNavigation();
 #if WINDOWS
         DetachTitleBarUnread();
@@ -433,6 +445,10 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         UpdateReceiveNotice(snapshot.SyncStatus);
         NotifyState();
         if (before.HasValue && explicitScrollRevision == scrollRevision) return;
+#if IOS || MACCATALYST
+        // Let an active translation layout preserve the anchor and its offset through the prepend.
+        if (before.HasValue && translationLayoutPending && restoreTranslationOffset is not null) return;
+#endif
         var target = scrollToEnd ? Messages.LastOrDefault() : anchor;
         if (IsMessageListPresented && target is not null)
             DispatchMessageScroll(target, scrollToEnd);
@@ -477,6 +493,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
 
     void ClearHistory(bool keepConversationList = false)
     {
+        ClearTranslations();
         contactDetailsHistory = null;
         CloseForwardRecipientPicker(resumeChat: false);
         CancelQuoteNavigation();

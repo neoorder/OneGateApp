@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <SupportedOSPlatformVersion>17.0</SupportedOSPlatformVersion>
+    <IsBindingProject>true</IsBindingProject>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LinkWithSwiftSystemLibraries>true</LinkWithSwiftSystemLibraries>
+  </PropertyGroup>
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <XcodeProject Include="native/OneGateTranslation.xcodeproj">
+      <SchemeName>OneGateTranslation</SchemeName>
+      <Kind>Framework</Kind>
+      <SmartLink>true</SmartLink>
+    </XcodeProject>
+  </ItemGroup>
+</Project>

@@ -4,6 +4,7 @@ using Meshline.Models.Protocol;
 using Neo.Wallets;
 using NeoOrder.OneGate.Properties;
 using NeoOrder.OneGate.Services.Messaging;
+using NeoOrder.OneGate.Services.Translation;
 
 namespace NeoOrder.OneGate.Pages;
 
@@ -11,6 +12,8 @@ public partial class ChatSettingsPage : ContentPage
 {
     readonly MessagingService messagingService;
     readonly IWalletProvider walletProvider;
+    readonly IChatTranslationService translationService;
+    readonly TranslationPreferences translationPreferences;
     CancellationTokenSource? operation;
     Wallet? settingsWallet;
     WalletAccount? settingsAccount;
@@ -49,6 +52,9 @@ public partial class ChatSettingsPage : ContentPage
     public string NicknameText => string.IsNullOrWhiteSpace(Nickname) ? Strings.ChatProfileEmpty : Nickname;
     public string? Bio => HasSettings ? messagingService.ChatBio : null;
     public string BioText => string.IsNullOrWhiteSpace(Bio) ? Strings.ChatProfileEmpty : Bio;
+    public bool IsTranslationAvailable => translationService.IsAvailable;
+    public string TranslationSummary => string.IsNullOrEmpty(translationPreferences.TargetLanguage) ? Strings.TranslationFollowLanguage
+        : TranslationLanguages.DisplayName(translationPreferences.TargetLanguage);
     public bool IsEditingBio { get; private set { field = value; OnPropertyChanged(); } }
     public string BioDraft
     {
@@ -82,10 +88,13 @@ public partial class ChatSettingsPage : ContentPage
         private set;
     }
 
-    public ChatSettingsPage(MessagingService messagingService, IWalletProvider walletProvider)
+    public ChatSettingsPage(MessagingService messagingService, IWalletProvider walletProvider,
+        IChatTranslationService translationService, TranslationPreferences translationPreferences)
     {
         this.messagingService = messagingService;
         this.walletProvider = walletProvider;
+        this.translationService = translationService;
+        this.translationPreferences = translationPreferences;
         InitializeComponent();
     }
 
@@ -93,6 +102,7 @@ public partial class ChatSettingsPage : ContentPage
     {
         base.OnAppearing();
         isVisible = true;
+        OnPropertyChanged(nameof(TranslationSummary));
         if (choosingAvatar) { NotifyState(); return; }
         appearanceGeneration++;
         initialized = false;
@@ -108,6 +118,7 @@ public partial class ChatSettingsPage : ContentPage
         walletProvider.WalletChanged += OnWalletChanged;
         messagingService.Changed += OnMessagingChanged;
         messagingService.ChatProfileUpdateStateChanged += OnMessagingChanged;
+        translationPreferences.Changed += OnTranslationPreferencesChanged;
         await LoadAsync();
     }
 
@@ -118,6 +129,7 @@ public partial class ChatSettingsPage : ContentPage
         walletProvider.WalletChanged -= OnWalletChanged;
         messagingService.Changed -= OnMessagingChanged;
         messagingService.ChatProfileUpdateStateChanged -= OnMessagingChanged;
+        translationPreferences.Changed -= OnTranslationPreferencesChanged;
         appearanceGeneration++;
         operation?.Cancel();
         operation = null;
@@ -289,6 +301,16 @@ public partial class ChatSettingsPage : ContentPage
         BioDraft = "";
         originalBioDraft = "";
         submittedBio = null;
+    }
+
+    void OnTranslationPreferencesChanged(object? sender, EventArgs e) => MainThread.BeginInvokeOnMainThread(() =>
+    {
+        if (isVisible) OnPropertyChanged(nameof(TranslationSummary));
+    });
+
+    async void OnTranslationClicked(object sender, EventArgs e)
+    {
+        if (IsTranslationAvailable) await NavigateToSettingsAsync("chat-translation");
     }
 
     async void OnInvitationClicked(object sender, EventArgs e) => await NavigateToSettingsAsync("//home/chat-invitation", requiresProfile: true);

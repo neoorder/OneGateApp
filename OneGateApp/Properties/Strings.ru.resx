@@ -1463,9 +1463,107 @@
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Сохранение аватара не завершено. Попробуйте снова.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Не удалось загрузить настройки чата. Попробуйте снова.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Этот аватар больше нельзя сохранить. Выберите фото заново.</value></data>
+  <data name="ChatTranslation" xml:space="preserve">
+    <value>Перевод чата</value>
+  </data>
+  <data name="TranslateMessage" xml:space="preserve">
+    <value>Перевести</value>
+  </data>
+  <data name="TranslateWithGoogle" xml:space="preserve">
+    <value>Перевести с Google</value>
+  </data>
+  <data name="TranslationCopy" xml:space="preserve">
+    <value>Копировать перевод</value>
+  </data>
+  <data name="TranslationHide" xml:space="preserve">
+    <value>Скрыть перевод</value>
+  </data>
+  <data name="TranslationShow" xml:space="preserve">
+    <value>Развернуть перевод</value>
+  </data>
+  <data name="TranslationTarget" xml:space="preserve">
+    <value>Язык перевода</value>
+  </data>
+  <data name="TranslationFollowLanguage" xml:space="preserve">
+    <value>Использовать язык приложения</value>
+  </data>
+  <data name="TranslationLanguagesLoadFailed" xml:space="preserve">
+    <value>Не удалось загрузить список доступных языков.</value>
+  </data>
+  <data name="TranslationChooseSource" xml:space="preserve">
+    <value>Выберите язык сообщения</value>
+  </data>
+  <data name="TranslationChooseTarget" xml:space="preserve">
+    <value>Выберите поддерживаемый язык перевода</value>
+  </data>
+  <data name="TranslationLanguageUnsupported" xml:space="preserve">
+    <value>Выбранный язык или письменность не поддерживается. Выберите другой язык.</value>
+  </data>
+  <data name="TranslationSourceLanguageUnsupported" xml:space="preserve">
+    <value>Перевод с языка «{0}» не поддерживается.</value>
+  </data>
+  <data name="TranslationLanguagePairUnsupported" xml:space="preserve">
+    <value>Перевод с языка «{0}» на язык «{1}» не поддерживается.</value>
+  </data>
+  <data name="TranslationLanguagesUnsupported" xml:space="preserve">
+    <value>Перевод для этой пары языков не поддерживается.</value>
+  </data>
+  <data name="TranslationDownloadPrompt" xml:space="preserve">
+    <value>Скачать следующие языковые модели? Размер каждой модели — около 30 МБ. Рекомендуется скачивать по Wi-Fi.</value>
+  </data>
+  <data name="TranslationWifi" xml:space="preserve">
+    <value>Скачать по Wi-Fi</value>
+  </data>
+  <data name="TranslationAnyNetwork" xml:space="preserve">
+    <value>Использовать мобильный интернет сейчас</value>
+  </data>
+  <data name="TranslationDeleteConfirm" xml:space="preserve">
+    <value>Удалить языковую модель для {0}? Когда она снова понадобится, появится предложение скачать её заново.</value>
+  </data>
+  <data name="TranslationModelReadFailed" xml:space="preserve">
+    <value>Не удалось загрузить список скачанных языковых моделей.</value>
+  </data>
+  <data name="TranslationModelDeleteFailed" xml:space="preserve">
+    <value>Не удалось удалить языковую модель.</value>
+  </data>
+  <data name="TranslationNoModels" xml:space="preserve">
+    <value>Языковые модели ещё не загружены.</value>
+  </data>
+  <data name="TranslationAppleModels" xml:space="preserve">
+    <value>Загрузками языков управляет Apple. Загруженные языки можно настроить в системных настройках языка и перевода.</value>
+  </data>
+  <data name="TranslationDeviceOnly" xml:space="preserve">
+    <value>После скачивания нужных языковых пакетов можно переводить сообщения чата прямо на устройстве без интернета и без отправки в сервис перевода.</value>
+  </data>
+  <data name="TranslationGoogleDisclaimer" xml:space="preserve">
+    <value>В этом сервисе могут быть переводы, предоставленные {0}. Google не даёт явных или подразумеваемых гарантий в отношении этих переводов, в том числе гарантий точности, надёжности, товарной пригодности, пригодности для определённой цели и ненарушения прав. {1}</value>
+  </data>
+  <data name="TranslationGoogleDisclaimerLink" xml:space="preserve">
+    <value>Отказ от ответственности</value>
+  </data>
+  <data name="TranslationFailed" xml:space="preserve">
+    <value>Не удалось перевести. Повторите попытку.</value>
+  </data>
+  <data name="TranslationDownloadFailed" xml:space="preserve">
+    <value>Не удалось скачать языковую модель. Проверьте подключение и повторите попытку.</value>
+  </data>
+  <data name="TranslationDownloadWifiRequired" xml:space="preserve">
+    <value>Для этой загрузки нужен Wi-Fi. Подключитесь к Wi-Fi и повторите попытку.</value>
+  </data>
+  <data name="TranslationDownloadWifiMayBeRequired" xml:space="preserve">
+    <value>Время ожидания загрузки истекло. Если загрузка была запущена только по Wi-Fi, подключитесь к Wi-Fi и повторите попытку.</value>
+  </data>
+  <data name="TranslationNoText" xml:space="preserve">
+    <value>В этом сообщении нет текста для перевода.</value>
+  </data>
+  <data name="TranslationSameLanguage" xml:space="preserve">
+    <value>Сообщение уже написано на языке перевода.</value>
+  </data>
   <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Конфиденциальность и контакты</value></data>
+  <data name="ChatPreferences" xml:space="preserve"><value>Настройки общения</value></data>
   <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Отменить изменения описания?</value></data>
   <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Изменения описания не сохранены. Отменить их и покинуть эту страницу?</value></data>
   <data name="ChatDiscardBio" xml:space="preserve"><value>Отменить изменения</value></data>
+  <data name="TranslationLanguageModels" xml:space="preserve"><value>Языковые модели</value></data>
   <data name="ChatProfileEmpty" xml:space="preserve"><value>Не указано</value></data>
 </root>
