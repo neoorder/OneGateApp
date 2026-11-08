@@ -11,7 +11,10 @@ for the matching Android, Windows, or Apple toolchain.
 
 - **Android:** install the Android SDK and JDK required by the MAUI workload, then use a device or emulator.
   Firebase notification testing requires Google Play services.
-- **Windows:** use Windows with the Windows SDK and MSIX development tools. The app is packaged as MSIX.
+- **Windows:** use the Windows SDK and MSIX development tools. Enable Developer Mode for local unsigned
+  development builds, then deploy and launch with Visual Studio's **Windows Machine** MSIX profile.
+  Trusted signed MSIX installations do not require Developer Mode. See the
+  [development deployment guide](https://learn.microsoft.com/en-us/windows/apps/develop/testing/loose-file-registration).
 - For **iOS and macOS**, use a Mac with Xcode that matches the installed
   [.NET Apple workload](https://aka.ms/xcode-requirement). Use your own signing identities and matching
   provisioning profiles for device and distribution builds.
@@ -228,8 +231,8 @@ results remain tied to the current account and view so navigation and list reuse
 Build each affected platform and validate UI/native behavior on its device or emulator. For avatars, cover
 selection, crop cancellation and drag/zoom, upload and publication retry, account switching, offline cache,
 profile removal and list reuse. For notifications, cover permission, both switches, foreground/background,
-registration changes and notification clicks. Compilation, platform acceptance and actual delivery are
-separate results; builds do not establish device behavior or deployment readiness.
+registration changes and notification clicks. On Windows, verify startup, Toast display and notification
+activation with the registered MSIX. Report build, device and delivery results separately.
 
 For translation changes, verify language selection and support, model download approval and cancellation,
 model deletion and offline use, full-text reading and copying, and scroll position and read state. Test
