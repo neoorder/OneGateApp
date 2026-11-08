@@ -4,88 +4,134 @@
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Pages.ChatSettingsPage"
+             x:DataType="og:ChatSettingsPage"
              Title="{x:Static og:Strings.ChatSettings}"
              SafeAreaEdges="All"
              BindingContext="{Binding Source={RelativeSource Self}}"
              Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
-        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
-        <toolkit:InvertedBoolConverter x:Key="Not" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Styles/ChatSettings.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="HasText" />
+            <toolkit:InvertedBoolConverter x:Key="Not" />
+        </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
-        <VerticalStackLayout Padding="20,24" Spacing="16" MaximumWidthRequest="520" HorizontalOptions="Fill">
-            <Grid WidthRequest="100" HeightRequest="100" HorizontalOptions="Center"
-                  IsVisible="{Binding HasSettings}" IsEnabled="{Binding CanEditAvatar}">
-                <og:ChatAvatarView IsSelf="True" DisplayName="{Binding Nickname}" WidthRequest="88" HeightRequest="88" StrokeShape="RoundRectangle 24"
-                                   HorizontalOptions="Start" VerticalOptions="Start">
-                    <og:ChatAvatarView.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnEditAvatarClicked" />
-                    </og:ChatAvatarView.GestureRecognizers>
-                </og:ChatAvatarView>
-                <Grid WidthRequest="44" HeightRequest="44" HorizontalOptions="End" VerticalOptions="End">
-                    <Border WidthRequest="32" HeightRequest="32" StrokeShape="RoundRectangle 16" StrokeThickness="2"
-                            HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"
-                            BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource PageBackground}" />
-                    <Button Text="&#xe63d;" StyleClass="Icon, Link" FontSize="16" WidthRequest="44" HeightRequest="44"
-                            SemanticProperties.Description="{x:Static og:Strings.ChatAvatarChange}"
-                            ToolTipProperties.Text="{x:Static og:Strings.ChatAvatarChange}" Clicked="OnEditAvatarClicked" />
-                </Grid>
-            </Grid>
-            <Grid ColumnDefinitions="*,44" ColumnSpacing="8" IsVisible="{Binding Address, Converter={StaticResource HasText}}">
-                <Label Text="{Binding Address}" StyleClass="Secondary" LineBreakMode="CharacterWrap" VerticalTextAlignment="Center" />
-                <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="18"
-                        WidthRequest="44" HeightRequest="44" VerticalOptions="Center"
-                        SemanticProperties.Description="{x:Static og:Strings.CopyAddress}"
-                        ToolTipProperties.Text="{x:Static og:Strings.CopyAddress}"
-                        Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
-            </Grid>
-            <Grid ColumnDefinitions="*,44" ColumnSpacing="12" IsVisible="{Binding HasSettings}">
-                <VerticalStackLayout Spacing="4" VerticalOptions="Center">
-                    <Label Text="{x:Static og:Strings.ChatNickname}" StyleClass="Secondary" FontSize="12" />
-                    <Label Text="{Binding Nickname, TargetNullValue='—'}" LineBreakMode="CharacterWrap" />
-                </VerticalStackLayout>
-                <Button Grid.Column="1" Text="&#xe63d;" StyleClass="Icon, Link" FontSize="22" Padding="0"
-                        MinimumHeightRequest="44" IsEnabled="{Binding CanEdit}" Clicked="OnEditNicknameClicked"
-                        SemanticProperties.Description="{x:Static og:Strings.ChatNickname}" />
-            </Grid>
-            <VerticalStackLayout Spacing="8" IsVisible="{Binding HasSettings}">
-                <Grid ColumnDefinitions="*,44" ColumnSpacing="12" IsVisible="{Binding IsEditingBio, Converter={StaticResource Not}}">
-                    <VerticalStackLayout Spacing="4" VerticalOptions="Center">
-                        <Label Text="{x:Static og:Strings.ChatBio}" StyleClass="Secondary" FontSize="12" />
-                        <Label Text="{Binding Bio, TargetNullValue='—'}" LineBreakMode="WordWrap" />
-                    </VerticalStackLayout>
-                    <Button Grid.Column="1" Text="&#xe63d;" StyleClass="Icon, Link" FontSize="22" Padding="0"
-                            MinimumHeightRequest="44" IsEnabled="{Binding CanEdit}" Clicked="OnEditBioClicked"
-                            SemanticProperties.Description="{x:Static og:Strings.ChatBio}" />
-                </Grid>
-                <VerticalStackLayout Spacing="8" IsVisible="{Binding IsEditingBio}">
-                    <Label Text="{x:Static og:Strings.ChatBio}" StyleClass="Secondary" FontSize="12" />
-                    <Border StrokeShape="RoundRectangle 8" BackgroundColor="{toolkit:AppThemeResource TextBox}" Padding="10,5">
-                        <Editor Text="{Binding BioDraft, Mode=TwoWay}" AutoSize="TextChanges" MinimumHeightRequest="96"
-                                IsReadOnly="{Binding CanEdit, Converter={StaticResource Not}}" og:Border.IsVisible="False"
-                                SemanticProperties.Description="{x:Static og:Strings.ChatBio}" />
-                    </Border>
-                    <Label Text="{x:Static og:Strings.ChatBioHint}" StyleClass="Secondary" FontSize="12" />
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsEnabled="{Binding CanEdit}">
-                        <Button Text="{x:Static og:Strings.Cancel}" StyleClass="Secondary" Clicked="OnCancelBioClicked" />
-                        <Button Grid.Column="1" Text="{x:Static og:Strings.ChatSaveBio}" Clicked="OnSaveBioClicked" />
+    <ScrollView x:Name="settingsScroll">
+        <VerticalStackLayout Style="{StaticResource ChatSettingsLayout}"
+                             WidthRequest="{Binding Width, Source={x:Reference settingsScroll}, x:DataType=ScrollView}">
+            <Border Style="{StaticResource ChatSettingsCard}" IsVisible="{Binding HasSettings}">
+                <VerticalStackLayout Spacing="0">
+                    <Grid Padding="16" ColumnDefinitions="68,*" ColumnSpacing="16">
+                        <Grid WidthRequest="68" HeightRequest="68" VerticalOptions="Start" IsEnabled="{Binding CanEditAvatar}">
+                            <og:ChatAvatarView IsSelf="True" DisplayName="{Binding Nickname}" WidthRequest="60" HeightRequest="60"
+                                               StrokeShape="RoundRectangle 16" HorizontalOptions="Start" VerticalOptions="Start"
+                                               AutomationProperties.IsInAccessibleTree="False">
+                                <og:ChatAvatarView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEditAvatarClicked" />
+                                </og:ChatAvatarView.GestureRecognizers>
+                            </og:ChatAvatarView>
+                            <Grid WidthRequest="44" HeightRequest="44" HorizontalOptions="End" VerticalOptions="End">
+                                <Border WidthRequest="28" HeightRequest="28" StrokeShape="RoundRectangle 14" StrokeThickness="1"
+                                        HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True"
+                                        BackgroundColor="{toolkit:AppThemeResource Panel}" Stroke="{toolkit:AppThemeResource Stroke}" />
+                                <Button Text="&#xe63d;" StyleClass="Icon, Link" FontSize="14" WidthRequest="44" HeightRequest="44"
+                                        Padding="0" MinimumHeightRequest="44" SemanticProperties.Description="{x:Static og:Strings.ChatAvatarChange}"
+                                        ToolTipProperties.Text="{x:Static og:Strings.ChatAvatarChange}" Clicked="OnEditAvatarClicked" />
+                            </Grid>
+                        </Grid>
+                        <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                            <Label Text="{Binding NicknameText}" FontSize="20" FontAttributes="Bold" LineBreakMode="CharacterWrap">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Nickname, Converter={StaticResource HasText}}" Value="False">
+                                        <Setter Property="TextColor" Value="{toolkit:AppThemeResource Secondary}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Grid ColumnDefinitions="*,44" ColumnSpacing="8" IsVisible="{Binding Address, Converter={StaticResource HasText}}">
+                                <Label Text="{Binding Address}" Style="{StaticResource ChatSettingsCaption}" VerticalOptions="Center"
+                                       LineBreakMode="MiddleTruncation" MaxLines="1" SemanticProperties.Description="{Binding Address}" />
+                                <Button Grid.Column="1" StyleClass="Icon, IconSecondary" Text="&#xe664;" FontSize="16"
+                                        WidthRequest="44" MinimumHeightRequest="44" Padding="0"
+                                        SemanticProperties.Description="{x:Static og:Strings.CopyAddress}" SemanticProperties.Hint="{Binding Address}"
+                                        ToolTipProperties.Text="{x:Static og:Strings.CopyAddress}"
+                                        Command="{x:Static og:Commands.Copy}" CommandParameter="{Binding Address}" />
+                            </Grid>
+                        </VerticalStackLayout>
                     </Grid>
+                    <BoxView Style="{StaticResource ChatSettingsDivider}" />
+                    <Grid Style="{StaticResource ChatSettingsRow}" IsEnabled="{Binding CanEdit}">
+                        <Button Style="{StaticResource ChatSettingsRowButton}" Clicked="OnEditNicknameClicked"
+                                SemanticProperties.Description="{x:Static og:Strings.ChatNickname}" SemanticProperties.Hint="{Binding NicknameText}" />
+                        <Grid Padding="16,14" ColumnDefinitions="0.4*,0.6*,Auto" ColumnSpacing="12" InputTransparent="True">
+                            <Label Text="{x:Static og:Strings.ChatNickname}" VerticalOptions="Center" LineBreakMode="WordWrap" AutomationProperties.IsInAccessibleTree="False" />
+                            <Label Grid.Column="1" Text="{Binding NicknameText}" StyleClass="Secondary" HorizontalTextAlignment="End"
+                                   VerticalOptions="Center" LineBreakMode="CharacterWrap" AutomationProperties.IsInAccessibleTree="False" />
+                            <Label Grid.Column="2" Text="&#xe70a;" StyleClass="Icon, Secondary" FontSize="12" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
+                        </Grid>
+                    </Grid>
+                    <BoxView Style="{StaticResource ChatSettingsDivider}" />
+                    <Grid Style="{StaticResource ChatSettingsRow}" IsEnabled="{Binding CanEdit}" IsVisible="{Binding IsEditingBio, Converter={StaticResource Not}}">
+                        <Button Style="{StaticResource ChatSettingsRowButton}" Clicked="OnEditBioClicked"
+                                SemanticProperties.Description="{x:Static og:Strings.ChatBio}" SemanticProperties.Hint="{Binding BioText}" />
+                        <Grid Padding="16,14" ColumnDefinitions="0.3*,0.7*,Auto" ColumnSpacing="12" InputTransparent="True">
+                            <Label Text="{x:Static og:Strings.ChatBio}" VerticalOptions="Center" LineBreakMode="WordWrap" AutomationProperties.IsInAccessibleTree="False" />
+                            <Label Grid.Column="1" Text="{Binding BioText}" StyleClass="Secondary" HorizontalTextAlignment="End"
+                                   VerticalOptions="Center" LineBreakMode="WordWrap" AutomationProperties.IsInAccessibleTree="False" />
+                            <Label Grid.Column="2" Text="&#xe70a;" StyleClass="Icon, Secondary" FontSize="12" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
+                        </Grid>
+                    </Grid>
+                    <VerticalStackLayout Padding="16" Spacing="12" IsVisible="{Binding IsEditingBio}">
+                        <Label Text="{x:Static og:Strings.ChatBio}" />
+                        <Border StyleClass="Field" Padding="10,6">
+                            <Editor Text="{Binding BioDraft, Mode=TwoWay}" AutoSize="TextChanges" MinimumHeightRequest="96"
+                                    IsReadOnly="{Binding CanEdit, Converter={StaticResource Not}}" og:Border.IsVisible="False"
+                                    SemanticProperties.Description="{x:Static og:Strings.ChatBio}" />
+                        </Border>
+                        <Label Text="{x:Static og:Strings.ChatBioHint}" Style="{StaticResource ChatSettingsCaption}" />
+                        <FlexLayout JustifyContent="End" Wrap="Wrap" IsEnabled="{Binding CanEdit}">
+                            <Button Text="{x:Static og:Strings.Cancel}" StyleClass="Secondary" Margin="0,0,8,8" Clicked="OnCancelBioClicked" />
+                            <Button Text="{x:Static og:Strings.ChatSaveBio}" Margin="0,0,0,8" Clicked="OnSaveBioClicked" />
+                        </FlexLayout>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout Spacing="8" IsVisible="{Binding HasSettings}">
+                <Label Text="{x:Static og:Strings.ChatPrivacyAndContacts}" Style="{StaticResource ChatSettingsHeading}" />
+                <Border Style="{StaticResource ChatSettingsCard}">
+                    <VerticalStackLayout Spacing="0">
+                        <VerticalStackLayout Padding="16,8,16,16" Spacing="4">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" MinimumHeightRequest="44">
+                                <Label Text="{x:Static og:Strings.ChatAllowAddressDiscovery}" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                                <Switch Grid.Column="1" IsToggled="{Binding AllowAddressDiscovery, Mode=OneWay}" IsEnabled="{Binding CanEdit}"
+                                        MinimumHeightRequest="44" MinimumWidthRequest="44" VerticalOptions="Center" Toggled="OnDiscoveryToggled"
+                                        SemanticProperties.Description="{x:Static og:Strings.ChatAllowAddressDiscovery}" />
+                            </Grid>
+                            <Label Text="{Binding DiscoveryHint}" Style="{StaticResource ChatSettingsCaption}" />
+                        </VerticalStackLayout>
+                        <BoxView Style="{StaticResource ChatSettingsDivider}" />
+                        <Grid Style="{StaticResource ChatSettingsRow}" IsEnabled="{Binding CanEdit}">
+                            <Button Style="{StaticResource ChatSettingsRowButton}" Clicked="OnInvitationClicked"
+                                    SemanticProperties.Description="{x:Static og:Strings.ChatMyInvitation}" />
+                            <Grid Padding="16,14" ColumnDefinitions="*,Auto" ColumnSpacing="12" InputTransparent="True">
+                                <Label Text="{x:Static og:Strings.ChatMyInvitation}" VerticalOptions="Center" LineBreakMode="WordWrap" AutomationProperties.IsInAccessibleTree="False" />
+                                <Label Grid.Column="1" Text="&#xe70a;" StyleClass="Icon, Secondary" FontSize="12" VerticalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
+                            </Grid>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
             </VerticalStackLayout>
-            <Grid ColumnDefinitions="*,auto" ColumnSpacing="12" MinimumHeightRequest="44">
-                <Label Text="{x:Static og:Strings.ChatAllowAddressDiscovery}" VerticalTextAlignment="Center" LineBreakMode="WordWrap" />
-                <Switch Grid.Column="1" IsToggled="{Binding AllowAddressDiscovery, Mode=OneWay}" IsEnabled="{Binding CanEdit}"
-                        Toggled="OnDiscoveryToggled" SemanticProperties.Description="{x:Static og:Strings.ChatAllowAddressDiscovery}" />
-            </Grid>
-            <Label Text="{Binding DiscoveryHint}" StyleClass="Secondary" IsVisible="{Binding HasSettings}" />
-            <HorizontalStackLayout Spacing="10" IsVisible="{Binding ShowLoading}" HorizontalOptions="Center">
-                <ActivityIndicator IsRunning="{Binding ShowLoading}" WidthRequest="20" HeightRequest="20" />
-                <Label Text="{Binding BusyText}" StyleClass="Secondary" VerticalTextAlignment="Center" />
-            </HorizontalStackLayout>
-            <Label Text="{Binding ErrorText}" StyleClass="Danger" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
-            <Button Text="{x:Static og:Strings.Retry}" IsVisible="{Binding CanRetry}" Clicked="OnRetryClicked" />
-            <Button Text="{x:Static og:Strings.ChatMyInvitation}" StyleClass="Secondary" IsVisible="{Binding HasSettings}" IsEnabled="{Binding CanEdit}"
-                    Command="{x:Static og:Commands.GotoPage}" CommandParameter="//home/chat-invitation" />
+
+            <VerticalStackLayout Spacing="8" IsVisible="{Binding ShowProfileStatus}">
+                <Grid ColumnDefinitions="24,*" ColumnSpacing="8" IsVisible="{Binding ShowLoading}">
+                    <ActivityIndicator IsRunning="{Binding ShowLoading}" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Text="{Binding BusyText}" Style="{StaticResource ChatSettingsCaption}" VerticalOptions="Center" />
+                </Grid>
+                <Label Text="{Binding ErrorText}" StyleClass="Danger" LineBreakMode="WordWrap" IsVisible="{Binding ErrorText, Converter={StaticResource HasText}}" />
+                <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" HorizontalOptions="Start" IsVisible="{Binding CanRetry}" Clicked="OnRetryClicked" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

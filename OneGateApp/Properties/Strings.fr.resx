@@ -1463,4 +1463,9 @@ Adresse : {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>L’enregistrement de la photo de profil n’a pas été terminé. Veuillez réessayer.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Impossible de charger les réglages du chat. Veuillez réessayer.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Cette photo de profil ne peut plus être enregistrée. Veuillez sélectionner à nouveau une photo.</value></data>
+  <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Confidentialité et contacts</value></data>
+  <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Abandonner les modifications de la bio ?</value></data>
+  <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Les modifications de votre bio n’ont pas été enregistrées. Voulez-vous les abandonner et quitter cette page ?</value></data>
+  <data name="ChatDiscardBio" xml:space="preserve"><value>Abandonner les modifications</value></data>
+  <data name="ChatProfileEmpty" xml:space="preserve"><value>Non renseigné</value></data>
 </root>

@@ -27,10 +27,13 @@ public partial class ChatSettingsPage : ContentPage
     string? submittedBio;
     string? nicknameDraft;
     bool editingNickname;
+    bool navigating;
+    string originalBioDraft = "";
     int appearanceGeneration;
 
     public bool IsWorking => operation is not null;
     public bool ShowLoading => BusyText is not null;
+    public bool ShowProfileStatus => ShowLoading || !string.IsNullOrWhiteSpace(ErrorText) || CanRetry;
     bool IsCurrentAccount => ReferenceEquals(settingsWallet, walletProvider.GetWallet())
         && ReferenceEquals(settingsAccount, settingsWallet?.GetDefaultAccount())
         && localAccountId == messagingService.AccountId;
@@ -43,7 +46,9 @@ public partial class ChatSettingsPage : ContentPage
         && (!initialized || HasSettings && (profileStateUnavailable || HasProfileFailure || HasProfileDraft || HasAvatarEdits));
     public string? Address => !accountChanged ? settingsAccount?.Address : null;
     public string? Nickname => HasSettings ? messagingService.ChatNickname : null;
+    public string NicknameText => string.IsNullOrWhiteSpace(Nickname) ? Strings.ChatProfileEmpty : Nickname;
     public string? Bio => HasSettings ? messagingService.ChatBio : null;
+    public string BioText => string.IsNullOrWhiteSpace(Bio) ? Strings.ChatProfileEmpty : Bio;
     public bool IsEditingBio { get; private set { field = value; OnPropertyChanged(); } }
     public string BioDraft
     {
@@ -68,6 +73,7 @@ public partial class ChatSettingsPage : ContentPage
             field = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(ShowLoading));
+            OnPropertyChanged(nameof(ShowProfileStatus));
         }
     }
     public string? ErrorText
@@ -254,6 +260,7 @@ public partial class ChatSettingsPage : ContentPage
         if (!CanEdit || IsEditingBio) return;
         var pending = HasChange(profileDraft.Bio) ? profileDraft.Bio : profileUpdateState?.PendingUpdate?.Bio ?? default;
         BioDraft = pending.IsSpecified ? pending.Value : pending.IsDeleted ? "" : Bio ?? "";
+        originalBioDraft = BioDraft;
         IsEditingBio = true;
     }
 
@@ -280,7 +287,32 @@ public partial class ChatSettingsPage : ContentPage
     {
         IsEditingBio = false;
         BioDraft = "";
+        originalBioDraft = "";
         submittedBio = null;
+    }
+
+    async void OnInvitationClicked(object sender, EventArgs e) => await NavigateToSettingsAsync("//home/chat-invitation", requiresProfile: true);
+
+    async Task NavigateToSettingsAsync(string route, bool requiresProfile = false)
+    {
+        if (!isVisible || navigating || requiresProfile && !CanEdit) return;
+        navigating = true;
+        int generation = appearanceGeneration;
+        try
+        {
+            bool unsavedBio = IsEditingBio && BioDraft.Trim() != originalBioDraft.Trim()
+                && (submittedBio != BioDraft.Trim() || HasChange(profileDraft.Bio));
+            if (unsavedBio && !await DisplayAlertAsync(Strings.ChatDiscardBioTitle, Strings.ChatDiscardBioMessage,
+                    Strings.ChatDiscardBio, Strings.Cancel)) return;
+            if (!isVisible || generation != appearanceGeneration || requiresProfile && !CanEdit) return;
+            await Shell.Current.GoToAsync(route);
+        }
+        catch (Exception)
+        {
+            if (isVisible && generation == appearanceGeneration)
+                await DisplayAlertAsync(Strings.OperationFailed, Strings.UnknownError, Strings.OK);
+        }
+        finally { navigating = false; }
     }
 
     async void OnRetryClicked(object sender, EventArgs e) => await RetryAsync();
@@ -425,13 +457,16 @@ public partial class ChatSettingsPage : ContentPage
     {
         OnPropertyChanged(nameof(IsWorking));
         OnPropertyChanged(nameof(ShowLoading));
+        OnPropertyChanged(nameof(ShowProfileStatus));
         OnPropertyChanged(nameof(HasSettings));
         OnPropertyChanged(nameof(CanEdit));
         OnPropertyChanged(nameof(CanEditAvatar));
         OnPropertyChanged(nameof(CanRetry));
         OnPropertyChanged(nameof(Address));
         OnPropertyChanged(nameof(Nickname));
+        OnPropertyChanged(nameof(NicknameText));
         OnPropertyChanged(nameof(Bio));
+        OnPropertyChanged(nameof(BioText));
         OnPropertyChanged(nameof(BusyText));
         OnPropertyChanged(nameof(ErrorText));
     }

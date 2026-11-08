@@ -1463,4 +1463,9 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>プロフィール画像の保存が完了していません。もう一度お試しください。</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>チャット設定を読み込めませんでした。もう一度お試しください。</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>このプロフィール画像は保存できなくなりました。写真を選び直してください。</value></data>
+  <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>プライバシーと連絡先</value></data>
+  <data name="ChatDiscardBioTitle" xml:space="preserve"><value>自己紹介の変更を破棄しますか？</value></data>
+  <data name="ChatDiscardBioMessage" xml:space="preserve"><value>自己紹介の変更は保存されていません。変更を破棄してこのページを離れますか？</value></data>
+  <data name="ChatDiscardBio" xml:space="preserve"><value>変更を破棄</value></data>
+  <data name="ChatProfileEmpty" xml:space="preserve"><value>なし</value></data>
 </root>

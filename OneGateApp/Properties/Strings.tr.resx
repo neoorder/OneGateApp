@@ -1463,4 +1463,9 @@ Adres: {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Profil fotoğrafını kaydetme işlemi tamamlanmadı. Lütfen tekrar deneyin.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Sohbet ayarları yüklenemedi. Lütfen tekrar deneyin.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Bu profil fotoğrafı artık kaydedilemiyor. Lütfen yeniden fotoğraf seçin.</value></data>
+  <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Gizlilik ve kişiler</value></data>
+  <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Biyografi değişiklikleri silinsin mi?</value></data>
+  <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Biyografi değişiklikleriniz kaydedilmedi. Değişiklikleri silip bu sayfadan çıkmak ister misiniz?</value></data>
+  <data name="ChatDiscardBio" xml:space="preserve"><value>Değişiklikleri sil</value></data>
+  <data name="ChatProfileEmpty" xml:space="preserve"><value>Yok</value></data>
 </root>

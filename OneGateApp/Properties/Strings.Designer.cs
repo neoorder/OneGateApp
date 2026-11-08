@@ -23,6 +23,12 @@ namespace NeoOrder.OneGate.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
+        internal static string ChatProfileEmpty => ResourceManager.GetString("ChatProfileEmpty", resourceCulture);
+        internal static string ChatPrivacyAndContacts => ResourceManager.GetString("ChatPrivacyAndContacts", resourceCulture);
+        internal static string ChatDiscardBioTitle => ResourceManager.GetString("ChatDiscardBioTitle", resourceCulture);
+        internal static string ChatDiscardBioMessage => ResourceManager.GetString("ChatDiscardBioMessage", resourceCulture);
+        internal static string ChatDiscardBio => ResourceManager.GetString("ChatDiscardBio", resourceCulture);
+
         internal static string ChatSettingsLoadFailed => ResourceManager.GetString("ChatSettingsLoadFailed", resourceCulture);
         internal static string ChatAvatar => ResourceManager.GetString("ChatAvatar", resourceCulture);
         internal static string ChatAvatarChange => ResourceManager.GetString("ChatAvatarChange", resourceCulture);

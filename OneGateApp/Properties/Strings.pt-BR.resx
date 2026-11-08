@@ -1463,4 +1463,9 @@ Endereço: {0}</value></data>
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Não foi possível concluir o salvamento da foto de perfil. Tente novamente.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Não foi possível carregar as configurações do chat. Tente novamente.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Não é mais possível salvar esta foto de perfil. Escolha uma foto novamente.</value></data>
+  <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Privacidade e contatos</value></data>
+  <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Descartar as alterações da biografia?</value></data>
+  <data name="ChatDiscardBioMessage" xml:space="preserve"><value>As alterações da sua biografia não foram salvas. Deseja descartá-las e sair desta página?</value></data>
+  <data name="ChatDiscardBio" xml:space="preserve"><value>Descartar alterações</value></data>
+  <data name="ChatProfileEmpty" xml:space="preserve"><value>Não definido</value></data>
 </root>

@@ -1463,4 +1463,9 @@
   <data name="ChatAvatarSaveFailed" xml:space="preserve"><value>Сохранение аватара не завершено. Попробуйте снова.</value></data>
   <data name="ChatSettingsLoadFailed" xml:space="preserve"><value>Не удалось загрузить настройки чата. Попробуйте снова.</value></data>
   <data name="ChatAvatarUploadExpired" xml:space="preserve"><value>Этот аватар больше нельзя сохранить. Выберите фото заново.</value></data>
+  <data name="ChatPrivacyAndContacts" xml:space="preserve"><value>Конфиденциальность и контакты</value></data>
+  <data name="ChatDiscardBioTitle" xml:space="preserve"><value>Отменить изменения описания?</value></data>
+  <data name="ChatDiscardBioMessage" xml:space="preserve"><value>Изменения описания не сохранены. Отменить их и покинуть эту страницу?</value></data>
+  <data name="ChatDiscardBio" xml:space="preserve"><value>Отменить изменения</value></data>
+  <data name="ChatProfileEmpty" xml:space="preserve"><value>Не указано</value></data>
 </root>

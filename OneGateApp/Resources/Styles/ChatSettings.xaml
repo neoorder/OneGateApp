@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <Style x:Key="ChatSettingsLayout" TargetType="VerticalStackLayout">
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Spacing" Value="20" />
+        <Setter Property="MaximumWidthRequest" Value="520" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="ChatSettingsCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource Panel}" />
+        <Setter Property="Stroke" Value="{toolkit:AppThemeResource Stroke}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style x:Key="ChatSettingsHeading" TargetType="Label">
+        <Setter Property="TextColor" Value="{toolkit:AppThemeResource Secondary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="SemanticProperties.HeadingLevel" Value="Level2" />
+    </Style>
+    <Style x:Key="ChatSettingsCaption" TargetType="Label">
+        <Setter Property="TextColor" Value="{toolkit:AppThemeResource Secondary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+    <Style x:Key="ChatSettingsDivider" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1" />
+        <Setter Property="Margin" Value="16,0" />
+        <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource Stroke}" />
+        <Setter Property="InputTransparent" Value="True" />
+    </Style>
+    <Style x:Key="ChatSettingsRow" TargetType="Grid">
+        <Setter Property="MinimumHeightRequest" Value="56" />
+        <Style.Triggers>
+            <Trigger TargetType="Grid" Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="ChatSettingsRowButton" TargetType="Button">
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+        <Setter Property="MinimumWidthRequest" Value="44" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="VerticalOptions" Value="Fill" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal" />
+                    <VisualState Name="Disabled" />
+                    <VisualState Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource PanelAlt}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="Focused">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="{toolkit:AppThemeResource Brand}" />
+                            <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource BrandMuted}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource TextBox}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+</ResourceDictionary>
