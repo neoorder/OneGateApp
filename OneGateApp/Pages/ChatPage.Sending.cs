@@ -123,15 +123,15 @@ public partial class ChatPage
 
     void OnSendClicked(object sender, EventArgs e)
     {
-        if (!CanSend || localAccountId is null || switchingConversation
-            || !IsCurrentMessageContext(walletProvider.GetWallet(), localAccountId, Address)) return;
+        if (!CanSend || localAccountId is not { } accountId || switchingConversation
+            || !IsCurrentMessageContext(walletProvider.GetWallet(), accountId, Address)) return;
         try
         {
-            messagingService.QueueTextMessage(localAccountId, Address, Draft, replyTo);
+            bool scrollToEnd = QueueMessageForCurrentChat(() => messagingService.QueueTextMessage(accountId, Address, Draft, replyTo));
             SetReplyDraft(null);
             Draft = "";
             SendErrorText = null;
-            ShowLatestPendingMessage();
+            UpdateAfterSend(scrollToEnd);
 #if WINDOWS
             messageEditor.Focus();
 #endif
@@ -139,14 +139,32 @@ public partial class ChatPage
         catch (Exception ex) { SendErrorText = ex.Message; }
     }
 
-    void ShowLatestPendingMessage()
+    bool QueueMessageForCurrentChat(Action queue)
     {
+        // Queueing can synchronously refresh the list. Use the viewport from before the insertion.
+        bool scrollToEnd = Messages.Count == 0 || IsLastMessageVisible();
+        bool wasFollowing = followLatest;
+        followLatest = false;
+        try { queue(); }
+        catch { followLatest = wasFollowing; throw; }
+        return scrollToEnd;
+    }
+
+    void UpdateAfterSend(bool scrollToEnd)
+    {
+        followLatest = false;
+        RefreshPendingMessages();
+        followLatest = scrollToEnd;
+        if (!scrollToEnd || Messages.LastOrDefault() is not { } target)
+        {
+            NotifyScrollState();
+            return;
+        }
+
         CancelQuoteNavigation();
         ClearQuoteHighlight();
         ClearQuoteReturnPosition();
-        scrollRevision++;
-        followLatest = true;
-        RefreshPendingMessages();
+        RequestBottomScroll(target);
     }
 
     void OnRetrySendClicked(object sender, EventArgs e)
@@ -215,25 +233,46 @@ public partial class ChatPage
     {
         if (!IsChatEnabled || localAccountId is null) return;
         var saved = Messages.Where(message => !message.IsPending).ToArray();
-        messagingService.RemoveSavedPendingMessages(localAccountId, Address,
-            saved.Where(message => message.IsOutgoing).Select(message => message.MessageId!).ToHashSet(StringComparer.Ordinal));
-        var pending = messagingService.GetPendingChatMessages(localAccountId, Address).Select(message =>
+        if (SetMessagesWithPending(saved, appendNewRows: IsMessageListPresented)
+            && followLatest && Messages.LastOrDefault() is { } target)
+            DispatchMessageScroll(target, scrollToEnd: true);
+    }
+
+    bool SetMessagesWithPending(ChatMessageViewModel[] saved, HashSet<string>? submittedMessageIds = null, bool appendNewRows = false)
+    {
+        var savedIds = saved.Where(message => message.IsOutgoing).Select(message => message.MessageId!).ToHashSet(StringComparer.Ordinal);
+        if (submittedMessageIds is not null) savedIds.UnionWith(submittedMessageIds);
+        var (confirmed, remaining) = messagingService.ReconcilePendingMessages(localAccountId!, Address, savedIds);
+        bool confirmedInPlace = false;
+        foreach (var message in confirmed)
         {
-            var viewModel = Messages.FirstOrDefault(value => value.PendingId == message.Id) ?? new ChatMessageViewModel(message);
+            if (Messages.FirstOrDefault(row => row.IsPending && row.PendingId == message.Id) is not { } viewModel) continue;
+            var status = message.SendStatus!;
+            int index = Array.FindIndex(saved, row => row.IsOutgoing && row.MessageId == status.MessageId);
+            if (index < 0) continue;
+
+            viewModel.ConfirmPending(saved[index].SavedMessage!, status);
+            saved[index] = viewModel;
+            confirmedInPlace = true;
+        }
+
+        var pending = remaining.Select(message =>
+        {
+            var viewModel = Messages.FirstOrDefault(row => row.IsPending && row.PendingId == message.Id) ?? new ChatMessageViewModel(message);
             viewModel.UpdatePending(message);
             return viewModel;
         }).ToArray();
-        // Insert local entries by creation time without reordering SDK history or its sequence cursors.
+        if (appendNewRows) return SetMessages([.. pending, .. saved], refreshExisting: confirmedInPlace, appendNewRows: true);
+
+        // Choose insertion positions for new rows using SDK order and local creation times.
         ChatMessageViewModel[] updated = new ChatMessageViewModel[saved.Length + pending.Length];
         int savedIndex = 0, pendingIndex = 0;
         for (int i = 0; i < updated.Length; i++)
             updated[i] = savedIndex < saved.Length
                 && (pendingIndex == pending.Length || saved[savedIndex].Timestamp <= pending[pendingIndex].Timestamp)
                 ? saved[savedIndex++] : pending[pendingIndex++];
-        if (Messages.SequenceEqual(updated)) return;
-        SetMessages(updated);
-        if (followLatest && Messages.LastOrDefault() is { } target)
-            DispatchMessageScroll(target, scrollToEnd: true);
+        if (confirmedInPlace || !Messages.SequenceEqual(updated)) return SetMessages(updated, refreshExisting: confirmedInPlace);
+        return false;
     }
 
     async Task ReadSendStatusesAsync(CancellationToken cancellationToken)

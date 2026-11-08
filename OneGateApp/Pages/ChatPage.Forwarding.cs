@@ -178,12 +178,15 @@ public partial class ChatPage
         }
         if (ForwardRecipientPreview is not { } contact || queueForwardMessage is not { } queue
             || !allForwardRecipients.Any(candidate => ReferenceEquals(candidate, contact))) return;
+        bool showForwardedMessage = contact.Address == Address && !ShowMessageSearch;
+        bool scrollToEnd = false;
         ForwardRecipientError = null;
         try
         {
             // Use the same optimistic send queue as the composer, without touching either draft.
             // Contact validation and delivery run in the queue; failures remain retryable in the target chat.
-            queue(contact);
+            if (showForwardedMessage) scrollToEnd = QueueMessageForCurrentChat(() => queue(contact));
+            else queue(contact);
         }
         catch (Exception ex)
         {
@@ -191,13 +194,8 @@ public partial class ChatPage
             return;
         }
         if (!ReferenceEquals(forwardRecipientSelection, selection)) return;
-        bool showForwardedMessage = contact.Address == Address && !ShowMessageSearch;
         CloseForwardRecipientPicker(resumeChat: !showForwardedMessage);
-        if (showForwardedMessage)
-        {
-            ShowLatestPendingMessage();
-            QueueLatestMessageScroll();
-        }
+        if (showForwardedMessage) UpdateAfterSend(scrollToEnd);
         else await Toast.Show(Strings.ChatMessageQueued);
     }
 

@@ -6,15 +6,14 @@ namespace NeoOrder.OneGate.Services.Messaging;
 
 public sealed partial class MessagingService
 {
-    public async Task<(MessageInfo[] Messages, bool HasMore, ResourceSyncStatus? SyncStatus)> GetChatHistoryAsync(
+    public async Task<(MessageInfo[] Messages, bool HasMore, ResourceSyncStatus? SyncStatus, HashSet<string>? SubmittedMessageIds)> GetChatHistoryAsync(
         string localAccountId, string address, long? before = null,
         CancellationToken cancellationToken = default, long? after = null)
     {
         if (before.HasValue && after.HasValue) throw new ArgumentException("Specify one history direction.");
-        // Wait outside lifecycleLock so other conversations and account changes remain available.
-        // A send must expose its SDK message ID before this conversation reads the committed history.
-        var submission = GetSubmissionLock(localAccountId, address);
-        await submission.WaitAsync(cancellationToken);
+        // Earlier pages end at an existing sequence. Only reads that can include a new send wait for its ID.
+        var submission = before.HasValue ? null : GetSubmissionLock(localAccountId, address);
+        if (submission is not null) await submission.WaitAsync(cancellationToken);
         try
         {
             await lifecycleLock.WaitAsync(cancellationToken);
@@ -39,6 +38,11 @@ public sealed partial class MessagingService
                     EnsureCurrentAccount(wallet, account);
                     // Read local state only. The SDK synchronizes and recovers in the background.
                     var status = await current.MessageManager.GetSyncStatusAsync(current.Route!.RelayId, operation.Token);
+                    // The SDK commits outgoing history with the outbox before returning a message ID.
+                    var submittedMessageIds = before is null && after is null
+                        ? GetPendingChatMessages(localAccountId, address).Select(message => message.SendStatus?.MessageId)
+                            .OfType<string>().ToHashSet(StringComparer.Ordinal)
+                        : null;
                     // Removing a friend does not remove this account's verified local history.
                     // Before selects the closest older batch. The SDK accepts safe-integer bounds.
                     await using var reader = await current.MessageManager.GetMessageHistoryAsync(accountId,
@@ -47,13 +51,15 @@ public sealed partial class MessagingService
                     var messages = await reader.ReadNextAsync(51, operation.Token);
                     operation.Token.ThrowIfCancellationRequested();
                     EnsureCurrentAccount(wallet, account);
-                    return ((after.HasValue ? messages.Take(50) : messages.TakeLast(50)).ToArray(), messages.Count > 50, status);
+                    bool hasMore = messages.Count > 50;
+                    return ((after.HasValue ? messages.Take(50) : messages.TakeLast(50)).ToArray(), hasMore, status,
+                        hasMore ? submittedMessageIds : null);
                 }
                 finally { walletProvider.WalletChanged -= OnWalletChanged; }
             }
             finally { lifecycleLock.Release(); }
         }
-        finally { submission.Release(); }
+        finally { submission?.Release(); }
     }
 
     // Reads verified local history only; a reply reference must never expose a different conversation.

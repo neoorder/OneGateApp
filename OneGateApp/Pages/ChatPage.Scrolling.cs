@@ -1,7 +1,9 @@
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Properties;
 using System.Globalization;
-#if WINDOWS
+#if ANDROID
+using Microsoft.Maui.Controls.Handlers.Items;
+#elif WINDOWS
 using Microsoft.UI.Xaml.Media;
 using NativeListView = Microsoft.UI.Xaml.Controls.ListViewBase;
 using NativeScrollViewer = Microsoft.UI.Xaml.Controls.ScrollViewer;
@@ -14,12 +16,17 @@ public partial class ChatPage
     int newMessageCount;
     long? firstNewMessageSequence;
     int? latestScrollRevision;
+    int? explicitScrollRevision;
+    int? explicitBottomScrollRevision;
     ChatMessageViewModel? initialScrollAnchor;
     int scrollRevision;
 #if WINDOWS
     (double ExtentHeight, double ViewportHeight)? lastScrollLayout;
 #elif ANDROID
     Android.Views.ViewTreeObserver? initialPresentationObserver;
+    Android.Views.ViewTreeObserver? latestMessageScrollObserver;
+    AndroidX.RecyclerView.Widget.RecyclerView? latestMessageScrollList;
+    int latestMessageScrollRevision;
 #elif IOS || MACCATALYST
     CoreAnimation.CADisplayLink? initialPresentationDisplayLink;
 #endif
@@ -52,6 +59,7 @@ public partial class ChatPage
 
     void QueueLatestMessageScroll()
     {
+        if (explicitScrollRevision == scrollRevision) return;
         if (!IsMessageListPresented || !isVisible || !HasLoaded || !followLatest || Messages.Count == 0
             || !messageList.IsLoaded || messageList.Width <= 0 || messageList.Height <= 0
             || latestScrollRevision == scrollRevision) return;
@@ -74,6 +82,9 @@ public partial class ChatPage
         latestScrollRevision = null;
         initialScrollAnchor = null;
         StopInitialMessagePresentation();
+#if ANDROID
+        StopLatestMessageScrollConfirmation();
+#endif
         IsMessageListPresented = false;
 #if WINDOWS
         lastScrollLayout = null;
@@ -110,7 +121,11 @@ public partial class ChatPage
             }
         }
         if (!atEnd && latestScrollRevision == scrollRevision) return;
-        if (atEnd) latestScrollRevision = null;
+        if (atEnd)
+        {
+            latestScrollRevision = null;
+            explicitBottomScrollRevision = null;
+        }
         firstVisibleIndex = Math.Max(0, e.FirstVisibleItemIndex);
         followLatest = atEnd;
         if (followLatest) ClearNewMessageHint();
@@ -124,9 +139,8 @@ public partial class ChatPage
         NotifyScrollState();
         MarkDisplayedMessagesRead(atLatest: atEnd);
         // Only an upward movement near the start loads another local page. Errors require explicit retry.
-        if (e.VerticalDelta < 0 && e.FirstVisibleItemIndex is >= 0 and <= 2 && !followLatest
-            && CanLoadEarlier && HasMore && EarlierMessagesError is null)
-            await LoadAsync(earlier: true);
+        if (e.VerticalDelta < 0 && e.FirstVisibleItemIndex is >= 0 and <= 2 && !followLatest && EarlierMessagesError is null)
+            await LoadEarlierAsync();
     }
 
     void RecordNewMessages(IEnumerable<ChatMessageViewModel> messages)
@@ -157,19 +171,34 @@ public partial class ChatPage
             FocusQuotedMessage(firstNew);
             return;
         }
-        scrollRevision++;
         // Wait for the viewport to reach the end before clearing the hint or marking messages read.
-        ScrollMessageIntoView(target, scrollToEnd: true);
+        RequestBottomScroll(target);
     }
 
-    void DispatchMessageScroll(ChatMessageViewModel target, bool scrollToEnd)
+    void RequestBottomScroll(ChatMessageViewModel target)
+    {
+        explicitBottomScrollRevision = ++scrollRevision;
+        latestScrollRevision = null;
+        DispatchMessageScroll(target, scrollToEnd: true, explicitScroll: true);
+    }
+
+    void DispatchMessageScroll(ChatMessageViewModel target, bool scrollToEnd, bool explicitScroll = false)
     {
         int revision = scrollRevision;
-        Dispatcher.Dispatch(() =>
+        if (explicitScroll) explicitScrollRevision = revision;
+        bool dispatched = Dispatcher.Dispatch(() =>
         {
-            if (IsMessageListPresented && isVisible && Messages.Contains(target) && revision == scrollRevision)
-                ScrollMessageIntoView(target, scrollToEnd);
+            if (explicitScroll && explicitScrollRevision == revision) explicitScrollRevision = null;
+            if (!IsMessageListPresented || !isVisible || revision != scrollRevision) return;
+            if (explicitScroll && scrollToEnd)
+            {
+                // Resolve the latest bubble after any updates that arrived while the scroll was queued.
+                if (Messages.LastOrDefault() is not { } latest) return;
+                ScrollMessageIntoView(latest, scrollToEnd: true);
+            }
+            else if (Messages.Contains(target)) ScrollMessageIntoView(target, scrollToEnd);
         });
+        if (!dispatched && explicitScroll) explicitScrollRevision = null;
     }
 
     void ScrollMessageIntoView(ChatMessageViewModel target, bool scrollToEnd)
@@ -208,12 +237,61 @@ public partial class ChatPage
         }
 #endif
         messageList.ScrollTo(target, position: scrollToEnd ? ScrollToPosition.End : ScrollToPosition.Start, animate: false);
+#if ANDROID
+        if (scrollToEnd && messageList.Handler?.PlatformView is AndroidX.RecyclerView.Widget.RecyclerView nativeList)
+        {
+            StopLatestMessageScrollConfirmation();
+            if (nativeList.ViewTreeObserver is not { IsAlive: true } observer) return;
+            latestMessageScrollList = nativeList;
+            latestMessageScrollObserver = observer;
+            latestMessageScrollRevision = scrollRevision;
+            // Scrolled and animation callbacks can precede the layout that updates the scroll range.
+            observer.PreDraw += OnLatestMessageScrollPreDraw;
+            nativeList.PostInvalidateOnAnimation();
+        }
+#endif
     }
+
+#if ANDROID
+    static bool IsSameMessage(ChatMessageViewModel message, ChatMessageViewModel anchor) =>
+        ReferenceEquals(message, anchor)
+        || (anchor.PendingId is { } pendingId && message.PendingId == pendingId)
+        || (anchor.MessageId is { } messageId && message.MessageId == messageId && message.SenderAccountId == anchor.SenderAccountId);
+
+    void OnLatestMessageScrollPreDraw(object? sender, Android.Views.ViewTreeObserver.PreDrawEventArgs e)
+    {
+        e.Handled = true;
+        var list = latestMessageScrollList;
+        if (list is null || latestMessageScrollRevision != scrollRevision
+            || !isVisible || !HasLoaded || !IsMessageListPresented || IsChatContentCovered
+            || !ReferenceEquals(messageList.Handler?.PlatformView, list))
+        {
+            StopLatestMessageScrollConfirmation();
+            return;
+        }
+        if (list.IsLayoutRequested || list.HasPendingAdapterUpdates) { list.PostInvalidateOnAnimation(); return; }
+        StopLatestMessageScrollConfirmation();
+        int headerCount = messageList.Header is null ? 0 : 1;
+        int itemCount = Messages.Count + headerCount + (messageList.Footer is null ? 0 : 1);
+        if (list.GetAdapter()?.ItemCount == itemCount
+            && list.GetLayoutManager() is AndroidX.RecyclerView.Widget.LinearLayoutManager layout
+            && IsAtLatestMessage(layout.FindLastVisibleItemPosition() - headerCount))
+            ConfirmLatestMessagesDisplayed(layout.FindFirstVisibleItemPosition() - headerCount);
+    }
+
+    void StopLatestMessageScrollConfirmation()
+    {
+        if (latestMessageScrollObserver is { IsAlive: true } observer) observer.PreDraw -= OnLatestMessageScrollPreDraw;
+        latestMessageScrollObserver = null;
+        latestMessageScrollList = null;
+    }
+#endif
 
     void ConfirmLatestMessagesDisplayed(int firstVisibleItemIndex)
     {
         if (!IsMessageListPresented) return;
         latestScrollRevision = null;
+        explicitBottomScrollRevision = null;
         firstVisibleIndex = Math.Max(0, firstVisibleItemIndex);
         followLatest = true;
 #if WINDOWS
@@ -222,6 +300,57 @@ public partial class ChatPage
         ClearNewMessageHint();
         NotifyScrollState();
         MarkDisplayedMessagesRead(atLatest: true);
+    }
+
+    bool IsLastMessageVisible()
+    {
+        if (!IsMessageListPresented || !messageList.IsLoaded || Messages.Count == 0) return false;
+#if ANDROID
+        if (messageList.Handler?.PlatformView is not AndroidX.RecyclerView.Widget.RecyclerView { IsAttachedToWindow: true } list)
+            return false;
+
+        var latest = Messages[^1];
+        using var viewport = new Android.Graphics.Rect();
+        using var bounds = new Android.Graphics.Rect();
+        if (!list.GetGlobalVisibleRect(viewport)) return false;
+        // A prepend can change the adapter indexes before the visible rows are laid out again.
+        for (int i = 0; i < list.ChildCount; i++)
+        {
+            if (list.GetChildAt(i) is { IsShown: true, Alpha: > 0 } row
+                && list.GetChildViewHolder(row) is TemplatedItemViewHolder { View.BindingContext: ChatMessageViewModel message }
+                && IsSameMessage(message, latest) && row.GetGlobalVisibleRect(bounds)
+                && Android.Graphics.Rect.Intersects(viewport, bounds))
+                return true;
+        }
+        return false;
+#else
+        var (first, last) = GetVisibleMessageRange();
+        int latest = Messages.Count - 1;
+        return first >= 0 && first <= latest && latest <= last;
+#endif
+    }
+
+    (int First, int Last) GetVisibleMessageRange()
+    {
+#if ANDROID
+        if (messageList.Handler?.PlatformView is AndroidX.RecyclerView.Widget.RecyclerView list
+            && list.GetLayoutManager() is AndroidX.RecyclerView.Widget.LinearLayoutManager layout)
+        {
+            int headerCount = messageList.Header is null ? 0 : 1;
+            return (Math.Max(0, layout.FindFirstVisibleItemPosition() - headerCount), layout.FindLastVisibleItemPosition() - headerCount);
+        }
+#elif IOS || MACCATALYST
+        if (messageList.Handler?.PlatformView is UIKit.UICollectionView list)
+        {
+            var visible = list.IndexPathsForVisibleItems.Where(path => path.Section == 0).Select(path => (int)path.Item).ToArray();
+            if (visible.Length > 0) return (visible.Min(), visible.Max());
+        }
+#elif WINDOWS
+        if (messageList.Handler?.PlatformView is NativeListView list
+            && list.ItemsPanelRoot is Microsoft.UI.Xaml.Controls.ItemsStackPanel panel)
+            return (panel.FirstVisibleIndex, panel.LastVisibleIndex);
+#endif
+        return (-1, -1);
     }
 
     bool IsAtLatestMessage(int lastVisibleItemIndex)

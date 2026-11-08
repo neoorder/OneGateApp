@@ -39,13 +39,20 @@ public partial class ChatPage
         if (reference is null || !HasLoaded || switchingConversation
             || !IsCurrentMessageContext(walletProvider.GetWallet(), localAccountId, Address)) return;
         CancelQuoteNavigation();
+        var origin = CaptureQuoteReturnPosition();
+        if (FindQuotedMessage(reference) is { } target)
+        {
+            FocusQuotedMessage(target, origin);
+            return;
+        }
         requestedQuote = reference;
-        requestedQuoteOrigin = CaptureQuoteReturnPosition();
+        requestedQuoteOrigin = origin;
         scrollRevision++;
         NotifyQuoteNavigation();
-        // A refresh already reading history completes first. The most recent tap then takes priority.
         ReloadIfIdle();
     }
+
+    ChatMessageViewModel? FindQuotedMessage(MessageRef reference) => Messages.FirstOrDefault(row => row.SavedMessage?.Key == reference);
 
     void CancelQuoteNavigation()
     {
@@ -77,8 +84,7 @@ public partial class ChatPage
         NotifyState();
         try
         {
-            ChatMessageViewModel? FindTarget() => Messages.FirstOrDefault(value => value.SavedMessage?.Key == reference);
-            var target = FindTarget();
+            var target = FindQuotedMessage(reference);
             if (target is null)
             {
                 var original = replyMessages.GetValueOrDefault(reference).Message;
@@ -93,17 +99,16 @@ public partial class ChatPage
                 if (original is not null)
                 {
                     // A referenced message can be received later than its reply and get a newer local sequence.
-                    var last = Messages.LastOrDefault(value => !value.IsPending);
-                    if (last is null || original.LocalSequence > last.LocalSequence)
+                    if (LastSavedSequence is not { } last || original.LocalSequence > last)
                     {
-                        await ReadNewHistoryAsync(cancellation.Token);
+                        bool readComplete = await ReadNewHistoryAsync(cancellation.Token);
                         cancellation.Token.ThrowIfCancellationRequested();
                         if (!IsCurrent()) return;
+                        if (!readComplete && FindQuotedMessage(reference) is null) return;
                     }
-                    target = FindTarget();
-                    if (target is null && Messages.FirstOrDefault(value => !value.IsPending) is { } first)
+                    target = FindQuotedMessage(reference);
+                    if (target is null && FirstSavedSequence is { } before)
                     {
-                        long before = first.LocalSequence;
                         var batches = new List<ChatMessageViewModel[]>();
                         bool hasMore = HasMore;
                         while (before > original.LocalSequence)
@@ -124,10 +129,10 @@ public partial class ChatPage
                         {
                             // Commit once, only after finding the target. No gaps or partial results on failure.
                             batches.Reverse();
-                            SetMessages([.. batches.SelectMany(value => value), .. Messages]);
+                            SetMessagesWithPending([.. batches.SelectMany(value => value), .. Messages.Where(message => !message.IsPending)]);
+                            target = FindQuotedMessage(reference);
                             HasMore = hasMore;
                             EarlierMessagesError = null;
-                            RefreshPendingMessages();
                             reloadPending |= MessagingChangeKind.Records;
                         }
                     }
@@ -136,12 +141,7 @@ public partial class ChatPage
             cancellation.Token.ThrowIfCancellationRequested();
             if (!IsCurrent()) return;
             if (target is null) await Toast.Show(Strings.ChatQuotedMessageUnavailable);
-            else
-            {
-                // Nested quote jumps keep the initial reading position until explicitly returning.
-                quoteReturnPosition ??= origin;
-                FocusQuotedMessage(target);
-            }
+            else FocusQuotedMessage(target, origin);
         }
         catch (OperationCanceledException) { }
         catch (Exception ex)
@@ -162,8 +162,10 @@ public partial class ChatPage
         }
     }
 
-    void FocusQuotedMessage(ChatMessageViewModel target)
+    void FocusQuotedMessage(ChatMessageViewModel target, QuoteReturnPosition? origin = null)
     {
+        // Nested quote jumps keep the initial reading position until explicitly returning.
+        quoteReturnPosition ??= origin;
         // An explicit jump supersedes initial positioning and queued refresh/resize scrolling.
         scrollRevision++;
         latestScrollRevision = null;
@@ -177,7 +179,7 @@ public partial class ChatPage
         quoteHighlight = cancellation;
         _ = ClearQuoteHighlightLaterAsync(cancellation);
         NotifyScrollState();
-        DispatchMessageScroll(target, scrollToEnd: false);
+        DispatchMessageScroll(target, scrollToEnd: false, explicitScroll: true);
     }
 
     async Task ClearQuoteHighlightLaterAsync(CancellationTokenSource cancellation)

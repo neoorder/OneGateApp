@@ -14,7 +14,7 @@ public partial class ChatPage
         bool IsCurrent() => !switchingConversation && IsCurrentMessageContext(wallet, accountId, address);
         if (!IsMessageListPresented || !HasLoaded || IsChatContentCovered || !followLatest || accountId is null || !IsCurrent()) return;
         // Only a confirmed viewport can advance this boundary; loading and write completion cannot.
-        if (atLatest) lastDisplayedSequence = Messages.LastOrDefault(message => !message.IsPending)?.LocalSequence ?? 0;
+        if (atLatest) lastDisplayedSequence = LastSavedSequence ?? 0;
         long sequence = lastDisplayedSequence;
         if (IsLoading || readCancellation is not null || sequence <= lastReadSequence) return;
 

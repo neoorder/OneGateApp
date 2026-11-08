@@ -179,7 +179,7 @@
                 <Label Text="{Binding ChatConnectionNotice}" StyleClass="Secondary" FontSize="12" LineBreakMode="WordWrap"
                        IsVisible="{Binding ChatConnectionNotice, Converter={StaticResource HasText}}" />
                 <Label Text="{Binding ErrorNotice}" StyleClass="Danger" IsVisible="{Binding ErrorNotice, Converter={StaticResource HasText}}" />
-                <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" IsVisible="{Binding ShowRetry}" Clicked="OnRetryHistoryClicked" />
+                <Button Text="{x:Static og:Strings.Retry}" StyleClass="Secondary" IsVisible="{Binding CanRetryInitialHistory}" Clicked="OnRetryInitialHistoryClicked" />
             </VerticalStackLayout>
             <Grid Grid.Row="1" ColumnDefinitions="20,*,auto" ColumnSpacing="8" IsVisible="{Binding ShowLoading}">
                 <ActivityIndicator IsRunning="{Binding ShowLoading}" WidthRequest="20" HeightRequest="20" />

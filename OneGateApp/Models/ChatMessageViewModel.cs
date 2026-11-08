@@ -8,7 +8,7 @@ namespace NeoOrder.OneGate.Models;
 
 public sealed class ChatMessageViewModel : INotifyPropertyChanged
 {
-    readonly MessageInfo? message;
+    MessageInfo? message;
     PendingChatMessage? pending;
     MessageSendState? sendState;
     string? sendError;
@@ -22,13 +22,14 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
     public ChatMessageViewModel(PendingChatMessage pending)
     {
         this.pending = pending;
+        PendingId = pending.Id;
         sendState = pending.SendStatus?.State;
         sendError = pending.SendStatus?.ErrorMessage;
         IsOutgoing = true;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    public Guid? PendingId => pending?.Id;
+    public Guid? PendingId { get; }
     public bool IsPending => pending is not null;
     public string? MessageId => message?.Key.MessageId ?? pending?.SendStatus?.MessageId;
     public long LocalSequence => message?.LocalSequence ?? 0;
@@ -166,6 +167,15 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
             || pending?.HasSubmissionStarted != value.HasSubmissionStarted;
         pending = value;
         UpdateSendStatus(value.SendStatus, pendingChanged);
+    }
+
+    internal void ConfirmPending(MessageInfo saved, MessageSendStatus status)
+    {
+        message = saved;
+        pending = null;
+        sendState = status.State;
+        sendError = status.ErrorMessage;
+        PropertyChanged?.Invoke(this, new(null));
     }
 
     public void UpdateSendStatus(MessageSendStatus? status)

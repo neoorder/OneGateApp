@@ -21,6 +21,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
     bool openingDetails;
     MessagingChangeKind reloadPending;
     string? receiveError;
+    bool earlierRequested;
     bool isLoadingEarlier;
     bool hasLoadedContact;
     bool followLatest = true;
@@ -34,39 +35,47 @@ public partial class ChatPage : ContentPage, IQueryAttributable
     public string Address { get; private set; } = "";
     public string DisplayName { get; private set; } = Strings.ChatConversation;
     public ObservableCollection<ChatMessageViewModel> Messages { get; } = [];
+    long? FirstSavedSequence => Messages.Where(message => !message.IsPending).Min(message => (long?)message.LocalSequence);
+    long? LastSavedSequence => Messages.Where(message => !message.IsPending).Max(message => (long?)message.LocalSequence);
 
-    void SetMessages(IReadOnlyList<ChatMessageViewModel> value)
+    bool SetMessages(IReadOnlyList<ChatMessageViewModel> value, bool refreshExisting = true, bool appendNewRows = false)
     {
-        DateOnly? previousDate = null;
-        foreach (var message in value)
+        var additions = value.ToHashSet();
+        int previousCount = Messages.Count;
+        for (int i = previousCount - 1; i >= 0; i--)
+            if (!additions.Remove(Messages[i])) Messages.RemoveAt(i);
+
+        bool changed = previousCount != Messages.Count || additions.Count > 0;
+        if (!changed && !refreshExisting)
         {
+            return false;
+        }
+
+        // Live updates append new rows after the retained bubbles in their visible order.
+        if (appendNewRows) value = [.. Messages, .. value.Where(additions.Contains)];
+        DateOnly? previousDate = null;
+        for (int i = 0; i < value.Count; i++)
+        {
+            bool insert = additions.Contains(value[i]);
+            var message = insert ? value[i] : Messages[i];
             DateOnly date = message.LocalDate;
             message.ShowDateSeparator = previousDate != date;
             previousDate = date;
+            if (insert) Messages.Insert(i, message);
         }
-        // Keep the native ItemsSource and unchanged rows; replacing it resets WinUI's scroll extent.
-        int start = 0;
-        while (start < Messages.Count && start < value.Count && ReferenceEquals(Messages[start], value[start])) start++;
-        int oldEnd = Messages.Count, newEnd = value.Count;
-        while (oldEnd > start && newEnd > start && ReferenceEquals(Messages[oldEnd - 1], value[newEnd - 1]))
-        {
-            oldEnd--;
-            newEnd--;
-        }
-        for (int i = start; i < Math.Min(oldEnd, newEnd); i++) Messages[i] = value[i];
-        while (Messages.Count > value.Count) Messages.RemoveAt(newEnd);
-        for (int i = oldEnd; i < newEnd; i++) Messages.Insert(i, value[i]);
         UpdateReplyPreviews();
         NotifyScrollState();
+        return changed;
     }
     public bool IsLoading => operation is not null;
     public bool ShowLoading => IsLoading && (!HasLoaded || requestedQuote is not null
         || quoteNavigation is { IsCancellationRequested: false });
     public bool IsChatEnabled { get; private set; }
-    public bool CanLoadEarlier => IsChatEnabled && !IsLoading;
+    public bool CanLoadEarlier => IsChatEnabled && HasLoaded && !earlierRequested
+        && (!IsLoading || (!isLoadingEarlier && quoteNavigation is null));
     public bool HasLoaded { get; private set; }
     public bool HasMore { get; private set; }
-    public string EarlierMessagesButtonText => IsLoading && isLoadingEarlier ? Strings.Loading
+    public string EarlierMessagesButtonText => earlierRequested || (IsLoading && isLoadingEarlier) ? Strings.Loading
         : EarlierMessagesError is not null ? Strings.Retry : Strings.ChatLoadEarlier;
     public string? EarlierMessagesError
     {
@@ -89,11 +98,11 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         {
             field = value;
             OnPropertyChanged(nameof(ErrorNotice));
-            OnPropertyChanged(nameof(ShowRetry));
+            OnPropertyChanged(nameof(CanRetryInitialHistory));
         }
     }
     public string? ErrorNotice => ErrorText ?? receiveError;
-    public bool ShowRetry => !IsLoading && ErrorText is not null;
+    public bool CanRetryInitialHistory => !HasLoaded && !IsLoading && ErrorText is not null;
     public string BusyText { get; private set { field = value; OnPropertyChanged(); } } = Strings.Loading;
 
     public ChatPage(MessagingService messagingService, AddressBookService addressBookService, IWalletProvider walletProvider)
@@ -207,9 +216,9 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         NotifyState();
     });
 
-    async void OnRetryHistoryClicked(object sender, EventArgs e)
+    async void OnRetryInitialHistoryClicked(object sender, EventArgs e)
     {
-        if (ShowRetry) await LoadAsync();
+        if (CanRetryInitialHistory) await LoadAsync();
     }
 
     void OnMessagingChanged(object? sender, MessagingChangedEventArgs e)
@@ -240,15 +249,33 @@ public partial class ChatPage : ContentPage, IQueryAttributable
             NotifyQuoteNavigation();
             return;
         }
+        if (earlierRequested)
+        {
+            earlierRequested = false;
+            if (CanLoadEarlier && HasMore)
+            {
+                await LoadAsync(earlier: true);
+                return;
+            }
+        }
         if (reloadPending == 0) return;
         var changes = reloadPending;
         reloadPending = 0;
         await LoadAsync(changes: changes);
     }
 
-    async void OnLoadEarlierClicked(object sender, EventArgs e)
+    async void OnLoadEarlierClicked(object sender, EventArgs e) => await LoadEarlierAsync();
+
+    Task LoadEarlierAsync()
     {
-        if (CanLoadEarlier && HasMore) await LoadAsync(earlier: true);
+        if (!CanLoadEarlier || !HasMore) return Task.CompletedTask;
+        if (operation is not { } refresh) return LoadAsync(earlier: true);
+
+        // An incremental refresh may be waiting for a send ID. Let the older page read first.
+        earlierRequested = true;
+        NotifyState();
+        refresh.Cancel();
+        return Task.CompletedTask;
     }
 
     async Task LoadAsync(bool earlier = false, MessagingChangeKind changes = MessagingChangeKind.Records)
@@ -257,12 +284,11 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         using var cancellation = new CancellationTokenSource();
         operation = cancellation;
         isLoadingEarlier = earlier;
-        bool refreshRecords = earlier || !HasLoaded || ErrorText is not null || (changes & MessagingChangeKind.Records) != 0;
+        bool refreshRecords = earlier || !HasLoaded || (changes & MessagingChangeKind.Records) != 0;
         if (earlier) EarlierMessagesError = null;
-        ErrorText = null;
         BusyText = Strings.Loading;
         NotifyState();
-        long? before = earlier ? Messages.FirstOrDefault(message => !message.IsPending)?.LocalSequence : null;
+        long? before = earlier ? FirstSavedSequence : null;
         bool verifiedAccount = false;
         bool historyReadCompleted = false;
         try
@@ -276,6 +302,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
                 await ReadConversationListAsync(cancellation.Token);
                 return;
             }
+            if (!earlier) ErrorText = null;
             if (!await ValidatePushNavigationAsync(cancellation.Token)) return;
             var details = await messagingService.GetChatContactAsync(Address, resolveProfile: false, cancellation.Token);
             if (!await ValidatePushNavigationAsync(cancellation.Token, details.LocalAccountId)) return;
@@ -337,6 +364,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         {
             if (ReferenceEquals(operation, cancellation))
             {
+                if (earlierRequested && cancellation.IsCancellationRequested) reloadPending |= changes;
                 operation = null;
                 NotifyState();
                 EnsureInitialMessagePresentation();
@@ -346,59 +374,65 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         }
     }
 
-    async Task ReadNewHistoryAsync(CancellationToken cancellationToken)
+    async Task<bool> ReadNewHistoryAsync(CancellationToken cancellationToken)
     {
-        var lastSaved = Messages.LastOrDefault(message => !message.IsPending);
-        if (lastSaved is null)
-        {
-            await ReadHistoryAsync(null, cancellationToken);
-            return;
-        }
-        long after = lastSaved.LocalSequence;
+        var wallet = walletProvider.GetWallet();
+        string accountId = localAccountId!;
+        string address = Address;
+        long after = LastSavedSequence ?? 0;
         var additions = new List<ChatMessageViewModel>();
-        bool more;
-        do
+        string? readError = null;
+        try
         {
-            var snapshot = await messagingService.GetChatHistoryAsync(localAccountId!, Address,
-                cancellationToken: cancellationToken, after: after);
-            cancellationToken.ThrowIfCancellationRequested();
-            UpdateReceiveNotice(snapshot.SyncStatus);
-            additions.AddRange(snapshot.Messages.Select(message => new ChatMessageViewModel(message, localAccountId!)));
-            if (snapshot.Messages.Length > 0) after = snapshot.Messages[^1].LocalSequence;
-            more = snapshot.HasMore && snapshot.Messages.Length > 0;
-        } while (more);
+            bool more;
+            do
+            {
+                var snapshot = await messagingService.GetChatHistoryAsync(accountId, address,
+                    cancellationToken: cancellationToken, after: after);
+                cancellationToken.ThrowIfCancellationRequested();
+                UpdateReceiveNotice(snapshot.SyncStatus);
+                additions.AddRange(snapshot.Messages.Select(message => new ChatMessageViewModel(message, accountId)));
+                if (snapshot.Messages.Length > 0) after = snapshot.Messages[^1].LocalSequence;
+                more = snapshot.HasMore && snapshot.Messages.Length > 0;
+            } while (more);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException && additions.Count > 0
+            && !cancellationToken.IsCancellationRequested && IsCurrentMessageContext(wallet, accountId, address))
+        {
+            // Keep the contiguous batches already read. The next refresh resumes after the last appended sequence.
+            readError = ex.Message;
+        }
 
+        cancellationToken.ThrowIfCancellationRequested();
         if (additions.Count > 0)
         {
-            bool scrollToEnd = followLatest;
+            bool scrollToEnd = followLatest || explicitBottomScrollRevision == scrollRevision;
             RecordNewMessages(additions);
-            SetMessages([.. Messages, .. additions]);
-            RefreshPendingMessages();
+            SetMessagesWithPending([.. Messages.Where(message => !message.IsPending), .. additions], appendNewRows: true);
             // Appending preserves the viewport; do not realign a partially visible reading anchor.
-            if (scrollToEnd) DispatchMessageScroll(Messages[^1], scrollToEnd: true);
+            if (scrollToEnd && explicitScrollRevision != scrollRevision) DispatchMessageScroll(Messages[^1], scrollToEnd: true);
         }
+        if (readError is not null) ErrorText ??= readError;
         NotifyState();
+        return readError is null;
     }
 
     async Task ReadHistoryAsync(long? before, CancellationToken cancellationToken)
     {
-        // Entries committed before a latest-history read are already in the SDK, even outside its page limit.
-        var submitted = before.HasValue ? [] : messagingService.GetPendingChatMessages(localAccountId!, Address)
-            .Where(message => message.SendStatus is not null).Select(message => message.SendStatus!.MessageId).ToHashSet(StringComparer.Ordinal);
         var snapshot = await messagingService.GetChatHistoryAsync(localAccountId!, Address, before, cancellationToken);
         cancellationToken.ThrowIfCancellationRequested();
-        messagingService.RemoveSavedPendingMessages(localAccountId!, Address, submitted);
-        bool scrollToEnd = !before.HasValue && (!HasLoaded || followLatest);
+        // An explicit scroll can precede the native viewport confirmation.
+        bool scrollToEnd = followLatest || explicitBottomScrollRevision == scrollRevision || (!before.HasValue && !HasLoaded);
         // The reader may have moved while the page was loading; preserve the currently visible message.
         var anchor = Messages.ElementAtOrDefault(firstVisibleIndex);
         var batch = snapshot.Messages.Select(message => new ChatMessageViewModel(message, localAccountId!)).ToArray();
-        if (HasLoaded && !before.HasValue) RecordNewMessages(batch);
-        SetMessages(before.HasValue ? [.. batch, .. Messages] : batch);
-        RefreshPendingMessages();
+        SetMessagesWithPending(before.HasValue ? [.. batch, .. Messages.Where(message => !message.IsPending)] : batch,
+            snapshot.SubmittedMessageIds);
         HasMore = snapshot.HasMore;
         HasLoaded = true;
         UpdateReceiveNotice(snapshot.SyncStatus);
         NotifyState();
+        if (before.HasValue && explicitScrollRevision == scrollRevision) return;
         var target = scrollToEnd ? Messages.LastOrDefault() : anchor;
         if (IsMessageListPresented && target is not null)
             DispatchMessageScroll(target, scrollToEnd);
@@ -412,7 +446,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
 
     void UpdateReceiveNotice(ResourceSyncStatus? status)
     {
-        // The SDK owns receive recovery. Keep its notice separate from local failures with a Retry action.
+        // The SDK reports receive progress separately from local history reads.
         string? notice = status switch
         {
             { State: ResourceSyncState.Blocked, BlockReason: ResourceSyncBlockReason.Connection } => Strings.ChatConnectionUnavailable,
@@ -460,6 +494,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         HasChatContact = false;
         HasLoaded = false;
         HasMore = false;
+        earlierRequested = false;
         EarlierMessagesError = null;
         UpdateReceiveNotice(null);
         ChatContact = null;
@@ -492,7 +527,7 @@ public partial class ChatPage : ContentPage, IQueryAttributable
         OnPropertyChanged(nameof(ShowContactRequired));
         OnPropertyChanged(nameof(ChatContact));
         OnPropertyChanged(nameof(CanOpenContactDetails));
-        OnPropertyChanged(nameof(ShowRetry));
+        OnPropertyChanged(nameof(CanRetryInitialHistory));
         OnPropertyChanged(nameof(CanCompose));
         OnPropertyChanged(nameof(CanSend));
         OnPropertyChanged(nameof(CanOpenMessageSearch));

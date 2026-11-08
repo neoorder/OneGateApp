@@ -62,12 +62,17 @@ public sealed partial class MessagingService
                 .OrderBy(message => message.CreatedAt).ToArray();
     }
 
-    public void RemoveSavedPendingMessages(string localAccountId, string address, HashSet<string> savedMessageIds)
+    public (PendingChatMessage[] Confirmed, PendingChatMessage[] Remaining) ReconcilePendingMessages(
+        string localAccountId, string address, HashSet<string> savedMessageIds)
     {
         lock (pendingLock)
-            foreach (var message in pendingMessages.Values.Where(message => message.LocalAccountId == localAccountId
-                && message.Address == address && message.SendStatus is { } status && savedMessageIds.Contains(status.MessageId)).ToArray())
+        {
+            var pending = GetPendingChatMessages(localAccountId, address);
+            var confirmed = pending.Where(message => message.SendStatus is { } status && savedMessageIds.Contains(status.MessageId)).ToArray();
+            foreach (var message in confirmed)
                 pendingMessages.Remove(message.Id);
+            return (confirmed, pending.Where(message => pendingMessages.ContainsKey(message.Id)).ToArray());
+        }
     }
 
     void ValidatePendingAccount(string localAccountId)
