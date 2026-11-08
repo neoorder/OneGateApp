@@ -1336,10 +1336,10 @@
   <data name="ChatSend" xml:space="preserve"><value>Отправить</value></data>
   <data name="ChatMessageQueued" xml:space="preserve"><value>Ожидание отправки</value></data>
   <data name="ChatMessageSending" xml:space="preserve"><value>Отправляется</value></data>
-  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Отправка ещё не подтверждена</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Не подтверждено</value></data>
   <data name="ChatMessageSent" xml:space="preserve"><value>Отправлено</value></data>
   <data name="ChatMessageFailed" xml:space="preserve"><value>Не удалось отправить</value></data>
-  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Сейчас не удаётся подтвердить результат отправки</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Статус неизвестен</value></data>
   <data name="ChatDraft" xml:space="preserve"><value>[Черновик]</value></data>
   <data name="ChatBackToLatest" xml:space="preserve"><value>К последним сообщениям ↓</value></data>
   <data name="ChatNewMessages" xml:space="preserve"><value>Новых сообщений: {0} ↓</value></data>

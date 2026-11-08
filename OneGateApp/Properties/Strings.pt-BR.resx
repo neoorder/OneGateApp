@@ -1336,10 +1336,10 @@ Endereço: {0}</value></data>
   <data name="ChatSend" xml:space="preserve"><value>Enviar</value></data>
   <data name="ChatMessageQueued" xml:space="preserve"><value>Aguardando envio</value></data>
   <data name="ChatMessageSending" xml:space="preserve"><value>Enviando</value></data>
-  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Envio ainda não confirmado</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Não confirmado</value></data>
   <data name="ChatMessageSent" xml:space="preserve"><value>Enviada</value></data>
   <data name="ChatMessageFailed" xml:space="preserve"><value>Falha no envio</value></data>
-  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Não é possível confirmar se a mensagem foi enviada</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Status desconhecido</value></data>
   <data name="ChatDraft" xml:space="preserve"><value>[Rascunho]</value></data>
   <data name="ChatBackToLatest" xml:space="preserve"><value>Voltar às mensagens mais recentes ↓</value></data>
   <data name="ChatNewMessages" xml:space="preserve"><value>Novas mensagens: {0} ↓</value></data>

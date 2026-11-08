@@ -1336,10 +1336,10 @@ Nên lưu trữ riêng khóa NEP-2 và mật khẩu, đồng thời sao lưu ch�
   <data name="ChatSend" xml:space="preserve"><value>Gửi</value></data>
   <data name="ChatMessageQueued" xml:space="preserve"><value>Đang chờ gửi</value></data>
   <data name="ChatMessageSending" xml:space="preserve"><value>Đang gửi</value></data>
-  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Kết quả gửi chưa được xác nhận</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Chưa xác nhận</value></data>
   <data name="ChatMessageSent" xml:space="preserve"><value>Đã gửi</value></data>
   <data name="ChatMessageFailed" xml:space="preserve"><value>Gửi thất bại</value></data>
-  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Hiện chưa thể xác nhận kết quả gửi</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Không rõ trạng thái</value></data>
   <data name="ChatDraft" xml:space="preserve"><value>[Bản nháp]</value></data>
   <data name="ChatBackToLatest" xml:space="preserve"><value>Về tin nhắn mới nhất ↓</value></data>
   <data name="ChatNewMessages" xml:space="preserve"><value>{0} tin nhắn mới ↓</value></data>

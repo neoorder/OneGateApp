@@ -1336,10 +1336,10 @@ NEP-2 とパスワードは別々に保管し、それぞれを安全にバッ�
   <data name="ChatSend" xml:space="preserve"><value>送信</value></data>
   <data name="ChatMessageQueued" xml:space="preserve"><value>送信待ち</value></data>
   <data name="ChatMessageSending" xml:space="preserve"><value>送信中</value></data>
-  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>送信結果は未確認です</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>未確認</value></data>
   <data name="ChatMessageSent" xml:space="preserve"><value>送信済み</value></data>
   <data name="ChatMessageFailed" xml:space="preserve"><value>送信失敗</value></data>
-  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>現在、送信結果を確認できません</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>状態不明</value></data>
   <data name="ChatDraft" xml:space="preserve"><value>[下書き]</value></data>
   <data name="ChatBackToLatest" xml:space="preserve"><value>最新のメッセージに戻る ↓</value></data>
   <data name="ChatNewMessages" xml:space="preserve"><value>新着メッセージ：{0}件 ↓</value></data>

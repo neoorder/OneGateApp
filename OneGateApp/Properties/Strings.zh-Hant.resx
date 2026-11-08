@@ -1338,10 +1338,10 @@
   <data name="ChatSend" xml:space="preserve"><value>傳送</value></data>
   <data name="ChatMessageQueued" xml:space="preserve"><value>等待傳送</value></data>
   <data name="ChatMessageSending" xml:space="preserve"><value>傳送中</value></data>
-  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>傳送結果待確認</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>傳送待確認</value></data>
   <data name="ChatMessageSent" xml:space="preserve"><value>已傳送</value></data>
   <data name="ChatMessageFailed" xml:space="preserve"><value>傳送失敗</value></data>
-  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>暫時無法確認傳送結果</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>傳送狀態未知</value></data>
   <data name="ChatDraft" xml:space="preserve"><value>[草稿]</value></data>
   <data name="ChatBackToLatest" xml:space="preserve"><value>回到最新訊息 ↓</value></data>
   <data name="ChatNewMessages" xml:space="preserve"><value>{0} 則新訊息 ↓</value></data>

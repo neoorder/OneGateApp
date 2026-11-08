@@ -1338,10 +1338,10 @@ Address: {0}</value></data>
   <data name="ChatSend" xml:space="preserve"><value>Send</value></data>
   <data name="ChatMessageQueued" xml:space="preserve"><value>Waiting to send</value></data>
   <data name="ChatMessageSending" xml:space="preserve"><value>Sending</value></data>
-  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Sending not yet confirmed</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Unconfirmed</value></data>
   <data name="ChatMessageSent" xml:space="preserve"><value>Sent</value></data>
   <data name="ChatMessageFailed" xml:space="preserve"><value>Failed to send</value></data>
-  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Unable to confirm whether the message was sent</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Status unknown</value></data>
   <data name="ChatDraft" xml:space="preserve"><value>[Draft]</value></data>
   <data name="ChatBackToLatest" xml:space="preserve"><value>Back to latest messages ↓</value></data>
   <data name="ChatNewMessages" xml:space="preserve"><value>New messages: {0} ↓</value></data>

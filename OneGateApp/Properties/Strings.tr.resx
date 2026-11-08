@@ -1336,10 +1336,10 @@ Adres: {0}</value></data>
   <data name="ChatSend" xml:space="preserve"><value>Gönder</value></data>
   <data name="ChatMessageQueued" xml:space="preserve"><value>Gönderilmeyi bekliyor</value></data>
   <data name="ChatMessageSending" xml:space="preserve"><value>Gönderiliyor</value></data>
-  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Gönderim henüz doğrulanmadı</value></data>
+  <data name="ChatMessageUnconfirmed" xml:space="preserve"><value>Doğrulanmadı</value></data>
   <data name="ChatMessageSent" xml:space="preserve"><value>Gönderildi</value></data>
   <data name="ChatMessageFailed" xml:space="preserve"><value>Gönderilemedi</value></data>
-  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Gönderim sonucu şu anda doğrulanamıyor</value></data>
+  <data name="ChatMessageStatusUnavailable" xml:space="preserve"><value>Durum bilinmiyor</value></data>
   <data name="ChatDraft" xml:space="preserve"><value>[Taslak]</value></data>
   <data name="ChatBackToLatest" xml:space="preserve"><value>Son mesajlara dön ↓</value></data>
   <data name="ChatNewMessages" xml:space="preserve"><value>Yeni mesaj sayısı: {0} ↓</value></data>

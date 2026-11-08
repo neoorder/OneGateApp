@@ -15,6 +15,29 @@
         <og:TransparentColorConverter x:Key="TransparentColor" />
         <toolkit:InvertedBoolConverter x:Key="Not" />
         <toolkit:VariableMultiValueConverter x:Key="AllTrue" ConditionType="All" />
+        <Style x:Key="FullTextOverlay" TargetType="og:DeferredContentView">
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="VerticalOptions" Value="End" />
+        </Style>
+        <Style Class="FullTextAction" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="MinimumWidthRequest" Value="0" />
+            <Setter Property="MinimumHeightRequest" Value="48" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+        </Style>
+        <Style x:Key="FullTextLabel" TargetType="Label">
+            <Setter Property="Text" Value="{x:Static og:Strings.ChatViewFullText}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="MinimumWidthRequest" Value="44" />
+            <Setter Property="MinimumHeightRequest" Value="20" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="InputTransparent" Value="True" />
+        </Style>
     </ContentPage.Resources>
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding Source={x:Reference Root}, Path=BackCommand, x:DataType=og:ChatPage}" />
@@ -241,6 +264,10 @@
                                 <Border x:Name="MessageBubble" StrokeShape="RoundRectangle 14" Padding="0" BackgroundColor="{toolkit:AppThemeResource Panel}"
                                         Stroke="Transparent" StrokeThickness="1" Loaded="OnMessageBubbleLoaded">
                                     <Border.Resources>
+                                        <LinearGradientBrush x:Key="FullTextFade" StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="{Binding Source={x:Reference MessageBubble}, Path=BackgroundColor, x:DataType=Border, Converter={StaticResource TransparentColor}}" Offset="0" />
+                                            <GradientStop Color="{Binding Source={x:Reference MessageBubble}, Path=BackgroundColor, x:DataType=Border}" Offset="0.9" />
+                                        </LinearGradientBrush>
                                         <DataTemplate x:Key="MessageContextMenu" x:DataType="og:ChatMessageViewModel">
                                             <MenuFlyout BindingContext="{Binding Source={x:Reference MessageBubble}, Path=BindingContext, x:DataType=Border}">
                                                 <MenuFlyoutItem Text="{x:Static og:Strings.ChatReply}" CommandParameter="{Binding .}" Clicked="OnReplyMessageClicked">
@@ -307,6 +334,13 @@
                                         <Grid>
                                             <Label TextType="Text" LineBreakMode="CharacterWrap"
                                                    BindingContextChanged="OnMessageTextBindingContextChanged">
+                                                <Label.Behaviors>
+                                                    <og:PressBehavior BindingContext="{Binding Source={x:Reference MessageBubble}, Path=BindingContext, x:DataType=Border}"
+                                                                      IsEnabled="{OnPlatform Default=False, Android={Binding CanShowActions}}"
+                                                                      LongPressDuration="600" DisallowTouchThreshold="10" ShouldMakeChildrenInputTransparent="False"
+                                                                      LongPressCommand="{Binding Source={x:Reference Root}, Path=MessageActionsCommand, x:DataType=og:ChatPage}"
+                                                                      LongPressCommandParameter="{Binding .}" />
+                                                </Label.Behaviors>
                                                 <Label.Triggers>
                                                     <DataTrigger TargetType="Label" Binding="{Binding HasTruncatedText}" Value="True">
                                                         <Setter Property="MaxLines" Value="30" />
@@ -314,24 +348,16 @@
                                                     </DataTrigger>
                                                 </Label.Triggers>
                                             </Label>
-                                            <og:DeferredContentView IsVisible="{Binding HasTruncatedText}" HeightRequest="64" VerticalOptions="End">
+                                            <og:DeferredContentView IsVisible="{Binding HasTruncatedText}" Style="{StaticResource FullTextOverlay}">
                                                 <og:DeferredContentView.ContentTemplate>
                                                     <DataTemplate x:DataType="og:ChatMessageViewModel">
                                                         <Grid>
-                                                            <Border HeightRequest="64" VerticalOptions="End" StrokeThickness="0"
-                                                                    InputTransparent="True"
-                                                                    AutomationProperties.IsInAccessibleTree="False">
-                                                                <Border.Background>
-                                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                                        <GradientStop Color="{Binding Source={x:Reference MessageBubble}, Path=BackgroundColor, x:DataType=Border, Converter={StaticResource TransparentColor}}" Offset="0" />
-                                                                        <GradientStop Color="{Binding Source={x:Reference MessageBubble}, Path=BackgroundColor, x:DataType=Border}" Offset="0.5" />
-                                                                    </LinearGradientBrush>
-                                                                </Border.Background>
-                                                            </Border>
-                                                            <Button Text="{x:Static og:Strings.ChatViewFullText}"
-                                                                    StyleClass="Link" HorizontalOptions="Start" VerticalOptions="End"
-                                                                    Padding="0,16,0,0" MinimumHeightRequest="44"
+                                                            <Border Background="{StaticResource FullTextFade}" StrokeThickness="0"
+                                                                    InputTransparent="True" AutomationProperties.IsInAccessibleTree="False" />
+                                                            <Button StyleClass="Link, FullTextAction"
+                                                                    SemanticProperties.Description="{x:Static og:Strings.ChatViewFullText}" ToolTipProperties.Text="{x:Static og:Strings.ChatViewFullText}"
                                                                     CommandParameter="{Binding .}" Clicked="OnReadMessageClicked" />
+                                                            <Label Style="{StaticResource FullTextLabel}" StyleClass="Link" AutomationProperties.IsInAccessibleTree="False" />
                                                         </Grid>
                                                     </DataTemplate>
                                                 </og:DeferredContentView.ContentTemplate>
@@ -340,21 +366,24 @@
                                         <Label Text="{x:Static og:Strings.ChatAttachmentsNotShown}" FontSize="12" StyleClass="Secondary" IsVisible="{Binding HasAttachments}" />
                                     </VerticalStackLayout>
                                 </Border>
-                                <Label Text="{Binding CreatedAt}" FontSize="11" StyleClass="Secondary">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding IsOutgoing}" Value="True">
-                                            <Setter Property="HorizontalTextAlignment" Value="End" />
+                                <Grid ColumnDefinitions="auto,*" ColumnSpacing="6" HorizontalOptions="Start">
+                                    <Grid.Triggers>
+                                        <DataTrigger TargetType="Grid" Binding="{Binding IsOutgoing}" Value="True">
+                                            <Setter Property="HorizontalOptions" Value="End" />
                                         </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                                <Label Text="{Binding SendStatusText}" FontSize="11" StyleClass="Secondary"
-                                       IsVisible="{Binding IsOutgoing}" HorizontalTextAlignment="End">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding HasSendError}" Value="True">
-                                            <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
+                                    </Grid.Triggers>
+                                    <Label Text="{Binding CreatedAt}" FontSize="11" StyleClass="Secondary"
+                                           MaxLines="1" LineBreakMode="NoWrap" VerticalTextAlignment="Center" />
+                                    <Label Grid.Column="1" Text="{Binding SendStatusText}" FontSize="11" StyleClass="Secondary"
+                                           ToolTipProperties.Text="{Binding SendStatusText}"
+                                           IsVisible="{Binding IsOutgoing}" MaxLines="1" LineBreakMode="TailTruncation" VerticalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding HasSendError}" Value="True">
+                                                <Setter Property="TextColor" Value="{toolkit:AppThemeResource Danger}" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Grid>
                                 <og:DeferredContentView IsVisible="{Binding HasSendError}">
                                     <og:DeferredContentView.ContentTemplate>
                                         <DataTemplate x:DataType="og:ChatMessageViewModel">
