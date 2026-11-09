@@ -48,6 +48,53 @@ function txtData(values) {
   }));
 }
 
+function readQuestionName(packet, offset) {
+  const labels = [];
+  let cursor = offset;
+  let end;
+  const visited = new Set();
+  while (cursor < packet.length && visited.size < 128) {
+    if (visited.has(cursor)) throw new Error('DNS compression loop');
+    visited.add(cursor);
+    const length = packet[cursor++];
+    if (length === 0) return { name: labels.join('.').toLowerCase(), end: end ?? cursor };
+    if ((length & 0xc0) === 0xc0) {
+      if (cursor >= packet.length) throw new Error('Truncated DNS pointer');
+      end ??= cursor + 1;
+      cursor = ((length & 0x3f) << 8) | packet[cursor];
+    } else {
+      if (length > 63 || cursor + length > packet.length) throw new Error('Invalid DNS label');
+      labels.push(packet.toString('utf8', cursor, cursor + length));
+      cursor += length;
+    }
+  }
+  throw new Error('Invalid DNS question');
+}
+
+function isDiscoveryQuery(packet, instanceName, hostName) {
+  if (packet.length < 12 || (packet.readUInt16BE(2) & 0xf800) !== 0) return false;
+  const count = packet.readUInt16BE(4);
+  let offset = 12;
+  let relevant = false;
+  try {
+    for (let index = 0; index < count; index++) {
+      const question = readQuestionName(packet, offset);
+      offset = question.end;
+      if (offset + 4 > packet.length) return false;
+      const type = packet.readUInt16BE(offset);
+      const dnsClass = packet.readUInt16BE(offset + 2) & 0x7fff;
+      offset += 4;
+      if (dnsClass !== 1) continue;
+      relevant ||= question.name === SERVICE_NAME && (type === 12 || type === 255)
+        || question.name === instanceName.toLowerCase() && [33, 16, 255].includes(type)
+        || question.name === hostName.toLowerCase() && (type === 1 || type === 255);
+    }
+    return relevant;
+  } catch {
+    return false;
+  }
+}
+
 export class RemoteDebuggerAdvertiser {
   constructor({ debuggerId, debuggerName, port, addresses }) {
     this.debuggerId = debuggerId;
@@ -64,7 +111,7 @@ export class RemoteDebuggerAdvertiser {
     this.socket = socket;
     socket.on("error", () => undefined);
     socket.on("message", (message) => {
-      if (message.includes(Buffer.from("_onegate-debug", "utf8"))) this.announce();
+      if (isDiscoveryQuery(message, this.instanceName, this.hostName)) this.announce();
     });
     await new Promise((resolve, reject) => {
       socket.once("error", reject);
