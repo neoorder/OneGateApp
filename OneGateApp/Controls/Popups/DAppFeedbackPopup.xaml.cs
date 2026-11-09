@@ -74,7 +74,6 @@ public partial class DAppFeedbackPopup : MyPopup<bool>
             if (response.StatusCode == HttpStatusCode.Conflict)
             {
                 await Toast.Show(Strings.FeedbackRetryLater);
-                await CloseAsync(false);
                 return;
             }
 
