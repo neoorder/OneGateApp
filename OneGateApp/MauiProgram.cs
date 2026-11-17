@@ -127,6 +127,7 @@ public static class MauiProgram
             RpcUrl = SharedOptions.RpcServerUri
         })));
         builder.Services.AddSingleton<IWalletProvider, WalletProvider>();
+        builder.Services.AddSingleton<TransactionHistoryDataSource>();
         builder.Services.AddTransient<WalletAuthorizationService>();
         builder.Services.AddTransient<AddressBookService>();
         builder.Services.AddSingleton<DAppUsageService>();
