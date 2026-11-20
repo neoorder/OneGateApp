@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net11.0-android;net11.0-ios;net11.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net11.0-windows10.0.19041.0</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>NeoOrder.OneGate</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -32,20 +32,20 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net11.0-ios|AnyCPU'">
 		<CodesignKey>Apple Development: Created via API (K222UWB5LF)</CodesignKey>
 		<CodesignProvision>VS: org.neoorder.onegate Development</CodesignProvision>
 		<ProvisioningType>manual</ProvisioningType>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net11.0-ios|AnyCPU'">
 		<CodesignKey>Apple Distribution: NEO GLOBAL DEVELOPMENT PTE. LTD. (3F3295APF5)</CodesignKey>
 		<CodesignProvision>App Store</CodesignProvision>
 		<ProvisioningType>manual</ProvisioningType>
 		<MtouchInterpreter>Neo</MtouchInterpreter>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net11.0-maccatalyst|AnyCPU'">
 		<EnableCodeSigning>true</EnableCodeSigning>
 		<EnablePackageSigning>true</EnablePackageSigning>
 		<CreatePackage>true</CreatePackage>
@@ -82,24 +82,24 @@
 		<ProjectReference Include="..\OneGate.DebugProtocol\OneGate.DebugProtocol.csproj" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-ios' Or '$(TargetFramework)' == 'net10.0-maccatalyst'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net11.0-ios' Or '$(TargetFramework)' == 'net11.0-maccatalyst'">
 		<ProjectReference Include="..\OneGate.Translation.Apple\OneGate.Translation.Apple.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="14.1.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="17.0.0" />
 		<PackageReference Include="Meshline.Sdk" Version="1.8.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.12" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.9" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.51" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="11.0.0" />
 		<PackageReference Include="Neo" Version="3.10.0" />
 		<PackageReference Include="Plugin.Maui.ScreenSecurity" Version="1.2.3" />
-		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.3" />
+		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.5" />
 		<PackageReference Include="ZXing.Net.Bindings.SkiaSharp" Version="0.16.22" />
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.10.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net11.0-android'">
 		<PackageReference Include="Xamarin.Google.MLKit.Translate" Version="117.0.3.9" />
 		<PackageReference Include="Xamarin.Google.MLKit.Language.Id" Version="117.0.6.9" />
 		<PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.2.0" />
