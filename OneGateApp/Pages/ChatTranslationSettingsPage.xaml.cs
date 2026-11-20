@@ -47,19 +47,31 @@ public partial class ChatTranslationSettingsPage : ContentPage
         lifetime = new();
         HasModelReadError = false;
         HasModelDeleteError = false;
-        if (CanManageModels)
-        {
-            service.ModelDownloaded += OnModelRefreshRequested;
-            observedWindow = Window;
-            if (observedWindow is not null) observedWindow.Resumed += OnModelRefreshRequested;
-        }
+        if (CanManageModels) service.ModelDownloaded += OnModelRefreshRequested;
         await LoadAsync(lifetime.Token);
+    }
+
+    // MAUI 11 on iOS and Mac Catalyst raises Appearing before the page is
+    // pushed, where the page is not attached to a Window yet. Window-scoped
+    // observation therefore attaches in NavigatedTo, which fires once the
+    // page is on screen (immediately after Appearing on earlier runtimes).
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+        if (CanManageModels) ObserveWindowResumed();
     }
 
     protected override void OnDisappearing()
     {
         StopObservingModels();
         base.OnDisappearing();
+    }
+
+    void ObserveWindowResumed()
+    {
+        if (observedWindow is not null) observedWindow.Resumed -= OnModelRefreshRequested;
+        observedWindow = Window;
+        if (observedWindow is not null) observedWindow.Resumed += OnModelRefreshRequested;
     }
 
     void StopObservingModels()
