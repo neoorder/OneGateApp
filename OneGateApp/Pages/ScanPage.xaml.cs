@@ -54,6 +54,14 @@ public partial class ScanPage : ContentPage, IQueryAttributable
     {
         base.OnAppearing();
         isPageVisible = true;
+    }
+
+    // MAUI 11 on iOS and Mac Catalyst raises Appearing before the page is
+    // pushed. Starting the camera from NavigatedTo keeps the scanner off
+    // until the page is actually on screen.
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
         if (cameraView is not null) cameraView.IsDetecting = !isProcessingScan;
     }
 
