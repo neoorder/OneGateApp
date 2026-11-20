@@ -2,8 +2,10 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:og="http://schemas.neoorder.org/onegate/controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NeoOrder.OneGate.Controls.Views.SpinnerButton">
     <ContentView.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         <og:SpinnerButtonTextConverter x:Key="SpinnerButtonTextConverter" />
     </ContentView.Resources>
     <Grid BindingContext="{Binding Source={RelativeSource AncestorType={x:Type og:SpinnerButton}}}">
@@ -14,6 +16,7 @@
                 BackgroundColor="{Binding ButtonColor}"
                 BorderWidth="{Binding BorderWidth}"
                 BorderColor="{Binding BorderColor}"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                 SemanticProperties.Description="{Binding Text}"
                 Clicked="Button_Clicked">
             <VisualStateManager.VisualStateGroups>
