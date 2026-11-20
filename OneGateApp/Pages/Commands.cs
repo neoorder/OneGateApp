@@ -85,32 +85,41 @@ static class Commands
         bool supportOpenWithDeepLink = true;
 #endif
         if (!supportOpenWithDeepLink || !await Launcher.TryOpenAsync(uri))
-        {
-            Dictionary<string, object> parameters = new();
-            if (dapp != null) parameters["dapp"] = dapp;
-            parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
-#if IOS
-            bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
-#else
-            bool supportMultiWindow = true;
-#endif
-            if (supportMultiWindow)
-            {
-                LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
-                page.ApplyQueryAttributes(parameters);
-#if MACCATALYST
-                Application.Current.OpenWindow(Platforms.MacCatalyst.DAppWindow.Create(page));
-#else
-                Application.Current.OpenWindow(new Window(new NavigationPage(page)));
-#endif
-            }
-            else
-            {
-                await Shell.Current.GoToAsync("launch", parameters);
-            }
-        }
+            await LaunchDAppInApp(uri, dapp);
 #endif
     });
+
+    /// <summary>
+    /// Opens a dApp URL in the built-in dApp browser without the deep-link
+    /// round trip. Used as the LaunchDApp fallback and by callers that already
+    /// hold an in-app URL which does not match an app-link pattern (for example
+    /// a NeoOS game link scanned from a QR code).
+    /// </summary>
+    internal static async Task LaunchDAppInApp(Uri uri, DApp? dapp = null)
+    {
+        Dictionary<string, object> parameters = new();
+        if (dapp != null) parameters["dapp"] = dapp;
+        parameters["uri"] = System.Net.WebUtility.UrlEncode(uri.ToString());
+#if IOS
+        bool supportMultiWindow = DeviceInfo.Idiom == DeviceIdiom.Desktop || DeviceInfo.Idiom == DeviceIdiom.Tablet;
+#else
+        bool supportMultiWindow = true;
+#endif
+        if (supportMultiWindow)
+        {
+            LaunchDAppPage page = Application.Current!.Handler.GetServiceProvider().GetServiceOrCreateInstance<LaunchDAppPage>();
+            page.ApplyQueryAttributes(parameters);
+#if MACCATALYST
+            Application.Current.OpenWindow(Platforms.MacCatalyst.DAppWindow.Create(page));
+#else
+            Application.Current.OpenWindow(new Window(new NavigationPage(page)));
+#endif
+        }
+        else
+        {
+            await Shell.Current.GoToAsync("launch", parameters);
+        }
+    }
 
     public static AsyncCommand CheckForUpdates { get; } = new(static async parameter =>
     {

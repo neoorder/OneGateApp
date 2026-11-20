@@ -4,8 +4,7 @@ using Neo.Wallets;
 using NeoOrder.OneGate.Controls;
 using NeoOrder.OneGate.Models;
 using NeoOrder.OneGate.Models.AppLinks;
-using NeoOrder.OneGate.Properties;
-using NeoOrder.OneGate.Services;
+using NeoOrder.OneGate.Properties;using NeoOrder.OneGate.Services;
 using NeoOrder.OneGate.Services.RemoteDebug;
 using NeoOrder.OneGate.DebugProtocol;
 using SkiaSharp;
@@ -253,6 +252,15 @@ public partial class ScanPage : ContentPage, IQueryAttributable
         }
         if (action is null)
         {
+            // NeoOS game play URLs run in the built-in dApp browser so the game
+            // gets wallet access through the NEP-21 dAPI; any other scanned
+            // https link keeps opening in the system browser.
+            if (NeoOSGameLink.IsGamePlayUrl(uri))
+            {
+                await Shell.Current.GoToAsync("..");
+                await Commands.LaunchDAppInApp(uri);
+                return true;
+            }
             await Shell.Current.GoToAsync("..");
             await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
             return true;

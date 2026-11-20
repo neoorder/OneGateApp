@@ -12,6 +12,7 @@ date is the date of its final commit. Later changes are listed under Unreleased.
 
 ### Added
 
+- Added support for opening NeoOS game play URLs (apps.neoos.network/play/...) scanned from QR codes in the built-in dApp browser, so the game gets wallet access through the NEP-21 dAPI.
 - Added manual on-device chat translation with inline results, with target-language settings and Android language-model management grouped under the redesigned Chat settings.
 - Added opt-in encrypted remote DApp debugging with trusted LAN pairing, explicit request approval, logs, traces, JavaScript evaluation, and visible-WebView screenshots.
 - Added per-platform DApp availability for Android, iOS, Mac Catalyst, and Windows.
